@@ -4,6 +4,8 @@ _project_logo_
 
 Welcome to the repository of Group 8 for CmpE [352](https://www.cmpe.boun.edu.tr/tr/courses/cmpe352)-[451](https://www.cmpe.boun.edu.tr/tr/courses/cmpe451) Project Development in Software Engineering courses. For details, please have a look at our Wiki page from [here](https://github.com/bounswe/bounswe2022group8/wiki). 
 
+![Screenshot 2022-03-09 200748](https://user-images.githubusercontent.com/71488784/157839515-61a6dff1-91d2-4163-a495-8a6d4d9120f2.jpg)
+
 ## Group Members
 * [Sena Mumcu](https://github.com/bounswe/bounswe2022group8/wiki/Sena-Mumcu)
 * [Serdar Akol](https://github.com/bounswe/bounswe2022group8/wiki/Serdar-Akol)
