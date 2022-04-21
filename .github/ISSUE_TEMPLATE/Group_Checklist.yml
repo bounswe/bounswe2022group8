@@ -1,0 +1,63 @@
+name: Group Checklist
+description: Create Group Checklist Issue
+body:
+- type: textarea
+  attributes:
+    label: What's up?
+    description: Brief explanation/backstory. You may include links to relevant places within the text. Not necessary for trivial issues.
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: To Do
+    description: Action items (list or enumerated).
+  validations:
+    required: true
+
+- type: checkboxes
+  attributes:
+    label: Checklist
+    options:
+    - label: Elif Bayraktar
+      required: false
+    - label: Serdar Akol
+      required: false
+    - label: Sena Mumcu
+      required: false
+    - label: Karahan Sarıtaş
+      required: false
+    - label: Mustafa Cihan
+      required: false
+    - label: Serhat Hebun Şimşek
+      required: false
+    - label: Doğukan Türksoy
+      required: false
+    - label: Furkan Keskin
+      required: false
+    - label: Metehan Dündar
+      required: false
+    - label: Sinem Koçoğlu
+      required: false
+      
+- type: textarea
+  attributes:
+    label: Deadline
+    placeholder: |
+      01.01.2022 @23.59
+  validations:
+    required: true
+    
+- type: textarea
+  attributes:
+    label: Additional Information
+    description: Any additional info about the issue.
+  validations:
+    required: false
+    
+- type: textarea
+  attributes:
+    label: Reviewers
+    description: Person reviewing the issue is responsible for closing, unless otherwise stated.
+  validations:
+    required: false
