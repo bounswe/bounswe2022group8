@@ -1,3 +1,6 @@
+# ignore environment 
+env/
+
 # ignore cache file
 __pycache__
 
