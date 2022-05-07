@@ -20,5 +20,5 @@ urlpatterns = [
     path('', views.home, name = "practice_home"),
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
-    # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
+    path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
 ]
