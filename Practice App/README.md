@@ -1,6 +1,6 @@
 ### To run the program: 
 
-You can run the program on Windows PowerShell by following the steps provided below.
+You can run the program on command line by following the steps provided below.
 
 * Clone this directory into your local workspace and open ```Practice App``` folder.  
 * Create a virtual environment named as ```env```.
