@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 # http://127.0.0.1:8000/admin --> redirected to admin.site.urls
 # http://127.0.0.1:8000/api --> redirected to api.urls 
@@ -22,6 +23,7 @@ from django.urls import path, include
 # All routes must be referenced here.
 
 urlpatterns = [
+    path('', views.index, name = "index"),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]

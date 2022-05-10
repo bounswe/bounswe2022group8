@@ -6,7 +6,7 @@ Function views
 
 from django.urls import path
 from .views import views
-from .views import view_TVSeries
+#from .views  import view_TVSeries
 
 # practice_home : pattern that matches with the empty route
 # That pattern will be handled by the function views.home(request).
