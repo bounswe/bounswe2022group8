@@ -1,3 +1,31 @@
+from datetime import datetime
+from tkinter import CASCADE
 from django.db import models
+from django.contrib.auth.models import User
+
+
+
+class myUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    type = models.CharField(max_length=100)  
+
+class Tag(models.Model):
+    tagname = models.CharField(max_length=100)
+
+class Comment(models.Model):
+    body = models.CharField(max_length=500)
+    commented_by = models.ForeignKey(myUser, on_delete= models.CASCADE)   
+
+class ArtItem(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
+    owner = models.ForeignKey(myUser, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag)
+    comments = models.ManyToManyField(Comment)
+
+    
+
+  
+    
 
 # Create your models here.
