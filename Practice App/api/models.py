@@ -24,7 +24,8 @@ class ArtItem(models.Model):
     comments = models.ManyToManyField(Comment)
 
     
-
+def __str_(self):
+    return self.id
   
     
 
