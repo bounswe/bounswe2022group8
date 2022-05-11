@@ -11,3 +11,13 @@ class ArtItemSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     model = Tag
     fields = ['id', 'tagname']
+
+class myUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = myUser
+        fields = ['id', 'username', 'name', 'surname', 'email', 'followers', 'followed_users', 'created_at', 'updated_at']
+class CommentSerializer(serializers.CommentSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'body', 'commented_by', 'created_at', 'updated_at']
+
