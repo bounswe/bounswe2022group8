@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 class myUser(models.Model):
     # Built-in User has username and password already.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    type = models.CharField(max_length=100)  
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     email = models.EmailField(unique=True, max_length=254)  # EmailField is a CharField that checks the value for a valid email address using EmailValidator
