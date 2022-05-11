@@ -17,14 +17,36 @@ class myUser(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     email = models.EmailField(unique=True, max_length=254)  # EmailField is a CharField that checks the value for a valid email address using EmailValidator
-    followers = models.ManyToManyField(User, related_name= "followed_by", blank=True)   # not required
-    followed_users = models.ManyToManyField(User, related_name= "follows", blank=True)  # not required
+    followers = models.ManyToManyField(
+        to="self", 
+        through= "follow",
+        related_name="following", 
+        symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField(upload_to=get_avatar_path, null=True, blank=True)
 
     def __str__(self):
         return self.name + " " + self.surname 
+
+
+class Follow(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["from_user", "to_user"],
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_prevent_self_follow",
+                check=~models.Q(from_user=models.F("to_user")),
+            ),
+        ]
+    
+    def __str__(self):
+        return str(self.from_user) + " follows " + str(self.to_user)
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -56,7 +78,5 @@ class Comment(models.Model):
     def __str__(self):
         return "A comment made by " + str(self.commented_by) + " on " + str(self.commented_on) 
 
-  
-    
 
 # Create your models here.
