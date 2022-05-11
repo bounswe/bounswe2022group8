@@ -12,12 +12,12 @@ from .views import views
 # That pattern will be handled by the function views.home(request).
 # It returns an HttpResponse.
 
-# http://127.0.0.1:8000/practice --> practice_home  (HTTP Response)
-# http://127.0.0.1:8000/practice/about --> about_section  (HTTP Response)
-# http://127.0.0.1:8000/practice/api_home --> REST API  (JSON Response) 
+# http://127.0.0.1:8000 --> index  (HTTP Response)
+# http://127.0.0.1:8000/about --> about_section  (HTTP Response)
+# http://127.0.0.1:8000/api_home --> REST API  (JSON Response) 
 
 urlpatterns = [
-    path('', views.home, name = "practice_home"),
+    path('', views.home, name = "index"),
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
     # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")

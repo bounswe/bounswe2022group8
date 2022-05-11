@@ -18,12 +18,11 @@ from django.urls import path, include
 from . import views
 
 # http://127.0.0.1:8000/admin --> redirected to admin.site.urls
-# http://127.0.0.1:8000/api --> redirected to api.urls 
+# http://127.0.0.1:8000 --> redirected to api.urls 
 
 # All routes must be referenced here.
 
 urlpatterns = [
-    path('', views.index, name = "index"),
+    path('', include('api.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
 ]
