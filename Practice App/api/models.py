@@ -6,10 +6,10 @@ import os
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
 
 def get_avatar_path(instance, filename):
-    return os.path.join('avatar', str(instance.id) + "_" + filename)
+    return os.path.join('avatar', str(instance.user.username) + "_" + filename)
 
 def get_artitem_path(instance, filename):
-    return os.path.join('artitem', str(instance.id) + "_" + filename)
+    return os.path.join('artitem', str(instance.title) + "_" + filename)
 
 class myUser(models.Model):
     # Built-in User has username and password already.
