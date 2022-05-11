@@ -2,8 +2,14 @@ from datetime import datetime
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
-
+import os
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
+
+def get_avatar_path(instance, filename):
+    return os.path.join('avatar', str(instance.id) + "_" + filename)
+
+def get_artitem_path(instance, filename):
+    return os.path.join('artitem', str(instance.id) + "_" + filename)
 
 class myUser(models.Model):
     # Built-in User has username and password already.
@@ -15,7 +21,7 @@ class myUser(models.Model):
     followed_users = models.ManyToManyField(User, related_name= "follows", blank=True)  # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
-
+    profile_image = models.ImageField(upload_to=get_avatar_path, null=True, blank=True)
 
     def __str__(self):
         return self.name + " " + self.surname 
@@ -34,20 +40,21 @@ class ArtItem(models.Model):
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(myUser, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
+    artitem_image = models.ImageField(upload_to=get_artitem_path, null=True, blank=True)
 
     def __str__(self):
         return "Art item: " + self.title
 
 class Comment(models.Model):
     body = models.CharField(max_length=500)
-    commented_by = models.ForeignKey(myUser, on_delete= models.CASCADE) 
-    commented_on = models.ForeignKey(ArtItem, on_delete= models.CASCADE)
+    commented_by = models.ForeignKey(myUser, on_delete= models.CASCADE)  # if user gets deleted from the system, then comment gets deleted
+    commented_on = models.ForeignKey(ArtItem, on_delete= models.CASCADE) # if art item gets deleted, then comment gets deleted
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
-        return "A comment made by " + str(self.commented_by) 
+        return "A comment made by " + str(self.commented_by) + " on " + str(self.commented_on) 
 
   
     
