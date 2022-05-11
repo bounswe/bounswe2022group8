@@ -1,15 +1,10 @@
 from datetime import datetime
+from email.policy import default
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 import os
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
-
-def get_avatar_path(instance, filename):
-    return os.path.join('avatar', str(instance.user.username) + "_" + filename)
-
-def get_artitem_path(instance, filename):
-    return os.path.join('artitem', str(instance.title) + "_" + filename)
 
 class myUser(models.Model):
     # Built-in User has username and password already.
@@ -24,7 +19,7 @@ class myUser(models.Model):
         symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField(upload_to=get_avatar_path, null=True, blank=True)
+    profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/', null=True, blank=True)
 
     def __str__(self):
         return self.name + " " + self.surname 
@@ -62,7 +57,7 @@ class ArtItem(models.Model):
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(myUser, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
-    artitem_image = models.ImageField(upload_to=get_artitem_path, null=True, blank=True)
+    artitem_image = models.ImageField(default='artitem/defaultart.jpg', upload_to='artitem/',null=True, blank=True)
 
     def __str__(self):
         return "Art item: " + self.title
