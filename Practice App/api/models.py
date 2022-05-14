@@ -15,19 +15,25 @@ class myUser(models.Model):
     followers = models.ManyToManyField(
         to="self", 
         through= "follow",
-        related_name="following", 
+        related_name="follower",   # user.follower.all() --> return all the followers
         symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/', null=True, blank=True)
+
+
+    @property
+    def username(self):
+        return self.user.username
 
     def __str__(self):
         return self.name + " " + self.surname 
 
 
 class Follow(models.Model):
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
-    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    from_user = models.ForeignKey(myUser, on_delete=models.CASCADE, related_name="+")
+    to_user = models.ForeignKey(myUser, on_delete=models.CASCADE, related_name="+")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         constraints = [
