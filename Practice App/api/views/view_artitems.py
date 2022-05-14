@@ -25,7 +25,6 @@ import json
 #  http://127.0.0.1:8000/api/v1/artitems/users/<id>        / GET  / get all of the art items of the specific user (by id)
 #  http://127.0.0.1:8000/api/v1/artitems/users/<username>  / GET  / get all of the art items of the specific user (by username)
 #  
-#
 
 
 
@@ -50,6 +49,7 @@ def artitems(request):
             data['tags'] = [data['tags']]
         
         data['artitem_image'] = file
+        print(data)
         serializer = ArtItemSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -59,7 +59,7 @@ def artitems(request):
 
 
 @api_view(["GET"])
-def artitem_by_userid(request, id):
+def artitems_by_id(request, id):
     try:
         artitem = ArtItem.objects.get(pk=id)
         serializer = ArtItemSerializer(artitem)
