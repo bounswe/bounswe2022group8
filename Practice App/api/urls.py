@@ -25,6 +25,9 @@ urlpatterns = [
     path('', views.home, name = "index"),         # base route
     path('about/', views.about, name = "about"),  # dummy
     path('api/v1', views.api, name= "api"),
-    path('api/v1/artitems/', view_artitems.artitems, name="gallery")
+    path('api/v1/artitems/', view_artitems.artitems, name="artitems"),
+    path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
+    path('api/v1/artitems/users/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
+    path('api/v1/artitems/<int:id>', view_artitems.artitem_by_userid, name="artitem_by_id")
     # path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
 ]
