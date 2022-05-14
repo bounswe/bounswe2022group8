@@ -24,17 +24,10 @@ def about(request):
     return HttpResponse("<h1>About Section</h1>")
 
 @api_view(["GET"])
-def api_home(request): 
+def api(request): 
     model_data = myUser.objects.all().order_by("?").first()
     data = {}
     if model_data:
-        # data['username'] = model_data.username
-        # data['name'] = model_data.name
-        # data['surname'] = model_data.surname
-        # data['email'] = model_data.email
-        # #data['followers'] = model_data.followers
-        # data['created_at'] = model_data.created_at
-        # data['updated_at'] = model_data.updated_at
         serializer = myUserSerializer(model_data)
 
     # pure JSON format 
@@ -42,3 +35,4 @@ def api_home(request):
 
     # we need to give serializer.data to the Response
     return Response(serializer.data)
+
