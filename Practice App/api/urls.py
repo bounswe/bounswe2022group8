@@ -28,6 +28,6 @@ urlpatterns = [
     path('api/v1/artitems/', view_artitems.artitems, name="artitems"),
     path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
     path('api/v1/artitems/users/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
-    path('api/v1/artitems/<int:id>', view_artitems.artitem_by_userid, name="artitem_by_id")
+    path('api/v1/artitems/<int:id>', view_artitems.artitems_by_id, name="artitem_by_id")
     # path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
 ]
