@@ -13,7 +13,7 @@ def home(request):
 def about(request):
     return HttpResponse("<h1>About Section</h1>")
 
-def api_home(request): 
+def api(request): 
     data = {}
     data['params'] = dict(request.GET)  # query parameters
     data['headers'] = dict(request.headers)
