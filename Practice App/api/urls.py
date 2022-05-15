@@ -6,6 +6,7 @@ Function views
 
 from django.urls import path
 from .views import views
+from .views import view_commentAPI
 #from .views  import view_TVSeries
 
 # practice_home : pattern that matches with the empty route
@@ -20,5 +21,6 @@ urlpatterns = [
     path('', views.home, name = "index"),
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
-    # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
+    path('api/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
+    path('api/user/<int:id>/comment/<int:commentid>', view_commentAPI.editComment, name= "editedComment"),
 ]
