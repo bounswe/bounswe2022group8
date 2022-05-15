@@ -19,7 +19,6 @@ class TestEpisodes(TestCase):
         print("TestArtItem:setUp_:begin")
 
         self.c = Client()
-        self.series = self.get_top_TVSeries()
 
         print("TestArtItem:setUp_:end")
 
@@ -32,7 +31,7 @@ class TestEpisodes(TestCase):
     List will consist of 100 elements (names of the TV series).
     """
     def get_top_TVSeries(self):
-        req = requests.get('https://www.imdb.com/chart/tvmeter')
+        req = requests.get('https://www.imdb.com/chart/tvmeter?sort=ir,desc&mode=simple&page=1')
         if(req.status_code == 500):
             # there is a server error (not related to us), let's just return our own mock data
             return ["arka sokaklar", "adanali", "prison break", "breaking bad", "lost"]  # efsane dizilerdi be 
@@ -47,6 +46,9 @@ class TestEpisodes(TestCase):
 
         series = []
         for name in unique_shows:
+            # NCIS can be one of the TV series we can fetch. However, in tvmaze/api it doesn't have any correspondence with this long name. We should replace it with simply 'NCIS'.
+            if(name == "NCIS: Naval Criminal Investigative Service"): 
+                name = "NCIS"
             series.append(name)
         return series
         
@@ -60,6 +62,7 @@ class TestEpisodes(TestCase):
 
     
     def test_basic(self):
+        self.series = self.get_top_TVSeries()
         
         for _ in range(20):
             series = random.choice(self.series)
