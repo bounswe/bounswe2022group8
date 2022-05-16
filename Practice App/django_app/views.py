@@ -38,8 +38,16 @@ def about(request):
 
 # http://127.0.0.1:8000/artitems/
 def all_artitems(request):
-    return render(request, 'list_all_artitems/index.html') 
+    return render(request, 'artitems/list_all_artitems.html') 
 
 # http://127.0.0.1:8000/artitems/id
 def artitem_by_id(request):
-    return render(request, 'list_all_artitems/index.html') 
+    return render(request, 'artitems/list_artitems_by_id.html') 
+
+# http://127.0.0.1:8000/artitems/users/id
+def artitem_by_user_id(request):
+    return render(request, 'artitems/list_artitems_by_user_id.html') 
+
+# http://127.0.0.1:8000/artitems/users/username
+def artitem_by_username(request):
+    return render(request, 'artitems/list_artimes_by_username.html')
