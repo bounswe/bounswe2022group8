@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 
+
 # Create your views here.
 
 # Using HttpResponse for debug, we should use JsonResponse
@@ -17,7 +18,8 @@ from rest_framework.renderers import JSONRenderer
 
 @api_view(["GET"])
 def home(request):
-    return HttpResponse("<h1>Practice App Home</h1>") # returns a Http page
+    return render(request, 'index/index.html')
+#    return HttpResponse("<h1>Practice App Home</h1>") # returns a Http page
 
 @api_view(["GET"])
 def about(request):
