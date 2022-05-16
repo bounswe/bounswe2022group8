@@ -30,7 +30,8 @@ urlpatterns = [
     path('', include('api.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
-    path('artitems/', views.artitems, name = "artitems"),
+    path('artitems/', views.all_artitems, name = "artitems"),
+    path('artitems/id', views.artitem_by_id, name = "artitems"),
     path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

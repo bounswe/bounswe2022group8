@@ -36,5 +36,10 @@ def home(request):
 def about(request):
     return HttpResponse("<h1>About</h1>")
 
-def artitems(request):
-    return render(request, 'artitems/index.html') 
+# http://127.0.0.1:8000/artitems/
+def all_artitems(request):
+    return render(request, 'list_all_artitems/index.html') 
+
+# http://127.0.0.1:8000/artitems/id
+def artitem_by_id(request):
+    return render(request, 'list_all_artitems/index.html') 
