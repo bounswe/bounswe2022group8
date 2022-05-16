@@ -20,11 +20,9 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('', views.home, name = "index"),
-    path('about/', views.about, name = "about_section"),
-    path('api_home/', views.api_home, name= "rest_api"),
-    # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
     path('api/searchbytag/<str:tag>', view_search_by_tag.search_by_tag, name="search_by_tag"), #if you're having trouble with tag names make sure it is encoded in the url format. Such as # -> %23. For reference https://www.w3schools.com/tags/ref_urlencode.asp
-    #path('api/searchbytag/form', view_search_by_tag.formview, name="search_by_tag_form"),
+   
+
 ]
 
 #added to give us the option to choose between default Response template and regular json

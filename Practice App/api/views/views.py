@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.http import JsonResponse 
 from django.forms.models import model_to_dict
@@ -18,13 +18,16 @@ from rest_framework.renderers import JSONRenderer
 
 @api_view(["GET"])
 def home(request):
-    return render(request, 'index/index.html')
+    return redirect("homeindex")
+#    return render(request, 'index/index.html')
 #    return HttpResponse("<h1>Practice App Home</h1>") # returns a Http page
 
+#not used
 @api_view(["GET"])
 def about(request):
     return HttpResponse("<h1>About Section</h1>")
 
+#not used
 @api_view(["GET"])
 def api_home(request): 
     model_data = myUser.objects.all().order_by("?").first()

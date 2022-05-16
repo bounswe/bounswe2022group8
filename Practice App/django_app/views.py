@@ -2,6 +2,7 @@
 
 import urllib.parse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import TagForm
 import urllib.parse
@@ -29,3 +30,6 @@ def formview(request): #should it get tag
 
 def home(request):
     return render(request, 'index/index.html')    
+
+def about(request):
+    return HttpResponse("<h1>About Section</h1>")    
