@@ -19,11 +19,13 @@ import json
 
 ##### List of routes / method / action:
 #
-#  http://127.0.0.1:8000/api/v1/artitems                   / GET  / Return all of the art items in the system in JSON format 
-#  http://127.0.0.1:8000/api/v1/artitems/<id>              / GET  / Return an art item with the given id
-#  http://127.0.0.1:8000/api/v1/artitems                   / POST / create an art item
-#  http://127.0.0.1:8000/api/v1/artitems/users/<id>        / GET  / get all of the art items of the specific user (by id)
-#  http://127.0.0.1:8000/api/v1/artitems/users/<username>  / GET  / get all of the art items of the specific user (by username)
+#  http://127.0.0.1:8000/api/v1/artitems                   /  GET    / Return all of the art items in the system in JSON format 
+#  http://127.0.0.1:8000/api/v1/artitems                   /  POST   / Create an art item
+#  http://127.0.0.1:8000/api/v1/artitems/<id>              /  GET    / Return an art item with the given id
+#  http://127.0.0.1:8000/api/v1/artitems/<id>              /  PATCH  / Update an art item with the given id
+#  http://127.0.0.1:8000/api/v1/artitems/<id>              /  DELETE / Delete an art item with the given id
+#  http://127.0.0.1:8000/api/v1/artitems/users/<id>        /  GET    / Get all of the art items of the specific user (by id)
+#  http://127.0.0.1:8000/api/v1/artitems/users/<username>  /  GET    / Get all of the art items of the specific user (by username)
 #  
 
 
