@@ -28,7 +28,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('api.urls')),
-    path('', views.home, name = "homeindex"),
+    path('', views.home, name = "index"),
     path('admin/', admin.site.urls),
     path('about/', views.about, name = "about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),

@@ -5,7 +5,7 @@ Function views
 """
 
 from django.urls import path, include
-from .views import view_artitems, view_myusers, views, view_search_by_tag
+from .views import view_artitems, view_myusers, view_search_by_tag
 from rest_framework.urlpatterns import format_suffix_patterns
 # from .views  import view_TVSeries
 
@@ -19,7 +19,6 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # Changed the route so that it includes v1.
 
 urlpatterns = [
-    #path('', views.home, name = "index"),
     path('api/v1/artitems/', view_artitems.artitems, name="artitems"),
     path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
     path('api/v1/artitems/users/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
