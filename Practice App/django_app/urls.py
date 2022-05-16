@@ -15,13 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 # http://127.0.0.1:8000/admin --> redirected to admin.site.urls
-# http://127.0.0.1:8000/api --> redirected to api.urls 
+# http://127.0.0.1:8000 --> redirected to api.urls 
+# http://127.0.0.1:8000
 
 # All routes must be referenced here.
 
 urlpatterns = [
+    path('', include('api.urls')),
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('', include('api.urls')),
 ]
+=======
+    path('', views.home, name="home"),
+    path('artitems/', views.all_artitems, name = "artitems"),
+    path('artitems/id', views.artitem_by_id, name = "artitems_by_id"),
+    path('artitems/users/id', views.artitem_by_user_id, name="artitems_by_user_id"),
+    path('artitems/users/username', views.artitem_by_username, name="artitems_by_username"),
+    path('about/', views.about, name="about_section"),
+    path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> feature/artitem

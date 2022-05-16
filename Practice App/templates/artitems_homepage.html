@@ -1,0 +1,94 @@
+{% extends "./base.html" %}
+{% block title %}
+Welcome to Artitem API Service
+{% endblock %}
+{% block content %}
+
+
+<style>
+body {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+input {
+  border: none;
+  background: hsl(0 0% 93%);
+  border-radius: .25rem;
+  padding: .75rem 1rem;
+  
+}  
+  </style>
+
+<h2>List all the art items.</h2>
+<form id="1">
+    <span style="font-size:20px; margin-left: 30px;"> You can view all the art items in the system by clicking on this button. </span>
+    <input type="button" style="margin-left:110px" value="Get Art Items" onclick="search1()" >
+</form>
+
+
+<h2>Return an art item with the given id.</h2>
+<form id="2">
+    <span style="font-size:20px; margin-left: 30px;">You can view a specific art item by providing its ID.</span> 
+    <input type="number" style="margin-left:280px" step="1" name="id" placeholder="ID of the art item.">
+    <input type="button"  value="Get the Art Item" onclick="search2()">
+</form>
+
+
+<h2>Get all of the art items of the specific user (by id)</h2>
+
+
+<form id="3">
+    <span style="font-size:20px; margin-left: 30px;">You can view all art items of a user by providing ID of the user. </span>
+    <input type="number" style="margin-left:170px"  step="1" name="id" placeholder="ID of the user">
+    <input type="button" value="Get Art Items of the User" onclick="search3()">
+</form>
+
+<h2>Get all of the art items of the specific user (by username)</h2>
+
+<form id="4">
+    <span style="font-size:20px; margin-left: 30px;">You can view all art items of a user by providing the username of the user.</span> 
+    <input type="text" style="margin-left:70px" name="username" placeholder="Username">
+    <input type="button" value="Get Art Items of the User" onclick="search4()">
+</form>
+
+<script>
+    function search1() {
+        var form = document.getElementById("1");
+        console.log(form)
+        var formData = new FormData(form)
+        url = "/bambaska" + encodeURIComponent(formData.get("query"))
+        window.location.assign(url)
+    }
+
+    function search2() {
+        var form = document.getElementById("2");
+        var formData = new FormData(form)
+        url = "/?query=" + encodeURIComponent(formData.get("query"))
+        window.location.assign(url)
+    }
+
+    function search3() {
+        var form = document.getElementById("3");
+        var formData = new FormData(form)
+        url = "/?query=" + encodeURIComponent(formData.get("query"))
+        window.location.assign(url)
+    }
+
+    function search4() {
+        var form = document.getElementById("4");
+        var formData = new FormData(form)
+        url = "/?query=" + encodeURIComponent(formData.get("query"))
+        window.location.assign(url)
+    }
+  </script>
+
+{% include "./footer.html" %}
+{% endblock %}
