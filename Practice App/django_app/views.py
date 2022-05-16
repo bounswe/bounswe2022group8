@@ -30,11 +30,7 @@ def formview(request): #should it get tag
 
 # http://127.0.0.1:8000
 def home(request):
-    return render(request, 'index/index.html')   
+    return render(request, 'index/index.html')    
 
-# http://127.0.0.1:8000/about
 def about(request):
-    return HttpResponse("<h1>About</h1>")
-
-def artitems(request):
-    return render(request, 'artitems/index.html') 
+    return HttpResponse("<h1>About Section</h1>")    
