@@ -162,13 +162,14 @@ img {
             fetch(url, {
                 method:'GET',
                 headers:{
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
+					'Accept': 'text/plain charset=UTF-8'
                 }
             })
 			.then((resp) => resp.json())
 			.then(function(data) {  // data : returned json
 				console.log('Data:', data)
-
+				
                 var list = data
                 for(var i in list) {
 					var tags = list[i].tags 
