@@ -24,10 +24,10 @@ class TestTagSearch(APITestCase):
         test_data = { "id":1, "title":"Flowers", "description": "A field full of flowers.", "owner": 1, "tags": [ 1 ], "artitem_image": "/media/artitem/defaultart.jpg"}
         #test_data = { 'id':1, 'title':'Flowers', 'description': 'A field full of flowers.', 'owner': 1, 'tags': [ 1 ], 'artitem_image': '/media/artitem/defaultart.jpg'}
 
-        print("Response is:")
-        print(json.dumps(response.data))
-        print("Test data is:")
-        print([test_data])
+        #print("Response is:")
+        #print(json.dumps(response.data))
+        #print("Test data is:")
+        #print([test_data])
 
         #self.assertEqual(json.dumps(response.data), [test_data])
         self.assertEqual(response.data, [test_data])
