@@ -22,12 +22,15 @@ from django.conf.urls.static import static
 
 # http://127.0.0.1:8000/admin --> redirected to admin.site.urls
 # http://127.0.0.1:8000 --> redirected to api.urls 
+# http://127.0.0.1:8000
 
 # All routes must be referenced here.
 
 urlpatterns = [
     path('', include('api.urls')),
     path('admin/', admin.site.urls),
-    path('home',views.home, name = "homeindex"),
+    path('', views.home, name="home"),
+    path('artitems/', views.artitems, name = "artitems"),
+    path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,6 +2,7 @@
 
 import urllib.parse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import TagForm
 import urllib.parse
@@ -20,12 +21,20 @@ def formview(request): #should it get tag
             #encoded = urllib.parse.quote(str(tag))
             #print(encoded)
             #print(encoded)
-            return redirect('search_by_tag', tag=tag)#Redirect to search_by_tag page
+            return redirect('search_by_tag', tag=tag) #Redirect to search_by_tag page
             #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
 
 
     return render(request, 'tagform/tagform.html', {'form':TagForm()}) #import render
     #return HttpResponse("why though")
 
+# http://127.0.0.1:8000
 def home(request):
-    return render(request, 'index/index.html')    
+    return render(request, 'index/index.html')   
+
+# http://127.0.0.1:8000/about
+def about(request):
+    return HttpResponse("<h1>About</h1>")
+
+def artitems(request):
+    return render(request, 'artitems/index.html') 
