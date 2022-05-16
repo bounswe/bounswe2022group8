@@ -58,15 +58,22 @@ def artitems(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["GET"])
+@api_view(["GET", "PATCH", "DELETE"])
 def artitems_by_id(request, id):
     try:
         artitem = ArtItem.objects.get(pk=id)
-        serializer = ArtItemSerializer(artitem)
-        return Response(serializer.data, status=status.HTTP_200_OK)
     except ArtItem.DoesNotExist:
         return Response({"Not Found:", "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
+    if request.method == "GET":
+        serializer = ArtItemSerializer(artitem)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == "PATCH":
+        serializer = ArtItemSerializer(artitem, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(["GET"])
