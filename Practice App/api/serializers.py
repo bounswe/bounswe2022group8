@@ -11,6 +11,7 @@ class ArtItemSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep["tags"] = TagSerializer(instance.tags.all(), many=True).data
+        rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
 class TagSerializer(serializers.ModelSerializer):
