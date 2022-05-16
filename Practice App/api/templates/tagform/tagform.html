@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<form action="{% url 'search_by_tag_form_main'    %}" method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
