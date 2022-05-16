@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_searchbtg.TestTagSearch-20220516233842" tests="1" file="test_searchbtg.py" time="0.017" timestamp="2022-05-16T23:38:43" failures="1" errors="0" skipped="0">
+	<testcase classname="test_searchbtg.TestTagSearch" name="test_get_tagged_artitems" time="0.017" timestamp="2022-05-16T23:38:43" file="tests\test_searchbtg.py" line="11">
+		<failure type="AssertionError" message="[OrderedDict([('id', 1), ('title', 'Flower[380 chars]')])] != [{'id': 1, 'title': 'Flowers', 'descriptio[102 chars]pg'}]"><![CDATA[Traceback (most recent call last):
+  File "C:\Users\Asus\ArtProject\bounswe2022group8\Practice App\tests\test_searchbtg.py", line 33, in test_get_tagged_artitems
+    self.assertEqual(response.data, [test_data])
+AssertionError: [OrderedDict([('id', 1), ('title', 'Flower[380 chars]')])] != [{'id': 1, 'title': 'Flowers', 'descriptio[102 chars]pg'}]
+]]></failure>
+	</testcase>
+</testsuite>

@@ -2,7 +2,7 @@ from urllib import response
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from ..models import ArtItem, Tag, myUser
+from api.models import ArtItem, Tag, myUser
 from django.contrib.auth.models import User
 import json
 
@@ -19,6 +19,7 @@ class TestTagSearch(APITestCase):
 
         url = reverse('search_by_tag', args=[test_tag.tagname])
         response = self.client.get(url, format='json')
+        print(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         test_data = { "id":1, "title":"Flowers", "description": "A field full of flowers.", "owner": 1, "tags": [ 1 ], "artitem_image": "/media/artitem/defaultart.jpg"}

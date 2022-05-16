@@ -28,8 +28,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('api.urls')),
+    path('', views.home, name = "homeindex"),
     path('admin/', admin.site.urls),
-    path('home',views.home, name = "homeindex"),
     path('about/', views.about, name = "about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
