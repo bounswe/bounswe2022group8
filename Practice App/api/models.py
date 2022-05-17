@@ -4,6 +4,8 @@ from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 import os
+
+from pkg_resources import require
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
 
 class myUser(models.Model):
@@ -62,8 +64,8 @@ class ArtItem(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(myUser, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag)
-    artitem_image = models.ImageField(default='artitem/defaultart.jpg', upload_to='artitem/',null=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True) # tags are not required
+    artitem_image = models.ImageField( default='artitem/defaultart.png', upload_to='artitem/')
 
     def __str__(self):
         return "Art item: " + self.title
