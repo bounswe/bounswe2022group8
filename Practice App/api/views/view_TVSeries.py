@@ -27,7 +27,7 @@ def episodes(request, series):
         data['language'] = response['language']
         data['genre'] = response['genres']
         data['description'] = response['summary']
-        data['rating'] = response['rating']
+        data['rating'] = response['rating']['average']
         episodes = []
         cnt = 1
 
@@ -35,7 +35,7 @@ def episodes(request, series):
             info = {}
             info['name'] = episode['name']
             info['season'] = episode['season']
-            info['rating'] = episode['rating']
+            info['rating'] = episode['rating']['average']
             info['summary'] = episode['summary']
             cnt = info['season']
             episodes.append(info)
