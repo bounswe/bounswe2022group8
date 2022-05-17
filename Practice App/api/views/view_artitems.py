@@ -64,16 +64,16 @@ def artitems(request):
         ### BASE64 DECODING
         # Check if artitem_image is provided. If not, default to defaultart.png. If provided, it's in base64 format. Decode it.
         if('artitem_image' in data):
-            image_data= data['artitem_image']
-            data['artitem_image'] = ContentFile(base64.decodebytes(str.encode(image_data) + b'=='), name='decode.png')
+            image_data= data['artitem_image'].split("base64,")[1]
+            decoded = base64.b64decode(image_data)
+            data['artitem_image'] = ContentFile(decoded , name='decode.png')
             
         ###
-        
         serializer = ArtItemSerializer(data=data)
         if serializer.is_valid():
             if('artitem_image' in data):
                 with open("media/artitem/decode.png", "wb") as fh:
-                    fh.write(base64.decodebytes(str.encode(image_data) + b'=='))
+                    fh.write(decoded)
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
