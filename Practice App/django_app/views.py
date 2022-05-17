@@ -30,7 +30,32 @@ def formview(request): #should it get tag
 
 # http://127.0.0.1:8000
 def home(request):
-    return render(request, 'index/index.html')    
+    return render(request, 'index/index.html')   
 
+# http://127.0.0.1:8000/about
 def about(request):
-    return HttpResponse("<h1>About Section</h1>")    
+    return HttpResponse("<h1>About</h1>")
+
+# http://127.0.0.1:8000/artitems/
+def all_artitems(request):
+    return render(request, 'artitems/list_all_artitems.html') 
+
+# http://127.0.0.1:8000/artitems/id
+def artitem_by_id(request):
+    return render(request, 'artitems/list_artitems_by_id.html') 
+
+# http://127.0.0.1:8000/artitems/users/id
+def artitem_by_user_id(request):
+    return render(request, 'artitems/list_artitems_by_user_id.html') 
+
+# http://127.0.0.1:8000/artitems/users/username
+def artitem_by_username(request):
+    return render(request, 'artitems/list_artimes_by_username.html')
+
+# http://127.0.0.1:8000/episodes
+def episodes(request):
+    return render(request, 'episodes/episodes.html')
+
+# # http://127.0.0.1:8000/artitems/new
+def add_artitem(request):
+    return render(request, 'artitems/add_art_item.html')

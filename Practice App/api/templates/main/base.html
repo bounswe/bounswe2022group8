@@ -6,13 +6,12 @@
     </head>
     <body>
         <span style="float:right">
-            <span><a href="{% url 'index'  %}">Return to homepage</a></span>    
+            <span><a href="{% url 'index'  %}">Return to homepage</a></span>
         </span>
         <div id="content",  name="content">
             {% block content %}
             <p> You forgot to utilise the block!</p>
             {% endblock %}
         </div>
-        
     </body>
 </html>

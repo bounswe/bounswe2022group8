@@ -146,8 +146,8 @@ class TestArtItem(TestCase):
         file.name = 'test.png'
         file.seek(0)
         return file
-
-    '''def test_artitems_post(self):
+"""
+    def test_artitems_post(self):
 
         faker = Faker()
         title= faker.word() 
@@ -169,5 +169,6 @@ class TestArtItem(TestCase):
 
         serializer = ArtItemSerializer(ArtItem.objects.get(pk=5)) # lastly added
         expected = serializer.data
-        self.assertEqual(response.json(), expected)'''
+        self.assertEqual(response.json(), expected)
             
+"""
