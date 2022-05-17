@@ -65,7 +65,7 @@ class ArtItem(models.Model):
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(myUser, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True) # tags are not required
-    artitem_image = models.ImageField( default='artitem/defaultart.png', upload_to='artitem/')
+    artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
 
     def __str__(self):
         return "Art item: " + self.title
