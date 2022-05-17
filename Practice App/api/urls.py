@@ -6,7 +6,7 @@ Function views
 """
 
 from django.urls import path, include
-from .views import view_artitems
+from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views  import view_TVSeries
 
@@ -24,6 +24,10 @@ urlpatterns = [
     path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
     path('api/v1/artitems/users/username/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
     path('api/v1/artitems/<int:id>', view_artitems.artitems_by_id, name="artitem_by_id"),
+    path('api/v1/users/', view_myusers.users, name="users"),
+    path('api/v1/users/<int:id>', view_myusers.users_by_id, name="users_by_id"),
+    path('api/v1/searchbytag/<str:tag>', view_search_by_tag.search_by_tag, name="search_by_tag"), #if you're having trouble with tag names make sure it is encoded in the url format. Such as # -> %23. For reference https://www.w3schools.com/tags/ref_urlencode.asp
+    path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
     path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes")
 ]
 

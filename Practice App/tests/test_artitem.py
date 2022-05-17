@@ -139,7 +139,6 @@ class TestArtItem(TestCase):
         expected = serializer.data
         self.assertEqual(response.json(), expected)
 
-
     def test_artitems_post(self):
         faker = Faker()
         title= faker.word() 
