@@ -25,7 +25,7 @@ def formview(request): #should it get tag
             #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
 
 
-    return render(request, 'tagform/tagform.html', {'form':TagForm()}) #import render
+    return render(request, 'tag/tagform.html', {'form':TagForm()}) #import render
     #return HttpResponse("why though")
 
 # http://127.0.0.1:8000
@@ -51,3 +51,11 @@ def artitem_by_user_id(request):
 # http://127.0.0.1:8000/artitems/users/username
 def artitem_by_username(request):
     return render(request, 'artitems/list_artimes_by_username.html')
+
+# http://127.0.0.1:8000/episodes
+def episodes(request):
+    return render(request, 'episodes/episodes.html')
+
+# # http://127.0.0.1:8000/artitems/new
+def add_artitem(request):
+    return render(request, 'artitems/add_art_item.html')

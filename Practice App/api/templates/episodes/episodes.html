@@ -97,11 +97,12 @@ img {
 				<form id="form">
 					<div class="flex-wrapper">
 						<div style="flex: 6">
-                            <span style="font-size:20px; margin-left: 30px;"> List all the art items. </span>
+                            <span style="font-size:15px;">You can view the episodes of a TV series by providing the name of the show.</span> 
 						</div>
 						<div style="flex: 1">
-						
-                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Items" onclick="search()">
+                            
+                            <input type="text" id = "name" name="id" placeholder="Name of the show." value="" required>  
+                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Episodes" onclick="search()">
 						</div>
 					</div>
 				</form>
@@ -137,56 +138,93 @@ img {
 
 		function search(){
 			var wrapper = document.getElementById('list-wrapper')
+            var par = document.getElementById('name').value
+            if (par == "") {
+                alert("Name of the show must be filled out.");
+                return false;
+            }
 			//wrapper.innerHTML = ''
 			wrapper.innerHTML='';
-
-
-			var url = 'http://127.0.0.1:8000/api/v1/artitems/'  // get all the art items
+            console.log(par)
 
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(url, {
+            fetch(`http://127.0.0.1:8000/api/v1/episodes/${par}`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'
                 }
             })
-			.then((resp) => resp.json())
-			.then(function(data) {  // data : returned json
+			.then(resp =>  {
+                
+                if (resp.status == 404) {
+                    var item = `
+                    <div  class="box" > 
+        			<p><b>TV Series with the specified name cannot be found.</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+                 }
+                 else if(resp.status == 500) {
+                    var item = `
+                    <div  class="box" > 
+        			<p><b>Internal server error: Most probably, there is a problem with tvmaze/api. Please try again later.</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+                 }       
+                if (resp.status == 200) { 
+                
+                resp.json().then(data => {  // data : returned json
 				console.log('Data:', data)
-				
-                var list = data
-                for(var i in list) {
-					var tags = list[i].tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
+
+                    var episodes = data['episodes']
+                    html = ""
+                    for(var i in episodes) {
+					    var e = episodes[i] 
+					    
+						var eHTML = `
 						<li>
-						<b>${tags[j].tagname}</b>
+                            <b>Name: </b>${e.name}
+						</li>
+                        <li>
+                            <b>Season: </b>${e.season}
+						</li>
+                        <li>
+                            <b>Average Rating: </b>${e.rating}
+						</li>
+                        <li>
+                            <b>Summary: </b>${e.summary}
 						</li>
 						`
-						html += tag
-					}
-					
+						html += eHTML
+                    }
+                    
 
                     var item = `
-                    <div id="data-row-${i}" class="box" > 
+                    <div class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+        			<p><b>Name:</b>       ${data.name}</p>
+        			<p><b>Language:</b> ${data.language}</p>
+        			<p><b>Genre:</b> ${data.genre}</p>
+        			<p><b>Description</b> ${data.description} </p>
+					<p>Average rating: ${data.rating}</p>
+                    <p>Number of seasons: ${data['number of seasons']}</p>
+                    <p>Episodes: ${html}</p>
     					</form>
                     </div>
                     `
                     wrapper.innerHTML += item
-                }
+                
+                
+                })
+            }
 
-
-			})
+			}).catch(err => {
+        console.log(err)
+            });
 		}
 
 

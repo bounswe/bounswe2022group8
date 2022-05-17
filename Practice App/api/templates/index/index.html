@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html>
+{% extends "main/base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <title>API Homepage</title>
-</head>
+    {% block title %}
+    <title>Homepage</title>
+    {% endblock %}
 
-<body>
-    <span style="float:right">
-        <span>Hi there!</span>    
-    </span>
-    <h1>Welcome to Practice App </h1>
-    <div><span><a href="{% url 'about_section'      %}">About page of Practice App</a></span></div>
-    <h3>Please choose one of the following API's to try out.</h3>
-    <div><span><a href="{% url 'search_by_tag_form_main'   %}" >Search by tag</a></span></div>
-    <div><span><a href="{% url 'artitems'   %}" >Get all of the art items</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Add an art item</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Delete an art item</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Update an art item</a></span></div>
-    <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
-    <div><span><a href="{% url 'artitems_by_username'   %}" >Get an art item by username</a></span></div>
-    <div><span><a href="{% url 'artitems_by_user_id'   %}" >Get an art item by user id</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Post comment on a specific art item</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Get comment</a></span></div>
-    <div><span><a href="{% url 'about_section'   %}" >Delete comment</a></span></div>
-    
-
-    
-
-</body>
-
-</html>
+    {% block content %}
+        <h1>Welcome to Practice App </h1>
+        <div><span><a href="{% url 'about_section'      %}">About page of Practice App</a></span></div>
+        <h3>Please choose one of the following API's to try out.</h3>
+        <div><span><a href="{% url 'search_by_tag_form_main'   %}" >Search by tag</a></span></div>
+        <div><span><a href="{% url 'artitems'   %}" >Get all of the art items</a></span></div>
+        <div><span><a href="{% url 'add_art_item'   %}" >Add an art item</a></span></div>
+        <div><span><a href="{% url 'about_section'   %}" >Delete an art item</a></span></div>
+        <div><span><a href="{% url 'about_section'   %}" >Update an art item</a></span></div>
+        <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
+        <div><span><a href="{% url 'artitems_by_username'   %}" >Get an art item by username</a></span></div>
+        <div><span><a href="{% url 'artitems_by_user_id'   %}" >Get an art item by user id</a></span></div>
+        <div><span><a href="{% url 'about_section'   %}" >Post comment on a specific art item</a></span></div>
+        <div><span><a href="{% url 'about_section'   %}" >Get comment</a></span></div>
+        <div><span><a href="{% url 'about_section'   %}" >Delete comment</a></span></div>
+        <div><span><a href="{% url 'episodes'   %}" >Get episodes of a TV Series.</a></span></div>
+    {% endblock %}
