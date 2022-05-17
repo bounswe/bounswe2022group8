@@ -11,6 +11,9 @@ Unittest for Episodes API.
 1) test_basic: Calls the API using some random TV series fetched from IMDB. Tests the status code
 2) test_get_episodes_1: Makes a call to API using TV Series "11.22.63". Expected output is prepared beforehand and it is cross-checked with the actual result.
 3) test_get_episodes_2: Makes a call to API using TV Series "Defending Jacob". Expected output is prepared beforehand and it is cross-checked with the actual result.
+
+After some consecutive testing, I decided to not test 'rating' fields. Because rating may change very frequently.
+The other day rating of 11.22.63 was 7.8, then it became 7.7 and so on.
 """
 class TestEpisodes(TestCase):
 
@@ -78,16 +81,16 @@ class TestEpisodes(TestCase):
     def test_get_episodes_1(self):
 
         expected = {"name": "11.22.63", "language": "English", "genre": ["Drama", "Science-Fiction", "Mystery"],
-         "rating": {"average": 7.8}, "number of seasons": 1, 
+         "rating": 7.7, "number of seasons": 1, 
         "episodes": [
-        {"name": "The Rabbit Hole", "season": 1, "rating": {"average": 8.4}}, 
-        {"name": "The Kill Floor", "season": 1, "rating": {"average": 7.8}}, 
-        {"name": "Other Voices, Other Rooms", "season": 1, "rating": {"average": 7.6}}, 
-        {"name": "The Eyes of Texas", "season": 1, "rating": {"average": 7.3}}, 
-        {"name": "The Truth", "season": 1, "rating": {"average": 7.8}}, 
-        {"name": "Happy Birthday, Lee Harvey Oswald", "season": 1, "rating": {"average": 8}}, 
-        {"name": "Soldier Boy", "season": 1, "rating": {"average": 7.7}}, 
-        {"name": "The Day in Question", "season": 1, "rating": {"average": 8.5}} ]}
+        {"name": "The Rabbit Hole", "season": 1, "rating": 8.4}, 
+        {"name": "The Kill Floor", "season": 1, "rating": 7.8}, 
+        {"name": "Other Voices, Other Rooms", "season": 1, "rating": 7.6}, 
+        {"name": "The Eyes of Texas", "season": 1, "rating":  7.3}, 
+        {"name": "The Truth", "season": 1, "rating":  7.8}, 
+        {"name": "Happy Birthday, Lee Harvey Oswald", "season": 1, "rating":  8}, 
+        {"name": "Soldier Boy", "season": 1, "rating":7.7}, 
+        {"name": "The Day in Question", "season": 1, "rating":  8.5} ]}
 
         ### 11/22/63 is a mini-TV Series. It's a MUST watch.
 
@@ -96,6 +99,7 @@ class TestEpisodes(TestCase):
         returned = response.json()
 
         conditions = []
+        # conditions.append(expected['rating'] == returned['rating'])
         conditions.append(expected['name'] == returned['name'])
         conditions.append(expected['language'] == returned['language'])
         conditions.append(expected['genre'] == returned['genre'])
@@ -109,16 +113,16 @@ class TestEpisodes(TestCase):
     def test_get_episodes_2(self):
 
         expected = {"name": "Defending Jacob", "language": "English", "genre": ["Drama","Thriller","Legal"],
-        "rating": {"average":7.8}, "number of seasons": 1, 
+        "rating": 7.8, "number of seasons": 1, 
         "episodes": [
-        {"name": "Pilot", "season": 1, "rating": {"average": 7.8}}, 
-        {"name": "Everything Is Cool", "season":1, "rating": {"average": 8.2}},
-        {"name": "Poker Faces", "season": 1, "rating": {"average": 8.2}}, 
-        {"name": "Damage Control", "season": 1, "rating": {"average": 8.1}}, 
-        {"name": "Visitors", "season": 1, "rating": {"average": 8.1}}, 
-        {"name": "Wishful Thinking", "season": 1, "rating": {"average": 8}}, 
-        {"name": "Job", "season": 1, "rating": {"average": 8.3}}, 
-        {"name": "After", "season": 1, "rating": {"average": 7.7}} ]}
+        {"name": "Pilot", "season": 1, "rating": 7.8}, 
+        {"name": "Everything Is Cool", "season":1, "rating":  8.2},
+        {"name": "Poker Faces", "season": 1, "rating":  8.2}, 
+        {"name": "Damage Control", "season": 1, "rating":  8.1}, 
+        {"name": "Visitors", "season": 1, "rating":  8.1}, 
+        {"name": "Wishful Thinking", "season": 1, "rating":  8}, 
+        {"name": "Job", "season": 1, "rating":  8.3}, 
+        {"name": "After", "season": 1, "rating":  7.7} ]}
 
         ### Defending Jacob is another mini-TV Series. That's also great.
 
@@ -128,6 +132,7 @@ class TestEpisodes(TestCase):
         returned = response.json()
 
         conditions = []
+         # conditions.append(expected['rating'] == returned['rating'])
         conditions.append(expected['name'] == returned['name'])
         conditions.append(expected['language'] == returned['language'])
         conditions.append(expected['genre'] == returned['genre'])
