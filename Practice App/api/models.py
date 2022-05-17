@@ -5,7 +5,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
-from pkg_resources import require
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
 
 class myUser(models.Model):
