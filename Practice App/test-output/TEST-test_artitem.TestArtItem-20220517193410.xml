@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_artitem.TestArtItem-20220517193410" tests="4" file="test_artitem.py" time="0.412" timestamp="2022-05-17T19:34:11" failures="0" errors="0" skipped="0">
+	<testcase classname="test_artitem.TestArtItem" name="test_artitems_by_id" time="0.127" timestamp="2022-05-17T19:34:10" file="tests\test_artitem.py" line="108">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_artitem.TestArtItem" name="test_artitems_by_userid" time="0.095" timestamp="2022-05-17T19:34:10" file="tests\test_artitem.py" line="121">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_artitem.TestArtItem" name="test_artitems_by_username" time="0.108" timestamp="2022-05-17T19:34:10" file="tests\test_artitem.py" line="93">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_artitem.TestArtItem" name="test_artitems_get" time="0.083" timestamp="2022-05-17T19:34:11" file="tests\test_artitem.py" line="134">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+]]></system-out>
+	</testcase>
+</testsuite>
