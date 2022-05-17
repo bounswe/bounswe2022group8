@@ -6,6 +6,8 @@ Function views
 
 from django.urls import path
 from .views import views
+from .views import view_search_user
+from rest_framework.urlpatterns import format_suffix_patterns
 #from .views  import view_TVSeries
 
 # practice_home : pattern that matches with the empty route
@@ -21,4 +23,6 @@ urlpatterns = [
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
     # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
+    path('api/search_user/<str:username>', view_search_user.search_user, name="username")
 ]
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])
