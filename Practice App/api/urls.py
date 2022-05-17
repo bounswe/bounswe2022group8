@@ -8,7 +8,7 @@ Function views
 from django.urls import path, include
 from .views import view_artitems
 from rest_framework.urlpatterns import format_suffix_patterns
-# from .views  import view_TVSeries
+from .views  import view_TVSeries
 
 # practice_home : pattern that matches with the empty route
 # That pattern will be handled by the function views.home(request).
@@ -23,8 +23,8 @@ urlpatterns = [
     path('api/v1/artitems/', view_artitems.artitems, name="artitems"),
     path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
     path('api/v1/artitems/users/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
-    path('api/v1/artitems/<int:id>', view_artitems.artitems_by_id, name="artitem_by_id")
-    # path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
+    path('api/v1/artitems/<int:id>', view_artitems.artitems_by_id, name="artitem_by_id"),
+    path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
 ]
 
 #added to give us the option to choose between default Response template and regular json
