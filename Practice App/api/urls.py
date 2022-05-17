@@ -22,5 +22,5 @@ urlpatterns = [
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
     path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
-    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.editComment, name= "editedComment"),
+    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
 ]
