@@ -25,7 +25,7 @@ def formview(request): #should it get tag
             #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
 
 
-    return render(request, 'tagform/tagform.html', {'form':TagForm()}) #import render
+    return render(request, 'tag/tagform.html', {'form':TagForm()}) #import render
     #return HttpResponse("why though")
 
 # http://127.0.0.1:8000

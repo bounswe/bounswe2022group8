@@ -24,10 +24,6 @@ import json
 #  http://127.0.0.1:8000/api/v1/users/<id>              /  GET    / Return a user with the given id
 #  http://127.0.0.1:8000/api/v1/users/<id>              /  PATCH  / Update a user with the given id
 #  http://127.0.0.1:8000/api/v1/users/<id>              /  DELETE / Delete a user with the given id
-#  http://127.0.0.1:8000/api/v1/users/<username>        /  GET    / Return a user with the given username
-#  http://127.0.0.1:8000/api/v1/users/<username>        /  PATCH  / Update a user with the given username
-#  http://127.0.0.1:8000/api/v1/users/<username>        /  DELETE / Delete a user with the given username
-#
 
 @api_view(["GET"])
 def users(request):
@@ -57,27 +53,6 @@ def users_by_id(request, id):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-
-@api_view(["GET", "PATCH", "DELETE"])
-def users_by_username(request, username):
-    users = myUser.objects.all()
-    user = [x for x in users if x.username == username]
-
-    if(not user):
-        return Response({"Not Found:", "Any user with the given username doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-    elif request.method == "GET":
-        serializer = myUserSerializer(user[0])
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    elif request.method == "PATCH":
-        serializer = myUserSerializer(user[0], data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "DELETE":
-        user[0].delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
