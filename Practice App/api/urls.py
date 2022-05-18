@@ -6,7 +6,7 @@ Function views
 """
 
 from django.urls import path, include
-from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries
+from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries, view_tags
 from rest_framework.urlpatterns import format_suffix_patterns
 
 # practice_home : pattern that matches with the empty route
@@ -27,7 +27,9 @@ urlpatterns = [
     path('api/v1/users/<int:id>', view_myusers.users_by_id, name="users_by_id"),
     path('api/v1/searchbytag/<str:tag>', view_search_by_tag.search_by_tag, name="search_by_tag"), #if you're having trouble with tag names make sure it is encoded in the url format. Such as # -> %23. For reference https://www.w3schools.com/tags/ref_urlencode.asp
     path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
-    path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes")
+    path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes"),
+    path('api/v1/tags/', view_tags.tags, name="tags")
+
 ]
 
 #added to give us the option to choose between default Response template and regular json
