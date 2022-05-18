@@ -103,7 +103,9 @@ def users_by_id(request, id):
         serializer = myUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == "DELETE":
+        django_user = User.objects.get(username=user.username)
         user.delete()
+        django_user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
