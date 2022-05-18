@@ -16,8 +16,8 @@
         <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
         <div><span><a href="{% url 'artitems_by_username'   %}" >Get an art item by username</a></span></div>
         <div><span><a href="{% url 'artitems_by_user_id'   %}" >Get an art item by user id</a></span></div>
-        <div><span><a href="{% url 'about_section'   %}" >Post comment on a specific art item</a></span></div>
-        <div><span><a href="{% url 'about_section'   %}" >Get comment</a></span></div>
-        <div><span><a href="{% url 'about_section'   %}" >Delete comment</a></span></div>
+        <div><span><a href="{% url 'commentOnArtItem'   %}" >Post comment on a specific art item</a></span></div>
+        <div><span><a href="{% url 'commentsOfArtItem'    %}" >Get comments of a specific art item</a></span></div>
+        <div><span><a href="{% url 'deleteComment'   %}" >Delete comment</a></span></div>
         <div><span><a href="{% url 'episodes'   %}" >Get episodes of a TV Series.</a></span></div>
     {% endblock %}

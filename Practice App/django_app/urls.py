@@ -38,4 +38,7 @@ urlpatterns = [
     path('episodes/', views.episodes, name="episodes"),
     path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
+    path('comments/artitem/id', views.commentsOfArtItem, name= "commentsOfArtItem"),
+    path('comments/artitem/new', views.commentOnArtItem, name= "commentOnArtItem"),
+    path('user/id/comment/commentid', views.deleteComment, name= "deleteComment"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

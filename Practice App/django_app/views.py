@@ -59,3 +59,15 @@ def episodes(request):
 # # http://127.0.0.1:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
+
+# http://127.0.0.1:8000/comments/artitem/id
+def commentsOfArtItem(request):
+    return render(request, 'comment/comments_of_artitem.html') 
+
+# http://127.0.0.1:8000/comments/artitem/new
+def commentOnArtItem(request):
+    return render(request, 'comment/post_comment_on_artitem.html') 
+
+# http://127.0.0.1:8000/user/id/comment/commentid
+def deleteComment(request):
+    return render(request, 'comment/delete_comment.html') 

@@ -25,7 +25,8 @@ def commentsOfArtItem(request,id):    # id is art item's id
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-        return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
+            return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 # user having id in db can view or delete his/her own comment with commentid
 # id is not the same as user_id stated in database. This is important to prevent confusion.
