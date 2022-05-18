@@ -5,17 +5,11 @@ Function views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
 """
 
-<<<<<<< HEAD
 from django.urls import path, include
 from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views  import view_TVSeries
-=======
-from django.urls import path
-from .views import views
 from .views import view_commentAPI
-#from .views  import view_TVSeries
->>>>>>> ee7c7c382fe50eab81f79807ff0895e1f6fb10a9
 
 # practice_home : pattern that matches with the empty route
 # That pattern will be handled by the function views.home(request).
@@ -27,7 +21,6 @@ from .views import view_commentAPI
 # Changed the route so that it includes v1.
 
 urlpatterns = [
-<<<<<<< HEAD
     path('api/v1/artitems/', view_artitems.artitems, name="artitems"),
     path('api/v1/artitems/users/<int:id>', view_artitems.artitems_by_userid, name="artitems_by_userid"),
     path('api/v1/artitems/users/username/<str:username>', view_artitems.artitems_by_username, name="artitems_by_username"),
@@ -36,18 +29,12 @@ urlpatterns = [
     path('api/v1/users/<int:id>', view_myusers.users_by_id, name="users_by_id"),
     path('api/v1/searchbytag/<str:tag>', view_search_by_tag.search_by_tag, name="search_by_tag"), #if you're having trouble with tag names make sure it is encoded in the url format. Such as # -> %23. For reference https://www.w3schools.com/tags/ref_urlencode.asp
     path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
-    path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes")
+    path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes"),
+    path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
+    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
 ]
 
 #added to give us the option to choose between default Response template and regular json
 #extend the url with <?format=json> to get json
 #if you're having any trouble with your views make sure you added format=None to the arguments
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])
-=======
-    path('', views.home, name = "index"),
-    path('about/', views.about, name = "about_section"),
-    path('api_home/', views.api_home, name= "rest_api"),
-    path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
-    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
-]
->>>>>>> ee7c7c382fe50eab81f79807ff0895e1f6fb10a9
