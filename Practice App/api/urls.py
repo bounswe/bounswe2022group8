@@ -22,7 +22,6 @@ urlpatterns = [
     path('', views.home, name = "index"),
     path('about/', views.about, name = "about_section"),
     path('api_home/', views.api_home, name= "rest_api"),
-    # path('episodes/<str:series>', view_TVSeries.episodes, name="episode_list")
-    path('api/search_user/<str:username>', view_search_user.search_user, name="username")
+    path('api/v1/search_user/<str:username>', view_search_user.search_user, name="search_username"),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])
