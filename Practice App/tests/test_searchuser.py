@@ -32,7 +32,7 @@ class TestSearchUsername(APITestCase):
     def test_search_by_username(self):
         index=0
         for _ in self.usernames:
-            response = self.client.get('/api/search_user/{}'.format(self.usernames[index]))
+            response = self.client.get('/api/v1/search_user/{}'.format(self.usernames[index]))
             self.assertEqual(response.status_code, 200)  # check status code
             index+=1
         
