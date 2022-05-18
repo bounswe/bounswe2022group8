@@ -27,8 +27,8 @@ from django.core.files.base import ContentFile
 #  http://127.0.0.1:8000/api/v1/users                   /  GET    / Return all of the non-admin users in the system in JSON format 
 #  http://127.0.0.1:8000/api/v1/users                   /  POST   / Create a user
 #  http://127.0.0.1:8000/api/v1/users/<id>              /  GET    / Return a user with the given id
-#  http://127.0.0.1:8000/api/v1/users/<id>              /  PATCH  / Update a user with the given id
 #  http://127.0.0.1:8000/api/v1/users/<id>              /  DELETE / Delete a user with the given id
+#
 
 @api_view(["GET", "POST"])
 def users(request):
@@ -88,33 +88,11 @@ def users(request):
                 return Response({"Invalid input."}, status=status.HTTP_400_BAD_REQUEST)
                 
             serializer = myUserSerializer(myuser)
-            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
        
 
-@api_view(["GET"])
-def deneme(request):
-    if request.method == "GET":
 
-        user = None
-
-        #print(myUser.objects.all())
-
-        try:
-            user = User.objects.create_user(username='p', password='-')
-        except:
-            return Response({"Username is already taken"}, status=status.HTTP_409_CONFLICT)
-
-
-        if not user:
-            print(user)
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
-@api_view(["GET", "PATCH", "DELETE"])
+@api_view(["GET", "DELETE"])
 def users_by_id(request, id):
     try:
         user = myUser.objects.get(pk=id)
@@ -124,12 +102,6 @@ def users_by_id(request, id):
     if request.method == "GET":
         serializer = myUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    elif request.method == "PATCH":
-        serializer = myUserSerializer(user, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "DELETE":
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
