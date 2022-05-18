@@ -56,6 +56,10 @@ def artitem_by_username(request):
 def episodes(request):
     return render(request, 'episodes/episodes.html')
 
-# # http://127.0.0.1:8000/artitems/new
+# http://127.0.0.1:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
+
+# http://127.0.0.1:8000/users/new
+def add_user(request):
+    return render(request, 'users/add_user.html')

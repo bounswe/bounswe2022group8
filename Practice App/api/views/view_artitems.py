@@ -63,7 +63,7 @@ def artitems(request):
 
         
         ### BASE64 DECODING
-        # Check if artitem_image is provided. If not, default to defaultart.png. If provided, it's in base64 format. Decode it.
+        # Check if artitem_image is provided. If not, default to defaultart.jpg. If provided, it's in base64 format. Decode it.
         if('artitem_image' in data):
             image_data= data['artitem_image'].split("base64,")[1]
             decoded = base64.b64decode(image_data)

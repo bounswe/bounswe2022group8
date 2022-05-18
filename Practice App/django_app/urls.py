@@ -36,6 +36,7 @@ urlpatterns = [
     path('artitems/users/username', views.artitem_by_username, name="artitems_by_username"),
     path('artitems/new', views.add_artitem, name = "add_art_item"),
     path('episodes/', views.episodes, name="episodes"),
+    path('users/new', views.add_user, name='add_user'),
     path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
