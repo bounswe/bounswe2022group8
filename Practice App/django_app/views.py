@@ -86,3 +86,6 @@ def delete_tag(request):
 
 def add_tags(request):
     return render(request, 'tag/add_tag.html')
+
+def search_user(request):
+    return render(request,'search_user/searchuser.html')
