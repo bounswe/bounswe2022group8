@@ -59,3 +59,8 @@ def episodes(request):
 # # http://127.0.0.1:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
+
+# http://127.0.0.1:8000/tag/
+def list_tags(request):
+    return render(request, 'tag/get_all_tags.html')
+
