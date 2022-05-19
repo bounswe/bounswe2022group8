@@ -75,3 +75,14 @@ def commentOnArtItem(request):
 # http://127.0.0.1:8000/user/id/comment/commentid
 def deleteComment(request):
     return render(request, 'comment/delete_comment.html') 
+
+# http://127.0.0.1:8000/tag/
+def list_tags(request):
+    return render(request, 'tag/get_all_tags.html')
+
+# http://127.0.0.1:8000/tag/id
+def delete_tag(request):
+    return render(request, 'tag/delete_tag_byID.html')
+
+def add_tags(request):
+    return render(request, 'tag/add_tag.html')
