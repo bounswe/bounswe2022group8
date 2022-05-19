@@ -23,9 +23,29 @@ from django.core.files.base import ContentFile
 @api_view(["GET", "POST"])
 def tags(request):
     
-    if(request.method == "GET"):
+    if(request.method == "GET"): # view all of the tags
         tags = Tag.objects.all()
         serializer = TagSerializer(tags, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    if(request.method == "POST"): # add new tags to the system
+        serializer = TagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return JsonResponse(serializer.data,status=status.HTTP_201_CREATED)
+    
+@api_view(["DELETE"]) # delete a tag with id.
+def delete_tag_byID(request, id):
+    try:
+        tag = tag.get(pk=id)
+    except:
+        return Response(status = status.HTTP_404_NOT_FOUND)
+    
+    if(request.method == "DELETE"):
+        tag.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
 
     

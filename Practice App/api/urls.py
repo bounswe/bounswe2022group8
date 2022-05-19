@@ -28,7 +28,8 @@ urlpatterns = [
     path('api/v1/searchbytag/<str:tag>', view_search_by_tag.search_by_tag, name="search_by_tag"), #if you're having trouble with tag names make sure it is encoded in the url format. Such as # -> %23. For reference https://www.w3schools.com/tags/ref_urlencode.asp
     path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
     path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes"),
-    path('api/v1/tags/', view_tags.tags, name="tags")
+    path('api/v1/tags/', view_tags.tags, name="tags"),
+    path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID")
 
 ]
 
