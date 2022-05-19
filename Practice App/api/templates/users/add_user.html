@@ -25,7 +25,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 		}
 
 		#task-container{
-		  max-width:600px;
+		  max-width:450px;
 		  margin:0 auto;
 		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		  background-color: #fff;
@@ -98,21 +98,17 @@ img {
 				<form id="form">
 					<div class="flex-wrapper">
 						<div style="flex: 6">	
-                        <span style="font-size:15px;">You can create an art item for a user from this interface.</span> 
+                        <span style="font-size:15px;">You can create a user from this interface.</span> 
 						<form>
-							<input type="text" id="title" name="Title" placeholder="Title">
-							<input type="text" id = "description" name="description" placeholder="Description">
-							<input type="number" step="1" id = "owner" name="ID of the owner" placeholder="ID of the owner">
-							<br>
-        					<sub>
-            				(You can enter multiple tag IDs with
-            				each separated by comma.)
-        					</sub>
-							<input type="text"  id = "tag" name="ID of the tag" placeholder="ID of the tag">
-							<input type="file"  id = "file" name="File" placeholder="Choose file">
+							<input type="text" id = "username" name="username" placeholder="Username"> <br>
+							<input type="text" id = "password" name="password" placeholder="Password"> <br>
+							<input type="text" id = "name" name="name" placeholder="Name"> <br>
+							<input type="text" id = "surname" name="surname" placeholder="Surname"> <br>
+							<input type="text" id = "email" name="email" placeholder="Email"> <br>
+                            <input type="file" id = "file" name="File" placeholder="Choose file">
 						</form>
 
-                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Create an Art Item and Display" onclick="search()">
+                        <input id="submit" type="button" style="margin-left:100px" class="btn" value="Create a user" onclick="search()">
 						
 					</div>
 				</form>
@@ -177,22 +173,19 @@ img {
 
 		async function search(){
 			var wrapper = document.getElementById('list-wrapper')
-            var title = document.getElementById('title').value
-			var description = document.getElementById('description').value
-			var owner = document.getElementById('owner').value
+            var username = document.getElementById('username').value
+			var password = document.getElementById('password').value
+			var name = document.getElementById('name').value
+            var surname = document.getElementById('surname').value
+            var email = document.getElementById('email').value
 			const files = document.getElementById('file').files
-			var text = document.getElementById('tag').value
-
-			const tagArray = text.split(",");
-			const tags = []
-			for (i in tagArray) {
-				if(isPositiveInteger(tagArray[i])) tags.push(Number(tagArray[i]));
-			}
 
 			console.log(files)
-            if (title == "") { alert("Title must be filled out."); return false;}
-			if (description == "") { alert("Description must be filled out."); return false;}
-			if (owner == "") { alert("Owner ID must be filled out."); return false;}
+            if (username == "") { alert("Username must be set."); return false;}
+			if (password == "") { alert("Password must be set."); return false;}
+			if (name == "") { alert("Name must be set."); return false;}
+            if (surname == "") { alert("Surname must be set."); return false;}
+            if (email == "") { alert("Email must be set."); return false;}
 
 			// clear the previous output
 			wrapper.innerHTML='';
@@ -212,18 +205,19 @@ img {
 			var input = {}
 
 			
-			input['title'] = title
-			input['description'] = description
-			input['owner'] = owner
-			if(result != "") input['artitem_image'] = result
-			if(tags.length > 0) input['tags'] = tags
+			input['username'] = username
+			input['password'] = password
+			input['name'] = name
+            input['surname'] = surname
+            input['email'] = email
+			if(result != "") input['profile_image'] = result
 
 			console.log(input)
 			body_ = JSON.stringify(input)
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/artitems/`, {
+            fetch(`http://127.0.0.1:8000/api/v1/users/`, {
                 method:'POST',
                 headers:{
                     'Content-type': 'application/json',
@@ -254,26 +248,14 @@ img {
                  }       
                 else if (resp.status == 201) { 
 				
-					var tags = data.tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
-						`
-						html += tag
-					}
-					
-
                     var item = `
                     <div  class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${data.title}</p>
-        			<p><b>Description:</b> ${data.description}</p>
-        			<p><b>Username of the owner:</b> ${data.owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${data.artitem_image}" alt="${data.artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+        			<p><b>Username:</b> ${data.username}</p>
+        			<p><b>Name:</b> ${data.name}</p>
+        			<p><b>Surname:</b> ${data.surname}</p>
+                    <p><b>Email:</b> ${data.email}</p>
+        			<p><b>Profile image:</b> <div class="box1"> <img src="${data.profile_image}" alt="${data.profile_image}"> </div> </p>
     					</form>
                     </div>
                     `

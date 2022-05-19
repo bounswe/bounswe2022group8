@@ -5,7 +5,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
-from pkg_resources import require
 # Django creates an automatic id field: https://stackoverflow.com/a/35770315/16530078
 
 class myUser(models.Model):
@@ -21,7 +20,7 @@ class myUser(models.Model):
         symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/', null=True, blank=True)
+    profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/')
 
 
     @property

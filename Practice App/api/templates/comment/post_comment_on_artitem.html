@@ -3,6 +3,7 @@
 
 {% endblock %}
 {% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,8 +83,6 @@ img {
 .box1 img {
     object-fit: cover;
 }
-
-
     
 
 	</style>
@@ -96,13 +95,21 @@ img {
 			<div id="form-wrapper">
 				<form id="form">
 					<div class="flex-wrapper">
-						<div style="flex: 6">
-                            <span style="font-size:20px; margin-left: 30px;"> List all the art items. </span>
-						</div>
-						<div style="flex: 1">
+						<div style="flex: 6">	
+                        <span style="font-size:15px;">Post a comment on art item </span> 
+						<form>
+                            <br>
+							<input type="text" id="body" name="Body" placeholder="Body" >
+                            <br>
+							<input type="number" step="1" id = "commented_by" name="commented_by" placeholder="commented_by">
+                            <br>
+							<input type="number" step="1" id = "commented_on" name="commented_on" placeholder="commented_on">
+							<br>
+        					
+						</form>
+
+                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Post comment" onclick="search()">
 						
-                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Items" onclick="search()">
-						</div>
 					</div>
 				</form>
 			</div>
@@ -112,8 +119,7 @@ img {
 
 
 	<script type="text/javascript">
-        
-        
+         
 		function getCookie(name) {
 		    var cookieValue = null;
 		    if (document.cookie && document.cookie !== '') {
@@ -131,67 +137,95 @@ img {
 		}
 		var csrftoken = getCookie('csrftoken');
 
-		var activeItem = null
-		var list_snapshot = []
-  
 
 		function search(){
 			var wrapper = document.getElementById('list-wrapper')
-			//wrapper.innerHTML = ''
+            var body = document.getElementById('body').value
+			var commented_by = document.getElementById('commented_by').value
+            var commented_on = document.getElementById('commented_on').value
+	
+
+            if (body == "") { alert("Body must be filled out."); return false;}
+			if (commented_by == "") { alert("Id of user must be filled out."); return false;}
+			if (commented_on == "") { alert("Id of art item must be filled out."); return false;}
+
+			// clear the previous output
 			wrapper.innerHTML='';
 
-
-			var url = 'http://127.0.0.1:8000/api/v1/artitems/'  // get all the art items
-
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+			var input = {}
+			var par = commented_on
+			
+			input['body'] = body
+			input['commented_by'] = commented_by
+			input['commented_on'] = commented_on
+
+			console.log(par)
+			console.log(input)
+			body_ = JSON.stringify(input)
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(url, {
-                method:'GET',
+            fetch(`http://127.0.0.1:8000/api/v1/comments/artitem/${par}`, {
+                method:'POST',
                 headers:{
-                    'Content-type': 'application/json'
-                }
-            })
-			.then((resp) => resp.json())
-			.then(function(data) {  // data : returned json
-				console.log('Data:', data)
+                    'Content-type': 'application/json',
+					'X-CSRFToken':csrftoken
+                },
+				body:body_
 				
-                var list = data
-                for(var i in list) {
-					var tags = list[i].tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
+            })
+			
+			.then(resp =>  {    
+                resp.json().then(data => {  // data : returned json
+				console.log('Data:', data)
+				if (resp.status == 400) {
+					var item = ""
+					errors = data
+					for (i in errors) {
+						var e = `
 						<li>
-						<b>${tags[j].tagname}</b>
+						<b>${errors[i]}</b>
 						</li>
 						`
-						html += tag
+						item += e
 					}
-					
+                    var html = `
+                    <div  class="box" > 
+        			<p><b>Bad Request: ${item}</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += html
+                 }       
+                else if (resp.status == 201) { 
+				
+					html = ""
 
                     var item = `
-                    <div id="data-row-${i}" class="box" > 
+                    <div  class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+					<p><b>id:</b>       ${data.id}</p>
+        			<p><b>Body:</b>       ${data.body}</p>
+        			<p><b>commented_by:</b> ${data.commented_by}</p>
+        			<p><b>Commented_on:</b> ${data.commented_on}</p>
+        			<p><b>created_at:</b> ${data.created_at}</p>
+					<p><b>updated_at:</b> ${data.updated_at}</p>
     					</form>
                     </div>
                     `
                     wrapper.innerHTML += item
-                }
+			}
+                
+                })
+            }
 
-
-			})
+			).catch(err => {
+        console.log(err)
+            });
 		}
 
 
 	</script>
 
-
-
 </body></html>{% endblock %}
+

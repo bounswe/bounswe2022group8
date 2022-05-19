@@ -3,6 +3,7 @@
 
 {% endblock %}
 {% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,8 +84,7 @@ img {
     object-fit: cover;
 }
 
-
-    
+ 
 
 	</style>
 
@@ -96,13 +96,12 @@ img {
 			<div id="form-wrapper">
 				<form id="form">
 					<div class="flex-wrapper">
-						<div style="flex: 6">
-                            <span style="font-size:20px; margin-left: 30px;"> List all the art items. </span>
-						</div>
-						<div style="flex: 1">
+						<div style="flex: 6">	
+                        <span style="font-size:15px;">Delete comment by providing comment id and user id</span> 
+						<input type="number" step="1" id = "commentid" name="commentid" placeholder="comment id" value="" required> 
+						<input type="number" step="1" id = "id" name="id" placeholder="user id" value="" required> 
+                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Delete Comment" onclick="search()">
 						
-                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Items" onclick="search()">
-						</div>
 					</div>
 				</form>
 			</div>
@@ -112,8 +111,7 @@ img {
 
 
 	<script type="text/javascript">
-        
-        
+         
 		function getCookie(name) {
 		    var cookieValue = null;
 		    if (document.cookie && document.cookie !== '') {
@@ -130,68 +128,58 @@ img {
 		    return cookieValue;
 		}
 		var csrftoken = getCookie('csrftoken');
-
-		var activeItem = null
-		var list_snapshot = []
-  
-
+        
 		function search(){
 			var wrapper = document.getElementById('list-wrapper')
-			//wrapper.innerHTML = ''
+            var par2 = document.getElementById('id').value
+			var par1 = document.getElementById('commentid').value
+            if (par1 == "" || par2=="" ) {
+                alert("id and comment id must be filled out.");
+                return false;
+            }
+			
 			wrapper.innerHTML='';
-
-
-			var url = 'http://127.0.0.1:8000/api/v1/artitems/'  // get all the art items
-
+			
+            console.log(par1)
+			console.log(par2)
+			
+			
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(url, {
-                method:'GET',
+            fetch(`http://127.0.0.1:8000/api/v1/user/${par2}/comment/${par1}`, {
+                method:'DELETE',
                 headers:{
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json', 'X-CSRFToken':csrftoken
                 }
             })
-			.then((resp) => resp.json())
-			.then(function(data) {  // data : returned json
-				console.log('Data:', data)
-				
-                var list = data
-                for(var i in list) {
-					var tags = list[i].tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
-						`
-						html += tag
-					}
-					
-
+			.then(resp =>  {
+                
+                if (resp.status == 404) {
                     var item = `
-                    <div id="data-row-${i}" class="box" > 
-						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
-    					</form>
+                    <div  class="box" > 
+        			<p><b>Any comment with commentid posted by user with id is not found</b></p>
                     </div>
                     `
                     wrapper.innerHTML += item
-                }
+                }    
+				if (resp.status == 204) {
+                    var item = `
+                    <div  class="box" > 
+        			<p><b>Comment is deleted successfully</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+                }    
+                
 
-
-			})
+			}).catch(err => {
+        	console.log(err)
+            });
 		}
 
-
+		
 	</script>
-
-
 
 </body></html>{% endblock %}

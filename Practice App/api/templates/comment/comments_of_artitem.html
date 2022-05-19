@@ -3,6 +3,7 @@
 
 {% endblock %}
 {% block content %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,13 +97,11 @@ img {
 			<div id="form-wrapper">
 				<form id="form">
 					<div class="flex-wrapper">
-						<div style="flex: 6">
-                            <span style="font-size:20px; margin-left: 30px;"> List all the art items. </span>
-						</div>
-						<div style="flex: 1">
+						<div style="flex: 6">	
+                        <span style="font-size:15px;">View comments of the art item by providing ID of the art item.</span> 
+                        <input type="number" step="1" id = "ID" name="id" placeholder="ID of the art item." value="" required>  
+                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Comments" onclick="search()">
 						
-                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Items" onclick="search()">
-						</div>
 					</div>
 				</form>
 			</div>
@@ -112,8 +111,7 @@ img {
 
 
 	<script type="text/javascript">
-        
-        
+         
 		function getCookie(name) {
 		    var cookieValue = null;
 		    if (document.cookie && document.cookie !== '') {
@@ -130,66 +128,73 @@ img {
 		    return cookieValue;
 		}
 		var csrftoken = getCookie('csrftoken');
-
-		var activeItem = null
-		var list_snapshot = []
-  
-
+        
 		function search(){
 			var wrapper = document.getElementById('list-wrapper')
-			//wrapper.innerHTML = ''
+            var par = document.getElementById('ID').value
+            if (par == "") {
+                alert("ID must be filled out.");
+                return false;
+            }
+			
 			wrapper.innerHTML='';
-
-
-			var url = 'http://127.0.0.1:8000/api/v1/artitems/'  // get all the art items
+            console.log(par)
 
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(url, {
+            fetch(`http://127.0.0.1:8000/api/v1/comments/artitem/${par}`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'
                 }
             })
-			.then((resp) => resp.json())
-			.then(function(data) {  // data : returned json
+			.then(resp =>  {
+                
+                if (resp.status == 404) {
+                    var item = `
+                    <div  class="box" > 
+        			<p><b>Any user with the given ID doesn't exist.</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+                 }       
+                if (resp.status == 200) { 
+                
+                resp.json().then(data => {  // data : returned json
 				console.log('Data:', data)
 				
                 var list = data
                 for(var i in list) {
-					var tags = list[i].tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
-						`
-						html += tag
-					}
 					
+					html = ""
+
 
                     var item = `
                     <div id="data-row-${i}" class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+					<p><b>id:</b>       ${list[i].id}</p>
+        			<p><b>Body:</b>       ${list[i].body}</p>
+        			<p><b>Commented_by:</b> ${list[i].commented_by}</p>  
+        			<p><b>created_at:</b>       ${list[i].created_at}</p>
+                    <p><b>updated_at:</b>       ${list[i].updated_at}</p>
+                    
     					</form>
                     </div>
                     `
                     wrapper.innerHTML += item
                 }
+                
+                })
+            }
 
-
-			})
+			}).catch(err => {
+        console.log(err)
+            });
 		}
 
-
+		
 	</script>
 
 
