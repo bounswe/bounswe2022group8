@@ -158,6 +158,7 @@ img {
 				console.log('Data:', data)
 				
                 var list = data
+				console.log(list)
                 for(var i in list) {
 					
 					html = ""
@@ -174,9 +175,16 @@ img {
     					</form>
                     </div>
                     `
-                    wrapper.innerHTML += item
+
+					wrapper.innerHTML += item
+
                 }
-                
+                if (list.length == 0) {
+				
+					wrapper.innerHTML += ` <p><b>There are no tags to list!!</b></p>`
+                    
+				} 
+
                 })
             }
 

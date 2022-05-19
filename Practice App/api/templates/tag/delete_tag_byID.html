@@ -147,7 +147,8 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
             fetch(`http://127.0.0.1:8000/api/v1/tags/${par1}`, {
                 method:'DELETE',
                 headers:{
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
+					'X-CSRFToken':csrftoken
                 }
             })
 			.then(resp =>  {
