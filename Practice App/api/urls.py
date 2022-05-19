@@ -6,7 +6,7 @@ Function views
 """
 
 from django.urls import path, include
-from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries, view_tags
+from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSeries, view_tags, view_questions
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views  import view_TVSeries
 from .views import view_commentAPI
@@ -33,7 +33,8 @@ urlpatterns = [
     path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
     path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
     path('api/v1/tags/', view_tags.tags, name="tags"),
-    path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID")
+    path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID"),
+    path('api/v1/questions/<str:tag>', view_questions.getquestions, name="getquestions"),
 ]
 
 #added to give us the option to choose between default Response template and regular json
