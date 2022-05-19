@@ -67,3 +67,6 @@ def list_tags(request):
 # http://127.0.0.1:8000/tag/id
 def delete_tag(request):
     return render(request, 'tag/delete_tag_byID.html')
+
+def add_tags(request):
+    return render(request, 'tag/add_tag.html')
