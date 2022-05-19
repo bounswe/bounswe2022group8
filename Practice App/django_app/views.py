@@ -44,6 +44,10 @@ def all_artitems(request):
 def artitem_by_id(request):
     return render(request, 'artitems/list_artitems_by_id.html') 
 
+# http://127.0.0.1:8000/artitems/id/delete
+def artitem_by_id_delete(request):
+    return render(request, 'artitems/delete_artitems_by_id.html')
+
 # http://127.0.0.1:8000/artitems/users/id
 def artitem_by_user_id(request):
     return render(request, 'artitems/list_artitems_by_user_id.html') 
@@ -64,6 +68,7 @@ def add_artitem(request):
 def add_user(request):
     return render(request, 'users/add_user.html')
 
+<<<<<<< HEAD
 # http://127.0.0.1:8000/comments/artitem/id
 def commentsOfArtItem(request):
     return render(request, 'comment/comments_of_artitem.html') 
@@ -86,3 +91,17 @@ def delete_tag(request):
 
 def add_tags(request):
     return render(request, 'tag/add_tag.html')
+=======
+# http://127.0.0.1:8000/users/
+def all_users(request):
+    return render(request, 'users/list_all_users.html')
+
+# http://127.0.0.1:8000/users/id
+def get_user_by_id(request):
+    return render(request, 'users/get_user_by_id.html')
+
+# http://127.0.0.1:8000/users/id/delete
+def delete_user_by_id(request):
+    return render(request, 'users/delete_user_by_id.html')
+    
+>>>>>>> d917a3ee6810c7c848d42a5c208a12b397ea7662
