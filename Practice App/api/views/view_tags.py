@@ -37,13 +37,13 @@ def tags(request):
 @api_view(["DELETE"]) # delete a tag with id.
 def delete_tag_byID(request, id):
     try:
-        tag = tag.get(pk=id)
+        tag = Tag.objects.get(pk=id)
+        tag.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     except:
         return Response(status = status.HTTP_404_NOT_FOUND)
     
-    if(request.method == "DELETE"):
-        tag.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 
 
 

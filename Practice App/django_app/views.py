@@ -64,3 +64,6 @@ def add_artitem(request):
 def list_tags(request):
     return render(request, 'tag/get_all_tags.html')
 
+# http://127.0.0.1:8000/tag/id
+def delete_tag(request):
+    return render(request, 'tag/delete_tag_byID.html')
