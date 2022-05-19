@@ -151,7 +151,7 @@ img {
             fetch(`http://127.0.0.1:8000/api/v1/user/${par2}/comment/${par1}`, {
                 method:'DELETE',
                 headers:{
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json', 'X-CSRFToken':csrftoken
                 }
             })
 			.then(resp =>  {
