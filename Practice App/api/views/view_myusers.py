@@ -11,6 +11,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
+from django.core.validators import validate_email
+
 
 
 from rest_framework.parsers import MultiPartParser
@@ -51,10 +53,13 @@ def users(request):
 
     
         if 'name' not in data:
+            user.delete()
             return Response({"Name must be set."}, status=status.HTTP_400_BAD_REQUEST)
         if 'surname' not in data:
+            user.delete()
             return Response({"Surname must be set."}, status=status.HTTP_400_BAD_REQUEST)
         if 'email' not in data:
+            user.delete()
             return Response({"Email must be set."}, status=status.HTTP_400_BAD_REQUEST)
 
         
@@ -64,17 +69,20 @@ def users(request):
             image_data= data['profile_image'].split("base64,")[1]
             decoded = base64.b64decode(image_data)
             data['profile_image'] = ContentFile(decoded , name='decode.png')
-        
+
+
         if('profile_image' in data):
             with open("media/avatar/decode.png", "wb") as fh:
                 try:
+                    validate_email(data["email"])
                     myuser = myUser.objects.create(user=user,
                                                 name=data["name"],
                                                 surname = data["surname"],
                                                 email = data["email"],
                                                 profile_image = data["profile_image"])
                 except:
-                    return Response({"Invalid input."}, status=status.HTTP_400_BAD_REQUEST)
+                    user.delete()
+                    return Response({"Invalid input: Please provide a valid email."}, status=status.HTTP_400_BAD_REQUEST)
                     
                 fh.write(decoded)
                 serializer = myUserSerializer(myuser)
@@ -82,12 +90,14 @@ def users(request):
                
         else:
             try:
+                validate_email(data["email"])
                 myuser = myUser.objects.create(user=user,
                                              name=data["name"],
                                              surname = data["surname"],
                                              email = data["email"])
             except:
-                return Response({"Invalid input."}, status=status.HTTP_400_BAD_REQUEST)
+                user.delete()
+                return Response({"Invalid input: Please provide a valid email."}, status=status.HTTP_400_BAD_REQUEST)
                 
             serializer = myUserSerializer(myuser)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
