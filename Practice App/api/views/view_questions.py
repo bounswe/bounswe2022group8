@@ -45,6 +45,11 @@ def getquestions(request, tag, format=None ):
         #return JsonResponse(unansweredquestions)
         return Response(unansweredquestions, status= status.HTTP_200_OK)        
 
+    if response.json() == {}:
+        #print(response.json())
+        unansweredquestions["message"] = "Sorry there are no unanswered questions with the given tag at the moment, please try again later."
+        return Response(unansweredquestions, status= status.HTTP_404_NOT_FOUND)  
+
 
 
     for question in response.json()['items']:
