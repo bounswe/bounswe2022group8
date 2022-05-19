@@ -45,7 +45,9 @@ def users(request):
         try:
             user = User.objects.create_user(username=data["username"], password=data["password"])
         except:
-            return Response({"Invalid username or username is already taken"}, status=status.HTTP_400_BAD_REQUEST)
+            if('password' not in data): return Response({"Please provide a password for the user."}, status=status.HTTP_400_BAD_REQUEST)
+            elif('username' not in data): return Response({"Please provide a username for the user."}, status=status.HTTP_400_BAD_REQUEST)
+            else: return Response({"Invalid username or username is already taken"}, status=status.HTTP_400_BAD_REQUEST)
 
     
         if 'name' not in data:
