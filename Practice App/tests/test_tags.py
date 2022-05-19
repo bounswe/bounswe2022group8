@@ -77,4 +77,20 @@ class TestComment(APITestCase):
         self.assertEqual(response.json(), expected)
 
     def test_delete_tag(self):
-        pass
+        for id in range(3,6):
+            tag = Tag.objects.create(tagname = faker.word(), description = faker.paragraph(nb_sentences=3))
+
+        #Testing to delete an existing artitem with given ID
+        for id in range(3,6):
+
+            #First being sure that data exists
+            response = self.client.get('/api/v1/tags/{}'.format(id))
+            self.assertEqual(response.status_code, 200) # check status code
+
+            #Testing if the user with given id successfully deleted
+            response = self.client.delete('/api/v1/tags/{}'.format(id))
+            self.assertEqual(response.status_code, 204) 
+
+        #Testing to delete a non-existent artitem
+        response = self.client.delete('/api/v1/tags/{}'.format(10))
+        self.assertEqual(response.status_code, 404) 
