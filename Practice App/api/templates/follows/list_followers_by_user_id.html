@@ -99,8 +99,8 @@ img {
 					<div class="flex-wrapper">
 						<div style="flex: 6">	
                         <span style="font-size:15px;">You can view the followers of a user by providing the ID of the user.</span> 
-                        <input type="number" step="1" id = "ID" name="id" placeholder="ID of the owner." value="" required>  
-                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Items" onclick="search()">
+                        <input type="number" step="1" id = "ID" name="id" placeholder="ID of the user." value="" required>  
+                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get followers" onclick="search()">
 						
 					</div>
 				</form>
@@ -190,30 +190,34 @@ img {
 				
                 var list = data
                 for(var i in list) {
-					var tags = list[i].tags 
 					html = ""
-					for(var j in tags) {
-						var tag = `
+
+					var name = list[i].name
+					var surname = list[i].surname
+					var email = list[i].email
+
+					var tag = `
 						<li>
-						<b>${tags[j].tagname}</b>
+						<b>${name}</b>
 						</li>
 						`
-						html += tag
-					}
-					
+					html += tag
+					var tag = `
+						<li>
+						<b>${surname}</b>
+						</li>
+						`
+					html += tag
+					var tag = `
+						<li>
+						<b>${email}</b>
+						</li>
+						`
+					html += tag
 
-                    var item = `
-                    <div id="data-row-${i}" class="box" > 
-						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
-    					</form>
-                    </div>
-                    `
+					var item = ``
                     wrapper.innerHTML += item
+					
                 }
                 
                 })

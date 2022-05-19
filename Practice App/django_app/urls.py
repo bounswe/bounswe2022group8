@@ -38,4 +38,7 @@ urlpatterns = [
     path('episodes/', views.episodes, name="episodes"),
     path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
+    path('get_followers/', views.followers_by_userid, name="followers_by_userid"),
+    path('get_followings/', views.followings_by_userid, name="followings_by_userid"),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -59,3 +59,11 @@ def episodes(request):
 # # http://127.0.0.1:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
+
+# # http://127.0.0.1:8000/get_followers/
+def followers_by_userid(request):
+    return render(request, 'follows/list_followers_by_user_id.html')
+
+# # http://127.0.0.1:8000/get_followings/
+def followings_by_userid(request):
+    return render(request, 'follows/list_followings_by_user_id.html')
