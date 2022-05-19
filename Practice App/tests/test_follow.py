@@ -101,12 +101,12 @@ class TestFollow(TestCase):
         while(following == follower):
             following = randrange(1,7)
 
-        data = {"from_user" : follower,
-                "to_user" : following
+        data = {"from_user" : 6,
+                "to_user" : 2
                 }
         
         response = self.client.post('/api/v1/follow_user/', content_type='application/json', data=data)
-        self.assertEqual(response.status_code, 201)  # check status code
+        self.assertEqual(response.status_code, 200)  # check status code
 
         serializer = FollowSerializer(Follow.objects.get(pk=14)) # lastly added
         expected = serializer.data
