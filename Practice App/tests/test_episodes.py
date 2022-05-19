@@ -70,7 +70,7 @@ class TestEpisodes(TestCase):
         for _ in range(20):
             series = random.choice(self.series)
             response = self.c.get('/api/v1/episodes/{}'.format(series))
-            print(series)
+            # print(series)
             self.assertEqual(response.status_code, 200)
 
         response = self.c.get('/api/v1/episodes/hüsnü komiser')  # no such TV series

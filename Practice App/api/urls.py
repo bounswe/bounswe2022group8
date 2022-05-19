@@ -10,6 +10,7 @@ from .views import view_artitems, view_myusers, view_search_by_tag, view_TVSerie
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views  import view_TVSeries
 from .views import view_commentAPI
+from .views import view_search_user
 
 # practice_home : pattern that matches with the empty route
 # That pattern will be handled by the function views.home(request).
@@ -31,9 +32,10 @@ urlpatterns = [
     path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
     path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes"),
     path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
-    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
+    path('api/v1/users/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
     path('api/v1/tags/', view_tags.tags, name="tags"),
-    path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID")
+    path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID"),
+    path('api/v1/users/username/<str:username>', view_search_user.search_user, name="search_username")
 ]
 
 #added to give us the option to choose between default Response template and regular json
