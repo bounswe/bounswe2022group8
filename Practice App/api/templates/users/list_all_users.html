@@ -25,7 +25,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 		}
 
 		#task-container{
-		  max-width:600px;
+		  max-width:450px;
 		  margin:0 auto;
 		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		  background-color: #fff;
@@ -98,10 +98,11 @@ img {
 				<form id="form">
 					<div class="flex-wrapper">
 						<div style="flex: 6">	
-                        <span style="font-size:15px;">You can view a specific art item by providing its ID.</span> 
-                        <input type="number" step="1" id = "ID" name="id" placeholder="ID of the art item." value="" required>  
-                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Item" onclick="search()">
-						
+                            <span style="font-size:20px; margin-left: 30px;">List users.</span> 
+						</div>
+						<div style="flex: 1">
+                            <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Users" onclick="search()">
+						</div> 
 					</div>
 				</form>
 			</div>
@@ -150,75 +151,78 @@ img {
 		var activeItem = null
 		var list_snapshot = []
         
-		// buildList()
 
-		function search(){
+		async function search(){
 			var wrapper = document.getElementById('list-wrapper')
-            var par = document.getElementById('ID').value
-            if (par == "") {
-                alert("ID must be filled out.");
-                return false;
-            }
+           
 
+			// clear the previous output
 			wrapper.innerHTML='';
-            console.log(par)
 
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 			
+			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/artitems/${par}`, {
+            fetch('http://127.0.0.1:8000/api/v1/users/', {
                 method:'GET',
                 headers:{
-                    'Content-type': 'application/json'
+                    'Content-type': 'application/json',
                 }
             })
-			.then(resp =>  {
-                
-                if (resp.status == 404) {
-                    var item = `
-                    <div  class="box" > 
-        			<p><b>Any art item with the given ID does not exist.</b></p>
-                    </div>
-                    `
-                    wrapper.innerHTML += item
-                 }       
-                if (resp.status == 200) { 
-                
-                resp.json().then(data => {  // data : returned json
-				console.log('Data:', data)
+			.then((resp) => resp.json())
+			.then(function(data) {    
 				
-					var tags = data.tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
+				console.log('Data:', data)
+
+				var list = data
+				
+				for(var i in list){
+					var followers = list[i].follower
+					var followings = list[i].following
+
+					var htmlfollowers = ""
+					for(var j in followers) {
+						var follower = `
+						${followers[j].username}
 						`
-						html += tag
+						htmlfollowers += follower + ', '
 					}
-					
 
-                    var item = `
-                    <div  class="box" > 
+					var htmlfollowings = ""
+					for(var j in followings) {
+						var following = `
+						${followings[j].username}
+						`
+						htmlfollowings += following + ', '
+					}
+
+
+					htmlfollowers = htmlfollowers.replace(/,\s*$/, "");
+					htmlfollowings = htmlfollowings.replace(/,\s*$/, "");
+
+
+						
+					var item = `
+					<div id="data-row-${i}" class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${data.title}</p>
-        			<p><b>Description:</b> ${data.description}</p>
-        			<p><b>Username of the owner:</b> ${data.owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${data.artitem_image}" alt="${data.artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
-    					</form>
-                    </div>
-                    `
-                    wrapper.innerHTML += item
-                
-                })
-            }
+					<p><b>Username:</b> ${list[i].username}</p>
+					<p><b>Name:</b> ${list[i].name}</p>
+					<p><b>Surname:</b> ${list[i].surname}</p>
+					<p><b>Followers:</b> ${htmlfollowers}</p>
+					<p><b>Following:</b> ${htmlfollowings}</p>
+					<p><b>Email:</b> ${list[i].email}</p>
+					<p><b>Profile image:</b> <div class="box1"> <img src="${list[i].profile_image}" alt="${list[i].profile_image}"> </div> </p>
+						</form>
+					</div>
+					`
+					wrapper.innerHTML += item
 
-			}).catch(err => {
-        console.log(err)
-            });
+
+				}
+                
+			
+			})
 		}
 
 

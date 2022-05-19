@@ -44,6 +44,10 @@ def all_artitems(request):
 def artitem_by_id(request):
     return render(request, 'artitems/list_artitems_by_id.html') 
 
+# http://127.0.0.1:8000/artitems/id/delete
+def artitem_by_id_delete(request):
+    return render(request, 'artitems/delete_artitems_by_id.html')
+
 # http://127.0.0.1:8000/artitems/users/id
 def artitem_by_user_id(request):
     return render(request, 'artitems/list_artitems_by_user_id.html') 
@@ -56,6 +60,48 @@ def artitem_by_username(request):
 def episodes(request):
     return render(request, 'episodes/episodes.html')
 
-# # http://127.0.0.1:8000/artitems/new
+# http://127.0.0.1:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
+
+# http://127.0.0.1:8000/users/new
+def add_user(request):
+    return render(request, 'users/add_user.html')
+
+<<<<<<< HEAD
+# http://127.0.0.1:8000/comments/artitem/id
+def commentsOfArtItem(request):
+    return render(request, 'comment/comments_of_artitem.html') 
+
+# http://127.0.0.1:8000/comments/artitem/new
+def commentOnArtItem(request):
+    return render(request, 'comment/post_comment_on_artitem.html') 
+
+# http://127.0.0.1:8000/user/id/comment/commentid
+def deleteComment(request):
+    return render(request, 'comment/delete_comment.html') 
+
+# http://127.0.0.1:8000/tag/
+def list_tags(request):
+    return render(request, 'tag/get_all_tags.html')
+
+# http://127.0.0.1:8000/tag/id
+def delete_tag(request):
+    return render(request, 'tag/delete_tag_byID.html')
+
+def add_tags(request):
+    return render(request, 'tag/add_tag.html')
+=======
+# http://127.0.0.1:8000/users/
+def all_users(request):
+    return render(request, 'users/list_all_users.html')
+
+# http://127.0.0.1:8000/users/id
+def get_user_by_id(request):
+    return render(request, 'users/get_user_by_id.html')
+
+# http://127.0.0.1:8000/users/id/delete
+def delete_user_by_id(request):
+    return render(request, 'users/delete_user_by_id.html')
+    
+>>>>>>> d917a3ee6810c7c848d42a5c208a12b397ea7662

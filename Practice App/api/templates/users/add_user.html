@@ -25,7 +25,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 		}
 
 		#task-container{
-		  max-width:600px;
+		  max-width:450px;
 		  margin:0 auto;
 		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		  background-color: #fff;
@@ -98,9 +98,17 @@ img {
 				<form id="form">
 					<div class="flex-wrapper">
 						<div style="flex: 6">	
-                        <span style="font-size:15px;">You can view a specific art item by providing its ID.</span> 
-                        <input type="number" step="1" id = "ID" name="id" placeholder="ID of the art item." value="" required>  
-                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Item" onclick="search()">
+                        <span style="font-size:15px;">You can create a user from this interface.</span> 
+						<form>
+							<input type="text" id = "username" name="username" placeholder="Username"> <br>
+							<input type="text" id = "password" name="password" placeholder="Password"> <br>
+							<input type="text" id = "name" name="name" placeholder="Name"> <br>
+							<input type="text" id = "surname" name="surname" placeholder="Surname"> <br>
+							<input type="text" id = "email" name="email" placeholder="Email"> <br>
+                            <input type="file" id = "file" name="File" placeholder="Choose file">
+						</form>
+
+                        <input id="submit" type="button" style="margin-left:100px" class="btn" value="Create a user" onclick="search()">
 						
 					</div>
 				</form>
@@ -150,73 +158,114 @@ img {
 		var activeItem = null
 		var list_snapshot = []
         
-		// buildList()
+		const toBase64 = file => new Promise((resolve, reject) => {
+    		const reader = new FileReader();
+    		reader.readAsDataURL(file);
+    		reader.onload = () => resolve(reader.result);
+    		reader.onerror = error => reject(error);
+		})
+		function isPositiveInteger(str) {
+  			if (typeof str !== 'string') { return false; }
+			const num = Number(str);
+			if (Number.isInteger(num) && num > 0) { return true; }
+			return false;
+		}		
 
-		function search(){
+		async function search(){
 			var wrapper = document.getElementById('list-wrapper')
-            var par = document.getElementById('ID').value
-            if (par == "") {
-                alert("ID must be filled out.");
-                return false;
-            }
+            var username = document.getElementById('username').value
+			var password = document.getElementById('password').value
+			var name = document.getElementById('name').value
+            var surname = document.getElementById('surname').value
+            var email = document.getElementById('email').value
+			const files = document.getElementById('file').files
 
+			console.log(files)
+            if (username == "") { alert("Username must be set."); return false;}
+			if (password == "") { alert("Password must be set."); return false;}
+			if (name == "") { alert("Name must be set."); return false;}
+            if (surname == "") { alert("Surname must be set."); return false;}
+            if (email == "") { alert("Email must be set."); return false;}
+
+			// clear the previous output
 			wrapper.innerHTML='';
-            console.log(par)
+			var result = ""
+			if(files.length > 0) {
+                try {
+      				result = await toBase64(files[0]);
+      				console.log(result)
+   				} catch(error) {
+      				console.error(error);
+      				return;
+   				}
+			}
+
 
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+			var input = {}
+
+			
+			input['username'] = username
+			input['password'] = password
+			input['name'] = name
+            input['surname'] = surname
+            input['email'] = email
+			if(result != "") input['profile_image'] = result
+
+			console.log(input)
+			body_ = JSON.stringify(input)
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/artitems/${par}`, {
-                method:'GET',
+            fetch(`http://127.0.0.1:8000/api/v1/users/`, {
+                method:'POST',
                 headers:{
-                    'Content-type': 'application/json'
-                }
+                    'Content-type': 'application/json',
+					'X-CSRFToken':csrftoken
+                },
+				body:body_
             })
-			.then(resp =>  {
-                
-                if (resp.status == 404) {
-                    var item = `
-                    <div  class="box" > 
-        			<p><b>Any art item with the given ID does not exist.</b></p>
-                    </div>
-                    `
-                    wrapper.innerHTML += item
-                 }       
-                if (resp.status == 200) { 
-                
+			.then(resp =>  {    
                 resp.json().then(data => {  // data : returned json
 				console.log('Data:', data)
-				
-					var tags = data.tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
+				if (resp.status == 400) {
+					var item = ""
+					errors = data
+					for (i in errors) {
+						var e = `
 						<li>
-						<b>${tags[j].tagname}</b>
+						<b>${errors[i]}</b>
 						</li>
 						`
-						html += tag
+						item += e
 					}
-					
-
+                    var html = `
+                    <div  class="box" > 
+        			<p><b>Bad Request: ${item}</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += html
+                 }       
+                else if (resp.status == 201) { 
+				
                     var item = `
                     <div  class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${data.title}</p>
-        			<p><b>Description:</b> ${data.description}</p>
-        			<p><b>Username of the owner:</b> ${data.owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${data.artitem_image}" alt="${data.artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+        			<p><b>Username:</b> ${data.username}</p>
+        			<p><b>Name:</b> ${data.name}</p>
+        			<p><b>Surname:</b> ${data.surname}</p>
+                    <p><b>Email:</b> ${data.email}</p>
+        			<p><b>Profile image:</b> <div class="box1"> <img src="${data.profile_image}" alt="${data.profile_image}"> </div> </p>
     					</form>
                     </div>
                     `
                     wrapper.innerHTML += item
+			}
                 
                 })
             }
 
-			}).catch(err => {
+			).catch(err => {
         console.log(err)
             });
 		}
