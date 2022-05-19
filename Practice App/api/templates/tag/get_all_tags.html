@@ -159,37 +159,28 @@ img {
 				
                 var list = data
                 for(var i in list) {
-					var tags = list[i].tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
-						`
-						html += tag
-					}
 					
+					html = ""
 
                     var item = `
                     <div id="data-row-${i}" class="box" > 
 						<form>
-        			<p><b>Title:</b>       ${list[i].title}</p>
-        			<p><b>Description:</b> ${list[i].description}</p>
-        			<p><b>Username of the owner:</b> ${list[i].owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${list[i].artitem_image}" alt="${list[i].artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
+					<p><b>id:</b>       ${list[i].id}</p>
+                    <p><b>Tag Name:</b>       ${list[i].tagname}</p>
+        			<p><b>Description:</b>       ${list[i].decription}</p>
+        			<p><b>created_at:</b>       ${list[i].created_at}</p>
+                    <p><b>updated_at:</b>       ${list[i].updated_at}</p>
+                    
     					</form>
                     </div>
                     `
                     wrapper.innerHTML += item
                 }
+                
+                })
+            }
 
-
-			})
-		}
-
-
+		
 	</script>
 
 
