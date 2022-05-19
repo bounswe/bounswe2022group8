@@ -19,11 +19,11 @@ class TestEpisodes(TestCase):
 
 
     def setUp(self):
-        print("TestArtItem:setUp_:begin")
+        print("TestEpisodes:setUp_:begin")
 
         self.c = Client()
 
-        print("TestArtItem:setUp_:end")
+        print("TestEpisodes:setUp_:end")
 
 
     """
@@ -58,10 +58,10 @@ class TestEpisodes(TestCase):
 
     def tearDown(self):
         # cleaning up after the test
-        print("TestArtItem:tearDown_:begin")
+        print("TestEpisodes:tearDown_:begin")
 
         # do something
-        print("TestArtItem:tearDown_:end") 
+        print("TestEpisodes:tearDown_:end") 
 
     
     def test_basic(self):

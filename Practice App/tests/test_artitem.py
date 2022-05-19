@@ -105,7 +105,7 @@ class TestArtItem(TestCase):
         response = self.client.get('/api/v1/artitems/users/username/{}'.format(self.usernames[4]))
         self.assertEqual(response.status_code, 404)  # check status code
 
-    def test_artitems_by_id(self):
+    def test_get_artitem_by_id(self):
         for id in range(1, 5):
             response = self.client.get('/api/v1/artitems/{}'.format(id))
             self.assertEqual(response.status_code, 200)  # check status code
@@ -117,6 +117,34 @@ class TestArtItem(TestCase):
         
         response = self.client.get('/api/v1/artitems/{}'.format(5))
         self.assertEqual(response.status_code, 404)  # check status code
+
+
+    def test_delete_artitem_by_id(self):
+        #Creating data
+        for id in range(1,5):
+            faker = Faker()
+            user = User.objects.create(username = faker.unique.word(), password = faker.password())
+            myuser = myUser.objects.create(user=user, name = faker.first_name(), surname = faker.last_name(), email = faker.email())
+            artitem = ArtItem.objects.create(title= faker.word(), description = faker.paragraph(nb_sentences=3), owner = myuser)
+        
+        #Testing to delete an existing artitem with given ID
+        for id in range(1,5):
+
+            #First being sure that data exists
+            response = self.client.get('/api/v1/artitems/{}'.format(id+4))
+            self.assertEqual(response.status_code, 200) # check status code
+
+            #Testing if the user with given id successfully deleted
+            response = self.client.delete('/api/v1/artitems/{}'.format(id+4))
+            self.assertEqual(response.status_code, 204) 
+
+        #Testing to delete a non-existent artitem
+
+        response = self.client.delete('/api/v1/artitems/{}'.format(9))
+        self.assertEqual(response.status_code, 404) 
+
+        
+
 
     def test_artitems_by_userid(self):
         for id in range(1, 5):
@@ -131,6 +159,8 @@ class TestArtItem(TestCase):
         response = self.client.get('/api/v1/artitems/users/{}'.format(5))
         self.assertEqual(response.status_code, 404)  # check status code
 
+
+
     def test_artitems_get(self):
         response = self.client.get('/api/v1/artitems/')
         self.assertEqual(response.status_code, 200)  # check status code
@@ -138,6 +168,8 @@ class TestArtItem(TestCase):
         serializer = ArtItemSerializer(ArtItem.objects.all(), many=True)
         expected = serializer.data
         self.assertEqual(response.json(), expected)
+
+
 
     def test_artitems_post(self):
         faker = Faker()

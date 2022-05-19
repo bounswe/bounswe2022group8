@@ -2,6 +2,7 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from .models import myUser, Tag, Comment, ArtItem, Follow
+from django.contrib.auth.models import User
 
 class ArtItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,6 +28,7 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = ["id", "from_user", "to_user", "created_at"] # add created_at
 
 
+
 class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = myUser
@@ -37,7 +39,7 @@ class myUserSerializer(serializers.ModelSerializer):
     following = serializers.SerializerMethodField()
     class Meta:
         model = myUser
-        fields = ['id', 'username', 'name', 'surname', 'follower', 'following', 'email', 'created_at', 'updated_at']
+        fields = ['id', 'username', 'name', 'surname', 'follower', 'following', 'email', 'profile_image', 'created_at', 'updated_at']
 
     def get_follower(self, obj):
         follower_query = Follow.objects.filter(to_user=obj.id)  # return all Follow objects with to_user = obj.id (all follow objects in which this user is being followed)
