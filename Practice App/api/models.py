@@ -20,7 +20,7 @@ class myUser(models.Model):
         symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/', null=True, blank=True)
+    profile_image = models.ImageField( default='avatar/profiledef.png', upload_to='avatar/')
 
 
     @property

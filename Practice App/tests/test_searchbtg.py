@@ -15,7 +15,7 @@ class TestTagSearch(APITestCase):
 
 
         # setting up for the test
-        print("TestArtItem:setUp_:begin")
+        print("TestSearchbtg:setUp_:begin")
         
         ##### Mock up data #####
 
@@ -29,16 +29,16 @@ class TestTagSearch(APITestCase):
         test_artitem.tags.add(test_tag)
 
 
-        print("TestArtItem:setUp_:end")
+        print("TestSearchbtg:setUp_:end")
 
 
 
     def tearDown(self):
         # cleaning up after the test
-        print("TestArtItem:setUp_:begin")
+        print("TestSearchbtg:setUp_:begin")
 
         # do something
-        print("TestArtItem:setUp_:end")
+        print("TestSearchbtg:setUp_:end")
 
 
     def test_get_tagged_artitems(self):
