@@ -215,7 +215,13 @@ img {
 						`
 					html += tag
 
-					var item = ``
+					var item = `
+                    	<div  class="box" > 
+							<form>
+						<p>Followings: ${html}</p>
+    						</form>
+                    	</div>
+                    	`
                     wrapper.innerHTML += item
                 }
                 
