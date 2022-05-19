@@ -20,9 +20,9 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-# http://127.0.0.1:8000/admin --> redirected to admin.site.urls
+# http://127.0.0.1:8000/admin/ --> redirected to admin.site.urls
 # http://127.0.0.1:8000 --> redirected to api.urls 
-# http://127.0.0.1:8000
+# http://127.0.0.1:8000/about/ --> redirected to about page
 
 # All routes must be referenced here.
 
@@ -32,11 +32,15 @@ urlpatterns = [
     path('', views.home, name="index"),
     path('artitems/', views.all_artitems, name = "artitems"),
     path('artitems/id', views.artitem_by_id, name = "artitems_by_id"),
+    path('artitems/id/delete', views.artitem_by_id_delete, name="artitems_by_id_delete_frontend"),
     path('artitems/users/id', views.artitem_by_user_id, name="artitems_by_user_id"),
     path('artitems/users/username', views.artitem_by_username, name="artitems_by_username"),
     path('artitems/new', views.add_artitem, name = "add_art_item"),
     path('episodes/', views.episodes, name="episodes"),
-    path('users/new', views.add_user, name='add_user'),
+    path('users/', views.all_users, name = 'users_frontend'),
+    path('users/new', views.add_user, name='add_user_frontend'),
+    path('users/id', views.get_user_by_id, name="user_by_id_frontend"),
+    path('users/id/delete', views.delete_user_by_id, name="delete_user_by_id_frontend"),
     path('about/', views.about, name="about_section"),
     path('searchbytag/form', views.formview, name="search_by_tag_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

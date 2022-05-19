@@ -8,13 +8,15 @@
         <h1>Welcome to Practice App </h1>
         <div><span><a href="{% url 'about_section'      %}">About page of Practice App</a></span></div>
         <h3>Please choose one of the following API's to try out.</h3>
-        <div><span><a href="{% url 'add_user'   %}" >Create a user</a></span></div>
+        <div><span><a href="{% url 'users_frontend'   %}" >Get all users</a></span></div>
+        <div><span><a href="{% url 'add_user_frontend'   %}" >Create a user</a></span></div>
+        <div><span><a href="{% url 'user_by_id_frontend'   %}" >Get a user by id</a></span></div>
+        <div><span><a href="{% url 'delete_user_by_id_frontend'   %}" >Delete a user by id</a></span></div>
         <div><span><a href="{% url 'search_by_tag_form_main'   %}" >Search by tag</a></span></div>
-        <div><span><a href="{% url 'artitems'   %}" >Get all of the art items</a></span></div>
+        <div><span><a href="{% url 'artitems'   %}" >Get all art items</a></span></div>
         <div><span><a href="{% url 'add_art_item'   %}" >Add an art item</a></span></div>
-        <div><span><a href="{% url 'about_section'   %}" >Delete an art item</a></span></div>
-        <div><span><a href="{% url 'about_section'   %}" >Update an art item</a></span></div>
         <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
+        <div><span><a href="{% url 'artitems_by_id_delete_frontend'   %}" >Delete an art item by id</a></span></div>
         <div><span><a href="{% url 'artitems_by_username'   %}" >Get an art item by username</a></span></div>
         <div><span><a href="{% url 'artitems_by_user_id'   %}" >Get an art item by user id</a></span></div>
         <div><span><a href="{% url 'about_section'   %}" >Post comment on a specific art item</a></span></div>

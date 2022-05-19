@@ -98,9 +98,9 @@ img {
 				<form id="form">
 					<div class="flex-wrapper">
 						<div style="flex: 6">	
-                        <span style="font-size:15px;">You can view a specific art item by providing its ID.</span> 
+                        <span style="font-size:15px;">You can delete an art item by providing its ID.</span> 
                         <input type="number" step="1" id = "ID" name="id" placeholder="ID of the art item." value="" required>  
-                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Get Art Item" onclick="search()">
+                        <input id="submit" type="button" style="margin-left:110px" class="btn" value="Delete Art Item" onclick="search()">
 						
 					</div>
 				</form>
@@ -147,6 +147,8 @@ img {
 		}
 		var csrftoken = getCookie('csrftoken');
 
+        
+
 		var activeItem = null
 		var list_snapshot = []
         
@@ -168,11 +170,13 @@ img {
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
             fetch(`http://127.0.0.1:8000/api/v1/artitems/${par}`, {
-                method:'GET',
-                headers:{
-                    'Content-type': 'application/json'
+                method: "DELETE",
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken':csrftoken
                 }
             })
+            
 			.then(resp =>  {
                 
                 if (resp.status == 404) {
@@ -183,37 +187,14 @@ img {
                     `
                     wrapper.innerHTML += item
                  }       
-                if (resp.status == 200) { 
+                if (resp.status == 204) { 
                 
-                resp.json().then(data => {  // data : returned json
-				console.log('Data:', data)
-				
-					var tags = data.tags 
-					html = ""
-					for(var j in tags) {
-						var tag = `
-						<li>
-						<b>${tags[j].tagname}</b>
-						</li>
-						`
-						html += tag
-					}
-					
-
                     var item = `
                     <div  class="box" > 
-						<form>
-        			<p><b>Title:</b>       ${data.title}</p>
-        			<p><b>Description:</b> ${data.description}</p>
-        			<p><b>Username of the owner:</b> ${data.owner.username}</p>
-        			<p><b>Image of the art item:</b> <div class="box1"> <img src="${data.artitem_image}" alt="${data.artitem_image}"> </div> </p>
-					<p>Related Tags: ${html}</p>
-    					</form>
+        			<p><b>Art item with the specified ID was successfully deleted.</b></p>
                     </div>
                     `
                     wrapper.innerHTML += item
-                
-                })
             }
 
 			}).catch(err => {
