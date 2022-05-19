@@ -121,7 +121,7 @@ async function search(){
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/search_user/${par}`, {
+            fetch(`http://127.0.0.1:8000/api/v1/users/username/${par}`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'
