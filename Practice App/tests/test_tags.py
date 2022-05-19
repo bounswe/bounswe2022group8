@@ -58,39 +58,39 @@ class TestComment(APITestCase):
         expected = serializer.data
         self.assertEqual(response.json(), expected)
 
-    def test_tags_post(self):
+        def test_tags_post(self):
 
-        faker = Faker()
-        name = faker.word()
-        description = faker.paragraph(nb_sentences=3)
+            faker = Faker()
+            name = faker.word()
+            description = faker.paragraph(nb_sentences=3)
 
-        data = {
-            "tagname" : name,
-            "description" : description
-        }
+            data = {
+                "tagname" : name,
+                "description" : description
+            }
 
-        response = self.client.post('/api/v1/tags/', content_type='application/json', data=data)
-        self.assertEqual(response.status_code, 201)
+            response = self.client.post('/api/v1/tags/', content_type='application/json', data=data)
+            self.assertEqual(response.status_code, 201)
 
-        serializer = TagSerializer(Tag.objects.get(pk=3))
-        expected = serializer.data
-        self.assertEqual(response.json(), expected)
+            serializer = TagSerializer(Tag.objects.get(pk=3))
+            expected = serializer.data
+            self.assertEqual(response.json(), expected)
 
-    def test_delete_tag(self):
-        for id in range(3,6):
-            tag = Tag.objects.create(tagname = faker.word(), description = faker.paragraph(nb_sentences=3))
+            def test_delete_tag(self):
+                for id in range(3,6):
+                    tag = Tag.objects.create(tagname = faker.word(), description = faker.paragraph(nb_sentences=3))
 
-        #Testing to delete an existing artitem with given ID
-        for id in range(3,6):
+                #Testing to delete an existing artitem with given ID
+                for id in range(3,6):
 
-            #First being sure that data exists
-            response = self.client.get('/api/v1/tags/{}'.format(id))
-            self.assertEqual(response.status_code, 200) # check status code
+                    #First being sure that data exists
+                    response = self.client.get('/api/v1/tags/{}'.format(id))
+                    self.assertEqual(response.status_code, 200) # check status code
 
-            #Testing if the user with given id successfully deleted
-            response = self.client.delete('/api/v1/tags/{}'.format(id))
-            self.assertEqual(response.status_code, 204) 
+                    #Testing if the user with given id successfully deleted
+                    response = self.client.delete('/api/v1/tags/{}'.format(id))
+                    self.assertEqual(response.status_code, 204) 
 
-        #Testing to delete a non-existent artitem
-        response = self.client.delete('/api/v1/tags/{}'.format(10))
-        self.assertEqual(response.status_code, 404) 
+                #Testing to delete a non-existent artitem
+                response = self.client.delete('/api/v1/tags/{}'.format(10))
+                self.assertEqual(response.status_code, 404)
