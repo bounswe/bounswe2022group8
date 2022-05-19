@@ -54,7 +54,7 @@ class TestFollow(TestCase):
         follow10 = Follow.objects.create(from_user = myUser4, to_user = myUser1)
         follow11 = Follow.objects.create(from_user = myUser5, to_user = myUser1)
         follow12 = Follow.objects.create(from_user = myUser6, to_user = myUser1)
-        follow12 = Follow.objects.create(from_user = myUser6, to_user = myUser3)
+        follow13 = Follow.objects.create(from_user = myUser6, to_user = myUser3)
 
         print("TestFollow:setUp_:end")
 
@@ -108,7 +108,7 @@ class TestFollow(TestCase):
         response = self.client.post('/api/v1/follow_user/', content_type='application/json', data=data)
         self.assertEqual(response.status_code, 201)  # check status code
 
-        serializer = FollowSerializer(Follow.objects.get(pk=7)) # lastly added
+        serializer = FollowSerializer(Follow.objects.get(pk=14)) # lastly added
         expected = serializer.data
         self.assertEqual(response.json(), expected)
         
