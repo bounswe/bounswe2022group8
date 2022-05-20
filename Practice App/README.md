@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```cmd
 python manage.py runserver
 ```
-* You can test the application by using the website running on ```http://127.0.0.1:8000/```.
+* You can test the application by using the website running on ```http://${host}:8000/```.
 
 * Other commands that will be useful in the future:
    * ```python manage.py test api/tests```: Run the tests within the ```api/tests``` folder.

@@ -20,9 +20,9 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-# http://127.0.0.1:8000/admin/ --> redirected to admin.site.urls
-# http://127.0.0.1:8000 --> redirected to api.urls 
-# http://127.0.0.1:8000/about/ --> redirected to about page
+# http://${host}:8000/admin/ --> redirected to admin.site.urls
+# http://${host}:8000 --> redirected to api.urls 
+# http://${host}:8000/about/ --> redirected to about page
 
 # All routes must be referenced here.
 

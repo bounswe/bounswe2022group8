@@ -27,10 +27,10 @@ from django.contrib.auth import authenticate
 
 ##### List of routes / method / action:
 #
-#  http://127.0.0.1:8000/api/v1/users                   /  GET    / Return all of the non-admin users in the system in JSON format 
-#  http://127.0.0.1:8000/api/v1/users                   /  POST   / Create a user
-#  http://127.0.0.1:8000/api/v1/users/<id>              /  GET    / Return a user with the given id
-#  http://127.0.0.1:8000/api/v1/users/<id>              /  DELETE / Delete a user with the given id
+#  http://${host}:8000/api/v1/users                   /  GET    / Return all of the non-admin users in the system in JSON format 
+#  http://${host}:8000/api/v1/users                   /  POST   / Create a user
+#  http://${host}:8000/api/v1/users/<id>              /  GET    / Return a user with the given id
+#  http://${host}:8000/api/v1/users/<id>              /  DELETE / Delete a user with the given id
 #
 
 @api_view(["GET", "POST"])
