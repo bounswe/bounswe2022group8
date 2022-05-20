@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_questions.TestQuestions-20220520144123" tests="2" file="test_questions.py" time="1.909" timestamp="2022-05-20T14:41:38" failures="0" errors="0" skipped="0">
+	<testcase classname="test_questions.TestQuestions" name="test_questions_all" time="0.964" timestamp="2022-05-20T14:41:37" file="tests\test_questions.py" line="35">
+		<system-out><![CDATA[TestQuestions:setUp_:begin
+TestQuestions:setUp_:end
+TestQuestions:setUp_:begin
+TestQuestions:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_questions.TestQuestions" name="test_questions_tag" time="0.945" timestamp="2022-05-20T14:41:38" file="tests\test_questions.py" line="48">
+		<system-out><![CDATA[TestQuestions:setUp_:begin
+TestQuestions:setUp_:end
+TestQuestions:setUp_:begin
+TestQuestions:setUp_:end
+]]></system-out>
+	</testcase>
+</testsuite>

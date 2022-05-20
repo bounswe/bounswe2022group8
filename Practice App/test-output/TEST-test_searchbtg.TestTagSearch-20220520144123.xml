@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_searchbtg.TestTagSearch-20220520144123" tests="3" file="test_searchbtg.py" time="0.444" timestamp="2022-05-20T14:41:39" failures="0" errors="0" skipped="0">
+	<testcase classname="test_searchbtg.TestTagSearch" name="test_get_tagged_artitems" time="0.177" timestamp="2022-05-20T14:41:38" file="tests\test_searchbtg.py" line="46">
+		<system-out><![CDATA[TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_searchbtg.TestTagSearch" name="test_get_tagged_artitems_no_item_with_tag" time="0.135" timestamp="2022-05-20T14:41:38" file="tests\test_searchbtg.py" line="62">
+		<system-out><![CDATA[TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_searchbtg.TestTagSearch" name="test_get_tagged_artitems_no_tag" time="0.132" timestamp="2022-05-20T14:41:39" file="tests\test_searchbtg.py" line="55">
+		<system-out><![CDATA[TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+TestSearchbtg:setUp_:begin
+TestSearchbtg:setUp_:end
+]]></system-out>
+	</testcase>
+</testsuite>

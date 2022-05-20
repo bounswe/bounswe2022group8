@@ -21,6 +21,7 @@ import json
 
 import base64
 from django.core.files.base import ContentFile
+from django.contrib.auth import authenticate
 
 
 
@@ -101,10 +102,9 @@ def users(request):
                 
             serializer = myUserSerializer(myuser)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-       
 
 
-@api_view(["GET", "DELETE"])
+@api_view(["GET",  "DELETE"])
 def users_by_id(request, id):
     try:
         user = myUser.objects.get(pk=id)
@@ -124,3 +124,14 @@ def users_by_id(request, id):
 
 
 
+@api_view(['GET'])
+def users_by_credentials(request, username,password):
+    user = authenticate(username=username , password=password)
+    if user is None:
+        user = User.objects.get(username=username)
+        if user is None:
+            return Response( {"Any user with the given credentials doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+        if user.password != password:
+            return Response( {"Any user with the given credentials doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
+    serializer = myUserSerializer(myUser.objects.get(user=user))
+    return Response(serializer.data, status=status.HTTP_200_OK)
