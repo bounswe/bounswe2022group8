@@ -21,14 +21,6 @@ python manage.py runserver
 ```
 * You can test the application by using the website running on ```http://${host}:8000/```.
 
-* Other commands that will be useful in the future:
-   * ```python manage.py test api/tests```: Run the tests within the ```api/tests``` folder.
-   * ```python manage.py makemigrations```: Create new migrations based on the changes you have made to your models.
-   * ```python manage.py sqlmigrate <app-name> <migration-number>```: Displays the SQL statements for a migration and executes them.
-   * ```python manage.py migrate```: Apply the migrations.
-   * ```python manage.py shell```: Open the Python shell that gives you access to the database API included with Django.
-
-
 
 ## Dockerization
 * In order to dockerize our application one should perform the following steps:
