@@ -33,6 +33,11 @@ urlpatterns = [
     path('api/v1/searchbytagkeyword/<str:tag>', view_search_by_tag.search_by_tag_keyword, name="search_by_tag_keyword"),
     path('api/v1/episodes/<str:series>', view_TVSeries.episodes, name="episodes"),
     path('api/v1/comments/artitem/<int:id>', view_commentAPI.commentsOfArtItem, name= "commentsOfArtItem"),
+    path('api/v1/user/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
+    path('api/v1/user/<str:username>/<str:password>', view_myusers.users_by_credentials, name = "users_by_credentials"),
+    path('api/v1/signup/', view_myusers.users, name = "signup"),
+
+
     path('api/v1/users/<int:id>/comment/<int:commentid>', view_commentAPI.getDeleteComment, name= "getDeleteComment"),
     path('api/v1/tags/', view_tags.tags, name="tags"),
     path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID"),

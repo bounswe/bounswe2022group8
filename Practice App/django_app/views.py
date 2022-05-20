@@ -64,6 +64,15 @@ def episodes(request):
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
 
+#  http://127.0.0.1:8000/login
+
+def login(request):
+    return render(request, 'users/login.html')
+
+# # http://127.0.0.1:8000/signup
+
+def signup(request):
+    return render(request, 'users/signup.html')
 # http://127.0.0.1:8000/users/new
 def add_user(request):
     return render(request, 'users/add_user.html')

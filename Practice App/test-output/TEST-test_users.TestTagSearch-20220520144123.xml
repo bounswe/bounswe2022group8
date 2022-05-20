@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_users.TestTagSearch-20220520144123" tests="5" file="test_users.py" time="2.239" timestamp="2022-05-20T14:41:41" failures="0" errors="0" skipped="0">
+	<testcase classname="test_users.TestTagSearch" name="test_delete_users_by_id" time="0.568" timestamp="2022-05-20T14:41:39" file="tests\test_users.py" line="138">
+		<system-out><![CDATA[TestUser:setUp_:begin
+TestUser:setUp_:end
+TestUser:setUp_:begin
+TestUser:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_users.TestTagSearch" name="test_get_users" time="0.010" timestamp="2022-05-20T14:41:39" file="tests\test_users.py" line="32">
+		<system-out><![CDATA[TestUser:setUp_:begin
+TestUser:setUp_:end
+TestUser:setUp_:begin
+TestUser:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_users.TestTagSearch" name="test_get_users_by_id" time="0.535" timestamp="2022-05-20T14:41:40" file="tests\test_users.py" line="119">
+		<system-out><![CDATA[TestUser:setUp_:begin
+TestUser:setUp_:end
+TestUser:setUp_:begin
+TestUser:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_users.TestTagSearch" name="test_post_users" time="0.414" timestamp="2022-05-20T14:41:40" file="tests\test_users.py" line="43">
+		<system-out><![CDATA[TestUser:setUp_:begin
+TestUser:setUp_:end
+TestUser:setUp_:begin
+TestUser:setUp_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="test_users.TestTagSearch" name="test_post_users_400" time="0.712" timestamp="2022-05-20T14:41:41" file="tests\test_users.py" line="73">
+		<system-out><![CDATA[TestUser:setUp_:begin
+TestUser:setUp_:end
+TestUser:setUp_:begin
+TestUser:setUp_:end
+]]></system-out>
+	</testcase>
+</testsuite>
