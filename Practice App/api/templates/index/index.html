@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+
+    {% block title %}
+    Homepage
+    {% endblock %}
+
+    {% block content %}
+        <h1>Welcome to Practice App </h1>
+        <div><span><a href="{% url 'about_section'      %}">About page of Practice App</a></span></div>
+        <h3>Please choose one of the following API's to try out.</h3>
+        <div><span><a href="{% url 'search_user'   %}" >Search for a user by username.</a></span></div>
+        <div><span><a href="{% url 'users_frontend'   %}" >Get all users</a></span></div>
+        <div><span><a href="{% url 'add_user_frontend'   %}" >Create a user</a></span></div>
+        <div><span><a href="{% url 'user_by_id_frontend'   %}" >Get a user by id</a></span></div>
+        <div><span><a href="{% url 'delete_user_by_id_frontend'   %}" >Delete a user by id</a></span></div>
+        <div><span><a href="{% url 'search_by_tag_form_main'   %}" >Search by tag</a></span></div>
+        <div><span><a href="{% url 'artitems'   %}" >Get all art items</a></span></div>
+        <div><span><a href="{% url 'add_art_item'   %}" >Add an art item</a></span></div>
+        <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
+        <div><span><a href="{% url 'artitems_by_id_delete_frontend'   %}" >Delete an art item by id</a></span></div>
+        <div><span><a href="{% url 'artitems_by_username'   %}" >Get an art item by username</a></span></div>
+        <div><span><a href="{% url 'artitems_by_user_id'   %}" >Get an art item by user id</a></span></div>
+        <div><span><a href="{% url 'commentOnArtItem'   %}" >Post comment on a specific art item</a></span></div>
+        <div><span><a href="{% url 'commentsOfArtItem'    %}" >Get comments of a specific art item</a></span></div>
+        <div><span><a href="{% url 'deleteComment'   %}" >Delete comment</a></span></div>
+        <div><span><a href="{% url 'episodes'   %}" >Get episodes of a TV Series.</a></span></div>
+        <div><span><a href="{% url 'login'   %}" >Login.</a></span></div>
+        <div><span><a href="{% url 'signup'   %}" >Sign Up.</a></span></div>
+        <div><span><a href="{% url 'list_tags'   %}" >List all of the tags.</a></span></div>
+        <div><span><a href="{% url 'delete_tag'   %}" >Delete a tag.</a></span></div>
+        <div><span><a href="{% url 'add_tags'   %}" >Add a tag.</a></span></div>
+        <div><span><a href="{% url 'questions_form_main'   %}" >Get freshest unanswered Stackexchange questions</a></span></div>
+        <div><span><a href="{% url 'followers_by_userid'   %}" >Get followers of a user.</a></span></div>
+        <div><span><a href="{% url 'followings_by_userid'   %}" >Get followings of a user.</a></span></div>
+    {% endblock %}
