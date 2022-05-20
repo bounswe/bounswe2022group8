@@ -134,6 +134,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 		var csrftoken = getCookie('csrftoken');	
 
 		async function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
             var tagname = document.getElementById('tagname').value
 			var description = document.getElementById('description').value
@@ -157,7 +158,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/tags/`, {
+            fetch(`${host}/api/v1/tags/`, {
                 method:'POST',
                 headers:{
                     'Content-type': 'application/json',

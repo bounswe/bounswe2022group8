@@ -130,6 +130,7 @@ img {
 		var csrftoken = getCookie('csrftoken');
         
 		function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
             var par = document.getElementById('ID').value
             if (par == "") {
@@ -144,7 +145,7 @@ img {
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/comments/artitem/${par}`, {
+            fetch(`${host}/api/v1/comments/artitem/${par}`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'
