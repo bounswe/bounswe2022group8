@@ -142,3 +142,7 @@ def followers_by_userid(request):
 # # http://127.0.0.1:8000/get_followings/
 def followings_by_userid(request):
     return render(request, 'follows/list_followings_by_user_id.html')
+
+    # # http://127.0.0.1:8000/searchbytag/keyword/
+def get_item_by_keyword(request):
+    return render(request, 'tag/get_item_by_keyword.html')
