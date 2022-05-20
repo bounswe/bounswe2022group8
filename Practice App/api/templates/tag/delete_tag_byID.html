@@ -129,6 +129,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 		var csrftoken = getCookie('csrftoken');
         
 		function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
             var par1 = document.getElementById('tagid').value
             if (par1 == "") {
@@ -144,7 +145,7 @@ background-image: linear-gradient(315deg, #a55c1b 0%, #363535 74%);
 
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/tags/${par1}`, {
+            fetch(`${host}/api/v1/tags/${par1}`, {
                 method:'DELETE',
                 headers:{
                     'Content-type': 'application/json',

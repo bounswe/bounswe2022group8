@@ -137,6 +137,7 @@ img {
   
 
 		function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
             var par = document.getElementById('name').value
             if (par == "") {
@@ -151,7 +152,7 @@ img {
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/episodes/${par}`, {
+            fetch(`${host}/api/v1/episodes/${par}`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'

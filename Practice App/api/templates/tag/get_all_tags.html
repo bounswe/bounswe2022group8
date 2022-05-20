@@ -136,18 +136,17 @@ img {
   
 
 		function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
 			//wrapper.innerHTML = ''
 			wrapper.innerHTML='';
 
 
-			var url = 'http://127.0.0.1:8000/api/v1/tags/'  // get all the tags
-
             var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(url, {
+            fetch(`${host}/api/v1/tags/`, {
                 method:'GET',
                 headers:{
                     'Content-type': 'application/json'

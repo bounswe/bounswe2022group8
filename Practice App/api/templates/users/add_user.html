@@ -172,6 +172,7 @@ img {
 		}		
 
 		async function search(){
+			var host = window.location.origin; 
 			var wrapper = document.getElementById('list-wrapper')
             var username = document.getElementById('username').value
 			var password = document.getElementById('password').value
@@ -217,7 +218,7 @@ img {
 			
             // Examine the structure of the fetch function in detail.
             // It's important to add method and headers.
-            fetch(`http://127.0.0.1:8000/api/v1/users/`, {
+            fetch(`${host}/api/v1/users/`, {
                 method:'POST',
                 headers:{
                     'Content-type': 'application/json',
