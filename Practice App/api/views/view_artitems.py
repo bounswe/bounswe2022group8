@@ -22,12 +22,12 @@ from django.core.files.base import ContentFile
 
 ##### List of routes / method / action:
 #
-#  http://127.0.0.1:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format 
-#  http://127.0.0.1:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://127.0.0.1:8000/api/v1/artitems/<id>                       / DELETE / Delete an art item with the given id
-#  http://127.0.0.1:8000/api/v1/artitems                            / POST   / create an art item
-#  http://127.0.0.1:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
-#  http://127.0.0.1:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
+#  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format 
+#  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
+#  http://${host}:8000/api/v1/artitems/<id>                       / DELETE / Delete an art item with the given id
+#  http://${host}:8000/api/v1/artitems                            / POST   / create an art item
+#  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
+#  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
 #  
 import base64
 from django.core.files.base import ContentFile

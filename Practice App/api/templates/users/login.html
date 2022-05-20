@@ -82,6 +82,8 @@ button {
 
     function search(){
         console.log("hellooo")
+        var host = window.location.origin; 
+
         var wrapper = document.getElementById('list-wrapper')
         //wrapper.innerHTML = ''
         var username = document.getElementById('0').value
@@ -99,7 +101,7 @@ button {
         
         // Examine the structure of the fetch function in detail.
         // It's important to add method and headers.
-        fetch(`http://127.0.0.1:8000/api/v1/user/${username}/${password}`, {
+        fetch(`${host}/api/v1/user/${username}/${password}`, {
             method:'GET',
             headers:{
                 'Content-type': 'application/json'

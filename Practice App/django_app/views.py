@@ -22,93 +22,93 @@ def formview(request): #should it get tag
             #print(encoded)
             #print(encoded)
             return redirect('search_by_tag', tag=tag) #Redirect to search_by_tag page
-            #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
+            #response = request.get('http://${host}:8000/api/searchbytag/{encoded}')
 
 
     return render(request, 'tag/tagform.html', {'form':TagForm()}) #import render
     #return HttpResponse("why though")
 
-# http://127.0.0.1:8000
+# http://${host}:8000
 def home(request):
     return render(request, 'index/index.html')   
 
-# http://127.0.0.1:8000/about
+# http://${host}:8000/about
 def about(request):
     return HttpResponse("<h1>About</h1>")
 
-# http://127.0.0.1:8000/artitems/
+# http://${host}:8000/artitems/
 def all_artitems(request):
     return render(request, 'artitems/list_all_artitems.html') 
 
-# http://127.0.0.1:8000/artitems/id
+# http://${host}:8000/artitems/id
 def artitem_by_id(request):
     return render(request, 'artitems/list_artitems_by_id.html') 
 
-# http://127.0.0.1:8000/artitems/id/delete
+# http://${host}:8000/artitems/id/delete
 def artitem_by_id_delete(request):
     return render(request, 'artitems/delete_artitems_by_id.html')
 
-# http://127.0.0.1:8000/artitems/users/id
+# http://${host}:8000/artitems/users/id
 def artitem_by_user_id(request):
     return render(request, 'artitems/list_artitems_by_user_id.html') 
 
-# http://127.0.0.1:8000/artitems/users/username
+# http://${host}:8000/artitems/users/username
 def artitem_by_username(request):
     return render(request, 'artitems/list_artimes_by_username.html')
 
-# http://127.0.0.1:8000/episodes
+# http://${host}:8000/episodes
 def episodes(request):
     return render(request, 'episodes/episodes.html')
 
-# http://127.0.0.1:8000/artitems/new
+# http://${host}:8000/artitems/new
 def add_artitem(request):
     return render(request, 'artitems/add_art_item.html')
 
-#  http://127.0.0.1:8000/login
+#  http://${host}:8000/login
 
 def login(request):
     return render(request, 'users/login.html')
 
-# # http://127.0.0.1:8000/signup
+# # http://${host}:8000/signup
 
 def signup(request):
     return render(request, 'users/signup.html')
-# http://127.0.0.1:8000/users/new
+# http://${host}:8000/users/new
 def add_user(request):
     return render(request, 'users/add_user.html')
 
-# http://127.0.0.1:8000/comments/artitem/id
+# http://${host}:8000/comments/artitem/id
 def commentsOfArtItem(request):
     return render(request, 'comment/comments_of_artitem.html') 
 
-# http://127.0.0.1:8000/comments/artitem/new
+# http://${host}:8000/comments/artitem/new
 def commentOnArtItem(request):
     return render(request, 'comment/post_comment_on_artitem.html') 
 
-# http://127.0.0.1:8000/user/id/comment/commentid
+# http://${host}:8000/user/id/comment/commentid
 def deleteComment(request):
     return render(request, 'comment/delete_comment.html') 
 
-# http://127.0.0.1:8000/tag/
+# http://${host}:8000/tag/
 def list_tags(request):
     return render(request, 'tag/get_all_tags.html')
 
-# http://127.0.0.1:8000/tag/id
+# http://${host}:8000/tag/id
 def delete_tag(request):
     return render(request, 'tag/delete_tag_byID.html')
 
 def add_tags(request):
     return render(request, 'tag/add_tag.html')
 
-# http://127.0.0.1:8000/users/
+# http://${host}:8000/users/
 def all_users(request):
     return render(request, 'users/list_all_users.html')
 
-# http://127.0.0.1:8000/users/id
+# http://${host}:8000/users/id
 def get_user_by_id(request):
     return render(request, 'users/get_user_by_id.html')
 
-# http://127.0.0.1:8000/users/id/delete
+# http://${host}:8000/users/id/delete
 def delete_user_by_id(request):
     return render(request, 'users/delete_user_by_id.html')
     
@@ -128,17 +128,21 @@ def questions(request):
             #print(encoded)
             #print(encoded)
             return redirect('getquestions', tag=tag) #Redirect to search_by_tag page
-            #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
+            #response = request.get('http://${host}:8000/api/searchbytag/{encoded}')
 
 
     return render(request, 'questions/questions.html', {'form':QuestionTagForm()}) #import render
     #return HttpResponse("why though") 
 
 
-# # http://127.0.0.1:8000/get_followers/
+# # http://${host}:8000/get_followers/
 def followers_by_userid(request):
     return render(request, 'follows/list_followers_by_user_id.html')
 
-# # http://127.0.0.1:8000/get_followings/
+# # http://${host}:8000/get_followings/
 def followings_by_userid(request):
     return render(request, 'follows/list_followings_by_user_id.html')
+
+    # # http://${host}:8000/searchbytag/keyword/
+def get_item_by_keyword(request):
+    return render(request, 'tag/get_item_by_keyword.html')
