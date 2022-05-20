@@ -38,11 +38,17 @@ def search_by_tag(request, tag, format=None):
     try:
         tagObject = Tag.objects.get(tagname=tag)
     except Tag.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)    
+        resp = {}
+        resp["message"]= "Sorry, the given tag does not exist. Perhaps try get all tags API to see what tags are available."
+        return Response(resp, status=status.HTTP_404_NOT_FOUND)    
 
 
     if request.method == 'GET':
         items= tagObject.artitem_set.all()
         # items = ArtItem.objects.all()
         serializer = ArtItemSerializer(items, many=True)
+        if serializer.data == []:
+            resp = {}
+            resp["message"]= "Sorry, currently there are no art items tagged with the given tag. Perhaps try get all art items API to see what art items are available."
+            return Response(resp, status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -49,5 +49,6 @@ urlpatterns = [
     path('user/id/comment/commentid', views.deleteComment, name= "deleteComment"),
     path('tag/id', views.delete_tag, name="delete_tag"),
     path('tag/new', views.add_tags, name="add_tags"),
-    path('search_user/',views.search_user ,name="search_user")
+    path('search_user/',views.search_user ,name="search_user"),
+    path('questions/form', views.questions, name="questions_form_main"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,7 +4,7 @@ import urllib.parse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import TagForm
+from .forms import TagForm, QuestionTagForm
 import urllib.parse
 import requests
 import json
@@ -107,3 +107,20 @@ def delete_user_by_id(request):
 def search_user(request):
     return render(request,'search_user/searchuser.html')
 
+def questions(request): 
+    if request.POST:
+        form = QuestionTagForm(request.POST)
+        print(request.POST)
+        tag=request.POST["tag"]
+        #print("here")
+        #print(tag)
+        if form.is_valid():        
+            #encoded = urllib.parse.quote(str(tag))
+            #print(encoded)
+            #print(encoded)
+            return redirect('getquestions', tag=tag) #Redirect to search_by_tag page
+            #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
+
+
+    return render(request, 'questions/questions.html', {'form':QuestionTagForm()}) #import render
+    #return HttpResponse("why though")    

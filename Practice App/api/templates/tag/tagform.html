@@ -1,6 +1,9 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+<h3>Here you can search for ArtItems tagged with the given tag.</h3>
+<p>Enter the tag you want to search for.</p>
+<p>Tip: If you want to get the reply in pure json format, extend the result url with ?format=json</p>
 <form action="{% url 'search_by_tag_form_main'    %}" method="post", enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
