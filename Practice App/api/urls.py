@@ -11,6 +11,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views  import view_TVSeries
 from .views import view_commentAPI
 from .views import view_search_user
+from .views import view_follow
 
 # practice_home : pattern that matches with the empty route
 # That pattern will be handled by the function views.home(request).
@@ -37,6 +38,9 @@ urlpatterns = [
     path('api/v1/tags/<int:id>', view_tags.delete_tag_byID, name="delete_tag_byID"),
     path('api/v1/users/username/<str:username>', view_search_user.search_user, name="search_username"),
     path('api/v1/questions/<str:tag>', view_questions.getquestions, name="getquestions"),
+    path('api/v1/follow_user/', view_follow.follow_user, name="follow_user"),
+    path('api/v1/get_followers/<int:id>', view_follow.get_followers, name="get_followers"),
+    path('api/v1/get_followings/<int:id>', view_follow.get_followings, name="get_followings"),
 ]
 
 #added to give us the option to choose between default Response template and regular json

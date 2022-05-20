@@ -123,4 +123,13 @@ def questions(request):
 
 
     return render(request, 'questions/questions.html', {'form':QuestionTagForm()}) #import render
-    #return HttpResponse("why though")    
+    #return HttpResponse("why though") 
+
+
+# # http://127.0.0.1:8000/get_followers/
+def followers_by_userid(request):
+    return render(request, 'follows/list_followers_by_user_id.html')
+
+# # http://127.0.0.1:8000/get_followings/
+def followings_by_userid(request):
+    return render(request, 'follows/list_followings_by_user_id.html')

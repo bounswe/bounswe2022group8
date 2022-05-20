@@ -51,4 +51,6 @@ urlpatterns = [
     path('tag/new', views.add_tags, name="add_tags"),
     path('search_user/',views.search_user ,name="search_user"),
     path('questions/form', views.questions, name="questions_form_main"),
+    path('get_followers/', views.followers_by_userid, name="followers_by_userid"),
+    path('get_followings/', views.followings_by_userid, name="followings_by_userid"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
