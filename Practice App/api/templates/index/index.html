@@ -92,6 +92,7 @@ img {
         <div><span><a href="{% url 'user_by_id_frontend'   %}" >Get a user by id</a></span></div>
         <div><span><a href="{% url 'delete_user_by_id_frontend'   %}" >Delete a user by id</a></span></div>
         <div><span><a href="{% url 'search_by_tag_form_main'   %}" >Search by tag</a></span></div>
+        <div><span><a href="{% url 'get_item_by_keyword' %}"> Search by tag - keyword</a></span></div>
         <div><span><a href="{% url 'artitems'   %}" >Get all art items</a></span></div>
         <div><span><a href="{% url 'add_art_item'   %}" >Add an art item</a></span></div>
         <div><span><a href="{% url 'artitems_by_id'   %}" >Get an art item by id</a></span></div>
@@ -110,4 +111,5 @@ img {
         <div><span><a href="{% url 'questions_form_main'   %}" >Get freshest unanswered Stackexchange questions</a></span></div>
         <div><span><a href="{% url 'followers_by_userid'   %}" >Get followers of a user.</a></span></div>
         <div><span><a href="{% url 'followings_by_userid'   %}" >Get followings of a user.</a></span></div>
+        
     {% endblock %}
