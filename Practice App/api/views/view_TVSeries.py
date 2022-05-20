@@ -46,7 +46,7 @@ def episodes(request, series):
     elif(request.status_code == 404): # resource does not exist
         return JsonResponse({'status': 'TV Series with the specified name cannot be found.'}, status = 404)
     else:
-        return JsonResponse({'status': 'An internal server error has occurred in the system. Please try again.'}, status = 500)
+        return JsonResponse({'status': 'An internal server error has occurred in the system. Please try again.'}, status = 503)
 
 
 

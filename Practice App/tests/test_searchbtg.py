@@ -28,6 +28,8 @@ class TestTagSearch(APITestCase):
         self.artitemId = test_artitem.id
         test_artitem.tags.add(test_tag)
 
+        self.tagname2 = 'someweirdwordtnottobeusedelsewhere'
+        test_tag2 = Tag.objects.create(tagname = self.tagname2, description = faker.paragraph(nb_sentences=3))
 
         print("TestSearchbtg:setUp_:end")
 
@@ -50,7 +52,24 @@ class TestTagSearch(APITestCase):
         expected = serializer.data
         self.assertEqual(response.json(), expected)
 
+    def test_get_tagged_artitems_no_tag(self):
+        response = self.client.get('/api/v1/searchbytag/someweirdname')
+        self.assertEqual(response.status_code, 404)  # check status code
+        resp = {}
+        resp["message"]= "Sorry, the given tag does not exist. Perhaps try get all tags API to see what tags are available."
+        self.assertEqual(response.json(), resp)
 
+    def test_get_tagged_artitems_no_item_with_tag(self):
+        response = self.client.get('/api/v1/searchbytag/{}'.format(self.tagname2))
+        self.assertEqual(response.status_code, 204)  # check status code
+        resp = {}
+        resp["message"]= "Sorry, currently there are no art items tagged with the given tag. Perhaps try get all art items API to see what art items are available."
+        #print("Response:")
+        #print(response.data)
+        #print(response.json())
+        #print("Resp:")
+        #print(resp)
+        self.assertEqual(response.data, resp)
 
 
         

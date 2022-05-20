@@ -4,7 +4,7 @@ import urllib.parse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import TagForm
+from .forms import TagForm, QuestionTagForm
 import urllib.parse
 import requests
 import json
@@ -68,7 +68,6 @@ def add_artitem(request):
 def add_user(request):
     return render(request, 'users/add_user.html')
 
-<<<<<<< HEAD
 # http://127.0.0.1:8000/comments/artitem/id
 def commentsOfArtItem(request):
     return render(request, 'comment/comments_of_artitem.html') 
@@ -91,7 +90,7 @@ def delete_tag(request):
 
 def add_tags(request):
     return render(request, 'tag/add_tag.html')
-=======
+
 # http://127.0.0.1:8000/users/
 def all_users(request):
     return render(request, 'users/list_all_users.html')
@@ -104,4 +103,24 @@ def get_user_by_id(request):
 def delete_user_by_id(request):
     return render(request, 'users/delete_user_by_id.html')
     
->>>>>>> d917a3ee6810c7c848d42a5c208a12b397ea7662
+
+def search_user(request):
+    return render(request,'search_user/searchuser.html')
+
+def questions(request): 
+    if request.POST:
+        form = QuestionTagForm(request.POST)
+        print(request.POST)
+        tag=request.POST["tag"]
+        #print("here")
+        #print(tag)
+        if form.is_valid():        
+            #encoded = urllib.parse.quote(str(tag))
+            #print(encoded)
+            #print(encoded)
+            return redirect('getquestions', tag=tag) #Redirect to search_by_tag page
+            #response = request.get('http://127.0.0.1:8000/api/searchbytag/{encoded}')
+
+
+    return render(request, 'questions/questions.html', {'form':QuestionTagForm()}) #import render
+    #return HttpResponse("why though")    

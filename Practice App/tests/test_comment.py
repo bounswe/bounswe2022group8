@@ -80,7 +80,7 @@ class TestComment(APITestCase):
         
 
     def test_getDeleteComment_get(self):
-        response = self.client.get('/api/v1/user/{id}/comment/{commentid}'.format(id= self.user.id, commentid=self.commentId))
+        response = self.client.get('/api/v1/users/{id}/comment/{commentid}'.format(id= self.user.id, commentid=self.commentId))
         self.assertEqual(response.status_code, 200)  # check status code
             
         serializer = CommentSerializer(Comment.objects.get(pk=self.commentId))
@@ -89,7 +89,7 @@ class TestComment(APITestCase):
 
 
     def test_getDeleteComment_delete(self):
-        response = self.client.delete('/api/v1/user/{id}/comment/{commentid}'.format(id= self.user.id, commentid=self.commentId))
+        response = self.client.delete('/api/v1/users/{id}/comment/{commentid}'.format(id= self.user.id, commentid=self.commentId))
         self.assertEqual(response.status_code, 204)  # check status code
         
         self.assertFalse(Comment.objects.filter(pk=self.commentId).exists())
