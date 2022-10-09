@@ -6,15 +6,17 @@ Welcome to the repository of Group 8 for CmpE [352](https://www.cmpe.boun.edu.tr
 
 ![Screenshot 2022-03-09 200748](https://user-images.githubusercontent.com/71488784/157839515-61a6dff1-91d2-4163-a495-8a6d4d9120f2.jpg)
 
-## Group Members
-* [Sena Mumcu](https://github.com/bounswe/bounswe2022group8/wiki/Sena-Mumcu)
+## Group Members 👨‍💻
 * [Serdar Akol](https://github.com/bounswe/bounswe2022group8/wiki/Serdar-Akol)
+* [Sena Mumcu](https://github.com/bounswe/bounswe2022group8/wiki/Sena-Mumcu)
 * [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F)
-* [Furkan Keskin](https://github.com/bounswe/bounswe2022group8/wiki/Furkan-Keskin)
+* [Mustafa Cihan](https://github.com/bounswe/bounswe2022group8/wiki/Mustafa-Cihan)
 * [Serhat Hebun Şimşek](https://github.com/bounswe/bounswe2022group8/wiki/Serhat-Hebun-%C5%9Eim%C5%9Fek)
 * [Elif Bayraktar](https://github.com/bounswe/bounswe2022group8/wiki/Elif-Bayraktar)
 * [Doğukan Türksoy](https://github.com/bounswe/bounswe2022group8/wiki/Do%C4%9Fukan-T%C3%BCrksoy)
-* [Mustafa Cihan](https://github.com/bounswe/bounswe2022group8/wiki/Mustafa-Cihan)
-* [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar)
+* [Furkan Keskin](https://github.com/bounswe/bounswe2022group8/wiki/Furkan-Keskin)
 * [Sinem Koçoğlu](https://github.com/bounswe/bounswe2022group8/wiki/Sinem-Ko%C3%A7o%C4%9Flu)
 * [Mustafa Emre Erengül](https://github.com/bounswe/bounswe2022group8/wiki/Mustafa-Emre-Erengül)
+
+### Former Group Members 👨‍💻
+* [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar)
