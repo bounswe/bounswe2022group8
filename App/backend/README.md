@@ -76,3 +76,12 @@ Migrations are Django’s way of propagating changes you make to your models (ad
    pip install --upgrade autopep8
    ```
 * If you are working on Windows, you can format your code using `Ctrl` + `Shift` + `F`. If this combination doesn't work for you, it's either you don't have the formatter or it's not the correct shortcut for you. You can look at the shortcode from the search bar using `Ctrl` + `Shift` + `P`. Write "_Formatter_" in that search bar and look for the shortcut associated with "_Format Document_" 
+
+### Django Superuser
+* The Django admin application can use your models to automatically build a site area that you can use to create, view, update, and delete records. This can save you a lot of time during development, making it very easy to test your models and get a feel for whether you have the right data.
+* To use the Django in admin mode, first you have to create a super user with the following command:
+   ```cmd
+   python manage.py createsuperuser
+   ```
+* After creating a super user, run the Django application.
+* To login to the admin panel, open the /admin URL (e.g. http://127.0.0.1:8000/admin).
