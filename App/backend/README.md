@@ -108,5 +108,5 @@ Migrations are Django’s way of propagating changes you make to your models (ad
    ```
 * When you are done with the container, run the following command to stop the services:
    ```cmd
-   python manage.py migrate
+   docker-compose stop
    ```
