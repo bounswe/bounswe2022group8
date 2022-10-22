@@ -85,3 +85,28 @@ Migrations are Django’s way of propagating changes you make to your models (ad
    ```
 * After creating a super user, run the Django application.
 * To login to the admin panel, open the /admin URL (e.g. http://127.0.0.1:8000/admin).
+
+
+### Docker
+`Dockerfile` and `docker-compose.yml` files are alread provided for you. Dockerizing our project is important for the deployment stage where we want our database to be stable and consistent between different runs for each use. To dockerize the application, use the following commands:
+* First of all, you must install the Docker Desktop from [here](https://www.docker.com/). It may require you to download WSL 2, so just follow the instructions. If asked, download Ubuntu as linux distributor.
+* I strongly suggest you to install the Docker extension for VS Code. It makes visualizing what's going on with the containers much more easier.
+* Firstly, build the `Dockerfile`. Let's give it a name with the `--tag` flag:
+   ```cmd
+   docker build --tag python-django .
+   ```
+   If you don't give it a name, its name will be some random gibberish. As a result of the build, a container will be created. A container simply corresponds to a Linux environment where a copy of our application resides.
+* Now, we should proceed with running our `docker-compose.yml` file. `docker-compose.yml` file helps us to define the services we want to run in our container. We have two services in our application: `web` and `db`. We also use `volume` to persist data even if service is interrupted (which is extremely important for production). You can both **build** and **run** the `docker-compose.yml` with the following command:
+   ```cmd
+   docker-compose up -d --build
+   ```
+   `-d` flag runs the services in detach mode so that they don't block the terminal. You can open their own terminal from the VS Code Docker extension. `--build` flag builds the project from scratch. It's important to use this flag if you make any changes on the code and want them to be reflected on your dockerized application.
+* Open the shell of the web service and apply migrations:
+   ```cmd
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+* When you are done with the container, run the following command to stop the services:
+   ```cmd
+   python manage.py migrate
+   ```
