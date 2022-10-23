@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<span style="float:right">
+	<span><a href="{% url 'admin:index'  %}">Go to admin page</a></span>
+</span>
+<h1>Home Page</h1>
+{% endblock %}

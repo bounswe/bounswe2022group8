@@ -103,10 +103,35 @@ Migrations are Django’s way of propagating changes you make to your models (ad
    `-d` flag runs the services in detach mode so that they don't block the terminal. You can open their own terminal from the VS Code Docker extension. `--build` flag builds the project from scratch. It's important to use this flag if you make any changes on the code and want them to be reflected on your dockerized application.
 * Open the shell of the web service and apply migrations:
    ```cmd
-   python manage.py makemigrations
-   python manage.py migrate
+   python manage.py makemigrations --settings=backend.settings.production
+   python manage.py migrate --settings=backend.settings.production
    ```
 * When you are done with the container, run the following command to stop the services:
    ```cmd
    docker-compose stop
    ```
+---
+* Sometimes we may change the structure of our models (rather than just updating them) during the development. In such scenarios, we may end up having to re-create our database from scratch. It's easy to do in your local, but you have to follow several steps to do it for your Docker container.:
+> Attention: Notice that this procedure will delete everything in your database. 
+   * Firstly, make sure that your container is not working:
+      ```cmd
+      docker-compose down
+      ```
+   * List the volumes and make sure that Postgres database is there:
+      ```cmd
+      docker volume ls
+      ```
+   * Remove that specific volume. In my case, name of the volume is `backend_postgres_data`. If it's different for you, please adjust the following command accordingly.:
+      ```cmd
+      docker volume rm backend_postgres_data
+      ```
+   * Build the container:
+      ```cmd
+      docker-compose up -d --build
+      ```
+   * Go to the `web` container, attach a shell and run the following commands:
+      ```
+      python manage.py makemigrations --settings=backend.settings.production
+      python manage.py migrate --settings=backend.settings.production
+      ``` 
+   * Now, your database should be up-to-date.
