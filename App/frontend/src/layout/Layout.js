@@ -1,16 +1,61 @@
-import style from './Layout.module.css';
-import MainNavigation from './MainNavigation';
+import MainNavigation from "./MainNavigation";
+import Signup from "../pages/Signup";
+import Login from "../pages/Login";
+import Backdrop from "../components/Backdrop";
+import style from "./Layout.module.css";
+import { useState } from "react";
 
 function Layout(props) {
-    return (
-    <div>
-        <MainNavigation />
-        <main className={style.main}>
-            {props.children}
-        </main>
-    </div>
-    );
-}
+  const [signUpIsOpen, setSignUpIsOpen] = useState(false);
+  const [logInIsOpen, setLogInIsOpen] = useState(false);
 
+  function handleSignUp() {
+    setSignUpIsOpen(true);
+    setLogInIsOpen(false);
+  }
+
+  function handleLogIn() {
+    setLogInIsOpen(true);
+    setSignUpIsOpen(false);
+  }
+
+  function handleCloseForm() {
+    setSignUpIsOpen(false);
+    setLogInIsOpen(false);
+  }
+
+  function handleSubmitSignUp() {
+    setSignUpIsOpen(false);
+  }
+
+  function handleSubmitLogIn() {
+    setLogInIsOpen(false);
+  }
+
+  return (
+    <div>
+      <MainNavigation
+        onSignUpClick={() => handleSignUp()}
+        onLogInClick={() => handleLogIn()}
+      />
+      <main className={style.main}>{props.children}</main>
+      {signUpIsOpen && (
+        <Signup
+          onSubmitSignUp={() => handleSubmitSignUp()}
+          onClickLogIn={() => handleLogIn()}
+        />
+      )}
+      {logInIsOpen && (
+        <Login
+          onSubmitLogIn={() => handleSubmitLogIn()}
+          onClickSignUp={() => handleSignUp()}
+        />
+      )}
+      {(signUpIsOpen || logInIsOpen) && (
+        <Backdrop onClick={() => handleCloseForm()} />
+      )}
+    </div>
+  );
+}
 
 export default Layout;
