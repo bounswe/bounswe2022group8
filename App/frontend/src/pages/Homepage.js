@@ -1,25 +1,21 @@
-import style from "./Homepage.module.css";
+import "./Homepage.css";
 
 function Homepage() {
   return (
     <div>
-      <div className={style.deneme}>HOMEPAGE1</div>
-      <div className={style.deneme}>HOMEPAGE2</div>
-      <div className={style.deneme}>HOMEPAGE3</div>
-      <div className={style.deneme}>HOMEPAGE4</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
-      <div className={style.deneme}>HOMEPAGE5</div>
+      <div className="enddeneme">
+        <span className="deneme">HOMEPAGE1</span>
+        <span className="deneme">HOMEPAGE1</span>
+      </div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      <div className="deneme">HOMEPAGE5</div>
+      
 
     </div>
   );

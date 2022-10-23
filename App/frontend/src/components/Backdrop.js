@@ -1,7 +1,7 @@
-import style from "./Backdrop.module.css";
+import "./Backdrop.css";
 
 function Backdrop(props) {
-  return <div className={style.backdrop} onClick={props.onClick} />;
+  return <div className="backdrop" onClick={props.onClick} />;
 }
 
 export default Backdrop;

@@ -12,11 +12,13 @@
   height: 70vh;
 }*/
 
+/* Form Related */
+
 .form {
   position: fixed;
   z-index: 2;
   top: 20%;
-  left: calc(50% - 210px);      /*%50 - width/2 */
+  left: calc(50% - 210px); /*%50 - width/2 */
   width: 420px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 30px;
@@ -39,6 +41,11 @@
   font-weight: 800;
 }
 
+.form-control:focus {
+  border-color: #e63946 !important;
+  box-shadow: none !important;
+}
+
 .label {
   font-size: 14px;
   font-weight: 600;
@@ -53,28 +60,36 @@
   align-items: center;
 }
 
+/* Primary Button */
 .btn-primary {
   background-color: #457b9d !important;
   border-color: #457b9d !important;
 }
 
+/* Primary Outline Button */
 .btn-outline-primary {
   border-color: #457b9d !important;
   color: #457b9d !important;
 }
 
 .btn-outline-primary:hover {
-  background-color: #e3f0fa;
+  background-color: #e3f0fa !important;
 }
 
 .btn-outline-primary:active {
   background-color: #85bbdd !important;
 }
 
-.googleButton {
-  margin-left: 3em;
+/* Light Button */
+.btn-light,
+.btn-light:hover,
+.btn-light:active {
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
+
+/* Backgrounds */
 .bg-primary {
   background-color: red !important;
 }

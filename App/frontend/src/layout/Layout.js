@@ -2,7 +2,7 @@ import MainNavigation from "./MainNavigation";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Backdrop from "../components/Backdrop";
-import style from "./Layout.module.css";
+import "./Layout.css";
 import { useState } from "react";
 
 function Layout(props) {
@@ -38,7 +38,7 @@ function Layout(props) {
         onSignUpClick={() => handleSignUp()}
         onLogInClick={() => handleLogIn()}
       />
-      <main className={style.main}>{props.children}</main>
+      <main className="layout-main">{props.children}</main>
       {signUpIsOpen && (
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}

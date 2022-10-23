@@ -1,23 +1,26 @@
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { BsSearch } from "react-icons/bs";
+import { AiOutlineSearch } from "react-icons/ai";
 
 function SearchBar() {
   return (
     <InputGroup>
-      <InputGroup.Text
-        id="search-icon"
-        style={{ backgroundColor: "white", borderRadius: "0" }}
-      >
-        <BsSearch />
-      </InputGroup.Text>
       <Form.Control
         type="search"
         placeholder="Search"
-        className="shadow-sm"
-        style={{ width: "30vw" }}
+        className="shadow-none"
+        style={{ width: "30vw", borderRightColor: "white", outline : "none",}}
         aria-label="Search"
       />
+      <InputGroup.Text
+        id="search-icon"
+        style={{
+          backgroundColor: "white",
+          borderLeftColor: "white",
+        }}
+      >
+        <AiOutlineSearch />
+      </InputGroup.Text>
     </InputGroup>
   );
 }
