@@ -2,6 +2,7 @@ from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 class User(AbstractUser):
     is_active_user = models.BooleanField('active user', default=False)
@@ -34,7 +35,7 @@ class Tag(models.Model):
 class ArtItem(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True) # tags are not required
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
 
@@ -44,7 +45,7 @@ class ArtItem(models.Model):
 
 class Comment(models.Model):
     body = models.CharField(max_length=500)
-    commented_by = models.ForeignKey(User, on_delete= models.CASCADE)  # if user gets deleted from the system, then comment gets deleted
+    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)  # if user gets deleted from the system, then comment gets deleted
     commented_on = models.ForeignKey(ArtItem, on_delete= models.CASCADE) # if art item gets deleted, then comment gets deleted
     created_at = models.DateTimeField(auto_now_add=True)
     #can we update comments?
@@ -53,16 +54,3 @@ class Comment(models.Model):
     def __str__(self):
         return "A comment made by " + str(self.commented_by) + " on " + str(self.commented_on) 
 
-
-class Teacher(models.Model):
-    name = models.CharField(max_length=80)
-    age = models.IntegerField()
-    talent = models.IntegerField(blank=True, null=True)
-
-class Student(models.Model):
-    name = models.CharField(max_length=80)
-    age = models.IntegerField()
-
-class Professor(models.Model):
-    name = models.CharField(max_length=80)
-    age = models.IntegerField()
