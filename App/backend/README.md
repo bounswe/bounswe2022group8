@@ -53,9 +53,9 @@ CmpE 451
 * You can test the application by using the website running on ```http://${host}:8000/```.
 
 ### Run tests
-* Our tests will be located in the `tests` folder. Please keep in mind that the name of the files must comply with this format: `test*.py` for Django to locate it.
+* Our tests will be located in the `api/tests` folder. Please keep in mind that the name of the files must comply with this format: `test*.py` for Django to locate it.
    ```cmd
-   python manage.py test tests/
+   python manage.py test api/tests
    ```
 ### Migrations
 Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema.
