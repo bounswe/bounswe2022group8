@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
 import "./styles/Access.css";
 
 function Login(props) {
@@ -9,6 +10,9 @@ function Login(props) {
 
   return (
     <form className="access">
+      <div className="access-btn-close">
+        <CloseButton onClick={props.onClickClose}/>
+      </div>
       <div className="access-content">
         <h3 className="access-title">Log In</h3>
         <div className="form-group mt-3">

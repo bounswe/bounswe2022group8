@@ -43,12 +43,14 @@ function Layout(props) {
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}
           onClickLogIn={() => handleLogIn()}
+          onClickClose={() => handleCloseForm()}
         />
       )}
       {logInIsOpen && (
         <Login
           onSubmitLogIn={() => handleSubmitLogIn()}
           onClickSignUp={() => handleSignUp()}
+          onClickClose={() => handleCloseForm()}
         />
       )}
       {(signUpIsOpen || logInIsOpen) && (

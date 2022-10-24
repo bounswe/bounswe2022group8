@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
 import "./styles/Access.css";
 
 function Signup(props) {
@@ -9,6 +10,9 @@ function Signup(props) {
 
   return (
     <form className="access">
+      <div className="access-btn-close">
+        <CloseButton onClick={props.onClickClose} />
+      </div>
       <div className="access-content">
         <h3 className="access-title">Sign Up</h3>
         <div className="text-center">

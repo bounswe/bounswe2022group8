@@ -37,6 +37,13 @@
   border-color: transparent !important;
 }
 
+/* Close Button */
+.btn-close,
+.btn-close:hover,
+.btn-close:active {
+  box-shadow: none !important;
+}
+
 /* Backgrounds */
 .bg-primary {
   background-color: red !important;
