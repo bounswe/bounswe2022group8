@@ -3,6 +3,7 @@ from pyexpat import model
 from rest_framework import serializers
 from ..models.models import Tag, Comment, ArtItem
 from ..models.user import User
+from django.contrib.auth.hashers import make_password
 
 class RegisterSerializer(serializers.ModelSerializer):
     START_ERROR = "The username must start with a letter."
@@ -10,7 +11,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     ALPHANUM_ERROR = "The username can consist of letters, numbers or underscore."
     MIN_LENGTH_ERROR = "The username must have at least 6 characters"
     SUCCESS = ""
-    
+
     password = serializers.CharField(min_length = 8, write_only=True)
     class Meta:
         model = User
@@ -26,6 +27,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
         return User.objects.create(**validated_data)
     
     def is_valid_username(self, username):
