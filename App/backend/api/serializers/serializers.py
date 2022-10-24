@@ -1,7 +1,8 @@
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
-from .models import User, Tag, Comment, ArtItem
+from ..models.models import Tag, Comment, ArtItem
+from ..models.user import User
 
 
 class UserSerializer(serializers.ModelSerializer):
