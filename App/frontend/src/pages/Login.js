@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./styles/Access.css";
 
 function Login(props) {
   function handleSubmit() {
@@ -7,11 +8,11 @@ function Login(props) {
   }
 
   return (
-    <form className="form">
-      <div className="form-content">
-        <h3 className="form-title">Log In</h3>
+    <form className="access">
+      <div className="access-content">
+        <h3 className="access-title">Log In</h3>
         <div className="form-group mt-3">
-          <label>Email or username</label>
+          <label className="access-label">Email or username</label>
           <input
             type="email"
             className="form-control mt-1"
@@ -19,7 +20,7 @@ function Login(props) {
           />
         </div>
         <div className="form-group mt-3">
-          <label>Password</label>
+          <label className="access-label">Password</label>
           <input
             type="password"
             className="form-control mt-1"

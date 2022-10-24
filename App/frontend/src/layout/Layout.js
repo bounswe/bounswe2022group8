@@ -2,7 +2,7 @@ import MainNavigation from "./MainNavigation";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Backdrop from "../components/Backdrop";
-import "./Layout.css";
+import "./styles/Layout.css";
 import { useState } from "react";
 
 function Layout(props) {
