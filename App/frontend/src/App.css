@@ -37,10 +37,12 @@
 }
 
 .btn-outline-primary:hover {
+  color: #18121c !important;
   background-color: #FFC9FF !important;
 }
 
 .btn-outline-primary:active {
+  color: #18121c !important;
   background-color: #FFC9FF !important;
 }
 
