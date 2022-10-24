@@ -1,0 +1,9 @@
+.navbar {
+  height: 80px;
+  position: fixed;      /* fixed --> sticky, absolute --> normal */
+  width: 100%;
+}
+
+.navbar-bg {
+  background-color: black;
+}

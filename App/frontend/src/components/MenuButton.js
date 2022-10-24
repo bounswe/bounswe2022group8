@@ -15,7 +15,7 @@ function MenuButton() {
     <Button
       as="a"
       variant="light"
-      className="me-4 menu-button menu-button-spin"
+      className="me-4 menu-button"
       onClick={handleRotate}
     >
       <SlMenu

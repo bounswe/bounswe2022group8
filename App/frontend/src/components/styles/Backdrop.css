@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   z-index: 2000;    /* sticky navbar z-index = 1020 */
-  background-color: rgba(22, 34, 46, 0.75);
+  background-color: rgba(24, 18, 28, 0.75);
   width: 100%;
   height: 100vh;
   top: 0;

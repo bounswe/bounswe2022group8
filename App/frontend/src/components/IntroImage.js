@@ -2,7 +2,6 @@ import "./styles/IntroImage.css";
 import background from "../media/aurora-high-res.jpg";
 import Button from "react-bootstrap/Button";
 
-
 function IntroImage(props) {
   return (
     <div className="background-image-container">
@@ -15,15 +14,10 @@ function IntroImage(props) {
             tools.
           </p>
         </div>
-        <div className="btn-on-background-image">
-          <Button
+        <div className="btn-on-background-image-container">
+          <Button className="btn-on-background-image"
             as="a"
-            variant="secondary"
-            style={{
-              width: "150px",
-              padding: "15px 10px",
-              verticalAlign: "middle",
-            }}
+            variant=""
             onClick={props.onJoinNowClick}
           >
             JOIN NOW

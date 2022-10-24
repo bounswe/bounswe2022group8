@@ -15,7 +15,8 @@
 /* ------- FORM ------- */
 
 .form-control:focus {
-  border-color: #e63946 !important;
+  border-color: #18121c !important;
+  background-color: transparent !important;
   box-shadow: none !important;
   outline: none !important;
 }
@@ -30,17 +31,17 @@
 
 /* Primary Outline Button */
 .btn-outline-primary {
-  background-color: white !important;
+  background-color: transparent !important;
   border-color: #18121c !important;
-  color: #18121c !important;
+  color: white !important;
 }
 
 .btn-outline-primary:hover {
-  background-color: #e3f0fa !important;
+  background-color: #FFC9FF !important;
 }
 
 .btn-outline-primary:active {
-  background-color: #85bbdd !important;
+  background-color: #FFC9FF !important;
 }
 
 /* Secondary Button */

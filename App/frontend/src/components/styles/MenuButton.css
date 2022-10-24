@@ -1,4 +1,8 @@
+.menu-button {
+  color: white;
+}
+
 .menu-button:hover,
 .menu-button:active {
-  color: #457b9d ;
+  color: #ffc9ff !important;
 }
