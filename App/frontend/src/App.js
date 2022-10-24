@@ -7,11 +7,9 @@ import Layout from "./layout/Layout";
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+    </Routes>
   );
 }
 

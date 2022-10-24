@@ -9,7 +9,14 @@ function SearchBar() {
         type="search"
         placeholder="Search"
         className="shadow-none"
-        style={{ width: "30vw", borderRightColor: "white", outline : "none",}}
+        style={{
+          width: "30vw",
+          borderRightColor: "white",
+          borderTopLeftRadius: "8px",
+          borderBottomLeftRadius: "8px",
+          borderTopRightRadius: "0px",
+          borderBottomRightRadius: "0px",
+        }}
         aria-label="Search"
       />
       <InputGroup.Text
@@ -17,6 +24,10 @@ function SearchBar() {
         style={{
           backgroundColor: "white",
           borderLeftColor: "white",
+          borderTopLeftRadius: "0px",
+          borderBottomLeftRadius: "0px",
+          borderTopRightRadius: "8px",
+          borderBottomRightRadius: "8px",
         }}
       >
         <AiOutlineSearch />

@@ -8,9 +8,9 @@
 
 .access {
   position: fixed;
-  z-index: 2;
+  z-index: 2001;  /* backdrop z-index = 2000 */
   top: 20%;
-  left: calc(50% - 210px); /*%50 - width/2 */
+  left: calc(50% - 210px);      /* %50 - width/2 */
   width: 420px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 10px;
@@ -43,6 +43,6 @@
   display: flex;
   justify-content: right;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   margin-right: 15px;       /* padding-top-form (10) + margin-top-btn(5)*/
 }

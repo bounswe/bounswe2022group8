@@ -1,0 +1,33 @@
+.background-image {
+  display: block;
+  width: 100%;
+  height: 65vh;
+  object-fit: fill;
+}
+
+.background-image-container {
+  position: relative;
+}
+
+.input-on-background-image {
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  right: 50%;
+  left: 12%;
+  top: 20%;
+}
+
+.input-on-background-image .main-header {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.text-on-background-image {
+  margin-bottom: 70px;
+}
+
+.btn-on-background-image {
+  display: flex;
+  justify-content: flex-start;
+}

@@ -1,24 +1,38 @@
-/*.App {
-  background-color: black;
-  background-image: url("https://i.pinimg.com/564x/87/0e/a9/870ea9ac4fef31c40b2253c6a6fe1b10.jpg");
-  background-size: cover;
-}*/
+/*  THIS PAGE IS USED TO OVERRIDE BOOTSTRAP COMPONENTS.
+
+    ANY CHANGE WE MAKE TO THIS PAGE WILL 
+    CHANGE THE STYLING OF THE COMPONENT
+    IN THE ENTIRE PROJECT SCOPE.
+
+    FOR THIS REASON, ONLY GENERAL CHANGES SHOULD BE MADE HERE.
+    ALL CUSTOM CHANGES SHOULD BE MADE IN SEPARATE CSS FILES
+
+    ALSO, COMPONENTS FROM THE SAME CLASS SHOULD BE 
+    ONE UNDER THE OTHER FOR MINIMAL CONFUSION
+
+*/
+
+/* ------- FORM ------- */
 
 .form-control:focus {
   border-color: #e63946 !important;
   box-shadow: none !important;
+  outline: none !important;
 }
+
+/* ------- BUTTONS ------- */
 
 /* Primary Button */
 .btn-primary {
-  background-color: #457b9d !important;
-  border-color: #457b9d !important;
+  background-color: #18121c !important;
+  border-color: #18121c !important;
 }
 
 /* Primary Outline Button */
 .btn-outline-primary {
-  border-color: #457b9d !important;
-  color: #457b9d !important;
+  background-color: white !important;
+  border-color: #18121c !important;
+  color: #18121c !important;
 }
 
 .btn-outline-primary:hover {
@@ -28,6 +42,21 @@
 .btn-outline-primary:active {
   background-color: #85bbdd !important;
 }
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: #fff !important;
+  color: #18121c !important;
+}
+
+.btn-secondary:hover {
+  background-color: #FCF6FF !important;
+}
+
+/* Secondary Outline Button */
+
+
+
 
 /* Light Button */
 .btn-light,
@@ -44,7 +73,8 @@
   box-shadow: none !important;
 }
 
-/* Backgrounds */
+/* ------- BACKGROUND ------- */
+
 .bg-primary {
   background-color: red !important;
 }

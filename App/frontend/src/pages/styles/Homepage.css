@@ -1,11 +1,11 @@
 .deneme {
-    font-size: 36px;
-    color: white;
+  font-size: 36px;
+  color: white;
 }
 
 .enddeneme {
-    font-size: 36px;
-    color: white;
-    display: flex;
-    justify-content: flex-end;
+  font-size: 36px;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -1,5 +1,5 @@
 .layout-main {
-  margin: 2rem auto;
-  width: 90%;
-  max-width: 150rem;    /* might be changed --> diff lim = 107rem */
+  margin: 0rem auto;
+  width: 100%;
+  max-width: 200rem;    /* might be changed --> diff lim = 107rem for %90 width*/
 }

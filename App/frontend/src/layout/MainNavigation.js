@@ -7,7 +7,7 @@ import MenuButton from "../components/MenuButton";
 
 function MainNavigation(props) {
   return (
-    <Navbar expand="md" style={{ height: 70 }} bg="light" variant="light">
+    <Navbar sticky="top" expand="md" style={{ height: 70, backgroundColor: "#BCB1C1"}} >
       <Container fluid>
         <Navbar.Brand className="ms-4 me-5" href="./">
           App Name
