@@ -7,7 +7,8 @@ Function views
 
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views.auth import RegisterView
+from .views.auth import DummyView, RegisterView, LoginView
+from knox import views as knox_views
 
 ###
 #
@@ -20,6 +21,9 @@ from .views.auth import RegisterView
 
 urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name="register"),
+    path('auth/login/', LoginView.as_view(), name="login"),
+    path('auth/dummy/', DummyView.as_view(), name="dummy"),
+    path('auth/logout/', knox_views.LogoutView.as_view(), name='logout'),
 ]
 
 # added to give us the option to choose between default Response template and regular json

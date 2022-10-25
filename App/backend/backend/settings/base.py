@@ -30,6 +30,7 @@ SECRET_KEY = env("SECRET_KEY")
 INSTALLED_APPS = [
     'api',
     'rest_framework',
+    'knox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,7 +68,10 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'NON_FIELD_ERRORS_KEY': 'ERROR'
+    'NON_FIELD_ERRORS_KEY': 'ERROR',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ]
 }
 
 WSGI_APPLICATION = 'backend.wsgi.application'

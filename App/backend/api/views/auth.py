@@ -1,8 +1,19 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
+from django.contrib.auth import authenticate, login, logout
+from knox.models import AuthToken
 
-from ..serializers.auth import RegisterSerializer
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+from ..serializers.auth import RegisterSerializer, LoginSerializer
+
+from django.contrib.auth import login
+
+from rest_framework import permissions
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from knox.views import LoginView as KnoxLoginView
 
 # Create your authentication-related views here.
 
@@ -13,8 +24,24 @@ class RegisterView(generics.GenericAPIView):
 
         serializer = self.serializer_class(data = user)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        user = serializer.save()
 
         user_data = serializer.data
-        return Response(user_data, status = status.HTTP_201_CREATED)
+        return Response({"user": user_data, "token": AuthToken.objects.create(user)[1]}, status = status.HTTP_201_CREATED)
 
+class LoginView(KnoxLoginView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request, format=None):
+        
+        serializer = AuthTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.validated_data['user']
+        login(request, user)
+
+        return super(LoginView, self).post(request, format=None)
+
+@method_decorator(login_required, name='dispatch')  
+class DummyView(generics.GenericAPIView):
+    def get(self, request):
+        return Response("deneme2", status=status.HTTP_202_ACCEPTED)

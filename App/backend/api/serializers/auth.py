@@ -5,6 +5,7 @@ from ..models.models import Tag, Comment, ArtItem
 from ..models.user import User
 from django.contrib.auth.hashers import make_password
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     START_ERROR = "The username must start with a letter."
     END_ERROR = "The username cannot end with an underscore."
@@ -50,3 +51,26 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Therefore it's not necessary to check it again.
 
 
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username','email','password']
+
+    def validate(self, attrs):
+
+        username = attrs.get("username")
+        password = attrs.get("password")
+        user = User.objects.filter(username=username).first()
+
+        if user is None:
+            context = { 'is_successful': False,
+                        'message': "Wrong username!"
+                    }
+
+        if password == user.password:
+            context = { 'is_successful': True,
+                        'message': "Successfull Login"
+            }
+
+        return context
+        
