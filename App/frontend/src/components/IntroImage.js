@@ -1,5 +1,5 @@
 import "./styles/IntroImage.css";
-import background from "../media/aurora.jpg";
+import background from "../images/aurora.jpg";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 import Signup from "./SignupModal";

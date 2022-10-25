@@ -1,6 +1,7 @@
 import React from "react";
 import { SidebarData } from "./data/SidebarData";
 import "./styles/Sidebar.css";
+import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
@@ -11,7 +12,9 @@ function Sidebar() {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="sidebar-row">
-                <Link to={val.link}>{val.title}</Link>
+                <Link to={val.link}>
+                  <Button className="btn-light sidebar-element">{val.title}</Button>
+                </Link>
               </li>
             );
           })}

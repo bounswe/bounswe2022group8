@@ -7,22 +7,36 @@
 .sidebar {
   height: 100%;
   width: 300px;
-  background-color: red;
+  background-color: #6A986B;
 }
 
 .sidebar-list {
   height: auto;
   padding: 0;
+  padding-top: 30px;
   width: 100%;
 }
 
-.sidebar-list .sidebar-row {
+.sidebar-row {
   width: 100%;
-  height: 50px;
-  border: 1px solid black;
+  height: 60px;
   list-style-type: none;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items:center;
+}
+
+
+.sidebar-element {
+  color: #18121c;
+  padding: 18px;
+  width: 300px;
+  font-weight: 400;
+  /*border-color: #18121c !important;*/     /*for debugging*/ 
+}
+
+.sidebar-element:hover,
+.sidebar-element:active {
+  color: white;
 }

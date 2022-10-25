@@ -1,7 +1,7 @@
 import "./styles/Homepage.css";
 import MainNavigation from "../layout/MainNavigation";
 import IntroImage from "../components/IntroImage";
-// import Sidebar from "../layout/Sidebar";
+import Sidebar from "../layout/Sidebar";
 
 
 function Homepage(props) {
@@ -9,6 +9,7 @@ function Homepage(props) {
     <div>
       <MainNavigation />
       <IntroImage />
+      <Sidebar/>
       <div className="deneme">HOMEPAGE5</div>
       <div className="deneme">HOMEPAGE5</div>
       <div className="deneme">HOMEPAGE5</div>

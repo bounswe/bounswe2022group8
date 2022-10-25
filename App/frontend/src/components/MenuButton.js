@@ -7,7 +7,9 @@ import "./styles/MenuButton.css";
 function MenuButton() {
   const [rotateMenuButton, setRotateMenuButton] = useState(false);
 
-  const handleRotate = () => setRotateMenuButton(!rotateMenuButton);
+  function handleRotate() {
+    setRotateMenuButton(!rotateMenuButton);
+  }
 
   const rotate = rotateMenuButton ? "rotate(90deg)" : "rotate(0)";
 
