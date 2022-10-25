@@ -34,7 +34,7 @@ function IntroImage(props) {
   }
   return (
     <div>
-      <div className="background-image-container">
+      <div className="background-image-container" style={{marginRight: props.rightMargin}}>
         <img className="background-image" src={background} alt="Aurora" />
         <div className="input-on-background-image">
           <div className="text-on-background-image">

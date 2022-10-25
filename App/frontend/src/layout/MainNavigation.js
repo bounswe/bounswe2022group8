@@ -8,12 +8,14 @@ import React, { useState, useEffect } from "react";
 import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
 import Backdrop from "../components/Backdrop";
+import Sidebar from "./Sidebar";
 import "./styles/MainNavigation.css";
 
 function MainNavigation(props) {
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
   const [navbarColor, setNavbarColor] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function handleSignUp() {
     setSignUpIsOpen(true);
@@ -54,6 +56,16 @@ function MainNavigation(props) {
     };
   }, []);
 
+  function handleSidebar() {
+    setSidebarOpen(!sidebarOpen);
+  }
+
+  if (sidebarOpen) {
+    props.rightMargin("300px");
+  } else {
+    props.rightMargin("0px");
+  }
+
   return (
     <div>
       <Navbar
@@ -80,7 +92,11 @@ function MainNavigation(props) {
               <Button
                 as="a"
                 variant=""
-                className="me-3 btn-access"
+                className={
+                  !navbarColor && sidebarOpen
+                    ? "me-3 btn-access-sidebar"
+                    : "me-3 btn-access"
+                }
                 onClick={() => handleLogIn()}
               >
                 Log in
@@ -90,18 +106,27 @@ function MainNavigation(props) {
               <Button
                 as="a"
                 variant=""
-                className="me-3 btn-access"
+                className={
+                  !navbarColor && sidebarOpen
+                    ? "me-3 btn-access-sidebar"
+                    : "me-3 btn-access"
+                }
                 onClick={() => handleSignUp()}
               >
                 Sign up
               </Button>
             </Nav>
             <Nav>
-              <MenuButton />
+              <MenuButton
+                onClick={() => handleSidebar()}
+                rotate={sidebarOpen ? "rotate(90deg)" : "rotate(0)"}
+                sidebarStyle={!navbarColor && sidebarOpen ? true : false}
+              />
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {<Sidebar width={sidebarOpen ? "300px" : "0px"} />}
       {signUpIsOpen && (
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}

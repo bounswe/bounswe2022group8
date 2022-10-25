@@ -1,19 +1,32 @@
 .sidebar-container {
-  height: calc(100vh - 80px); /*100vh-navbar */
-  display: flex;
-  justify-content: flex-end;
+  height: calc(100vh); /*100vh-navbar */
+  position: fixed;
+  right: 0px;
+  top: 0px; /*navbar */
+  z-index: 1000; /*1020 = navbar's z-index */
 }
 
 .sidebar {
   height: 100%;
-  width: 300px;
-  background-color: #6A986B;
+  /*in real, will be determined in inline css (300:open - 0:closed)
+  -- info comes from MainNavigation.js via width prop*/
+  width: 0px;
+  background-color: #6a986b;
+  overflow-x: hidden;
+  transition: 0.3s;
+}
+
+.sidebar-line {
+  height: 80px;
+  padding: 0;
+  width: 100%;
+  border-bottom: 1px solid black;
 }
 
 .sidebar-list {
   height: auto;
   padding: 0;
-  padding-top: 30px;
+  padding-top: 90px;
   width: 100%;
 }
 
@@ -24,19 +37,21 @@
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
-
 
 .sidebar-element {
   color: #18121c;
   padding: 18px;
   width: 300px;
   font-weight: 400;
-  /*border-color: #18121c !important;*/     /*for debugging*/ 
+  /*border-color: #18121c !important;*/ /*for debugging*/
 }
 
-.sidebar-element:hover,
-.sidebar-element:active {
+.sidebar-element:hover {
   color: white;
+}
+
+.sidebar-element:active {
+  color: #18121c !important;
 }

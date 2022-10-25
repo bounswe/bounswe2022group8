@@ -9,3 +9,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.slide-deneme {
+  display: flex;
+  justify-content: center;
+  margin: 100px 200px;
+}

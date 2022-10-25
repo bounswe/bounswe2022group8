@@ -8,7 +8,7 @@
 
 .access {
   position: fixed;
-  z-index: 2001;  /* backdrop z-index = 2000 */
+  z-index: 2100;  /* backdrop z-index = 2000 */
   top: 20%;
   left: calc(50% - 210px);      /* %50 - width/2 */
   width: 420px;

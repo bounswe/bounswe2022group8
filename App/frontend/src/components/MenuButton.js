@@ -1,29 +1,20 @@
 import Button from "react-bootstrap/Button";
 // import { AiOutlineMenu } from "react-icons/ai";
 import { SlMenu } from "react-icons/sl";
-import { useState } from "react";
 import "./styles/MenuButton.css";
 
-function MenuButton() {
-  const [rotateMenuButton, setRotateMenuButton] = useState(false);
-
-  function handleRotate() {
-    setRotateMenuButton(!rotateMenuButton);
-  }
-
-  const rotate = rotateMenuButton ? "rotate(90deg)" : "rotate(0)";
-
+function MenuButton(props) {
   return (
     <Button
       as="a"
       variant="light"
-      className="me-4 menu-button"
-      onClick={handleRotate}
+      className= {props.sidebarStyle ? "me-4 menu-button-sidebar"  : "me-4 menu-button"}
+      onClick={props.onClick}
     >
       <SlMenu
         style={{
           fontSize: "1.7rem",
-          transform: rotate,
+          transform: props.rotate,
           transition: "all 0.2s linear",
         }}
       />

@@ -1,3 +1,5 @@
+/* navbar --> z-index = 1020 */
+
 .navigation-bar {
   height: 80px;
   position: fixed; /* fixed --> sticky, absolute --> normal */
@@ -5,7 +7,7 @@
 }
 
 .navigation-bar-bg {
-  background-color: black;
+  background-color: #080808;
 }
 
 .btn-access {
@@ -16,6 +18,20 @@
 
 .btn-access:hover,
 .btn-access:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+.btn-access-sidebar {
+  background-color: transparent;
+  border-color: transparent;
   color: #18121c;
-  background-color: #ffc9ff;
+}
+
+.btn-access-sidebar:hover {
+  color: white;
+}
+
+.btn-access-sidebar:active {
+  color: #18121c !important;
 }
