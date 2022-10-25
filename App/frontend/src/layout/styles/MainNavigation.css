@@ -34,4 +34,5 @@
 
 .btn-access-sidebar:active {
   color: #18121c !important;
+  border-color: transparent !important;
 }
