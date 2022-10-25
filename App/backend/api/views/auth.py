@@ -21,7 +21,7 @@ class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
     def post(self, request):
         user = request.data
-
+    
         serializer = self.serializer_class(data = user)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -29,19 +29,20 @@ class RegisterView(generics.GenericAPIView):
         user_data = serializer.data
         return Response({"user": user_data, "token": AuthToken.objects.create(user)[1]}, status = status.HTTP_201_CREATED)
 
-class LoginView(KnoxLoginView):
+class LoginView(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
-    def post(self, request, format=None):
-        
-        serializer = AuthTokenSerializer(data=request.data)
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        user = serializer.validated_data['user']
-        login(request, user)
-
-        return super(LoginView, self).post(request, format=None)
+        user = serializer.validated_data
+        return Response({
+            "token": AuthToken.objects.create(user)[1]
+        })
 
 @method_decorator(login_required, name='dispatch')  
 class DummyView(generics.GenericAPIView):
     def get(self, request):
         return Response("deneme2", status=status.HTTP_202_ACCEPTED)
+

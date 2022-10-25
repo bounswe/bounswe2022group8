@@ -1,9 +1,10 @@
-from dataclasses import fields
-from pyexpat import model
+
 from rest_framework import serializers
-from ..models.models import Tag, Comment, ArtItem
 from ..models.user import User
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.contrib.auth import authenticate
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -13,21 +14,37 @@ class RegisterSerializer(serializers.ModelSerializer):
     MIN_LENGTH_ERROR = "The username must have at least 6 characters"
     SUCCESS = ""
 
-    password = serializers.CharField(min_length = 8, write_only=True)
+    password = serializers.CharField(min_length = 10, write_only=True)
+    password_confirm = serializers.CharField(write_only=True)
+
+    # here, we define the parameters we expect to receive (not directly related to model)
     class Meta:
         model = User
-        fields = ['email', 'username', 'name', 'surname', 'password']
+        fields = ['email', 'username', 'password', 'password_confirm']
 
-    def validate(self, attrs):
-        username = attrs.get('username', '')
+
+    def validate(self, data):
+        username = data.get('username', '')
+        password = data.get('password', '')
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            raise serializers.ValidationError({"password": e.messages}) 
+
 
         is_valid_username, error = self.is_valid_username(username)
         if not is_valid_username:
             raise serializers.ValidationError({"username": error})
+        if not data.get('password') or not data.get('password_confirm'):
+            raise serializers.ValidationError({"password": "Please enter a password and confirm it."})
+        if data.get('password') != data.get('password_confirm'):
+            raise serializers.ValidationError({"password": "Those passwords don't match."})
 
-        return attrs
+        return data
 
     def create(self, validated_data):
+        
+        del validated_data['password_confirm']
         validated_data['password'] = make_password(validated_data['password'])
         return User.objects.create(**validated_data)
     
@@ -51,26 +68,26 @@ class RegisterSerializer(serializers.ModelSerializer):
         # Therefore it's not necessary to check it again.
 
 
-class LoginSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username','email','password']
+class LoginSerializer(serializers.Serializer):
+    credential = serializers.CharField()
+    password = serializers.CharField()
 
-    def validate(self, attrs):
+    def validate(self, data):
+        credentials = {
+            'username': '',
+            'password': data.get("password")
+        }
 
-        username = attrs.get("username")
-        password = attrs.get("password")
-        user = User.objects.filter(username=username).first()
+        # This is answering the original question, but do whatever you need here. 
+        # For example in my case I had to check a different model that stores more user info
+        # But in the end, you should obtain the username to continue.
+        usr = User.objects.filter(email=data.get("credential")).first() or User.objects.filter(username=data.get("credential")).first()
+        if usr:
+            credentials['username'] = usr.username
+        else:
+            raise serializers.ValidationError({"credentials": 'Incorrect username or email.'})
+        user = authenticate(**credentials)
 
-        if user is None:
-            context = { 'is_successful': False,
-                        'message': "Wrong username!"
-                    }
-
-        if password == user.password:
-            context = { 'is_successful': True,
-                        'message': "Successfull Login"
-            }
-
-        return context
-        
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError({"credentials": 'Incorrect password.'})
