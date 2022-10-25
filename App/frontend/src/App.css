@@ -32,7 +32,7 @@
 /* Primary Outline Button */
 .btn-outline-primary {
   background-color: transparent !important;
-  border-color: #18121c !important;
+  border-color: transparent !important;
   color: white !important;
 }
 

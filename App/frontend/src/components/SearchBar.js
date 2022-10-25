@@ -1,9 +1,9 @@
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { AiOutlineSearch } from "react-icons/ai";
-import "./styles/SearchBar.css";
+import "./styles/Searchbar.css";
 
-function SearchBar() {
+function Searchbar() {
   return (
     <InputGroup>
       <InputGroup.Text id="search-icon" className="search-icon">
@@ -19,4 +19,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default Searchbar;

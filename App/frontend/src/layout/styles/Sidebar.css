@@ -1,0 +1,28 @@
+.sidebar-container {
+  height: calc(100vh - 80px); /*100vh-navbar */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar {
+  height: 100%;
+  width: 300px;
+  background-color: red;
+}
+
+.sidebar-list {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar-list .sidebar-row {
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
