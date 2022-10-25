@@ -79,8 +79,8 @@ function MainNavigation(props) {
             <Nav className="ms-auto">
               <Button
                 as="a"
-                variant="outline-primary"
-                className="me-3"
+                variant=""
+                className="me-3 btn-access"
                 onClick={() => handleLogIn()}
               >
                 Log in
@@ -89,8 +89,8 @@ function MainNavigation(props) {
             <Nav>
               <Button
                 as="a"
-                variant="outline-primary"
-                className="me-3"
+                variant=""
+                className="me-3 btn-access"
                 onClick={() => handleSignUp()}
               >
                 Sign up

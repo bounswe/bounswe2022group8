@@ -1,9 +1,21 @@
 .navigation-bar {
   height: 80px;
-  position: fixed;      /* fixed --> sticky, absolute --> normal */
+  position: fixed; /* fixed --> sticky, absolute --> normal */
   width: 100%;
 }
 
 .navigation-bar-bg {
   background-color: black;
+}
+
+.btn-access {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+}
+
+.btn-access:hover,
+.btn-access:active {
+  color: #18121c;
+  background-color: #ffc9ff;
 }
