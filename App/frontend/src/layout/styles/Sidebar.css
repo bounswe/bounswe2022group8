@@ -9,7 +9,7 @@
 .sidebar {
   height: 100%;
   /*in real, will be determined in inline css (300:open - 0:closed)
-  -- info comes from MainNavigation.js via width prop*/
+  -- info comes from Layout.js via width prop*/
   width: 0px;
   background-color: #6a986b;
   overflow-x: hidden;

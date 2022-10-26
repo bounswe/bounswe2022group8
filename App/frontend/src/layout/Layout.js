@@ -1,10 +1,5 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Searchbar from "../components/Searchbar";
-import MenuButton from "../components/MenuButton";
 import React, { useState, useEffect } from "react";
+import Mainbar from "./Mainbar";
 import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
 import Backdrop from "../components/Backdrop";
@@ -14,7 +9,7 @@ import "./styles/Layout.css";
 function Layout(props) {
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
-  const [navbarColor, setNavbarColor] = useState(false);
+  const [mainbarOpen, setMainbarOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function handleSignUp() {
@@ -42,9 +37,9 @@ function Layout(props) {
 
   const changeNavbarColor = () => {
     if (window.scrollY >= 30) {
-      setNavbarColor(true);
+      setMainbarOpen(true);
     } else {
-      setNavbarColor(false);
+      setMainbarOpen(false);
     }
   };
 
@@ -62,64 +57,13 @@ function Layout(props) {
 
   return (
     <div>
-      <Navbar
-        sticky="top"
-        expand="md"
-        className={
-          navbarColor ? "navigation-bar navigation-bar-bg" : "navigation-bar"
-        }
-      >
-        <Container fluid>
-          <Navbar.Brand
-            className="ms-4 me-5"
-            href="./"
-            style={{ color: "white" }}
-          >
-            App Name
-          </Navbar.Brand>
-          <Navbar.Collapse>
-            <Nav className="me-auto">
-              <Searchbar />
-            </Nav>
-
-            <Nav className="ms-auto">
-              <Button
-                as="a"
-                variant=""
-                className={
-                  !navbarColor && sidebarOpen
-                    ? "me-3 btn-access-sidebar"
-                    : "me-3 btn-access"
-                }
-                onClick={() => handleLogIn()}
-              >
-                Log in
-              </Button>
-            </Nav>
-            <Nav>
-              <Button
-                as="a"
-                variant=""
-                className={
-                  !navbarColor && sidebarOpen
-                    ? "me-3 btn-access-sidebar"
-                    : "me-3 btn-access"
-                }
-                onClick={() => handleSignUp()}
-              >
-                Sign up
-              </Button>
-            </Nav>
-            <Nav>
-              <MenuButton
-                onClick={() => handleSidebar()}
-                rotate={sidebarOpen ? "rotate(90deg)" : "rotate(0)"}
-                sidebarStyle={!navbarColor && sidebarOpen ? true : false}
-              />
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Mainbar
+        mainbarOpen={mainbarOpen}
+        sidebarOpen={sidebarOpen}
+        onClickLogIn={() => handleLogIn()}
+        onClickSignUp={() => handleSignUp()}
+        onClickMenu={() => handleSidebar()}
+      />
       {signUpIsOpen && (
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}
@@ -138,7 +82,10 @@ function Layout(props) {
         <Backdrop onClick={() => handleCloseForm()} />
       )}
       <Sidebar width={sidebarOpen ? "300px" : "0px"} />
-      <main className="main-container" style={{marginRight : sidebarOpen ? "300px" : "0px"}}>
+      <main
+        className="main-container"
+        style={{ marginRight: sidebarOpen ? "300px" : "0px" }}
+      >
         {props.children}
       </main>
     </div>
