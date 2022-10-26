@@ -1,27 +1,27 @@
 
 export const SidebarData = [
     {
-        title: "HOME",
+        title: "Home",
         link: "/"
     },
     {
-        title: "GALLERY",
+        title: "Gallery",
         link: "/"
     },
     {
-        title: "EXHIBITIONS",
+        title: "Exhibitions",
         link: "/"
     },
     {
-        title: "POPULAR ARTISTS",
+        title: "Popular Artists",
         link: "/"
     },
     {
-        title: "DENEME",
+        title: "Just For You",
         link: "/"
     },
     {
-        title: "DENEME-2",
+        title: "Add Favourites",
         link: "/xx"
     }
 ]

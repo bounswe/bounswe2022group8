@@ -14,19 +14,21 @@
   background-color: #6a986b;
   overflow-x: hidden;
   transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.sidebar-line {
+/*.sidebar-line {
   height: 80px;
   padding: 0;
   width: 100%;
   border-bottom: 1px solid black;
-}
+}*/
 
 .sidebar-list {
   height: auto;
   padding: 0;
-  padding-top: 90px;
   width: 100%;
 }
 
