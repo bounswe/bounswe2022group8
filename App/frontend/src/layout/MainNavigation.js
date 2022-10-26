@@ -60,12 +60,6 @@ function MainNavigation(props) {
     setSidebarOpen(!sidebarOpen);
   }
 
-  if (sidebarOpen) {
-    props.rightMargin("300px");
-  } else {
-    props.rightMargin("0px");
-  }
-
   return (
     <div>
       <Navbar
@@ -126,7 +120,6 @@ function MainNavigation(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {<Sidebar width={sidebarOpen ? "300px" : "0px"} />}
       {signUpIsOpen && (
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}
@@ -144,6 +137,7 @@ function MainNavigation(props) {
       {(signUpIsOpen || logInIsOpen) && (
         <Backdrop onClick={() => handleCloseForm()} />
       )}
+      <Sidebar width={sidebarOpen ? "300px" : "0px"} />
     </div>
   );
 }

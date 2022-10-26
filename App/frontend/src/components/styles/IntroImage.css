@@ -1,13 +1,13 @@
+.background-image-container {
+  position: relative;
+  height: 100vh;
+}
+
 .background-image {
   display: block;
   width: 100%;
   height: 100vh;
   object-fit: cover;
-}
-
-.background-image-container {
-  position: relative;
-  transition: 0.3s;
 }
 
 .input-on-background-image {

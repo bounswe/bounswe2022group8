@@ -1,5 +1,43 @@
-.layout-main {
-  margin: 0rem auto;
+.main-container {
+  position: relative;
+  transition: 0.3s;
+}
+
+/* navbar --> z-index = 1020 */
+
+.navigation-bar {
+  height: 80px;
+  position: fixed; /* fixed --> sticky, absolute --> normal */
   width: 100%;
-  max-width: 200rem; /* might be changed --> diff lim = 107rem for %90 width*/
+}
+
+.navigation-bar-bg {
+  background-color: #080808;
+}
+
+.btn-access {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+}
+
+.btn-access:hover,
+.btn-access:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+.btn-access-sidebar {
+  background-color: transparent;
+  border-color: transparent;
+  color: #18121c;
+}
+
+.btn-access-sidebar:hover {
+  color: white;
+}
+
+.btn-access-sidebar:active {
+  color: #18121c !important;
+  border-color: transparent !important;
 }

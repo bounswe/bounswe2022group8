@@ -6,7 +6,7 @@ import Signup from "./SignupModal";
 import Login from "./LoginModal";
 import Backdrop from "../components/Backdrop";
 
-function IntroImage(props) {
+function IntroImage() {
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
 
@@ -34,7 +34,7 @@ function IntroImage(props) {
   }
   return (
     <div>
-      <div className="background-image-container" style={{marginRight: props.rightMargin}}>
+      <div className="background-image-container">
         <img className="background-image" src={background} alt="Aurora" />
         <div className="input-on-background-image">
           <div className="text-on-background-image">
