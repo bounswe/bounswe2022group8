@@ -1,8 +1,8 @@
 .sidebar-container {
-  height: calc(100vh); /*100vh-navbar */
+  height: 100vh; /*100vh-navbar --> old*/
   position: fixed;
   right: 0px;
-  top: 0px; /*navbar */
+  top: 0px; /*navbar --> old*/
   z-index: 1000; /*1020 = navbar's z-index */
 }
 

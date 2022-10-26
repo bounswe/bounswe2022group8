@@ -39,7 +39,15 @@ function Signup(props) {
           <input
             type="password"
             className="form-control mt-1"
-            placeholder="Password"
+            placeholder="Choose a password"
+          />
+        </div>
+        <div className="form-group mt-3">
+          <label className="access-label">Confirm password</label>
+          <input
+            type="password"
+            className="form-control mt-1"
+            placeholder="Confirm password"
           />
         </div>
         <div className="d-grid gap-2 mt-4 mb-4">

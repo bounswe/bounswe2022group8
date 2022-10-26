@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import IntroImage from "../components/IntroImage";
 import "./styles/Homepage.css";
 import Layout from "../layout/Layout";
