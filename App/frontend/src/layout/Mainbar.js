@@ -30,45 +30,44 @@ function Mainbar(props) {
           <Nav className="me-auto">
             <Searchbar />
           </Nav>
-
-          <Nav className="ms-auto">
-            <Button
-              as="a"
-              variant=""
-              className={
-                !props.mainbarOpen && props.sidebarOpen
-                  ? "me-3 btn-access-sidebar"
-                  : "me-3 btn-access"
-              }
-              onClick={props.onClickLogIn}
-            >
-              Log in
-            </Button>
-          </Nav>
-          <Nav>
-            <Button
-              as="a"
-              variant=""
-              className={
-                !props.mainbarOpen && props.sidebarOpen
-                  ? "me-3 btn-access-sidebar"
-                  : "me-3 btn-access"
-              }
-              onClick={props.onClickSignUp}
-            >
-              Sign up
-            </Button>
-          </Nav>
-          <Nav>
-            <MenuButton
-              onClick={props.onClickMenu}
-              rotate={props.BackdropsidebarOpen ? "rotate(90deg)" : "rotate(0)"}
-              sidebarStyle={
-                !props.mainbarOpen && props.sidebarOpen ? true : false
-              }
-            />
-          </Nav>
         </Navbar.Collapse>
+        <Nav className="ms-auto">
+          <Button
+            as="a"
+            variant=""
+            className={
+              !props.mainbarOpen && props.sidebarOpen
+                ? "me-3 btn-access-sidebar"
+                : "me-3 btn-access"
+            }
+            onClick={props.onClickLogIn}
+          >
+            Log in
+          </Button>
+        </Nav>
+        <Nav>
+          <Button
+            as="a"
+            variant=""
+            className={
+              !props.mainbarOpen && props.sidebarOpen
+                ? "me-3 btn-access-sidebar"
+                : "me-3 btn-access"
+            }
+            onClick={props.onClickSignUp}
+          >
+            Sign up
+          </Button>
+        </Nav>
+        <Nav>
+          <MenuButton
+            onClick={props.onClickMenu}
+            rotate={props.BackdropsidebarOpen ? "rotate(90deg)" : "rotate(0)"}
+            sidebarStyle={
+              !props.mainbarOpen && props.sidebarOpen ? true : false
+            }
+          />
+        </Nav>
       </Container>
     </Navbar>
   );

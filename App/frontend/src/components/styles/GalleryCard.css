@@ -1,0 +1,15 @@
+.gallery-container {
+    margin: 8rem 5%;
+}
+
+.gallery-header {
+  margin-bottom: 5rem;
+  color: white;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.gallery-row {
+  display: flex;
+  justify-content: center;
+}

@@ -1,6 +1,7 @@
 .background-image-container {
   position: relative;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 .background-image {

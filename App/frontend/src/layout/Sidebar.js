@@ -1,12 +1,15 @@
 import React from "react";
-import { SidebarData } from "./data/SidebarData";
-import "./styles/Sidebar.css";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { FiLogOut } from "react-icons/fi";
+import { SidebarData } from "./data/SidebarData";
+
+import "./styles/Sidebar.css";
 
 function Sidebar(props) {
   return (
     <div className="sidebar-container">
+      <div className="sidebar-header" style={{ width: props.width }}></div>
       <div className="sidebar" style={{ width: props.width }}>
         <ul className="sidebar-list">
           {SidebarData.map((val, key) => {
@@ -21,6 +24,19 @@ function Sidebar(props) {
             );
           })}
         </ul>
+      </div>
+      <div className="sidebar-footer" style={{ width: props.width }}>
+        <Button className="btn-light sidebar-footer-btn">Settings</Button>
+        <Button className="btn-light sidebar-footer-btn">
+          Log out
+          <FiLogOut
+            style={{
+              marginLeft: "10px",
+              marginBottom: "2px",
+              fontSize: "15px",
+            }}
+          />
+        </Button>
       </div>
     </div>
   );
