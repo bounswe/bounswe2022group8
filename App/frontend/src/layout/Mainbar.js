@@ -62,7 +62,7 @@ function Mainbar(props) {
         <Nav>
           <MenuButton
             onClick={props.onClickMenu}
-            rotate={props.BackdropsidebarOpen ? "rotate(90deg)" : "rotate(0)"}
+            rotate={props.sidebarOpen ? "rotate(90deg)" : "rotate(0)"}
             sidebarStyle={
               !props.mainbarOpen && props.sidebarOpen ? true : false
             }

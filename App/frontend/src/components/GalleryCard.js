@@ -23,22 +23,22 @@ function GalleryCard(props) {
       <div className="gallery-container">
         <div className="gallery-header">Discover Exhibitions</div>
         <div className="gallery-row">
-          <ImageCard source={lost} name="To Pimp a Butterfly" />
-          <ImageCard source={buddhists} name="To Pimp a Butterfly" />
-          <ImageCard source={haybales} name="To Pimp a Butterfly" />
-          <ImageCard source={wheat} name="To Pimp a Butterfly" />
+          <ImageCard source={lost} name="Lost Highway" />
+          <ImageCard source={buddhists} name="Four Noble Truths" />
+          <ImageCard source={haybales} name="Agriculture in the Netherlands" />
+          <ImageCard source={wheat} name="Fauvism" />
         </div>
         <div className="gallery-row">
           <ImageCard source={greenFace} name="To Pimp a Butterfly" />
-          <ImageCard source={greenFood} name="To Pimp a Butterfly" />
-          <ImageCard source={greenCadillac} name="To Pimp a Butterfly" />
-          <ImageCard source={angel} name="To Pimp a Butterfly" />
+          <ImageCard source={greenFood} name="Green Life" />
+          <ImageCard source={greenCadillac} name="1957 Cadillac Eldorado Biarritz " />
+          <ImageCard source={angel} name="Forgotten Statues" />
         </div>
         <div className="gallery-row">
-          <ImageCard source={cyber} name="To Pimp a Butterfly" />
-          <ImageCard source={bluebuilding} name="To Pimp a Butterfly" />
-          <ImageCard source={rome} name="To Pimp a Butterfly" />
-          <ImageCard source={beach} name="To Pimp a Butterfly" />
+          <ImageCard source={cyber} name="One Night in Shangai" />
+          <ImageCard source={bluebuilding} name="Architecture in Movies" />
+          <ImageCard source={rome} name="Rome: A History of the Eternal City" />
+          <ImageCard source={beach} name="West Coast" />
         </div>
       </div>
     </>

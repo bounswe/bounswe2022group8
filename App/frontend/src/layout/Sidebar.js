@@ -31,7 +31,7 @@ function Sidebar(props) {
           Log out
           <FiLogOut
             style={{
-              marginLeft: "10px",
+              marginLeft: "8px",
               marginBottom: "2px",
               fontSize: "15px",
             }}
