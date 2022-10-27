@@ -1,10 +1,10 @@
-import "./styles/IntroImage.css";
-import background from "../images/aurora.jpg";
-import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
 import Signup from "./SignupModal";
 import Login from "./LoginModal";
 import Backdrop from "../components/Backdrop";
+import background from "../images/aurora.jpg";
+import "./styles/IntroImage.css";
 
 function IntroImage() {
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);

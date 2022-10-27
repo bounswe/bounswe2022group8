@@ -1,5 +1,4 @@
 import Button from "react-bootstrap/Button";
-// import { AiOutlineMenu } from "react-icons/ai";
 import { SlMenu } from "react-icons/sl";
 import "./styles/MenuButton.css";
 
@@ -8,7 +7,9 @@ function MenuButton(props) {
     <Button
       as="a"
       variant="light"
-      className= {props.sidebarStyle ? "me-4 menu-button-sidebar"  : "me-4 menu-button"}
+      className={
+        props.sidebarStyle ? "me-4 menu-button-sidebar" : "me-4 menu-button"
+      }
       onClick={props.onClick}
     >
       <SlMenu
@@ -21,4 +22,5 @@ function MenuButton(props) {
     </Button>
   );
 }
+
 export default MenuButton;
