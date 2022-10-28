@@ -11,19 +11,6 @@ function Homepage(props) {
     <Layout>
       <IntroImage />
       <GalleryCard />
-      <div className="slide-deneme">
-        <div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-          <div className="deneme">HOMEPAGE5</div>
-        </div>
-      </div>
       <HomeFooter />
     </Layout>
   );

@@ -4,6 +4,7 @@ import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
 import Backdrop from "../components/Backdrop";
 import Sidebar from "./Sidebar";
+
 import "./styles/Layout.css";
 
 function Layout(props) {
@@ -11,6 +12,7 @@ function Layout(props) {
   const [logInIsOpen, setLogInIsOpen] = useState(false);
   const [mainbarOpen, setMainbarOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentScrollY, setCurrentScrollY] = useState(0);
 
   function handleSignUp() {
     setSignUpIsOpen(true);
@@ -35,25 +37,36 @@ function Layout(props) {
     setLogInIsOpen(false);
   }
 
-  const changeNavbarColor = () => {
-    if (window.scrollY >= 30) {
-      setMainbarOpen(true);
-    } else {
-      setMainbarOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNavbarColor);
-
-    return () => {
-      window.removeEventListener("scroll", changeNavbarColor);
-    };
-  }, []);
-
   function handleSidebar() {
     setSidebarOpen(!sidebarOpen);
   }
+
+  useEffect(() => {
+    function changeNavbarColor() {
+      if (window.scrollY >= 30) {
+        setMainbarOpen(true);
+      } else {
+        setMainbarOpen(false);
+      }
+    }
+    window.addEventListener("scroll", changeNavbarColor);
+
+    return () => window.removeEventListener("scroll", changeNavbarColor);
+  }, []);
+
+  // keeps track of the current position of the scrollbar
+  useEffect(() => {
+    function updatePosition() {
+      setCurrentScrollY(window.scrollY);
+    }
+    window.addEventListener("scroll", updatePosition);
+    return () => window.removeEventListener("scroll", updatePosition);
+  }, []);
+
+  // prevents scrollbar to reset each time a component re-renders
+  useEffect(() => {
+    window.scrollTo(0, currentScrollY);
+  }, [currentScrollY]);
 
   return (
     <div>
@@ -84,7 +97,10 @@ function Layout(props) {
       <Sidebar width={sidebarOpen ? "300px" : "0px"} />
       <main
         className="main-container"
-        style={{ marginRight: sidebarOpen ? "300px" : "0px" }}
+        style={{
+          marginRight: sidebarOpen ? "300px" : "0px",
+          //opacity: sidebarOpen ? "0.6" : "1",
+        }}
       >
         {props.children}
       </main>

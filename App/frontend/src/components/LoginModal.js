@@ -41,7 +41,7 @@ function Login(props) {
           </button>
         </div>
         <p className="forgot-password text-center mt-3">
-          <a href="#"> Forgot password?</a>
+          <a href=""> Forgot password?</a>
         </p>
         <p className="text-center mt-2">
           Not on (AppName) yet?{" "}
