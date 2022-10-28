@@ -1,9 +1,25 @@
 .footer-container {
-    min-height: 200px;
-    background-color: #d8bbd8;
-    padding: 3rem 5%;
+  color: #18121c;
+  background-color: #bcb1c1;
+  padding-top: 3rem;
+  padding-bottom: 3.5rem;
 }
 
-.footer {
-   
+.footer-header {
+  font-weight: 600;
+  color: #18121c;
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.footer-element {
+  font-weight: 400;
+  color: #18121c;
+  text-decoration: none;
+}
+
+.footer-element:hover,
+.footer-element:active {
+  color: #18121c;
+  text-decoration: underline;
 }

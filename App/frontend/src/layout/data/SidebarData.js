@@ -22,6 +22,6 @@ export const SidebarData = [
     },
     {
         title: "Add Favourites",
-        link: "/xx"
+        link: "/"
     }
 ]
