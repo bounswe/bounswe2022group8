@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
+import 'package:flutter_app_mustafa/landing_page.dart';
 import 'package:flutter_app_mustafa/login_page.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // home: LandingPage(),
       home: HomePage(),
     );
   }

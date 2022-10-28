@@ -3,8 +3,8 @@ import 'package:flutter_app_mustafa/login_page.dart';
 import 'package:flutter_app_mustafa/signup_page.dart';
 import 'package:flutter_app_mustafa/templates.dart';
 
-class LoginScreenRoute extends StatelessWidget {
-  const LoginScreenRoute({Key? key}) : super(key: key);
+class LoginPageRoute extends StatelessWidget {
+  const LoginPageRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,8 @@ class LoginScreenRoute extends StatelessWidget {
   }
 }
 
-class HomeScreenRoute extends StatelessWidget {
-  const HomeScreenRoute({Key? key}) : super(key: key);
+class LandingPageRoute extends StatelessWidget {
+  const LandingPageRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
