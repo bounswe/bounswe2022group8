@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('HELLO', style: TextStyle(color: Colors.white),),
+      child: Text('Ben bir homepage olacagim', style: TextStyle(color: Colors.white),),
     );
   }
 }
