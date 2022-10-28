@@ -32,6 +32,7 @@ function Layout(props) {
 
   function handleSubmitSignUp() {
     setSignUpIsOpen(false);
+    handleLogIn();
   }
 
   function handleSubmitLogIn() {
