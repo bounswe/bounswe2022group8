@@ -5,10 +5,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Searchbar from "../components/Searchbar";
 import MenuButton from "../components/MenuButton";
+import { CgProfile } from "react-icons/cg";
+import { BiEnvelope } from "react-icons/bi";
+import { FiUser } from "react-icons/fi";
+import { HiOutlineUserCircle } from "react-icons/hi";
+import { SlEnvolope } from "react-icons/sl";
 
 import "./styles/Mainbar.css";
 
-function Mainbar(props) {
+function MainbarLogged(props) {
   return (
     <Navbar
       sticky="top"
@@ -34,30 +39,26 @@ function Mainbar(props) {
         </Navbar.Collapse>
         <Nav className="ms-auto">
           <Button
-            as="a"
-            variant=""
+            variant="light"
             className={
               !props.mainbarOpen && props.sidebarOpen
-                ? "me-3 btn-access-sidebar"
-                : "me-3 btn-access"
+                ? "me-4 btn-logged-sidebar"
+                : "me-4 btn-logged"
             }
-            onClick={props.onClickLogIn}
           >
-            Log in
+            <HiOutlineUserCircle style={{ fontSize: "2rem", marginRight: "0.4rem" }} />
           </Button>
         </Nav>
         <Nav>
           <Button
-            as="a"
-            variant=""
+            variant="light"
             className={
               !props.mainbarOpen && props.sidebarOpen
-                ? "me-3 btn-access-sidebar"
-                : "me-3 btn-access"
+                ? "me-4 btn-logged-sidebar"
+                : "me-4 btn-logged"
             }
-            onClick={props.onClickSignUp}
           >
-            Sign up
+            <SlEnvolope style={{ fontSize: "2rem", marginRight: "0.3rem" }} />
           </Button>
         </Nav>
         <Nav>
@@ -74,4 +75,4 @@ function Mainbar(props) {
   );
 }
 
-export default Mainbar;
+export default MainbarLogged;

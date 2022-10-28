@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Mainbar from "./Mainbar";
+import MainbarLogged from "./MainbarLogged";
 import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
 import Backdrop from "../components/Backdrop";
@@ -70,7 +71,7 @@ function Layout(props) {
 
   return (
     <div>
-      <Mainbar
+      <MainbarLogged
         mainbarOpen={mainbarOpen}
         sidebarOpen={sidebarOpen}
         onClickLogIn={() => handleLogIn()}

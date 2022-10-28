@@ -36,3 +36,26 @@
   color: #18121c !important;
   border-color: transparent !important;
 }
+
+.btn-logged {
+  color: white;
+}
+
+.btn-logged:hover,
+.btn-logged:active {
+  color: #ffc9ff !important;
+}
+
+.btn-logged-sidebar {
+  background-color: transparent;
+  border-color: transparent;
+  color: #18121c;
+}
+
+.btn-logged-sidebar:hover {
+  color: white;
+}
+
+.btn-logged-sidebar:active {
+  color: #18121c !important;
+}

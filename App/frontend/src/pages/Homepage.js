@@ -1,7 +1,7 @@
 import React from "react";
 import IntroImage from "../components/IntroImage";
 import Layout from "../layout/Layout";
-import HomeFooter from "../layout/HomeFooter"
+import HomeFooter from "../components/HomeFooter"
 import GalleryCard from "../components/GalleryCard";
 
 import "./styles/Homepage.css";
