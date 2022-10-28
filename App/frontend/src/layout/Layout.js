@@ -71,7 +71,7 @@ function Layout(props) {
 
   return (
     <div>
-      <MainbarLogged
+      <Mainbar
         mainbarOpen={mainbarOpen}
         sidebarOpen={sidebarOpen}
         onClickLogIn={() => handleLogIn()}
