@@ -5,15 +5,19 @@ import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
 import Backdrop from "../components/Backdrop";
 import Sidebar from "./Sidebar";
+import { useAuth } from "../auth/authentication";
 
 import "./styles/Layout.css";
 
 function Layout(props) {
+  const { token } = useAuth();
+
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
   const [mainbarOpen, setMainbarOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentScrollY, setCurrentScrollY] = useState(0);
+  // const [currentScrollY, setCurrentScrollY] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   function handleSignUp() {
     setSignUpIsOpen(true);
@@ -43,6 +47,7 @@ function Layout(props) {
     setSidebarOpen(!sidebarOpen);
   }
 
+  // changes color of the navbar w.r.t scrollY position
   useEffect(() => {
     function changeNavbarColor() {
       if (window.scrollY >= 30) {
@@ -56,11 +61,13 @@ function Layout(props) {
     return () => window.removeEventListener("scroll", changeNavbarColor);
   }, []);
 
-  // keeps track of the current position of the scrollbar
+  {
+    /*// keeps track of the current position of the scrollbar
+  function updatePosition() {
+    setCurrentScrollY(window.scrollY);
+  }
+
   useEffect(() => {
-    function updatePosition() {
-      setCurrentScrollY(window.scrollY);
-    }
     window.addEventListener("scroll", updatePosition);
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
@@ -68,17 +75,42 @@ function Layout(props) {
   // prevents scrollbar to reset each time a component re-renders
   useEffect(() => {
     window.scrollTo(0, currentScrollY);
-  }, [currentScrollY]);
+  }, [currentScrollY]);*/
+  }
+
+  // keeps track of the current windows width
+
+  function updateWidth() {
+    setWindowWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  // console.log(windowWidth);
 
   return (
     <div>
-      <MainbarLogged
-        mainbarOpen={mainbarOpen}
-        sidebarOpen={sidebarOpen}
-        onClickLogIn={() => handleLogIn()}
-        onClickSignUp={() => handleSignUp()}
-        onClickMenu={() => handleSidebar()}
-      />
+      {token ? (
+        <MainbarLogged
+          mainbarOpen={mainbarOpen}
+          sidebarOpen={sidebarOpen}
+          onClickLogIn={() => handleLogIn()}
+          onClickSignUp={() => handleSignUp()}
+          onClickMenu={() => handleSidebar()}
+        />
+      ) : (
+        <Mainbar
+          mainbarOpen={mainbarOpen}
+          sidebarOpen={sidebarOpen}
+          onClickLogIn={() => handleLogIn()}
+          onClickSignUp={() => handleSignUp()}
+          onClickMenu={() => handleSidebar()}
+        />
+      )}
+
       {signUpIsOpen && (
         <Signup
           onSubmitSignUp={() => handleSubmitSignUp()}
@@ -96,12 +128,11 @@ function Layout(props) {
       {(signUpIsOpen || logInIsOpen) && (
         <Backdrop onClick={() => handleCloseForm()} />
       )}
-      <Sidebar width={sidebarOpen ? "300px" : "0px"} />
+      <Sidebar width={sidebarOpen ? "300px" : "0px"} auth={token} />
       <main
         className="main-container"
         style={{
-          marginRight: sidebarOpen ? "300px" : "0px",
-          //opacity: sidebarOpen ? "0.6" : "1",
+          marginRight: sidebarOpen && windowWidth >= 1400 ? "300px" : "0px",
         }}
       >
         {props.children}

@@ -4,9 +4,9 @@ import Layout from "../layout/Layout";
 import HomeFooter from "../components/HomeFooter"
 import GalleryCard from "../components/GalleryCard";
 
-import "./styles/Homepage.css";
+import "./styles/Home.css";
 
-function Homepage(props) {
+function Home(props) {
   return (
     <Layout>
       <IntroImage />
@@ -16,4 +16,4 @@ function Homepage(props) {
   );
 }
 
-export default Homepage;
+export default Home;

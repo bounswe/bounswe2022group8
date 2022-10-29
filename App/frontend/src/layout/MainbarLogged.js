@@ -49,7 +49,7 @@ function MainbarLogged(props) {
               strokeWidth={1.3}
               stroke="currentColor"
               style={{
-                height: "2.3rem",
+                height: "2.4rem",
                 marginRight: "0.4rem",
                 marginBottom: "0.1rem",
               }}

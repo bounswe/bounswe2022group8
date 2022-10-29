@@ -1,6 +1,6 @@
 .background-image-container {
   position: relative;
-  height: 100vh;
+  height: 70vh;
   overflow-y: hidden;
 }
 
@@ -15,7 +15,7 @@
   font-size: 24px;
   color: white;
   position: absolute;
-  right: 50%;
+  right: 30%;
   left: 12%;
   top: 25%;
 }
@@ -49,4 +49,24 @@
   border-color: #ffc9ff !important;
   background-color: #ffc9ff !important;
   box-shadow: 0px 0px 5px #ffc9ff !important;
+}
+
+@media (max-width: 1400px) {
+  .input-on-background-image {
+    font-size: 20px;
+  }
+
+  .input-on-background-image .main-header {
+    font-size: 30px;
+  }
+
+  .text-on-background-image {
+    margin-bottom: 66px;
+  }
+
+  .btn-on-background-image {
+    font-size: 14px;
+    width: 125px;
+    padding: 12px 8px;
+  }
 }

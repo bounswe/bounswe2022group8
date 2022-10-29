@@ -26,17 +26,21 @@ function Sidebar(props) {
         </ul>
       </div>
       <div className="sidebar-footer" style={{ width: props.width }}>
-        <Button className="btn-light sidebar-footer-btn">Settings</Button>
-        <Button className="btn-light sidebar-footer-btn">
-          Log out
-          <FiLogOut
+        {props.auth && (
+          <>
+            <Button className="btn-light sidebar-footer-btn">Settings</Button>
+            <Button className="btn-light sidebar-footer-btn">
+              Log out
+              {/*<FiLogOut
             style={{
               marginLeft: "8px",
               marginBottom: "2px",
               fontSize: "15px",
             }}
-          />
-        </Button>
+          />*/}
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

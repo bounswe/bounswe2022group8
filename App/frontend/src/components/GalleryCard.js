@@ -1,6 +1,3 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import ImageCard from "./ImageCard";
 import "./styles/GalleryCard.css";
 
@@ -31,7 +28,10 @@ function GalleryCard(props) {
         <div className="gallery-row">
           <ImageCard source={greenFace} name="To Pimp a Butterfly" />
           <ImageCard source={greenFood} name="Green Life" />
-          <ImageCard source={greenCadillac} name="1957 Cadillac Eldorado Biarritz " />
+          <ImageCard
+            source={greenCadillac}
+            name="1957 Cadillac Eldorado Biarritz "
+          />
           <ImageCard source={angel} name="Forgotten Statues" />
         </div>
         <div className="gallery-row">

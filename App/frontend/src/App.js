@@ -5,14 +5,14 @@ import "./App.css";
 
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage";
+import Home from "./pages/Home";
 import { AuthProvider } from "./auth/authentication";
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </AuthProvider>
   );

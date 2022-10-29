@@ -7,12 +7,21 @@
 
 .gallery-header {
   margin-bottom: 5rem;
-  color: white;
+  background: linear-gradient(30deg, #c7a0c7, #6a986b, white);
+  background-clip: text;
+  color: transparent;
   font-size: 60px;
   font-weight: 600;
+  /*text-align: center; */
 }
 
 .gallery-row {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1400px) {
+  .gallery-header {
+    font-size: 50px;
+  }
 }

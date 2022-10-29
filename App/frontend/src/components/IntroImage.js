@@ -4,9 +4,12 @@ import Signup from "./SignupModal";
 import Login from "./LoginModal";
 import Backdrop from "../components/Backdrop";
 import background from "../images/aurora.jpg";
+import { useAuth } from "../auth/authentication";
+
 import "./styles/IntroImage.css";
 
 function IntroImage() {
+  const { token } = useAuth();
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
 
@@ -44,16 +47,18 @@ function IntroImage() {
               tools.
             </p>
           </div>
-          <div className="btn-on-background-image-container">
-            <Button
-              className="btn-on-background-image"
-              as="a"
-              variant=""
-              onClick={() => handleSignUp()}
-            >
-              JOIN NOW
-            </Button>
-          </div>
+          {!token && (
+            <div className="btn-on-background-image-container">
+              <Button
+                className="btn-on-background-image"
+                as="a"
+                variant=""
+                onClick={() => handleSignUp()}
+              >
+                JOIN NOW
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       {signUpIsOpen && (
