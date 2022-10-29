@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+// DON'T EDIT ABOVE
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import { AuthProvider } from "./auth/authentication";
-
-import "./App.css";
 
 function App() {
   return (

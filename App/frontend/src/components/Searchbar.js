@@ -11,7 +11,7 @@ function Searchbar() {
       </InputGroup.Text>
       <Form.Control
         type="search"
-        placeholder="Search for images, galleries, artists..."
+        placeholder="Search for images, exhibitions, artists..."
         className="search-bar"
         aria-label="Search"
       />

@@ -7,53 +7,53 @@ import "./styles/HomeFooter.css";
 
 function Footer(props) {
   return (
-    <div className="footer-container">
-      <Container>
+    <div className="homefooter-container">
+      <Container className="homefooter">
         <Row align="center">
-          <Col className="footer-header">Verification</Col>
-          <Col className="footer-header">Copyright Issues</Col>
-          <Col className="footer-header">Contact Us</Col>
-          <Col className="footer-header">About</Col>
+          <Col className="homefooter-header">Verification</Col>
+          <Col className="homefooter-header">Copyright Issues</Col>
+          <Col className="homefooter-header">Contact Us</Col>
+          <Col className="homefooter-header">About</Col>
         </Row>
         <Row align="center" className="mb-2">
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Request a verified badge
             </Link>
           </Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Claim copyright
             </Link>
           </Col>
           <Col>
             <a
               href="https://github.com/bounswe/bounswe2022group8"
-              className="footer-element"
+              className="homefooter-element"
             >
               Github
             </a>
           </Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               License
             </Link>
           </Col>
         </Row>
         <Row align="center" className="mb-2">
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Need help?
             </Link>
           </Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Report infringement
             </Link>
           </Col>
           <Col></Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Terms and Conditions
             </Link>
           </Col>
@@ -61,13 +61,13 @@ function Footer(props) {
         <Row align="center" className="mb-2">
           <Col></Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               Need help?
             </Link>
           </Col>
           <Col></Col>
           <Col>
-            <Link to="./" className="footer-element">
+            <Link to="./" className="homefooter-element">
               FAQ
             </Link>
           </Col>

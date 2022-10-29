@@ -1,25 +1,29 @@
-.footer-container {
+.homefooter-container {
   color: #18121c;
   background-color: #bcb1c1;
   padding-top: 3rem;
   padding-bottom: 3.5rem;
 }
 
-.footer-header {
+.homefooter-header {
   font-weight: 600;
   color: #18121c;
   text-decoration: none;
   margin-bottom: 2rem;
 }
 
-.footer-element {
+.homefooter-element {
   font-weight: 400;
   color: #18121c;
   text-decoration: none;
 }
 
-.footer-element:hover,
-.footer-element:active {
+.homefooter-element:hover,
+.homefooter-element:active {
   color: #18121c;
   text-decoration: underline;
+}
+
+.homefooter {
+  padding: 0 12%;
 }
