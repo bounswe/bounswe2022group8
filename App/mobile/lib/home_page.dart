@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_mustafa/landing_page.dart';
+import 'widgets/posts.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
 
@@ -18,19 +20,64 @@ class _HomePageState extends State<HomePage> {
         leading: const Icon(Icons.account_circle_rounded),
         title: const Text(
           "MyApp",
-          style:  TextStyle(
+          style: TextStyle(
             color: Colors.black45,
             fontFamily: "OpenSans",
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
-            ),
           ),
+        ),
         actions: const [
           Icon(Icons.more_vert),
+        ],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        onTap: (value){
+          if(value == 1){
+            Route route = MaterialPageRoute(builder: (context) =>  LandingPage());
+            Navigator.pushReplacement(context, route);
+          }
+        },
+        items:  const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -40,9 +87,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Logout',
           ),
         ],
-        ),
-      );
+      ),
+    );
   }
 }
-
-

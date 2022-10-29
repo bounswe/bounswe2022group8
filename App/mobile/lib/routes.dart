@@ -78,3 +78,13 @@ class SignUpScreenRoute extends StatelessWidget {
   }
 }
 
+class HomePageRoute extends StatelessWidget {
+  const HomePageRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+
