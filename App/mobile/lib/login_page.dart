@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
 
@@ -10,6 +11,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String _error = "Hello There!";
+
+  void _setErrorMessage({String error = ""}) {
+    setState((){
+      _error = error;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,12 +76,54 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         )
                       ),
-                      const SizedBox(height:30),
+                      const SizedBox(height:5),
+                      Text(
+                          _error,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "OpenSans",
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )
+                      ),
                       EmailInput(),
                       const SizedBox(height: 10),
                       PasswordInput(),
                       const SizedBox(height: 20),
-                      LoginButton(),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: (){
+                            if(true){
+                              Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                              Navigator.pushReplacement(context, route);
+                            }
+                            else{
+                              _setErrorMessage(error:"Ben bir AAAAAA");
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(12.5),
+                            minimumSize: const Size(400, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            backgroundColor: Colors.white,
+                          ),
+                          child: const Text(
+                            "LOGIN",
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontFamily: "OpenSans",
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ),
+                      ),
                       ForgotPassword(),
                     ],
                   ),
