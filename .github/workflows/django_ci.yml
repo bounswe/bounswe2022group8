@@ -5,8 +5,9 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    
 env:
-SECRET_KEY=django-insecure-e@#xa6tw^cu0ef0gns914_+iubzxrlq+1hp3rlcp0=j)8^!q_s
+  SECRET_KEY: django-insecure-e@#xa6tw^cu0ef0gns914_+iubzxrlq+1hp3rlcp0=j)8^!q_s
 
 jobs:
   build:
