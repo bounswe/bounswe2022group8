@@ -29,6 +29,8 @@ SECRET_KEY = env("SECRET_KEY")
 
 INSTALLED_APPS = [
     'api',
+    'rest_framework',
+    'knox',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,6 +67,13 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'NON_FIELD_ERRORS_KEY': 'ERROR',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ]
+}
+
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -74,9 +83,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+                'OPTIONS': {
+                    'user_attributes': (
+                        'username', 'email'
+                    ),
+                    'max_similarity': 0.5
+                }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+                'OPTIONS': {
+                    'min_length': 10,
+                }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -98,6 +116,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+from datetime import timedelta
+
+REST_KNOX = {'TOKEN_TTL': timedelta(hours=24)}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
