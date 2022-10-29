@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.symmetric(horizontal : 0, vertical: 40),
                 child: Column(
                   children: const <Widget>[
-                    HomeScreenRoute(),
+                    LandingPageRoute(),
                   ],
                 ),
               ),

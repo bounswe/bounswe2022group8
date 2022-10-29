@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
 
@@ -41,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: const EdgeInsets.symmetric(horizontal : 0, vertical: 40),
                 child: Column(
                   children: const <Widget>[
-                    HomeScreenRoute(),
+                    LandingPageRoute(),
                   ],
                 ),
               ),
@@ -116,7 +117,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: ()=> print("Signed Up"),
+                        onPressed: (){
+                          if(true){
+                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                            Navigator.pushReplacement(context, route);
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(12.5),
                           minimumSize: const Size(400, 50),

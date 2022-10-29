@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/login_page.dart';
 
 
@@ -133,10 +134,15 @@ class LoginButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       child: ElevatedButton(
-          onPressed: ()=> LoginScreen(),
+          onPressed: (){
+            if(true){
+              Route route = MaterialPageRoute(builder: (context) => const HomePage());
+              Navigator.pushReplacement(context, route);
+            }
+          },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(12.5),
-            minimumSize: Size(400, 50),
+            minimumSize: const Size(400, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
