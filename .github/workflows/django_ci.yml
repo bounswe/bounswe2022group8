@@ -28,6 +28,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
+        cd App/backend
         python manage.py test api/tests
         
     - name: Build the Docker image
