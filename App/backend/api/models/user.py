@@ -8,7 +8,8 @@ class User(AbstractUser):
     surname = models.CharField(max_length=100, blank=True)
     username = models.CharField(unique=True, max_length=100)
     email = models.EmailField(unique=True, max_length=254)  # EmailField is a CharField that checks the value for a valid email address using EmailValidator
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=128)
+    # last_login = models.DateTimeField(_("last login"), blank=True, null=True) ? maybe
     # implement follow later
     # followers = models.ManyToManyField(
     #     to="self", 
