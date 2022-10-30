@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-
+import 'requests/login.dart' ;
 class LoginScreen extends StatefulWidget {
 
   @override
@@ -11,7 +11,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  
   String _error = "Hello There!";
+  final EmailInputObject = EmailInput() ;
+  final PasswordInputObject = PasswordInput() ;
+  Future<String>? _loginResponseMessage ;
 
   void _setErrorMessage({String error = ""}) {
     setState((){
@@ -87,9 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold,
                           )
                       ),
-                      EmailInput(),
+                      EmailInputObject,
                       const SizedBox(height: 10),
-                      PasswordInput(),
+                      PasswordInputObject,
                       const SizedBox(height: 20),
                     Container(
                       alignment: Alignment.center,
@@ -97,13 +101,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                           onPressed: (){
-                            if(true){
-                              Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                              Navigator.pushReplacement(context, route);
+                          
+                          String email = EmailInputObject.emailController.text  ;
+                          String password = PasswordInputObject.passwordController.text  ;
+                          login(email,password).then((value){
+                            if (value == "OK"){
+                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                            Navigator.pushReplacement(context, route);
                             }
                             else{
-                              _setErrorMessage(error:"Ben bir AAAAAA");
-                            }
+                            _setErrorMessage(error:value);
+                            }                          
+                            print(value);
+                            }) ;                         
+     
+                        
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(12.5),

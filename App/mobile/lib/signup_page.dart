@@ -148,7 +148,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           String username = usernameController.text ;
                           String email = EmailInputObject.emailController.text  ;
                           String password = PasswordInputObject.passwordController.text  ;
-                          _registerResponseMessage = register(username,email,password) ;
                           register(username,email,password).then((value){
                             if (value == "OK"){
                             Route route = MaterialPageRoute(builder: (context) => const HomePage());

@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final EmailInputObject = EmailInput() ;
+  final PasswordInputObject = PasswordInput() ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
