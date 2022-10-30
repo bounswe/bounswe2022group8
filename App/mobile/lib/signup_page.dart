@@ -11,6 +11,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String _error = "Welcome to Artly!";
+
+  void _setErrorMessage({String error = ""}) {
+    setState((){
+      _error = error;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +76,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontWeight: FontWeight.bold,
                           )
                       ),
+                      const SizedBox(height:5),
+                      Text(
+                          _error,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: "OpenSans",
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )
+                      ),
                       const SizedBox(height:30),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,9 +137,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: (){
-                          if(true){
+                          if(false){
                             Route route = MaterialPageRoute(builder: (context) => const HomePage());
                             Navigator.pushReplacement(context, route);
+                          }
+                          else{
+                            _setErrorMessage(error:"BIRB");
                           }
                         },
                         style: ElevatedButton.styleFrom(

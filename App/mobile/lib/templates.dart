@@ -184,3 +184,17 @@ class BackToHomeButton extends StatelessWidget {
     );
   }
 }
+
+class ErrorMessage extends StatefulWidget {
+  const ErrorMessage({Key? key}) : super(key: key);
+
+  @override
+  State<ErrorMessage> createState() => _ErrorMessageState();
+}
+
+class _ErrorMessageState extends State<ErrorMessage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
