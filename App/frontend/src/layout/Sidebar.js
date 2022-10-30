@@ -3,10 +3,29 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { FiLogOut } from "react-icons/fi";
 import { SidebarData } from "./data/SidebarData";
+import { useAuth } from "../auth/authentication";
 
 import "./styles/Sidebar.css";
 
 function Sidebar(props) {
+  const { token, clearToken } = useAuth();
+
+  function handleLogOut() {
+
+    fetch("http://127.0.0.1:8000/api/v1/auth/logout/", {
+      method: "POST",
+      body: "",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + { token },
+      },
+    })
+      .then(() => {
+        clearToken();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-header" style={{ width: props.width }}></div>
@@ -29,15 +48,18 @@ function Sidebar(props) {
         {props.auth && (
           <>
             <Button className="btn-light sidebar-footer-btn">Settings</Button>
-            <Button className="btn-light sidebar-footer-btn">
+            <Button
+              className="btn-light sidebar-footer-btn"
+              onClick={() => handleLogOut()}
+            >
               Log out
-              {/*<FiLogOut
-            style={{
-              marginLeft: "8px",
-              marginBottom: "2px",
-              fontSize: "15px",
-            }}
-          />*/}
+              <FiLogOut
+                style={{
+                  marginLeft: "8px",
+                  marginBottom: "2px",
+                  fontSize: "15px",
+                }}
+              />
             </Button>
           </>
         )}

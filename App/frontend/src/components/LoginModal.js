@@ -17,13 +17,7 @@ function Login(props) {
   const { saveToken } = useAuth();
 
   function handleSubmit(event) {
-    // props.onSubmitLogIn();
-
     event.preventDefault();
-
-    saveToken(loginInput.credential);
-
-    //let data = { loginInput };
 
     fetch("http://127.0.0.1:8000/api/v1/auth/login/", {
       method: "POST",
@@ -35,7 +29,8 @@ function Login(props) {
       .then((response) => response.json())
       .then((response) => {
         console.log("Success:", JSON.stringify(response));
-        console.log(loginInput);
+        // console.log(loginInput);
+        saveToken(response.token);
         props.onSubmitLogIn();
       })
       .catch((error) => console.error("Error:", error));

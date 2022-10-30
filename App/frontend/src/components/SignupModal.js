@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import "./styles/Access.css";
 
+import { useAuth } from "../auth/authentication";
+
 function Signup(props) {
   const [signupInput, setSignupInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -14,12 +16,10 @@ function Signup(props) {
     }
   );
 
+  const { saveToken } = useAuth();
+
   function handleSubmit(event) {
-    // props.onSubmitSignUp();
-
     event.preventDefault();
-
-    //let data = { signupInput };
 
     fetch("http://127.0.0.1:8000/api/v1/auth/register/", {
       method: "POST",
@@ -31,6 +31,7 @@ function Signup(props) {
       .then((response) => response.json())
       .then((response) => {
         console.log("Success:", JSON.stringify(response));
+        saveToken(response.token);
         props.onSubmitSignUp();
       })
       .catch((error) => console.error("Error:", error));

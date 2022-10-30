@@ -11,6 +11,7 @@ import "./styles/Layout.css";
 
 function Layout(props) {
   const { token } = useAuth();
+  console.log(token)
 
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
@@ -36,7 +37,6 @@ function Layout(props) {
 
   function handleSubmitSignUp() {
     setSignUpIsOpen(false);
-    handleLogIn();
   }
 
   function handleSubmitLogIn() {
