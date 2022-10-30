@@ -6,10 +6,13 @@ import 'package:flutter_app_mustafa/login_page.dart';
 class EmailInput extends StatefulWidget {
 
   @override
+  final emailController = TextEditingController();
+
   State<EmailInput> createState() => _EmailInputState();
 }
 
 class _EmailInputState extends State<EmailInput> {
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +34,8 @@ class _EmailInputState extends State<EmailInput> {
             borderRadius: BorderRadius.circular(10),
           ),
           height: 60,
-          child: const TextField(
+          child:  TextField(
+            controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
                 color: Colors.white
@@ -51,11 +55,14 @@ class _EmailInputState extends State<EmailInput> {
       ],
     );
   }
+ 
 }
 
 class PasswordInput extends StatefulWidget {
 
   @override
+    final passwordController = TextEditingController();
+
   State<PasswordInput> createState() => _PasswordInputState();
 }
 
@@ -81,7 +88,8 @@ class _PasswordInputState extends State<PasswordInput> {
             borderRadius: BorderRadius.circular(10),
           ),
           height: 60,
-          child: const TextField(
+          child:  TextField(
+            controller: widget.passwordController,
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
