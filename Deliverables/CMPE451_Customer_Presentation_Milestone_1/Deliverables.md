@@ -1,12 +1,20 @@
 # Deliverables
 
 Here you can find hyperlinks to our deliverable documents:
-* [Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)
-* Software Design (UML)
-* Scenarios and Mockups
-* Project Plan
-* Individual Contribution Reports
-* Customer Milestone 1 Group Review
+### Software Requirements Specification
+* [Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)<br/>
+### Software Design (UML)
+* [Use case diagram](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram)
+* [Class Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)
+* [Sequence Diagrams](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)
+
+### Scenarios and Mockups
+* [Scenario: Art Follower User](https://github.com/bounswe/bounswe2022group8/wiki/Scenario:-Art-Follower-User)
+* [Scenario: Verified User/Artist Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2)
+* [Scenario: Collaboration Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-3)
+
+### Project Plan
+* [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
 
 
 # Individual Contributions
