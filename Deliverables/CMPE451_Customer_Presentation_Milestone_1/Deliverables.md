@@ -123,6 +123,42 @@ I have created the first view for login and signup pages while creating the fron
 </details>
 
 <details>
+    <summary> Sena Mumcu </summary>
+I am [Sena Mumcu](https://github.com/bounswe/bounswe2022group8/wiki/Sena-Mumcu), a member and the communicator of group 8. I am working on backend side of the project.
+    
+### Responsibilities
+* Revision of last year deliverables and project requirements.
+* Doing a research on PostgreSQL and creating initial integration of the database with the Django application.
+* Implementation of login API endpoint.
+* Implementation of logout API endpoint.
+* Creating a communication channel with the FE team and ensuring the coordination on API endpoints.
+    
+### Main Contributions
+I made the initial database configurations for the project. Since our team decided on using PostgreSQL, I did a research on PostgreSQL and learned how to integrate postgreSQL with our Django application. I wrote 2 API endpoints, namely login and logout to implement necessary functionalities. Created a Google Doc and documented Api endpoints so that we, the backend team can coordinate with frontend team. 
+    
+**Code Related Issues**
+* [BE-3: PostgreSQL Integration to the application](https://github.com/bounswe/bounswe2022group8/issues/182)
+* [BE-9: API Implementation of Login Endpoint](https://github.com/bounswe/bounswe2022group8/issues/195)
+    
+**Management Related Issues**
+* [BE-7 API Documentation with FE team](https://github.com/bounswe/bounswe2022group8/issues/193)
+    
+**Pull Requests**
+* [feature/BE-3](https://github.com/bounswe/bounswe2022group8/pull/183)
+* [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200) - the pr created for my implementations
+    
+**Additional**
+    
+PR reviews and Comments
+    
+* [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200)
+* [feature/BE-6](https://github.com/bounswe/bounswe2022group8/pull/191)
+* [BE-10 API Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
+* [GEN-28](https://github.com/bounswe/bounswe2022group8/issues/212)
+    
+</details>
+
+<details>
     <summary> Karahan Sarıtaş </summary>
     
 I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I am working on backend side of the project.
