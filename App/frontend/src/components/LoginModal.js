@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import "./styles/Access.css";
@@ -13,30 +13,27 @@ function Login(props) {
       password: "",
     }
   );
+  const [responseStatus, setResponseStatus] = useState(0);
 
   const { saveToken } = useAuth();
 
   function handleSubmit(event) {
-    // props.onSubmitLogIn();
-
     event.preventDefault();
 
-    saveToken(loginInput.credential);
-
-    //let data = { loginInput };
-
-    fetch("http://127.0.0.1:8000/api/v1/auth/login/", {
+    fetch("http://44.211.68.74:8000/api/v1/auth/login/", {
       method: "POST",
       body: JSON.stringify(loginInput),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
       .then((response) => {
-        console.log("Success:", JSON.stringify(response));
-        console.log(loginInput);
-        props.onSubmitLogIn();
+        setResponseStatus(response.status);
+        props.onSubmitLogIn(response.status);
+        return response.json();
+      })
+      .then((response) => {
+        saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
   }
@@ -46,6 +43,8 @@ function Login(props) {
     const newValue = event.target.value;
     setLoginInput({ [name]: newValue });
   };
+
+  // console.log(responseStatus);
 
   return (
     <form className="access">
@@ -58,7 +57,9 @@ function Login(props) {
           <label className="access-label">Email or username</label>
           <input
             type="email"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Email or username"
             name="credential"
             id="credential"
@@ -71,7 +72,9 @@ function Login(props) {
           <label className="access-label">Password</label>
           <input
             type="password"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Password"
             name="password"
             id="password"
@@ -80,6 +83,11 @@ function Login(props) {
             onChange={handleInput}
           />
         </div>
+        {responseStatus === 400 && (
+          <div className="form-error">
+            Please check your input and try again.
+          </div>
+        )}
         <div className="d-grid gap-2 mt-4">
           <button
             type="submit"
@@ -90,7 +98,7 @@ function Login(props) {
           </button>
         </div>
         <p className="forgot-password text-center mt-3">
-          <a href="./"> Forgot password?</a>
+          <Link to="./">Forgot password?</Link>
         </p>
         <p className="text-center mt-2">
           Not on (AppName) yet?{" "}

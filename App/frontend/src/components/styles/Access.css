@@ -8,9 +8,9 @@
 
 .access {
   position: fixed;
-  z-index: 2100;  /* backdrop z-index = 2000 */
+  z-index: 2100; /* backdrop z-index = 2000 */
   top: 20%;
-  left: calc(50% - 210px);      /* %50 - width/2 */
+  left: calc(50% - 210px); /* %50 - width/2 */
   width: 420px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 10px;
@@ -44,5 +44,16 @@
   justify-content: right;
   margin-top: 5px;
   margin-bottom: 0px;
-  margin-right: 15px;       /* padding-top-form (10) + margin-top-btn(5)*/
+  margin-right: 15px; /* padding-top-form (10) + margin-top-btn(5)*/
+}
+
+.form-error {
+  margin-top: 1.5em;
+  font-size: 15px;
+  font-weight: 600;
+  color: #d90429;
+}
+
+.form-control-error {
+  border-color: #d90429 !important; /* overriding form-control when there is an error */
 }

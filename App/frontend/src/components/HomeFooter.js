@@ -18,7 +18,7 @@ function Footer(props) {
         <Row align="center" className="mb-2">
           <Col>
             <Link to="./" className="homefooter-element">
-              Request a verified badge
+              Request a badge
             </Link>
           </Col>
           <Col>

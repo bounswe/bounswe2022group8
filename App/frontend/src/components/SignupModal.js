@@ -1,7 +1,9 @@
-import React, { useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import "./styles/Access.css";
+
+import { useAuth } from "../auth/authentication";
 
 function Signup(props) {
   const [signupInput, setSignupInput] = useReducer(
@@ -13,25 +15,27 @@ function Signup(props) {
       password_confirm: "",
     }
   );
+  const [responseStatus, setResponseStatus] = useState(0);
+
+  const { saveToken } = useAuth();
 
   function handleSubmit(event) {
-    // props.onSubmitSignUp();
-
     event.preventDefault();
 
-    //let data = { signupInput };
-
-    fetch("http://127.0.0.1:8000/api/v1/auth/register/", {
+    fetch("http://44.211.68.74:8000/api/v1/auth/register/", {
       method: "POST",
       body: JSON.stringify(signupInput),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
       .then((response) => {
-        console.log("Success:", JSON.stringify(response));
-        props.onSubmitSignUp();
+        setResponseStatus(response.status);
+        props.onSubmitSignUp(response.status);
+        return response.json();
+      })
+      .then((response) => {
+        saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
   }
@@ -56,7 +60,9 @@ function Signup(props) {
           <label className="access-label">Username</label>
           <input
             type="text"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Username"
             id="username"
             required
@@ -69,7 +75,9 @@ function Signup(props) {
           <label className="access-label">Email</label>
           <input
             type="email"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Email"
             id="email"
             required
@@ -82,7 +90,9 @@ function Signup(props) {
           <label className="access-label">Password</label>
           <input
             type="password"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Choose a password"
             id="password"
             required
@@ -95,7 +105,9 @@ function Signup(props) {
           <label className="access-label">Confirm password</label>
           <input
             type="password"
-            className="form-control mt-1"
+            className={`form-control mt-1 + ${
+              responseStatus === 400 ? "form-control-error" : ""
+            }`}
             placeholder="Confirm password"
             id="password_confirm"
             required
@@ -104,6 +116,15 @@ function Signup(props) {
             onChange={handleInput}
           />
         </div>
+        {responseStatus === 400 && (
+          <div>
+            <div className="form-error">
+              Please make sure to enter:<br></br> a unique username of at least
+              6 characters,<br></br> a valid e-mail address,<br></br> and a
+              password of at least 10 characters.
+            </div>
+          </div>
+        )}
         <div className="d-grid gap-2 mt-4 mb-4">
           <button
             type="submit"
