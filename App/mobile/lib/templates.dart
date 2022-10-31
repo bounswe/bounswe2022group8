@@ -4,7 +4,9 @@ import 'package:flutter_app_mustafa/login_page.dart';
 
 
 class UsernameInput extends StatefulWidget {
-  const UsernameInput({Key? key}) : super(key: key);
+  final usernameController = TextEditingController();
+
+  UsernameInput({Key? key}) : super(key: key);
 
   @override
   State<UsernameInput> createState() => _UsernameInputState();
@@ -32,8 +34,8 @@ class _UsernameInputState extends State<UsernameInput> {
             borderRadius: BorderRadius.circular(10),
           ),
           height: 60,
-          child:  const TextField(
-            // controller: widget.usernameController,
+          child:  TextField(
+            controller: widget.usernameController,
             keyboardType: TextInputType.name,
             style: TextStyle(
                 color: Colors.white
@@ -89,8 +91,8 @@ class _EmailInputState extends State<EmailInput> {
             borderRadius: BorderRadius.circular(10),
           ),
           height: 60,
-          child: const  TextField(
-            // controller: widget.emailController,
+          child:  TextField(
+            controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
                 color: Colors.white

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-// import 'requests/login.dart' ;
+import 'requests/login.dart' ;
 class LoginScreen extends StatefulWidget {
 
   @override
@@ -102,18 +102,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                           onPressed: (){
                           
-                          // String username = UsernameInputObject.usernameController.text  ;
-                          // String password = PasswordInputObject.passwordController.text  ;
-                          // login(username,password).then((value){
-                          //   if (value == "OK"){
-                          //   Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                          //   Navigator.pushReplacement(context, route);
-                          //   }
-                          //   else{
-                          //   _setErrorMessage(error:value);
-                          //   }
-                          //   print(value);
-                          //   }) ;
+                          String username = UsernameInputObject.usernameController.text  ;
+                          String password = PasswordInputObject.passwordController.text  ;
+                          login(username,password).then((value){
+                            if (value == "OK"){
+                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                            Navigator.pushReplacement(context, route);
+                            }
+                            else{
+                            _setErrorMessage(error:value);
+                            }
+                            print(value);
+                            }) ;
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(12.5),

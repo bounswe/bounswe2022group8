@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-// import 'requests/register.dart' ;
+import 'requests/register.dart' ;
 
 class SignUpScreen extends StatefulWidget {
 
@@ -151,16 +151,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           String username = usernameController.text ;
                           String email = EmailInputObject.emailController.text  ;
                           String password = PasswordInputObject.passwordController.text  ;
-                          // register(username,email,password).then((value){
-                          //   if (value == "OK"){
-                          //   Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                          //   Navigator.pushReplacement(context, route);
-                          //   }
-                          //   else{
-                          //   _setErrorMessage(error:value);
-                          //   }
-                          //   print(value);
-                          //   }) ;
+                          String confirmPassword = ConfirmPasswordInputObject.passwordController.text  ;
+                          print(username + email + password + confirmPassword) ;
+                          register(username,email,password,confirmPassword).then((value){
+                           if (value == "OK"){
+                             Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                             Navigator.pushReplacement(context, route);
+                             }
+                             else{
+                             _setErrorMessage(error:value);
+                             }
+                             print(value);
+                             }) ;
      
                         },
                         style: ElevatedButton.styleFrom(
