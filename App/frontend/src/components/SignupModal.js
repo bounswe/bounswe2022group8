@@ -22,7 +22,7 @@ function Signup(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://44.211.68.74:8000/api/v1/auth/register/", {
+    fetch("http://34.125.134.88:8000/api/v1/auth/register/", {
       method: "POST",
       body: JSON.stringify(signupInput),
       headers: {

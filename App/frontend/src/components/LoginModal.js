@@ -20,7 +20,7 @@ function Login(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://44.211.68.74:8000/api/v1/auth/login/", {
+    fetch("http://34.125.134.88:8000/api/v1/auth/login/", {
       method: "POST",
       body: JSON.stringify(loginInput),
       headers: {
