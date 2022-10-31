@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-import 'requests/register.dart' ;
+import 'register.dart' ;
 
 class SignUpScreen extends StatefulWidget {
 
