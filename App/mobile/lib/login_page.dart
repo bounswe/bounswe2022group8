@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-import 'requests/login.dart' ;
+// import 'requests/login.dart' ;
 class LoginScreen extends StatefulWidget {
 
   @override
@@ -13,8 +13,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   
   String _error = "Hello There!";
-  final EmailInputObject = EmailInput() ;
-  final PasswordInputObject = PasswordInput() ;
+  final UsernameInputObject = UsernameInput() ;
+  final PasswordInputObject = PasswordInput(name: "Password");
   Future<String>? _loginResponseMessage ;
 
   void _setErrorMessage({String error = ""}) {
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold,
                           )
                       ),
-                      EmailInputObject,
+                      UsernameInputObject,
                       const SizedBox(height: 10),
                       PasswordInputObject,
                       const SizedBox(height: 20),
@@ -102,20 +102,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                           onPressed: (){
                           
-                          String email = EmailInputObject.emailController.text  ;
-                          String password = PasswordInputObject.passwordController.text  ;
-                          login(email,password).then((value){
-                            if (value == "OK"){
-                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                            Navigator.pushReplacement(context, route);
-                            }
-                            else{
-                            _setErrorMessage(error:value);
-                            }                          
-                            print(value);
-                            }) ;                         
-     
-                        
+                          // String username = UsernameInputObject.usernameController.text  ;
+                          // String password = PasswordInputObject.passwordController.text  ;
+                          // login(username,password).then((value){
+                          //   if (value == "OK"){
+                          //   Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                          //   Navigator.pushReplacement(context, route);
+                          //   }
+                          //   else{
+                          //   _setErrorMessage(error:value);
+                          //   }
+                          //   print(value);
+                          //   }) ;
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(12.5),
@@ -136,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         ),
                       ),
-                      ForgotPassword(),
+                      // ForgotPassword(),
                     ],
                   ),
                 ),

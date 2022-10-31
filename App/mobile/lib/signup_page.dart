@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/home_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
-import 'requests/register.dart' ;
+// import 'requests/register.dart' ;
 
 class SignUpScreen extends StatefulWidget {
 
@@ -16,7 +16,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final usernameController = TextEditingController();
 
   final EmailInputObject = EmailInput() ;
-  final PasswordInputObject = PasswordInput() ;
+  final PasswordInputObject = PasswordInput(name: "Password") ;
+  final ConfirmPasswordInputObject = PasswordInput(name: "Confirm Password") ;
   Future<String>? _registerResponseMessage ;
 
   void _setErrorMessage({String error = ""}) {
@@ -116,10 +117,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child:  TextField(
                               controller: usernameController,
                               keyboardType: TextInputType.text,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white
                               ),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.only(top: 14),
                                   prefixIcon: Icon(Icons.email, color: Colors.white,),
@@ -137,6 +138,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       EmailInputObject,
                       const SizedBox(height: 10),
                       PasswordInputObject,
+                      const SizedBox(height: 10),
+                      ConfirmPasswordInputObject,
                       const SizedBox(height: 15),
                   Container(
                     alignment: Alignment.center,
@@ -148,16 +151,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           String username = usernameController.text ;
                           String email = EmailInputObject.emailController.text  ;
                           String password = PasswordInputObject.passwordController.text  ;
-                          register(username,email,password).then((value){
-                            if (value == "OK"){
-                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                            Navigator.pushReplacement(context, route);
-                            }
-                            else{
-                            _setErrorMessage(error:value);
-                            }                          
-                            print(value);
-                            }) ;                         
+                          // register(username,email,password).then((value){
+                          //   if (value == "OK"){
+                          //   Route route = MaterialPageRoute(builder: (context) => const HomePage());
+                          //   Navigator.pushReplacement(context, route);
+                          //   }
+                          //   else{
+                          //   _setErrorMessage(error:value);
+                          //   }
+                          //   print(value);
+                          //   }) ;
      
                         },
                         style: ElevatedButton.styleFrom(
