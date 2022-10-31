@@ -12,6 +12,44 @@ Here you can find hyperlinks to our deliverable documents:
 # Individual Contributions
 
 <details>
+    <summary> Elif Bayraktar </summary>
+I am Elif Bayraktar, a member of group 8. I am working on the backend of the project.
+
+### Responsibilities
+* Reviewing/updating requirements (Bidding system, Notifications, Level and Verification Systems)
+* Researching different authentication and authorization mechanisms to set up our project the right way.
+* Implementing the itinital models for the project.
+* Implementing serializers and creating the admin site.
+* Implementation of alternative registration API, using django authentication.
+* Researching and implementing CICD workflow.
+
+### Main Contributions
+I revised the requirements, contributed to some decisions. I extensively researched authentication and authorization mechanisms (creating custom user class vs. extending base) to make sure we set up the project the right way, and to avoid any headaches in the future. I implemented the initial models. I also implemented serializers for the models, some decorators for future use and the admin site. I also tested the API's developed by other members and developed the alternative registeration API, to test if there were any problems with using django authentication. Finally I researched, learned and implemented CICD workflow with testing and dockerization with GitHub Actions (this part is on hold until we access secrets via settings). I also went over and updated some of the mockups.
+    
+**Code Related Issues**
+* [BE-4: Setting up initial models](https://github.com/bounswe/bounswe2022group8/issues/187)
+* [BE_11: CICD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
+
+**Management Related Issues**
+* [GEN-11: Revise the Notifications](https://github.com/bounswe/bounswe2022group8/issues/163)
+* [GEN-14: Revise the Bidding System](https://github.com/bounswe/bounswe2022group8/issues/166)
+* [GEN-15: Revise Verification and Level System](https://github.com/bounswe/bounswe2022group8/issues/167)
+* [GEN-12: Update Issue Template](https://github.com/bounswe/bounswe2022group8/issues/164)
+* [GEN-13: Update Questions and Answers](https://github.com/bounswe/bounswe2022group8/issues/165)
+* [GEN-19: Revise Mockups](https://github.com/bounswe/bounswe2022group8/issues/171)
+* [GEN-26: Best Django Practices](https://github.com/bounswe/bounswe2022group8/issues/197)
+    
+
+**Pull Requests**
+* [Feature/BE-4](https://github.com/bounswe/bounswe2022group8/pull/190)
+* [Feature/BE11](https://github.com/bounswe/bounswe2022group8/pull/215)(on hold)
+* reviewed [feature/BE-1](https://github.com/bounswe/bounswe2022group8/pull/180)
+* reviewed [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200)
+ 
+</details>    
+
+
+<details>
     <summary> Mustafa Cihan </summary>
 I am Mustafa Cihan a member of group 8. I am working on mobile application of our project.
 
