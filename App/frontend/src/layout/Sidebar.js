@@ -12,7 +12,7 @@ function Sidebar(props) {
 
   function handleLogOut() {
 
-    fetch("http://127.0.0.1:8000/api/v1/auth/logout/", {
+    fetch("http://44.211.68.74:8000/api/v1/auth/logout/", {
       method: "POST",
       body: "",
       headers: {

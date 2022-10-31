@@ -11,7 +11,6 @@ import "./styles/Layout.css";
 
 function Layout(props) {
   const { token } = useAuth();
-  console.log(token)
 
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
@@ -35,12 +34,12 @@ function Layout(props) {
     setLogInIsOpen(false);
   }
 
-  function handleSubmitSignUp() {
-    setSignUpIsOpen(false);
+  function handleSubmitSignUp(response) {
+    setSignUpIsOpen(response !== 201);
   }
 
-  function handleSubmitLogIn() {
-    setLogInIsOpen(false);
+  function handleSubmitLogIn(response) {
+    setLogInIsOpen(response !== 200);
   }
 
   function handleSidebar() {
@@ -61,8 +60,7 @@ function Layout(props) {
     return () => window.removeEventListener("scroll", changeNavbarColor);
   }, []);
 
-  {
-    /*// keeps track of the current position of the scrollbar
+  /*// keeps track of the current position of the scrollbar
   function updatePosition() {
     setCurrentScrollY(window.scrollY);
   }
@@ -76,7 +74,6 @@ function Layout(props) {
   useEffect(() => {
     window.scrollTo(0, currentScrollY);
   }, [currentScrollY]);*/
-  }
 
   // keeps track of the current windows width
 
@@ -113,14 +110,14 @@ function Layout(props) {
 
       {signUpIsOpen && (
         <Signup
-          onSubmitSignUp={() => handleSubmitSignUp()}
+          onSubmitSignUp={(response) => handleSubmitSignUp(response)}
           onClickLogIn={() => handleLogIn()}
           onClickClose={() => handleCloseForm()}
         />
       )}
       {logInIsOpen && (
         <Login
-          onSubmitLogIn={() => handleSubmitLogIn()}
+          onSubmitLogIn={(response) => handleSubmitLogIn(response)}
           onClickSignUp={() => handleSignUp()}
           onClickClose={() => handleCloseForm()}
         />
