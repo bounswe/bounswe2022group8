@@ -78,9 +78,11 @@ I have created the first view for login and signup pages while creating the fron
 
 <details>
     <summary> Karahan Sarıtaş </summary>
-I am Karahan Sarıtaş, a member of group 8. I am working on backend side of the project.
+    
+I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I am working on backend side of the project.
 
 ### Responsibilities
+* Revision of requirements and making necessary changes.
 * Creating the initial structure of our Django project. Configuration of settings for both development and production environment.
 * Dockerization of the backend service.
 * Implementation of registration API.
