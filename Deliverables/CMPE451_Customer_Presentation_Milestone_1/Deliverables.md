@@ -11,6 +11,35 @@ Here you can find hyperlinks to our deliverable documents:
 
 # Individual Contributions
 
+
+## Mustafa Cihan
+I am Mustafa Cihan a member of group 8. I am working on mobile application of our project.
+
+### Responsibilities
+I am responsible for mobile application. For this milestone I mostly worked on frontend of mobile application. I designed landing page, login page, signup page and home page. Also I implemented pages that I designed.
+
+### Main Contributions
+I mainly worked on mobile app so I gave most of my effort to develop mobile application.<br/>
+
+**Code Related Issues**
+* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198)
+* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213)
+* [MOB-5: Adding error notifications on login and sign-up]()
+* [MOB-3: Connecting Mobile App with Backend](https://github.com/bounswe/bounswe2022group8/issues/208) made [commit](https://github.com/bounswe/bounswe2022group8/commit/ab54c1f7421d943cb31c427005342a2c24466440)  to this issue.
+
+**Management Related Issues**
+* [GEN-27: Meeting Notes: Week#4 Meeting#4](https://github.com/bounswe/bounswe2022group8/issues/207)
+* [MOB-2: Meeting Notes: Week#3 Mobile Meeting#1](https://github.com/bounswe/bounswe2022group8/issues/205)
+* [GEN-25:Revise the Copyright Infringement Requirement](https://github.com/bounswe/bounswe2022group8/issues/178)
+* [GEN-21: Create a Wikipage for Conventions](https://github.com/bounswe/bounswe2022group8/issues/173)
+* [GEN-3: Week #1 Meeting #1 Notes](https://github.com/bounswe/bounswe2022group8/issues/155)
+
+**Pull Requests**
+* [feature/MOB-1](https://github.com/bounswe/bounswe2022group8/pull/204)
+* [feature/MOB-4](https://github.com/bounswe/bounswe2022group8/pull/216)
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219)
+* Reviewed [Feature/MOB-3](https://github.com/bounswe/bounswe2022group8/pull/221)
+
 # Milestone Group Review
 
 ### The requirements addressed in this milestone
