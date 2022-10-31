@@ -75,6 +75,61 @@ I have created the first view for login and signup pages while creating the fron
 * I did not create a pr to merge authentication file to the branch 'feature/FE-3' because I have already downloaded updated backend folder to my branch to test if everything worked well. Not to destruct folder structure, Furkan Keskin copied the only authentication file manually to his branch.
 
 </details>
+
+<details>
+    <summary> Karahan Sarıtaş </summary>
+I am Karahan Sarıtaş, a member of group 8. I am working on backend side of the project.
+
+### Responsibilities
+* Creating the initial structure of our Django project. Configuration of settings for both development and production environment.
+* Dockerization of the backend service.
+* Implementation of registration API.
+* Implementation of login API.
+* Implementation of logout API.
+* Research on tokenization and authentication mechanisms.
+* Helping frontend team for the connection.
+
+### Main Contributions
+I made the initial configurations for the project, adjusted the settings and dockerized it and worked on API endpoints related to registration, login and logout. I made some research on tokenization to prefer a suitable methodology for the project. Meanwhile, I also helped frontend team to integrate their application with ours, use tokens for authentication and actively participated in inter-team communication to make sure that everything works ok.
+    
+**Code Related Issues**
+* [BE-1: Initial Configurations for the App](https://github.com/bounswe/bounswe2022group8/issues/179)
+* [BE-5: Dockerize the Django Application with PostgreSql](https://github.com/bounswe/bounswe2022group8/issues/188)
+* [BE-6: Organization of api folder](https://github.com/bounswe/bounswe2022group8/issues/192)
+* [BE-9: [API] Implementation of Login Endpoint](https://github.com/bounswe/bounswe2022group8/issues/195)
+* [BE-10: [API] Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
+* [BE-8: [API] Implementation of Register Endpoint](https://github.com/bounswe/bounswe2022group8/issues/194)
+* [BE-12: Integration Between Frontend and Backend](https://github.com/bounswe/bounswe2022group8/issues/211)
+
+**Management Related Issues**
+* [GEN-8: Week #2 Meeting #2 Notes](https://github.com/bounswe/bounswe2022group8/issues/160)
+* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162)  (general issue)
+* [GEN-11: Revise the Notifications](https://github.com/bounswe/bounswe2022group8/issues/163)
+* [GEN-14: Revise the Bidding System](https://github.com/bounswe/bounswe2022group8/issues/166)
+* [GEN-15: Revise Verification and Level System](https://github.com/bounswe/bounswe2022group8/issues/167)
+* [MIL-1: Milestone I Deliverables](https://github.com/bounswe/bounswe2022group8/issues/201)
+* [MIL-2: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/202)
+* [BE-2: Meeting Notes Week #3 Backend Meeting #1](https://github.com/bounswe/bounswe2022group8/issues/181)
+
+
+**Pull Requests**
+* [feature/BE-1](https://github.com/bounswe/bounswe2022group8/pull/180)
+* [feature/BE-5](https://github.com/bounswe/bounswe2022group8/pull/189)
+* [feature/BE-6](https://github.com/bounswe/bounswe2022group8/pull/191)
+* [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200)
+* [bugfix/BE-5](https://github.com/bounswe/bounswe2022group8/pull/206) 
+* [feature/BE-12](https://github.com/bounswe/bounswe2022group8/pull/210)
+
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-4](https://github.com/bounswe/bounswe2022group8/pull/190)
+* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215)  (on-hold for now)<br>
+    
+Throughout the week, I took the whole responsibility of communication between backend and other teams. Tried to be present on Discord whenever someone needs help. 
+ 
+</details>
+    
     
 # Milestone Group Review
 
