@@ -67,6 +67,7 @@ I revised the requirements, contributed to some decisions. I extensively researc
 * [GEN-13: Update Questions and Answers](https://github.com/bounswe/bounswe2022group8/issues/165)
 * [GEN-19: Revise Mockups](https://github.com/bounswe/bounswe2022group8/issues/171)
 * [GEN-26: Best Django Practices](https://github.com/bounswe/bounswe2022group8/issues/197)
+* [GEN-29: Update Use Case diagram](https://github.com/bounswe/bounswe2022group8/issues/229)
     
 
 **Pull Requests**
