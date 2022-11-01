@@ -189,7 +189,7 @@ PR reviews and Comments
 <details>
     <summary> Karahan Sarıtaş </summary>
     
-I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I am working on backend side of the project.
+I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I am mainly working on backend side of the project. Also helping others (especially frontend) in terms of development and sharing crucial ideas.
 
 ### Responsibilities
 * Revision of requirements and making necessary changes.
@@ -200,6 +200,8 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 * Implementation of logout API.
 * Research on tokenization and authentication mechanisms.
 * Helping frontend team for the connection.
+* Dockerization of frontend and deployment. (We faced lots of problems with Dockerfile during the procedure, I ended up writing it from scratch) 
+
 
 ### Main Contributions
 I made the initial configurations for the project, adjusted the settings and dockerized it and worked on API endpoints related to registration, login and logout. I made some research on tokenization to prefer a suitable methodology for the project. Meanwhile, I also helped frontend team to integrate their application with ours, use tokens for authentication and actively participated in inter-team communication to make sure that everything works ok.
@@ -212,6 +214,7 @@ I made the initial configurations for the project, adjusted the settings and doc
 * [BE-10: [API] Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
 * [BE-8: [API] Implementation of Register Endpoint](https://github.com/bounswe/bounswe2022group8/issues/194)
 * [BE-12: Integration Between Frontend and Backend](https://github.com/bounswe/bounswe2022group8/issues/211)
+* [MIL-4: Last changes for Deployment before Milestone 1](https://github.com/bounswe/bounswe2022group8/issues/224)
 
 **Management Related Issues**
 * [GEN-8: Week #2 Meeting #2 Notes](https://github.com/bounswe/bounswe2022group8/issues/160)
@@ -236,7 +239,8 @@ I made the initial configurations for the project, adjusted the settings and doc
     
 PR reviews:<br>
 * [feature/BE-4](https://github.com/bounswe/bounswe2022group8/pull/190)
-* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215)  (on-hold for now)<br>
+* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215)  (on-hold for now)
+* [feature/MIL-4](https://github.com/bounswe/bounswe2022group8/pull/225) (worked on this as a pair)<br>
     
 Throughout the week, I took the whole responsibility of communication between backend and other teams. Tried to be present on Discord whenever someone needs help. 
  
