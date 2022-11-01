@@ -95,7 +95,7 @@ I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on t
 Setting the environment for the mobile development and learning basic Flutter/Dart to implement the initial pages. Creating the basic version of the mobile app which can run the functionalities that Backend team provided. Debugging the error-messages and dependency problems. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
     
 ### Main Contributions
-Help to launch the initial version of the mobile app. Contribute to creating of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also design issues and the colour palette for the app background.<br/>
+Help to launch the initial version of the mobile app. Contribute to creation of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also designing issues and the colour palette for the app background.<br/>
 
 **Code Related Issues**
 * [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198) (reviewed & closed)
