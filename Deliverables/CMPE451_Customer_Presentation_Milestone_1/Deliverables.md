@@ -88,6 +88,34 @@ I mainly worked on mobile app so I gave most of my effort to develop mobile appl
 </details>
     
 <details>
+    <summary> Mustafa Emre Erengül </summary>
+I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
+
+### Responsibilities
+Setting the environment for the mobile development and learning basic Flutter/Dart to implement the initial pages. Creating the basic version of the mobile app which can run the functionalities that Backend team provided. Debugging the error-messages and dependency problems. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
+    
+### Main Contributions
+Help to launch the initial version of the mobile app. Contribute to creating of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also design issues and the colour palette for the app background.<br/>
+
+**Code Related Issues**
+* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198) (reviewed & closed)
+* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213) (reviewed & closed)
+    
+**Management Related Issues**
+* [GEN-4: Updating Wiki pages related to the last semester](https://github.com/bounswe/bounswe2022group8/issues/156) (opened)
+* [GEN-5: Adding CmpE451 section to the personal Timesheet pages](https://github.com/bounswe/bounswe2022group8/issues/157) (opened)
+* [GEN-7: Update the Communication Plan](https://github.com/bounswe/bounswe2022group8/issues/159) (contributed)
+* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162) (contributed)
+* [GEN-22: Revise Search](https://github.com/bounswe/bounswe2022group8/issues/174) (completed)
+* [GEN-23: Revise Location](https://github.com/bounswe/bounswe2022group8/issues/175) (completed)
+* [MIL-5: Milestone 1 Group Review](https://github.com/bounswe/bounswe2022group8/issues/226) (opened)
+    
+**Pull Requests**
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219) (reviewed)
+    
+</details>
+    
+<details>
     <summary> Sinem Koçoğlu </summary>
 I am Sinem Koçoğlu and I am member of group 8 frontend team.
 
