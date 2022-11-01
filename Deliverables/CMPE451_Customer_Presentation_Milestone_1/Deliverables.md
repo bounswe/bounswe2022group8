@@ -268,7 +268,56 @@ Throughout the week, I took the whole responsibility of communication between ba
  
 </details>
     
+<details>
+    <summary> Doğukan Türksoy </summary>
     
+I am [Doğukan Türksoy](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I am mainly working on mobile side of the project. Also helped frontend team and deployed the application.
+
+### Responsibilities
+* Revision of requirements and making necessary changes.
+* Creating the initial structure of our Mobile project. Helped mobile team to setup Flutter and Android Studio.
+* Implementation of registration API connection with mobile.
+* Implementation of login API connection with mobile.
+* Helping frontend team for the connection related issues.
+* Created AWS EC2 instance, then a Google Cloud instance since we had problems with AWS EC2.
+* Deployment of Frontend and Backend apps and creating .apk version of Mobile app.
+* Helped to modify sign-up and login pages for mobile.
+
+### Main Contributions
+I made the initial configurations for the mobile project and connected it with Register and Login APIs. I helped to modify sign-up and login pages for mobile. I reviewed Copyright Infringement requirement and made changes on them. Meanwhile, I also helped frontend team to solve their some errors.
+    
+**Code Related Issues**
+* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198)
+* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213)
+* [MOB-5: Adding error notifications on login and sign-up]()
+* [MOB-3: Connecting Mobile App with Backend](https://github.com/bounswe/bounswe2022group8/issues/208)
+
+**Management Related Issues**
+* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162)  (general issue)
+* [MIL-5: Milestone 1 Group Review](https://github.com/bounswe/bounswe2022group8/issues/226)
+* [MIL-1: Milestone I Deliverables](https://github.com/bounswe/bounswe2022group8/issues/201)
+* [GEN-25:Revise the Copyright Infringement Requirement](https://github.com/bounswe/bounswe2022group8/issues/178)
+* [MIL-2: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/202)
+* [BE-2: Meeting Notes Week #3 Backend Meeting #1](https://github.com/bounswe/bounswe2022group8/issues/181)
+
+
+**Pull Requests**
+
+* [feature/MIL-4](https://github.com/bounswe/bounswe2022group8/pull/225) (worked on this as a pair)<br>
+* [feature/MOB-3](https://github.com/bounswe/bounswe2022group8/pull/221)
+    
+**Additional**
+    
+PR reviews:<br>
+* [feature/MOB-1](https://github.com/bounswe/bounswe2022group8/pull/204)
+* [feature/MOB-4](https://github.com/bounswe/bounswe2022group8/pull/216)
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219)
+* [feature/MIL-4](https://github.com/bounswe/bounswe2022group8/pull/225) (worked on this as a pair)<br>
+    
+Throughout the week, I took the whole responsibility of communication between backend and other teams. Tried to be present on Discord whenever someone needs help. 
+ 
+</details>
+
 # Milestone Group Review
 
 ### The requirements addressed in this milestone
