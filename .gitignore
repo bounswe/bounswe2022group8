@@ -1,3 +1,7 @@
+#
+App/mobile/.dart_tool/
+App/mobile/macos/
+
 # ignore backend part
 App/backend/
 

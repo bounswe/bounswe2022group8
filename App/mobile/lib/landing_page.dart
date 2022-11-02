@@ -22,16 +22,10 @@ class _LandingPageState extends State<LandingPage> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                    gradient:SweepGradient(
-                      center: FractionalOffset.topRight,
-                      colors: <Color>[
-                        Color.fromARGB(120, 0, 8, 193),
-                        Color.fromARGB(120, 33, 70, 199),
-                        Color.fromARGB(120, 175, 180, 255),
-                        Color.fromARGB(120, 166, 225, 255),
-                      ],
-                      stops: <double>[0.25, 0.60, 0.750, 1],
-                    )
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/background.jpeg'),
+                        fit: BoxFit.cover
+                    ),
                 ),
               ),
               Container(
@@ -47,7 +41,7 @@ class _LandingPageState extends State<LandingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:  const <Widget>[
                       Text(
-                          "Welcome to MyApp",
+                          "Welcome to Artopia",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Colors.white,
