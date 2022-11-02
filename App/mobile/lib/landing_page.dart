@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/routes.dart';
+import 'package:flutter_app_mustafa/utils/textUtils.dart';
 
 class LandingPage extends StatefulWidget {
 
@@ -9,6 +10,9 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
+  final TextUtils textUtils = TextUtils();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,20 +43,11 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  const <Widget>[
-                      Text(
-                          "Welcome to Artopia",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          )
-                      ),
-                      SizedBox(height: 30),
+                    children:   <Widget>[
+                      textUtils.buildText("Welcome to Artopia", 30.0, Colors.white, FontWeight.w400),
+                      const SizedBox(height: 30),
                       LoginPageRoute(),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       SignUpScreenRoute(),
                     ],
                   ),

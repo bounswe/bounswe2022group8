@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_mustafa/login_page.dart';
 import 'package:flutter_app_mustafa/signup_page.dart';
 import 'package:flutter_app_mustafa/templates.dart';
+import 'package:flutter_app_mustafa/utils/textUtils.dart';
 
 class LoginPageRoute extends StatelessWidget {
-  const LoginPageRoute({Key? key}) : super(key: key);
-
+  LoginPageRoute({Key? key}) : super(key: key);
+  final TextUtils textUtils = TextUtils();
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -23,15 +24,8 @@ class LoginPageRoute extends StatelessWidget {
           MaterialPageRoute(builder: (context) => LoginScreen()),
         );
       },
-        child: const Text(
-        "LOGIN",
-        style: TextStyle(
-        color: Colors.black87,
-        fontFamily: "OpenSans",
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
-          ),
-        ),
+        child:
+        textUtils.buildText("Login", 20.0, Colors.black, FontWeight.w500),
     );
   }
 }
@@ -46,7 +40,8 @@ class LandingPageRoute extends StatelessWidget {
 }
 
 class SignUpScreenRoute extends StatelessWidget {
-  const SignUpScreenRoute({Key? key}) : super(key: key);
+  SignUpScreenRoute({Key? key}) : super(key: key);
+  final TextUtils textUtils = TextUtils();
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +60,8 @@ class SignUpScreenRoute extends StatelessWidget {
           MaterialPageRoute(builder: (context) => SignUpScreen()),
         );
       },
-      child: const Text(
-        "SIGN UP",
-        style: TextStyle(
-          color: Colors.black87,
-          fontFamily: "OpenSans",
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child:
+      textUtils.buildText("Sign Up", 20.0, Colors.black, FontWeight.w500),
     );
   }
 }
