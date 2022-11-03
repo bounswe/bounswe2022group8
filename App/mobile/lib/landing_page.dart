@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_mustafa/routes.dart';
 import 'package:flutter_app_mustafa/utils/textUtils.dart';
+import 'package:flutter_app_mustafa/utils/colorPalette.dart';
 
 class LandingPage extends StatefulWidget {
 
@@ -12,6 +13,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
 
   final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _LandingPageState extends State<LandingPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:   <Widget>[
-                      textUtils.buildText("Welcome to Artopia", 30.0, Colors.white, FontWeight.w400),
+                      textUtils.buildText("Welcome to Artopia", 32.5, Colors.white, FontWeight.w400),
                       const SizedBox(height: 30),
                       LoginPageRoute(),
                       const SizedBox(height: 30),
