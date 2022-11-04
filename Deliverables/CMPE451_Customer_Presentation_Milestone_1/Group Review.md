@@ -50,6 +50,32 @@
     </details>    
 ##### 2) Backend Team
 ##### 3) Frontend Team
+   
+<details>
+       <summary>  VS Code  </summary>
+    Microsoft Visual Studio Dode is an useful editor to manage the project with backend side because we can run both sides on the same window when we want to test if frontend and backend connected successfully. Also, it is easy to install extensions such as Eslint used to find and fix problems in javascript code and Prettier that is a code formatter. What's more, VS code is convenient to carry out git management. 
+</details> 
+<details>
+       <summary> Javascript   </summary>
+    We prefer using javascript for frontend because we are familiar with React.js library a little. It is beginner-friendly and there are a lot of resources related to it available on the internet. Also, it is compatible with Node.js to develop an web application. 
+    </details> 
+    <details>
+       <summary> React.js  </summary>
+    It is an open source library that makes it easier to develop user interfaces. It has many features such as hooks, states etc. which provides capability to develop featured user interfaces.
+    </details> 
+    <details>
+       <summary> Node.js   </summary>
+    It is a framework to develop web applications using backend API services. By its package manager, it is easy to see modules installed for the project properly. Besides, it benefits from javascript interpreters. In development of frontend applications, using javascript with react.js and node.js is very common. That's way, there are many resources on the internet to find a solution for possible errors we encounter in the process of development.
+    </details> 
+    <details>
+       <summary> Bootstrap   </summary>
+    It is an open source frontend development css framework providing pre-defined design templates, syntax, and css classes for components. We benefit from these templates and make improvements on them to design our user interfaces.
+    </details> 
+    <details>
+       <summary> Docker   </summary>
+    We have to dockerize the frontend to automate deployment by using Docker Desktop. Dockerization files work well in local, but in the process of deployment an error occured related to extensive amount of browser cache. We will try to solve that problem as soon as possible to make deployment process faster and free of error.
+    </details> 
+    
 ### 5. The Requirements Addressed in this Milestone
 <summary>1.1.1. Registration/Login</summary>
 
