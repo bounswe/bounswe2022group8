@@ -150,14 +150,14 @@ Please refer to our requirements for glossary and further details.
 * Doğukan Türksoy
 
     1. Revision of requirements and making necessary changes.
-    2.Creating the initial structure of our Mobile project. Helped mobile team to setup Flutter and Android Studio.
-    3.Implementation of registration API connection with mobile.
-    4.Implementation of login API connection with mobile.
-    5.Helping frontend team for the connection related issues.
-    6.Created AWS EC2 instance, then a Google Cloud instance since we had problems with AWS EC2.
-    7.Deployment of Frontend and Backend apps and creating .apk version of Mobile app.
-    8.Helped to modify sign-up and login pages for mobile. 
-    9.Evaluating mobile tools and processes for Milestrone Group Review.
+    2. Creating the initial structure of our Mobile project. Helped mobile team to setup Flutter and Android Studio.
+    3. Implementation of registration API connection with mobile.
+    4. Implementation of login API connection with mobile.
+    5. Helping frontend team for the connection related issues.
+    6. Created AWS EC2 instance, then a Google Cloud instance since we had problems with AWS EC2.
+    7. Deployment of Frontend and Backend apps and creating .apk version of Mobile app.
+    8. Helped to modify sign-up and login pages for mobile. 
+    9. Evaluating mobile tools and processes for Milestrone Group Review.
     
 ### 7. Summary of Work
 
