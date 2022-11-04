@@ -16,6 +16,22 @@ Here you can find hyperlinks to our deliverable documents:
 ### Project Plan
 * [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
 
+# Evaluation of Tools and Processes
+<details>
+    <summary> Visual Studio Code (VSCode) </summary>
+    
+  Visual Studio Code is a commonly used IDE to develop applications with most programming languages. It is lightweight and it has a perfect interface for viewing folders, splitting screen and using terminals. We used some very useful Visual Studio Code extensions. Mobile team used flutter/dart extension, Frontend team used React extension and Backend team used Django extension for their development. Also all teams are used extensions for Git to push/pull operations and Docker extension to track container activities. We also managed SSH connection with our deployment environment via Remote extension of VSCode. 
+ </details>    
+<details>
+       <summary>  Flutter/Dart  </summary>
+    
+   Before researching mobile frameworks, we decided not to use Java since it is harder to deal with errors in this language in our sense. We came up with 2 alternatives, React Native and Flutter. Our team had little experience with JavaScript, so decided to go with *Flutter*. Flutter is created by Google. It uses Dart as the programming language, which is very similar to Java in terms of syntax. Flutter has lots of official and unofficial resources. Flutter has a perfect VSCode plugin, it helps a lot at developing processes. Also it has a feature called “hot reload”, you don’t need to restart Flutter application again and again when you change the code, except in some structural cases. This feature also speeded up our development.  
+    </details>    
+<details>
+       <summary> Android Studio  </summary>
+    
+  Android Studio is a commonly used IDE for Android developers. Since VSCode has great plugins for Git, Docker etc. and our team is accustomed with VSCode, we used Android Studio only to create and start an Android Virtual Device (as known as Emulator). When we start the emulator, the flutter application runs on this emulator automatically.
+    </details>    
 
 # Individual Contributions
 
