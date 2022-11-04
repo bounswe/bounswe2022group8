@@ -223,7 +223,20 @@ Please refer to our requirements for glossary and further details.
     
 |  Task Type   | Task Description |  Time Spent    | Related Link(s) |
 |  :----: |  :----:       |  :----:   |  :----: |
- 
+ |  Group meeting  |  Attended weekly meeting #2.    |  2 hours  |  [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232) |
+ |  Group meeting |  Attended weekly meeting #3.    |  1 hour 45 minutes  |  [Weekly Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ | Reviewing| Review all the requirements to recall our design.  | 20 minutes | [#162](https://github.com/bounswe/bounswe2022group8/issues/162)|
+ | Revising| Revise the requirements Search  | 30 minutes | [#174](https://github.com/bounswe/bounswe2022group8/issues/174)|
+ | Revising| Revise the requirements Location  | 30 minutes  | [#175](https://github.com/bounswe/bounswe2022group8/issues/175)|
+| Research | Research about the tools we can use as Mobile team. | 60 minutes | 
+ | Team meeting |  Attended Week 3 Mobile Meeting #1.    |  1 hour 30 minutes  |  [Mobile Meeting #1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1)
+ | Implementation | Install and setup Flutter, Android Studio and run a basic application on emulator. | 120 minutes | [Mobile Meeting #1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1) |
+ | Learning | Research and watching videos about Flutter | 300 minutes | 
+ |  Group meeting |  Attended Week 4 Meeting #4.    | 2 hour |  [Weekly Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4)
+ | Implementation | Started to implement Register/Login system with Mobile Team on Discord.  | 60 minutes | [#161](https://github.com/bounswe/bounswe2022group8/issues/161)|
+| Reviewing | MOB-1: Design and Code Flutter Files for Login and Sign-Up is reviewed and closed. | 30 minutes | [#198](https://github.com/bounswe/bounswe2022group8/issues/198)  |
+| Reviewing | MOB-4: Creating a Homepage is reviewed and closed. | 30 minutes | [#213](https://github.com/bounswe/bounswe2022group8/issues/213)  |
+| Reviewing | Pull request feature/MOB-5 is reviewed. | 30 minutes | [Pull Request](https://github.com/bounswe/bounswe2022group8/pull/219)  |
 
 </details>
 
