@@ -207,3 +207,26 @@ Please refer to our requirements for glossary and further details.
 | Implementation | Authentication for login/logout and signup on frontend. |(no pr available because of manuel merge of the files from branch feature/FE-4 to feature/FE-3) [#203](https://github.com/bounswe/bounswe2022group8/issues/203) |
 | Testing | Manuel testing integration of frontend and backend |[#203](https://github.com/bounswe/bounswe2022group8/issues/203) |
 </details>
+
+<details>
+    <summary> Sena Mumcu </summary>
+    
+|  Task Type   | Task Description   | Related Link(s) |
+|  :----:        |  :----:    |  :----: |
+| Planning | Attended online meeting | [Week 2 Meeting 3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) | 
+| Planning | Attended team meeting during lab session | [Week 4 Meeting 4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4) | 
+| Planning | Attended online team meeting | [Week 5 Meeting 5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+| Planning | Attended first backend team meeting during lab session | [Week 3 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Backend-Meeting-Notes-1) | 
+| Planning | Attended online backend team meeting | [Week 5 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
+| Review | Reviewed changes in use case diagram | [Issue](https://github.com/bounswe/bounswe2022group8/issues/229) |
+| MIL - 1 | Evaluated the tools and processes used by backend team until Milestone 1 | [Issue](https://github.com/bounswe/bounswe2022group8/issues/242) |
+| Documentation | Documented the API endpoints login and logout in Google Docs |  | 
+| Testing | Testing of login and logout API endpoints | [PR](https://github.com/bounswe/bounswe2022group8/pull/200) |
+| Backend | Implemented logout API endpoint | [Issue](https://github.com/bounswe/bounswe2022group8/issues/199) , [PR](https://github.com/bounswe/bounswe2022group8/pull/200) |
+| Backend | Implemented login API endpoint | [Issue](https://github.com/bounswe/bounswe2022group8/issues/195) , [PR](https://github.com/bounswe/bounswe2022group8/pull/200) |
+| Research | Research on PostgreSQL and its integration with Django framework | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) |  
+| Backend | Initial integration of database and web application | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) , [PR](https://github.com/bounswe/bounswe2022group8/pull/183) |
+
+
+
+    
