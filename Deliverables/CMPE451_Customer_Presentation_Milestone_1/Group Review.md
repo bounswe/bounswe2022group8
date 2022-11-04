@@ -1,6 +1,6 @@
 # Group 8 - Milestone 1 - Group Review
 
-## Table of Contents
+### Table of Contents
 1. [Executive Summary](#1-executive-summary)
 2. [List and status of deliverables](#2-list-and-status-of-deliverables)
 3. [Evaluation of the status of deliverables and its impact on your project plan](#3-evaluation-of-deliverables-and-impact)
@@ -9,19 +9,19 @@
 6. [Overall description of responsibilities that are assigned to each member](#6-responsibilities)
 7. [A Summary of work performed by each team member](#7-summary-of-work)
 
-### 1. Executive Summary
-#### *Description*
+## 1. Executive Summary
+### *Description*
 We are a group of Bogazici University students who are taking the CMPE451 course in the Fall 2022 semester. For the first Customer Milestone in this course, we start developing an Art Community Platform where users can interact with other users and display different art works. After signing up and logging in, a user can share new art items and also view all of the art items in the system. Admin can add comments on art items for a specific user, delete his/hers existing art item. To make the tag functionality more interactive we added functionalities like creating new tags, deleting an existing tag, listing all of the available tags in the system and also searching art items by their tags.
 
-#### *Overall Status*
+### *Overall Status*
 This part will be about what we have done since the beginning of the semester and what we are planning to do in the future. First of all, we started by rearranging our GitHub repository. We updated all folders to be ready for the new semester.  Also we decided when we will do our meetings as a group and which communication platform we are going to use. Then we went over the work we did in CMPE352, last semester. The design diagrams, requirements, scenarios and mockups were revised as a group. We tried to form our project basis. After that we divided into the technical teams which are: Backend, Frontend and Mobile teams. This allow us to move the coding part of our project. Our backend team was responsible for the API’s which enables the  registration and login/logout functionalities, also they dockerized their database. The frontend team implemented the authentication for the sign-up/sign-in pages, designed our webpage and dockerized their frontend.  The team of Mobile did the initial changes for the welcome page, sign-in/sign-out page and initial landing page. Also they did a custom, simple and elegant design for the UI part. Finally, they created the APK of the release version of the mobile app.
 
-#### *Future Plans*
+### *Future Plans*
 For the forthcoming weeks, we would like the start with the implementation of the personal profiles and filling our database with the art items so that customers can have them in their profile. Then we create an art items feed for the main page of the users so that they can follow the new trends in their favorite art movements. Also we are going the enable the feature of semantic search and labeling which similarly help users to search for their interests. Moreover, as a further step, the exhibition domain of the platform will be joining us. So that the users can interact with the other users and share their experiences about the artworks. Then the bidding system enters the game and allow users not just to see but own their favorite artworks.  When all this parts implemented the main skeleton of the project will have been formed.
 
 
 
-### 2. List and Status of Deliverables
+## 2. List and Status of Deliverables
 |Deliverable|Status|Date Delivered| 
 |-----|:--------:|:------:| 
 |[Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)| Delivered |01/11/2022 |
@@ -39,17 +39,24 @@ For the forthcoming weeks, we would like the start with the implementation of th
 
 
 
-### 3. Evaluation of Deliverables and Impact
+## 3. Evaluation of Deliverables and Impact
+### Software Requirements Specification
+With the beginning of the new semester, we started to draw a detailed roadmap for our implementation. To be able to do that, first of all we are required to revise our project plan, software design, diagrams, scenarios, mockups and requirements. The basis of our work is pretty much consists of last semester's plans, however some necessary changes have been made. Last semester, these requirements are elicited according to the Project Description and our discussion as a team. Similarly, we validated and revised the requirements with the assistance of user stories, and designed diagrams. The Software Requirements Specification is now showing us which roadmap we are on, both to examine what we have done so far and to improve our work furthermore. All group members are sure that our aims are compatible with what we can implement.  We believe, requirements elicitation is the most fundamental part of our work and we strived as a team to prepare our requirements in the most concrete way and not to leave any loose ends.
+### Software Design (UML)
+For the design diagrams, first we did some individual research and gathered information as to the UML diagram structure. First we created use case diagram and then class diagrams collaboratively. Then we designed sequence diagrams by considering the classes and actions we have demonstrated in previous diagrams. We made some modifications and changes on the use case and class diagram as needed while developing the sequence diagrams.
+### Scenarios and Mockups
+Three user scenarios (art follower, artist and collaboration) and corresponding mockups are used in our project. In the first user scenario, we demonstrated a couple of basic functionalities that can be formed by a registered user including following a user and making a search. In the second scenario, we showed the bidding system. In the fourth scenario, we displayed a chat and exhibition system. Along the way, we tried to indicate some other requirements as well such as a recommendation system. We have splitted the user stories to 3 subgroups, each with 3 members. Our remaining team members have prepared the drafts for visual material such as layout of the webpage and mobile app. Then each team filled the content of these layouts, and created persona, scenario and acceptance criteria. User scenarios and mockups are revised as we further develop our requirements, and acceptance criteria are updated as article references in the requirements page changed. Overall, we got positive feedback from our customers during the meetings as to our user stories and detailed mock-ups.
+### Project Plan
+Project plan includes the tasks, expected amount of time each task will take, and team members assigned for that specific task. Project plan covers our future plans as well, however it is open to change as we progress.
+### Individual Contributions Reports
+Each of our team members is attending the group and the technical meetings, since the beginning of this semester. Similarly they documented their work in a structured way. At the reports, after the short intro part, we start stating our responsibilities and then how we contributed to our project both by management work and the coding&implementation work. It can be clearly examined what we have done so far.
+### Group Review
+With the end of Milestone 1 process, we get the opportunity to assess and criticize our work as a full group. Each member reflected how they contributed and give a wide summary of their work. Also we present a clear vision of what we are going to implement during the rest of the semester. 
 
 
+## 4. Evaluation of Tools and Processes
 
-
-### 4. Evaluation of Tools and Processes
-
-
-
-
-##### 1) Mobile Team
+### 1) Mobile Team
 <details>
     <summary> Visual Studio Code (VSCode) </summary>
     
@@ -65,7 +72,7 @@ For the forthcoming weeks, we would like the start with the implementation of th
     
   Android Studio is a commonly used IDE for Android developers. Since VSCode has great plugins for Git, Docker etc. and our team is accustomed with VSCode, we used Android Studio only to create and start an Android Virtual Device (as known as Emulator). When we start the emulator, the flutter application runs on this emulator automatically.
     </details>    
-##### 2) Backend Team
+### 2) Backend Team
 
 <details>
     <summary> Visual Studio Code (VSCode) </summary>
@@ -91,7 +98,7 @@ During API testing, we used Postman frequently because it offers an easy user in
 </details>
 
 
-##### 3) Frontend Team
+### 3) Frontend Team
    
 <details>
        <summary>  VS Code  </summary>
@@ -118,7 +125,7 @@ During API testing, we used Postman frequently because it offers an easy user in
     We have to dockerize the frontend to automate deployment by using Docker Desktop. Dockerization files work well in local, but in the process of deployment an error occured related to extensive amount of browser cache. We will try to solve that problem as soon as possible to make deployment process faster and free of error.
     </details> 
     
-### 5. The Requirements Addressed in this Milestone
+## 5. The Requirements Addressed in this Milestone
 <summary>1.1.1. Registration/Login</summary>
 
 Please refer to our requirements for glossary and further details.
@@ -134,7 +141,7 @@ Please refer to our requirements for glossary and further details.
 * 2.6.1. User passwords shall be at least 10 characters long and cannot consist entirely of letters.
 * 2.6.2. User passwords shall be stored in a database using PBKDF2 algorithm with a SHA256 hash.
 
-### 6. Responsibilities
+## 6. Responsibilities
 
 * Karahan Sarıtaş
 
@@ -207,7 +214,7 @@ Please refer to our requirements for glossary and further details.
     4. Debugging the error-messages and dependency problems. 
     5. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
 
-### 7. Summary of Work
+## 7. Summary of Work
 
 <details>
     <summary> Serdar Akol </summary>
