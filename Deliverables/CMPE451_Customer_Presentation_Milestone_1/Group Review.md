@@ -190,7 +190,13 @@ Please refer to our requirements for glossary and further details.
     7. Deployment of Frontend and Backend apps and creating .apk version of Mobile app.
     8. Helped to modify sign-up and login pages for mobile. 
     9. Evaluating mobile tools and processes for Milestrone Group Review.
-    
+
+* Metehan Dündar
+
+    1. Revisioning of requirements and updating necessary changes.
+    2. Implementation of logout API.
+    3. Learning basics of Django Rest Framework in order to help implementation.
+
 * Mustafa Cihan
     
     1. Creating conventions wikipage to standardize issue naming and branch naming.
@@ -282,6 +288,23 @@ Please refer to our requirements for glossary and further details.
 |  1 hour  |  documentation   |  Organized and added [BE Meeting#2 notes](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) to wiki. [Issue link](https://github.com/bounswe/bounswe2022group8/issues/240) |
 |         |  documentation   |  Adding work summary and work performed to Group Review Report, updating timesheet.  |
 
+</details>
+
+<details>
+    <summary> Metehan Dündar </summary>
+
+|  Task Type   | Task Description |  Time Spent    | Related Link(s) |
+|  :----: |  :----:       |  :----:   |  :----: |
+ |  Group meeting |  Attended weekly meeting #2.    |  1 hour 45 minutes  |  [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232) |
+ |  Group meeting |  Attended weekly meeting #3.    |  2 hours            |  [Weekly Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ |  Group meeting |  Attended Week 4 Meeting #4.    | 2 hours             |  [Weekly Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4)
+ |  Group meeting | Attended first backend team meeting during lab session |  1 hour 15 minutes  |  [Week 3 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Backend-Meeting-Notes-1) | 
+ | Reviewing| Review all the requirements to recall our design.  | 1 hour | [#162](https://github.com/bounswe/bounswe2022group8/issues/162)|
+ | Revising | Revise the requirements Search    | 30 minutes | [#174](https://github.com/bounswe/bounswe2022group8/issues/174)|
+ | Revising | Revise the requirements Location  | 30 minutes  | [#175](https://github.com/bounswe/bounswe2022group8/issues/175)|
+ | Learning | Research and watching videos about Flutter | 3 hours |
+ |  Planning     |  Preparing for Milestone presentation.|  1 hours   |
+ | Documentation |  Adding work summary and work performed to Group Review Report, updating timesheet.  |  2 hours   |
 </details>
 
 
