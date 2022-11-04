@@ -14,11 +14,21 @@
 
 
 
-
-
-
 ### 2. List and Status of Deliverables
-
+|Deliverable|Status|Date Delivered| 
+|-----|:--------:|:------:| 
+|[Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)| Delivered |01/11/2022 |
+|[Software Design (UML):Use-Case Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram)|Delivered|01/11/2022|
+|[Software Design (UML):Class Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)|Delivered|01/11/2022|
+|[Software Design (UML):Sequence Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)|Delivered|01/11/2022|
+|[Scenario: Art Follower User](https://github.com/bounswe/bounswe2022group8/wiki/Scenario:-Art-Follower-User) | Delivered | 01/11/2022|
+|[Scenario: Verified User/Artist Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2) | Delivered | 01/11/2022|
+|[Scenario: Collaboration Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-3) | Delivered | 01/11/2022|
+|[Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)|Delivered|01/11/2022|
+|[Individual Contribution Reports](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_1/Deliverables.md#individual-contributions)|Delivered|01/11/2022|
+|[Web App](http://34.125.134.88/#) | Delivered | 01/11/2022| 
+|Mobile App ([APK](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/app-release.apk))|Delivered |01/11/2022|
+|[Group Review](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_1/Deliverables.md#individual-contributions) | Delivered | 04/11/2022|
 
 
 
