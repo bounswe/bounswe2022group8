@@ -139,6 +139,14 @@ Please refer to our requirements for glossary and further details.
     4. Providing connection to backend.
     5. Dockerization of frontend.
 
+* Sena Mumcu
+    
+    1. Creating the initial integration of PostgreSQL and out Django application.
+    2. Implementing login API.
+    3. Implementing logout API. 
+    4. Taking notes during Milestone 1 presentation.
+    5. Evaluating backend tools and processes for Milestone Group Review.
+
 ### 7. Summary of Work
 
 <details>
