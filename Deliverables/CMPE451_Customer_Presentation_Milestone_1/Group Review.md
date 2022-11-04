@@ -49,11 +49,33 @@
   Android Studio is a commonly used IDE for Android developers. Since VSCode has great plugins for Git, Docker etc. and our team is accustomed with VSCode, we used Android Studio only to create and start an Android Virtual Device (as known as Emulator). When we start the emulator, the flutter application runs on this emulator automatically.
     </details>    
 ##### 2) Backend Team
+
+<details>
+    <summary> Visual Studio Code (VSCode) </summary>
+    We used Visual Studio Code as out IDE for the development. With its extensions for the programming languages that we are using and for Github, VSCode enabled the backend team write code easily. 
+</details>
+
+<details>
+    <summary> Python Django </summary>
+</details>
+
+<details>
+    <summary> PostgreSQL </summary>
+</details>
+
+<details>
+    <summary> Postman </summary>
+</details>
+
+<details>
+    <summary> Docker </summary>
+</details>
+
 ##### 3) Frontend Team
    
 <details>
        <summary>  VS Code  </summary>
-    Microsoft Visual Studio Dode is an useful editor to manage the project with backend side because we can run both sides on the same window when we want to test if frontend and backend connected successfully. Also, it is easy to install extensions such as Eslint used to find and fix problems in javascript code and Prettier that is a code formatter. What's more, VS code is convenient to carry out git management. 
+    Microsoft Visual Studio Code is an useful editor to manage the project with backend side because we can run both sides on the same window when we want to test if frontend and backend connected successfully. Also, it is easy to install extensions such as Eslint used to find and fix problems in javascript code and Prettier that is a code formatter. What's more, VS code is convenient to carry out git management. 
 </details> 
 <details>
        <summary> Javascript   </summary>
