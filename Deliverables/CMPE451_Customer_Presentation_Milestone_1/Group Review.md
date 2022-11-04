@@ -147,6 +147,18 @@ Please refer to our requirements for glossary and further details.
     4. Taking notes during Milestone 1 presentation.
     5. Evaluating backend tools and processes for Milestone Group Review.
 
+* Doğukan Türksoy
+
+    1. Revision of requirements and making necessary changes.
+    2.Creating the initial structure of our Mobile project. Helped mobile team to setup Flutter and Android Studio.
+    3.Implementation of registration API connection with mobile.
+    4.Implementation of login API connection with mobile.
+    5.Helping frontend team for the connection related issues.
+    6.Created AWS EC2 instance, then a Google Cloud instance since we had problems with AWS EC2.
+    7.Deployment of Frontend and Backend apps and creating .apk version of Mobile app.
+    8.Helped to modify sign-up and login pages for mobile. 
+    9.Evaluating mobile tools and processes for Milestrone Group Review.
+    
 ### 7. Summary of Work
 
 <details>
@@ -227,6 +239,30 @@ Please refer to our requirements for glossary and further details.
 | Research | Research on PostgreSQL and its integration with Django framework | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) |  
 | Backend | Initial integration of database and web application | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) , [PR](https://github.com/bounswe/bounswe2022group8/pull/183) |
 
+</details>
 
-
+<details>
+    <summary> Doğukan Türksoy </summary>
     
+|  Task Type   | Task Description |  Time Spent    | Related Link(s) |
+|  :----: |  :----:       |  :----:   |  :----: |
+ |  Planning |  Attended weekly meeting #2 and weekly meeting #3.    |  3 hour 45 minutes  |  [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232), [Weekly Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ | Documentation | Documentation of our weekly meeting notes. | 20 minutes | [#160](https://github.com/bounswe/bounswe2022group8/issues/160) |
+ | Requirements Elicitation | Review all the requirements to recall our design.  | 20 minutes | [#162](https://github.com/bounswe/bounswe2022group8/issues/162)|
+ | Requirements Elicitation| Revise the requirements Registration/Login   | 30 minutes |
+ | Requirements Elicitation| Revise the requirements _Copyright Infringement_   | 30 minutes  | [#178](https://github.com/bounswe/bounswe2022group8/issues/178)|
+| Requirements Elicitation | Made the necessary corrections on _Copyright Infringement_ feature as decided in the meeting. | 20 minutes | [#178](https://github.com/bounswe/bounswe2022group8/issues/178)
+| Research | Research about the tools we can use as Mobile team. | 60 minutes | 
+ |  Planning |  Attended Week 3 Mobile Meeting #1.    |  1 hour 30 minutes  |  [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1)
+ | Implementation | Install and setup Flutter, Android Studio and run a basic application on emulator. | 120 minutes | [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1) |
+ | Implementation | Started to implement Register/Login system with Mobile Team on Discord.  | 60 minutes | [#161](https://github.com/bounswe/bounswe2022group8/issues/161)|
+ | Deployment | Created AWS EC2 instance and published dockerized Practice App for testing  | 60 minutes |
+ | Research | Research about Flutter | 120 minutes | 
+ |  Planning |  Attended Week 4 Meeting #4.    | 2 hour |  [Weekly Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4)
+ | Implementation | Implemented feature/MOB-3: Connecting Mobile App with Backend. | 300 minutes | [#208](https://github.com/bounswe/bounswe2022group8/issues/208), [Pull Request](https://github.com/bounswe/bounswe2022group8/pull/221)  |
+ | Implementation | Started to implement Register/Login system with Mobile Team on Discord.  | 60 minutes | [#161](https://github.com/bounswe/bounswe2022group8/issues/161)|
+ | Deployment | Deployed the Backend App  | 100 minutes |
+ | Deployment | Deployed the Frontend App  | 100 minutes |
+ | Implementation | Helped the Frontend Team resolving issues about database connection and authentication  | 90 minutes |
+ | Revisions | Revised and merged the pull requests | 90 minutes | [feature/MOB-1](https://github.com/bounswe/bounswe2022group8/pull/204) , [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219), [feature/MOB-4](https://github.com/bounswe/bounswe2022group8/pull/216)
+
