@@ -1,12 +1,3 @@
-# ignore backend part
-App/backend/
-
-# ignore deliverables
-Deliverables/
-
-# ignore practice aapp
-Practice/ \App
-
 # ignore environment 
 env/
 
