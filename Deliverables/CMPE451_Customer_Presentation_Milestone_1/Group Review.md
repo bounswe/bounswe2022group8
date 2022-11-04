@@ -334,3 +334,28 @@ Please refer to our requirements for glossary and further details.
  | Implementation | Helped the Frontend Team resolving issues about database connection and authentication  | 90 minutes |
  | Revisions | Revised and merged the pull requests | 90 minutes | [feature/MOB-1](https://github.com/bounswe/bounswe2022group8/pull/204) , [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219), [feature/MOB-4](https://github.com/bounswe/bounswe2022group8/pull/216)
 
+</details>
+
+
+<details>
+    <summary> Mustafa Cihan </summary>
+    
+|  Task Type   | Task Description | Time Spent | Related Link(s) |
+ |  :----:        |  :----:   |  :----: | :----: |
+ |  Planning |  Attended weekly meeting    |  |
+ | General | Added meeting note and edited sidebar (related [issue](https://github.com/bounswe/bounswe2022group8/issues/155)) |75 minutes |
+ |  Planning |  Attended weekly meeting #2 and weekly meeting #3.    |  3 hour 45 minutes  |  [Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232), [Weekly Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ | Requirements Elicitation| Revise the requirements _Copyright Infringement_ critically.   | 20 minutes  | [#178](https://github.com/bounswe/bounswe2022group8/issues/178)|
+ |  Planning |  Attended first mobile meeting.   |  1 hour 15 minutes  |  [Week 3 Mobile Meeting Notes 1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1) |
+| Documentation | Documented first mobile meeting.| 30 mins| [Week 3 Mobile Meeting Notes 1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1) |
+| Research | Researched flutter | 2.5 hours |[#198](https://github.com/bounswe/bounswe2022group8/issues/198)|
+| Implementation | Initialized the mobile project| 1 hour| [#198](https://github.com/bounswe/bounswe2022group8/issues/198)|
+| Implementation | Designed and implemented landing page| 1 hour| [#198](https://github.com/bounswe/bounswe2022group8/issues/198), [PR](https://github.com/bounswe/bounswe2022group8/pull/204)|
+| Implementation | Designed and implemented login page| 2 hours| [#198](https://github.com/bounswe/bounswe2022group8/issues/198), [PR](https://github.com/bounswe/bounswe2022group8/pull/204)||
+| Implementation | Designed and implemented signup page| 2 hours| [#198](https://github.com/bounswe/bounswe2022group8/issues/198), [PR](https://github.com/bounswe/bounswe2022group8/pull/204)||
+ |  Planning |  Attended weekly meeting #4.    |  1 hour 15 minutes  |  [Weekly Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4) |
+ |  Documentation | Documented weekly meetings 4.   | 45 minutes  |  [#207](https://github.com/bounswe/bounswe2022group8/issues/207) |
+ |  Implementation | Created a semi-static homepage   | 3 hours  |  [#213](https://github.com/bounswe/bounswe2022group8/issues/213), [PR](https://github.com/bounswe/bounswe2022group8/pull/216) |
+ |  Implementation | Added slot for error messages   | 1 hour  |  [#214](https://github.com/bounswe/bounswe2022group8/issues/214), [PR](https://github.com/bounswe/bounswe2022group8/pull/219) |
+| Milestone I Documentation | Added _individual contirbution_ subsection to Milestone document. | 30 minutes | [#222](https://github.com/bounswe/bounswe2022group8/issues/222) |
+</details>
