@@ -184,6 +184,21 @@ Please refer to our requirements for glossary and further details.
     8. Helped to modify sign-up and login pages for mobile. 
     9. Evaluating mobile tools and processes for Milestrone Group Review.
     
+* Mustafa Cihan
+    
+    1. Creating conventions wikipage to standardize issue naming and branch naming.
+    2. Revision of requirements and suggesting changes.
+    3. Desinging landing page.
+    4. Implementing landing page.
+    5. Designing login page.
+    6. Implementing login page.
+    7. Designing signup page.
+    8. Implementing signup page.
+    9. Designing home page.
+   10. Implementing home page.
+   11. Adding error notifications on login and signup pages.
+   12. Taking notes in two mobile team meetings and two general meetings.
+    
 ### 7. Summary of Work
 
 <details>
