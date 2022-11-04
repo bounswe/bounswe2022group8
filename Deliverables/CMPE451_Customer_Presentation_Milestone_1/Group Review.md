@@ -52,15 +52,18 @@
 
 <details>
     <summary> Visual Studio Code (VSCode) </summary>
-    We used Visual Studio Code as out IDE for the development. With its extensions for the programming languages that we are using and for Github, VSCode enabled the backend team write code easily. 
+    We used Visual Studio Code as our IDE for the development. With its extensions for Python and for Github, VSCode enabled the backend team write code easily. It also provided smart code completion, on-the-fly error checking which overall helped us focus on the implementation.
 </details>
 
 <details>
-    <summary> Python Django </summary>
+    <summary> Python Django & Rest Framework </summary>
+    
+    To implement the backend of our web application we used django framework which provides many built-in function that helped the backend team implement the web application easily. We could integrate the application with PostgreSQL without any issues and additional code fabric. With the help of migration files we were able to create models and switch between different databases.
 </details>
 
 <details>
     <summary> PostgreSQL </summary>
+    
 </details>
 
 <details>
