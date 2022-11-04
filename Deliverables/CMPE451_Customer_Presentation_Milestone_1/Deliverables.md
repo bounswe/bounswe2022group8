@@ -32,7 +32,7 @@ I am Serdar Akol, a member of group 8. I am working on the Mobile Development pa
 I have revised the requirements and contributed on the decisions we were making reltated to the functionalities of our project. I have attended to all of our meetings. I have searched different mobile application development tools. I have set the development environment for the development but unforetunately I could not contirubute any code for this milestone due to overload of my other classes. I promise I will be contributing more while we continiue to develop.
 
 **Management Related Issues**
-* [GEN-24: Revise the Annotation requirements](https://github.com/bounswe/bounswe2022group8/issues/1176)
+* [GEN-24: Revise the Annotation requirements](https://github.com/bounswe/bounswe2022group8/issues/176)
 * [GEN-20: Revise User Interaction and Guest Users](https://github.com/bounswe/bounswe2022group8/issues/172)
 * [GEN-19: Revise Mockups](https://github.com/bounswe/bounswe2022group8/issues/171)
 

@@ -157,6 +157,14 @@ Please refer to our requirements for glossary and further details.
     4. Taking notes during Milestone 1 presentation.
     5. Evaluating backend tools and processes for Milestone Group Review.
 
+* Serdar Akol
+
+    1. Researching different mobile application development tools.
+    2. Setting the environment for the mobile development.
+    3. Learning basic Flutter/Dart to implement the initial pages.
+    4. Reviewing and updating the requirements.
+
+
 * Doğukan Türksoy
 
     1. Revision of requirements and making necessary changes.
@@ -249,6 +257,24 @@ Please refer to our requirements for glossary and further details.
 | Research | Research on PostgreSQL and its integration with Django framework | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) |  
 | Backend | Initial integration of database and web application | [Issue](https://github.com/bounswe/bounswe2022group8/issues/182) , [PR](https://github.com/bounswe/bounswe2022group8/pull/183) |
 
+</details>
+
+<details>
+    <summary> Serdar Akol </summary>
+
+|  Task Type   | Task Description   | Related Link(s) |
+ |  :----:        |  :----:    |  :----: |
+ |  Planning|  Attending weekly meeting on lab session |[Weekly Meeting #1](https://github.com/bounswe/bounswe2022group8/wiki/Week-1-Meeting-Notes-1) |
+|  Planning|  Attending week 2 meeting 2  on lab session| [Week2 Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232) |
+ |  Planning|  Attending 2nd meeting on discord | [Week2 Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ |  Planning|  Attending weekly meeting | [Week4 Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4) |
+ |  Planning|  Attending weekly meeting | [Week5 Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+ |  Planning|  Attending backend meeting | [Week 5 Backend Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022))|
+ | Requirements Elicitation| Review and revise the requirements _Annotation_ .  |  [#176](https://github.com/bounswe/bounswe2022group8/issues/176)|
+ | Requirements Elicitation|  Review and revise the requirements _User Interaction and Guest Users_ . |   [#172](https://github.com/bounswe/bounswe2022group8/issues/172)|
+ |  Revise | Review and revise the Mockups .  |  [#171](https://github.com/bounswe/bounswe2022group8/issues/171)|
+ |  Planning |  Attended first mobile meeting | [Week 3 Mobile Meeting #1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Mobile-Meeting-Notes-1)|   
+ 
 </details>
 
 <details>
