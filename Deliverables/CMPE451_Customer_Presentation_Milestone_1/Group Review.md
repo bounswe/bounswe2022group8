@@ -105,6 +105,14 @@ Please refer to our requirements for glossary and further details.
   8. Research on tokenization and authentication mechanisms.
   9. Helping frontend team for the connection.
   10. Dockerization of frontend and deployment.
+  
+* Sinem Koçoğlu
+
+    1. Creation of first design of login and signup pages.
+    2. Research on frontend tools.
+    3. Providing authentication for login and signup.
+    4. Providing connection to backend.
+    5. Dockerization of frontend.
 
 ### 7. Summary of Work
 
@@ -144,4 +152,25 @@ Please refer to our requirements for glossary and further details.
 | Implementation | Dockerization of frontend and deployment | [#224](https://github.com/bounswe/bounswe2022group8/issues/224), [PR](https://github.com/bounswe/bounswe2022group8/pull/225) |
 |  Planning |  Attended weekly meeting #5.    |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
  |  Planning |  Attended backend weekly meeting #2.   |  [BE Weekly Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
+</details>
+<details>
+    <summary> Sinem Koçoğlu </summary>
 
+|  Task Type   | Task Description   | Related Link(s) |
+ |  :----:        |  :----:    |  :----: |
+ |  Planning|  Attending weekly meeting on lab session |[Weekly Meeting #1](https://github.com/bounswe/bounswe2022group8/wiki/Week-1-Meeting-Notes-1) |
+  |  Review  |  Reviewed meeting notes | [Issue](https://github.com/bounswe/bounswe2022group8/issues/155)|
+|  Planning|  Attending week 2 meeting 2  on lab session| [Week2 Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232) |
+ |  Planning|  Attending 2nd meeting on discord | [Week2 Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3) |
+ | Documentation | Documentation of 2nd meeting notes. | [#177](https://github.com/bounswe/bounswe2022group8/issues/177) |
+ | Planning | Review the project planning for CmpE451.  |  [#161](https://github.com/bounswe/bounswe2022group8/issues/161)|
+ | Requirements Elicitation| Review and revise the requirements _Profile Management_ .  |  [#168](https://github.com/bounswe/bounswe2022group8/issues/168)|
+ | Requirements Elicitation|  Review and revise the requirements _Exhibition_ . |   [#169](https://github.com/bounswe/bounswe2022group8/issues/169)|
+ | Requirements Elicitation| Clarification in the requirements _Location_    |   [#175](https://github.com/bounswe/bounswe2022group8/issues/175)|
+ |  Planning |  Attended first frontend meeting | [Week 3 Meeting 1](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Frontend-Meeting-Notes-1)    |   
+ |  Research |  Research on tools compatible with React.js, Css tutorials, and design ideas. |[#185](https://github.com/bounswe/bounswe2022group8/issues/185)|
+ | Implementation | Creation of project and css files for login and signup pages. | [#186](https://github.com/bounswe/bounswe2022group8/issues/186) |
+ |  Research and Coding |  Research on dockerization of frontend and dockerize frontend |[#217](https://github.com/bounswe/bounswe2022group8/issues/217) [PR](https://github.com/bounswe/bounswe2022group8/pull/218)|
+| Implementation | Authentication for login/logout and signup on frontend. |(no pr available because of manuel merge of the files from branch feature/FE-4 to feature/FE-3) [#203](https://github.com/bounswe/bounswe2022group8/issues/203) |
+| Testing | Manuel testing integration of frontend and backend |[#203](https://github.com/bounswe/bounswe2022group8/issues/203) |
+</details>
