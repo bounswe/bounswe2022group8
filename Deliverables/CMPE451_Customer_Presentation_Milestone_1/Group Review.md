@@ -1,13 +1,13 @@
 # Group 8 - Milestone 1 - Group Review
 
 ## Table of Contents
-1. [Executive Summary](#Executive-Summary)
-2. [List and status of deliverables](List-and-Status-of-Deliverables)
-3. [Evaluation of the status of deliverables and its impact on your project plan](Evaluation-of-Deliverables-and-Impact)
-4. [Evaluation of tools and processes you have used to manage your team project](Evaluation-of-Tools-and-Processes)
-5. [The requirements addressed in this milestone](The-Requirements-Addressed-in-this-Milestone)
-6. [Overall description of responsibilities that are assigned to each member](Responsibilities)
-7. [A Summary of work performed by each team member](Summary-of-Work)
+1. [Executive Summary](#1-executive-summary)
+2. [List and status of deliverables](#2-list-and-status-of-deliverables)
+3. [Evaluation of the status of deliverables and its impact on your project plan](#3-evaluation-of-deliverables-and-impact)
+4. [Evaluation of tools and processes you have used to manage your team project](#4-evaluation-of-tools-and-processes)
+5. [The requirements addressed in this milestone](#5-the-requirements-addressed-in-this-milestone)
+6. [Overall description of responsibilities that are assigned to each member](#6-responsibilities)
+7. [A Summary of work performed by each team member](#7-summary-of-work)
 
 ### 1. Executive Summary
 
