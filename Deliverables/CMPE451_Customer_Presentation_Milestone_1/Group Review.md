@@ -57,21 +57,22 @@
 
 <details>
     <summary> Python Django & Rest Framework </summary>
- To implement the backend of our web application we used django framework which provides many built-in function that helped the backend team implement the web application easily. We could integrate the application with PostgreSQL without any issues and additional code fabric. With the help of migration files we were able to create models and switch between different databases.
+ To implement the backend of our web application we used Django framework which provides many built-in function that helped the backend team implement the web application easily. We could integrate the application with PostgreSQL without any issues and additional code fabric. With the help of migration files we were able to create models and switch between different databases.
+    
+We decided to use Django Rest framework because of its flexibility. With Django framework, Rest is one of the most used frameworks for web applications. That is why there is a big community online and we got a lot of support from the community with explanation videos, error messages etc. We were able to use knox and implement logout API endpoint in one line of code easily.
 </details>
 
 <details>
     <summary> PostgreSQL </summary>
+    PostgreSQL is an open-source object-relational database system that supports both relational and non-relational querying. It supports the programming language that we used (Python) and we were able to integrate out Django application with our database. There is also a big support community online that use PostgreSQL with Django applications, thus we could get help from online videos while working on DB-app connection. PostgreSQL is also reliable and secure which helped us focus on implementation rather than possible security issues that we could face.
     
 </details>
 
 <details>
     <summary> Postman </summary>
+During API testing, we used Postman frequently because it offers an easy user interface and allows us send calls to out API functions. It also supports different types of inputs which made our job easier, we could send data in the same format overall. 
 </details>
 
-<details>
-    <summary> Docker </summary>
-</details>
 
 ##### 3) Frontend Team
    
