@@ -199,6 +199,14 @@ Please refer to our requirements for glossary and further details.
    11. Adding error notifications on login and signup pages.
    12. Taking notes in two mobile team meetings and two general meetings.
     
+    * Mustafa Emre Erengül
+
+    1. Setting the environment for the mobile development
+    2. Learning basic Flutter/Dart to implement the initial pages.
+    3. Creating the basic version of the mobile app which can run the functionalities that Backend team provided.
+    4. Debugging the error-messages and dependency problems. 
+    5. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
+
 ### 7. Summary of Work
 
 <details>
