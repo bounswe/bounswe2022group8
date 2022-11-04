@@ -57,8 +57,7 @@
 
 <details>
     <summary> Python Django & Rest Framework </summary>
-    
-    To implement the backend of our web application we used django framework which provides many built-in function that helped the backend team implement the web application easily. We could integrate the application with PostgreSQL without any issues and additional code fabric. With the help of migration files we were able to create models and switch between different databases.
+ To implement the backend of our web application we used django framework which provides many built-in function that helped the backend team implement the web application easily. We could integrate the application with PostgreSQL without any issues and additional code fabric. With the help of migration files we were able to create models and switch between different databases.
 </details>
 
 <details>
