@@ -10,7 +10,14 @@
 7. [A Summary of work performed by each team member](#7-summary-of-work)
 
 ### 1. Executive Summary
+#### *Description*
+We are a group of Bogazici University students who are taking the CMPE451 course in the Fall 2022 semester. For the first Customer Milestone in this course, we start developing an Art Community Platform where users can interact with other users and display different art works. After signing up and logging in, a user can share new art items and also view all of the art items in the system. Admin can add comments on art items for a specific user, delete his/hers existing art item. To make the tag functionality more interactive we added functionalities like creating new tags, deleting an existing tag, listing all of the available tags in the system and also searching art items by their tags.
 
+#### *Overall Status*
+This part will be about what we have done since the beginning of the semester and what we are planning to do in the future. First of all, we started by rearranging our GitHub repository. We updated all folders to be ready for the new semester.  Also we decided when we will do our meetings as a group and which communication platform we are going to use. Then we went over the work we did in CMPE352, last semester. The design diagrams, requirements, scenarios and mockups were revised as a group. We tried to form our project basis. After that we divided into the technical teams which are: Backend, Frontend and Mobile teams. This allow us to move the coding part of our project. Our backend team was responsible for the API’s which enables the  registration and login/logout functionalities, also they dockerized their database. The frontend team implemented the authentication for the sign-up/sign-in pages, designed our webpage and dockerized their frontend.  The team of Mobile did the initial changes for the welcome page, sign-in/sign-out page and initial landing page. Also they did a custom, simple and elegant design for the UI part. Finally, they created the APK of the release version of the mobile app.
+
+#### *Future Plans*
+For the forthcoming weeks, we would like the start with the implementation of the personal profiles and filling our database with the art items so that customers can have them in their profile. Then we create an art items feed for the main page of the users so that they can follow the new trends in their favorite art movements. Also we are going the enable the feature of semantic search and labeling which similarly help users to search for their interests. Moreover, as a further step, the exhibition domain of the platform will be joining us. So that the users can interact with the other users and share their experiences about the artworks. Then the bidding system enters the game and allow users not just to see but own their favorite artworks.  When all this parts implemented the main skeleton of the project will have been formed.
 
 
 
