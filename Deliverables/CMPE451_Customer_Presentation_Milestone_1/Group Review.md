@@ -199,7 +199,7 @@ Please refer to our requirements for glossary and further details.
    11. Adding error notifications on login and signup pages.
    12. Taking notes in two mobile team meetings and two general meetings.
     
-    * Mustafa Emre Erengül
+* Mustafa Emre Erengül
 
     1. Setting the environment for the mobile development
     2. Learning basic Flutter/Dart to implement the initial pages.
