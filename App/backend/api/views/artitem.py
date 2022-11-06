@@ -22,14 +22,43 @@ from drf_yasg import openapi
 #
 #  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format
 #  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://${host}:8000/api/v1/artitems/<id>                       / DELETE / Delete an art item with the given id [REQUIRES AUTHENTICATION]
-#  http://${host}:8000/api/v1/artitems                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
 #  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
 #
 import base64
 from django.core.files.base import ContentFile
 
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns all the art items in the system. It returns ID of the art item, title, description, (id, username, name, surname) of the owner, tags and URL of the image in AWS S3 bucket.",
+    operation_summary="Get all the art items in the system.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                    }
+                ]
+            }
+        )
+    }
+)
 @api_view(["GET"])
 @permission_classes([permissions.AllowAny])
 def get_artitems(request):
@@ -39,7 +68,7 @@ def get_artitems(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(["POST"])
+@api_view(["POST", "DELETE"])
 @permission_classes([permissions.IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def post_artitem(request):
@@ -80,17 +109,6 @@ def post_artitem(request):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(["GET", "DELETE"])
-def artitems_by_id(request, id):
-    if request.method == "GET":
-        try:
-            artitem = ArtItem.objects.get(pk=id)
-            serializer = ArtItemSerializer(artitem)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except ArtItem.DoesNotExist:
-            return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
     elif request.method == "DELETE":
         try:
             artitem = ArtItem.objects.get(pk=id)
@@ -100,6 +118,89 @@ def artitems_by_id(request, id):
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
 
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Return an art item based on ID.",
+    operation_summary="Get an art item with unique ID.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                    }
+                ]
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any art item with the given ID doesn't exist."
+                }
+            }
+        ),
+    }
+)
+@api_view(["GET"])
+def artitems_by_id(request, id):
+    if request.method == "GET":
+        try:
+            artitem = ArtItem.objects.get(pk=id)
+            serializer = ArtItemSerializer(artitem)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except ArtItem.DoesNotExist:
+            return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns art items of a specific user. You should provide the ID of the user.",
+    operation_summary="Get art items of a user with ID.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                    }
+                ]
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any user with the given ID doesn't exist."
+                }
+            }
+        ),
+    }
+)
 @api_view(["GET"])
 def artitems_by_userid(request, id):
     try:
@@ -113,6 +214,42 @@ def artitems_by_userid(request, id):
 # api/v1/artitems/users/username/<str:username>
 
 
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns art items of a specific user. You should provide the username of the user.",
+    operation_summary="Get art items of a user with username.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                    }
+                ]
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any user with the given username doesn't exist."
+                }
+            }
+        ),
+    }
+)
 @api_view(["GET"])
 def artitems_by_username(request, username):
 
