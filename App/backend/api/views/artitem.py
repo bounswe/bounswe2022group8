@@ -14,7 +14,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from drf_yasg import openapi
 import base64
 from django.core.files.base import ContentFile
-from ..utils import ProfileImageStorage
+from ..utils import ArtItemStorage
 
 from drf_yasg import openapi
 
@@ -22,7 +22,7 @@ from drf_yasg import openapi
 #
 #  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format
 #  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://${host}:8000/api/v1/artitems/me/                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/<id>                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/me/                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
 #  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
@@ -68,19 +68,10 @@ def get_artitems(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(["POST", "DELETE"])
+@api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def post_artitem(request):
-    # owner id must be provided.
-    # list of tag ids or a single tag id must be provided.
-    # So we assume that the person who consumes this API, knows necessary IDs.
-    #
-    #
-    # We take the input from frontend in base64 format.
-    # We have to decode it and convert to a ContentFile object.
-    # Then we store it in S3 bucket.
-
     if (request.method == "POST"):
         data = request.data.copy()
 
@@ -92,24 +83,61 @@ def post_artitem(request):
         # BASE64 DECODING
         # Check if artitem_image is provided. If not, default to defaultart.jpg. If provided, it's in base64 format. Decode it.
         if ('artitem_image' in data):
-            image_data = data['artitem_image'].split("base64,")[1]
-            decoded = base64.b64decode(image_data)
-            data['artitem_image'] = ContentFile(decoded, name='decode.png')
+            try:
+                image_data = request.data['artitem_image'].split("base64,")[1]
+                decoded = base64.b64decode(image_data)
+                filename = 'artitem-{pk}.png'.format(pk=request.user.pk)
+                request.data['artitem_image'] = ContentFile(
+                    decoded, "temporary")
+            except:
+                return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
-        ###
         serializer = ArtItemSerializer(data=data)
         if serializer.is_valid():
-            if ('artitem_image' in data):
-                with open("media/artitem/decode.png", "wb") as fh:
-                    fh.write(decoded)
-                    serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+            if ('artitem_image' in request.data):
+                artitem_image_storage = ArtItemStorage()
+                filename = request.data['artitem_image'].name
+                artitem_image_storage.save(
+                    filename,  request.data['artitem_image'])
+                file_url = artitem_image_storage.url(filename)
+                request.data['artitem_image'] = file_url
             else:
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "DELETE":
+
+
+@ swagger_auto_schema(
+    method='delete',
+    operation_description="Deletes an art item by its ID. This endpoint requires authentication.",
+    operation_summary="Deletes an art item by its ID.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_204_NO_CONTENT: openapi.Response(
+            description="Successfully deleted the art item.",
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Art item cannot be found.",
+            examples={
+                "application/json": {"Not Found": "Any art item with the given ID doesn't exist."}
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
+    }
+)
+@api_view(['DELETE'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def delete_artitem(request, id):
+    if request.method == "DELETE":
         try:
             artitem = ArtItem.objects.get(pk=id)
             artitem.delete()

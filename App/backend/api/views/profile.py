@@ -165,7 +165,7 @@ def profile_me_api(request):
             profile_image_storage.save(
                 filename,  request.data['profile_image'])
             file_url = profile_image_storage.url(filename)
-            request.data['profile_image'] = print(file_url)
+            request.data['profile_image'] = file_url
 
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
