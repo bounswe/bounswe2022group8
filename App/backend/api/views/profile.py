@@ -4,7 +4,7 @@ from ..models.user import User
 from ..serializers.profile import UserProfileSerializer, UserUpdateProfileSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
-from knox.auth import TokenAuthentication, AuthToken
+from knox.auth import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from drf_yasg import openapi
 import base64

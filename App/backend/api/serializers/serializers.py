@@ -1,7 +1,8 @@
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
-from ..models.models import Tag, Comment, ArtItem
+from ..models.models import Comment
+from ..models.artitem import Tag, ArtItem
 from ..models.user import User
 
 
@@ -27,6 +28,7 @@ class ArtItemSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep["tags"] = TagSerializer(instance.tags.all(), many=True).data
+        rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
 
@@ -36,3 +38,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'body', 'commented_by', 'commented_on', 'created_at']
 
 
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name', 'surname']

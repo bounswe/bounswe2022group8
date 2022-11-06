@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models.models import Tag, Comment, ArtItem
+from .models.models import Comment
+from .models.artitem import Tag, ArtItem
 from .models.user import User
 
 

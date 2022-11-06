@@ -9,9 +9,10 @@ from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views.auth import RegisterView, LoginView
 from .views.profile import profile_api, profile_me_api
+from .views.artitem import get_artitems
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import generics, status
+from rest_framework import status
 
 from drf_yasg import openapi
 
@@ -48,6 +49,7 @@ urlpatterns = [
     path('auth/logout/', decorated_logout_view, name='logout'),
     path('users/profile/<int:id>', profile_api, name="profile_by_id"),
     path('users/profile/me/', profile_me_api, name="profile_me"),
+    path('artitems/', get_artitems, name="get_all_artitems")
 ]
 
 # added to give us the option to choose between default Response template and regular json
