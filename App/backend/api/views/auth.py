@@ -25,7 +25,7 @@ class RegisterView(generics.GenericAPIView):
                 examples={
                     "application/json": {
                         "user": {
-                            "email": "alvin.plantsdiga@calvin.edu",
+                            "email": "alvin.plantiga@calvin.edu",
                             "username": "on_existentialism"
                         },
                         "token": "d3e90cabeb3c3476eba98c5b4fc3750e81efd9c72fd623c8c6bae1bfbcc7b435"
