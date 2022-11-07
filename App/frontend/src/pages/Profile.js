@@ -36,7 +36,8 @@ function Profile(props) {
             </div>
 
             <div className="profile-bio">
-              <span className="profile-real-name">Full Name</span>
+              <p>Full Name</p>
+              <p>Location</p>
               <p>Profile Decription will fit here well 📷✈️🏕️</p>
 
               <span className="profile-stat-count">

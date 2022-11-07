@@ -27,9 +27,9 @@ img {
   cursor: pointer;
 }
 
-.btn:focus {
+/*.btn:focus {
   outline: 0.5rem auto #4d90fe;
-}
+}*/
 
 .visually-hidden {
   position: absolute !important;
