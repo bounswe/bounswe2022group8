@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
+import { HOST } from "../constants/host";
 import "./styles/Access.css";
 
 import { useAuth } from "../auth/authentication";
@@ -19,8 +20,9 @@ function Login(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    var host = HOST;
 
-    fetch("http://34.125.134.88:8000/api/v1/auth/login/", {
+    fetch(`${host}/api/v1/auth/login/`, {
       method: "POST",
       body: JSON.stringify(loginInput),
       headers: {

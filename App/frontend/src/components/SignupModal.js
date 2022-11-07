@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
+import { HOST } from "../constants/host";
 import "./styles/Access.css";
 
 import { useAuth } from "../auth/authentication";
@@ -21,8 +22,9 @@ function Signup(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    var host = HOST;
 
-    fetch("http://34.125.134.88:8000/api/v1/auth/register/", {
+    fetch(`${host}/api/v1/auth/register/`, {
       method: "POST",
       body: JSON.stringify(signupInput),
       headers: {
@@ -32,9 +34,11 @@ function Signup(props) {
       .then((response) => {
         setResponseStatus(response.status);
         props.onSubmitSignUp(response.status);
+        console.log(response);
         return response.json();
       })
       .then((response) => {
+        console.log(JSON.stringify(response));
         saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));

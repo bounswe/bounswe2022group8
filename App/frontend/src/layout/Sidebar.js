@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { FiLogOut } from "react-icons/fi";
 import { SidebarData } from "./data/SidebarData";
 import { useAuth } from "../auth/authentication";
+import { HOST } from "../constants/host";
 
 import "./styles/Sidebar.css";
 
@@ -11,8 +12,9 @@ function Sidebar(props) {
   const { token, clearToken } = useAuth();
 
   function handleLogOut() {
+    var host = HOST;
 
-    fetch("http://34.125.134.88:8000/api/v1/auth/logout/", {
+    fetch(`${host}/api/v1/auth/logout/`, {
       method: "POST",
       body: "",
       headers: {
