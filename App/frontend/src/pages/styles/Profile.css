@@ -12,7 +12,7 @@ img {
 }
 
 .container {
-  max-width: 80rem;
+  max-width: 75rem;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -71,7 +71,7 @@ img {
 .profile-user-name {
   display: inline-block;
   color: white;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 300;
 }
 
@@ -92,7 +92,7 @@ img {
 
 .profile-stat-count {
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: 24px;
   font-weight: 400;
   line-height: 1.5;
   color: white;
@@ -101,7 +101,7 @@ img {
 }
 
 .profile-bio {
-  font-size: 1.6rem;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   margin-top: 2.3rem;
@@ -115,6 +115,7 @@ img {
   flex-wrap: wrap;
   margin: -1rem -1rem;
   padding-bottom: 3rem;
+  width: 25rem;
 }
 
 .gallery-item {
@@ -123,6 +124,8 @@ img {
   margin: 1rem;
   color: #fff;
   cursor: pointer;
+  width: 25rem;
+  height:25rem;
 }
 
 .gallery-item:hover .gallery-item-info,
@@ -132,8 +135,8 @@ img {
   align-items: center;
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 25rem;
+  height: 25rem;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -151,21 +154,13 @@ img {
   margin-right: 2.2rem;
 }
 
-.gallery-item-type {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2.5rem;
-  text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-}
-
 .fa-comment {
   transform: rotateY(180deg);
 }
 
 .gallery-image {
-  width: 100%;
-  height: 100%;
+  width: 22.5rem;
+  height: 25rem;
   object-fit: cover;
 }
 
@@ -185,6 +180,7 @@ img {
     color: #18121c;
 }
 
+/*this belongs to the line on the art items*/
 .solid{
     color:#ffc9ff;
     margin-top: 1px;
