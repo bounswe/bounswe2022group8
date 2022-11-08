@@ -17,19 +17,6 @@ img {
   padding: 0 2rem;
 }
 
-.btn {
-  display: inline-block;
-  font: inherit;
-  background: none;
-  border: none;
-  color: inherit;
-  padding: 0;
-  cursor: pointer;
-}
-
-/*.btn:focus {
-  outline: 0.5rem auto #4d90fe;
-}*/
 
 .visually-hidden {
   position: absolute !important;
@@ -57,27 +44,20 @@ img {
   border-radius: 50%;
 }
 
-.profile-user-settings,
-.profile-stats,
-.profile-bio {
-  float: left;
-  width: calc(66.666% - 2rem);
-}
-
 .profile-user-settings {
   margin-top: 1.1rem;
 }
 
 .profile-user-name {
   display: inline-block;
-  color: white;
-  font-size: 30px;
+  color: #fafafa;
+  font-size: 24px;
   font-weight: 300;
 }
 
 .profile-edit-btn {
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1.8;
   border: 0.1rem solid #dbdbdb;
   border-radius: 0.3rem;
@@ -92,10 +72,10 @@ img {
 
 .profile-stat-count {
   display: inline-block;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
-  color: white;
+  color:#fafafa;
   width: calc(66.666% - 2rem);
   margin-right: 4rem;
 }
@@ -105,7 +85,7 @@ img {
   font-weight: 400;
   line-height: 1.5;
   margin-top: 2.3rem;
-  color: white;
+  color: #fafafa;
 }
 
 
@@ -151,7 +131,12 @@ img {
 }
 
 .gallery-item-likes {
-  margin-right: 2.2rem;
+  margin-left: 1rem;
+  margin-right: 2rem;
+}
+
+.gallery-item-comments {
+  margin-right: 4rem;
 }
 
 .fa-comment {
@@ -166,9 +151,9 @@ img {
 
 .add-new-artitem-btn {
     margin-bottom: 20px;
-    margin-right: 0rem;
-    color: white;
-    font-size: 1.4rem;
+    margin-left: 82%;
+    color: #fafafa;
+    font-size: 1.2rem;
     line-height: 1.8;
     border: 0.1rem solid #dbdbdb;
     border-radius: 0.3rem;
@@ -185,6 +170,9 @@ img {
     color:#ffc9ff;
     margin-top: 1px;
 }
+
+/*Loader can be used in any related action.*/
+
 /*.loader {
   width: 5rem;
   height: 5rem;
@@ -209,6 +197,8 @@ The following code will only run if your browser supports CSS grid.
 Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
 */
 
+/*This part makes components in the screen seem better in terms of size when you minimize the size of the screen.*/
+
 @supports (display: grid) {
   .profile {
     display: grid;
@@ -230,7 +220,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
   .profile-image,
   .profile-user-settings,
-  .profile-stats,
+  .profile-stat-count,
   .profile-bio,
   .gallery-item,
   .gallery {
@@ -255,7 +245,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
     }
 
     .profile-edit-btn,
-    .profile-stats,
+    .profile-stat-count,
     .profile-bio {
       grid-column: 1 / -1;
     }
@@ -264,7 +254,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
     .profile-edit-btn,
     .profile-settings-btn,
     .profile-bio,
-    .profile-stats {
+    .profile-stat-count {
       margin: 0;
     }
   }
