@@ -24,6 +24,7 @@ function Sidebar(props) {
     })
       .then(() => {
         clearToken();
+        props.onClickLogOut();
       })
       .catch((error) => console.error("Error:", error));
   }

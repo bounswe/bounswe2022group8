@@ -15,6 +15,10 @@ function Login(props) {
     }
   );
   const [responseStatus, setResponseStatus] = useState(0);
+  const [credentialEmpty, setCredentialEmpty] = useState(false);
+  const [passwordEmpty, setPasswordEmpty] = useState(false);
+  const [credentialIncorrect, setCredentialIncorrect] = useState(false);
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
 
   const { saveToken } = useAuth();
 
@@ -35,6 +39,22 @@ function Login(props) {
         return response.json();
       })
       .then((response) => {
+        response.credential
+          ? setCredentialEmpty(true)
+          : setCredentialEmpty(false);
+
+        response.password ? setPasswordEmpty(true) : setPasswordEmpty(false);
+
+        response.credentials &&
+        response.credentials[0] === "Incorrect username or email."
+          ? setCredentialIncorrect(true)
+          : setCredentialIncorrect(false);
+
+        response.credentials &&
+        response.credentials[0] === "Incorrect password."
+          ? setPasswordIncorrect(true)
+          : setPasswordIncorrect(false);
+
         saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
@@ -60,7 +80,7 @@ function Login(props) {
           <input
             type="email"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              credentialEmpty || credentialIncorrect ? "form-control-error" : ""
             }`}
             placeholder="Email or username"
             name="credential"
@@ -70,12 +90,18 @@ function Login(props) {
             onChange={handleInput}
           />
         </div>
+        {credentialEmpty && (
+          <div className="form-error">Please fill in this field.</div>
+        )}
+        {credentialIncorrect && (
+          <div className="form-error">Incorrect email or username.</div>
+        )}
         <div className="form-group mt-3">
           <label className="access-label">Password</label>
           <input
             type="password"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              passwordEmpty || passwordIncorrect ? "form-control-error" : ""
             }`}
             placeholder="Password"
             name="password"
@@ -85,10 +111,11 @@ function Login(props) {
             onChange={handleInput}
           />
         </div>
-        {responseStatus === 400 && (
-          <div className="form-error">
-            Please check your input and try again.
-          </div>
+        {passwordEmpty && (
+          <div className="form-error">Please fill in this field.</div>
+        )}
+        {passwordIncorrect && (
+          <div className="form-error">Incorrect password.</div>
         )}
         <div className="d-grid gap-2 mt-4">
           <button

@@ -17,6 +17,10 @@ function Signup(props) {
     }
   );
   const [responseStatus, setResponseStatus] = useState(0);
+  const [usernameError, setUsernameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
 
   const { saveToken } = useAuth();
 
@@ -34,11 +38,26 @@ function Signup(props) {
       .then((response) => {
         setResponseStatus(response.status);
         props.onSubmitSignUp(response.status);
-        console.log(response);
         return response.json();
       })
       .then((response) => {
         console.log(JSON.stringify(response));
+        console.log(response);
+
+        response.username
+          ? setUsernameError(response.username[0])
+          : setUsernameError(null);
+
+        response.email ? setEmailError(response.email[0]) : setEmailError(null);
+
+        response.password
+          ? setPasswordError(response.password[0])
+          : setPasswordError(null);
+
+        response.password_confirm
+          ? setConfirmPasswordError(response.password_confirm[0])
+          : setConfirmPasswordError(null);
+
         saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
@@ -65,7 +84,7 @@ function Signup(props) {
           <input
             type="text"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              usernameError ? "form-control-error" : ""
             }`}
             placeholder="Username"
             id="username"
@@ -75,12 +94,13 @@ function Signup(props) {
             onChange={handleInput}
           />
         </div>
+        {usernameError && <div className="form-error">{usernameError}</div>}
         <div className="form-group mt-3">
           <label className="access-label">Email</label>
           <input
             type="email"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              emailError ? "form-control-error" : ""
             }`}
             placeholder="Email"
             id="email"
@@ -90,12 +110,13 @@ function Signup(props) {
             onChange={handleInput}
           />
         </div>
+        {emailError && <div className="form-error">{emailError}</div>}
         <div className="form-group mt-3">
           <label className="access-label">Password</label>
           <input
             type="password"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              passwordError ? "form-control-error" : ""
             }`}
             placeholder="Choose a password"
             id="password"
@@ -105,12 +126,13 @@ function Signup(props) {
             onChange={handleInput}
           />
         </div>
+        {passwordError && <div className="form-error">{passwordError}</div>}
         <div className="form-group mt-3">
           <label className="access-label">Confirm password</label>
           <input
             type="password"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              confirmPasswordError ? "form-control-error" : ""
             }`}
             placeholder="Confirm password"
             id="password_confirm"
@@ -120,14 +142,8 @@ function Signup(props) {
             onChange={handleInput}
           />
         </div>
-        {responseStatus === 400 && (
-          <div>
-            <div className="form-error">
-              Please make sure to enter:<br></br> a unique username of at least
-              6 characters,<br></br> a valid e-mail address,<br></br> and a
-              password of at least 10 characters.
-            </div>
-          </div>
+        {confirmPasswordError && (
+          <div className="form-error">{confirmPasswordError}</div>
         )}
         <div className="d-grid gap-2 mt-4 mb-4">
           <button

@@ -36,10 +36,16 @@ function Layout(props) {
 
   function handleSubmitSignUp(response) {
     setSignUpIsOpen(response !== 201);
+    if (response === 201) setSidebarOpen(false);
   }
 
   function handleSubmitLogIn(response) {
     setLogInIsOpen(response !== 200);
+    if (response === 200) setSidebarOpen(false);
+  }
+
+  function handleClickLogOut() {
+    window.location.replace("./");
   }
 
   function handleSidebar() {
@@ -125,7 +131,11 @@ function Layout(props) {
       {(signUpIsOpen || logInIsOpen) && (
         <Backdrop onClick={() => handleCloseForm()} />
       )}
-      <Sidebar width={sidebarOpen ? "300px" : "0px"} auth={token} />
+      <Sidebar
+        onClickLogOut={() => handleClickLogOut()}
+        width={sidebarOpen ? "300px" : "0px"}
+        auth={token}
+      />
       <main
         className="main-container"
         style={{

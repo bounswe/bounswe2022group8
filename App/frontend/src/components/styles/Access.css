@@ -48,8 +48,9 @@
 }
 
 .form-error {
-  margin-top: 1.5em;
-  font-size: 15px;
+  margin-top: 0.4em;
+  margin-bottom: -0.4em;
+  font-size: 13px;
   font-weight: 600;
   color: #d90429;
 }
