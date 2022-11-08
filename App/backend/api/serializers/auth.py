@@ -15,12 +15,17 @@ class RegisterSerializer(serializers.ModelSerializer):
     SUCCESS = ""
 
     password = serializers.CharField(min_length = 10, write_only=True)
+    username = serializers.CharField(min_length = 6)
     password_confirm = serializers.CharField(write_only=True)
 
     # here, we define the parameters we expect to receive (not directly related to model)
     class Meta:
         model = User
         fields = ['email', 'username', 'password', 'password_confirm']
+        extra_kwargs = {'email': {'error_messages': {'required': 'This field is required.'}},
+        'username': {'error_messages': {'required': 'This field is required.'}},
+        'password': {'error_messages': {'required': 'This field is required.'}},
+        'password_confirm': {'error_messages': {'required': 'This field is required.'}}}
 
 
     def validate(self, data):
@@ -38,7 +43,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         if not data.get('password') or not data.get('password_confirm'):
             raise serializers.ValidationError({"password": "Please enter a password and confirm it."})
         if data.get('password') != data.get('password_confirm'):
-            raise serializers.ValidationError({"password": "Those passwords don't match."})
+            raise serializers.ValidationError({"password_confirm": "Passwords do not match."})
 
         return data
 
