@@ -101,9 +101,9 @@ def post_artitem(request):
                     filename,  request.data['artitem_image'])
                 file_url = artitem_image_storage.url(filename)
                 request.data['artitem_image'] = file_url
-            else:
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
