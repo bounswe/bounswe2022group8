@@ -107,6 +107,34 @@ I mainly worked on mobile app so I gave most of my effort to develop mobile appl
 * [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219)
 * Reviewed [Feature/MOB-3](https://github.com/bounswe/bounswe2022group8/pull/221)
 </details>
+
+<details>
+    <summary> Metehan Dündar </summary>
+    
+I am [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar), a member of group 8. I am working on backend part of the project.
+
+### Responsibilities
+* Revisioning of requirements and updating necessary changes. (Search and Location)
+* Implementation of logout API.
+
+### Main Contributions
+I updated the specifications and participated in the choices we were making on the project's functionalities. I have been there at each of our meetings. I helped my team to present our product to the customers. Due to certain technical issues, I was unable to submit any code for this milestone. I make a commitment to putting in greater effort as we go.
+    
+**Code Related Issues**
+    
+* [BE-3: PostgreSQL Integration to the application](https://github.com/bounswe/bounswe2022group8/issues/182)
+* [BE-4: Setting up initial models](https://github.com/bounswe/bounswe2022group8/pull/190)
+* [BE-10: [API] Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
+
+**Management Related Issues**
+
+* [GEN-5: Adding CmpE451 section to the personal Timesheet pages](https://github.com/bounswe/bounswe2022group8/issues/157)
+* [GEN-19: Revise Mockups](https://github.com/bounswe/bounswe2022group8/issues/171)
+* [GEN-28: Name for application](https://github.com/bounswe/bounswe2022group8/issues/212)
+* [GEN-22: Revise Search](https://github.com/bounswe/bounswe2022group8/issues/174)
+* [GEN-23: Revise Location](https://github.com/bounswe/bounswe2022group8/issues/175)
+ 
+</details>
     
 <details>
     <summary> Mustafa Emre Erengül </summary>
