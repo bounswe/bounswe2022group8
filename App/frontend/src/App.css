@@ -27,6 +27,12 @@
 .btn-primary {
   background-color: #18121c !important;
   border-color: #18121c !important;
+  transition: 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: #826f99 !important;
+  border-color: #826f99 !important;
 }
 
 /* Primary Outline Button */
@@ -38,12 +44,12 @@
 
 .btn-outline-primary:hover {
   color: #18121c !important;
-  background-color: #FFC9FF !important;
+  background-color: #ffc9ff !important;
 }
 
 .btn-outline-primary:active {
   color: #18121c !important;
-  background-color: #FFC9FF !important;
+  background-color: #ffc9ff !important;
 }
 
 /* Secondary Button */
@@ -53,13 +59,10 @@
 }
 
 .btn-secondary:hover {
-  background-color: #FCF6FF !important;
+  background-color: #fcf6ff !important;
 }
 
 /* Secondary Outline Button */
-
-
-
 
 /* Light Button */
 .btn-light,

@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from "react";
 import { Link } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
+import { HOST } from "../constants/host";
 import "./styles/Access.css";
 
 import { useAuth } from "../auth/authentication";
@@ -13,14 +14,19 @@ function Login(props) {
       password: "",
     }
   );
-  const [responseStatus, setResponseStatus] = useState(0);
+
+  const [credentialEmpty, setCredentialEmpty] = useState(false);
+  const [passwordEmpty, setPasswordEmpty] = useState(false);
+  const [credentialIncorrect, setCredentialIncorrect] = useState(false);
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
 
   const { saveToken } = useAuth();
 
   function handleSubmit(event) {
     event.preventDefault();
+    var host = HOST;
 
-    fetch("http://34.125.134.88:8000/api/v1/auth/login/", {
+    fetch(`${host}/api/v1/auth/login/`, {
       method: "POST",
       body: JSON.stringify(loginInput),
       headers: {
@@ -28,12 +34,27 @@ function Login(props) {
       },
     })
       .then((response) => {
-        setResponseStatus(response.status);
         props.onSubmitLogIn(response.status);
         return response.json();
       })
       .then((response) => {
-        saveToken(response.token);
+        response.credential
+          ? setCredentialEmpty(true)
+          : setCredentialEmpty(false);
+
+        response.password ? setPasswordEmpty(true) : setPasswordEmpty(false);
+
+        response.credentials &&
+        response.credentials[0] === "Incorrect username or email."
+          ? setCredentialIncorrect(true)
+          : setCredentialIncorrect(false);
+
+        response.credentials &&
+        response.credentials[0] === "Incorrect password."
+          ? setPasswordIncorrect(true)
+          : setPasswordIncorrect(false);
+
+        if (response.token) saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
   }
@@ -58,7 +79,7 @@ function Login(props) {
           <input
             type="email"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              credentialEmpty || credentialIncorrect ? "form-control-error" : ""
             }`}
             placeholder="Email or username"
             name="credential"
@@ -68,12 +89,18 @@ function Login(props) {
             onChange={handleInput}
           />
         </div>
+        {credentialEmpty && (
+          <div className="form-error">Please fill in this field.</div>
+        )}
+        {credentialIncorrect && (
+          <div className="form-error">Incorrect email or username.</div>
+        )}
         <div className="form-group mt-3">
           <label className="access-label">Password</label>
           <input
             type="password"
             className={`form-control mt-1 + ${
-              responseStatus === 400 ? "form-control-error" : ""
+              passwordEmpty || passwordIncorrect ? "form-control-error" : ""
             }`}
             placeholder="Password"
             name="password"
@@ -83,10 +110,11 @@ function Login(props) {
             onChange={handleInput}
           />
         </div>
-        {responseStatus === 400 && (
-          <div className="form-error">
-            Please check your input and try again.
-          </div>
+        {passwordEmpty && (
+          <div className="form-error">Please fill in this field.</div>
+        )}
+        {passwordIncorrect && (
+          <div className="form-error">Incorrect password.</div>
         )}
         <div className="d-grid gap-2 mt-4">
           <button
