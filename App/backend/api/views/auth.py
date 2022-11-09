@@ -20,7 +20,7 @@ class RegisterView(generics.GenericAPIView):
         tags=['auth'],
         request_body=RegisterSerializer,
         responses={
-            status.HTTP_200_OK: openapi.Response(
+            status.HTTP_201_CREATED: openapi.Response(
                 description="Successfully logged in.",
                 examples={
                     "application/json": {
