@@ -34,18 +34,23 @@ function Layout(props) {
     setLogInIsOpen(false);
   }
 
+  // when successfully signed up, close the sign up pop up and
+  // close the sidebar if it was open
   function handleSubmitSignUp(response) {
     setSignUpIsOpen(response !== 201);
     if (response === 201) setSidebarOpen(false);
   }
 
+  // when successfully logged in, close the log in pop up and
+  // close the sidebar if it was open
   function handleSubmitLogIn(response) {
     setLogInIsOpen(response !== 200);
     if (response === 200) setSidebarOpen(false);
   }
 
+  // when log out is clicked, re-render server side and redirect to home page
   function handleClickLogOut() {
-    window.location.replace("./");
+    window.location.replace("./");  // window.location.href("./") might also be used
   }
 
   function handleSidebar() {

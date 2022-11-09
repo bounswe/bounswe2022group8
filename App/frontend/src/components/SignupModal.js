@@ -16,7 +16,7 @@ function Signup(props) {
       password_confirm: "",
     }
   );
-  const [responseStatus, setResponseStatus] = useState(0);
+
   const [usernameError, setUsernameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -36,7 +36,6 @@ function Signup(props) {
       },
     })
       .then((response) => {
-        setResponseStatus(response.status);
         props.onSubmitSignUp(response.status);
         return response.json();
       })
@@ -58,7 +57,7 @@ function Signup(props) {
           ? setConfirmPasswordError(response.password_confirm[0])
           : setConfirmPasswordError(null);
 
-        saveToken(response.token);
+        if (response.token) saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
   }

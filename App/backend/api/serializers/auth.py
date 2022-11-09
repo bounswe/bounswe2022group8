@@ -11,21 +11,24 @@ class RegisterSerializer(serializers.ModelSerializer):
     START_ERROR = "The username must start with a letter."
     END_ERROR = "The username cannot end with an underscore."
     ALPHANUM_ERROR = "The username can consist of letters, numbers or underscore."
-    MIN_LENGTH_ERROR = "The username must have at least 6 characters"
+    MIN_LENGTH_ERROR = "Username must have at least 6 characters."
     SUCCESS = ""
 
-    password = serializers.CharField(min_length = 10, write_only=True)
-    username = serializers.CharField(min_length = 6)
-    password_confirm = serializers.CharField(write_only=True)
+    password = serializers.CharField(min_length = 10, write_only=True,  error_messages={
+        'blank':  'This field is required.',
+        'min_length':  'Password must have at least 10 characters.'
+    })
+    #username = serializers.CharField(min_length = 6, unique = True)
+    password_confirm = serializers.CharField(write_only=True, error_messages={
+        'blank':  'This field is required.'
+    })
 
     # here, we define the parameters we expect to receive (not directly related to model)
     class Meta:
         model = User
         fields = ['email', 'username', 'password', 'password_confirm']
-        extra_kwargs = {'email': {'error_messages': {'required': 'This field is required.'}},
-        'username': {'error_messages': {'required': 'This field is required.'}},
-        'password': {'error_messages': {'required': 'This field is required.'}},
-        'password_confirm': {'error_messages': {'required': 'This field is required.'}}}
+        extra_kwargs = {'email': {'error_messages': {'blank': 'This field is required.'}},
+        'username': {'error_messages': {'blank': 'This field is required.'}}}
 
 
     def validate(self, data):

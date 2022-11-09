@@ -14,7 +14,7 @@ function Login(props) {
       password: "",
     }
   );
-  const [responseStatus, setResponseStatus] = useState(0);
+
   const [credentialEmpty, setCredentialEmpty] = useState(false);
   const [passwordEmpty, setPasswordEmpty] = useState(false);
   const [credentialIncorrect, setCredentialIncorrect] = useState(false);
@@ -34,7 +34,6 @@ function Login(props) {
       },
     })
       .then((response) => {
-        setResponseStatus(response.status);
         props.onSubmitLogIn(response.status);
         return response.json();
       })
@@ -55,7 +54,7 @@ function Login(props) {
           ? setPasswordIncorrect(true)
           : setPasswordIncorrect(false);
 
-        saveToken(response.token);
+        if (response.token) saveToken(response.token);
       })
       .catch((error) => console.error("Error:", error));
   }
