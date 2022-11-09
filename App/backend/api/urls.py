@@ -7,7 +7,7 @@ Function views
 
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views.auth import RegisterView, LoginView
+from .views.auth import RegisterView, LoginView, resetRequestView, resetPasswordView
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status
@@ -44,6 +44,8 @@ urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name="register"),
     path('auth/login/', LoginView.as_view(), name="login"),
     path('auth/logout/', decorated_logout_view, name='logout'),
+    path('auth/resetRequest/', resetRequestView, name = "resetRequest"),
+    path('auth/restPassword/', resetPasswordView, name = "resetPassword"),
 ]
 
 # added to give us the option to choose between default Response template and regular json

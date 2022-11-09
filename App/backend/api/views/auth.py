@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from knox.models import AuthToken
 
 from ..serializers.auth import RegisterSerializer, LoginSerializer
@@ -8,6 +9,9 @@ from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 
 from drf_yasg import openapi
+
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 class RegisterView(generics.GenericAPIView):
@@ -92,3 +96,54 @@ class LoginView(generics.GenericAPIView):
         return Response({
             "token": AuthToken.objects.create(user)[1]
         })
+
+#Function to send Email with OTP on User Request
+@api_view(['POST'])
+def resetRequestView(request):
+    data = request.data
+    email = data['email']
+    user = settings.AUTH_USER_MODEL.objects.get(email=email)
+    if settings.AUTH_USER_MODEL.objects.filter(email=email).exists():
+        # send email with otp
+        send_mail(
+        'Password Reset', #Subject
+        f'We have received a request from your account to reset password. Please reset your pass word using the following OTP (one time password): {user.otp}.', #message
+        'from@example.com',
+        [user.email],
+        fail_silently=False,
+        )
+        message = {
+            'detail': 'Successfully sent the password reset email.'}
+        return Response(message, status=status.HTTP_200_OK)
+    else:
+        message = {
+            'detail': 'User with given email does not exist. Error occured while sending password reset email.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+#Function to verify OTP And reset Password
+@api_view(['PUT'])
+def resetPasswordView(request):
+    """reset_password with email, OTP and new password"""
+    data = request.data
+    user = settings.AUTH_USER_MODEL.objects.get(email=data['email'])
+    if user.is_active:
+        # Check if otp is valid
+        if data['otp'] == user.opt:
+            #here use a function to check password criteria
+            if data['new_password'] != '':
+                # Change Password
+                user.set_password(data['password'])
+                user.save() # Here user otp will also be changed on save automatically 
+                return Response('Password succesfully reset.')
+            else:
+                message = {
+                    'detail': 'Password cant be empty'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            message = {
+                'detail': 'OTP did not match'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        message = {
+            'detail': 'User is not active. Something went wrong'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
