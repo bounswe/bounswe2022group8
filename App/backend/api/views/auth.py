@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 from ..models.user import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 
 
 class RegisterView(generics.GenericAPIView):
@@ -261,4 +262,32 @@ def resetPasswordView(request):
     else:
         message = {
             'detail': 'User is not active. Something went wrong'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+# {
+#   "new_password": "new_user_password"
+# }
+@api_view(['PUT'])
+@login_required
+def resetPasswordLoggedView(request):
+    data = request.data
+    currentusername = request.user.username
+    u = User.objects.get(username = currentusername)
+    if data['new_password'] != '':
+        #validate that new password fits criteria
+        try:
+            validate_password(data['new_password'])
+        except ValidationError as e:
+            message = {
+            'detail': e.messages}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        # Change Password
+        u.set_password(data['new_password'])
+        u.save() 
+        message = {
+            'detail': 'Password succesfully reset.'}
+        return Response(message, status=status.HTTP_200_OK)
+    else:
+        message = {
+            'detail': 'Password cant be empty'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
