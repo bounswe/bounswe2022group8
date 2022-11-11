@@ -1,0 +1,261 @@
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #fafafa;
+  color: #262626;
+  padding-bottom: 3rem;
+}
+
+img {
+  display: block;
+  width: calc(50% - 1rem);
+}
+
+.container {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Profile info*/
+.profile {
+  padding: 5rem 0;
+}
+
+.profile-image {
+  float: left;
+  width: calc(33.333% - 3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3rem;
+}
+
+.profile-image img {
+  border-radius: 50%;
+}
+
+.profile-user-settings {
+  margin-top: 1.1rem;
+}
+
+.profile-user-name {
+  display: inline-block;
+  color: #fafafa;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.profile-edit-btn {
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 0.3rem;
+  padding: 0 1.2rem;
+  margin-left: 2rem;
+}
+
+.profile-edit-btn:hover {
+    background-color: #ffc9ff;
+    color: #18121c;
+  }
+
+.profile-stat-count {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  color:#fafafa;
+  width: calc(66.666% - 2rem);
+  margin-right: 4rem;
+}
+
+.profile-bio {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 2.3rem;
+  color: #fafafa;
+}
+
+
+/* Art Items*/
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem -1rem;
+  padding-bottom: 3rem;
+  width: 25rem;
+}
+
+.gallery-item {
+  position: relative;
+  flex: 1 0 22rem;
+  margin: 1rem;
+  color: #fff;
+  cursor: pointer;
+  width: 25rem;
+  height:25rem;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 25rem;
+  height: 25rem;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-info {
+  display: none;
+}
+
+.gallery-item-info li {
+  display: inline-block;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.gallery-item-likes {
+  margin-left: 1rem;
+  margin-right: 2rem;
+}
+
+.gallery-item-comments {
+  margin-right: 4rem;
+}
+
+.fa-comment {
+  transform: rotateY(180deg);
+}
+
+.gallery-image {
+  width: 22.5rem;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.add-new-artitem-btn {
+    margin-bottom: 20px;
+    margin-left: 82%;
+    color: #fafafa;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    border: 0.1rem solid #dbdbdb;
+    border-radius: 0.3rem;
+    padding: 0 1.2rem;
+}
+
+.add-new-artitem-btn:hover {
+    background-color: #ffc9ff;
+    color: #18121c;
+}
+
+/*this belongs to the line on the art items*/
+.solid{
+    color:#ffc9ff;
+    margin-top: 1px;
+}
+
+/*Loader can be used in any related action.*/
+
+/*.loader {
+  width: 5rem;
+  height: 5rem;
+  border: 0.6rem solid #999;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: loader 500ms linear infinite;
+}
+
+/* Spinner Animation */
+/*@keyframes loader {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+*/
+
+
+/*
+The following code will only run if your browser supports CSS grid.
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
+*/
+
+/*This part makes components in the screen seem better in terms of size when you minimize the size of the screen.*/
+
+@supports (display: grid) {
+  .profile {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, auto);
+    grid-column-gap: 3rem;
+    align-items: center;
+  }
+
+  .profile-image {
+    grid-row: 1 / -1;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    grid-gap: 2rem;
+  }
+
+  .profile-image,
+  .profile-user-settings,
+  .profile-stat-count,
+  .profile-bio,
+  .gallery-item,
+  .gallery {
+    width: auto;
+    margin: 0;
+  }
+
+  @media (max-width: 40rem) {
+    .profile {
+      grid-template-columns: auto 1fr;
+      grid-row-gap: 1.5rem;
+    }
+
+    .profile-image {
+      grid-row: 1 / 2;
+    }
+
+    .profile-user-settings {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-gap: 1rem;
+    }
+
+    .profile-edit-btn,
+    .profile-stat-count,
+    .profile-bio {
+      grid-column: 1 / -1;
+    }
+
+    .profile-user-settings,
+    .profile-edit-btn,
+    .profile-settings-btn,
+    .profile-bio,
+    .profile-stat-count {
+      margin: 0;
+    }
+  }
+}
