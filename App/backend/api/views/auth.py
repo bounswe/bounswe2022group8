@@ -12,6 +12,9 @@ from drf_yasg import openapi
 
 from django.conf import settings
 from django.core.mail import send_mail
+from ..models.user import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 
 class RegisterView(generics.GenericAPIView):
@@ -97,18 +100,21 @@ class LoginView(generics.GenericAPIView):
             "token": AuthToken.objects.create(user)[1]
         })
 
+# {
+#   "email": "user_email@artopia.com"
+# }
 #Function to send Email with OTP on User Request
 @api_view(['POST'])
 def resetRequestView(request):
     data = request.data
     email = data['email']
-    user = settings.AUTH_USER_MODEL.objects.get(email=email)
-    if settings.AUTH_USER_MODEL.objects.filter(email=email).exists():
+    user = User.objects.get(email=email)
+    if User.objects.filter(email=email).exists():
         # send email with otp
         send_mail(
         'Password Reset', #Subject
-        f'We have received a request from your account to reset password. Please reset your pass word using the following OTP (one time password): {user.otp}.', #message
-        'from@example.com',
+        f'We have received a request from your account to reset password. Please reset your password using the following OTP (one time password): {user.otp}.', #message
+        settings.EMAIL_HOST_USER,
         [user.email],
         fail_silently=False,
         )
@@ -120,21 +126,40 @@ def resetRequestView(request):
             'detail': 'User with given email does not exist. Error occured while sending password reset email.'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
+# {
+#   "email": "user_email@artopia.com",
+#   "otp": "six_digit_otp_from_email",
+#   "new_password": "new_user_password"
+# }
 #Function to verify OTP And reset Password
 @api_view(['PUT'])
 def resetPasswordView(request):
     """reset_password with email, OTP and new password"""
     data = request.data
-    user = settings.AUTH_USER_MODEL.objects.get(email=data['email'])
+    try:
+        user = User.objects.get(email=data['email'])
+    except User.DoesNotExist:
+        message = {
+            'detail': 'User with given email does not exist.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
     if user.is_active:
         # Check if otp is valid
-        if data['otp'] == user.opt:
+        if data['otp'] == user.otp:
             #here use a function to check password criteria
             if data['new_password'] != '':
+                #validate that new password fits criteria
+                try:
+                    validate_password(data['new_password'])
+                except ValidationError as e:
+                    message = {
+                    'detail': e.messages}
+                    return Response(message, status=status.HTTP_400_BAD_REQUEST)
                 # Change Password
-                user.set_password(data['password'])
+                user.set_password(data['new_password'])
                 user.save() # Here user otp will also be changed on save automatically 
-                return Response('Password succesfully reset.')
+                message = {
+                    'detail': 'Password succesfully reset.'}
+                return Response(message, status=status.HTTP_200_OK)
             else:
                 message = {
                     'detail': 'Password cant be empty'}
