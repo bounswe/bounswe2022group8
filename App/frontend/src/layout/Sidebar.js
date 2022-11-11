@@ -7,12 +7,17 @@ import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 
 import "./styles/Sidebar.css";
-import { useNavigate } from "react-router-dom";
 
 function Sidebar(props) {
-  const { token, clearToken } = useAuth();
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
 
-  const navigate = useNavigate();
+  const { token, clearToken } = useAuth();
 
   function handleLogOut() {
     var host = HOST;
@@ -32,7 +37,7 @@ function Sidebar(props) {
       .catch((error) => console.error("Error:", error));
   }
 
-  function goToSettings(){
+  function goToSettings() {
     //navigate('/settings');
   }
 
@@ -44,7 +49,7 @@ function Sidebar(props) {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="sidebar-row">
-                <Link to={val.link}>
+                <Link to={val.link} onClick={scrollToTop}>
                   <Button className="btn-light sidebar-element">
                     {val.title}
                   </Button>
@@ -57,7 +62,10 @@ function Sidebar(props) {
       <div className="sidebar-footer" style={{ width: props.width }}>
         {props.auth && (
           <>
-            <Button className="btn-light sidebar-footer-btn" onClick={() => goToSettings()}>
+            <Button
+              className="btn-light sidebar-footer-btn"
+              onClick={() => goToSettings()}
+            >
               Settings
             </Button>
             <Button

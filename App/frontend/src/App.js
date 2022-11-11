@@ -5,9 +5,9 @@ import "./App.css";
 
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 import { AuthProvider } from "./auth/authentication";
 
+import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 
 function App() {

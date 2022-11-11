@@ -54,15 +54,11 @@ function Layout(props) {
 
   // when log out is clicked, re-render server side and redirect to home page
   function handleClickLogOut() {
-    window.location.replace("./");  // window.location.href("./") might also be used
+    window.location.replace("/"); // window.location.href("/") might also be used
   }
 
   function handleSidebar() {
     setSidebarOpen(!sidebarOpen);
-  }
-
-  function goToProfile(){
-    navigate('/:username');
   }
 
   // changes color of the navbar w.r.t scrollY position
@@ -116,7 +112,6 @@ function Layout(props) {
           onClickLogIn={() => handleLogIn()}
           onClickSignUp={() => handleSignUp()}
           onClickMenu={() => handleSidebar()}
-          onClickProfile={() => goToProfile()}
         />
       ) : (
         <Mainbar
