@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from knox.models import AuthToken
 
-from ..serializers.auth import RegisterSerializer, LoginSerializer
+from ..serializers.auth import RegisterSerializer, LoginSerializer, resetRequestSerializer, resetPasswordSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 
@@ -104,6 +104,32 @@ class LoginView(generics.GenericAPIView):
 #   "email": "user_email@artopia.com"
 # }
 #Function to send Email with OTP on User Request
+@swagger_auto_schema(
+        method='POST',
+        request_body=resetRequestSerializer,
+        operation_description="Password reset request API. This API takes the user email as a parameter and sends an email with OTP (one time password) to user.",
+        operation_summary="Send password reset request with email (Part1).",
+        tags=['password_reset'],
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                description="Successfully sent the password reset email.",
+                examples={
+                    "application/json": {
+                        "detail": ["Successfully sent the password reset email."]
+                    }
+                }
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description="Invalid credentials.",
+                examples={
+                    "application/json": {
+                        "credentials": ["Incorrect username or email."],
+                        "credentials": ["Incorrect password"]
+                    },
+                }
+            ),
+        }
+    )
 @api_view(['POST'])
 def resetRequestView(request):
     data = request.data
@@ -132,6 +158,70 @@ def resetRequestView(request):
 #   "new_password": "new_user_password"
 # }
 #Function to verify OTP And reset Password
+@swagger_auto_schema(
+        method='PUT',
+        request_body=resetPasswordSerializer,
+        operation_description="Password reset API. After user has received otp via resetRequestAPI, this API takes the user email, otp and new_password as a parameters and changes the user password if everything checks out.",
+        operation_summary="Password reset API (Part2).",
+        tags=['password_reset'],
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                description="Password succesfully reset.",
+                examples={
+                    "application/json": {
+                        "detail": ["Password succesfully reset."]
+                    }
+                }
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description="Invalid credentials.",
+                examples={
+                    "application/json": {
+                        "detail": ["User with given email does not exist."],
+                        "detail": ["Password cant be empty"],
+                        "detail": ["User is not active. Something went wrong"],
+                        "detail": ["OTP did not match"]
+                    },
+                    
+                }
+            ),
+            # status.HTTP_400_BAD_REQUEST: openapi.Response(
+            #     description="New Password not valid.",
+            #     examples={
+            #         "application/json": {
+            #             "detail": ["User with given email does not exist."]
+            #         },
+            #     }
+            # ),
+            # status.HTTP_400_BAD_REQUEST: openapi.Response(
+            #     description="Password cant be empty",
+            #     examples={
+            #         "application/json": {
+            #             "detail": ["Password cant be empty"]
+            #         },
+            #     }
+            # ),
+            # status.HTTP_400_BAD_REQUEST: openapi.Response(
+            #     description="OTP did not match",
+            #     examples={
+            #         "application/json": {
+            #             "detail": ["OTP did not match"]
+            #         },
+            #     }
+            # ),
+            # status.HTTP_400_BAD_REQUEST: openapi.Response(
+            #     description="User is not active.",
+            #     examples={
+            #         "application/json": {
+            #             "detail": ["User is not active. Something went wrong"]
+            #         },
+            #         "application/json": {
+            #             "detail": ["Password cant be empty"]
+            #         },
+            #     }
+            # ),
+        }
+    )
 @api_view(['PUT'])
 def resetPasswordView(request):
     """reset_password with email, OTP and new password"""
