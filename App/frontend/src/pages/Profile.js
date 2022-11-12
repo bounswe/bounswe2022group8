@@ -15,13 +15,12 @@ function Profile(props) {
     name: null,
     surname: null,
     location: null,
-    description: null,
+    about: null,
   });
 
   useEffect(() => {
     fetch(`${host}/api/v1/users/profile/me`, {
       method: "GET",
-      body: "",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Token " + { token },
@@ -35,7 +34,7 @@ function Profile(props) {
           name: response.name,
           surname: response.surname,
           location: response.location,
-          description: response.description,
+          about: response.about,
         });
       })
       .catch((error) => console.error("Error:", error));
@@ -59,7 +58,7 @@ function Profile(props) {
                   width="25"
                   height="25"
                   fill="currentColor"
-                  class="bi bi-check-circle-fill"
+                  className="bi bi-check-circle-fill"
                   viewBox="0 0 16 16"
                 >
                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -72,7 +71,7 @@ function Profile(props) {
             <div className="profile-bio">
               <p>{profileInfo.name}{" "}{profileInfo.surname}</p>
               <p>{profileInfo.location}</p>
-              <p>{profileInfo.description}</p>
+              <p>{profileInfo.about}</p>
 
               <span className="profile-stat-count">
                 0 Followers 0 Following
@@ -106,11 +105,11 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-heart-fill"
+                      className="bi bi-heart-fill"
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                       />
                     </svg>{" "}
@@ -122,7 +121,7 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chat-fill"
+                      className="bi bi-chat-fill"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
@@ -149,11 +148,11 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-heart-fill"
+                      className="bi bi-heart-fill"
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                       />
                     </svg>{" "}
@@ -166,7 +165,7 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chat-fill"
+                      className="bi bi-chat-fill"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
@@ -193,11 +192,11 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-heart-fill"
+                      className="bi bi-heart-fill"
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                       />
                     </svg>{" "}
@@ -210,7 +209,7 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chat-fill"
+                      className="bi bi-chat-fill"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
@@ -237,11 +236,11 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-heart-fill"
+                      className="bi bi-heart-fill"
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                       />
                     </svg>{" "}
@@ -253,7 +252,7 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chat-fill"
+                      className="bi bi-chat-fill"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
@@ -280,11 +279,11 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-heart-fill"
+                      className="bi bi-heart-fill"
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                       />
                     </svg>{" "}
@@ -297,7 +296,7 @@ function Profile(props) {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chat-fill"
+                      className="bi bi-chat-fill"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
