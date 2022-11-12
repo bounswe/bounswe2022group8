@@ -5,7 +5,7 @@ import "./App.css";
 
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./auth/authentication";
+import { AuthProvider,AuthenticatedRoute } from "./auth/authentication";
 
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -15,7 +15,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/my-profile" element={<Profile />} />
+        <Route path="/my-profile" element={<AuthenticatedRoute> <Profile/></AuthenticatedRoute>} />
       </Routes>
     </AuthProvider>
   );
