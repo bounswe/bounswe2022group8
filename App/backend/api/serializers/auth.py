@@ -111,3 +111,7 @@ class resetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(default="user_email@artopia.com")
     otp = serializers.CharField(default="six_digit_otp_from_email")
     new_password = serializers.CharField(default="new_user_password")
+
+#just used for swagger
+class passwordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(default="new_user_password")

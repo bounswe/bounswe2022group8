@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from knox.models import AuthToken
 
-from ..serializers.auth import RegisterSerializer, LoginSerializer, resetRequestSerializer, resetPasswordSerializer
+from ..serializers.auth import RegisterSerializer, LoginSerializer, resetRequestSerializer, resetPasswordSerializer, passwordSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 
@@ -162,7 +162,7 @@ def resetRequestView(request):
 @swagger_auto_schema(
         method='PUT',
         request_body=resetPasswordSerializer,
-        operation_description="Password reset API. After user has received otp via resetRequestAPI, this API takes the user email, otp and new_password as a parameters and changes the user password if everything checks out.",
+        operation_description="Password reset API. After user has received otp via request-reset API, this API takes the user email, otp and new_password as a parameters and changes the user password if everything checks out.",
         operation_summary="Password reset API (Part2).",
         tags=['password_reset'],
         responses={
@@ -186,41 +186,6 @@ def resetRequestView(request):
                     
                 }
             ),
-            # status.HTTP_400_BAD_REQUEST: openapi.Response(
-            #     description="New Password not valid.",
-            #     examples={
-            #         "application/json": {
-            #             "detail": ["User with given email does not exist."]
-            #         },
-            #     }
-            # ),
-            # status.HTTP_400_BAD_REQUEST: openapi.Response(
-            #     description="Password cant be empty",
-            #     examples={
-            #         "application/json": {
-            #             "detail": ["Password cant be empty"]
-            #         },
-            #     }
-            # ),
-            # status.HTTP_400_BAD_REQUEST: openapi.Response(
-            #     description="OTP did not match",
-            #     examples={
-            #         "application/json": {
-            #             "detail": ["OTP did not match"]
-            #         },
-            #     }
-            # ),
-            # status.HTTP_400_BAD_REQUEST: openapi.Response(
-            #     description="User is not active.",
-            #     examples={
-            #         "application/json": {
-            #             "detail": ["User is not active. Something went wrong"]
-            #         },
-            #         "application/json": {
-            #             "detail": ["Password cant be empty"]
-            #         },
-            #     }
-            # ),
         }
     )
 @api_view(['PUT'])
@@ -267,6 +232,32 @@ def resetPasswordView(request):
 # {
 #   "new_password": "new_user_password"
 # }
+@swagger_auto_schema(
+        method='PUT',
+        request_body=passwordSerializer,
+        operation_description="Password update API. This API takes the new password as a parameter and updates the user password. Login is required",
+        operation_summary="Password update API.",
+        tags=['password_reset'],
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                description="Password succesfully updated.",
+                examples={
+                    "application/json": {
+                        "detail": ["Password succesfully updated."]
+                    }
+                }
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description="Invalid credentials.",
+                examples={
+                    "application/json": {
+                        "detail": ["Invalid token."],
+                        "detail": ["Password cant be empty"]
+                    },
+                }
+            ),
+        }
+    )
 @api_view(['PUT'])
 @login_required
 def resetPasswordLoggedView(request):
@@ -285,7 +276,7 @@ def resetPasswordLoggedView(request):
         u.set_password(data['new_password'])
         u.save() 
         message = {
-            'detail': 'Password succesfully reset.'}
+            'detail': 'Password succesfully updated.'}
         return Response(message, status=status.HTTP_200_OK)
     else:
         message = {

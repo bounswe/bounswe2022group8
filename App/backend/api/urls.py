@@ -44,9 +44,9 @@ urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name="register"),
     path('auth/login/', LoginView.as_view(), name="login"),
     path('auth/logout/', decorated_logout_view, name='logout'),
-    path('auth/resetRequest/', resetRequestView, name = "resetRequest"),
-    path('auth/resetPassword/', resetPasswordView, name = "resetPassword"),
-    path('auth/resetPasswordLogged/', resetPasswordLoggedView, name = "resetPasswordLogged"),
+    path('auth/request-reset/', resetRequestView, name = "resetRequest"),
+    path('auth/password-reset/', resetPasswordView, name = "resetPassword"),
+    path('profile/me/password-reset/', resetPasswordLoggedView, name = "resetPasswordLogged"),
 ]
 
 # added to give us the option to choose between default Response template and regular json
