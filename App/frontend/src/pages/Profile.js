@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 
-import { useParams } from "react-router-dom";
+import { useAuth } from "../auth/authentication";
+import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
 import "./styles/Profile.css";
 
 function Profile(props) {
-  let { username } = useParams();
+  const { token } = useAuth();
+  var host = HOST;
+
+  const [profileInfo, setProfileInfo] = useState({
+    username: null,
+    name: null,
+    surname: null,
+    location: null,
+    description: null,
+  });
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me`, {
+      method: "GET",
+      body: "",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + { token },
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setProfileInfo({
+          username: response.username,
+          name: response.name,
+          surname: response.surname,
+          location: response.location,
+          description: response.description,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+
+  }, [host,token]);
 
   return (
     <Layout>
@@ -19,7 +53,7 @@ function Profile(props) {
 
             <div className="profile-user-settings">
               <h1 className="profile-user-name">
-                Username{" "}
+                {profileInfo.username}{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
@@ -36,9 +70,9 @@ function Profile(props) {
             </div>
 
             <div className="profile-bio">
-              <p>Full Name</p>
-              <p>Location</p>
-              <p>Profile Decription will fit here well 📷✈️🏕️</p>
+              <p>{profileInfo.name}{" "}{profileInfo.surname}</p>
+              <p>{profileInfo.location}</p>
+              <p>{profileInfo.description}</p>
 
               <span className="profile-stat-count">
                 0 Followers 0 Following

@@ -15,7 +15,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:username" element={<Profile />} />
+        <Route path="/my-profile" element={<Profile />} />
       </Routes>
     </AuthProvider>
   );

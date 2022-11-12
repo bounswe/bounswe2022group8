@@ -41,7 +41,7 @@ function MainbarLogged(props) {
           </Nav>
         </Navbar.Collapse>
         <Nav className="ms-auto">
-          <Link to="/:username" onClick={scrollToTop}>
+          <Link to="/my-profile" onClick={scrollToTop}>
             <Button
               variant="light"
               className={
