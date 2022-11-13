@@ -7,11 +7,17 @@ import Backdrop from "../components/Backdrop";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../auth/authentication";
 
-import { useNavigate } from "react-router-dom";
-
 import "./styles/Layout.css";
 
 function Layout(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token } = useAuth();
 
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
@@ -20,8 +26,6 @@ function Layout(props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // const [currentScrollY, setCurrentScrollY] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const navigate = useNavigate();
 
   function handleSignUp() {
     setSignUpIsOpen(true);
@@ -42,14 +46,20 @@ function Layout(props) {
   // close the sidebar if it was open
   function handleSubmitSignUp(response) {
     setSignUpIsOpen(response !== 201);
-    if (response === 201) setSidebarOpen(false);
+    if (response === 201) {
+      setSidebarOpen(false);
+      scrollToTop();
+    }
   }
 
   // when successfully logged in, close the log in pop up and
   // close the sidebar if it was open
   function handleSubmitLogIn(response) {
     setLogInIsOpen(response !== 200);
-    if (response === 200) setSidebarOpen(false);
+    if (response === 200) {
+      setSidebarOpen(false);
+      scrollToTop();
+    }
   }
 
   // when log out is clicked, re-render server side and redirect to home page

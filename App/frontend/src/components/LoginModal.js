@@ -129,7 +129,7 @@ function Login(props) {
           <Link to="./">Forgot password?</Link>
         </p>
         <p className="text-center mt-2">
-          Not on (AppName) yet?{" "}
+          Not on Artopia yet?{" "}
           <Link onClick={props.onClickSignUp}>Sign up</Link>
         </p>
       </div>
