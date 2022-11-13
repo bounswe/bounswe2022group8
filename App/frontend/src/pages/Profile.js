@@ -1,14 +1,47 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { SampleGallery } from "./data/SampleGallery";
 
+import { useAuth } from "../auth/authentication";
+import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
 import { CiLocationOn } from "react-icons/ci";
 import "./styles/Profile.css";
 
 function Profile(props) {
-  let { username } = useParams();
+  const { token } = useAuth();
+  var host = HOST;
+
+  const [profileInfo, setProfileInfo] = useState({
+    username: null,
+    name: null,
+    surname: null,
+    location: null,
+    about: null,
+  });
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + { token },
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setProfileInfo({
+          username: response.username,
+          name: response.name,
+          surname: response.surname,
+          location: response.location,
+          about: response.about,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+
+  }, [host,token]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
