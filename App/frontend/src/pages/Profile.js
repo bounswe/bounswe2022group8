@@ -7,10 +7,13 @@ import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
 import { CiLocationOn } from "react-icons/ci";
 import "./styles/Profile.css";
+import { useNavigate } from "react-router-dom";
 
 function Profile(props) {
   const { token } = useAuth();
   var host = HOST;
+
+  const navigate = useNavigate();
 
   const [profileInfo, setProfileInfo] = useState({
     username: null,
@@ -40,8 +43,7 @@ function Profile(props) {
         });
       })
       .catch((error) => console.error("Error:", error));
-
-  }, [host,token]);
+  }, [host, token]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
@@ -52,6 +54,10 @@ function Profile(props) {
 
   function handleExhibitions() {
     setNavTab(false);
+  }
+
+  function goToArtItem() {
+    navigate("/artitems/:id");
   }
 
   return (
@@ -118,12 +124,17 @@ function Profile(props) {
 
         <main>
           {navTab ? (
-            // what if gallery is empty ? 
+            // what if gallery is empty ?
             <div className="gallery">
               {SampleGallery.map((val, key) => {
                 return (
                   <div key={key} className="gallery-item">
-                    <img src={val.src} className="gallery-image" alt="" />
+                    <img
+                      src={val.src}
+                      className="gallery-image"
+                      alt=""
+                      onClick={() => goToArtItem()}
+                    />
                   </div>
                 );
               })}
