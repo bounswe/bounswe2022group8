@@ -126,7 +126,7 @@ function Login(props) {
           </button>
         </div>
         <p className="forgot-password text-center mt-3">
-          <Link to="./">Forgot password?</Link>
+          <Link onClick={props.onClickResPass}>Forgot password?</Link>
         </p>
         <p className="text-center mt-2">
           Not on Artopia yet?{" "}

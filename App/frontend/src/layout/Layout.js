@@ -8,6 +8,7 @@ import Sidebar from "./Sidebar";
 import { useAuth } from "../auth/authentication";
 
 import "./styles/Layout.css";
+import ResetPassword from "../components/ResetPasswordModal";
 
 function Layout(props) {
   function scrollToTop() {
@@ -22,6 +23,7 @@ function Layout(props) {
 
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
+  const [resPassIsOpen, setResPassIsOpen] = useState(false);
   const [mainbarOpen, setMainbarOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -37,9 +39,20 @@ function Layout(props) {
     setSignUpIsOpen(false);
   }
 
+  function handleResPass() {
+    setResPassIsOpen(true);
+    setLogInIsOpen(false);
+  }
+
+  function handleBackToLogIn() {
+    setResPassIsOpen(false);
+    setLogInIsOpen(true);
+  }
+
   function handleCloseForm() {
     setSignUpIsOpen(false);
     setLogInIsOpen(false);
+    setResPassIsOpen(false);
   }
 
   // when successfully signed up, close the sign up pop up and
@@ -119,8 +132,6 @@ function Layout(props) {
         <MainbarLogged
           mainbarOpen={mainbarOpen}
           sidebarOpen={sidebarOpen}
-          onClickLogIn={() => handleLogIn()}
-          onClickSignUp={() => handleSignUp()}
           onClickMenu={() => handleSidebar()}
         />
       ) : (
@@ -144,10 +155,17 @@ function Layout(props) {
         <Login
           onSubmitLogIn={(response) => handleSubmitLogIn(response)}
           onClickSignUp={() => handleSignUp()}
+          onClickResPass={() => handleResPass()}
           onClickClose={() => handleCloseForm()}
         />
       )}
-      {(signUpIsOpen || logInIsOpen) && (
+      {resPassIsOpen && (
+        <ResetPassword
+          onClickClose={() => handleCloseForm()}
+          onClickBack={() => handleBackToLogIn()}
+        />
+      )}
+      {(signUpIsOpen || logInIsOpen || resPassIsOpen) && (
         <Backdrop onClick={() => handleCloseForm()} />
       )}
       <Sidebar
