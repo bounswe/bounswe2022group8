@@ -9,6 +9,14 @@ import { HOST } from "../constants/host";
 import "./styles/Sidebar.css";
 
 function Sidebar(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token, clearToken } = useAuth();
 
   function handleLogOut() {
@@ -29,6 +37,10 @@ function Sidebar(props) {
       .catch((error) => console.error("Error:", error));
   }
 
+  function goToSettings() {
+    //navigate('/settings');
+  }
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-header" style={{ width: props.width }}></div>
@@ -37,7 +49,7 @@ function Sidebar(props) {
           {SidebarData.map((val, key) => {
             return (
               <li key={key} className="sidebar-row">
-                <Link to={val.link}>
+                <Link to={val.link} onClick={scrollToTop}>
                   <Button className="btn-light sidebar-element">
                     {val.title}
                   </Button>
@@ -50,7 +62,12 @@ function Sidebar(props) {
       <div className="sidebar-footer" style={{ width: props.width }}>
         {props.auth && (
           <>
-            <Button className="btn-light sidebar-footer-btn">Settings</Button>
+            <Button
+              className="btn-light sidebar-footer-btn"
+              onClick={() => goToSettings()}
+            >
+              Settings
+            </Button>
             <Button
               className="btn-light sidebar-footer-btn"
               onClick={() => handleLogOut()}

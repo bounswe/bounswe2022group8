@@ -21,6 +21,18 @@
   outline: none !important;
 }
 
+.form-error {
+  margin-top: 0.4em;
+  margin-bottom: -0.4em;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d90429;
+}
+
+.form-control-error {
+  border-color: #d90429 !important; /* overriding form-control when there is an error */
+}
+
 /* ------- BUTTONS ------- */
 
 /* Primary Button */
@@ -31,8 +43,8 @@
 }
 
 .btn-primary:hover {
-  background-color: #826f99 !important;
-  border-color: #826f99 !important;
+  background-color: rgb(39, 44, 48) !important;
+  border-color: rgb(39, 44, 48) !important;
 }
 
 /* Primary Outline Button */
