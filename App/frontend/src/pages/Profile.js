@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { SampleGallery } from "./data/SampleGallery";
 
@@ -7,7 +8,6 @@ import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
 import { CiLocationOn } from "react-icons/ci";
 import "./styles/Profile.css";
-import { useNavigate } from "react-router-dom";
 
 function Profile(props) {
   const { token } = useAuth();
@@ -17,18 +17,20 @@ function Profile(props) {
 
   const [profileInfo, setProfileInfo] = useState({
     username: null,
+    email: null,
     name: null,
-    surname: null,
-    location: null,
     about: null,
+    location: null,
+    profile_image: null,
   });
 
   useEffect(() => {
-    fetch(`${host}/api/v1/users/profile/me`, {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/profile/me/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token " + { token },
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
@@ -36,10 +38,11 @@ function Profile(props) {
         console.log(response);
         setProfileInfo({
           username: response.username,
+          email: response.email,
           name: response.name,
-          surname: response.surname,
-          location: response.location,
           about: response.about,
+          location: response.location,
+          profile_image: response.profile_image,
         });
       })
       .catch((error) => console.error("Error:", error));
@@ -144,6 +147,13 @@ function Profile(props) {
               <div className="gallery-item" tabIndex="0">
                 <img
                   src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
+                  className="gallery-image"
+                  alt=""
+                />
+              </div>
+              <div className="gallery-item" tabIndex="0">
+                <img
+                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
                   className="gallery-image"
                   alt=""
                 />

@@ -8,6 +8,7 @@
 
 .profile-page-container {
   max-width: 1400px;
+  min-height: 80vh;
   margin: 0 auto 10rem auto;
   padding: 0 2.5rem;
 }
@@ -16,7 +17,7 @@
 .profile-container {
   display: flex;
   margin-top: 7rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3.2rem;
   gap: 2.5rem;
   align-items: flex-start;
   justify-content: flex-start;
@@ -29,6 +30,10 @@
 .profile-photo {
   height: 9rem;
   width: 9rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
   border-radius: 50%;
 }
 
@@ -66,6 +71,7 @@
   font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
   color: #bcb1c1;
 }
@@ -300,5 +306,4 @@ Remove or comment-out the code block below to see how the browser will fall-back
   .profile-stat-count {
     overflow: hidden;
   }
-
 }

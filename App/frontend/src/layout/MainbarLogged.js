@@ -30,7 +30,7 @@ function MainbarLogged(props) {
       }
     >
       <Container fluid>
-        <Link to="/" onClick={scrollToTop} style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }} onClick={scrollToTop}>
           <Navbar.Brand className="ms-4 me-5" style={{ color: "white" }}>
             App Name
           </Navbar.Brand>
@@ -41,7 +41,11 @@ function MainbarLogged(props) {
           </Nav>
         </Navbar.Collapse>
         <Nav className="ms-auto">
-          <Link to="/my-profile" onClick={scrollToTop}>
+          <Link
+            to="/my-profile"
+            style={{ display: "contents" }}
+            onClick={scrollToTop}
+          >
             <Button
               variant="light"
               className={

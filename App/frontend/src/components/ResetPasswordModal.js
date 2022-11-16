@@ -15,7 +15,7 @@ function ResetPassword(props) {
       </div>
       <div className="access-content">
         <h3 className="access-title">Forgot password?</h3>
-        <div>No worries, we'll send you a link to reset your password.</div>
+        <div>Don't worry, we will send you a link to reset your password.</div>
 
         <div className="form-group mt-3">
           <label className="access-label">Email</label>
