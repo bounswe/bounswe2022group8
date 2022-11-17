@@ -10,12 +10,22 @@ import { useAuth } from "../auth/authentication";
 import { useNavigate } from "react-router-dom";
 
 import "./styles/Layout.css";
+import ResetPassword from "../components/ResetPasswordModal";
 
 function Layout(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token } = useAuth();
 
   const [signUpIsOpen, setSignUpIsOpen] = useState(false);
   const [logInIsOpen, setLogInIsOpen] = useState(false);
+  const [resPassIsOpen, setResPassIsOpen] = useState(false);
   const [mainbarOpen, setMainbarOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -33,28 +43,45 @@ function Layout(props) {
     setSignUpIsOpen(false);
   }
 
+  function handleResPass() {
+    setResPassIsOpen(true);
+    setLogInIsOpen(false);
+  }
+
+  function handleBackToLogIn() {
+    setResPassIsOpen(false);
+    setLogInIsOpen(true);
+  }
+
   function handleCloseForm() {
     setSignUpIsOpen(false);
     setLogInIsOpen(false);
+    setResPassIsOpen(false);
   }
 
   // when successfully signed up, close the sign up pop up and
   // close the sidebar if it was open
   function handleSubmitSignUp(response) {
     setSignUpIsOpen(response !== 201);
-    if (response === 201) setSidebarOpen(false);
+    if (response === 201) {
+      setSidebarOpen(false);
+      scrollToTop();
+    }
   }
 
   // when successfully logged in, close the log in pop up and
   // close the sidebar if it was open
   function handleSubmitLogIn(response) {
     setLogInIsOpen(response !== 200);
-    if (response === 200) setSidebarOpen(false);
+    if (response === 200) {
+      setSidebarOpen(false);
+      scrollToTop();
+    }
   }
 
   // when log out is clicked, re-render server side and redirect to home page
   function handleClickLogOut() {
-    window.location.replace("./");  // window.location.href("./") might also be used
+    window.location.replace("/"); // window.location.href("/") might also be used
   }
 
   function handleSidebar() {
@@ -113,8 +140,6 @@ function Layout(props) {
         <MainbarLogged
           mainbarOpen={mainbarOpen}
           sidebarOpen={sidebarOpen}
-          onClickLogIn={() => handleLogIn()}
-          onClickSignUp={() => handleSignUp()}
           onClickMenu={() => handleSidebar()}
           onClickProfile={() => goToProfile()}
         />
@@ -139,10 +164,17 @@ function Layout(props) {
         <Login
           onSubmitLogIn={(response) => handleSubmitLogIn(response)}
           onClickSignUp={() => handleSignUp()}
+          onClickResPass={() => handleResPass()}
           onClickClose={() => handleCloseForm()}
         />
       )}
-      {(signUpIsOpen || logInIsOpen) && (
+      {resPassIsOpen && (
+        <ResetPassword
+          onClickClose={() => handleCloseForm()}
+          onClickBack={() => handleBackToLogIn()}
+        />
+      )}
+      {(signUpIsOpen || logInIsOpen || resPassIsOpen) && (
         <Backdrop onClick={() => handleCloseForm()} />
       )}
       <Sidebar

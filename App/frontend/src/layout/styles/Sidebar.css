@@ -10,7 +10,7 @@
 .sidebar-header {
   width: 0px;
   height: 80px;
-  background-color: #6FA470;
+  background-color: #6fa470;
   transition: width 0.3s;
 }
 
@@ -19,7 +19,7 @@
   /*in real, will be determined in inline css (300:open - 0:closed)
   -- info comes from Layout.js via width prop*/
   width: 0px;
-  background-color: #6FA470;
+  background-color: #6fa470;
   overflow-x: hidden;
   transition: width 0.3s;
   display: flex;
@@ -65,7 +65,7 @@
   -- info comes from Layout.js via width prop*/
   width: 0px;
   height: 80px;
-  background-color: #6FA470;
+  background-color: #6fa470;
   overflow-x: hidden;
   transition: width 0.3s;
   display: flex;
