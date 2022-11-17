@@ -145,7 +145,7 @@ def resetRequestView(request):
     if User.objects.filter(email=email).exists():
         #create an otp
         myotp = user.changeOTP()
-
+        #print(settings.EMAIL_HOST_USER)
         # send email with otp
         send_mail(
         'Password Reset', #Subject
