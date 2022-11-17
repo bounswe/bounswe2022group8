@@ -12,8 +12,6 @@ import Profile from "./pages/Profile";
 import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
 
-import Profile from "./pages/Profile";
-
 function App() {
   return (
     <AuthProvider>

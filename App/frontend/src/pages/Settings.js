@@ -10,15 +10,21 @@ function Settings() {
   const { token } = useAuth();
   var host = HOST;
 
+  // profile_image = base64 encoded version of the image --> for updating the profile photo -- PUT
+  // profile_path = response from GET e.g --> avatar/default.png  --> private version of the image requested --> ACCESS_DENIED -- GET
+  // profile_image_url = signed version of the profile_path  --> for display -- GET
+
+  // For the initial GET
   const [profileInfo, setProfileInfo] = useState({
     username: null,
     email: null,
     name: null,
     about: null,
     location: null,
-    profile_image: null,
+    profile_image_url: null,
   });
 
+  // For PUT
   const [profileInput, setProfileInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     []
@@ -46,7 +52,7 @@ function Settings() {
 
         var params = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
-          Key: response.profile_image,
+          Key: response.profile_path,
         };
 
         // signed profile image url --> for display in frontend
@@ -58,7 +64,7 @@ function Settings() {
           name: response.name,
           about: response.about,
           location: response.location,
-          profile_image: profile_image_url,
+          profile_image_url: profile_image_url,
         });
       })
       .catch((error) => console.error("Error:", error));
@@ -144,7 +150,7 @@ function Settings() {
             <label className="access-label">Profile Photo</label>
             <div className="pp-container mt-1 hadow-sm">
               <img
-                src={profileInfo.profile_image}
+                src={profileInfo.profile_image_url}
                 alt=""
                 className="pp-preview"
                 id="preview"
