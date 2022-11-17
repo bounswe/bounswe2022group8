@@ -4,7 +4,7 @@ from .models.user import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    exclude = ('otp',)
+   # exclude = ('otp',)
     list_display = ['username', 'id', 'name', 'surname', 'email', 'created_at', 'updated_at']
 
 class TagAdmin(admin.ModelAdmin):

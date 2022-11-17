@@ -16,6 +16,7 @@ from ..models.user import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+import hashlib
 
 
 class RegisterView(generics.GenericAPIView):
@@ -135,12 +136,20 @@ class LoginView(generics.GenericAPIView):
 def resetRequestView(request):
     data = request.data
     email = data['email']
-    user = User.objects.get(email=email)
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        message = {
+            'detail': 'User with given email does not exist.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
     if User.objects.filter(email=email).exists():
+        #create an otp
+        myotp = user.changeOTP()
+
         # send email with otp
         send_mail(
         'Password Reset', #Subject
-        f'We have received a request from your account to reset password. Please reset your password using the following OTP (one time password): {user.otp}.', #message
+        f'We have received a request from your account to reset password. Please reset your password using the following OTP (one time password): {myotp}.', #message
         settings.EMAIL_HOST_USER,
         [user.email],
         fail_silently=False,
@@ -200,7 +209,7 @@ def resetPasswordView(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     if user.is_active:
         # Check if otp is valid
-        if data['otp'] == user.otp:
+        if hashlib.sha256(data['otp'].encode('utf-8')).hexdigest() == user.otp:
             #here use a function to check password criteria
             if data['new_password'] != '':
                 #validate that new password fits criteria
@@ -212,13 +221,15 @@ def resetPasswordView(request):
                     return Response(message, status=status.HTTP_400_BAD_REQUEST)
                 # Change Password
                 user.set_password(data['new_password'])
-                user.save() # Here user otp will also be changed on save automatically 
+                user.save() 
+                user.changeOTP()
                 message = {
                     'detail': 'Password succesfully reset.'}
                 return Response(message, status=status.HTTP_200_OK)
             else:
                 message = {
                     'detail': 'Password cant be empty'}
+                user.changeOTP()
                 return Response(message, status=status.HTTP_400_BAD_REQUEST)
         else:
             message = {
