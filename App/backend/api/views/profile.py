@@ -29,7 +29,7 @@ from ..utils import ProfileImageStorage
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
                     "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
-                    "is_level2": "false"
+                    "is_level2": False
                 }
             }
         ),
@@ -74,7 +74,7 @@ def profile_api(request, id):
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
                     "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
-                    "is_level2": "false"
+                    "is_level2": False
                 }
             }
         ),
