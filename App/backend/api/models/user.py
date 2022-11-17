@@ -6,6 +6,8 @@ class User(AbstractUser):
     is_level2 = models.BooleanField('active user', default=False)
     name = models.CharField(max_length=100, blank=True)
     surname = models.CharField(max_length=100, blank=True)
+    about = models.TextField(blank = True)
+    location = models.CharField(max_length=100, blank=True)
     username = models.CharField(unique=True, max_length=100, error_messages={
         'unique':  'User with this username already exists.',
     })
@@ -27,4 +29,3 @@ class User(AbstractUser):
     
     def __str__(self):
         return self.name + " " + self.surname 
-    
