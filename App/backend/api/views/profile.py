@@ -28,7 +28,7 @@ from ..utils import ProfileImageStorage
                     "name": "Po",
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
-                    "profile_path": "avatar/default.png"
+                    "profile_path": "avatar/default.png",
                     "is_level2": False
                 }
             }
@@ -73,7 +73,7 @@ def profile_api(request, id):
                     "surname": "The Budgie",
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
-                    "profile_path": "avatar/default.png"
+                    "profile_path": "avatar/default.png",
                     "is_level2": False
 
                 }
