@@ -52,7 +52,7 @@ from django.core.files.base import ContentFile
                             "surname": "Blocker"
                         },
                         "tags": [],
-                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg"
                     }
                 ]
             }
@@ -66,7 +66,34 @@ def get_artitems(request):
         artitems = ArtItem.objects.all()
         serializer = ArtItemSerializer(artitems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+@ swagger_auto_schema(
+    method='post',
+    operation_description="Uploads an art item to the system.",
+    operation_summary="Upload an art item to the system.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_path": "artitem/docker.jpg"
+                    }
+                ]
+            }
+        )
+    }
+)
 
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
@@ -80,6 +107,8 @@ def post_artitem(request):
             # change 'mutable' property
             data['tags'] = [data['tags']]
 
+
+        artitem_image_storage = ArtItemStorage()
         # BASE64 DECODING
         # Check if artitem_image is provided. If not, default to defaultart.jpg. If provided, it's in base64 format. Decode it.
         if ('artitem_image' in data):
@@ -89,18 +118,18 @@ def post_artitem(request):
                 filename = 'artitem-{pk}.png'.format(pk=request.user.pk)
                 request.data['artitem_image'] = ContentFile(
                     decoded, "temporary")
+
+                request.data['profile_path'] = artitem_image_storage.location + "/" + filename  
             except:
                 return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = ArtItemSerializer(data=data)
         if serializer.is_valid():
             if ('artitem_image' in request.data):
-                artitem_image_storage = ArtItemStorage()
                 filename = request.data['artitem_image'].name
                 artitem_image_storage.save(
                     filename,  request.data['artitem_image'])
-                file_url = artitem_image_storage.url(filename)
-                request.data['artitem_image'] = file_url
+
             
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -167,7 +196,8 @@ def delete_artitem(request, id):
                             "surname": "Blocker"
                         },
                         "tags": [],
-                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg"
+
                     }
                 ]
             }
@@ -214,7 +244,7 @@ def artitems_by_id(request, id):
                             "surname": "Blocker"
                         },
                         "tags": [],
-                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg"
                     }
                 ]
             }
@@ -263,7 +293,7 @@ def artitems_by_userid(request, id):
                             "surname": "Blocker"
                         },
                         "tags": [],
-                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg"
                     }
                 ]
             }

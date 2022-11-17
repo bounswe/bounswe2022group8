@@ -9,7 +9,6 @@ from django.urls import path
 from .views.auth import RegisterView, LoginView
 from .views.profile import profile_api, profile_me_api
 from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem
-
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status

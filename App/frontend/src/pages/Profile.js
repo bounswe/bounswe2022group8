@@ -1,281 +1,174 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
+import { SampleGallery } from "./data/SampleGallery";
 
-import { useParams } from "react-router-dom";
+import { useAuth } from "../auth/authentication";
+import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
+import { CiLocationOn } from "react-icons/ci";
 import "./styles/Profile.css";
 
 function Profile(props) {
-  let { username } = useParams();
+  const { token } = useAuth();
+  var host = HOST;
+
+  const navigate = useNavigate();
+
+  const [profileInfo, setProfileInfo] = useState({
+    username: null,
+    email: null,
+    name: null,
+    about: null,
+    location: null,
+    profile_image: null,
+  });
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setProfileInfo({
+          username: response.username,
+          email: response.email,
+          name: response.name,
+          about: response.about,
+          location: response.location,
+          profile_image: response.profile_image,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token]);
+
+  // true -> art item --- false -> exhibition
+  const [navTab, setNavTab] = useState(true);
+
+  function handleArtItems() {
+    setNavTab(true);
+  }
+
+  function handleExhibitions() {
+    setNavTab(false);
+  }
+
+  function goToArtItem() {
+    navigate("/artitems/:id");
+  }
 
   return (
     <Layout>
-      <header>
-        <div className="container">
-          <div className="profile">
-            <div className="profile-image">
-              <img src={defaultUserImage} alt="" />
+      <div className="profile-page-container">
+        <header>
+          <div className="profile-container">
+            <div className="profile-photo-container">
+              <img className="profile-photo" src={defaultUserImage} alt="" />
             </div>
+            <div>
+              <div>
+                <h1 className="profile-username">Kostanya </h1>
+              </div>
 
-            <div className="profile-user-settings">
-              <h1 className="profile-user-name">
-                Username{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  fill="currentColor"
-                  class="bi bi-check-circle-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                </svg>
-              </h1>
+              <p className="profile-name">Furkan Keskin</p>
+              <p className="profile-bio">
+                Hello! I am a junior Computer Engineering student at Boğaziçi
+                University.
+              </p>
+              <p className="profile-location">
+                <CiLocationOn
+                  style={{
+                    marginBottom: "0.2rem",
+                    marginLeft: "-0.3rem",
+                    marginRight: "0.1rem",
+                  }}
+                />
+                Istanbul, Turkey
+              </p>
 
-              <button className="btn profile-edit-btn">Edit Profile</button>
-            </div>
-
-            <div className="profile-bio">
-              <p>Full Name</p>
-              <p>Location</p>
-              <p>Profile Decription will fit here well 📷✈️🏕️</p>
-
-              <span className="profile-stat-count">
-                0 Followers 0 Following
-              </span>
+              <div className="profile-stat-count">
+                {/* dont forget the space after the number */}
+                <span className="profile-follow-number">123 </span>
+                <span className="profile-follow">Followers</span>
+                <span className="profile-follow-number">0 </span>
+                <span className="profile-follow">Following</span>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="container">
-        <button className="btn add-new-artitem-btn">Add New Art Item</button>
-        <hr className="solid"></hr>
+        <div className="tab-container">
+          <button
+            className={`btn btn-navtab + ${
+              navTab ? "btn-navtab-underline" : ""
+            }`}
+            onClick={() => handleArtItems()}
+          >
+            Art Items
+          </button>
+          <button
+            className={`btn btn-navtab + ${
+              !navTab ? "btn-navtab-underline" : ""
+            }`}
+            onClick={() => handleExhibitions()}
+          >
+            Exhibitions
+          </button>
+          <button className="btn btn-upload">Upload</button>
+        </div>
+
+        <hr className="tab-line"></hr>
+
+        <main>
+          {navTab ? (
+            // what if gallery is empty ?
+            <div className="gallery">
+              {SampleGallery.map((val, key) => {
+                return (
+                  <div key={key} className="gallery-item">
+                    <img
+                      src={val.src}
+                      className="gallery-image"
+                      alt=""
+                      onClick={() => goToArtItem()}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="gallery">
+              <div className="gallery-item" tabIndex="0">
+                <img
+                  src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
+                  className="gallery-image"
+                  alt=""
+                />
+              </div>
+              <div className="gallery-item" tabIndex="0">
+                <img
+                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
+                  className="gallery-image"
+                  alt=""
+                />
+              </div>
+              <div className="gallery-item" tabIndex="0">
+                <img
+                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
+                  className="gallery-image"
+                  alt=""
+                />
+              </div>
+            </div>
+          )}
+        </main>
       </div>
-
-      <main>
-        <div className="container">
-          <div className="gallery">
-            <div className="gallery-item" tabIndex="0">
-              <img
-                src="https://i.pinimg.com/564x/a7/b8/1d/a7b81d6d34bc9e47bb7e7f3caefdc751.jpg"
-                className="gallery-image"
-                alt=""
-              />
-
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>{" "}
-                    56
-                  </li>
-                  <li className="gallery-item-comments">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-chat-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-                    </svg>{" "}
-                    2
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="gallery-item" tabIndex="0">
-              <img
-                src="https://i.pinimg.com/564x/71/f2/7a/71f27aad0987ecf69dbaf8ade6399b43.jpg"
-                className="gallery-image"
-                alt=""
-              />
-
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>{" "}
-                    89
-                  </li>
-                  <li className="gallery-item-comments">
-                    <span className="visually-hidden">Comments:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-chat-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-                    </svg>{" "}
-                    5
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="gallery-item" tabIndex="0">
-              <img
-                src="https://i.pinimg.com/564x/71/f9/8d/71f98d2b86340a2ae2be55f9b67e6853.jpg"
-                className="gallery-image"
-                alt=""
-              />
-
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>{" "}
-                    94
-                  </li>
-                  <li className="gallery-item-comments">
-                    <span className="visually-hidden">Comments:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-chat-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-                    </svg>{" "}
-                    3
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="gallery-item" tabIndex="0">
-              <img
-                src="https://i.pinimg.com/564x/8c/96/51/8c9651a848f1633ca1d268ecf511a0d5.jpg"
-                className="gallery-image"
-                alt=""
-              />
-
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>{" "}
-                    66
-                  </li>
-                  <li className="gallery-item-comments">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-chat-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-                    </svg>{" "}
-                    2
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="gallery-item" tabIndex="0">
-              <img
-                src="https://i.pinimg.com/564x/89/69/c6/8969c6301c6f809e72505f992d40ed7d.jpg"
-                className="gallery-image"
-                alt=""
-              />
-
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>{" "}
-                    41
-                  </li>
-                  <li className="gallery-item-comments">
-                    <span className="visually-hidden">Comments:</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-chat-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" />
-                    </svg>{" "}
-                    0
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
     </Layout>
   );
 }

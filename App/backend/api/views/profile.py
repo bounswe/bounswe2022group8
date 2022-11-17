@@ -29,7 +29,7 @@ from ..utils import ProfileImageStorage
                     "name": "Po",
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
-                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
+                    "profile_path": "avatar/default.png",
                     "is_level2": False
                 }
             }
@@ -74,8 +74,9 @@ def profile_api(request, id):
                     "surname": "The Budgie",
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
-                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
+                    "profile_path": "avatar/default.png",
                     "is_level2": False
+
                 }
             }
         ),
@@ -113,7 +114,7 @@ def profile_api(request, id):
                     "surname": "Blocker",
                     "about": "A veteran of the Indian Wars, who is deeply interested in impressionist art.",
                     "location": "Santa Fe",
-                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/295055.jpg"
+                    "profile_path": "avatar/295055.jpg"
                 }
             }
         ),
@@ -150,12 +151,15 @@ def profile_me_api(request):
 
         # BASE64 DECODING
         # Check if profile_image is provided. If not, don't change it. If provided, it's in base64 format. Decode it.
+
+        profile_image_storage = ProfileImageStorage()
         if ('profile_image' in request.data):
             try:
                 image_data = request.data['profile_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
                 filename = 'profile-{pk}.png'.format(pk=request.user.pk)
                 request.data['profile_image'] = ContentFile(decoded, filename)
+                request.data['profile_path'] = profile_image_storage.location + "/" + filename  
             except:
                 return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -164,14 +168,9 @@ def profile_me_api(request):
         serializer.is_valid(raise_exception=True)
 
         if ('profile_image' in request.data):
-            profile_image_storage = ProfileImageStorage()
-            filename = request.data['profile_image'].name
             profile_image_storage.save(
-                filename,  request.data['profile_image'])
-            file_url = profile_image_storage.url(filename)
-            request.data['profile_image'] = file_url
-
-
+                request.data['profile_image'].name,  request.data['profile_image'])
+      
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     else:
