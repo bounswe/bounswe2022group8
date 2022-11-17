@@ -14,5 +14,6 @@ Welcome to the repository of Group 8 for CmpE [352](https://www.cmpe.boun.edu.tr
 * [Doğukan Türksoy](https://github.com/bounswe/bounswe2022group8/wiki/Do%C4%9Fukan-T%C3%BCrksoy)
 * [Furkan Keskin](https://github.com/bounswe/bounswe2022group8/wiki/Furkan-Keskin)
 * [Sinem Koçoğlu](https://github.com/bounswe/bounswe2022group8/wiki/Sinem-Ko%C3%A7o%C4%9Flu)
-* [Mustafa Emre Erengül](https://github.com/bounswe/bounswe2022group8/wiki/Mustafa-Emre-Erengül)
 * [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar)
+* [Mustafa Emre Erengül](https://github.com/bounswe/bounswe2022group8/wiki/Mustafa-Emre-Erengül)
+

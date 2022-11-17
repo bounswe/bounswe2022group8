@@ -45,6 +45,16 @@ function MainbarLogged(props) {
             to="/my-profile"
             style={{ display: "contents" }}
             onClick={scrollToTop}
+
+          <Button
+            variant="light"
+            onClick={props.onClickProfile}
+            className={
+              !props.mainbarOpen && props.sidebarOpen
+                ? "me-4 btn-logged-sidebar"
+                : "me-4 btn-logged"
+            }
+
           >
             <Button
               variant="light"
