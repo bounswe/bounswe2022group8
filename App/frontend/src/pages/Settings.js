@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import Layout from "../layout/Layout";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
@@ -18,6 +18,11 @@ function Settings() {
     location: null,
     profile_image: null,
   });
+
+  const [profileInput, setProfileInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    []
+  );
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -41,9 +46,10 @@ function Settings() {
 
         var params = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
-          Key: "avatar/eye.jpg",
+          Key: response.profile_image,
         };
 
+        // signed profile image url --> for display in frontend
         var profile_image_url = s3.getSignedUrl("getObject", params);
 
         setProfileInfo({
@@ -58,16 +64,15 @@ function Settings() {
       .catch((error) => console.error("Error:", error));
   }, [host, token]);
 
-  function handlePreview(e) {
+  async function handlePreview(e) {
     if (e.target.files) {
-      console.log(e.target.files);
       let imageFile = e.target.files[0];
       var reader = new FileReader();
       reader.onload = function (e) {
         var img = document.createElement("img");
         img.onload = function () {
-          var MAX_WIDTH = 300;
-          var MAX_HEIGHT = 300;
+          var MAX_WIDTH = 400;
+          var MAX_HEIGHT = 400;
 
           var width = img.width;
           var height = img.height;
@@ -94,6 +99,7 @@ function Settings() {
           // Show resized image in preview element
           var dataurl = canvas.toDataURL(imageFile.type);
           document.getElementById("preview").src = dataurl;
+          setProfileInput({ ["profile_image"]: dataurl });
         };
         img.src = e.target.result;
       };
@@ -101,9 +107,29 @@ function Settings() {
     }
   }
 
-  function handleSubmit(e) {
+  function handleProfileSubmit(e) {
     e.preventDefault();
+
+    console.log(profileInput);
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "PUT",
+      body: JSON.stringify(profileInput),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {})
+      .catch((error) => console.error("Error:", error));
   }
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setProfileInput({ [name]: value });
+    // console.log(value);
+  };
 
   return (
     <Layout>
@@ -127,7 +153,7 @@ function Settings() {
               <span className="pp-text">
                 <div>Choose an image from your files.</div>
                 <div style={{ fontSize: "13px" }}>
-                  Min. resolution: 300x300px
+                  Min. resolution: 400x400px
                 </div>
                 <label className="btn btn-primary btn-pp" htmlFor="input-image">
                   Choose Photo
@@ -153,6 +179,7 @@ function Settings() {
               name="name"
               id="name"
               defaultValue={profileInfo.name}
+              onChange={handleInput}
             />
           </div>
 
@@ -165,6 +192,7 @@ function Settings() {
               name="about"
               id="about"
               defaultValue={profileInfo.about}
+              onChange={handleInput}
             />
           </div>
 
@@ -177,11 +205,12 @@ function Settings() {
               name="location"
               id="location"
               defaultValue={profileInfo.location}
+              onChange={handleInput}
             />
           </div>
 
           <div className="settings-btn-container">
-            <button className="btn btn-primary" onClick={handleSubmit}>
+            <button className="btn btn-primary" onClick={handleProfileSubmit}>
               Save Changes
             </button>
           </div>
@@ -204,9 +233,7 @@ function Settings() {
           </div>
 
           <div className="settings-btn-container">
-            <button className="btn btn-primary" onClick={handleSubmit}>
-              Save Changes
-            </button>
+            <button className="btn btn-primary">Save Changes</button>
           </div>
         </form>
       </div>
