@@ -36,6 +36,7 @@ function MainbarLogged(props) {
         <Nav className="ms-auto">
           <Button
             variant="light"
+            onClick={props.onClickProfile}
             className={
               !props.mainbarOpen && props.sidebarOpen
                 ? "me-4 btn-logged-sidebar"

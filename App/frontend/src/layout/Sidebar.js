@@ -7,9 +7,12 @@ import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 
 import "./styles/Sidebar.css";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar(props) {
   const { token, clearToken } = useAuth();
+
+  const navigate = useNavigate();
 
   function handleLogOut() {
     var host = HOST;
@@ -27,6 +30,10 @@ function Sidebar(props) {
         props.onClickLogOut();
       })
       .catch((error) => console.error("Error:", error));
+  }
+
+  function goToSettings(){
+    //navigate('/settings');
   }
 
   return (
@@ -50,7 +57,9 @@ function Sidebar(props) {
       <div className="sidebar-footer" style={{ width: props.width }}>
         {props.auth && (
           <>
-            <Button className="btn-light sidebar-footer-btn">Settings</Button>
+            <Button className="btn-light sidebar-footer-btn" onClick={() => goToSettings()}>
+              Settings
+            </Button>
             <Button
               className="btn-light sidebar-footer-btn"
               onClick={() => handleLogOut()}

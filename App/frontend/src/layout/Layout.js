@@ -7,6 +7,8 @@ import Backdrop from "../components/Backdrop";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../auth/authentication";
 
+import { useNavigate } from "react-router-dom";
+
 import "./styles/Layout.css";
 
 function Layout(props) {
@@ -18,6 +20,8 @@ function Layout(props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // const [currentScrollY, setCurrentScrollY] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const navigate = useNavigate();
 
   function handleSignUp() {
     setSignUpIsOpen(true);
@@ -55,6 +59,10 @@ function Layout(props) {
 
   function handleSidebar() {
     setSidebarOpen(!sidebarOpen);
+  }
+
+  function goToProfile(){
+    navigate('/:username');
   }
 
   // changes color of the navbar w.r.t scrollY position
@@ -108,6 +116,7 @@ function Layout(props) {
           onClickLogIn={() => handleLogIn()}
           onClickSignUp={() => handleSignUp()}
           onClickMenu={() => handleSidebar()}
+          onClickProfile={() => goToProfile()}
         />
       ) : (
         <Mainbar
