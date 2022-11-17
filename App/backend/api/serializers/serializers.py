@@ -23,7 +23,7 @@ class ArtItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtItem
         fields = ['id', 'title', 'description',
-                  'owner', 'tags', 'artitem_image', 'created_at']
+                  'owner', 'tags', 'artitem_path', 'created_at']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)

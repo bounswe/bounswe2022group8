@@ -14,7 +14,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     # here, we define the parameters we expect to receive (not directly related to model)
     class Meta:
         model = User
-        fields = ['username', 'email', 'name', 'surname', 'about', 'location', 'profile_image']
+        fields = ['username', 'email', 'name', 'surname', 'about', 'location', 'profile_path']
 
 
 class UserUpdateProfileSerializer(serializers.ModelSerializer):
@@ -23,4 +23,4 @@ class UserUpdateProfileSerializer(serializers.ModelSerializer):
     # here, we define the parameters we expect to receive (not directly related to model)
     class Meta:
         model = User
-        fields = ['name', 'surname', 'about', 'location', 'profile_image']
+        fields = ['name', 'surname', 'about', 'location', 'profile_path']
