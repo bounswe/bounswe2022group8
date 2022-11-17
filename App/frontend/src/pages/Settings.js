@@ -1,11 +1,63 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { useAuth } from "../auth/authentication";
-import defaultUserImage from "../images/300px.jpg";
+import { HOST } from "../constants/host";
+import * as dotenv from "dotenv";
 
 import "./styles/Settings.css";
 
 function Settings() {
+  const { token } = useAuth();
+  var host = HOST;
+
+  const [profileInfo, setProfileInfo] = useState({
+    username: null,
+    email: null,
+    name: null,
+    about: null,
+    location: null,
+    profile_image: null,
+  });
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        const AWS = require("aws-sdk");
+        dotenv.config();
+        AWS.config.update({
+          accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+          secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+        });
+
+        const s3 = new AWS.S3();
+
+        var params = {
+          Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+          Key: "avatar/eye.jpg",
+        };
+
+        var profile_image_url = s3.getSignedUrl("getObject", params);
+
+        setProfileInfo({
+          username: response.username,
+          email: response.email,
+          name: response.name,
+          about: response.about,
+          location: response.location,
+          profile_image: profile_image_url,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token]);
+
   function handlePreview(e) {
     if (e.target.files) {
       console.log(e.target.files);
@@ -66,7 +118,7 @@ function Settings() {
             <label className="access-label">Profile Photo</label>
             <div className="pp-container mt-1 hadow-sm">
               <img
-                src={defaultUserImage}
+                src={profileInfo.profile_image}
                 alt=""
                 className="pp-preview"
                 id="preview"
@@ -100,6 +152,7 @@ function Settings() {
               placeholder="Name"
               name="name"
               id="name"
+              defaultValue={profileInfo.name}
             />
           </div>
 
@@ -111,6 +164,7 @@ function Settings() {
               placeholder="Make yourself known to people"
               name="about"
               id="about"
+              defaultValue={profileInfo.about}
             />
           </div>
 
@@ -122,6 +176,7 @@ function Settings() {
               placeholder="Location"
               name="location"
               id="location"
+              defaultValue={profileInfo.location}
             />
           </div>
 
