@@ -120,7 +120,6 @@ from django.core import serializers
     }
 )
 @api_view(['GET','PUT','DELETE'])
-@login_required
 def CommentView(request, artitemid, id):
     data = request.data
     if (request.method == "GET"):
@@ -133,44 +132,52 @@ def CommentView(request, artitemid, id):
                 'detail': 'Comment with given id does not exist.'}
             return Response(message, status=status.HTTP_404_NOT_FOUND)
     elif(request.method == "PUT"):
-        try:
-            comment = Comment.objects.get(id=id)
-        except Comment.DoesNotExist:
-            message = {
-                'detail': 'Comment with given id does not exist.'}
-            return Response(message, status=status.HTTP_404_NOT_FOUND)
-        u = request.user
-        if(comment.commented_by == u):
-            mydata = {
-                'body': data['body']
-            }
-            serializer = CommentSerializer(instance = comment, data=mydata, partial = True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if request.user.is_authenticated:
+            try:
+                comment = Comment.objects.get(id=id)
+            except Comment.DoesNotExist:
+                message = {
+                    'detail': 'Comment with given id does not exist.'}
+                return Response(message, status=status.HTTP_404_NOT_FOUND)
+            u = request.user
+            if(comment.commented_by == u):
+                mydata = {
+                    'body': data['body']
+                }
+                serializer = CommentSerializer(instance = comment, data=mydata, partial = True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                message = {
+                    'detail': 'This comment is not posted by you.'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
         else:
-            message = {
-                'detail': 'This comment is not posted by you.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    elif(request.method == "DELETE"):
-        try:
-            comment = Comment.objects.get(id=id)
-        except Comment.DoesNotExist:
-            message = {
-                'detail': 'Comment with given id does not exist.'}
-            return Response(message, status=status.HTTP_404_NOT_FOUND)
-        u = request.user
-        if(comment.commented_by == u):
-            comment.delete()
-            message = {
-                'detail': 'Comment deleted!'}
-            return Response(message, status=status.HTTP_200_OK)
-        else:
-            message = {
-                'detail': 'This comment is not posted by you.'}
+            message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
+    elif(request.method == "DELETE"):
+        if request.user.is_authenticated:
+            try:
+                comment = Comment.objects.get(id=id)
+            except Comment.DoesNotExist:
+                message = {
+                    'detail': 'Comment with given id does not exist.'}
+                return Response(message, status=status.HTTP_404_NOT_FOUND)
+            u = request.user
+            if(comment.commented_by == u):
+                comment.delete()
+                message = {
+                    'detail': 'Comment deleted!'}
+                return Response(message, status=status.HTTP_200_OK)
+            else:
+                message = {
+                    'detail': 'This comment is not posted by you.'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
 #do we want nonregistered users to see comments???
 #Condition to keep parent ArtItem the same
 
@@ -264,20 +271,23 @@ def CommentView(request, artitemid, id):
     }
 )
 @api_view(['POST', 'GET'])
-@login_required
 def CommentsView(request, id):
     data = request.data
     if(request.method == "POST"):
-        data["commented_by"] = request.user.id
-        data["commented_on"]= id
-        serializer = CommentSerializer(data=data)
-        print(data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if request.user.is_authenticated:
+            data["commented_by"] = request.user.id
+            data["commented_on"]= id
+            serializer = CommentSerializer(data=data)
+            print(data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                #catch serializer integrity error 
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            #catch serializer integrity error 
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
     if(request.method == "GET"):
         artitem = ArtItem.objects.get(id=id)
         comments = Comment.objects._mptt_filter(commented_on=artitem)
