@@ -28,7 +28,8 @@ from ..utils import ProfileImageStorage
                     "name": "Po",
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
-                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png"
+                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
+                    "is_level2": "false"
                 }
             }
         ),
@@ -72,7 +73,8 @@ def profile_api(request, id):
                     "surname": "The Budgie",
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
-                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png"
+                    "profile_image": "https://cmpe451-development.s3.amazonaws.com/avatar/default.png",
+                    "is_level2": "false"
                 }
             }
         ),
@@ -91,13 +93,13 @@ def profile_api(request, id):
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
-            "name": openapi.Schema(type=openapi.TYPE_STRING, description='name of the user'),
-            "surname": openapi.Schema(type=openapi.TYPE_STRING, description='surname of the user'),
-            "about": openapi.Schema(type=openapi.TYPE_STRING, description='about section of a user'),
-            "location": openapi.Schema(type=openapi.TYPE_STRING, description='location of a user (text)'),
+            "name": openapi.Schema(type=openapi.TYPE_STRING, description='name of the user', default="Captain Joseph"),
+            "surname": openapi.Schema(type=openapi.TYPE_STRING, description='surname of the user', default="Blocker"),
+            "about": openapi.Schema(type=openapi.TYPE_STRING, description='about section of a user', default="A veteran of the Indian Wars, who is deeply interested in impressionist art."),
+            "location": openapi.Schema(type=openapi.TYPE_STRING, description='location of a user (text)', default="Santa Fe"),
             "profile_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of an image (text)')
         }),
-    operation_description="Updates profile information: name, surname, about section, location and profile image can be updated. If you don't want to update any field, just don't provide any input for it. Please notice that providing an empty string replaces the current value with the empty string - so avoid providing empty string if you want a specific field to not change. Please observe that this API requires authorization.",
+    operation_description="Updates profile information: name, surname, about section, location and profile image can be updated. If the user doesn't change one of the fields listed below, just return the same value you retrieved with GET. Sending empty string means that user removed the text from the related field. Please observe that this API requires authorization. You have to provide base64 encoded version of the image. You can encode your images from here: https://www.base64-image.de/",
     operation_summary="Update the profile information about the currently logged in user",
     tags=['profile'],
     responses={
