@@ -14,7 +14,7 @@ from django.core import serializers
 
 @swagger_auto_schema(
     method='GET',
-    operation_description="Comment API. This endpoint with GET request returns a specific comment. Authentication is required.",
+    operation_description="Comment API. This endpoint with GET request returns a specific comment. Authentication is not required.",
     operation_summary="Get single comment.",
     tags=['comments'],
     responses={
@@ -219,7 +219,7 @@ def CommentView(request, artitemid, id):
 )
 @swagger_auto_schema(
     method='GET',
-    operation_description="Comments API. This endpoint with GET request return all of the comments on an art item. Authentication is required.",
+    operation_description="Comments API. This endpoint with GET request return all of the comments on an art item. Authentication is not required.",
     operation_summary="Get Art Item comments.",
     tags=['comments'],
     responses={
