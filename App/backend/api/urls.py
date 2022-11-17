@@ -5,15 +5,17 @@ Function views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
 """
 
-from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path
 from .views.auth import RegisterView, LoginView
 from .views.profile import profile_api, profile_me_api
+from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem
+
+
 
 from .views.comments import CommentView, CommentsView
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import generics, status
+from rest_framework import status
 
 from drf_yasg import openapi
 
@@ -51,9 +53,14 @@ urlpatterns = [
     path('auth/logout/', decorated_logout_view, name='logout'),
     path('users/profile/<int:id>', profile_api, name="profile_by_id"),
     path('users/profile/me/', profile_me_api, name="profile_me"),
-
     path('artitems/<int:id>/comments/', CommentsView, name="CommentsView"),
     path('artitems/<int:artitemid>/comments/<int:id>/', CommentView, name="CommentView"),
+    path('artitems/', get_artitems, name="get_all_artitems"),
+    path('artitems/users/<int:id>', artitems_by_userid, name="get_artitems_of_user_id"),
+    path('artitems/users/username/<str:username>', artitems_by_username, name="get_artitems_of_user_username"),
+    path('artitems/<int:id>', artitems_by_id, name="get_artitem_id"), 
+    path('artitems/me/upload/', post_artitem, name="post_artitem"),
+    path('artitems/me/remove/<int:id>', delete_artitem, name="delete_artitem")
 ]
 
 # added to give us the option to choose between default Response template and regular json

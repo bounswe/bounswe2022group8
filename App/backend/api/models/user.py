@@ -25,7 +25,8 @@ class User(AbstractUser):
     #     symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')
+    profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
+    profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
     
     def __str__(self):
         return self.name + " " + self.surname 

@@ -9,6 +9,7 @@ __pycache__
 
 # Ignore files related to API keys
 .env
+.production.env
 
 # Ignore IDE specific directories
 .vscode
