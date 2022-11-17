@@ -19,6 +19,9 @@ class ArtItem(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True) # tags are not required
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ["-created_at"]  # order according to the timestamps
 
     def __str__(self):
         return "Art item: " + self.title

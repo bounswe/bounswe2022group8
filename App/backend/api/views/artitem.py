@@ -67,7 +67,34 @@ def get_artitems(request):
         serializer = ArtItemSerializer(artitems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+@ swagger_auto_schema(
+    method='post',
+    operation_description="Uploads an art item to the system.",
+    operation_summary="Upload an art item to the system.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items in the system.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "title": "Docker",
+                        "description": "From the perspective of a docker",
+                        "owner": {
+                            "id": 11,
+                            "username": "JosephBlocker",
+                            "name": "Captain Joseph",
+                            "surname": "Blocker"
+                        },
+                        "tags": [],
+                        "artitem_image": "https://cmpe451-development.s3.amazonaws.com/artitem/docker.jpg"
+                    }
+                ]
+            }
+        )
+    }
+)
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 @authentication_classes([TokenAuthentication])
