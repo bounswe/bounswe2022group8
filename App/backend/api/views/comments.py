@@ -12,6 +12,7 @@ from ..models.models import Comment, ArtItem
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 
+
 @swagger_auto_schema(
     method='GET',
     operation_description="Comment API. This endpoint with GET request returns a specific comment. Authentication is not required.",
@@ -119,7 +120,7 @@ from django.core import serializers
         ),
     }
 )
-@api_view(['GET','PUT','DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def CommentView(request, artitemid, id):
     data = request.data
     if (request.method == "GET"):
@@ -131,7 +132,7 @@ def CommentView(request, artitemid, id):
             message = {
                 'detail': 'Comment with given id does not exist.'}
             return Response(message, status=status.HTTP_404_NOT_FOUND)
-    elif(request.method == "PUT"):
+    elif (request.method == "PUT"):
         if request.user.is_authenticated:
             try:
                 comment = Comment.objects.get(id=id)
@@ -140,11 +141,12 @@ def CommentView(request, artitemid, id):
                     'detail': 'Comment with given id does not exist.'}
                 return Response(message, status=status.HTTP_404_NOT_FOUND)
             u = request.user
-            if(comment.commented_by == u):
+            if (comment.commented_by == u):
                 mydata = {
                     'body': data['body']
                 }
-                serializer = CommentSerializer(instance = comment, data=mydata, partial = True)
+                serializer = CommentSerializer(
+                    instance=comment, data=mydata, partial=True)
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -157,7 +159,7 @@ def CommentView(request, artitemid, id):
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
-    elif(request.method == "DELETE"):
+    elif (request.method == "DELETE"):
         if request.user.is_authenticated:
             try:
                 comment = Comment.objects.get(id=id)
@@ -166,7 +168,7 @@ def CommentView(request, artitemid, id):
                     'detail': 'Comment with given id does not exist.'}
                 return Response(message, status=status.HTTP_404_NOT_FOUND)
             u = request.user
-            if(comment.commented_by == u):
+            if (comment.commented_by == u):
                 comment.delete()
                 message = {
                     'detail': 'Comment deleted!'}
@@ -178,8 +180,9 @@ def CommentView(request, artitemid, id):
         else:
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
-#do we want nonregistered users to see comments???
-#Condition to keep parent ArtItem the same
+# do we want nonregistered users to see comments???
+# Condition to keep parent ArtItem the same
+
 
 @swagger_auto_schema(
     method='POST',
@@ -231,7 +234,7 @@ def CommentView(request, artitemid, id):
                         {
                             "id": 1,
                             "body": "first comment",
-                            #"parent": null,
+                            # "parent": null,
                             "commented_by": 2,
                             "commented_on": 1,
                             "created_at": "2022-11-12T20:48:33.527802Z",
@@ -268,32 +271,42 @@ def CommentView(request, artitemid, id):
                 },
             }
         ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Artitem ID is not found.",
+            examples={
+                "application/json": {
+                    "Not Found": "Requested art item with the given ID is not found."
+                },
+            }
+        ),
     }
 )
 @api_view(['POST', 'GET'])
-def CommentsView(request, id):
+def CommentsView(request, artitemid):
     data = request.data
-    if(request.method == "POST"):
+    if (request.method == "POST"):
         if request.user.is_authenticated:
             data["commented_by"] = request.user.id
-            data["commented_on"]= id
+            data["commented_on"] = artitemid
             serializer = CommentSerializer(data=data)
-            print(data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
-                #catch serializer integrity error 
+                # catch serializer integrity error
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    if(request.method == "GET"):
-        artitem = ArtItem.objects.get(id=id)
+    if (request.method == "GET"):
+        try:
+            artitem = ArtItem.objects.get(id=artitemid)
+        except:
+            return Response({"Not Found": "Requested art item with the given ID is not found."}, status=status.HTTP_404_NOT_FOUND)
+
         comments = Comment.objects._mptt_filter(commented_on=artitem)
-        #check
+        # check
         comments_json = serializers.serialize('json', comments)
         serializer = CommentSerializer(comments, many=True)
-        print(comments_json)
         resp = {"data": serializer.data}
         return Response(resp, status=status.HTTP_200_OK)

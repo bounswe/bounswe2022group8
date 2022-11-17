@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from .artitem import ArtItem
+from mptt.models import MPTTModel, TreeForeignKey
 
 class Comment(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
