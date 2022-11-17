@@ -8,6 +8,8 @@ Function views
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views.auth import RegisterView, LoginView
+from .views.profile import profile_api, profile_me_api
+
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status
@@ -23,27 +25,32 @@ from drf_yasg import openapi
 #   api/v1/
 #
 
+
 decorated_logout_view = \
     swagger_auto_schema(
         method='post',
+        operation_description="Invalidates the token of the current session.",
+        operation_summary="Log out from the application safely.",
         responses={status.HTTP_204_NO_CONTENT: openapi.Response(
             description="Successfully logged out."
         ),
-        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Unauthorized token.",
             examples={
-                "application/json": {"detail": "Invalid token."
-                }
+                "application/json": {"detail": "Invalid token."}
             }
         )
         },
-        tags=["auth"]
-    )(knox_views.LogoutView.as_view())
+        tags=["auth"])(knox_views.LogoutView.as_view())
 
+# SWAGGER: localhost:8000/api/v1/swagger/schema
 urlpatterns = [
     path('auth/register/', RegisterView.as_view(), name="register"),
     path('auth/login/', LoginView.as_view(), name="login"),
     path('auth/logout/', decorated_logout_view, name='logout'),
+    path('users/profile/<int:id>', profile_api, name="profile_by_id"),
+    path('users/profile/me/', profile_me_api, name="profile_me"),
+
 ]
 
 # added to give us the option to choose between default Response template and regular json
