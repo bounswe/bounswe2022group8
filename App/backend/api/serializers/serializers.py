@@ -22,12 +22,11 @@ class TagSerializer(serializers.ModelSerializer):
 class ArtItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtItem
-        fields = ['id', 'title', 'description',
-                  'owner', 'tags', 'artitem_path', 'created_at']
+        fields = ['id', 'owner', 'title', 'description', 'type', 'tags', 'artitem_path', 'created_at']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        rep["tags"] = TagSerializer(instance.tags.all(), many=True).data
+        rep["tags"] = TagSerializer(instance.tags.all(), many=True).data 
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
