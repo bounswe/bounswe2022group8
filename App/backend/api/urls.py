@@ -8,7 +8,8 @@ Function views
 from django.urls import path
 from .views.auth import RegisterView, LoginView
 from .views.profile import profile_api, profile_me_api
-from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem
+from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings
+from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
 
 from knox import views as knox_views
@@ -58,7 +59,15 @@ urlpatterns = [
     path('artitems/users/username/<str:username>', artitems_by_username, name="get_artitems_of_user_username"),
     path('artitems/<int:id>', artitems_by_id, name="get_artitem_id"), 
     path('artitems/me/upload/', post_artitem, name="post_artitem"),
-    path('artitems/me/remove/<int:id>', delete_artitem, name="delete_artitem")
+    path('artitems/me/remove/<int:id>', delete_artitem, name="delete_artitem"),
+    path('users/follow/<int:id>', follow_user, name="follow_user"),
+    path('users/unfollow/<int:id>', unfollow_user, name="unfollow_user"),
+    path('users/me/followers/', get_my_followers, name="get_my_followers"),
+    path('users/me/followings/', get_my_followings, name="get_my_followings"),
+    path('users/<int:id>/followers/', get_followers, name="get_followers"),
+    path('users/<int:id>/followings/', get_followings, name="get_followings"),
+    path('artitems/me/followings/', artitems_of_followings, name="get_artitems_of_followings")
+
 ]
 
 # added to give us the option to choose between default Response template and regular json
