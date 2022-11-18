@@ -12,6 +12,7 @@ from .views.artitem import get_artitems, artitems_by_userid, artitems_by_usernam
 
 
 
+from .views.comments import CommentView, CommentsView
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
@@ -52,6 +53,8 @@ urlpatterns = [
     path('auth/logout/', decorated_logout_view, name='logout'),
     path('users/profile/<int:id>', profile_api, name="profile_by_id"),
     path('users/profile/me/', profile_me_api, name="profile_me"),
+    path('artitems/<int:artitemid>/comments/', CommentsView, name="CommentsView"),
+    path('artitems/<int:artitemid>/comments/<int:id>/', CommentView, name="CommentView"),
     path('artitems/', get_artitems, name="get_all_artitems"),
     path('artitems/users/<int:id>', artitems_by_userid, name="get_artitems_of_user_id"),
     path('artitems/users/username/<str:username>', artitems_by_username, name="get_artitems_of_user_username"),
