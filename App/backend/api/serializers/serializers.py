@@ -34,7 +34,7 @@ class ArtItemSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['id', 'body', 'commented_by', 'commented_on', 'created_at']
+        fields = ['id', 'body', 'parent', 'commented_by', 'commented_on', 'created_at', 'lft', 'rght', 'tree_id', 'level']
 
 
 class SimpleUserSerializer(serializers.ModelSerializer):
