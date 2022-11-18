@@ -22,7 +22,7 @@ class ArtItemTest(TestCase):
         print("TestArtItem:setUp_:end")
 
     def test_artitem_creation(self):
-        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password())
+        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
 
         self.assertTrue(isinstance(artitem, ArtItem))
@@ -30,7 +30,7 @@ class ArtItemTest(TestCase):
         self.assertEqual(artitem.artitem_image, 'artitem/defaultart.jpg')
 
     def test_artitem_deletion_cascaded(self):
-        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password())
+        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
         id = artitem.id
 
@@ -38,7 +38,7 @@ class ArtItemTest(TestCase):
         self.assertFalse(ArtItem.objects.filter(id=id))   # empty list is False   
 
     def test_artitem_deletion(self):
-        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password())
+        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
         title = artitem.title
 
