@@ -1,6 +1,7 @@
 import React from "react";
 import { createContext, useContext, useState, useMemo } from "react";
 //import { useHistory } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const UserContext = createContext();
 
@@ -46,4 +47,12 @@ export const AuthProvider = ({ children }) => {
   return (
     <UserContext.Provider value={contextData}>{children}</UserContext.Provider>
   );
+};
+
+export const AuthenticatedRoute = ({ children }) => {
+  const { token } = useAuth();
+  if (!token) {
+    return <Navigate to="/"/>;
+  }
+  return children;
 };

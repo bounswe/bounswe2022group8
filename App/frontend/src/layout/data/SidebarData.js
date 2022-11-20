@@ -18,7 +18,7 @@ export const SidebarData = [
     },
     {
         title: "Just For You",
-        link: "/"
+        link: "/just-for-you"
     },
     {
         title: "Add Favourites",
