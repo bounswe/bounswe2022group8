@@ -1,7 +1,7 @@
 .recommendation-container {
   max-width: 1400px;
   min-height: 80vh;
-  margin: 300px 100px 100px 100px;
+  margin: 100px 100px 100px 100px;
   padding: 0 2.5rem;
 }
 
@@ -27,6 +27,7 @@
 }
 .recommended-artitems .list .artitem {
   min-width: 215px;
+  max-width: 215px;;
   height: auto;
   padding: 15px;
   background-color: #2a2031;
@@ -84,6 +85,7 @@
 }
 .recommended-exhibitions .list .exhibition {
   min-width: 215px;
+  max-width: 215px;
   height: auto;
   padding: 15px;
   background-color: #2a2031;

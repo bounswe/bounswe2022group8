@@ -1,0 +1,51 @@
+.recommended-artitems .gallery {
+  display: flex;
+  gap: 20px;
+  overflow: visible;
+  flex-wrap: wrap;
+  margin-left: 50px;
+  position: relative;
+  columns: 4;
+}
+.recommended-artitems .gallery .artitem {
+  min-width: 250px;
+  max-width: 250px;
+  height: fit-content;
+  padding: 15px;
+  background-color: #2a2031;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all ease 0.4s;
+  position: relative;
+  display: block;
+}
+
+.recommended-artitems .gallery .artitem:hover {
+    background-color: #4a3c4a;
+  }
+  .recommended-artitems .gallery .artitem img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    vertical-align:top;
+  }
+  .recommended-artitems .gallery .artitem .context {
+    position: relative;
+  }
+  
+  .recommended-artitems .gallery .artitem h4 {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .recommended-artitems .gallery .artitem p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+  
