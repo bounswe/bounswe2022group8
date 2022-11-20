@@ -51,6 +51,7 @@ from django.core.files.base import ContentFile
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
+                        "type": "sketch",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg"
                     }
@@ -67,11 +68,21 @@ def get_artitems(request):
         serializer = ArtItemSerializer(artitems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 @ swagger_auto_schema(
     method='post',
     operation_description="Uploads an art item to the system.",
     operation_summary="Upload an art item to the system.",
     tags=['artitems'],
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the art item', default="Portrait of Joel Miller"),
+            "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the art item', default="Joel Miller from TLOU universe."),
+            "type": openapi.Schema(type=openapi.TYPE_STRING, description='type of the art item', default="Sketch"),
+            "tags": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='an array of tag IDs attached to the art item (can be empty)', default=[1]),
+            "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string"),
+        }),
     responses={
         status.HTTP_200_OK: openapi.Response(
             description="Successfully retrieved all the art items in the system.",
@@ -87,7 +98,8 @@ def get_artitems(request):
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
-                        "tags": [],
+                        "type": "sketch",
+                        "tags": [1],
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -100,34 +112,37 @@ def get_artitems(request):
 @authentication_classes([TokenAuthentication])
 def post_artitem(request):
     if (request.method == "POST"):
-        data = request.data.copy()
 
         # tags must be a list
-        if ('tags' in data and not isinstance(data['tags'], list)):
+        if ('tags' in request.data and not isinstance(request.data['tags'], list)):
             # change 'mutable' property
-            data['tags'] = [data['tags']]
+            request.data['tags'] = [request.data['tags']]
 
         artitem_image_storage = ArtItemStorage()
         # BASE64 DECODING
         # Check if artitem_image is provided. If not, default to defaultart.jpg. If provided, it's in base64 format. Decode it.
-        if ('artitem_image' in data):
+        if ('artitem_image' in request.data):
             try:
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
-                filename = 'artitem-{pk}.png'.format(pk=request.user.pk)
-                request.data['artitem_image'] = ContentFile(
-                    decoded, "temporary")
-                request.data['profile_path'] = artitem_image_storage.location + "/" + filename  
+                id_ = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
+                filename = 'artitem-{pk}.png'.format(
+                    pk=id_ )
+                request.data['artitem_image'] = ContentFile(decoded, filename)
+                request.data['artitem_path'] = artitem_image_storage.location + \
+                    "/" + filename
             except:
                 return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = ArtItemSerializer(data=data)
+        request.data["owner"] = request.user.id
+        serializer = ArtItemSerializer(data=request.data)
+
         if serializer.is_valid():
             if ('artitem_image' in request.data):
                 filename = request.data['artitem_image'].name
                 artitem_image_storage.save(
                     filename,  request.data['artitem_image'])
-            
+
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
@@ -149,6 +164,12 @@ def post_artitem(request):
                 "application/json": {"Not Found": "Any art item with the given ID doesn't exist."}
             }
         ),
+        status.HTTP_403_FORBIDDEN: openapi.Response(
+            description="User attempts to delete another user's art item.",
+            examples={
+                "application/json": {"Invalid Attempt": "Cannot delete art item of another user."}
+            }
+        ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="User cannot be found.",
             examples={
@@ -166,7 +187,11 @@ def delete_artitem(request, id):
     if request.method == "DELETE":
         try:
             artitem = ArtItem.objects.get(pk=id)
-            artitem.delete()
+            u = request.user
+            if (artitem.owner == u):
+                artitem.delete()
+            else:
+                return Response({"Invalid Attempt": "Cannot delete art item of another user."}, status=status.HTTP_403_FORBIDDEN)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
@@ -192,8 +217,10 @@ def delete_artitem(request, id):
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
+                        "type": "sketch",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg"
+
                     }
                 ]
             }
@@ -239,6 +266,7 @@ def artitems_by_id(request, id):
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
+                        "type": "sketch",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg"
                     }
@@ -288,6 +316,7 @@ def artitems_by_userid(request, id):
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
+                        "type": "sketch",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg"
                     }
