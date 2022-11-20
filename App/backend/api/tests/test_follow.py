@@ -15,12 +15,12 @@ class FollowTest(TestCase):
     # preparing to test
     def setUp(self):
         # setting up for the test
-        print("TestArtItem:setUp_:begin")
+        print("TestFollow:setUp_:begin")
         self.faker = Faker()
         self.serializer = FollowSerializer()
 
         # do something
-        print("TestArtItem:setUp_:end")
+        print("TestFollow:setUp_:end")
 
     def test_follow_creation(self):
         from_user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
