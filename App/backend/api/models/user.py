@@ -17,12 +17,6 @@ class User(AbstractUser):
 
     password = models.CharField(max_length=128)
     # last_login = models.DateTimeField(_("last login"), blank=True, null=True) ? maybe
-    # implement follow later
-    # followers = models.ManyToManyField(
-    #     to="self", 
-    #     through= "follow",
-    #     related_name="follower",   # user.follower.all() --> return all the followers
-    #     symmetrical=False)   # not required
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
@@ -30,3 +24,24 @@ class User(AbstractUser):
     
     def __str__(self):
         return self.name + " " + self.surname 
+
+
+class Follow(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["from_user", "to_user"],
+            ),
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_prevent_self_follow",
+                check=~models.Q(from_user=models.F("to_user")),
+            ),
+        ]
+        ordering = ["-created_at"]
+    
+    def __str__(self):
+        return str(self.from_user) + " follows " + str(self.to_user)

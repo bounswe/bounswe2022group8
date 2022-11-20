@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 
 from ..models.user import User
+from ..models.user import Follow
 from ..models.artitem import ArtItem
 from ..serializers.serializers import ArtItemSerializer
 from ..serializers.auth import RegisterSerializer, LoginSerializer
@@ -127,7 +128,7 @@ def post_artitem(request):
                 decoded = base64.b64decode(image_data)
                 id_ = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
                 filename = 'artitem-{pk}.png'.format(
-                    pk=id_ )
+                    pk=id_)
                 request.data['artitem_image'] = ContentFile(decoded, filename)
                 request.data['artitem_path'] = artitem_image_storage.location + \
                     "/" + filename
@@ -345,3 +346,47 @@ def artitems_by_username(request, username):
         artitems = ArtItem.objects.filter(owner=user[0].id)
         serializer = ArtItemSerializer(artitems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns art items of the users followed by the currently logged-in user. This API can be handy especially for filling the feed of a user with art items.",
+    operation_summary="Get art items of the followed users.",
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items belonging to the followed users.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "owner": {
+                            "id": 9,
+                            "username": "till_i_collapse",
+                            "name": "",
+                            "surname": ""
+                        },
+                        "title": "Portrait of Joel Miller",
+                        "description": "Joel Miller from TLOU universe.",
+                        "type": "sketch",
+                        "tags": [],
+                        "artitem_path": "artitem/artitem-0.png",
+                        "created_at": "2022-11-18T13:51:56.342042Z"
+                    }
+                ]
+            }
+        ),
+    }
+)
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def artitems_of_followings(request):
+
+    current_user = request.user
+    followings = [follow.to_user for follow in Follow.objects.filter(
+        from_user=current_user)]
+
+    artitems = ArtItem.objects.filter(owner__in=followings)
+    serializer = ArtItemSerializer(artitems, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -9,8 +9,8 @@ from ..models.user import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username',  'is_active_user', 'name', 'surname',
-                  'email', 'profile_image', 'created_at', 'updated_at']
+        fields = ['id', 'username',  'is_level2', 'name', 'surname',
+                  'email', 'profile_path', 'created_at', 'updated_at']
 
 
 class TagSerializer(serializers.ModelSerializer):
