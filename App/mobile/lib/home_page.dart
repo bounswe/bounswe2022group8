@@ -12,8 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final EmailInputObject = EmailInput() ;
-  final PasswordInputObject = PasswordInput(name: "Password") ;
+  final EmailInputObject = EmailInput();
+  final PasswordInputObject = PasswordInput(name: "Password");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         leading: const Icon(Icons.account_circle_rounded),
         title: const Text(
-          "MyApp",
+          "Artopia",
           style: TextStyle(
             color: Colors.black45,
             fontFamily: "OpenSans",
@@ -73,13 +73,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (value){
-          if(value == 1){
-            Route route = MaterialPageRoute(builder: (context) =>  LandingPage());
+        onTap: (value) {
+          if (value == 1) {
+            Route route =
+                MaterialPageRoute(builder: (context) => LandingPage());
             Navigator.pushReplacement(context, route);
           }
         },
-        items:  const [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
