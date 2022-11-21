@@ -2,8 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ..serializers.serializers import CommentSerializer
-from ..serializers.comments import commentsPostSerializer, commentUpdateSerializer
+from ..serializers.serializers import TagSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
