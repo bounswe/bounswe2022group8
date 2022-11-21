@@ -7,7 +7,7 @@ from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from ..models.user import User
-from ..models.models import Comment, ArtItem
+from ..models.artitem import Tag
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 
@@ -42,4 +42,31 @@ from django.core import serializers
 )
 @api_view(['GET', 'PUT', 'DELETE'])
 def TagView(request, artitemid, id):
-    pass
+    data = request.data
+    if (request.method == "GET"):
+        try:
+            tag = Tag.objects.get(id=id)
+            serializer = TagSerializer(tag)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Tag.DoesNotExist:
+            message = {
+                'detail': 'Tag with given id does not exist.'}
+            return Response(message, status=status.HTTP_404_NOT_FOUND)
+    elif(request.method == "DELETE"):
+        if request.user.is_authenticated:
+            try:
+                tag = Tag.objects.get(id=id)
+            except Tag.DoesNotExist:
+                message = {
+                    'detail': 'Tag with given id does not exist.'}
+                return Response(message, status=status.HTTP_404_NOT_FOUND)
+            # IMPORTANT : Tag Deletion process????
+            tag.delete()
+            message = {
+                'detail': 'Tag deleted!'}
+            return Response(message, status=status.HTTP_200_OK)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    elif(request.method == "PUT"):
+        pass
