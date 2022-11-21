@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_mustafa/home_page.dart';
-import 'package:flutter_app_mustafa/login_page.dart';
+import 'package:artopia/home_page.dart';
+import 'package:artopia/login_page.dart';
 
 class UsernameInput extends StatefulWidget {
   final usernameController = TextEditingController();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_mustafa/login_page.dart';
-import 'package:flutter_app_mustafa/signup_page.dart';
-import 'package:flutter_app_mustafa/templates.dart';
-import 'package:flutter_app_mustafa/utils/colorPalette.dart';
-import 'package:flutter_app_mustafa/utils/textUtils.dart';
+import 'package:artopia/login_page.dart';
+import 'package:artopia/signup_page.dart';
+import 'package:artopia/templates.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
 
 class LandingPageRoute extends StatelessWidget {
   const LandingPageRoute({Key? key}) : super(key: key);

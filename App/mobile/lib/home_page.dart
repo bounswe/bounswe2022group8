@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_mustafa/landing_page.dart';
-import 'package:flutter_app_mustafa/profile_page.dart';
-import 'package:flutter_app_mustafa/routes.dart';
+import 'package:artopia/landing_page.dart';
+import 'package:artopia/profile_page.dart';
+import 'package:artopia/routes.dart';
 import 'widgets/posts.dart';
 import 'templates.dart';
 
