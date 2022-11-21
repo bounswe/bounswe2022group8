@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_mustafa/landing_page.dart';
-import 'widgets/posts.dart';
+import 'package:flutter_app_mustafa/profile_page.dart';
 import 'package:flutter_app_mustafa/routes.dart';
+import 'widgets/posts.dart';
 import 'templates.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,12 +15,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final EmailInputObject = EmailInput();
   final PasswordInputObject = PasswordInput(name: "Password");
+  void goToProfile(BuildContext context) {
+    Route route = MaterialPageRoute(builder: (context) => ProfilePage());
+    Navigator.pushReplacement(context, route);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const Icon(Icons.account_circle_rounded),
+        leading: IconButton(
+          icon: Icon(Icons.account_circle_rounded),
+          tooltip: 'Go to your profile',
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            )
+          },
+        ),
         title: const Text(
           "Artopia",
           style: TextStyle(

@@ -5,6 +5,15 @@ import 'package:flutter_app_mustafa/templates.dart';
 import 'package:flutter_app_mustafa/utils/colorPalette.dart';
 import 'package:flutter_app_mustafa/utils/textUtils.dart';
 
+class LandingPageRoute extends StatelessWidget {
+  const LandingPageRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const BackToHomeButton();
+  }
+}
+
 class LoginPageRoute extends StatelessWidget {
   LoginPageRoute({Key? key}) : super(key: key);
   final TextUtils textUtils = TextUtils();
@@ -12,7 +21,7 @@ class LoginPageRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
+      style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(12.5),
         minimumSize: const Size(400, 50),
         foregroundColor: colorPalette.frenchLilac,
@@ -27,18 +36,9 @@ class LoginPageRoute extends StatelessWidget {
           MaterialPageRoute(builder: (context) => LoginScreen()),
         );
       },
-        child:
-        textUtils.buildText("Login", 22.5, Colors.white70, FontWeight.w500),
+      child:
+          textUtils.buildText("Login", 22.5, Colors.white70, FontWeight.w500),
     );
-  }
-}
-
-class LandingPageRoute extends StatelessWidget {
-  const LandingPageRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BackToHomeButton();
   }
 }
 
@@ -64,7 +64,7 @@ class SignUpScreenRoute extends StatelessWidget {
         );
       },
       child:
-      textUtils.buildText("Sign Up", 22.5, Colors.white70, FontWeight.w500),
+          textUtils.buildText("Sign Up", 22.5, Colors.white70, FontWeight.w500),
     );
   }
 }
@@ -74,8 +74,14 @@ class HomePageRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const ExitProfileButton();
   }
 }
 
-
+class ProfilePageRoute extends StatelessWidget {
+  const ProfilePageRoute({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
