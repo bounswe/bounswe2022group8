@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'drf_yasg',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'mptt',
 ]
 
 MIDDLEWARE = [

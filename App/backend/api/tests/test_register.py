@@ -13,12 +13,12 @@ class RegistrationTest(TestCase):
     # preparing to test
     def setUp(self):
         # setting up for the test
-        print("TestArtItem:setUp_:begin")
+        print("TestRegister:setUp_:begin")
         self.faker = Faker()
         self.serializer = RegisterSerializer()
 
         # do something
-        print("TestArtItem:setUp_:end")
+        print("TestRegister:setUp_:end")
 
     def test_username_syntax(self):
         """
