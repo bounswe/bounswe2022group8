@@ -1,9 +1,11 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import random
+import hashlib
 
 class User(AbstractUser):
-    is_level2 = models.BooleanField('active user', default=False)
+    is_level2 = models.BooleanField('Level2 user (active)', default=False)
     name = models.CharField(max_length=100, blank=True)
     surname = models.CharField(max_length=100, blank=True)
     about = models.TextField(blank = True)
@@ -22,6 +24,37 @@ class User(AbstractUser):
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
     profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
     
+    #OTP (one time password for password reset)
+    otp = models.CharField(max_length=256, null=True, blank=True)
+
+    # # Method to Put a Random OTP in the User table, every time the save is called.
+    # def save(self, *args, **kwargs):
+    #     number_list = [x for x in range(10)]  # Use of list comprehension
+    #     code_items_for_otp = []
+
+    #     for i in range(6):
+    #         num = random.choice(number_list)
+    #         code_items_for_otp.append(num)
+
+    #     code_string = "".join(str(item) for item in code_items_for_otp)  # list comprehension again
+    #     # A six digit random number from the list will be saved in otp field
+    #     self.otp = code_string
+    #     super().save(*args, **kwargs)
+
+    def changeOTP(self, *args, **kwargs):
+        number_list = [x for x in range(10)]  # Use of list comprehension
+        code_items_for_otp = []
+
+        for i in range(6):
+            num = random.choice(number_list)
+            code_items_for_otp.append(num)
+
+        code_string = "".join(str(item) for item in code_items_for_otp)  # list comprehension again
+        # A six digit random number from the list will be saved in otp field
+        self.otp = hashlib.sha256(code_string.encode('utf-8')).hexdigest()
+        super().save(*args, **kwargs)
+        return code_string
+
     def __str__(self):
         return self.name + " " + self.surname 
 
