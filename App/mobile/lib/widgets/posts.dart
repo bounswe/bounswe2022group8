@@ -39,7 +39,7 @@ class _PostsListState extends State<PostsList> {
           ),
           const SizedBox(height: 10),
           Image.asset("assets/images/profile.jpeg",
-              height: 500, fit: BoxFit.fill),
+              height: 450, fit: BoxFit.fill),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
@@ -91,12 +91,14 @@ class _PostsListState extends State<PostsList> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      " Hi! New profile picture. #NewYearNewMe",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "OpenSans",
-                        fontSize: 14,
+                    Flexible(
+                      child: Text(
+                        " Hi! New profile picture. #NewYearNewMe",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "OpenSans",
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ],

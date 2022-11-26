@@ -219,6 +219,33 @@ class LoginButton extends StatelessWidget {
   }
 }
 
+class ExitProfileButton extends StatelessWidget {
+  const ExitProfileButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.topLeft,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      width: double.infinity,
+      child: IconButton(
+        icon: const Icon(
+          color: Colors.black,
+          Icons.arrow_back,
+        ),
+        onPressed: () => Navigator.pop(context),
+        style: ElevatedButton.styleFrom(
+          // padding: const EdgeInsets.all(12.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          backgroundColor: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
 class BackToHomeButton extends StatelessWidget {
   const BackToHomeButton({super.key});
 
@@ -257,32 +284,5 @@ class _ErrorMessageState extends State<ErrorMessage> {
   @override
   Widget build(BuildContext context) {
     return Container();
-  }
-}
-
-class ExitProfileButton extends StatelessWidget {
-  const ExitProfileButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topLeft,
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      width: double.infinity,
-      child: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-        onPressed: () => Navigator.pop(context),
-        style: ElevatedButton.styleFrom(
-          // padding: const EdgeInsets.all(12.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          backgroundColor: Colors.white,
-        ),
-      ),
-    );
   }
 }

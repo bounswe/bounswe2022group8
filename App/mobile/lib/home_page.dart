@@ -1,9 +1,11 @@
+import 'package:artopia/utils/colorPalette.dart';
 import 'package:flutter/material.dart';
 import 'package:artopia/landing_page.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/routes.dart';
 import 'widgets/posts.dart';
 import 'templates.dart';
+import 'package:artopia/utils/colorPalette.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,9 +24,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: colorPalette.frenchLilac,
         leading: IconButton(
           icon: Icon(Icons.account_circle_rounded),
           tooltip: 'Go to your profile',
