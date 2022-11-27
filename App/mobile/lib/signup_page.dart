@@ -153,6 +153,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
+                                if (this.value == false){
+                                  _setErrorMessage(error: "Please accept the Terms and Conditions.");
+                                  }
+                                else {
                               String username = usernameController.text;
                               String email =
                                   EmailInputObject.emailController.text;
@@ -169,14 +173,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       confirmPassword)
                                   .then((value) {
                                 if (value == "OK") {
+                       
                                   Route route = MaterialPageRoute(
                                       builder: (context) => LoginScreen());
                                   Navigator.pushReplacement(context, route);
+                                  
                                 } else {
                                   _setErrorMessage(error: value);
                                 }
                                 print(value);
                               });
+                            }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(12.5),
