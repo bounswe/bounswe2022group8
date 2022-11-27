@@ -11,6 +11,7 @@ from .views.profile import profile_api, profile_me_api
 from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
+from .views.tags import TagView, TagsView
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
@@ -66,7 +67,9 @@ urlpatterns = [
     path('users/me/followings/', get_my_followings, name="get_my_followings"),
     path('users/<int:id>/followers/', get_followers, name="get_followers"),
     path('users/<int:id>/followings/', get_followings, name="get_followings"),
-    path('artitems/me/followings/', artitems_of_followings, name="get_artitems_of_followings")
+    path('artitems/me/followings/', artitems_of_followings, name="get_artitems_of_followings"),
+    path('artitems/tags/<int:id>', TagView, name="Tagview"),
+    path('artitems/tags/', TagsView, name="TagsView")
 
 ]
 
