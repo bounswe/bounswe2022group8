@@ -1,4 +1,4 @@
-package com.example.flutter_app_mustafa
+package com.example.artopia
 
 import io.flutter.embedding.android.FlutterActivity
 
