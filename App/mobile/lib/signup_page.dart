@@ -5,6 +5,7 @@ import 'package:artopia/routes.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'templates.dart';
 import 'register.dart';
 
@@ -15,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   String _error = "Welcome to Artopia!";
+  bool value = false;
   final TextUtils textUtils = TextUtils();
   final ColorPalette colorPalette = ColorPalette();
   final usernameController = TextEditingController();
@@ -116,7 +118,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       PasswordInputObject,
                       const SizedBox(height: 10),
                       ConfirmPasswordInputObject,
-                      const SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Checkbox(value: value,
+                              side: const BorderSide(color: Colors.white),
+                              onChanged:
+                                  (bool? value) {
+                                setState(() {
+                                  this.value = value!;
+                                });
+                              }),
+                          SizedBox(
+                            width: 260,
+                            child:
+                            InkWell(
+                              onTap: () => launchUrl(Uri.parse('https://www.lipsum.com')),
+                              child: Text(
+                                'I agree to the Terms and Conditions',
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline
+                                ),
+                              ),
+                            )
+                          ),
+                        ], //<Widget>[]
+                      ),
                       Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(vertical: 10),
