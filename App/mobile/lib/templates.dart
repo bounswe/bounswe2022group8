@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/login_page.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UsernameInput extends StatefulWidget {
   final usernameController = TextEditingController();
@@ -34,19 +37,20 @@ class _UsernameInputState extends State<UsernameInput> {
           child: TextField(
             controller: widget.usernameController,
             keyboardType: TextInputType.name,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
+                contentPadding: const EdgeInsets.only(top: 14),
+                prefixIcon: const Icon(
                   Icons.email,
                   color: Colors.white,
                 ),
                 hintText: "Enter your username",
-                hintStyle: TextStyle(
-                  color: Colors.white54,
-                  fontFamily: 'OpenSans',
-                )),
+                hintStyle: GoogleFonts.inter(
+                    fontSize: 14,
+                    color: Colors.white54,
+                ),
+            ),
           ),
         ),
       ],
@@ -56,7 +60,8 @@ class _UsernameInputState extends State<UsernameInput> {
 
 class EmailInput extends StatefulWidget {
   final emailController = TextEditingController();
-
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   EmailInput({super.key});
 
   @override
@@ -69,6 +74,7 @@ class _EmailInputState extends State<EmailInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+
         const Text("Email",
             style: TextStyle(
               color: Colors.white,
@@ -86,8 +92,8 @@ class _EmailInputState extends State<EmailInput> {
           child: TextField(
             controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(
@@ -108,7 +114,6 @@ class _EmailInputState extends State<EmailInput> {
 
 class PasswordInput extends StatefulWidget {
   final String name;
-
   PasswordInput({Key? key, required this.name}) : super(key: key);
 
   final passwordController = TextEditingController();
@@ -117,17 +122,15 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(widget.name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+        textUtils.buildText(widget.name, 14,
+            Colors.white, FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -149,10 +152,11 @@ class _PasswordInputState extends State<PasswordInput> {
                   color: Colors.white,
                 ),
                 hintText: widget.name,
-                hintStyle: const TextStyle(
+                hintStyle: GoogleFonts.inter(
+                  fontSize: 14,
                   color: Colors.white54,
-                  fontFamily: 'OpenSans',
-                )),
+                ),
+            ),
           ),
         ),
       ],
