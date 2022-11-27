@@ -1,8 +1,11 @@
+import 'package:artopia/utils/colorPalette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_mustafa/landing_page.dart';
+import 'package:artopia/landing_page.dart';
+import 'package:artopia/profile_page.dart';
+import 'package:artopia/routes.dart';
 import 'widgets/posts.dart';
-import 'package:flutter_app_mustafa/routes.dart';
 import 'templates.dart';
+import 'package:artopia/utils/colorPalette.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,16 +15,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final EmailInputObject = EmailInput() ;
-  final PasswordInputObject = PasswordInput(name: "Password") ;
+  final EmailInputObject = EmailInput();
+  final PasswordInputObject = PasswordInput(name: "Password");
+  void goToProfile(BuildContext context) {
+    Route route = MaterialPageRoute(builder: (context) => ProfilePage());
+    Navigator.pushReplacement(context, route);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const Icon(Icons.account_circle_rounded),
+        backgroundColor: colorPalette.frenchLilac,
+        leading: IconButton(
+          icon: Icon(Icons.account_circle_rounded),
+          tooltip: 'Go to your profile',
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            )
+          },
+        ),
         title: const Text(
-          "MyApp",
+          "Artopia",
           style: TextStyle(
             color: Colors.black45,
             fontFamily: "OpenSans",
@@ -73,13 +92,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (value){
-          if(value == 1){
-            Route route = MaterialPageRoute(builder: (context) =>  LandingPage());
+        onTap: (value) {
+          if (value == 1) {
+            Route route =
+                MaterialPageRoute(builder: (context) => LandingPage());
             Navigator.pushReplacement(context, route);
           }
         },
-        items:  const [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
