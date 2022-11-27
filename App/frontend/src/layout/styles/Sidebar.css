@@ -1,0 +1,92 @@
+.sidebar-container {
+  height: calc(100vh - 160px); /*100vh-2*navbar */
+  position: fixed;
+  right: 0px;
+  top: 0px; /*navbar --> old*/
+  bottom: 80px;
+  z-index: 1000; /*1020 = navbar's z-index */
+}
+
+.sidebar-header {
+  width: 0px;
+  height: 80px;
+  background-color: #6fa470;
+  transition: width 0.3s;
+}
+
+.sidebar {
+  height: 100%;
+  /*in real, will be determined in inline css (300:open - 0:closed)
+  -- info comes from Layout.js via width prop*/
+  width: 0px;
+  background-color: #6fa470;
+  overflow-x: hidden;
+  transition: width 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-list {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar-row {
+  width: 100%;
+  height: 60px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-element {
+  color: #18121c;
+  padding: 18px;
+  width: 300px;
+  font-weight: 400;
+  /*border-color: #18121c !important;*/ /*for debugging*/
+  white-space: nowrap;
+}
+
+.sidebar-element:hover {
+  color: white;
+}
+
+.sidebar-element:active {
+  color: #18121c !important;
+}
+
+.sidebar-footer {
+  /*in real, will be determined in inline css (300:open - 0:closed)
+  -- info comes from Layout.js via width prop*/
+  width: 0px;
+  height: 80px;
+  background-color: #6fa470;
+  overflow-x: hidden;
+  transition: width 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-footer-btn {
+  background-color: transparent;
+  border-color: transparent;
+  color: #18121c;
+  /*border-color: red !important*/ /*for debugging*/
+  white-space: nowrap;
+  margin: 0 2rem;
+}
+
+.sidebar-footer-btn:hover {
+  color: white;
+}
+
+.sidebar-footer-btn:active {
+  color: #18121c !important;
+  border-color: transparent !important;
+}

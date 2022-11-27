@@ -1,0 +1,6 @@
+.main-container {
+  position: relative;
+  transition: 0.3s;
+  margin: 0px 0px; /* right margin will be overriden in inline css */
+}
+

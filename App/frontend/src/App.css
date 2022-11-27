@@ -1,0 +1,102 @@
+/*  THIS PAGE IS USED TO OVERRIDE BOOTSTRAP COMPONENTS.
+
+    ANY CHANGE WE MAKE TO THIS PAGE WILL 
+    CHANGE THE STYLING OF THE COMPONENT
+    IN THE ENTIRE PROJECT SCOPE.
+
+    FOR THIS REASON, ONLY GENERAL CHANGES SHOULD BE MADE HERE.
+    ALL CUSTOM CHANGES SHOULD BE MADE IN SEPARATE CSS FILES
+
+    ALSO, COMPONENTS FROM THE SAME CLASS SHOULD BE 
+    ONE UNDER THE OTHER FOR MINIMAL CONFUSION
+
+*/
+
+/* ------- FORM ------- */
+
+.form-control:focus {
+  border-color: #18121c !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.form-error {
+  margin-top: 0.4em;
+  margin-bottom: -0.4em;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d90429;
+}
+
+.form-control-error {
+  border-color: #d90429 !important; /* overriding form-control when there is an error */
+}
+
+/* ------- BUTTONS ------- */
+
+/* Primary Button */
+.btn-primary {
+  background-color: #18121c !important;
+  border-color: #18121c !important;
+  transition: 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: rgb(39, 44, 48) !important;
+  border-color: rgb(39, 44, 48) !important;
+}
+
+/* Primary Outline Button */
+.btn-outline-primary {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: white !important;
+}
+
+.btn-outline-primary:hover {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+.btn-outline-primary:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: #fff !important;
+  color: #18121c !important;
+}
+
+.btn-secondary:hover {
+  background-color: #fcf6ff !important;
+}
+
+/* Secondary Outline Button */
+
+/* Light Button */
+.btn-light,
+.btn-light:hover,
+.btn-light:active {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Close Button */
+.btn-close,
+.btn-close:hover,
+.btn-close:active {
+  box-shadow: none !important;
+}
+
+/* ------- BACKGROUND ------- */
+
+.bg-primary {
+  background-color: red !important;
+}
+
+.bg-secondary {
+  background-color: white !important;
+}

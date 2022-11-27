@@ -1,72 +1,114 @@
+import 'package:artopia/utils/colorPalette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app_mustafa/routes.dart';
+import 'package:artopia/landing_page.dart';
+import 'package:artopia/profile_page.dart';
+import 'package:artopia/routes.dart';
+import 'widgets/posts.dart';
+import 'templates.dart';
+import 'package:artopia/utils/colorPalette.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final EmailInputObject = EmailInput();
+  final PasswordInputObject = PasswordInput(name: "Password");
+  void goToProfile(BuildContext context) {
+    Route route = MaterialPageRoute(builder: (context) => ProfilePage());
+    Navigator.pushReplacement(context, route);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    gradient:SweepGradient(
-                      center: FractionalOffset.topRight,
-                      colors: <Color>[
-                        Color.fromARGB(120, 0, 8, 193),
-                        Color.fromARGB(120, 33, 70, 199),
-                        Color.fromARGB(120, 175, 180, 255),
-                        Color.fromARGB(120, 166, 225, 255),
-                      ],
-                      stops: <double>[0.25, 0.60, 0.750, 1],
-                    )
-                ),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 60,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  const <Widget>[
-                      Text(
-                          "Welcome to MyApp",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          )
-                      ),
-                      SizedBox(height: 30),
-                      LoginScreenRoute(),
-                      SizedBox(height: 30),
-                      SignUpScreenRoute(),
-                    ],
-                  ),
-                ),
-              )
-            ],
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: colorPalette.frenchLilac,
+        leading: IconButton(
+          icon: Icon(Icons.account_circle_rounded),
+          tooltip: 'Go to your profile',
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            )
+          },
+        ),
+        title: const Text(
+          "Artopia",
+          style: TextStyle(
+            color: Colors.black45,
+            fontFamily: "OpenSans",
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        actions: const [
+          Icon(Icons.more_vert),
+        ],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  PostsList(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          if (value == 1) {
+            Route route =
+                MaterialPageRoute(builder: (context) => LandingPage());
+            Navigator.pushReplacement(context, route);
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.open_in_new_rounded),
+            label: 'Logout',
+          ),
+        ],
       ),
     );
   }

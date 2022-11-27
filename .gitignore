@@ -1,3 +1,6 @@
+App/mobile/.dart_tool/
+App/mobile/macos/
+
 # ignore environment 
 env/
 
@@ -6,6 +9,7 @@ __pycache__
 
 # Ignore files related to API keys
 .env
+.production.env
 
 # Ignore IDE specific directories
 .vscode

@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_mustafa/login_page.dart';
-import 'package:flutter_app_mustafa/signup_page.dart';
-import 'package:flutter_app_mustafa/templates.dart';
+import 'package:artopia/login_page.dart';
+import 'package:artopia/signup_page.dart';
+import 'package:artopia/templates.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
 
-class LoginScreenRoute extends StatelessWidget {
-  const LoginScreenRoute({Key? key}) : super(key: key);
+class LandingPageRoute extends StatelessWidget {
+  const LandingPageRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return const BackToHomeButton();
+  }
+}
+
+class LoginPageRoute extends StatelessWidget {
+  LoginPageRoute({Key? key}) : super(key: key);
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
+      style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(12.5),
         minimumSize: const Size(400, 50),
+        foregroundColor: colorPalette.frenchLilac,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: colorPalette.frenchLilac,
       ),
       onPressed: () {
         Navigator.push(
@@ -23,31 +36,16 @@ class LoginScreenRoute extends StatelessWidget {
           MaterialPageRoute(builder: (context) => LoginScreen()),
         );
       },
-        child: const Text(
-        "LOGIN",
-        style: TextStyle(
-        color: Colors.black87,
-        fontFamily: "OpenSans",
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
-          ),
-        ),
+      child:
+          textUtils.buildText("Login", 22.5, Colors.white70, FontWeight.w500),
     );
   }
 }
 
-class HomeScreenRoute extends StatelessWidget {
-  const HomeScreenRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BackToHomeButton();
-  }
-}
-
 class SignUpScreenRoute extends StatelessWidget {
-  const SignUpScreenRoute({Key? key}) : super(key: key);
-
+  SignUpScreenRoute({Key? key}) : super(key: key);
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -57,7 +55,7 @@ class SignUpScreenRoute extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: colorPalette.frenchLilac,
       ),
       onPressed: () {
         Navigator.push(
@@ -65,16 +63,25 @@ class SignUpScreenRoute extends StatelessWidget {
           MaterialPageRoute(builder: (context) => SignUpScreen()),
         );
       },
-      child: const Text(
-        "SIGN UP",
-        style: TextStyle(
-          color: Colors.black87,
-          fontFamily: "OpenSans",
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child:
+          textUtils.buildText("Sign Up", 22.5, Colors.white70, FontWeight.w500),
     );
   }
 }
 
+class HomePageRoute extends StatelessWidget {
+  const HomePageRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const ExitProfileButton();
+  }
+}
+
+class ProfilePageRoute extends StatelessWidget {
+  const ProfilePageRoute({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
