@@ -29,7 +29,8 @@ class _HomePageState extends State<HomePage> {
     final textUtils = TextUtils();
     final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
-      backgroundColor: colorPalette.darkPurple,
+      backgroundColor: Colors.black,
+      // backgroundColor: colorPalette.darkPurple,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(

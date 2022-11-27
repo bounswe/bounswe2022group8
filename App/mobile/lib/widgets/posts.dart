@@ -3,6 +3,8 @@ import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 
 class PostsList extends StatefulWidget {
+  const PostsList({super.key});
+
   @override
   State<PostsList> createState() => _PostsListState();
 }
@@ -21,26 +23,36 @@ class _PostsListState extends State<PostsList> {
         ),
         borderRadius: BorderRadius.zero,
       ),
-      decoration: BoxDecoration(
-        color: colorPalette.palatinatePurple,
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        // color: colorPalette.palatinatePurple,
       ),
       alignment: Alignment.topCenter,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 5, top: 7),
+            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:  [
-                const CircleAvatar(
-                  radius: 16,
-                  backgroundImage: AssetImage("assets/images/profile.jpeg"),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 16,
+                      backgroundImage: AssetImage("assets/images/profile.jpeg"),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    textUtils.buildText("selin", 16, colorPalette.blackShadows, FontWeight.w600),
+                  ],
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                textUtils.buildText("selin", 16, colorPalette.blackShadows, FontWeight.w600),
+                Row(
+                  children: [
+                    textUtils.buildText("Aurora", 16, colorPalette.blackShadows, FontWeight.w600),
+                  ],
+                )
               ],
             ),
           ),
@@ -56,32 +68,22 @@ class _PostsListState extends State<PostsList> {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(
                       Icons.heart_broken_rounded,
                       color: colorPalette.blackShadows,
                       size: 30,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 5),
-                    ),
                     Icon(
                           Icons.message,
                           color: colorPalette.blackShadows,
                           size: 30),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 5),
-                    ),
                     Icon(
                       Icons.attach_money,
                       color: colorPalette.blackShadows,
                       size: 30,
-                    ),
-                  ],
-                ),
+                    )
               ],
             ),
           ),
