@@ -29,12 +29,11 @@ class _HomePageState extends State<HomePage> {
     final textUtils = TextUtils();
     final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorPalette.darkPurple,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
-          backgroundColor: colorPalette.russianGreen,
-
+          backgroundColor: colorPalette.darkPurple,
           leading: IconButton(
             icon: Icon(Icons.account_circle_rounded),
             tooltip: 'Go to your profile',
@@ -56,38 +55,13 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
+            PostsList(),
+            PostsList(),
+            PostsList(),
+            PostsList(),
+            PostsList(),
+            PostsList(),
+            PostsList(),
           ],
         ),
       ),
