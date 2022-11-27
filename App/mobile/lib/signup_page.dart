@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textUtils.buildText("Sign Up", 30,
                           Colors.white, FontWeight.bold),
                       const SizedBox(height: 5),
-                      textUtils.buildText(_error, 16,
+                      textUtils.buildText(_error, 14,
                           Colors.white, FontWeight.bold),
                       const SizedBox(height: 30),
                       Column(
@@ -153,7 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
-                                if (this.value == false){
+                                if (value == false){
                                   _setErrorMessage(error: "Please accept the Terms and Conditions.");
                                   }
                                 else {
