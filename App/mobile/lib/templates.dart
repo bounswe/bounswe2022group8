@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class UsernameInput extends StatefulWidget {
   final usernameController = TextEditingController();
-
   UsernameInput({Key? key}) : super(key: key);
 
   @override
@@ -15,17 +14,17 @@ class UsernameInput extends StatefulWidget {
 }
 
 class _UsernameInputState extends State<UsernameInput> {
+  final textUtils = TextUtils();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text("Username",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+        textUtils.buildText(
+            "Username",
+            18,
+            Colors.white,
+            FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -59,28 +58,24 @@ class _UsernameInputState extends State<UsernameInput> {
 }
 
 class EmailInput extends StatefulWidget {
-  final emailController = TextEditingController();
-  final TextUtils textUtils = TextUtils();
-  final ColorPalette colorPalette = ColorPalette();
   EmailInput({super.key});
+  final emailController = TextEditingController();
 
   @override
   State<EmailInput> createState() => _EmailInputState();
 }
 
 class _EmailInputState extends State<EmailInput> {
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
 
-        const Text("Email",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+        textUtils.buildText("Email", 14,
+            Colors.white, FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -93,17 +88,17 @@ class _EmailInputState extends State<EmailInput> {
             controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
+            decoration:  InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
+                contentPadding: const EdgeInsets.only(top: 14),
+                prefixIcon: const Icon(
                   Icons.email,
                   color: Colors.white,
                 ),
                 hintText: "Enter your email",
-                hintStyle: TextStyle(
+                hintStyle: GoogleFonts.inter(
+                  fontSize: 14,
                   color: Colors.white54,
-                  fontFamily: 'OpenSans',
                 )),
           ),
         ),
@@ -115,7 +110,6 @@ class _EmailInputState extends State<EmailInput> {
 class PasswordInput extends StatefulWidget {
   final String name;
   PasswordInput({Key? key, required this.name}) : super(key: key);
-
   final passwordController = TextEditingController();
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -187,7 +181,6 @@ class ForgotPassword extends StatelessWidget {
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -218,7 +211,8 @@ class LoginButton extends StatelessWidget {
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
             ),
-          )),
+          )
+      ),
     );
   }
 }
