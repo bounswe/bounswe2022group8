@@ -40,6 +40,38 @@ from django.core import serializers
         ),
     }
 )
+@swagger_auto_schema(
+    method='DELETE',
+    operation_description="Tag delete API.",
+    operation_summary="Delete tag.",
+    tags=['tags'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully deleted the tag.",
+            examples={
+                "application/json": {
+                    "detail": "Tag deleted!"
+                }
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Wrong tag id.",
+            examples={
+                "application/json": {
+                    "detail": "Tag with given id does not exist."
+                },
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="User not authorized.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
 @api_view(['GET', 'DELETE'])
 def TagView(request, id):
     data = request.data
@@ -67,7 +99,35 @@ def TagView(request, id):
         else:
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    
+
+@swagger_auto_schema(
+    method='POST',
+    operation_description="Tag API. This endpoint with POST request creates a tag. Moderator is required.",
+    operation_summary="Create a new tag.",
+    tags=['tags'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully created a tag.",
+            examples={
+                "application/json": {
+                    "id": 1,
+                    "tagname": "ocean",
+                    "description": "test",
+                    "created_at": "2022-11-13T16:34:03.316236Z",
+                    "updated_at": "2022-11-13T16:34:03.316236Z"
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Invalid parameters or token.",
+            examples={
+                "application/json": {
+                    
+                },
+            }
+        ),
+    }
+)
 @api_view(['POST'])
 def TagsView(request):
     data = request.data
