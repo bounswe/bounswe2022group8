@@ -40,8 +40,8 @@ from django.core import serializers
         ),
     }
 )
-@api_view(['GET', 'PUT', 'DELETE'])
-def TagView(request, artitemid, id):
+@api_view(['GET', 'DELETE'])
+def TagView(request, id):
     data = request.data
     if (request.method == "GET"):
         try:
@@ -53,14 +53,13 @@ def TagView(request, artitemid, id):
                 'detail': 'Tag with given id does not exist.'}
             return Response(message, status=status.HTTP_404_NOT_FOUND)
     elif(request.method == "DELETE"):
-        if request.user.is_authenticated:
+        if request.user.is_superuser:
             try:
                 tag = Tag.objects.get(id=id)
             except Tag.DoesNotExist:
                 message = {
                     'detail': 'Tag with given id does not exist.'}
                 return Response(message, status=status.HTTP_404_NOT_FOUND)
-            # IMPORTANT : Tag Deletion process????
             tag.delete()
             message = {
                 'detail': 'Tag deleted!'}
@@ -68,5 +67,19 @@ def TagView(request, artitemid, id):
         else:
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    elif(request.method == "PUT"):
-        pass
+    
+@api_view(['POST'])
+def TagsView(request):
+    data = request.data
+    if (request.method == "POST"):
+        if request.user.is_superuser:
+            serializer = TagSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    
