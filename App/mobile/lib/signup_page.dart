@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
+import 'package:artopia/login_page.dart';
 import 'package:artopia/routes.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
@@ -169,7 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   .then((value) {
                                 if (value == "OK") {
                                   Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
+                                      builder: (context) => LoginScreen());
                                   Navigator.pushReplacement(context, route);
                                 } else {
                                   _setErrorMessage(error: value);

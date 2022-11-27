@@ -6,6 +6,7 @@ import 'package:artopia/routes.dart';
 import 'widgets/posts.dart';
 import 'templates.dart';
 import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,33 +26,31 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final textUtils = TextUtils();
     final ColorPalette colorPalette = ColorPalette();
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: colorPalette.frenchLilac,
-        leading: IconButton(
-          icon: Icon(Icons.account_circle_rounded),
-          tooltip: 'Go to your profile',
-          onPressed: () => {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            )
-          },
-        ),
-        title: const Text(
-          "Artopia",
-          style: TextStyle(
-            color: Colors.black45,
-            fontFamily: "OpenSans",
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: AppBar(
+          backgroundColor: colorPalette.russianGreen,
+
+          leading: IconButton(
+            icon: Icon(Icons.account_circle_rounded),
+            tooltip: 'Go to your profile',
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              )
+            },
           ),
+          title: textUtils.buildText("artopia", 25, Colors.white70,
+              FontWeight.w500),
+          // actions: const [
+          //   Icon(Icons.more_vert),
+          // ],
         ),
-        actions: const [
-          Icon(Icons.more_vert),
-        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -95,6 +94,12 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
           if (value == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }
+          if (value == 2) {
             Route route =
                 MaterialPageRoute(builder: (context) => LandingPage());
             Navigator.pushReplacement(context, route);
@@ -104,6 +109,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.open_in_new_rounded),

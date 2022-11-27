@@ -3,6 +3,7 @@ import 'package:artopia/art_items_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
+import 'package:artopia/landing_page.dart';
 import 'package:artopia/routes.dart';
 import 'package:artopia/profile.dart';
 import 'package:artopia/widgets/profile_header_widgets.dart';
@@ -131,6 +132,41 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          if (value == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          if (value == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }
+          if (value == 2) {
+            Route route =
+            MaterialPageRoute(builder: (context) => LandingPage());
+            Navigator.pushReplacement(context, route);
+          }
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.open_in_new_rounded),
+            label: 'Logout',
+          ),
+        ],
       ),
     );
   }

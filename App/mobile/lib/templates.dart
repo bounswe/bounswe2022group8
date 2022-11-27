@@ -254,6 +254,7 @@ class BackToHomeButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       child: IconButton(
+        alignment: Alignment.topLeft,
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.white,
