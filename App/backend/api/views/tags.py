@@ -156,7 +156,7 @@ def TagView(request, id):
         ),
     }
 )
-@api_view(['POST, GET'])
+@api_view(['POST', 'GET'])
 def TagsView(request):
     data = request.data
     if (request.method == "POST"):
