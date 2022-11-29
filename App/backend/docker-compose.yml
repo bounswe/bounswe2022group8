@@ -3,6 +3,7 @@ version: "3.8"
 services:
   web:
     build: .
+    # image: 6f6e28ad14df  (ID of the image - look at it from your local Docker)
     command: python /project/manage.py runserver 0.0.0.0:8000 --settings=backend.settings.production
     volumes:
       - .:/project

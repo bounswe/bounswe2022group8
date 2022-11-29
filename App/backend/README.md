@@ -91,7 +91,7 @@ Migrations are Django’s way of propagating changes you make to your models (ad
 `Dockerfile` and `docker-compose.yml` files are alread provided for you. Dockerizing our project is important for the deployment stage where we want our database to be stable and consistent between different runs for each use. To dockerize the application, use the following commands:
 * First of all, you must install the Docker Desktop from [here](https://www.docker.com/). It may require you to download WSL 2, so just follow the instructions. If asked, download Ubuntu as linux distributor.
 * I strongly suggest you to install the Docker extension for VS Code. It makes visualizing what's going on with the containers much more easier.
-* Firstly, build the `Dockerfile`. Let's give it a name with the `--tag` flag:
+* Firstly, you should build the `Dockerfile`. However, we do not really have to do it like this because `docker-compose` file already does it for us. So you can skip this step. (When we start using the docker image from Registry, we won't even need to build the image.)
    ```cmd
    docker build --tag python-django .
    ```
