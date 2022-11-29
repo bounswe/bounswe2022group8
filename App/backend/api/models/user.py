@@ -58,6 +58,14 @@ class User(AbstractUser):
     def __str__(self):
         return self.name + " " + self.surname 
 
+    @property
+    def get_followers(self):
+        return len([follow.from_user for follow in Follow.objects.filter(to_user=self)])
+    
+    @property
+    def get_followings(self):
+        return len([follow.to_user for follow in Follow.objects.filter(from_user=self)])
+
 
 class Follow(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")

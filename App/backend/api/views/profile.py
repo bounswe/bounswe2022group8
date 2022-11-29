@@ -11,6 +11,7 @@ from drf_yasg import openapi
 import base64
 from django.core.files.base import ContentFile
 from ..utils import ProfileImageStorage
+from ..models.user import Follow
 
 
 @ swagger_auto_schema(
@@ -30,7 +31,9 @@ from ..utils import ProfileImageStorage
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2
                 }
             }
         ),
@@ -50,6 +53,7 @@ def profile_api(request, id):
     if (request.method == "GET"):
         try:
             user = User.objects.get(pk=id)
+
             serializer = UserProfileSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
@@ -75,7 +79,9 @@ def profile_api(request, id):
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2
 
                 }
             }
@@ -146,6 +152,7 @@ def profile_me_api(request):
         """
         user = request.user
         serializer = UserProfileSerializer(user)
+ 
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
 
