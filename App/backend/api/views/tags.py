@@ -97,7 +97,7 @@ def TagView(request, id):
                 'detail': 'Tag deleted!'}
             return Response(message, status=status.HTTP_200_OK)
         else:
-            message = {'detail': 'Invalid token.'}
+            message = {'detail': 'You do not have the permission to delete an existing tag.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 @swagger_auto_schema(
@@ -128,11 +128,39 @@ def TagView(request, id):
         ),
     }
 )
-@api_view(['POST'])
+@swagger_auto_schema(
+    method='GET',
+    operation_description="Tag API. This endpoint with GET request returns all tags in the db. Authentication is not required.",
+    operation_summary="Get all tags",
+    tags=['tags'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully got all tags.",
+            examples={
+                "application/json": {
+                    "id": 1,
+                    "tagname": "ocean",
+                    "description": "test",
+                    "created_at": "2022-11-13T16:34:03.316236Z",
+                    "updated_at": "2022-11-13T16:34:03.316236Z"
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad request.",
+            examples={
+                "application/json": {
+                    "detail": "Bad request."
+                },
+            }
+        ),
+    }
+)
+@api_view(['POST, GET'])
 def TagsView(request):
     data = request.data
     if (request.method == "POST"):
-        if request.user.is_superuser:
+        if request.user.is_level2 or request.user.is_superuser:
             serializer = TagSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
@@ -142,4 +170,12 @@ def TagsView(request):
         else:
             message = {'detail': 'Invalid token.'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    
+    elif(request.method == "GET"):
+        try:
+            tags = Tag.objects.all()
+            serializer = TagSerializer(tags, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Tag.DoesNotExist:
+            message = {
+                'detail': 'Bad request.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
