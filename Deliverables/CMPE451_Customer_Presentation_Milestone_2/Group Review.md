@@ -23,6 +23,76 @@
 
 ## 2. Summary of Work
 
+<details>
+    <summary> Serdar Akol </summary>
+
+
+
+</details>
+
+<details>
+    <summary> Elif Bayraktar </summary>
+
+
+
+</details>
+
+<details>
+    <summary> Metehan Dündar </summary>
+
+
+
+</details>
+
+
+<details>
+    <summary> Mustafa Emre Erengül </summary>
+    
+
+
+
+</details>
+
+<details>
+    <summary> Sinem Koçoğlu </summary>
+
+
+ 
+</details>
+
+<details>
+    <summary> Sena Mumcu </summary>
+    
+
+
+
+</details>
+
+<details>
+    <summary> Karahan Sarıtaş </summary>
+
+
+
+</details>
+
+
+<details>
+    <summary> Doğukan Türksoy </summary>
+    
+
+
+
+</details>
+
+
+<details>
+    <summary> Mustafa Cihan </summary>
+    
+
+
+</details>
+
+
 ## 3. Status of Deliverables
 
 ## 4. Progress According to Requirements
@@ -43,3 +113,6 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 ## 8. Standards
 
 ## 9. Individual Reports 
+---
+*
+---
