@@ -151,3 +151,83 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 ## 8. Standards
 
 ## 9. Individual Reports 
+
+<details>
+    <summary> Karahan Sarıtaş </summary>
+    
+I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I'm working in the backend team.
+
+### Responsibilities
+* Integration of Swagger to the backend for API documentation and testing.
+* AWS S3 Bucket Integration for both development and production.
+* Research on how we can transfer the images from frontend to backend - and store them properly. As a result of my research, I provided a detailed description of the architecture [here](https://github.com/bounswe/bounswe2022group8/issues/246), implemented the backend part of the system.
+* Integration of Profile Page with backend APIs with Furkan from frontend team.
+* Implementation of art item related APIs (x7 APIs in total).
+* Implementation of follow/unfollow related APIs (x6 APIs in total).
+* Implementation of profile related APIs (x3 APIs in total).
+* Updating login and signup error messages.
+* PR Review: Reset Password API
+* PR Review: Comment related APIs
+* PR Review: CI/CD Integration
+* Configuration of `.env` and `.production.env` files to hide all of our secret information including AWS credentials, database credentials, email information and S3 bucket information, for both development and production sites.
+* Generation of the class diagram fron Django using `graphviz`.
+* Updating the class diagram. Filling up the `API` section of the Milestone II document.
+
+
+### Main Contributions
+Already listed all of my responsibilities and contributions above. Overall, I worked so hard to pushed the team forward, handled some of the challenging tasks in our path and guided people throughout the procedure. Critically reviewed pull requests of other team members. I showed uttermost respect to the mutual agreements we did in the meetings and therefore did my best to meet all the deadlines specified for our tasks. Unfortunatelly I couldn't see the same respect from others though.
+    
+**Code Related Issues**
+* [BE-24: Generate Class Diagram from Django](https://github.com/bounswe/bounswe2022group8/issues/293)
+* [BE-22: [API] Implementation of Follow Action APIs](https://github.com/bounswe/bounswe2022group8/issues/272)
+* [BE-21: Add Image Storage Path and Production Settings](https://github.com/bounswe/bounswe2022group8/issues/269)
+* [BE-17: [API] Implementation of Art Item Related APIs - 1](https://github.com/bounswe/bounswe2022group8/issues/250)
+* [BE-16: [API] Implementation of Profile Related APIs - 1](https://github.com/bounswe/bounswe2022group8/issues/248)
+* [BE-15: Configure AWS S3 Bucket for Image Storage](https://github.com/bounswe/bounswe2022group8/issues/246)
+* [BE-14: Add Swagger Integration](https://github.com/bounswe/bounswe2022group8/issues/244)
+
+
+**Management Related Issues**
+* [MIL-8: Milestone 2 Group Review](https://github.com/bounswe/bounswe2022group8/issues/295)
+* [MIL-9: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/298)
+* [MIL-11:  Milestone 2 Deliverables](https://github.com/bounswe/bounswe2022group8/issues/300)
+* [MIL-12: Update Class Diagram](https://github.com/bounswe/bounswe2022group8/issues/303)
+
+
+**Pull Requests**
+* [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245)
+* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247)
+* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249)
+* [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)
+* [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252)
+* [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
+* [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270)
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271)
+* [feature/BE-22 #1](https://github.com/bounswe/bounswe2022group8/pull/274)
+* [feature/BE-22 #2](https://github.com/bounswe/bounswe2022group8/pull/291)
+* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294)
+* [hotfix/BE-11](https://github.com/bounswe/bounswe2022group8/pull/301)
+
+**Unit Tests**
+* You can find my unittests from the related [folder](https://github.com/bounswe/bounswe2022group8/tree/master/App/backend/api/tests).
+* `test_artitem_creation`
+* `test_artitem_deletion_cascaded`
+* `test_artitem_deletion`
+* `test_follow_creation`
+* `test_follow_deletion_cascaded`
+* `test_follow_artitems`
+* `test_username_syntax`
+
+
+> I hit the database from these functions, therefore they are not technically unit-tests but maybe integration tests. However, in CmpE352, we were requested to test our APIs and that was called unittest (that was indeed wrong but I guess the aim was to make us familiar with the concept of unittest and also testing our APIs?). So, I assumed that flexibility still holds, and included some very basic database operations in my unittests. For your information.
+
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-20](https://github.com/bounswe/bounswe2022group8/pull/262)
+* [feature/BE-19](https://github.com/bounswe/bounswe2022group8/pull/259)
+* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215) 
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271) (We worked as pair on this)
+    
+
+</details>
