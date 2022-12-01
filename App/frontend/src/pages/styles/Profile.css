@@ -1,23 +1,3 @@
-body {
-  font-family: "Open Sans", Arial, sans-serif;
-  min-height: 100vh;
-  background-color: #fafafa;
-  color: #262626;
-  padding-bottom: 3rem;
-}
-
-img {
-  display: block;
-  width: calc(50% - 1rem);
-}
-
-.container {
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -26,89 +6,169 @@ img {
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+.profile-page-container {
+  max-width: 1400px;
+  min-height: 80vh;
+  margin: 0 auto 10rem auto;
+  padding: 0 2.5rem;
+}
+
 /* Profile info*/
-.profile {
-  padding: 5rem 0;
-}
-
-.profile-image {
-  float: left;
-  width: calc(33.333% - 3rem);
+.profile-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 3rem;
+  margin-top: 7rem;
+  margin-bottom: 3.2rem;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.profile-image img {
+.profile-photo-container {
+  padding: 0 2.5rem;
+}
+
+.profile-photo {
+  height: 9rem;
+  width: 9rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
   border-radius: 50%;
 }
 
-.profile-user-settings {
-  margin-top: 1.1rem;
-}
-
-.profile-user-name {
+.profile-username {
   display: inline-block;
-  color: #fafafa;
-  font-size: 24px;
-  font-weight: 300;
+  color: #ffc9ff; /* #00f0f0 */
+  font-size: 23px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  margin-right: 7rem;
 }
 
-.profile-edit-btn {
-  color: white;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  border: 0.1rem solid #dbdbdb;
-  border-radius: 0.3rem;
-  padding: 0 1.2rem;
-  margin-left: 2rem;
-}
-
-.profile-edit-btn:hover {
-    background-color: #ffc9ff;
-    color: #18121c;
-  }
-
-.profile-stat-count {
-  display: inline-block;
-  font-size: 20px;
+.profile-name {
+  display: block;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color:#fafafa;
-  width: calc(66.666% - 2rem);
-  margin-right: 4rem;
+  margin-top: -1.1rem;
+  padding-bottom: 0.6rem;
+  color: #bcb1c1;
 }
 
 .profile-bio {
-  font-size: 20px;
+  display: block;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  margin-top: 2.3rem;
-  color: #fafafa;
+  margin-top: 0.3rem;
+  margin-bottom: 1.8rem;
+  color: #ffffff;
 }
 
+.profile-location {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: #bcb1c1;
+}
+
+.profile-stat-count {
+  display: inline;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.profile-follow-number {
+  font-weight: 400;
+}
+
+.profile-follow {
+  font-weight: 400;
+  margin-right: 2rem;
+  color: #bcb1c1;
+}
+
+/* Navigation Tab */
+.tab-container {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, auto) 1fr;
+  grid-column-gap: 3rem;
+  justify-items: center;
+}
+
+.tab-line {
+  color: #bcb1c1;
+  margin-top: 0px;
+}
+
+.btn-navtab {
+  font-size: 17px;
+  padding-bottom: 12px;
+  color: #fafafa;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 0;
+  border-width: 1px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.btn-navtab:hover,
+.btn-navtab:active {
+  color: #bcb1c1 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.btn-navtab:nth-child(1) {
+  grid-column-start: 2;
+}
+
+.btn-navtab-underline {
+  border-bottom-color: #fafafa !important;
+}
+
+.btn-navtab-underline:hover,
+.btn-navtab-underline:active {
+  border-bottom-color: #bcb1c1 !important;
+}
+
+.btn-upload {
+  margin-left: auto;
+  margin-bottom: 13px;
+  color: #fafafa;
+  font-size: 16px;
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 0.3rem;
+  padding: 0.2rem 1.2rem;
+}
+
+.btn-upload:hover,
+.btn-upload:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
 
 /* Art Items*/
+
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -1rem -1rem;
-  padding-bottom: 3rem;
-  width: 25rem;
+  columns: 4;
+  column-gap: 1rem;
 }
 
 .gallery-item {
-  position: relative;
-  flex: 1 0 22rem;
-  margin: 1rem;
-  color: #fff;
   cursor: pointer;
-  width: 25rem;
-  height:25rem;
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.gallery-item:hover .gallery-item-info,
+/*.gallery-item:hover .gallery-item-info,
 .gallery-item:focus .gallery-item-info {
   display: flex;
   justify-content: center;
@@ -118,57 +178,15 @@ img {
   width: 25rem;
   height: 25rem;
   background-color: rgba(0, 0, 0, 0.3);
-}
-
-.gallery-item-info {
-  display: none;
-}
-
-.gallery-item-info li {
-  display: inline-block;
-  font-size: 1.7rem;
-  font-weight: 600;
-}
-
-.gallery-item-likes {
-  margin-left: 1rem;
-  margin-right: 2rem;
-}
-
-.gallery-item-comments {
-  margin-right: 4rem;
-}
-
-.fa-comment {
-  transform: rotateY(180deg);
-}
+}*/
 
 .gallery-image {
-  width: 22.5rem;
-  height: 25rem;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-.add-new-artitem-btn {
-    margin-bottom: 20px;
-    margin-left: 82%;
-    color: #fafafa;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    border: 0.1rem solid #dbdbdb;
-    border-radius: 0.3rem;
-    padding: 0 1.2rem;
-}
-
-.add-new-artitem-btn:hover {
-    background-color: #ffc9ff;
-    color: #18121c;
-}
-
-/*this belongs to the line on the art items*/
-.solid{
-    color:#ffc9ff;
-    margin-top: 1px;
+.gallery-item .gallery-image {
+  width: 100%;
+  vertical-align: top;
 }
 
 /*Loader can be used in any related action.*/
@@ -191,7 +209,6 @@ img {
   }
 */
 
-
 /*
 The following code will only run if your browser supports CSS grid.
 Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
@@ -199,63 +216,94 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 /*This part makes components in the screen seem better in terms of size when you minimize the size of the screen.*/
 
-@supports (display: grid) {
-  .profile {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: repeat(3, auto);
-    grid-column-gap: 3rem;
-    align-items: center;
-  }
-
-  .profile-image {
-    grid-row: 1 / -1;
-  }
-
+/*@supports (display: grid) {
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-    grid-gap: 2rem;
+    grid-gap: 1rem;
   }
 
-  .profile-image,
-  .profile-user-settings,
-  .profile-stat-count,
-  .profile-bio,
   .gallery-item,
   .gallery {
     width: auto;
     margin: 0;
   }
+}*/
 
-  @media (max-width: 40rem) {
-    .profile {
-      grid-template-columns: auto 1fr;
-      grid-row-gap: 1.5rem;
-    }
+@media (max-width: 1400px) {
+  .profile-container {
+    margin-top: 7rem;
+    margin-bottom: 3.2rem;
+    gap: 1.7rem;
+  }
 
-    .profile-image {
-      grid-row: 1 / 2;
-    }
+  .profile-photo-container {
+    padding: 0 2.5rem;
+  }
 
-    .profile-user-settings {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-gap: 1rem;
-    }
+  .profile-photo {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+  }
 
-    .profile-edit-btn,
-    .profile-stat-count,
-    .profile-bio {
-      grid-column: 1 / -1;
-    }
+  .profile-username {
+    font-size: 21px;
+  }
 
-    .profile-user-settings,
-    .profile-edit-btn,
-    .profile-settings-btn,
-    .profile-bio,
-    .profile-stat-count {
-      margin: 0;
-    }
+  .profile-name {
+    font-size: 15px;
+  }
+
+  .profile-bio {
+    font-size: 15px;
+  }
+
+  .profile-location {
+    font-size: 15px;
+  }
+
+  .profile-stat-count {
+    font-size: 15px;
+  }
+
+  .btn-navtab {
+    font-size: 16px;
+    padding-bottom: 12px;
+  }
+
+  .btn-upload {
+    margin-bottom: 11px;
+    font-size: 15px;
+    padding: 0.2rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-page-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  .profile-container {
+    gap: 1.5rem;
+  }
+
+  .profile-photo-container {
+    padding: 0 1.8rem;
+  }
+
+  .profile-photo {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+  }
+
+  .profile-bio,
+  .profile-location {
+    display: none;
+  }
+
+  .profile-stat-count {
+    overflow: hidden;
   }
 }

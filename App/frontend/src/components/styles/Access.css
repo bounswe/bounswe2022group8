@@ -46,15 +46,3 @@
   margin-bottom: 0px;
   margin-right: 15px; /* padding-top-form (10) + margin-top-btn(5)*/
 }
-
-.form-error {
-  margin-top: 0.4em;
-  margin-bottom: -0.4em;
-  font-size: 13px;
-  font-weight: 600;
-  color: #d90429;
-}
-
-.form-control-error {
-  border-color: #d90429 !important; /* overriding form-control when there is an error */
-}

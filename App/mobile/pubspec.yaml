@@ -1,5 +1,5 @@
-name: flutter_app_mustafa
-description: A new Flutter project.
+name: artopia
+description: The meeting platform of the art lovers.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -41,6 +41,10 @@ dependencies:
   http: ^0.13.5
   io: ^1.0.3
   google_fonts: ^3.0.1
+  avatar_glow: ^2.0.2
+  dotted_border: ^2.0.0+3
+  url_launcher: ^6.1.6
+  #profile: ^0.0.1
 
 dev_dependencies:
   flutter_test:

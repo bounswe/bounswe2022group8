@@ -14,6 +14,7 @@
 }
 
 .search-bar:focus {
+  background-color: transparent !important;
   border-top-color: transparent !important;
   border-bottom-color: white !important;
   border-right-color: transparent !important;

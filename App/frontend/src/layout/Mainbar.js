@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -9,6 +10,14 @@ import MenuButton from "../components/MenuButton";
 import "./styles/Mainbar.css";
 
 function Mainbar(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   return (
     <Navbar
       sticky="top"
@@ -20,13 +29,11 @@ function Mainbar(props) {
       }
     >
       <Container fluid>
-        <Navbar.Brand
-          className="ms-4 me-5"
-          href="./"
-          style={{ color: "white" }}
-        >
-          App Name
-        </Navbar.Brand>
+        <Link to="/" onClick={scrollToTop} style={{ textDecoration: "none" }}>
+          <Navbar.Brand className="ms-4 me-5" style={{ color: "white" }}>
+            App Name
+          </Navbar.Brand>
+        </Link>
         <Navbar.Collapse>
           <Nav className="me-auto">
             <Searchbar />
