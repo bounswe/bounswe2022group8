@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:artopia/landing_page.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/routes.dart';
-import 'widgets/posts.dart';
+import 'widgets/post.dart';
 import 'templates.dart';
 import 'package:artopia/utils/textUtils.dart';
 
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               for (var i = 0; i < 3; i++) (
-                  PostsList()
+                  Post()
               ),
             ],
           )),
