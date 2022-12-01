@@ -44,6 +44,7 @@ dependencies:
   avatar_glow: ^2.0.2
   dotted_border: ^2.0.0+3
   url_launcher: ^6.1.6
+  comment_tree: ^0.3.0
   #profile: ^0.0.1
 
 dev_dependencies:

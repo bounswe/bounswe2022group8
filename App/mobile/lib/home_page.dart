@@ -18,16 +18,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final EmailInputObject = EmailInput();
   final PasswordInputObject = PasswordInput(name: "Password");
-  Future<ArtItem> artitemfuture = getAllArtItems();
-  void goToProfile(BuildContext context) {
-    Route route = MaterialPageRoute(builder: (context) => ProfilePage());
-    Navigator.pushReplacement(context, route);
-  }
+  final textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
+  // Future<ArtItem> artitemfuture = getAllArtItems();
 
   @override
   Widget build(BuildContext context) {
-    final textUtils = TextUtils();
-    final ColorPalette colorPalette = ColorPalette();
+
     return Scaffold(
       backgroundColor: Colors.black,
       // backgroundColor: colorPalette.darkPurple,

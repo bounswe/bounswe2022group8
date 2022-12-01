@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/comment_page.dart';
+
+
 //  baglama isi yaparken kullanilacak.
 // import 'package:artopia/artitem.dart';
+
+
 
 class Post extends StatefulWidget {
   //baglama isi icin bu satiri da commentli birakiyorum
   // final ArtItem artItem;
   final owner = "Author";
-  Post({Key?key}) : super(key: key);
+  const Post({Key?key}) : super(key: key);
   //baglama isini kolaylastirmak icin bu satiri burada birakmak mantikli.
   // PostsList({Key?key, required this.artItem}) : super(key: key);
+
   @override
   State<Post> createState() => _PostState();
 }
@@ -28,7 +34,7 @@ class _PostState extends State<Post> {
           size: 30),
       tooltip: 'Comment',
       splashColor: Colors.white,
-      onPressed: () => {print("like")},
+      onPressed: () => {likeButtonPressed()},
     );
 
     IconButton commentButton = IconButton(
@@ -37,7 +43,7 @@ class _PostState extends State<Post> {
           color: colorPalette.blackShadows,
           size: 30),
       tooltip: 'Comment',
-      onPressed: () => {print("comment")},
+      onPressed: () => {commentButtonPressed()},
     );
 
     return Container(
@@ -113,5 +119,15 @@ class _PostState extends State<Post> {
       ),
     );
   }
-}
 
+likeButtonPressed() {
+  print("like button pressed");
+}
+commentButtonPressed() {
+  print("comment button pressed");
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const CommentPage()),
+  );
+  }
+}
