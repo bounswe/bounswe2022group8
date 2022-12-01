@@ -1,24 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/artitem.dart';
+//  baglama isi yaparken kullanilacak.
+// import 'package:artopia/artitem.dart';
 
-class PostsList extends StatefulWidget {
+class Post extends StatefulWidget {
   //baglama isi icin bu satiri da commentli birakiyorum
   // final ArtItem artItem;
   final owner = "Author";
-  PostsList({Key?key}) : super(key: key);
+  Post({Key?key}) : super(key: key);
   //baglama isini kolaylastirmak icin bu satiri burada birakmak mantikli.
   // PostsList({Key?key, required this.artItem}) : super(key: key);
   @override
-  State<PostsList> createState() => _PostsListState();
+  State<Post> createState() => _PostState();
 }
 
-class _PostsListState extends State<PostsList> {
+class _PostState extends State<Post> {
   final textUtils = TextUtils();
   final colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
+
+    IconButton likeButton = IconButton(
+      icon: Icon(
+          Icons.favorite,
+          color: colorPalette.blackShadows,
+          size: 30),
+      tooltip: 'Comment',
+      splashColor: Colors.white,
+      onPressed: () => {print("like")},
+    );
+
+    IconButton commentButton = IconButton(
+      icon: Icon(
+          Icons.comment_outlined,
+          color: colorPalette.blackShadows,
+          size: 30),
+      tooltip: 'Comment',
+      onPressed: () => {print("comment")},
+    );
+
     return Container(
       margin: const EdgeInsets.only(top: 5,bottom: 5),
       foregroundDecoration: BoxDecoration(
@@ -75,15 +96,11 @@ class _PostsListState extends State<PostsList> {
             child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(
-                      Icons.heart_broken_rounded,
-                      color: colorPalette.blackShadows,
-                      size: 30,
-                    ),
-                    Icon(
-                          Icons.message,
-                          color: colorPalette.blackShadows,
-                          size: 30),
+
+                    likeButton,
+
+                    commentButton,
+
                     Icon(
                       Icons.attach_money,
                       color: colorPalette.blackShadows,
@@ -97,3 +114,4 @@ class _PostsListState extends State<PostsList> {
     );
   }
 }
+
