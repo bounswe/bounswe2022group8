@@ -10,7 +10,7 @@
 .recommended-artitems .gallery .artitem {
   min-width: 250px;
   max-width: 250px;
-  height: fit-content;
+  height: auto;
   padding: 15px;
   background-color: #2a2031;
   border-radius: 6px;
