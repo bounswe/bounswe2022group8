@@ -14,7 +14,7 @@ function Recommendation(props) {
         <div class="recommendation-container">
           <div class="recommended-artitems">
             <h1>
-              Discover Art Items <a href="/recommended-artitems">SEE MORE</a>
+              Discover Art Items <a href="/discover-artitems">SEE MORE</a>
             </h1>
 
             <div class="list">
@@ -35,7 +35,7 @@ function Recommendation(props) {
           <div class="recommended-exhibitions">
             <h1>
               Discover Exhibitions{" "}
-              <a href="/recommended-exhibitions">SEE MORE</a>
+              <a href="/discover-exhibitions">SEE MORE</a>
             </h1>
             <div class="list">
               {SampleExhibitions.map((val, key) => {
@@ -56,7 +56,7 @@ function Recommendation(props) {
           <div class="recommended-users">
             <h1>
               Users you may want to follow...{" "}
-              <a href="/recommended-users">SEE MORE</a>
+              <a href="/discover-users">SEE MORE</a>
             </h1>
             <div class="list">
               {SampleUsers.map((val, key) => {

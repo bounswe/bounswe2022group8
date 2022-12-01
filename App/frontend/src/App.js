@@ -20,10 +20,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:username" element={<Profile />} />
-        <Route path="/just-for-you" element={<AuthenticatedRoute><Recommendation/></AuthenticatedRoute>} />
-        <Route path="/recommended-artitems" element={<AuthenticatedRoute><RecommendedArtitems /></AuthenticatedRoute>} />
-        <Route path="/recommended-exhibitions" element={<AuthenticatedRoute><RecommendedExhibitions /></AuthenticatedRoute>} />
-        <Route path="/recommended-users" element={<AuthenticatedRoute><RecommendedUsers/></AuthenticatedRoute>} />
+        <Route path="/discover" element={<AuthenticatedRoute><Recommendation/></AuthenticatedRoute>} />
+        <Route path="/discover-artitems" element={<AuthenticatedRoute><RecommendedArtitems /></AuthenticatedRoute>} />
+        <Route path="/discover-exhibitions" element={<AuthenticatedRoute><RecommendedExhibitions /></AuthenticatedRoute>} />
+        <Route path="/discover-users" element={<AuthenticatedRoute><RecommendedUsers/></AuthenticatedRoute>} />
       </Routes>
     </AuthProvider>
   );

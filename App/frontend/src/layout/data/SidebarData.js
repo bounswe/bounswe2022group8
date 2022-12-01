@@ -17,8 +17,8 @@ export const SidebarData = [
         link: "/"
     },
     {
-        title: "Just For You",
-        link: "/just-for-you"
+        title: "Discover",
+        link: "/discover"
     },
     {
         title: "Add Favourites",
