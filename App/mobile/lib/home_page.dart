@@ -1,3 +1,4 @@
+import 'package:artopia/artitem.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:flutter/material.dart';
 import 'package:artopia/landing_page.dart';
@@ -5,7 +6,6 @@ import 'package:artopia/profile_page.dart';
 import 'package:artopia/routes.dart';
 import 'widgets/posts.dart';
 import 'templates.dart';
-import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,10 +15,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   final EmailInputObject = EmailInput();
   final PasswordInputObject = PasswordInput(name: "Password");
+  Future<ArtItem> artitemfuture = getAllArtItems();
   void goToProfile(BuildContext context) {
     Route route = MaterialPageRoute(builder: (context) => ProfilePage());
     Navigator.pushReplacement(context, route);
@@ -45,27 +45,20 @@ class _HomePageState extends State<HomePage> {
               )
             },
           ),
-          title: textUtils.buildText("artopia", 25, Colors.white70,
-              FontWeight.w500),
-          // actions: const [
-          //   Icon(Icons.more_vert),
-          // ],
+          title: textUtils.buildText(
+              "artopia", 25, Colors.white70, FontWeight.w500),
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            PostsList(),
-            PostsList(),
-            PostsList(),
-            PostsList(),
-            PostsList(),
-            PostsList(),
-            PostsList(),
-          ],
-        ),
-      ),
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              for (var i = 0; i < 3; i++) (
+                  PostsList()
+              ),
+            ],
+          )),
+
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
           if (value == 1) {

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/artitem.dart';
 
 class PostsList extends StatefulWidget {
-  const PostsList({super.key});
-
+  //baglama isi icin bu satiri da commentli birakiyorum
+  // final ArtItem artItem;
+  final owner = "Author";
+  PostsList({Key?key}) : super(key: key);
+  //baglama isini kolaylastirmak icin bu satiri burada birakmak mantikli.
+  // PostsList({Key?key, required this.artItem}) : super(key: key);
   @override
   State<PostsList> createState() => _PostsListState();
 }
@@ -50,7 +55,7 @@ class _PostsListState extends State<PostsList> {
                 ),
                 Row(
                   children: [
-                    textUtils.buildText("Aurora", 16, colorPalette.blackShadows, FontWeight.w600),
+                    textUtils.buildText("Title", 16, colorPalette.blackShadows, FontWeight.w600),
                   ],
                 )
               ],
@@ -87,56 +92,6 @@ class _PostsListState extends State<PostsList> {
               ],
             ),
           ),
-          // Container(
-          //   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       const Text(
-          //         "1,3m views",
-          //         style: TextStyle(
-          //           color: Colors.black,
-          //           fontFamily: "OpenSans",
-          //           fontSize: 14,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //       const SizedBox(height: 5),
-          //       Row(
-          //         children: const [
-          //           Text(
-          //             "selincihangirli34",
-          //             style: TextStyle(
-          //               color: Colors.black,
-          //               fontFamily: "OpenSans",
-          //               fontSize: 14,
-          //               fontWeight: FontWeight.bold,
-          //             ),
-          //           ),
-          //           Flexible(
-          //             child: Text(
-          //               " Hi! New profile picture. #NewYearNewMe",
-          //               style: TextStyle(
-          //                 color: Colors.black,
-          //                 fontFamily: "OpenSans",
-          //                 fontSize: 14,
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 5),
-          //       const Text(
-          //         "View all 1321 comments.",
-          //         style: TextStyle(
-          //           color: Colors.grey,
-          //           fontFamily: "OpenSans",
-          //           fontSize: 14,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
