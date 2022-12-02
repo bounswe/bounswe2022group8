@@ -28,7 +28,7 @@ class LoginPageRoute extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        backgroundColor: colorPalette.frenchLilac,
+        backgroundColor: colorPalette.russianGreen,
       ),
       onPressed: () {
         Navigator.push(
