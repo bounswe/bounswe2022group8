@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
+import 'package:artopia/login_page.dart';
 import 'package:artopia/routes.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
@@ -75,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       textUtils.buildText("Sign Up", 30,
                           Colors.white, FontWeight.bold),
                       const SizedBox(height: 5),
-                      textUtils.buildText(_error, 16,
+                      textUtils.buildText(_error, 14,
                           Colors.white, FontWeight.bold),
                       const SizedBox(height: 30),
                       Column(
@@ -152,7 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
-                                if (this.value == false){
+                                if (value == false){
                                   _setErrorMessage(error: "Please accept the Terms and Conditions.");
                                   }
                                 else {
@@ -174,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if (value == "OK") {
                        
                                   Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
+                                      builder: (context) => LoginScreen());
                                   Navigator.pushReplacement(context, route);
                                   
                                 } else {
