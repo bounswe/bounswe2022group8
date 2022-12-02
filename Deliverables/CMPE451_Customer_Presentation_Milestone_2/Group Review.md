@@ -109,7 +109,7 @@
  |  Review |  Reviewed CI/CD pr, tested the Github packages and our docker-compose file. |  30 minutes  | [#209](https://github.com/bounswe/bounswe2022group8/issues/209), [PR](https://github.com/bounswe/bounswe2022group8/pull/215)|
  |  Implementation | Upon requests, updated the profile related GET APIs to return number of followers/followings. |  30 minutes  | [PR](https://github.com/bounswe/bounswe2022group8/pull/291)|
   |  Documentation | Updated our class diagram. |  30 minutes | [#303](https://github.com/bounswe/bounswe2022group8/issues/303)|
-  |  Documentation | Created necessary folders for the Milestone II. <br> Separated the markdown file into sections and filled up the `API` section. |  1 hour | [#303](https://github.com/bounswe/bounswe2022group8/issues/303)|
+  |  Documentation | Created necessary folders for the Milestone II. <br> Separated the markdown file into sections and filled up the `API` section. |  1 hour | [#295](https://github.com/bounswe/bounswe2022group8/issues/295)|
     
   > Implementation tasks involve documentation with Swagger, testing the functionality on both local and Dockerized version of the application.
 </details>
