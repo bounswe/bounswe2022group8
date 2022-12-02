@@ -1,0 +1,129 @@
+.upload-container {
+  box-sizing: border-box;
+  /* real height, border and margin bottom will be set in the Profile Page */
+  height: 0px;
+  border: 2px dashed #bcb1c1;
+  margin-bottom: 1rem;
+
+  transition: all 0.3s;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 7fr 4fr;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.upload-interface-container {
+  color: #ffffff;
+  height: 100%;
+}
+
+.upload-interface-header {
+  font-size: 40px;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.upload-interface-btn {
+  margin-left: auto;
+  margin-bottom: 0.5rem;
+  color: #fafafa;
+  font-size: 16px;
+  border: 0.1rem solid #dbdbdb;
+  border-radius: 0.3rem;
+  padding: 0.2rem 1.2rem;
+}
+
+.upload-interface-btn:hover,
+.upload-interface-btn:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.upload-post-preview-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.upload-post-preview {
+  object-fit: contain;
+  box-shadow: 0px 0px 5px #ffc9ff !important;
+  /* hardcoded for now */
+  /* container height - padding top - padding bottom */
+  max-height: calc(535px - 4rem);
+  max-width: 100%;
+}
+
+.upload-post-wrap {
+  position: relative;
+}
+
+.upload-post-wrap:hover .upload-post-cancel-container,
+.upload-post-wrap:focus .upload-post-cancel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 200, 200, 0.1);
+}
+
+.upload-post-cancel-container {
+  display: none;
+}
+
+.upload-post-cancel-btn {
+  position: absolute;
+  color: #ffc9ff;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 28px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.upload-post-cancel-btn:hover,
+.upload-post-cancel-btn:active {
+  cursor: pointer;
+}
+
+.upload-info {
+  color: #ffffff;
+  border-left: 1px solid #ffffff;
+  margin: 1.2rem 1.5rem 1.2rem 0rem;
+  padding-left: 1.5rem;
+}
+
+.upload-info .upload-info-header {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.upload-post-btn {
+  margin-top: 0.6rem;
+  background-color: #ffc9ff;
+  color: #18121c !important;
+}
+
+.upload-post-btn:hover,
+.upload-post-btn:active {
+  color: #18121c !important;
+  background-color: #ffc9ff !important;
+}
+
+.upload-post-error {
+  color: #ef233c;
+  font-size: 20px;
+  margin-top: 5rem;
+  font-weight: 300;
+}

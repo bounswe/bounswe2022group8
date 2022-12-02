@@ -148,7 +148,7 @@ function Settings() {
 
           <div className="mt-3">
             <label className="access-label">Profile Photo</label>
-            <div className="pp-container mt-1 hadow-sm">
+            <div className="pp-container mt-1 shadow-sm">
               <img
                 src={profileInfo.profile_image_url}
                 alt=""

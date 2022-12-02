@@ -24,7 +24,7 @@ function Profile(props) {
     location: null,
     profile_image_url: null,
     followers: 0,
-    followings: 0
+    followings: 0,
   });
 
   useEffect(() => {
@@ -64,26 +64,30 @@ function Profile(props) {
           location: response.location,
           profile_image_url: profile_image_url,
           followers: response.followers,
-          followings: response.followings
+          followings: response.followings,
         });
       })
       .catch((error) => console.error("Error:", error));
   }, [host, token]);
 
-
-
-
-
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
   const [upload, setUpload] = useState(false);
+  const [postError, setPostError] = useState(false); // essentially for the upload card
 
   function handleArtItems() {
     setNavTab(true);
+    setUpload(false);
   }
 
   function handleExhibitions() {
     setNavTab(false);
+    setUpload(false);
+  }
+
+  function handleUpload() {
+    setUpload(!upload);
+    setPostError(false);
   }
 
   function goToArtItem() {
@@ -129,9 +133,13 @@ function Profile(props) {
 
               <div className="profile-stat-count">
                 {/* dont forget the space after the number */}
-                <span className="profile-follow-number">{profileInfo.followers} </span>
+                <span className="profile-follow-number">
+                  {profileInfo.followers}{" "}
+                </span>
                 <span className="profile-follow">Followers</span>
-                <span className="profile-follow-number">{profileInfo.followings} </span>
+                <span className="profile-follow-number">
+                  {profileInfo.followings}{" "}
+                </span>
                 <span className="profile-follow">Following</span>
               </div>
             </div>
@@ -155,13 +163,21 @@ function Profile(props) {
           >
             Exhibitions
           </button>
-          <button className="btn btn-upload">Upload</button>
+          <button className="btn btn-upload" onClick={() => handleUpload()}>
+            Upload
+          </button>
         </div>
 
         <hr className="tab-line"></hr>
 
         <main>
-          <UploadCard></UploadCard>
+          <UploadCard
+            height={upload ? "535px" : "0px"}
+            border={upload ? "2px dashed #bcb1c1" : "2px dashed transparent"}
+            marginBottom={upload ? "1rem" : "0rem"}
+            postError={postError}
+            setPostError={(error) => setPostError(error)}
+          />
           {navTab ? (
             // what if gallery is empty ?
             <div className="gallery">
