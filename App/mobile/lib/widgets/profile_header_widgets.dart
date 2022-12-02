@@ -15,15 +15,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:artopia/utils/colorPalette.dart';
 //import 'package:instagram_profile_page/data/data.dart';
 
-<<<<<<< HEAD
-Widget profileHeaderWidget(BuildContext context) {
-  final ColorPalette colorPalette = ColorPalette();
-=======
 Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
- 
 
->>>>>>> master
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -83,11 +77,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Row(
                     children: [
                       Text(
-<<<<<<< HEAD
-                        "kostanya",
-=======
                         me.username,
->>>>>>> master
                         style: const TextStyle(
                           color: Colors.black87,
                           fontFamily: "OpenSans",
@@ -101,11 +91,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Row(
                     children: [
                       Text(
-<<<<<<< HEAD
-                        "Furkan Keskin",
-=======
                         me.name,
->>>>>>> master
                       ),
                     ],
                   ),
@@ -114,11 +100,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     width: 200,
                     child: Flexible(
                       child: Text(
-<<<<<<< HEAD
-                        "Hello! I am a junior Computer Engineering student at Bogazici University.",
-=======
                         me.bio,
->>>>>>> master
                       ),
                     ),
                   ),
@@ -129,11 +111,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           Icon(Icons.location_on),
-<<<<<<< HEAD
-                          Text("Istanbul, Turkey"),
-=======
                           Text(me.location),
->>>>>>> master
                         ],
                       ),
                     ],
@@ -143,17 +121,10 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text("Followers "),
-<<<<<<< HEAD
-                      Text("123"),
-                      SizedBox(width: 20),
-                      Text(" Following "),
-                      Text("0"),
-=======
                       Text(me.followers.toString()),
                       SizedBox(width: 20),
                       Text(" Following "),
                       Text(me.following.toString()),
->>>>>>> master
                     ],
                   ),
                 ],

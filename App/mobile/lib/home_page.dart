@@ -24,30 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: colorPalette.frenchLilac,
-        leading: IconButton(
-          icon: Icon(Icons.account_circle_rounded),
-          tooltip: 'Go to your profile',
-          onPressed: () => {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            )
-          },
-        ),
-        title: const Text(
-          "artopia",
-          style: TextStyle(
-            color: Colors.black45,
-            fontFamily: "OpenSans",
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-=======
       backgroundColor: Colors.black,
       // backgroundColor: colorPalette.darkPurple,
       appBar: PreferredSize(
@@ -63,7 +40,6 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(builder: (context) => ProfilePage()),
               )
             },
->>>>>>> master
           ),
           title: textUtils.buildText(
               "artopia", 25, Colors.white70, FontWeight.w500),
@@ -73,9 +49,7 @@ class _HomePageState extends State<HomePage> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              for (var i = 0; i < 3; i++) (
-                  Post()
-              ),
+              for (var i = 0; i < 3; i++) (Post()),
             ],
           )),
 
