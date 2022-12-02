@@ -164,7 +164,8 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 * Integration of Profile Page with backend APIs with Furkan from frontend team.
 * Implementation of art item related APIs (x7 APIs in total).
 * Implementation of follow/unfollow related APIs (x6 APIs in total).
-* Implementation of profile related APIs (x3 APIs in total).
+* Implementation of profile related APIs (x4 APIs in total).
+* Communication with frontend for the integration stage.
 * Updating login and signup error messages.
 * PR Review: Reset Password API
 * PR Review: Comment related APIs
@@ -200,6 +201,7 @@ Already listed all of my responsibilities and contributions above. Overall, I wo
 * [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249)
 * [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)
 * [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252)
+* [bugfix/BE-17](https://github.com/bounswe/bounswe2022group8/pull/311)
 * [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
 * [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270)
 * [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271)
