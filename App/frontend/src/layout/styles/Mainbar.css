@@ -59,3 +59,9 @@
 .btn-logged-sidebar:active {
   color: #18121c !important;
 }
+
+.logo-image{
+  margin-top: 2rem;
+  height: 5.5rem;
+  weight: auto;
+}
