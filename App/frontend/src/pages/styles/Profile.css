@@ -35,6 +35,7 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile-username {
