@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/routes.dart';
-import 'package:artopia/profile.dart';
+import 'profile.dart';
 import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'templates.dart';
@@ -19,6 +19,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ColorPalette colorPalette = ColorPalette();
+  Future<Profile> myProfile = getMyProfile() ;  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,13 +65,19 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: DefaultTabController(
         length: 2,
-        child: NestedScrollView(
+        child:FutureBuilder<Profile>(
+          future: myProfile, // a previously-obtained Future<String> or null
+          builder: (BuildContext context, AsyncSnapshot<Profile> snapshot) {
+            if(snapshot.hasData == false)   return SizedBox.shrink();
+            final Profile me = snapshot.requireData ;
+          return NestedScrollView(
           headerSliverBuilder: (context, _) {
+
             return [
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    profileHeaderWidget(context),
+                   profileHeaderWidget(context,me),
                   ],
                 ),
               ),
@@ -130,7 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-        ),
+        );
+  
+  
+  }, 
+  ),
       ),
     );
   }

@@ -15,8 +15,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:artopia/utils/colorPalette.dart';
 //import 'package:instagram_profile_page/data/data.dart';
 
-Widget profileHeaderWidget(BuildContext context) {
+Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
+ 
+
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -76,7 +78,7 @@ Widget profileHeaderWidget(BuildContext context) {
                   Row(
                     children: [
                       Text(
-                        "kostanya",
+                        me.username,
                         style: const TextStyle(
                           color: Colors.black87,
                           fontFamily: "OpenSans",
@@ -90,7 +92,7 @@ Widget profileHeaderWidget(BuildContext context) {
                   Row(
                     children: [
                       Text(
-                        "Furkan Keskin",
+                        me.name,
                       ),
                     ],
                   ),
@@ -99,7 +101,7 @@ Widget profileHeaderWidget(BuildContext context) {
                     width: 200,
                     child: Flexible(
                       child: Text(
-                        "Hello! I am a junior Computer Engineering student at Bogazici University.",
+                        me.bio,
                       ),
                     ),
                   ),
@@ -110,7 +112,7 @@ Widget profileHeaderWidget(BuildContext context) {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           Icon(Icons.location_on),
-                          Text("Istanbul, Turkey"),
+                          Text(me.location),
                         ],
                       ),
                     ],
@@ -120,10 +122,10 @@ Widget profileHeaderWidget(BuildContext context) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text("Followers "),
-                      Text("123"),
+                      Text(me.followers.toString()),
                       SizedBox(width: 20),
                       Text(" Following "),
-                      Text("0"),
+                      Text(me.following.toString()),
                     ],
                   ),
                 ],

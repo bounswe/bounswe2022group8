@@ -11,7 +11,9 @@ import 'dart:core';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'variables.dart' ;
 class Profile extends StatefulWidget {
   Profile({
     required this.imageUrl,
@@ -27,14 +29,15 @@ class Profile extends StatefulWidget {
   final String name;
   final String bio;
   final String location;
-  final String followers;
-  final String following;
+  final int followers;
+  final int following;
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  
   @override
   Widget build(BuildContext context) {
     final Uri imagelUrl = Uri.parse(widget.imageUrl);
@@ -42,8 +45,8 @@ class _ProfileState extends State<Profile> {
     final Uri nameUrl = Uri.parse(widget.name);
     final Uri bioUrl = Uri.parse(widget.bio);
     final Uri locationUrl = Uri.parse(widget.location);
-    final Uri followersUrl = Uri.parse(widget.followers);
-    final Uri followingUrl = Uri.parse(widget.following);
+    final Uri followersUrl = Uri.parse(widget.followers.toString());
+    final Uri followingUrl = Uri.parse(widget.following.toString());
     void getUrlLauncher(Uri url) async {
       if (await canLaunchUrl(url)) {
         await launchUrl(url);
@@ -54,4 +57,26 @@ class _ProfileState extends State<Profile> {
 
     return Container();
   }
+}
+
+Future<Profile> getMyProfile() async {
+  final response = await http.get(
+    Uri.parse(GET_PROFILE_ENDPOINT),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Token ' + token 
+
+    }
+   )
+   ;
+  print(response.statusCode) ;
+  print(response.body) ;      
+  
+  Map<String, dynamic> body = jsonDecode(response.body);
+  
+  if (response.statusCode == 200) {
+    return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: body["name"], username: registered_username) ;
+  }
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+  
 }
