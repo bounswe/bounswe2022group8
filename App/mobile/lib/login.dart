@@ -21,19 +21,20 @@ Future<String> login(username,password) async {
 
   if (response.statusCode == 200) {
       token = body['token'] ;
+      registered_password = password;
+      registered_username = username;
       return "OK" ;
   }
   else {
+      if(username.length <1) return "Username cannot be empty" ;
+      if(password.length <1) return "Password cannot be empty" ;
 
-     if (body["credential"] != null) {
-      return body["credential"][0] ;
-    }
-    else if (body["password"] != null) {
-      return body["password"][0] ;
-    }
-    else {
-      return "Please check your credentials for login." ;
-    }
+     if (body["credential"] != null)  return body["credential"][0] ;
+    
+    else if (body["password"] != null)   return body["password"][0] ;
+    
+    else   return "Please check your credentials for login." ;
+    
   }
 }
 
