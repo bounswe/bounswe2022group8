@@ -1,11 +1,11 @@
+import 'package:artopia/artitem.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:flutter/material.dart';
 import 'package:artopia/landing_page.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/routes.dart';
-import 'widgets/posts.dart';
+import 'widgets/post.dart';
 import 'templates.dart';
-import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,26 +15,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   final EmailInputObject = EmailInput();
   final PasswordInputObject = PasswordInput(name: "Password");
-  void goToProfile(BuildContext context) {
-    Route route = MaterialPageRoute(builder: (context) => ProfilePage());
-    Navigator.pushReplacement(context, route);
-  }
+  final textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
+  // Future<ArtItem> artitemfuture = getAllArtItems();
 
   @override
   Widget build(BuildContext context) {
-    final textUtils = TextUtils();
-    final ColorPalette colorPalette = ColorPalette();
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
+      // backgroundColor: colorPalette.darkPurple,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
-          backgroundColor: colorPalette.russianGreen,
-
+          backgroundColor: colorPalette.darkPurple,
           leading: IconButton(
             icon: Icon(Icons.account_circle_rounded),
             tooltip: 'Go to your profile',
@@ -45,52 +42,20 @@ class _HomePageState extends State<HomePage> {
               )
             },
           ),
-          title: textUtils.buildText("artopia", 25, Colors.white70,
-              FontWeight.w500),
-          // actions: const [
-          //   Icon(Icons.more_vert),
-          // ],
+          title: textUtils.buildText(
+              "artopia", 25, Colors.white70, FontWeight.w500),
         ),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              for (var i = 0; i < 3; i++) (
+                  Post()
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  PostsList(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          )),
+
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
           if (value == 1) {
