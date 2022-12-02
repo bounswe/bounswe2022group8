@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
+import 'package:artopia/login_page.dart';
 import 'package:artopia/routes.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'templates.dart';
 import 'register.dart';
 
@@ -11,9 +16,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String _error = "Welcome to Artly!";
+  String _error = "Welcome to Artopia!";
+  bool value = false;
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   final usernameController = TextEditingController();
-
   final EmailInputObject = EmailInput();
   final PasswordInputObject = PasswordInput(name: "Password");
   final ConfirmPasswordInputObject = PasswordInput(name: "Confirm Password");
@@ -38,16 +45,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                    gradient: SweepGradient(
-                  center: FractionalOffset.topRight,
-                  colors: <Color>[
-                    Color.fromARGB(120, 0, 8, 193),
-                    Color.fromARGB(120, 33, 70, 199),
-                    Color.fromARGB(120, 175, 180, 255),
-                    Color.fromARGB(120, 166, 225, 255),
-                  ],
-                  stops: <double>[0.25, 0.60, 0.750, 1],
-                )),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/background.jpeg'),
+                      fit: BoxFit.cover),
+                ),
               ),
               Container(
                 alignment: Alignment.topCenter,
@@ -72,33 +73,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Sign Up",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      textUtils.buildText("Sign Up", 30,
+                          Colors.white, FontWeight.bold),
                       const SizedBox(height: 5),
-                      Text(_error,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      textUtils.buildText(_error, 14,
+                          Colors.white, FontWeight.bold),
                       const SizedBox(height: 30),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text("Username",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                              )),
+                          textUtils.buildText("Username", 14,
+                              Colors.white, FontWeight.bold),
                           const SizedBox(height: 10.0),
                           Container(
                             alignment: Alignment.centerLeft,
@@ -111,18 +96,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: usernameController,
                               keyboardType: TextInputType.text,
                               style: const TextStyle(color: Colors.white),
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(top: 14),
-                                  prefixIcon: Icon(
+                                  contentPadding: const EdgeInsets.only(top: 14),
+                                  prefixIcon: const Icon(
                                     Icons.email,
                                     color: Colors.white,
                                   ),
                                   hintText: "Enter your username",
-                                  hintStyle: TextStyle(
+                                  hintStyle: GoogleFonts.inter(
+                                    fontSize: 14,
                                     color: Colors.white54,
-                                    fontFamily: 'OpenSans',
-                                  )),
+                                  ),
+                              ),
                             ),
                           ),
                         ],
@@ -133,13 +119,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       PasswordInputObject,
                       const SizedBox(height: 10),
                       ConfirmPasswordInputObject,
-                      const SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Checkbox(value: value,
+                              side: const BorderSide(color: Colors.white),
+                              onChanged:
+                                  (bool? value) {
+                                setState(() {
+                                  this.value = value!;
+                                });
+                              }),
+                          SizedBox(
+                            width: 260,
+                            child:
+                            InkWell(
+                              onTap: () => launchUrl(Uri.parse('https://www.lipsum.com')),
+                              child: Text(
+                                'I agree to the Terms and Conditions',
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline
+                                ),
+                              ),
+                            )
+                          ),
+                        ], //<Widget>[]
+                      ),
                       Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
+                                if (value == false){
+                                  _setErrorMessage(error: "Please accept the Terms and Conditions.");
+                                  }
+                                else {
                               String username = usernameController.text;
                               String email =
                                   EmailInputObject.emailController.text;
@@ -156,14 +173,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       confirmPassword)
                                   .then((value) {
                                 if (value == "OK") {
+                       
                                   Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
+                                      builder: (context) => LoginScreen());
                                   Navigator.pushReplacement(context, route);
+                                  
                                 } else {
                                   _setErrorMessage(error: value);
                                 }
                                 print(value);
                               });
+                            }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(12.5),
@@ -171,17 +191,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
-                              backgroundColor: Colors.white,
+                              backgroundColor: colorPalette.frenchLilac,
                             ),
-                            child: const Text(
-                              "SIGN UP",
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontFamily: "OpenSans",
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
+                            child: textUtils.buildText("Sign Up", 20, Colors.white, FontWeight.bold)
+                        ),
                       ),
                     ],
                   ),

@@ -18,6 +18,7 @@ class ArtItem(models.Model):
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True) # tags are not required
+    type = models.CharField(max_length=500)
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)

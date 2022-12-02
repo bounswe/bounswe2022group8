@@ -8,6 +8,7 @@ import Searchbar from "../components/Searchbar";
 import MenuButton from "../components/MenuButton";
 
 import "./styles/Mainbar.css";
+import artopia_logo from "../images/artopia_logo.png";
 
 function Mainbar(props) {
   function scrollToTop() {
@@ -31,7 +32,7 @@ function Mainbar(props) {
       <Container fluid>
         <Link to="/" onClick={scrollToTop} style={{ textDecoration: "none" }}>
           <Navbar.Brand className="ms-4 me-5" style={{ color: "white" }}>
-            App Name
+          <img className="logo-image" src={artopia_logo} />
           </Navbar.Brand>
         </Link>
         <Navbar.Collapse>

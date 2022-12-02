@@ -5,11 +5,13 @@ from ..serializers.profile import UserProfileSerializer, UserUpdateProfileSerial
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from knox.auth import TokenAuthentication, AuthToken
+
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from drf_yasg import openapi
 import base64
 from django.core.files.base import ContentFile
 from ..utils import ProfileImageStorage
+from ..models.user import Follow
 
 
 @ swagger_auto_schema(
@@ -29,7 +31,9 @@ from ..utils import ProfileImageStorage
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2
                 }
             }
         ),
@@ -49,6 +53,7 @@ def profile_api(request, id):
     if (request.method == "GET"):
         try:
             user = User.objects.get(pk=id)
+
             serializer = UserProfileSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
@@ -74,7 +79,9 @@ def profile_api(request, id):
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2
 
                 }
             }
@@ -101,6 +108,7 @@ def profile_api(request, id):
             "profile_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of an image (text)')
         }),
     operation_description="Updates profile information: name, surname, about section, location and profile image can be updated. If the user doesn't change one of the fields listed below, just return the same value you retrieved with GET. Sending empty string means that user removed the text from the related field. Please observe that this API requires authorization. You have to provide base64 encoded version of the image. You can encode your images from here: https://www.base64-image.de/",
+
     operation_summary="Update the profile information about the currently logged in user",
     tags=['profile'],
     responses={
@@ -144,6 +152,7 @@ def profile_me_api(request):
         """
         user = request.user
         serializer = UserProfileSerializer(user)
+ 
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
 
@@ -169,7 +178,6 @@ def profile_me_api(request):
             profile_image_storage.save(
                 request.data['profile_image'].name,  request.data['profile_image'])
       
-
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     else:

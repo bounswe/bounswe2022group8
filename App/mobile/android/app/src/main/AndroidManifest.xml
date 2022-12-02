@@ -1,5 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.artopia">
+=======
+    package="com.example.flutter_app_mustafa">
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+>>>>>>> master
    <application
         android:label="artopia"
         android:name="${applicationName}"

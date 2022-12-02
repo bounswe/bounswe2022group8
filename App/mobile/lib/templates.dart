@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/login_page.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UsernameInput extends StatefulWidget {
   final usernameController = TextEditingController();
-
   UsernameInput({Key? key}) : super(key: key);
 
   @override
@@ -12,17 +14,17 @@ class UsernameInput extends StatefulWidget {
 }
 
 class _UsernameInputState extends State<UsernameInput> {
+  final textUtils = TextUtils();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text("Username",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+        textUtils.buildText(
+            "Username",
+            18,
+            Colors.white,
+            FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -34,19 +36,20 @@ class _UsernameInputState extends State<UsernameInput> {
           child: TextField(
             controller: widget.usernameController,
             keyboardType: TextInputType.name,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
+                contentPadding: const EdgeInsets.only(top: 14),
+                prefixIcon: const Icon(
                   Icons.email,
                   color: Colors.white,
                 ),
                 hintText: "Enter your username",
-                hintStyle: TextStyle(
-                  color: Colors.white54,
-                  fontFamily: 'OpenSans',
-                )),
+                hintStyle: GoogleFonts.inter(
+                    fontSize: 14,
+                    color: Colors.white54,
+                ),
+            ),
           ),
         ),
       ],
@@ -55,26 +58,24 @@ class _UsernameInputState extends State<UsernameInput> {
 }
 
 class EmailInput extends StatefulWidget {
-  final emailController = TextEditingController();
-
   EmailInput({super.key});
+  final emailController = TextEditingController();
 
   @override
   State<EmailInput> createState() => _EmailInputState();
 }
 
 class _EmailInputState extends State<EmailInput> {
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text("Email",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+
+        textUtils.buildText("Email", 14,
+            Colors.white, FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -86,18 +87,18 @@ class _EmailInputState extends State<EmailInput> {
           child: TextField(
             controller: widget.emailController,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            style: const TextStyle(color: Colors.white),
+            decoration:  InputDecoration(
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
+                contentPadding: const EdgeInsets.only(top: 14),
+                prefixIcon: const Icon(
                   Icons.email,
                   color: Colors.white,
                 ),
                 hintText: "Enter your email",
-                hintStyle: TextStyle(
+                hintStyle: GoogleFonts.inter(
+                  fontSize: 14,
                   color: Colors.white54,
-                  fontFamily: 'OpenSans',
                 )),
           ),
         ),
@@ -108,26 +109,22 @@ class _EmailInputState extends State<EmailInput> {
 
 class PasswordInput extends StatefulWidget {
   final String name;
-
   PasswordInput({Key? key, required this.name}) : super(key: key);
-
   final passwordController = TextEditingController();
   @override
   State<PasswordInput> createState() => _PasswordInputState();
 }
 
 class _PasswordInputState extends State<PasswordInput> {
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(widget.name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: "OpenSans",
-              fontWeight: FontWeight.bold,
-            )),
+        textUtils.buildText(widget.name, 14,
+            Colors.white, FontWeight.bold),
         const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
@@ -137,9 +134,10 @@ class _PasswordInputState extends State<PasswordInput> {
           ),
           height: 60,
           child: TextField(
+            autocorrect: false,
             controller: widget.passwordController,
             obscureText: true,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
                 border: InputBorder.none,
@@ -149,10 +147,11 @@ class _PasswordInputState extends State<PasswordInput> {
                   color: Colors.white,
                 ),
                 hintText: widget.name,
-                hintStyle: const TextStyle(
+                hintStyle: GoogleFonts.inter(
+                  fontSize: 14,
                   color: Colors.white54,
-                  fontFamily: 'OpenSans',
-                )),
+                ),
+            ),
           ),
         ),
       ],
@@ -183,7 +182,6 @@ class ForgotPassword extends StatelessWidget {
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -214,7 +212,8 @@ class LoginButton extends StatelessWidget {
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
             ),
-          )),
+          )
+      ),
     );
   }
 }
@@ -256,6 +255,7 @@ class BackToHomeButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       width: double.infinity,
       child: IconButton(
+        alignment: Alignment.topLeft,
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.white,

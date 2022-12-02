@@ -41,9 +41,9 @@ function IntroImage() {
         <img className="background-image" src={background} alt="Aurora" />
         <div className="input-on-background-image">
           <div className="text-on-background-image">
-            <p className="main-header"> PRESENT, MANAGE AND SELL YOUR ART </p>
+            <p className="main-header"> Present, Manage And Sell Your Art </p>
             <p>
-              Revolutionize the way you promote your art online – with APPNAME
+              Revolutionize the way you promote your art online – with Artopia
               tools.
             </p>
           </div>
