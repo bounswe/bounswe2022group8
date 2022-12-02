@@ -8,8 +8,7 @@ import 'package:artopia/routes.dart';
 import 'profile.dart';
 import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
-import 'templates.dart';
-import 'register.dart';
+import 'package:artopia/utils/textUtils.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -20,6 +19,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ColorPalette colorPalette = ColorPalette();
+  final textUtils = TextUtils();
   Future<Profile> myProfile = getMyProfile() ;  
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           child: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            /*
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               color: Colors.black,
@@ -47,7 +50,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
               },
             ),
-            backgroundColor: colorPalette.graniteGray,
+             */
+            backgroundColor: colorPalette.darkPurple,
+            title: textUtils.buildText(
+                "artopia", 25, Colors.white70, FontWeight.w500),
             actions: [
               IconButton(
                 icon: Icon(Icons.settings),
@@ -98,29 +104,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                       alignment: Alignment.center,
                       height: 40,
-                      child: Text(
-                        "Art Items",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontSize: 15.0,
-                          //fontWeight: FontWeight.bold,
-                        ),
+                      child: textUtils.buildText(
+                          "Art Items", 15, colorPalette.darkPurple, FontWeight.w500
                       ),
                     ),
                     Container(
                       alignment: Alignment.center,
                       height: 40,
-                      child: Text(
-                        "Exibitions",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontSize: 15.0,
-                          //fontWeight: FontWeight.bold,
-                        ),
+                      child: textUtils.buildText(
+                          "Exibitions", 15, colorPalette.darkPurple, FontWeight.w500
                       ),
                     ),
                   ],
@@ -129,9 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    Gallery(),
-                    Gallery(),
-                    //ArtItems(),
+                    ArtItems(),
+                    ArtItems(),
                     //Exibitions(),
                   ],
                 ),
@@ -139,29 +130,26 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         );
-  
-  
+
+
   }, 
   ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: colorPalette.darkPurple,
+        unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
+          print(value);
           if (value == 0) {
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          if (value == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
             );
           }
-          if (value == 2) {
-            Route route =
-            MaterialPageRoute(builder: (context) => LandingPage());
-            Navigator.pushReplacement(context, route);
-          }
+          else if (value == 2) {
+              Route route =
+              MaterialPageRoute(builder: (context) => LandingPage());
+              Navigator.pushReplacement(context, route);
           }
         },
         items: const [

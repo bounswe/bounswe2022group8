@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:artopia/profile.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
 
-class Gallery extends StatefulWidget {
+class ArtItems extends StatefulWidget {
   @override
-  _GalleryState createState() => _GalleryState();
+  _ArtItems createState() => _ArtItems();
 }
 
-class _GalleryState extends State<Gallery> {
+class _ArtItems extends State<ArtItems> {
+  final ColorPalette colorPalette = ColorPalette();
+  final textUtils = TextUtils();
   late OverlayEntry _popupDialog;
   List<String> imageUrls = [
     'https://placeimg.com/640/480/animals',
@@ -59,10 +64,10 @@ class _GalleryState extends State<Gallery> {
 
   Widget _createPhotoTitle() => Container(
       width: double.infinity,
-      color: Colors.white,
+      color: colorPalette.blackShadows,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: NetworkImage('https://placeimg.com/640/480/people'),
+          backgroundImage: Image.asset("assets/images/blank_profile.jpeg").image,
         ),
         title: Text(
           'john.doe',
@@ -72,20 +77,20 @@ class _GalleryState extends State<Gallery> {
 
   Widget _createActionBar() => Container(
         padding: EdgeInsets.symmetric(vertical: 10.0),
-        color: Colors.white,
+      color: colorPalette.blackShadows,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Icon(
-              Icons.favorite_border,
+              Icons.favorite,
               color: Colors.black,
             ),
             Icon(
-              Icons.chat_bubble_outline_outlined,
+              Icons.chat,
               color: Colors.black,
             ),
             Icon(
-              Icons.send,
+              Icons.attach_money,
               color: Colors.black,
             ),
           ],

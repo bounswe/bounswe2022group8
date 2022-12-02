@@ -30,7 +30,10 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
+          centerTitle: true,
+          automaticallyImplyLeading: false,
           backgroundColor: colorPalette.darkPurple,
+          /*
           leading: IconButton(
             icon: Icon(Icons.account_circle_rounded),
             tooltip: 'Go to your profile',
@@ -41,6 +44,7 @@ class _HomePageState extends State<HomePage> {
               )
             },
           ),
+          */
           title: textUtils.buildText(
               "artopia", 25, Colors.white70, FontWeight.w500),
         ),
@@ -54,7 +58,11 @@ class _HomePageState extends State<HomePage> {
           )),
 
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: colorPalette.darkPurple,
+        unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
+          setState(() {
+          });
           if (value == 1) {
             Navigator.push(
               context,
