@@ -23,7 +23,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"tamortasındayüzmekteyim\",\r\n    \"credential\": \"greg@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"password\": \"tamortasındayüzmekteyim\",\r\n    \"credential\": \"sss@boun.edu.tr\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,7 +55,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"ss@boun.edu.tr\",\r\n  \"username\": \"zamassnla\",\r\n  \"password\": \"tamortasındayüzmekteyim\",\r\n  \"password_confirm\": \"tamortasındayüzmekteyim\"\r\n}",
+					"raw": "{\r\n  \"email\": \"sss@boun.edu.tr\",\r\n  \"username\": \"zamasssnla\",\r\n  \"password\": \"tamortasındayüzmekteyim\",\r\n  \"password_confirm\": \"tamortasındayüzmekteyim\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,7 +170,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token a95c55acba932eab12a70f2222989f4ea2fc97d8653c73eb91d6ff397f93e3b0",
+						"value": "Token b3f14f4a1d491a9bf43d13adb22a7fd10ae9d398bface1c9745fc9d1d4524abb",
 						"type": "text"
 					}
 				],
@@ -209,7 +209,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token dd4f2105e63280fdca333c499cb7174913c4f72b9944526aee1ce208847575b0",
+						"value": "Token b3f14f4a1d491a9bf43d13adb22a7fd10ae9d398bface1c9745fc9d1d4524abb",
 						"type": "text"
 					}
 				],
@@ -353,7 +353,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token da4bf1acde82269922058f2c526a31cc54f16ac671e10e0de16c55a0d05ab700",
+						"value": "Token ef63feffb72131537d0c7c422d9c70774e7760f5f258c9e990fbacf5db0a3a78",
 						"type": "text"
 					}
 				],
@@ -392,12 +392,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 13a4793be2f4484887faafa88a18fb2b932954908bfc46e1aa5a67a3c56839bb",
+						"value": "Token ef63feffb72131537d0c7c422d9c70774e7760f5f258c9e990fbacf5db0a3a78",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://{{prod}}:8000/api/v1/artitems/me/remove/2",
+					"raw": "http://{{prod}}:8000/api/v1/artitems/me/remove/1",
 					"protocol": "http",
 					"host": [
 						"{{prod}}"
@@ -409,7 +409,7 @@
 						"artitems",
 						"me",
 						"remove",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -863,6 +863,30 @@
 						"v1",
 						"artitems",
 						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/v1/users/profile/users/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{prod}}:8000/api/v1/users/profile/users/",
+					"protocol": "http",
+					"host": [
+						"{{prod}}"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"profile",
+						"users",
+						""
 					]
 				}
 			},
