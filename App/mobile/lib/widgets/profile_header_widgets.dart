@@ -1,28 +1,23 @@
+import 'package:artopia/art_item_upload.dart';
+import 'package:artopia/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/routes.dart';
 import 'package:artopia/profile.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/templates.dart';
-import 'package:artopia/register.dart';
 import 'dart:core';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:http/http.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:artopia/utils/colorPalette.dart';
-//import 'package:instagram_profile_page/data/data.dart';
+import 'package:artopia/utils/textUtils.dart';
 
 Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
- 
+  final textUtils = TextUtils();
 
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
-      color: colorPalette.frenchLilac,
+      color: colorPalette.graniteGray,
     ),
     child: Padding(
       padding: const EdgeInsets.only(left: 18.0, right: 18.0, bottom: 10),
@@ -39,15 +34,15 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     width: 120,
                     height: 120,
                     child: AvatarGlow(
-                      glowColor: colorPalette.graniteGray,
+                      glowColor: colorPalette.darkPurple,
                       endRadius: 90.0,
                       duration: Duration(milliseconds: 2000),
                       repeat: true,
                       showTwoGlows: true,
                       repeatPauseDuration: Duration(milliseconds: 100),
                       child: DottedBorder(
-                        radius: Radius.circular(10),
-                        color: colorPalette.graniteGray,
+                        radius: Radius.circular(5),
+                        color: colorPalette.darkPurple,
                         strokeWidth: 8,
                         borderType: BorderType.Circle,
                         dashPattern: [1, 12],
@@ -77,22 +72,16 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   SizedBox(height: 20),
                   Row(
                     children: [
-                      Text(
-                        me.username,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      textUtils.buildText(
+                          me.username, 18, Colors.white70, FontWeight.w500
                       ),
                     ],
                   ),
                   SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        me.name,
+                      textUtils.buildText(
+                          me.name, 13, Colors.white70, FontWeight.w500
                       ),
                     ],
                   ),
@@ -100,8 +89,8 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Container(
                     width: 200,
                     child: Flexible(
-                      child: Text(
-                        me.bio,
+                      child: textUtils.buildText(
+                          me.bio, 12, Colors.white70, FontWeight.w500
                       ),
                     ),
                   ),
@@ -112,7 +101,9 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           Icon(Icons.location_on),
-                          Text(me.location),
+                          textUtils.buildText(
+                              me.location, 12, Colors.white70, FontWeight.w500
+                          ),
                         ],
                       ),
                     ],
@@ -121,11 +112,33 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Followers "),
-                      Text(me.followers.toString()),
+                      GestureDetector(
+                        child: textUtils.buildText(
+                            "Followers ", 12, Colors.black87, FontWeight.w500
+                        ),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        ),
+                      ),
+                      textUtils.buildText(
+                          me.followers.toString(), 12, Colors.black, FontWeight.w500
+                      ),
                       SizedBox(width: 20),
-                      Text(" Following "),
-                      Text(me.following.toString()),
+                      GestureDetector(
+
+                        child:
+                        textUtils.buildText(
+                            " Following ", 12, Colors.black87, FontWeight.w500
+                        ),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        ),
+                      ),
+                      textUtils.buildText(
+                          me.following.toString(), 13, Colors.black, FontWeight.w500
+                      ),
                     ],
                   ),
                 ],
@@ -137,19 +150,27 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 30),
+                padding: EdgeInsets.only(right: 25),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: colorPalette.blackShadows,
-                    onPrimary: Colors.black,
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  onPressed: () {
-                    //Upload photos;
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          UploadArtItem()
+                          //myAlert(),
+                      ),
+                    ),
                   },
-                  child: const Text('Upload'),
+                  child: textUtils.buildText(
+                      "Upload", 13, Colors.black, FontWeight.w500
+                  ),
                 ),
               ),
             ],

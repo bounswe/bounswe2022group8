@@ -5,12 +5,12 @@ import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/widgets/post.dart';
 import 'package:artopia/comment_page.dart';
 
-class ArtItems extends StatefulWidget {
+class Exhibitions extends StatefulWidget {
   @override
-  _ArtItems createState() => _ArtItems();
+  _Exhibitions createState() => _Exhibitions();
 }
 
-class _ArtItems extends State<ArtItems> {
+class _Exhibitions extends State<Exhibitions> {
   likeButtonPressed() {
     print("like button pressed");
   }
@@ -25,23 +25,6 @@ class _ArtItems extends State<ArtItems> {
   final textUtils = TextUtils();
   late OverlayEntry _popupDialog;
   List<String> imageUrls = [
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
   ];
 
   @override
@@ -57,15 +40,15 @@ class _ArtItems extends State<ArtItems> {
   }
 
   Widget _createGridTileWidget(String url) => Builder(
-        builder: (context) => GestureDetector(
-          onLongPress:() {
-            _popupDialog = _createPopupDialog(url);
-            Overlay.of(context)?.insert(_popupDialog);
-          },
-          onLongPressEnd: (details) => _popupDialog.remove(),
-          child: Image.network(url, fit: BoxFit.cover),
-        ),
-      );
+    builder: (context) => GestureDetector(
+      onLongPress:() {
+        _popupDialog = _createPopupDialog(url);
+        Overlay.of(context)?.insert(_popupDialog);
+      },
+      onLongPressEnd: (details) => _popupDialog.remove(),
+      child: Image.network(url, fit: BoxFit.cover),
+    ),
+  );
 
   OverlayEntry _createPopupDialog(String url) {
     return OverlayEntry(
@@ -73,7 +56,6 @@ class _ArtItems extends State<ArtItems> {
         child: _createPopupContent(url),
       ),
     );
-
   }
   Widget _createPhotoTitle() => Container(
       width: double.infinity,
@@ -89,50 +71,50 @@ class _ArtItems extends State<ArtItems> {
       ));
 
   Widget _createActionBar() => Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        color: colorPalette.blackShadows,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.favorite,
-                color: Colors.black,
-              ),
-                onPressed: () => likeButtonPressed(),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.chat,
-                color: Colors.black,
-              ),
-                onPressed: () => commentButtonPressed(),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.attach_money,
-                color: Colors.black,
-              ),
-              onPressed: () => print("money button pressed"),
-            ),
-          ],
+    padding: EdgeInsets.symmetric(vertical: 10.0),
+    color: colorPalette.blackShadows,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        IconButton(
+          icon: const Icon(
+            Icons.favorite,
+            color: Colors.black,
+          ),
+          onPressed: () => likeButtonPressed(),
         ),
-      );
+        IconButton(
+          icon: const Icon(
+            Icons.chat,
+            color: Colors.black,
+          ),
+          onPressed: () => commentButtonPressed(),
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.attach_money,
+            color: Colors.black,
+          ),
+          onPressed: () => print("money button pressed"),
+        ),
+      ],
+    ),
+  );
 
   Widget _createPopupContent(String url) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              //_createPhotoTitle(),
-              Image.network(url, fit: BoxFit.fitWidth),
-              //_createActionBar(),
-            ],
-          ),
-        ),
-      );
+    padding: EdgeInsets.symmetric(horizontal: 16.0),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          //_createPhotoTitle(),
+          Image.network(url, fit: BoxFit.fitWidth),
+          //_createActionBar(),
+        ],
+      ),
+    ),
+  );
 }
 
 class AnimatedDialog extends StatefulWidget {
