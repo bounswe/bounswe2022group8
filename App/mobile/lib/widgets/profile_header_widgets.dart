@@ -1,3 +1,5 @@
+import 'package:artopia/art_item_upload.dart';
+import 'package:artopia/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -110,18 +112,32 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      textUtils.buildText(
-                          "Followers ", 12, Colors.white70, FontWeight.w500
+                      GestureDetector(
+                        child: textUtils.buildText(
+                            "Followers ", 12, Colors.black87, FontWeight.w500
+                        ),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        ),
                       ),
                       textUtils.buildText(
-                          me.followers.toString(), 12, Colors.white70, FontWeight.w500
+                          me.followers.toString(), 12, Colors.black, FontWeight.w500
                       ),
                       SizedBox(width: 20),
-                      textUtils.buildText(
-                          " Following ", 12, Colors.white70, FontWeight.w500
+                      GestureDetector(
+
+                        child:
+                        textUtils.buildText(
+                            " Following ", 12, Colors.black87, FontWeight.w500
+                        ),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        ),
                       ),
                       textUtils.buildText(
-                          me.following.toString(), 13, Colors.white70, FontWeight.w500
+                          me.following.toString(), 13, Colors.black, FontWeight.w500
                       ),
                     ],
                   ),
@@ -137,16 +153,24 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                 padding: EdgeInsets.only(right: 25),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: colorPalette.blackShadows,
-                    onPrimary: Colors.black,
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  onPressed: () {
-                    //Upload photos;
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          UploadArtItem()
+                          //myAlert(),
+                      ),
+                    ),
                   },
-                  child: const Text('Upload'),
+                  child: textUtils.buildText(
+                      "Upload", 13, Colors.black, FontWeight.w500
+                  ),
                 ),
               ),
             ],

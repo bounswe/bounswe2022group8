@@ -73,6 +73,7 @@ class _ArtItems extends State<ArtItems> {
         child: _createPopupContent(url),
       ),
     );
+
   }
   Widget _createPhotoTitle() => Container(
       width: double.infinity,
