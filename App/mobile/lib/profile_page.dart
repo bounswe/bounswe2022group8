@@ -1,14 +1,14 @@
-// import 'package:profile/profile.dart';
 import 'package:artopia/art_items_tab.dart';
+import 'package:artopia/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
-import 'package:artopia/routes.dart';
 import 'profile.dart';
 import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/settings_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -38,19 +38,6 @@ class _ProfilePageState extends State<ProfilePage> {
           child: AppBar(
             centerTitle: true,
             automaticallyImplyLeading: false,
-            /*
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: Colors.black,
-              tooltip: 'Back to home page',
-              onPressed: () => {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                )
-              },
-            ),
-             */
             backgroundColor: colorPalette.darkPurple,
             title: textUtils.buildText(
                 "artopia", 25, Colors.white70, FontWeight.w500),
@@ -60,11 +47,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.black,
                 tooltip: 'Settings',
                 onPressed: () => {
-                  Navigator.pop(
-                    context,
-                    //MaterialPageRoute(builder: (context) => //SettingsPage()),
-                  )
-                },
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+                ),
+              },
               ),
             ],
           ),
@@ -79,7 +66,6 @@ class _ProfilePageState extends State<ProfilePage> {
             final Profile me = snapshot.requireData ;
           return NestedScrollView(
           headerSliverBuilder: (context, _) {
-
             return [
               SliverList(
                 delegate: SliverChildListDelegate(

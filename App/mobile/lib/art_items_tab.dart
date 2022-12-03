@@ -70,7 +70,7 @@ class _ArtItems extends State<ArtItems> {
           backgroundImage: Image.asset("assets/images/blank_profile.jpeg").image,
         ),
         title: Text(
-          'john.doe',
+          'selin',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
       ));
