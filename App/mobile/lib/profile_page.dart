@@ -1,5 +1,3 @@
-import 'package:artopia/art_items_tab.dart';
-import 'package:artopia/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
@@ -9,6 +7,8 @@ import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/settings_page.dart';
+import 'package:artopia/art_items_tab.dart';
+import 'package:artopia/exhibitions_tab.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
             actions: [
               IconButton(
                 icon: Icon(Icons.settings),
-                color: Colors.black,
+                color: colorPalette.russianGreen,
                 tooltip: 'Settings',
                 onPressed: () => {
                 Navigator.push(
@@ -108,8 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: TabBarView(
                   children: [
                     ArtItems(),
-                    ArtItems(),
-                    //Exibitions(),
+                    Exhibitions()
                   ],
                 ),
               ),

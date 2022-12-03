@@ -42,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
             backgroundColor: colorPalette.darkPurple,
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: Colors.black,
+              color: colorPalette.russianGreen,
               tooltip: 'Back to profile page',
               onPressed: () => {
                 Navigator.pop(

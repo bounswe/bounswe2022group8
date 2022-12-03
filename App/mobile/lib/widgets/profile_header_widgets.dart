@@ -32,14 +32,14 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     width: 120,
                     height: 120,
                     child: AvatarGlow(
-                      glowColor: colorPalette.graniteGray,
+                      glowColor: colorPalette.darkPurple,
                       endRadius: 90.0,
                       duration: Duration(milliseconds: 2000),
                       repeat: true,
                       showTwoGlows: true,
                       repeatPauseDuration: Duration(milliseconds: 100),
                       child: DottedBorder(
-                        radius: Radius.circular(10),
+                        radius: Radius.circular(5),
                         color: colorPalette.darkPurple,
                         strokeWidth: 8,
                         borderType: BorderType.Circle,
@@ -71,15 +71,15 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                   Row(
                     children: [
                       textUtils.buildText(
-                          me.username, 20, Colors.white70, FontWeight.w500
+                          me.username, 18, Colors.white70, FontWeight.w500
                       ),
                     ],
                   ),
                   SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        me.name,
+                      textUtils.buildText(
+                          me.name, 13, Colors.white70, FontWeight.w500
                       ),
                     ],
                   ),
@@ -88,7 +88,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     width: 200,
                     child: Flexible(
                       child: textUtils.buildText(
-                          me.bio, 10, Colors.white70, FontWeight.w500
+                          me.bio, 12, Colors.white70, FontWeight.w500
                       ),
                     ),
                   ),
@@ -100,7 +100,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                         children: [
                           Icon(Icons.location_on),
                           textUtils.buildText(
-                              me.location, 10, Colors.white70, FontWeight.w500
+                              me.location, 12, Colors.white70, FontWeight.w500
                           ),
                         ],
                       ),
@@ -111,14 +111,14 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       textUtils.buildText(
-                          "Followers ", 13, Colors.white70, FontWeight.w500
+                          "Followers ", 12, Colors.white70, FontWeight.w500
                       ),
                       textUtils.buildText(
-                          me.followers.toString(), 13, Colors.white70, FontWeight.w500
+                          me.followers.toString(), 12, Colors.white70, FontWeight.w500
                       ),
                       SizedBox(width: 20),
                       textUtils.buildText(
-                          " Following ", 13, Colors.white70, FontWeight.w500
+                          " Following ", 12, Colors.white70, FontWeight.w500
                       ),
                       textUtils.buildText(
                           me.following.toString(), 13, Colors.white70, FontWeight.w500
@@ -134,7 +134,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 30),
+                padding: EdgeInsets.only(right: 25),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: colorPalette.blackShadows,
