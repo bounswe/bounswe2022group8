@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final EmailInputObject = EmailInput();
-  final PasswordInputObject = PasswordInput(name: "Password");
   final textUtils = TextUtils();
   final ColorPalette colorPalette = ColorPalette();
   // Future<ArtItem> artitemfuture = getAllArtItems();
@@ -33,18 +31,6 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           automaticallyImplyLeading: false,
           backgroundColor: colorPalette.darkPurple,
-          /*
-          leading: IconButton(
-            icon: Icon(Icons.account_circle_rounded),
-            tooltip: 'Go to your profile',
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
-              )
-            },
-          ),
-          */
           title: textUtils.buildText(
               "artopia", 25, Colors.white70, FontWeight.w500),
         ),
