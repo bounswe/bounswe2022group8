@@ -17,11 +17,12 @@ from knox.auth import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.db import IntegrityError
 
+
 @swagger_auto_schema(
     method='POST',
     operation_description="LikeArtItem API. This endpoint with POST request like an art item with the given ID. Authentication is required.",
     operation_summary="Like an art item.",
-    tags=['Like'],
+    tags=['like'],
     responses={
         status.HTTP_201_CREATED: openapi.Response(
             description="Successfully liked the given art item.",
@@ -60,7 +61,7 @@ def like_artitem(request, id):
     method='DELETE',
     operation_description="LikeArtItem API. This endpoint with DELETE request unlikes an art item with the given ID. Authentication is required.",
     operation_summary="Unlike an art item.",
-    tags=['Like'],
+    tags=['like'],
     responses={
         status.HTTP_204_NO_CONTENT: openapi.Response(
             description="Successfully unliked the given art item.",
@@ -94,6 +95,47 @@ def unlike_artitem(request, id):
             return Response({"Invalid request": "A user cannot unlike an art item which is not liked before."}, status=status.HTTP_400_BAD_REQUEST)
     except ArtItem.DoesNotExist:
         return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="LikeArtItem API. This endpoint with GET request the information of whether the user has liked the art item or not.",
+    operation_summary="Returns whether the user has liked the art item or not.",
+    tags=['like'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="User has liked the art item.",
+            examples={
+                "application/json": {
+                    "OK": "User has liked the art item."
+                }
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="User has not liked the art item or the art item with given id does not exist.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any art item with the given ID doesn't exist."
+                }
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def isLiked_artitem(request, id):
+    user = request.user
+    try:
+        artitem = ArtItem.objects.get(pk=id)
+        try:
+            like = LikeArtItem.objects.get(user=user, artitem=artitem)
+            return Response({"OK": "User has liked the art item."}, status=status.HTTP_200_OK)
+        except LikeArtItem.DoesNotExist:
+            return Response({"Not Found": "User has not liked the art item."}, status=status.HTTP_404_NOT_FOUND)
+    except ArtItem.DoesNotExist:
+        return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+
 
 @swagger_auto_schema(
     method='GET',
@@ -203,7 +245,7 @@ def get_users_who_liked_artitem(request, id):
     method='POST',
     operation_description="LikeComment API. This endpoint with POST request like a comment with the given ID. Authentication is required.",
     operation_summary="Like a comment.",
-    tags=['Like'],
+    tags=['like'],
     responses={
         status.HTTP_201_CREATED: openapi.Response(
             description="Successfully liked the given comment.",
@@ -242,7 +284,7 @@ def like_comment(request, id):
     method='DELETE',
     operation_description="LikeComment API. This endpoint with DELETE request unlikes a comment with the given ID. Authentication is required.",
     operation_summary="Unlike a comment which is liked before by the user.",
-    tags=['Like'],
+    tags=['like'],
     responses={
         status.HTTP_204_NO_CONTENT: openapi.Response(
             description="Successfully unliked the given comment.",
@@ -275,6 +317,46 @@ def unlike_comment(request, id):
         except LikeComment.DoesNotExist:
             return Response({"Invalid request": "A user cannot unlike a comment which is not liked before by the user."}, status=status.HTTP_400_BAD_REQUEST)
     except Comment.DoesNotExist:
+        return Response({"Not Found": "Any comment with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="LikeComment API. This endpoint with GET request the information of whether the user has liked the comment or not.",
+    operation_summary="Returns whether the user has liked the comment or not.",
+    tags=['like'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="User has liked the comment.",
+            examples={
+                "application/json": {
+                    "OK": "User has liked the comment."
+                }
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="User has not liked the comment or the comment with given id does not exist.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any comment with the given ID doesn't exist."
+                }
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def isLiked_comment(request, id):
+    user = request.user
+    try:
+        comment = Comment.objects.get(pk=id)
+        try:
+            like = LikeComment.objects.get(user=user, comment=comment)
+            return Response({"OK": "User has liked the comment."}, status=status.HTTP_200_OK)
+        except LikeArtItem.DoesNotExist:
+            return Response({"Not Found": "User has not liked the comment."}, status=status.HTTP_404_NOT_FOUND)
+    except ArtItem.DoesNotExist:
         return Response({"Not Found": "Any comment with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
 
@@ -332,3 +414,5 @@ def get_users_who_liked_comment(request, id):
         return Response(users.data, status=status.HTTP_200_OK)
     except Comment.DoesNotExist:
         return Response({"Not Found": "Any comment with the given ID does not exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
