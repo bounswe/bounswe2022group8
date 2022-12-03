@@ -195,7 +195,25 @@ class _CommentsState extends State<Comments> {
                           SizedBox(
                             width: 55,
                             height: 33,
-                            child: buildTextButton("Reply", Colors.white54, () => _Comment),
+                            child: buildTextButton("Reply", Colors.white54, () => print("Reply")),
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          // Text("Reply"),
+                          SizedBox(
+                            width: 55,
+                            height: 33,
+                            child: buildTextButton("Edit", Colors.white54, () => print("Edit")),
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          // Text("Reply"),
+                          SizedBox(
+                            width: 60,
+                            height: 33,
+                            child: buildTextButton("Delete", Colors.white54, () => print("Delete")),
                           ),
                         ],
                       ),
