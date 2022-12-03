@@ -16,8 +16,8 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
   final textUtils = TextUtils();
-  Future<List<List<Comment>>> allcomments = getComments(1) ;
-    final CommentInputObject = TextEditingController();
+  Future<List<List<Comment>>> allcomments = getComments(1);
+  final CommentInputObject = TextEditingController();
 
   final ColorPalette colorPalette = ColorPalette();
   final List<Comment> commentLi = [
@@ -74,6 +74,12 @@ class _CommentPageState extends State<CommentPage> {
     ),
   ];
 
+  void updateUI() {
+    setState(() {
+      //You can also make changes to your state here.
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,23 +113,29 @@ class _CommentPageState extends State<CommentPage> {
                   color: Colors.black,
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child:FutureBuilder<List<List<Comment>>>(
-          future: allcomments, 
-          builder: (BuildContext context, AsyncSnapshot<List<List<Comment>>> snapshot) {
-            if(snapshot.hasData == false)   return SizedBox.shrink();
-           List<List<Comment>> artItemcomments = snapshot.requireData ;
-           List<Comments> commentWidgets = [] ;
+                      child: FutureBuilder<List<List<Comment>>>(
+                          future: allcomments,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<List<Comment>>> snapshot) {
+                            if (snapshot.hasData == false)
+                              return SizedBox.shrink();
+                            List<List<Comment>> artItemcomments =
+                                snapshot.requireData;
+                            List<Comments> commentWidgets = [];
 
-          for (var element in artItemcomments) commentWidgets.add(Comments(commentList: element)) ;
-          
-            return Column( 
-                        children: commentWidgets,
-                      ) ; })  ),
+                            for (var element in artItemcomments)
+                              commentWidgets
+                                  .add(Comments(commentList: element));
+
+                            return Column(
+                              children: commentWidgets,
+                            );
+                          })),
                 ),
               ),
               ListTile(
                 title: TextFormField(
-                  controller:CommentInputObject,
+                  controller: CommentInputObject,
                   style: TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     labelText: "Add a comment...",
@@ -133,19 +145,25 @@ class _CommentPageState extends State<CommentPage> {
                 ),
                 trailing: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: colorPalette.hunterGreen,
+                    backgroundColor: colorPalette.russianGreen,
                   ),
                   onPressed: () {
-                    String comment =
-                                  CommentInputObject.text;
-                              postComment(1,1,comment,true).then((value) {
-                                if (value == "OK") {
-                                  Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
-                                  Navigator.pushReplacement(context, route);
-                                } 
-                  });},
-                  child: textUtils.buildText("Post", 18, colorPalette.blackShadows, FontWeight.w400),
+                    String comment = CommentInputObject.text;
+                    postComment(1, 1, comment, true).then((value) {
+                      if (value == "OK") {
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentPage()),
+                          (Route<dynamic> route) => false,
+                        );
+
+                      }
+                    });
+                  },
+                  child: textUtils.buildText("Post", 18,
+                      colorPalette.palePurplePantone, FontWeight.w500),
                 ),
               ),
             ],
