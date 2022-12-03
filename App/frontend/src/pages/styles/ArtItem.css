@@ -163,14 +163,14 @@
 .artitem-post-container .add-comment-input {
   width: 100%;
   font-size: 15px;
-  resize: none;
   border-radius: 0.3rem;
+  resize: none;
 }
 
-/*.artitem-post-container .add-comment-input:focus {
-  border-color: red !important;
-  background-color: #d9d9d9 !important;
-}*/
+.artitem-post-container .add-comment-input:focus {
+  outline: none !important;
+  box-shadow: 0px 0px 5px #ffc9ff !important;
+}
 
 .artitem-post-container .btn-comment-container {
   text-align: right;
