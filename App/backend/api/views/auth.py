@@ -293,3 +293,43 @@ def resetPasswordLoggedView(request):
         message = {
             'detail': 'Password cant be empty'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+@swagger_auto_schema(
+        method='DELETE',
+        request_body=passwordSerializer,
+        operation_description="Account deletion API. This API takes the password as a parameter and deletes the user account. Login is required",
+        operation_summary="Account deletion API.",
+        tags=['account_delete'],
+        responses={
+            status.HTTP_204_NO_CONTENT: openapi.Response(
+                description="The user account has been successfully deleted.",
+                examples={
+                    "application/json": {
+                        "Success": ["The user account has successfully been deleted!"]
+                    }
+                }
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                description="The password did not match or the user account could not be deleted.",
+                examples={
+                    "application/json": {
+                        "Failure": ["The user account could not be deleted!"],
+                        "Failure": ["The password did not match!"]
+                    },
+                }
+            ),
+        }
+    )
+@api_view(['DELETE'])
+@login_required
+def delete_account(request):
+    data = request.data
+    user = request.user
+    if(data['password'] == user.password):
+        try:
+            user.delete()
+            return Response({'Success': 'The user account has successfully been deleted!'}, status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response({'Failure': 'The user account could not be deleted!'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({'Failure': 'The password did not match!'}, status=status.HTTP_400_BAD_REQUEST)
