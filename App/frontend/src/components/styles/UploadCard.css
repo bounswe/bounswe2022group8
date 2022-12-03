@@ -118,7 +118,7 @@ input[type="file"] {
 .upload-post-btn:hover,
 .upload-post-btn:active {
   color: #18121c !important;
-  background-color: #ffc9ff !important;
+  background-color: rgba(255, 201, 255, 0.9) !important;
 }
 
 .upload-post-error {

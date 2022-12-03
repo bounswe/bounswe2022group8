@@ -11,6 +11,14 @@ import * as dotenv from "dotenv";
 import "./styles/Profile.css";
 
 function Profile(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token } = useAuth();
   var host = HOST;
 
@@ -92,6 +100,7 @@ function Profile(props) {
 
   function goToArtItem() {
     navigate("/artitems/:id");
+    scrollToTop();
   }
 
   return (

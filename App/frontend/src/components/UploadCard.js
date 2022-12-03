@@ -122,7 +122,8 @@ function UploadCard(props) {
               className="form-control mt-1"
               placeholder="Give a title"
               name="title"
-              id="description"
+              id="title"
+              style={{ fontSize: "14px" }}
             />
           </div>
           <div className="form-group mt-3">
@@ -135,6 +136,7 @@ function UploadCard(props) {
               placeholder="Describe your art item"
               name="description"
               id="description"
+              style={{ fontSize: "14px" }}
               rows="2"
             />
           </div>
@@ -147,7 +149,8 @@ function UploadCard(props) {
               className="form-control mt-1"
               placeholder="Painting, sculpture, digital art..."
               name="type"
-              id="description"
+              id="type"
+              style={{ fontSize: "14px" }}
             />
           </div>
           <div className="form-group mt-3">
@@ -159,7 +162,8 @@ function UploadCard(props) {
               className="form-control mt-1"
               placeholder="Add tags"
               name="tags"
-              id="description"
+              id="tags"
+              style={{ fontSize: "14px" }}
             />
           </div>
 
