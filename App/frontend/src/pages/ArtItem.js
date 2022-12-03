@@ -18,10 +18,6 @@ function ArtItem(props) {
               <Tag tagname="nature"></Tag>
               <Tag tagname="casualTag"></Tag>
               <Tag tagname="fauvism"></Tag>
-              <Tag tagname="lovelovehate"></Tag>
-              <Tag tagname="yellow"></Tag>
-              <Tag tagname="farm"></Tag>
-              <Tag tagname="haybales"></Tag>
             </div>
           </div>
           <div id="info-container">
