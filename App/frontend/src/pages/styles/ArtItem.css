@@ -7,7 +7,7 @@
   /*padding: 10px;
   overflow: hidden;
   background-color: red;*/
-  margin-bottom: 500px;
+  margin-bottom: 0px;
 }
 
 .artitem-post-container .artitem-post {
@@ -29,14 +29,19 @@
 .artitem-post-container #image {
   object-fit: contain;
   width: 100%;
-  height: 100%;
+  height: 87%;
+  margin-bottom: 2rem;
+}
+
+.artitem-post-container .tag-container {
+  display: flex;
 }
 
 .artitem-post-container #info-container {
   color: #ffffff;
   background-color: #0e0a10;
   flex: 1 4 300px;
-  max-width: 500px;
+  max-width: 25vw;
   min-width: 280px;
   border-left: 1px solid #bcb1c1;
   padding-left: 10px;
@@ -191,4 +196,15 @@
 .artitem-post-container .btn-comment:active {
   background-color: rgba(255, 201, 255, 0.9) !important;
   color: #18121c !important;
+}
+
+.artitem-post-properties {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-bottom: 500px;
+}
+
+.artitem-post-properties .section-header {
+  color: #ffc9ff;
+  font-size: 32px;
 }

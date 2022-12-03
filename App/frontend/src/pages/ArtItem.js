@@ -1,23 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 
 import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
-import haybales from "../images/haybales.jpg";
+import haybales from "../images/bluebuilding.jfif";
 import "./styles/ArtItem.css";
-import { useParams } from "react-router-dom";
 
 function ArtItem(props) {
-  const { id } = useParams();
-
   return (
     <Layout>
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
             <img id="image" src={haybales} alt="" />
+            <div className="tag-container">
+              <Tag tagname="nature"></Tag>
+              <Tag tagname="casualTag"></Tag>
+              <Tag tagname="fauvism"></Tag>
+              <Tag tagname="lovelovehate"></Tag>
+              <Tag tagname="yellow"></Tag>
+              <Tag tagname="farm"></Tag>
+              <Tag tagname="haybales"></Tag>
+            </div>
           </div>
-
           <div id="info-container">
             <div id="owner">
               <img id="owner-profile-photo" src={defaultUserImage} alt="" />
@@ -184,6 +190,11 @@ function ArtItem(props) {
           </div>
         </div>
       </div>
+      {/*<div className="artitem-post-properties">
+        <div className="tag-container">
+          <div className="tag"></div>
+        </div>
+      </div>*/}
     </Layout>
   );
 }
