@@ -116,7 +116,7 @@ function Settings() {
   function handleProfileSubmit(e) {
     e.preventDefault();
 
-    console.log(profileInput);
+    // console.log(profileInput);
     fetch(`${host}/api/v1/users/profile/me/`, {
       method: "PUT",
       body: JSON.stringify(profileInput),
@@ -191,13 +191,15 @@ function Settings() {
 
           <div className="form-group mt-3">
             <label className="access-label">Bio</label>
-            <input
+            <textarea
               type="text"
               className="form-control mt-1"
               placeholder="Make yourself known to people"
               name="about"
               id="about"
               defaultValue={profileInfo.about}
+              rows="3"
+              style={{ resize: "none" }}
               onChange={handleInput}
             />
           </div>

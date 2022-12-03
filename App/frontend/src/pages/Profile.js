@@ -46,7 +46,7 @@ function Profile(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const AWS = require("aws-sdk");
         dotenv.config();
         AWS.config.update({

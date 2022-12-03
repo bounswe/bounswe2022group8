@@ -1,31 +1,52 @@
 import React, { useState } from "react";
+import { useAuth } from "../auth/authentication";
+import { HOST } from "../constants/host";
 import { RiDragDropLine } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 
 import "./styles/UploadCard.css";
 
 function UploadCard(props) {
+  const { token } = useAuth();
+  var host = HOST;
+
+  /*const [uploadInfo, setUploadInfo] = useState({
+    title: "",
+    description: "",
+    type: "",
+    tags: [],
+    artitem_image: "",
+  });*/
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [tags, setTags] = useState([]);
+  const [base64Image, setBase64Image] = useState("");
+
   const [preview, setPreview] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
 
-  function handlePreview(e) {
+  async function handlePreview(e) {
     if (e.target.files) {
       setPreview(true);
       props.setPostError(false);
       setPreviewImage(URL.createObjectURL(e.target.files[0]));
+      setBase64Image(toBase64(e.target.files[0]));
     }
   }
 
   function closePreview() {
     setPreview(false);
     setPreviewImage("");
+    setBase64Image("");
   }
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
-  const handleOnDrop = (e) => {
+  async function handleOnDrop(e) {
     //prevent the browser from opening the image
     e.preventDefault();
     e.stopPropagation();
@@ -33,13 +54,60 @@ function UploadCard(props) {
     setPreview(true);
     props.setPostError(false);
     setPreviewImage(URL.createObjectURL(e.dataTransfer.files[0]));
-  };
+    setBase64Image(toBase64(e.dataTransfer.files[0]));
+  }
 
   function handlePost(e) {
     if (previewImage === "") {
       e.preventDefault();
       props.setPostError(true);
+    } else {
+      fetch(`${host}/api/v1/artitems/me/upload/`, {
+        method: "POST",
+        body: JSON.stringify({
+          title: title,
+          description: description,
+          type: type,
+          tags: tags,
+          art_image: base64Image,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {})
+        .catch((error) => console.error("Error:", error));
     }
+  }
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  function handleTitle(e) {
+    const value = e.target.value;
+    setTitle(value);
+  }
+
+  function handleDescription(e) {
+    const value = e.target.value;
+    setDescription(value);
+  }
+
+  function handleType(e) {
+    const value = e.target.value;
+    setType(value);
+  }
+
+  function handleTags(e) {
+    const value = e.target.value;
+    setTags([]);
   }
 
   return (
@@ -124,6 +192,7 @@ function UploadCard(props) {
               name="title"
               id="title"
               style={{ fontSize: "14px" }}
+              onChange={handleTitle}
             />
           </div>
           <div className="form-group mt-3">
@@ -136,8 +205,9 @@ function UploadCard(props) {
               placeholder="Describe your art item"
               name="description"
               id="description"
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: "14px", resize: "none" }}
               rows="2"
+              onChange={handleDescription}
             />
           </div>
           <div className="form-group mt-3">
@@ -151,6 +221,7 @@ function UploadCard(props) {
               name="type"
               id="type"
               style={{ fontSize: "14px" }}
+              onChange={handleType}
             />
           </div>
           <div className="form-group mt-3">
@@ -164,6 +235,7 @@ function UploadCard(props) {
               name="tags"
               id="tags"
               style={{ fontSize: "14px" }}
+              onChange={handleTags}
             />
           </div>
 
