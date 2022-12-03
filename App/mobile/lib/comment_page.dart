@@ -15,10 +15,10 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
+  bool replyState = false;
   final textUtils = TextUtils();
   Future<List<List<Comment>>> allcomments = getComments(1);
   final CommentInputObject = TextEditingController();
-
   final ColorPalette colorPalette = ColorPalette();
   final List<Comment> commentLi = [
     Comment(
@@ -74,10 +74,8 @@ class _CommentPageState extends State<CommentPage> {
     ),
   ];
 
-  void updateUI() {
-    setState(() {
-      //You can also make changes to your state here.
-    });
+  void _update(bool value) {
+    setState(() => replyState = value);
   }
 
   @override
@@ -126,7 +124,6 @@ class _CommentPageState extends State<CommentPage> {
                             for (var element in artItemcomments)
                               commentWidgets
                                   .add(Comments(commentList: element));
-
                             return Column(
                               children: commentWidgets,
                             );
@@ -151,14 +148,12 @@ class _CommentPageState extends State<CommentPage> {
                     String comment = CommentInputObject.text;
                     postComment(1, 1, comment, true).then((value) {
                       if (value == "OK") {
-
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => CommentPage()),
                           (Route<dynamic> route) => false,
                         );
-
                       }
                     });
                   },

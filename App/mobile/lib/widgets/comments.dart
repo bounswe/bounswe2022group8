@@ -1,3 +1,4 @@
+import 'package:artopia/comment_page.dart';
 import 'package:comment_tree/comment_tree.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
@@ -9,7 +10,6 @@ import 'dart:convert';
 import 'package:artopia/variables.dart' ;
 class Comments extends StatefulWidget {
   final List<Comment> commentList;
-
   const Comments({Key? key, required this.commentList}) : super(key: key);
 
   @override
@@ -135,7 +135,7 @@ class _CommentsState extends State<Comments> {
                           SizedBox(
                             width: 55,
                             height: 33,
-                            child: buildTextButton("Reply", Colors.white54, () => print("reply")),
+                            child: buildTextButton("Reply", Colors.white54, () => {}),
                           ),
                         ],
                       ),
@@ -195,7 +195,7 @@ class _CommentsState extends State<Comments> {
                           SizedBox(
                             width: 55,
                             height: 33,
-                            child: buildTextButton("Reply", Colors.white54, () => print("reply")),
+                            child: buildTextButton("Reply", Colors.white54, () => _Comment),
                           ),
                         ],
                       ),
