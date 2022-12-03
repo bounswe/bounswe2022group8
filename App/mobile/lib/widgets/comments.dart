@@ -46,7 +46,7 @@ class _CommentsState extends State<Comments> {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: CommentTreeWidget<Comment, Comment>(
             // Root comment
             getFirstComment(widget.commentList),
@@ -115,19 +115,28 @@ class _CommentsState extends State<Comments> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Row(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text('5d'),
-                          SizedBox(
+                          const Text('5d'),
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text('Like'),
                           SizedBox(
+                            width: 45,
+                            height: 33,
+                            child: buildTextButton("Like", Colors.white54, () => print("like")),
+                          ),
+                          const SizedBox(
                             width: 12,
                           ),
-                          Text('Reply'),
+                          // Text("Reply"),
+                          SizedBox(
+                            width: 55,
+                            height: 33,
+                            child: buildTextButton("Reply", Colors.white54, () => print("reply")),
+                          ),
                         ],
                       ),
                     ),
@@ -166,19 +175,28 @@ class _CommentsState extends State<Comments> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Row(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text('5d'),
-                          SizedBox(
+                          const Text('5d'),
+                          const SizedBox(
                             width: 8,
                           ),
-                          Text('Like'),
                           SizedBox(
+                            width: 45,
+                            height: 33,
+                            child: buildTextButton("Like", Colors.white54, () => print("like")),
+                          ),
+                          const SizedBox(
                             width: 12,
                           ),
-                          Text('Reply'),
+                          // Text("Reply"),
+                          SizedBox(
+                            width: 55,
+                            height: 33,
+                            child: buildTextButton("Reply", Colors.white54, () => print("reply")),
+                          ),
                         ],
                       ),
                     ),
@@ -193,6 +211,20 @@ class _CommentsState extends State<Comments> {
   }
 }
 
+//create a function that returns a textbutton
+Widget buildTextButton(String text, Color color, Function() onPressed) {
+  return TextButton(
+
+    onPressed: onPressed,
+    child: Text(
+      text,
+      style: GoogleFonts.inter(
+        fontSize: 14,
+        color: color,
+      ),
+    ),
+  );
+}
 
 Future <List<List<Comment>>> getComments(artItemId) async {
    String GET_COMMENTS_ENDPOINT = "http://34.125.134.88:8000/api/v1/artitems/$artItemId/comments/" ;
@@ -238,7 +270,6 @@ for (var element in commentObjs) {
 }}
 }
     return allcomments ;
-
 }
 
 class getCommentsClass{
