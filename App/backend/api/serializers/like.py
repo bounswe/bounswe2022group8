@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ..models.user import LikeArtItem, LikeComment
+from ..models.artitem import LikeArtItem
+from ..models.models import LikeComment
 
 
 class LikeArtItemSerializer(serializers.ModelSerializer):

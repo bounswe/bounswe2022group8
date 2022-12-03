@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from .artitem import ArtItem
 from mptt.models import MPTTModel, TreeForeignKey
-from user import LikeComment
+from .user import User
 
 class Comment(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
@@ -27,3 +27,20 @@ class Comment(MPTTModel):
     @property
     def get_users_who_liked(self):
         return [liked.user for liked in LikeComment.objects.filter(comment=self)]
+
+
+class LikeComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="+")
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["user", "comment"],
+            ),
+        ]
+        ordering = ["-liked_at"]
+
+    def __str__(self):
+        return str(self.user) + " liked " + str(self.comment)

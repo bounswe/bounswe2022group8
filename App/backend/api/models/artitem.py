@@ -2,7 +2,7 @@ from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from .user import User, LikeArtItem
+from .user import User
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -37,4 +37,18 @@ class ArtItem(models.Model):
         return [liked.user for liked in LikeArtItem.objects.filter(artitem=self)]
 
     
+class LikeArtItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    artitem = models.ForeignKey(ArtItem, on_delete=models.CASCADE, related_name="+")
+    liked_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["user", "artitem"],
+            ),
+        ]
+        ordering = ["-liked_at"]
+
+    def __str__(self):
+        return str(self.user) + " liked " + str(self.artitem)

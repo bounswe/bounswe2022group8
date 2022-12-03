@@ -5,9 +5,9 @@ from ..serializers.serializers import UserSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from ..models.user import User, Follow, LikeComment, LikeArtItem
-from ..models.artitem import ArtItem
-from ..models.models import Comment
+from ..models.user import User
+from ..models.artitem import ArtItem, LikeArtItem
+from ..models.models import Comment, LikeComment
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.shortcuts import render
