@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import random
 import hashlib
+from artitem import ArtItem
+from models import Comment
 
 class User(AbstractUser):
     is_level2 = models.BooleanField('Level2 user (active)', default=False)
@@ -66,6 +68,10 @@ class User(AbstractUser):
     def get_followings(self):
         return len([follow.to_user for follow in Follow.objects.filter(from_user=self)])
 
+    @property
+    def get_liked_art_items(self):
+        return [liked.artitem for liked in LikeArtItem.objects.filter(user=self)]
+
 
 class Follow(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
@@ -86,3 +92,35 @@ class Follow(models.Model):
     
     def __str__(self):
         return str(self.from_user) + " follows " + str(self.to_user)
+
+class LikeArtItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    artitem = models.ForeignKey(ArtItem, on_delete=models.CASCADE, related_name="+")
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["user", "artitem"],
+            ),
+        ]
+        ordering = ["-liked_at"]
+
+    def __str__(self):
+        return str(self.user) + " liked " + str(self.artitem)
+
+class LikeComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="+")
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["user", "comment"],
+            ),
+        ]
+        ordering = ["-liked_at"]
+
+    def __str__(self):
+        return str(self.user) + " liked " + str(self.comment)

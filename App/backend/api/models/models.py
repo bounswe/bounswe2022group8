@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from .artitem import ArtItem
 from mptt.models import MPTTModel, TreeForeignKey
+from user import LikeComment
 
 class Comment(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
@@ -19,3 +20,10 @@ class Comment(MPTTModel):
     def __str__(self):
         return "A comment made by " + str(self.commented_by) + " on " + str(self.commented_on) 
 
+    @property
+    def get_numberof_likes(self):
+        return len([liked.user for liked in LikeComment.objects.filter(comment=self)])
+
+    @property
+    def get_users_who_liked(self):
+        return [liked.user for liked in LikeComment.objects.filter(comment=self)]

@@ -2,7 +2,7 @@ from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from .user import User
+from .user import User, LikeArtItem
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -27,3 +27,14 @@ class ArtItem(models.Model):
 
     def __str__(self):
         return "Art item: " + self.title
+
+    @property
+    def get_numberof_likes(self):
+        return len([liked.user for liked in LikeArtItem.objects.filter(artitem=self)])
+
+    @property
+    def get_users_who_liked(self):
+        return [liked.user for liked in LikeArtItem.objects.filter(artitem=self)]
+
+    
+
