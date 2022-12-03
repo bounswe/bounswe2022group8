@@ -9,6 +9,9 @@ import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/settings_page.dart';
 import 'package:artopia/art_items_tab.dart';
 import 'package:artopia/exhibitions_tab.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:core';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -57,7 +60,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: DefaultTabController(
+      body:
+      DefaultTabController(
         length: 2,
         child:FutureBuilder<Profile>(
           future: myProfile, // a previously-obtained Future<String> or null

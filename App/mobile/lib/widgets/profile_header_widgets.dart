@@ -10,10 +10,80 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 
+
 Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
-
+  void myAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          title: Text('Please choose media to select'),
+          content: Container(
+            height: MediaQuery.of(context).size.height / 6,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UploadArtItem()
+                        //myAlert(),
+                        //Navigator.pop(context);
+                        //getImage(ImageSource.gallery);
+                      ),
+                    ),
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.image),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      textUtils.buildText(
+                          "From Gallery", 13, Colors.black, FontWeight.w500),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    //getImage(ImageSource.camera);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.camera),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      textUtils.buildText(
+                          "From Camera", 13, Colors.black, FontWeight.w500),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -53,7 +123,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                             height: 130,
                             child: CircleAvatar(
                               foregroundImage: Image.asset(
-                                      "assets/images/blank_profile.jpeg")
+                                  "assets/images/blank_profile.jpeg")
                                   .image,
                               radius: 10,
                             ),
@@ -159,17 +229,21 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
+                  /*
+                  onPressed: () {
+                    myAlert();
+                    //UploadArtItem();
+                  },
+                  */
                   onPressed: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>
-                          UploadArtItem()
-                          //myAlert(),
+                      MaterialPageRoute(builder: (context) => UploadArtItem()
                       ),
                     ),
                   },
                   child: textUtils.buildText(
-                      "Upload", 13, Colors.black, FontWeight.w500
+                      "Add Art Item", 13, Colors.black, FontWeight.w500
                   ),
                 ),
               ),

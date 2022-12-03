@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/profile_page.dart';
 
-
 class UploadArtItem extends StatefulWidget {
   @override
   _UploadArtItem createState() => _UploadArtItem();
@@ -32,71 +31,67 @@ class _UploadArtItem extends State<UploadArtItem> {
   //show popup dialog
   void myAlert() {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            title: Text('Please choose media to select'),
-            content: Container(
-              height: MediaQuery.of(context).size.height / 6,
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorPalette.blackShadows,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          title: Text('Please choose media to select'),
+          content: Container(
+            height: MediaQuery.of(context).size.height / 6,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.gallery);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.image),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        textUtils.buildText(
-                            "From Gallery", 13, Colors.black, FontWeight.w500
-                        ),
-                      ],
-                    ),
-
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorPalette.blackShadows,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    getImage(ImageSource.gallery);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.image),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.camera);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.camera),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        textUtils.buildText(
-                            "From Camera", 13, Colors.black, FontWeight.w500
-                        ),
-                      ],
-                    ),
-
+                      textUtils.buildText(
+                          "From Gallery", 13, Colors.black, FontWeight.w500),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorPalette.blackShadows,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    getImage(ImageSource.camera);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.camera),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      textUtils.buildText(
+                          "From Camera", 13, Colors.black, FontWeight.w500),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -137,6 +132,7 @@ class _UploadArtItem extends State<UploadArtItem> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorPalette.blackShadows,
@@ -146,12 +142,15 @@ class _UploadArtItem extends State<UploadArtItem> {
                 ),
               ),
               onPressed: () {
-                myAlert();
+                Navigator.pop(context);
+                getImage(ImageSource.gallery);
               },
               child: textUtils.buildText(
-                  "Upload Art Item", 15, Colors.black, FontWeight.w500
+                  "Choose", 20, Colors.black, FontWeight.w500
               ),
             ),
+
+
             SizedBox(
               height: 10,
             ),
@@ -159,20 +158,37 @@ class _UploadArtItem extends State<UploadArtItem> {
             //if image null show text
             image != null
                 ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(
-                  //to show image, you type like this.
-                  File(image!.path),
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: 300,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        //to show image, you type like this.
+                        File(image!.path),
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width,
+                        height: 300,
+                      ),
+                    ),
+                  )
+                : textUtils.buildText(
+                    "No Art Item", 20, Colors.black, FontWeight.w500),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colorPalette.blackShadows,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-            )
-                : textUtils.buildText(
-                "No Image", 20, Colors.black, FontWeight.w500
+              onPressed: () {
+                //myAlert();
+              },
+              child: textUtils.buildText(
+                  "Upload", 20, Colors.black, FontWeight.w500
+              ),
             ),
           ],
         ),
