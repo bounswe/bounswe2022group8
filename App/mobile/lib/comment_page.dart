@@ -16,8 +16,10 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
   final textUtils = TextUtils();
-  final ColorPalette colorPalette = ColorPalette();
+  Future<List<List<Comment>>> allcomments = getComments(1) ;
+    final CommentInputObject = TextEditingController();
 
+  final ColorPalette colorPalette = ColorPalette();
   final List<Comment> commentLi = [
     Comment(
       avatar:
@@ -105,19 +107,23 @@ class _CommentPageState extends State<CommentPage> {
                   color: Colors.black,
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: Column(
-                        children: <Widget>[
-                          Comments(commentList: commentLi),
-                          Comments(commentList: commentHi),
-                          Comments(commentList: commentMid),
-                          Comments(commentList: comment),
-                          Comments(commentList: commentLi),
-                        ],
-                      )),
+                      child:FutureBuilder<List<List<Comment>>>(
+          future: allcomments, 
+          builder: (BuildContext context, AsyncSnapshot<List<List<Comment>>> snapshot) {
+            if(snapshot.hasData == false)   return SizedBox.shrink();
+           List<List<Comment>> artItemcomments = snapshot.requireData ;
+           List<Comments> commentWidgets = [] ;
+
+          for (var element in artItemcomments) commentWidgets.add(Comments(commentList: element)) ;
+          
+            return Column( 
+                        children: commentWidgets,
+                      ) ; })  ),
                 ),
               ),
               ListTile(
                 title: TextFormField(
+                  controller:CommentInputObject,
                   style: TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     labelText: "Add a comment...",
@@ -129,7 +135,16 @@ class _CommentPageState extends State<CommentPage> {
                   style: OutlinedButton.styleFrom(
                     backgroundColor: colorPalette.hunterGreen,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    String comment =
+                                  CommentInputObject.text;
+                              postComment(1,1,comment,true).then((value) {
+                                if (value == "OK") {
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => const HomePage());
+                                  Navigator.pushReplacement(context, route);
+                                } 
+                  });},
                   child: textUtils.buildText("Post", 18, colorPalette.blackShadows, FontWeight.w400),
                 ),
               ),
