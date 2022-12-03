@@ -24,6 +24,7 @@ from ..models.user import Follow
             description="Successfully retrieved the profile information of a user.",
             examples={
                 "application/json": {
+                    "id": 1,
                     "username": "pothepanda",
                     "email": "po@jade.edu",
                     "location": "China",
@@ -72,6 +73,7 @@ def profile_api(request, id):
             description="Successfully retrieved the profile information of the current user.",
             examples={
                 "application/json": {
+                    "id": 1,
                     "username": "budgie",
                     "email": "budgie@mit.edu",
                     "name": "Salvador",
@@ -116,6 +118,7 @@ def profile_api(request, id):
             description="Successfully updated the profile of the user, here are the updated values:",
             examples={
                 "application/json": {
+                    "id": 1,
                     "name": "Captain Joseph",
                     "surname": "Blocker",
                     "about": "A veteran of the Indian Wars, who is deeply interested in impressionist art.",
