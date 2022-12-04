@@ -1,9 +1,9 @@
 App/mobile/.dart_tool/
 App/mobile/macos/
-.flutter-plugins
-.flutter-plugins-dependencies
-pubspec.lock
-pubspec.yaml
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*pubspec.lock
+*pubspec.yaml
 
 # ignore environment 
 env/
