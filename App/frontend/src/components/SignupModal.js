@@ -40,9 +40,6 @@ function Signup(props) {
         return response.json();
       })
       .then((response) => {
-        console.log(JSON.stringify(response));
-        console.log(response);
-
         response.username
           ? setUsernameError(response.username[0])
           : setUsernameError(null);
