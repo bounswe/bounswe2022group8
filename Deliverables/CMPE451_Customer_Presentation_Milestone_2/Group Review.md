@@ -110,7 +110,8 @@
  |  Implementation | Upon requests, updated the profile related GET APIs to return number of followers/followings. |  30 minutes  | [PR](https://github.com/bounswe/bounswe2022group8/pull/291)|
   |  Documentation | Updated our class diagram. |  30 minutes | [#303](https://github.com/bounswe/bounswe2022group8/issues/303)|
   |  Documentation | Created necessary folders for the Milestone II. <br> Separated the markdown file into sections and filled up the `API` section. |  1 hour | [#295](https://github.com/bounswe/bounswe2022group8/issues/295)|
-    
+  |  Implementation | Updated existing APIs and serializers to return requested information to frontend and mobile. | 30 minutes | [#321](https://github.com/bounswe/bounswe2022group8/issues/321), [PR](https://github.com/bounswe/bounswe2022group8/pull/320)|
+   |  Review | Reviewed a PR related to like/unlike APIs. |  hours? |  [PR](https://github.com/bounswe/bounswe2022group8/pull/315)|
   > Implementation tasks involve documentation with Swagger, testing the functionality on both local and Dockerized version of the application.
 </details>
 
@@ -179,6 +180,7 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 Already listed all of my responsibilities and contributions above. Overall, I worked so hard to pushed the team forward, handled some of the challenging tasks in our path and guided people throughout the procedure. Critically reviewed pull requests of other team members. I showed uttermost respect to the mutual agreements we did in the meetings and therefore did my best to meet all the deadlines specified for our tasks. Unfortunatelly I couldn't see the same respect from others though.
     
 **Code Related Issues**
+* [BE-29: [API] Follow&Profile and Comment Enhancement](https://github.com/bounswe/bounswe2022group8/issues/321)
 * [BE-24: Generate Class Diagram from Django](https://github.com/bounswe/bounswe2022group8/issues/293)
 * [BE-22: [API] Implementation of Follow Action APIs](https://github.com/bounswe/bounswe2022group8/issues/272)
 * [BE-21: Add Image Storage Path and Production Settings](https://github.com/bounswe/bounswe2022group8/issues/269)
@@ -208,6 +210,7 @@ Already listed all of my responsibilities and contributions above. Overall, I wo
 * [feature/BE-22 #1](https://github.com/bounswe/bounswe2022group8/pull/274)
 * [feature/BE-22 #2](https://github.com/bounswe/bounswe2022group8/pull/291)
 * [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294)
+* [feature/BE-29](https://github.com/bounswe/bounswe2022group8/pull/320)
 * [hotfix/BE-11](https://github.com/bounswe/bounswe2022group8/pull/301)
 
 **Unit Tests**
@@ -230,6 +233,8 @@ PR reviews:<br>
 * [feature/BE-19](https://github.com/bounswe/bounswe2022group8/pull/259)
 * [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215) 
 * [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271) (We worked as pair on this)
+* [feature/FE-20](https://github.com/bounswe/bounswe2022group8/pull/322)
+* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
 
 </details>
