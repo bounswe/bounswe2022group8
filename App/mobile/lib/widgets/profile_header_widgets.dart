@@ -135,8 +135,8 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                 ],
               ),
               Padding(padding: const EdgeInsets.only(left: 20)),
-              Flex(
-                direction: Axis.vertical,
+              Column( //Flex
+                //direction: Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
@@ -215,7 +215,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
               )
             ],
           ),
-          Padding(padding: const EdgeInsets.only(top: 10)),
+          const Padding(padding: const EdgeInsets.only(top: 10)),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

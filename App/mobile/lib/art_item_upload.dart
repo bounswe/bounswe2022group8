@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/profile_page.dart';
+import 'package:artopia/widgets/art_item_widget.dart';
 
 class UploadArtItem extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _UploadArtItem extends State<UploadArtItem> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text('Please choose media to select'),
+          title: Text('Please choose source to upload'),
           content: Container(
             height: MediaQuery.of(context).size.height / 6,
             child: Column(
@@ -54,7 +55,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.image),
+                      Icon(Icons.photo_library_outlined),
                       SizedBox(
                         width: 10,
                       ),
@@ -130,11 +131,16 @@ class _UploadArtItem extends State<UploadArtItem> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.
           children: [
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.height / 3.5,
+              child: ElevatedButton(
+              style:
+              ElevatedButton.styleFrom(
                 backgroundColor: colorPalette.blackShadows,
                 foregroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
@@ -142,14 +148,23 @@ class _UploadArtItem extends State<UploadArtItem> {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context);
-                getImage(ImageSource.gallery);
+                myAlert();
+                //Navigator.pop(context);
+                //getImage(ImageSource.gallery);
               },
-              child: textUtils.buildText(
-                  "Choose", 20, Colors.black, FontWeight.w500
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Icon(Icons.photo_size_select_actual_outlined),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  textUtils.buildText(
+                      "Choose", 20, Colors.black, FontWeight.w500),
+                ],
               ),
             ),
-
+            ),
 
             SizedBox(
               height: 10,
@@ -175,7 +190,13 @@ class _UploadArtItem extends State<UploadArtItem> {
             SizedBox(
               height: 10,
             ),
-            ElevatedButton(
+            SizedBox(
+              child:
+                MyCustomForm(),
+            ),
+            SizedBox(
+              child:
+              ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorPalette.blackShadows,
                 foregroundColor: Colors.black,
@@ -183,12 +204,12 @@ class _UploadArtItem extends State<UploadArtItem> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              onPressed: () {
-                //myAlert();
-              },
+                onPressed: () {
+                },
               child: textUtils.buildText(
                   "Upload", 20, Colors.black, FontWeight.w500
               ),
+            ),
             ),
           ],
         ),
