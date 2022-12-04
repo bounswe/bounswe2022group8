@@ -108,8 +108,8 @@ def unlike_artitem(request, id):
 
 @swagger_auto_schema(
     method='GET',
-    operation_description="LikeArtItem API. This endpoint with GET request the information of whether the user has liked the art item or not.",
-    operation_summary="Returns whether the user has liked the art item or not.",
+    operation_description="LikeArtItem API. This endpoint with GET request the information of whether the currently logged-in user has liked the art item or not.",
+    operation_summary="Returns whether the currently logged-in has liked the art item or not.",
     tags=['like'],
     responses={
         status.HTTP_200_OK: openapi.Response(
@@ -183,7 +183,7 @@ def get_liked_artitems_of_user(request, id):
 @swagger_auto_schema(
     method='GET',
     operation_description="LikeArtItem API. This endpoint with GET request fetches the users who liked the art item with the given ID.",
-    operation_summary="Get the users who likes the art item.",
+    operation_summary="Get the users who likes the given art item.",
     tags=['like'],
     responses={
         status.HTTP_200_OK: openapi.Response(
