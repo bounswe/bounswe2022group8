@@ -5,6 +5,7 @@ from ..serializers.profile import UserProfileSerializer, UserUpdateProfileSerial
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from knox.auth import TokenAuthentication, AuthToken
+from django.contrib.auth.models import AnonymousUser
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from drf_yasg import openapi
@@ -16,7 +17,7 @@ from ..models.user import Follow
 
 @ swagger_auto_schema(
     method='get',
-    operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID.",
+    operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID. isFollowed field returns True if currently logged-in user follows the given user. Defaults to False if user is a guest user.",
     operation_summary="Get profile information of a user by unique ID.",
     tags=['profile'],
     responses={
@@ -34,7 +35,8 @@ from ..models.user import Follow
                     "profile_path": "avatar/default.png",
                     "is_level2": False,
                     "followers": 3,
-                    "followings": 2
+                    "followings": 2,
+                    "isFollowed": True
                 }
             }
         ),
@@ -54,9 +56,14 @@ def profile_api(request, id):
     if (request.method == "GET"):
         try:
             user = User.objects.get(pk=id)
-
-            serializer = UserProfileSerializer(user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            data = UserProfileSerializer(user).data.copy()
+            
+            if(isinstance(request.user, AnonymousUser)):
+                data["isFollowed"] = False
+            else:
+                data["isFollowed"] = True if Follow.objects.get(from_user=request.user, to_user=user) is not None else False
+            
+            return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"Not Found": "Any user with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
     else:
@@ -84,7 +91,6 @@ def profile_api(request, id):
                     "is_level2": False,
                     "followers": 3,
                     "followings": 2
-
                 }
             }
         ),

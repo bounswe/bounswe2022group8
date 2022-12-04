@@ -19,8 +19,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'name', 'surname', 'about', 'location', 'profile_path', 'is_level2', 'followers', 'followings']
 
-
-
 class UserUpdateProfileSerializer(serializers.ModelSerializer):
     """Update serializer for our user profile"""
 
