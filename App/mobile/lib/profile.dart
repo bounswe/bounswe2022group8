@@ -1,3 +1,4 @@
+import 'package:artopia/getimage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,7 +76,8 @@ Future<Profile> getMyProfile() async {
   Map<String, dynamic> body = jsonDecode(response.body);
   
   if (response.statusCode == 200) {
-    return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: body["name"], username: registered_username) ;
+    String profileUrl = await getImage(body['profile_path']) ;
+    return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
   }
 return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
   
