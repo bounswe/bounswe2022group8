@@ -61,7 +61,11 @@ def profile_api(request, id):
             if(isinstance(request.user, AnonymousUser)):
                 data["isFollowed"] = False
             else:
-                data["isFollowed"] = True if Follow.objects.get(from_user=request.user, to_user=user) is not None else False
+                try:
+                    Follow.objects.get(from_user=request.user, to_user=user)
+                    data["isFollowed"] = True
+                except:
+                    data["isFollowed"] = False
             
             return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
