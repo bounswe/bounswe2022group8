@@ -1,15 +1,17 @@
-// import 'package:profile/profile.dart';
-import 'package:artopia/art_items_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
-import 'package:artopia/routes.dart';
 import 'profile.dart';
 import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
-import 'templates.dart';
-import 'register.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/settings_page.dart';
+import 'package:artopia/art_items_tab.dart';
+import 'package:artopia/exhibitions_tab.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:core';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ColorPalette colorPalette = ColorPalette();
+  final textUtils = TextUtils();
   Future<Profile> myProfile = getMyProfile() ;  
   @override
   Widget build(BuildContext context) {
@@ -36,35 +39,29 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           child: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: Colors.black,
-              tooltip: 'Back to home page',
-              onPressed: () => {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                )
-              },
-            ),
-            backgroundColor: colorPalette.graniteGray,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            backgroundColor: colorPalette.darkPurple,
+            title: textUtils.buildText(
+                "artopia", 25, Colors.white70, FontWeight.w500),
             actions: [
               IconButton(
                 icon: Icon(Icons.settings),
-                color: Colors.black,
+                color: colorPalette.russianGreen,
                 tooltip: 'Settings',
                 onPressed: () => {
-                  Navigator.pop(
-                    context,
-                    //MaterialPageRoute(builder: (context) => //SettingsPage()),
-                  )
-                },
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+                ),
+              },
               ),
             ],
           ),
         ),
       ),
-      body: DefaultTabController(
+      body:
+      DefaultTabController(
         length: 2,
         child:FutureBuilder<Profile>(
           future: myProfile, // a previously-obtained Future<String> or null
@@ -73,7 +70,6 @@ class _ProfilePageState extends State<ProfilePage> {
             final Profile me = snapshot.requireData ;
           return NestedScrollView(
           headerSliverBuilder: (context, _) {
-
             return [
               SliverList(
                 delegate: SliverChildListDelegate(
@@ -98,29 +94,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     Container(
                       alignment: Alignment.center,
                       height: 40,
-                      child: Text(
-                        "Art Items",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontSize: 15.0,
-                          //fontWeight: FontWeight.bold,
-                        ),
+                      child: textUtils.buildText(
+                          "Art Items", 15, colorPalette.darkPurple, FontWeight.w500
                       ),
                     ),
                     Container(
                       alignment: Alignment.center,
                       height: 40,
-                      child: Text(
-                        "Exibitions",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontSize: 15.0,
-                          //fontWeight: FontWeight.bold,
-                        ),
+                      child: textUtils.buildText(
+                          "Exibitions", 15, colorPalette.darkPurple, FontWeight.w500
                       ),
                     ),
                   ],
@@ -129,39 +111,34 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    Gallery(),
-                    Gallery(),
-                    //ArtItems(),
-                    //Exibitions(),
+                    ArtItems(),
+                    Exhibitions()
                   ],
                 ),
               ),
             ],
           ),
         );
-  
-  
+
+
   }, 
   ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: colorPalette.darkPurple,
+        unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
+          print(value);
           if (value == 0) {
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          if (value == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
             );
           }
-          if (value == 2) {
-            Route route =
-            MaterialPageRoute(builder: (context) => LandingPage());
-            Navigator.pushReplacement(context, route);
-          }
+          else if (value == 2) {
+              Route route =
+              MaterialPageRoute(builder: (context) => LandingPage());
+              Navigator.pushReplacement(context, route);
           }
         },
         items: const [

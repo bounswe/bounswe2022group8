@@ -1,0 +1,14 @@
+.artitem-tag {
+  color: #fafafa;
+  background-color: transparent;
+  border: 1px solid #bcb1c1;
+  margin-right: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  border-radius: 4px;
+}
+
+.artitem-tag:hover {
+  color: #ffc9ff;
+  border: 1px solid #ffc9ff;
+}
