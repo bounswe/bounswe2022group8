@@ -8,3 +8,17 @@ const String GET_PROFILE_ENDPOINT = "http://$HOST/api/v1/users/profile/me/" ;
 String token = "";
 String registered_username = "";
 String registered_password = "" ;
+String change_email = "";
+
+
+
+
+
+
+
+
+
+
+
+const String OTP_ENDPOINT ="http://$HOST/api/v1/auth/request-reset/";
+const String PASSWORD_RESET_ENDPOINT ="http://$HOST/api/v1/auth/password-reset/";

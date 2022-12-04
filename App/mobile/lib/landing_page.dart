@@ -49,6 +49,8 @@ class _LandingPageState extends State<LandingPage> {
                       LoginPageRoute(),
                       const SizedBox(height: 30),
                       SignUpScreenRoute(),
+                      const SizedBox(height: 30),
+                      ForgotPasswordScreenRoute(),
                     ],
                   ),
                 ),

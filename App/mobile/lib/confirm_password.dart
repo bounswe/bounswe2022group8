@@ -1,3 +1,4 @@
+import 'package:artopia/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
@@ -6,7 +7,8 @@ import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'templates.dart';
 import 'login.dart';
-
+import 'variables.dart' ;
+import 'password_change.dart';
 class ConfirmPasswordPage extends StatefulWidget {
   @override
   State<ConfirmPasswordPage> createState() => ConfirmPasswordState();
@@ -88,12 +90,25 @@ class ConfirmPasswordState extends State<ConfirmPasswordPage> {
                             onPressed: () {
                         
                              
+                             String otp =
+                                  SecureCodeInputObject.usernameController.text;
+                                  String password = NewPasswordInputObject.passwordController.text ;
+                                  String confirmPassword = ConfirmPasswordInputObject.passwordController.text ;
+                                if(password == confirmPassword){
+                                resetPassword(otp,change_email,password).then((value) {
+                                if (value == "OK") {
                                   Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
+                                      builder: (context) =>  LandingPage());
                                   Navigator.pushReplacement(context, route);
-                             
-                              ;
-                            },
+                                } else {
+                                  _setErrorMessage(error: value);
+                                }
+
+                            });}
+                            else {
+                            _setErrorMessage(error: "Passwords do not match");
+
+                            }},
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(12.5),
                               minimumSize: const Size(400, 50),

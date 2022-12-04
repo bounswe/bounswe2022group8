@@ -1,11 +1,17 @@
+import 'package:artopia/password_change.dart';
+import 'package:artopia/templates.dart';
+import 'package:artopia/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/routes.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/utils/colorPalette.dart';
-import 'templates.dart';
-import 'login.dart';
+import 'package:artopia/password_change.dart';
+import 'package:artopia/confirm_password.dart';
+
+//import 'templates.dart';
+//import 'login.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -16,8 +22,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
   String _error = "Hello There!";
   final TextUtils textUtils = TextUtils();
   final ColorPalette colorPalette = ColorPalette();
-  final UsernameInputObject = UsernameInput();
-  final PasswordInputObject = PasswordInput(name: "Password");
+  final EmailInputObject = EmailInput();
   Future<String>? _loginResponseMessage;
 
   void _setErrorMessage({String error = ""}) {
@@ -72,7 +77,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                       const SizedBox(height: 5),
                       textUtils.buildText(_error, 16,
                           Colors.white, FontWeight.bold),
-                      UsernameInputObject,
+                      EmailInputObject,
                       const SizedBox(height: 10),
                       Container(
                         alignment: Alignment.center,
@@ -80,14 +85,21 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
-                        
-                             
+                        String email =
+                                  EmailInputObject.emailController.text;
+                              sendOTP(email).then((value) {
+                                if (value == "OK") {
+                                  change_email = email ;
                                   Route route = MaterialPageRoute(
-                                      builder: (context) => const HomePage());
+                                      builder: (context) =>  ConfirmPasswordPage());
                                   Navigator.pushReplacement(context, route);
+                                } else {
+                                  _setErrorMessage(error: value);
+                                }
+
                              
                               ;
-                            },
+                            },); },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.all(12.5),
                               minimumSize: const Size(400, 50),
