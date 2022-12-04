@@ -15,9 +15,12 @@ function ArtItem(props) {
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
-  const [artitemOwner, setArtitemOwner] = useState("");
+  const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
+  const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemComments, setArtitemComments] = useState([]);
+  const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
+  const [commentPhotos, setCommentPhotos] = useState([]);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -40,7 +43,8 @@ function ArtItem(props) {
       .then((response) => {
         // console.log(response);
         setArtitemDescription(response.description);
-        setArtitemOwner(response.owner.username);
+        setArtitemOwnerUsername(response.owner.username);
+        setArtitemOwnerID(response.owner.id);
         setArtitemTitle(response.title);
 
         var params = {
@@ -48,7 +52,6 @@ function ArtItem(props) {
           Key: response.artitem_path,
         };
 
-        // signed profile image url --> for display in frontend
         setArtitemSrc(s3.getSignedUrl("getObject", params));
       })
       .catch((error) => console.error("Error:", error));
@@ -66,9 +69,47 @@ function ArtItem(props) {
       .then((response) => {
         // console.log(response);
         setArtitemComments(response.data);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var comment_photos = [];
+
+        for (let i = 0; i < response.data.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response.data[i].commented_by.profile_path,
+          };
+
+          var profile_url = s3.getSignedUrl("getObject", params);
+          comment_photos.push(profile_url);
+        }
+
+        setCommentPhotos(comment_photos);
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
+
+  // UNNECESSARY API CALL JUST TO GET THE PROFILE PATH OF THE ART ITEM OWNER
+  useEffect(() => {
+    if (artitemOwnerID) {
+      fetch(`${host}/api/v1/users/profile/${artitemOwnerID}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          var params = {
+            Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+            Key: response.profile_path,
+          };
+
+          setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params));
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [host, artitemOwnerID]);
 
   return (
     <Layout>
@@ -78,14 +119,17 @@ function ArtItem(props) {
             <img id="image" src={artitemSrc} alt={artitemDescription} />
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
-              <Tag tagname="casualTag"></Tag>
-              <Tag tagname="fauvism"></Tag>
+              <Tag tagname="human"></Tag>
+              <Tag tagname="architecture"></Tag>
+              <Tag tagname="black"></Tag>
+              <Tag tagname="pink"></Tag>
+              <Tag tagname="night"></Tag>
             </div>
           </div>
           <div id="info-container">
             <div id="owner">
-              <img id="owner-profile-photo" src={defaultUserImage} alt="" />
-              <div id="owner-username"> {artitemOwner} </div>
+              <img id="owner-profile-photo" src={artitemOwnerPhoto} alt="" />
+              <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
             <div id="title-and-description">
               <div id="title">{artitemTitle}</div>
@@ -93,12 +137,12 @@ function ArtItem(props) {
             </div>
             <br></br>
             <div id="comments">
-              {artitemComments.map((val, key) => {
+              {artitemComments.map((val, index) => {
                 return (
                   <div key={val.id} className="comment">
                     <img
                       className="comment-owner-profile-photo"
-                      src={defaultUserImage}
+                      src={commentPhotos[index]}
                       alt=""
                     />
                     <div>
