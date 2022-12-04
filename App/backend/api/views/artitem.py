@@ -55,6 +55,7 @@ from django.core.files.base import ContentFile
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -102,6 +103,7 @@ def get_artitems(request):
                         },
                         "type": "sketch",
                         "tags": [1],
+                        "likes": 0,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -224,6 +226,7 @@ def delete_artitem(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
 
                     }
@@ -273,6 +276,7 @@ def artitems_by_id(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -323,6 +327,7 @@ def artitems_by_userid(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -374,6 +379,7 @@ def artitems_by_username(request, username):
                         "description": "Joel Miller from TLOU universe.",
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
                         "created_at": "2022-11-18T13:51:56.342042Z"
                     }

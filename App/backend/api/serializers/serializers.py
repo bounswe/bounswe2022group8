@@ -20,9 +20,11 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class ArtItemSerializer(serializers.ModelSerializer):
+    likes = serializers.ReadOnlyField(source='get_numberof_likes')
+
     class Meta:
         model = ArtItem
-        fields = ['id', 'owner', 'title', 'description', 'type', 'tags', 'artitem_path', 'created_at']
+        fields = ['id', 'owner', 'title', 'description', 'type', 'tags', 'artitem_path', 'likes', 'created_at']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)

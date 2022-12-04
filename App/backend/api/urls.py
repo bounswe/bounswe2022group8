@@ -80,7 +80,7 @@ urlpatterns = [
     path('users/<int:id>/liked-artitems/', get_liked_artitems_of_user, name="get_liked_artitems_of_user"),
     path('artitems/<int:id>/likers/', get_users_who_liked_artitem, name="get_users_who_liked_artitem"),
     path('users/comments/<int:id>/like/', like_comment, name="like_comment"),
-    path('users/comments/<int:id>unlike/', unlike_comment, name="unlike_comment"),
+    path('users/comments/<int:id>/unlike/', unlike_comment, name="unlike_comment"),
     path('users/comments/<int:id>/isLiked/', isLiked_comment, name="isLiked_comment"),
     path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment")
 
