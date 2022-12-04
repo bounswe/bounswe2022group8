@@ -16,6 +16,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
 
+
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -54,11 +55,14 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                             width: 130,
                             height: 130,
                             child: CircleAvatar(
-                              foregroundImage: Image.asset(
-                                  "assets/images/blank_profile.jpeg")
+       
+                              foregroundImage: Image.network(
+                                      me.imageUrl)
+
                                   .image,
                               radius: 10,
-                            ),
+
+                                ),
                           ),
                         ),
                       ),
