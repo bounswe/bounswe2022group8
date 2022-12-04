@@ -145,8 +145,8 @@ function Profile(props) {
     setUploadInfoError(false);
   }
 
-  function goToArtItem(id, artitem_path, description) {
-    props.onArtItemClick(artitem_path, description);
+  function goToArtItem(id, artitem_path, description, owner, title) {
+    props.onArtItemClick(artitem_path, description, owner, title);
     navigate(`/artitems/${id}`);
     scrollToTop();
   }
@@ -248,7 +248,13 @@ function Profile(props) {
                       className="gallery-image"
                       alt={val.description}
                       onClick={() =>
-                        goToArtItem(val.id, val.artitem_path, val.description)
+                        goToArtItem(
+                          val.id,
+                          val.artitem_path,
+                          val.description,
+                          val.owner,
+                          val.title
+                        )
                       }
                     />
                   </div>

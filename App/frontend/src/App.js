@@ -20,11 +20,15 @@ import Settings from "./pages/Settings";
 
 function App() {
   const [artitemSrc, setArtitemSrc] = useState("");
-  const [artitemAlt, setArtitemAlt] = useState("");
+  const [artitemDescription, setArtitemDescription] = useState("");
+  const [artitemOwner, setArtitemOwner] = useState("");
+  const [artitemTitle, setArtitemTitle] = useState("");
 
-  function handleArtItemClick(src, alt) {
+  function handleArtItemClick(src, description, owner, title) {
     setArtitemSrc(src);
-    setArtitemAlt(alt);
+    setArtitemDescription(description);
+    setArtitemOwner(owner);
+    setArtitemTitle(title);
   }
 
   return (
@@ -69,13 +73,24 @@ function App() {
           path="/my-profile"
           element={
             <AuthenticatedRoute>
-              <Profile onArtItemClick={(src, alt) => handleArtItemClick(src, alt)} />
+              <Profile
+                onArtItemClick={(src, description, owner, title) =>
+                  handleArtItemClick(src, description, owner, title)
+                }
+              />
             </AuthenticatedRoute>
           }
         />
         <Route
           path="/artitems/:artitem_id"
-          element={<ArtItem src={artitemSrc} alt={artitemAlt} />}
+          element={
+            <ArtItem
+              src={artitemSrc}
+              description={artitemDescription}
+              owner={artitemOwner}
+              title={artitemTitle}
+            />
+          }
         />
         <Route path="/settings" element={<Settings />} />
       </Routes>

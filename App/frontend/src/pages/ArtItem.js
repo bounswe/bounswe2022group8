@@ -11,7 +11,7 @@ function ArtItem(props) {
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
-            <img id="image" src={props.src} alt={props.alt} />
+            <img id="image" src={props.src} alt={props.description} />
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
               <Tag tagname="casualTag"></Tag>
@@ -21,14 +21,11 @@ function ArtItem(props) {
           <div id="info-container">
             <div id="owner">
               <img id="owner-profile-photo" src={defaultUserImage} alt="" />
-              <div id="owner-username"> Kostanya</div>
+              <div id="owner-username"> {props.owner.username} </div>
             </div>
             <div id="title-and-description">
-              <div id="title">Portrait of Joel Miller</div>
-              <div id="description">
-                If people knew how hard I worked to get my mastery, it wouldn’t
-                seem so wonderful at all. - Michelangelo.
-              </div>
+              <div id="title">{props.title}</div>
+              <div id="description">{props.description}</div>
             </div>
             <br></br>
             <div id="comments">
