@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
+import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/login_page.dart';
 // import 'package:artopia/profile_page.dart';
 
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final ColorPalette colorPalette = ColorPalette();
     return MaterialApp(
+      theme: Theme.of(context).copyWith(textSelectionTheme: TextSelectionThemeData(selectionHandleColor: colorPalette.darkPurple)),
       debugShowCheckedModeBanner: false,
       home: LandingPage(),
       // home: ProfilePage(),

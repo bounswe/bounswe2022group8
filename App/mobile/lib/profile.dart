@@ -1,15 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/routes.dart';
-import 'package:artopia/profile.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/templates.dart';
-import 'package:artopia/register.dart';
 import 'dart:core';
-import 'package:avatar_glow/avatar_glow.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
