@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
 
-import defaultUserImage from "../images/defaultUserImage.png";
 import "./styles/ArtItem.css";
 
 function ArtItem(props) {
   const { artitem_id } = useParams();
 
   var host = HOST;
+  const { token } = useAuth();
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -22,6 +23,15 @@ function ArtItem(props) {
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
 
+  // COMMENT BODY TO BE POSTED
+  const [newComment, setNewComment] = useState("");
+
+  // JUST TO CAUSE A STATE CHANGE AFTER A COMMENT POSTED
+  const [updateComments, setUpdateComments] = useState(true);
+
+  // DUMMY DIV IN ORDER TO DETECT THE END OF THE MESSAGES
+  const bottomRef = useRef(null);
+
   const AWS = require("aws-sdk");
   dotenv.config();
   AWS.config.update({
@@ -31,6 +41,7 @@ function ArtItem(props) {
 
   const s3 = new AWS.S3();
 
+  // GET THE ART ITEM'S PROPERTIES
   useEffect(() => {
     fetch(`${host}/api/v1/artitems/${artitem_id}`, {
       method: "GET",
@@ -57,6 +68,7 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }, [host]);
 
+  // GET THE ART ITEM'S COMMENTS
   useEffect(() => {
     fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
       method: "GET",
@@ -67,7 +79,7 @@ function ArtItem(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
+        // console.log(response)
         setArtitemComments(response.data);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
@@ -86,7 +98,7 @@ function ArtItem(props) {
         setCommentPhotos(comment_photos);
       })
       .catch((error) => console.error("Error:", error));
-  }, [host]);
+  }, [host, updateComments]);
 
   // UNNECESSARY API CALL JUST TO GET THE PROFILE PATH OF THE ART ITEM OWNER
   useEffect(() => {
@@ -110,6 +122,35 @@ function ArtItem(props) {
         .catch((error) => console.error("Error:", error));
     }
   }, [host, artitemOwnerID]);
+
+  function handleSendComment(e) {
+    e.preventDefault();
+    if (newComment !== "") {
+      fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
+        method: "POST",
+        body: JSON.stringify({
+          body: newComment,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          setUpdateComments(!updateComments);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+
+    // clear the input box after the message is sent
+    setNewComment("");
+  }
+
+  useEffect(() => {
+    // scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [artitemComments]);
 
   return (
     <Layout>
@@ -137,6 +178,17 @@ function ArtItem(props) {
             </div>
             <br></br>
             <div id="comments">
+              {artitemComments.length === 0 && (
+                <div
+                  style={{
+                    color: "#bcb1c1",
+                    fontSize: "14px",
+                    textAlign: "center",
+                  }}
+                >
+                  No comments yet
+                </div>
+              )}
               {artitemComments.map((val, index) => {
                 return (
                   <div key={val.id} className="comment">
@@ -155,6 +207,7 @@ function ArtItem(props) {
                   </div>
                 );
               })}
+              <div ref={bottomRef} />
             </div>
             <div id="stats">
               <span id="likes">0 likes</span>
@@ -168,10 +221,18 @@ function ArtItem(props) {
                   placeholder="Add comment..."
                   name="comment"
                   rows="3"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
                 ></textarea>
               </div>
               <div className="btn-comment-container">
-                <button className="btn btn-comment">Send</button>
+                <button
+                  className="btn btn-comment"
+                  type="submit"
+                  onClick={handleSendComment}
+                >
+                  Send
+                </button>
               </div>
             </div>
           </div>
