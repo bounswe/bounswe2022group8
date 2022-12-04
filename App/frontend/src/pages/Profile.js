@@ -146,9 +146,21 @@ function Profile(props) {
   }
 
   function goToArtItem(id, artitem_path, description, owner, title) {
-    props.onArtItemClick(artitem_path, description, owner, title);
-    navigate(`/artitems/${id}`);
-    scrollToTop();
+    fetch(`${host}/api/v1/artitems/${id}/comments/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response.data);
+        props.onArtItemClick(artitem_path, description, owner, title, response.data);
+        navigate(`/artitems/${id}`);
+        scrollToTop();
+      })
+      .catch((error) => console.error("Error:", error));
   }
 
   return (

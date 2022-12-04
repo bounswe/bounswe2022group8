@@ -21,14 +21,16 @@ import Settings from "./pages/Settings";
 function App() {
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
-  const [artitemOwner, setArtitemOwner] = useState("");
+  const [artitemOwner, setArtitemOwner] = useState({});
   const [artitemTitle, setArtitemTitle] = useState("");
+  const [artitemComments, setArtitemComments] = useState([]);
 
-  function handleArtItemClick(src, description, owner, title) {
+  function handleArtItemClick(src, description, owner, title, comments) {
     setArtitemSrc(src);
     setArtitemDescription(description);
     setArtitemOwner(owner);
     setArtitemTitle(title);
+    setArtitemComments(comments);
   }
 
   return (
@@ -74,8 +76,8 @@ function App() {
           element={
             <AuthenticatedRoute>
               <Profile
-                onArtItemClick={(src, description, owner, title) =>
-                  handleArtItemClick(src, description, owner, title)
+                onArtItemClick={(src, description, owner, title, comments) =>
+                  handleArtItemClick(src, description, owner, title, comments)
                 }
               />
             </AuthenticatedRoute>
@@ -89,6 +91,7 @@ function App() {
               description={artitemDescription}
               owner={artitemOwner}
               title={artitemTitle}
+              comments={artitemComments}
             />
           }
         />

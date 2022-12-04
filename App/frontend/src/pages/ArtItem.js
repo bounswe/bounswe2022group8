@@ -29,140 +29,26 @@ function ArtItem(props) {
             </div>
             <br></br>
             <div id="comments">
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s aşsdlkfj asd aslkdjf laskdjf asdfk
-                    jlaskdjf asldfj lakjsd{" "}
+              {props.comments.map((val, key) => {
+                return (
+                  <div key={val.id} className="comment">
+                    <img
+                      className="comment-owner-profile-photo"
+                      src={defaultUserImage}
+                      alt=""
+                    />
+                    <div>
+                      <div className="comment-owner"> {val.commented_by} </div>
+                      <div className="comment-text">{val.body}</div>
+                      <div className="comment-info"> {val.created_at} </div>
+                    </div>
                   </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s asdf asdf df asdfasdf kldfjkld fkjdlfk
-                    jslkdafjl a{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
-              <div className="comment">
-                <img
-                  className="comment-owner-profile-photo"
-                  src={defaultUserImage}
-                  alt=""
-                />
-                <div>
-                  <div className="comment-owner"> comment owner </div>
-                  <div className="comment-text">
-                    {" "}
-                    asdf asdfas dfaşlskdf asdfjk asdkflaks jflaskdjfl kasdjf
-                    lasdkfj asdfkasdjf s{" "}
-                  </div>
-                  <div className="comment-info"> comment info </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
             <div id="stats">
               <span id="likes">0 likes</span>
-              <span>8 comments</span>
+              <span>{props.comments.length} comments</span>
             </div>
             <div className="add-comment-container">
               <div>
