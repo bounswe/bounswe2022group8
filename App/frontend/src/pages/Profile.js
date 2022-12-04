@@ -145,22 +145,9 @@ function Profile(props) {
     setUploadInfoError(false);
   }
 
-  function goToArtItem(id, artitem_path, description, owner, title) {
-    fetch(`${host}/api/v1/artitems/${id}/comments/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response.data);
-        props.onArtItemClick(artitem_path, description, owner, title, response.data);
-        navigate(`/artitems/${id}`);
-        scrollToTop();
-      })
-      .catch((error) => console.error("Error:", error));
+  function goToArtItem(id) {
+    navigate(`/artitems/${id}`);
+    scrollToTop();
   }
 
   return (
@@ -259,15 +246,7 @@ function Profile(props) {
                       src={val.artitem_path}
                       className="gallery-image"
                       alt={val.description}
-                      onClick={() =>
-                        goToArtItem(
-                          val.id,
-                          val.artitem_path,
-                          val.description,
-                          val.owner,
-                          val.title
-                        )
-                      }
+                      onClick={() => goToArtItem(val.id)}
                     />
                   </div>
                 );
