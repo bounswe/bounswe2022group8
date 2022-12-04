@@ -41,6 +41,12 @@ from django.db import IntegrityError
                 "application/json": {"Not Found": "Any art item with the given ID doesn't exist."},
             }
         ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Art item with the given id already is liked by the current user.",
+            examples={
+                "application/json": {"Invalid request": "Current user already liked the art item."},
+            }
+        )
     }
 )
 @api_view(['POST'])
@@ -50,9 +56,12 @@ def like_artitem(request, id):
     current_user = request.user
     try:
         artitem = ArtItem.objects.get(pk=id)
-        like = LikeArtItem.objects.create(user=current_user, artitem=artitem)
-        serializer = LikeArtItemSerializer(like)
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            like = LikeArtItem.objects.create(user=current_user, artitem=artitem)
+            serializer = LikeArtItemSerializer(like)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        except IntegrityError:
+            return Response({"Invalid request": "Current user already liked the art item."}, status=status.HTTP_400_BAD_REQUEST) 
     except ArtItem.DoesNotExist:
         return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -264,6 +273,12 @@ def get_users_who_liked_artitem(request, id):
                 "application/json": {"Not Found": "Any comment with the given ID doesn't exist."},
             }
         ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Comment with the given id already is liked by the current user.",
+            examples={
+                "application/json": {"Invalid request": "Current user already liked the comment."},
+            }
+        ),
     }
 )
 @api_view(['POST'])
@@ -273,9 +288,12 @@ def like_comment(request, id):
     current_user = request.user
     try:
         comment = Comment.objects.get(pk=id)
-        like = LikeComment.objects.create(user=current_user, comment=comment)
-        serializer = LikeCommentSerializer(like)
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            like = LikeComment.objects.create(user=current_user, comment=comment)
+            serializer = LikeCommentSerializer(like)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        except IntegrityError:
+            return Response({"Invalid request": "Current user already liked the comment."}, status=status.HTTP_400_BAD_REQUEST)
     except Comment.DoesNotExist:
         return Response({"Not Found": "Any comment with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
