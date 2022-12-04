@@ -1,0 +1,17 @@
+.deneme {
+  font-size: 36px;
+  color: white;
+}
+
+.enddeneme {
+  font-size: 36px;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.slide-deneme {
+  display: flex;
+  justify-content: center;
+  margin: 100px 100px;
+}

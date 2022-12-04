@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> {% block title %} Practice App-Group 8 {% endblock %} </title>
+    </head>
+    <body>
+        <span style="float:right">
+            <span><a href="{% url 'index'  %}">Return to homepage</a></span>
+        </span>
+        <div id="content",  name="content">
+            {% block content %}
+            <p> You forgot to utilise the block!</p>
+            {% endblock %}
+        </div>
+    </body>
+</html>

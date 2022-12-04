@@ -1,0 +1,174 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Sign Up Page </title>  
+<style>   
+Body {  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: pink;  
+}  
+button {   
+       background-color: #4CAF50;   
+       width: 100%;  
+        color: orange;   
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;   
+        cursor: pointer;   
+         }   
+ form {   
+        border: 3px solid #f1f1f1;   
+    }   
+ input[type=text], input[type=password] {   
+        width: 100%;   
+        margin: 8px 0;  
+        padding: 12px 20px;   
+        display: inline-block;   
+        border: 2px solid green;   
+        box-sizing: border-box;   
+    }  
+ button:hover {   
+        opacity: 0.7;   
+    }   
+  .cancelbtn {   
+        width: auto;   
+        padding: 10px 18px;  
+        margin: 10px 5px;  
+    }   
+        
+     
+ .container {   
+        padding: 25px;   
+        background-color: rgb(34, 43, 46);  
+    }   
+</style>   
+</head>    
+<body>    
+    <center> <h1> Sign Up </h1> </center>   
+    <form>  
+        <div class="container" id="list-wrapper">   
+            <label>Username : </label>   
+            <input type="text" placeholder="Enter Username" name="username"  id = "0" required>  
+            <label>Name : </label>   
+            <input type="text" placeholder="Enter Name" name="name" id = "1" required> 
+            <label>Surname : </label>   
+            <input type="text" placeholder="Enter Surname" name="surnane" id = "2" required> 
+            <label>Email  : </label>   <br>
+            <input type="email" placeholder="Enter Email" name="mail" id = "3" required> <br>
+            <label>Password : </label>   
+            <input type="password" placeholder="Enter Password" name="password" id = "4" required>  
+            <button type="submit" onclick="search()">Sign Up</button>      
+        </div>   
+    </form>     
+</body>     
+<script type="text/javascript">
+        
+        
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    var activeItem = null
+    var list_snapshot = []
+
+
+    function search(){
+        var host = window.location.origin; 
+
+        console.log("hellooo")
+        var wrapper = document.getElementById('list-wrapper')
+        //wrapper.innerHTML = ''
+        console.log("hellooo123123")
+        var username = document.getElementById('0').value
+       
+        var name = document.getElementById('1').value
+        var surname = document.getElementById('2').value
+        var email = document.getElementById('3').value
+        var password = document.getElementById('4').value
+        console.log("hellooo123123")
+
+        wrapper.innerHTML='';
+
+        console.log(username)
+        console.log(email)
+       // get all the art items
+
+        var headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        console.log("hellooo456457")
+        var input = {}
+
+        
+        input['username'] = username
+        input['name'] = name
+        input['password'] = password
+        input['email'] = email
+        input['surname'] = surname
+
+        console.log(input)
+        body_ = JSON.stringify(input)
+        // Examine the structure of the fetch function in detail.
+        // It's important to add method and headers.
+        fetch(`${host}/api/v1/users/`, {
+            method:'POST',
+            headers:{
+                    'Content-type': 'application/json',
+					'X-CSRFToken':csrftoken
+                },
+				body:body_
+            })
+        .then((resp) => {
+                
+                if (resp.status == 400) {
+                    var item = `
+                    <div  class="box" > 
+        			<p><b>Wrong Credentials or some fields were blank.</b></p>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+                 }       
+                else { 
+                
+                resp.json().then(data => {  // data : returned json
+				console.log('Data:', data)
+				
+
+
+                    var item = `
+                <div id="data-row-" class="box" > 
+                    <form>
+                <p><b>Name:</b>       ${data.name}</p>
+                <p><b>Surname:</b> ${data.surname}</p>
+                <p><b>Username</b> ${data.username}</p>
+                <p><b>Email:</b> ${data.email} </div> </p>
+                <p>Welcome!: </p>
+                    </form>
+                </div>
+                `
+                wrapper.innerHTML += item
+                }
+                )
+                }
+            }).catch(err => {
+        console.log(err)
+            });
+        
+       
+        }
+
+</script>  
+</html>  
+

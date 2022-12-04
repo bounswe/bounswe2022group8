@@ -1,0 +1,23 @@
+version: "3.8"
+   
+services:
+  web:
+    build: .
+    command: python /project/manage.py runserver 0.0.0.0:8000 --settings=backend.settings.production
+    volumes:
+      - .:/project
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - backend/settings/.production.env
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
