@@ -1,12 +1,23 @@
 import React, { useEffect, useState, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
+import SettingsPopUp from "../components/SettingsPopUp";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import * as dotenv from "dotenv";
 
 import "./styles/Settings.css";
+import Backdrop from "../components/Backdrop";
 
 function Settings() {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token } = useAuth();
   var host = HOST;
 
@@ -29,6 +40,10 @@ function Settings() {
     (state, newState) => ({ ...state, ...newState }),
     []
   );
+
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -125,7 +140,10 @@ function Settings() {
         Authorization: `Token ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        setIsPopUpOpen(true);
+        return response.json();
+      })
       .then((response) => {})
       .catch((error) => console.error("Error:", error));
   }
@@ -137,8 +155,23 @@ function Settings() {
     // console.log(value);
   };
 
+  function goToProfile() {
+    setIsPopUpOpen(false);
+    navigate("/my-profile");
+    scrollToTop();
+  }
+
   return (
     <Layout>
+      {isPopUpOpen && (
+        <>
+          <SettingsPopUp
+            onClickProfile={() => goToProfile()}
+            onClickStay={() => setIsPopUpOpen(false)}
+          />
+          <Backdrop onClick={() => setIsPopUpOpen(false)} />
+        </>
+      )}
       <div className="settings-container">
         <header className="settings-header">Settings</header>
 
