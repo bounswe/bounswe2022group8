@@ -2,9 +2,7 @@ import React from "react";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 
-import { HOST } from "../constants/host";
 import defaultUserImage from "../images/defaultUserImage.png";
-import haybales from "../images/bluebuilding.jfif";
 import "./styles/ArtItem.css";
 
 function ArtItem(props) {
@@ -13,7 +11,7 @@ function ArtItem(props) {
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
-            <img id="image" src={haybales} alt="" />
+            <img id="image" src={props.src} alt={props.alt} />
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
               <Tag tagname="casualTag"></Tag>
