@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/profile_page.dart';
-import 'package:artopia/widgets/art_item_widget.dart';
 
 class UploadArtItem extends StatefulWidget {
   @override
@@ -13,6 +12,7 @@ class UploadArtItem extends StatefulWidget {
 }
 
 class _UploadArtItem extends State<UploadArtItem> {
+  final _formKey = GlobalKey<FormState>();
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
 
@@ -64,6 +64,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                     ],
                   ),
                 ),
+                /*
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colorPalette.blackShadows,
@@ -87,6 +88,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                     ],
                   ),
                 ),
+                */
               ],
             ),
           ),
@@ -139,31 +141,30 @@ class _UploadArtItem extends State<UploadArtItem> {
             SizedBox(
               width: MediaQuery.of(context).size.height / 3.5,
               child: ElevatedButton(
-              style:
-              ElevatedButton.styleFrom(
-                backgroundColor: colorPalette.blackShadows,
-                foregroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorPalette.blackShadows,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                onPressed: () {
+                  myAlert();
+                  //Navigator.pop(context);
+                  //getImage(ImageSource.gallery);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.photo_size_select_actual_outlined),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    textUtils.buildText(
+                        "Choose", 20, Colors.black, FontWeight.w500),
+                  ],
                 ),
               ),
-              onPressed: () {
-                myAlert();
-                //Navigator.pop(context);
-                //getImage(ImageSource.gallery);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Icon(Icons.photo_size_select_actual_outlined),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  textUtils.buildText(
-                      "Choose", 20, Colors.black, FontWeight.w500),
-                ],
-              ),
-            ),
             ),
 
             SizedBox(
@@ -191,25 +192,145 @@ class _UploadArtItem extends State<UploadArtItem> {
               height: 10,
             ),
             SizedBox(
-              child:
-                MyCustomForm(),
-            ),
-            SizedBox(
-              child:
-              ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorPalette.blackShadows,
-                foregroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              child: Form(
+                key: _formKey,
+                child: Theme(
+                  data: ThemeData(
+                    textSelectionTheme: TextSelectionThemeData(
+                      cursorColor: colorPalette.blackShadows,
+                      selectionColor: colorPalette.blackShadows,
+                    ),
+                    inputDecorationTheme: InputDecorationTheme(
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: colorPalette.darkPurple),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: colorPalette.darkPurple),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: colorPalette.darkPurple),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: colorPalette.darkPurple),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      helperStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      floatingLabelStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      errorStyle: TextStyle(
+                        color: Colors.red[900],
+                      ),
+                      hintStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      labelStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      prefixStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      suffixStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                      counterStyle: TextStyle(
+                        color: colorPalette.darkPurple,
+                      ),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.title_outlined,
+                              color: colorPalette.darkPurple),
+                          hintText: 'Please write the title of your art item',
+                          labelText: 'Title',
+                          prefixIconColor: Colors.red,
+                          hoverColor: Colors.red,
+                        ),
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.description_rounded,
+                              color: colorPalette.darkPurple),
+                          hintText: 'Please write the description of your art item',
+                          labelText: 'Description',
+                        ),
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.tag,
+                              color: colorPalette.darkPurple),
+                          hintText: 'Please write tags for your art item',
+                          labelText: 'Tags',
+                        ),
+                        validator: (value) {
+                          if (value?.isEmpty ?? true) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-                onPressed: () {
-                },
-              child: textUtils.buildText(
-                  "Upload", 20, Colors.black, FontWeight.w500
-              ),
             ),
+            SizedBox(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorPalette.blackShadows,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                onPressed: () {
+                  // It returns true if the form is valid, otherwise returns false
+                  if (_formKey.currentState!.validate() && (image == null)) {
+                    // If the form is valid, display a Snackbar.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please choose an art item.')),
+                    );
+                  }
+                  if (_formKey.currentState!.validate() && (image != null)) {
+                    // If the form is valid, display a Snackbar.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('The art item is uploaded.')),
+                    );
+                  }
+                },
+                child: textUtils.buildText(
+                    "Upload", 20, Colors.black, FontWeight.w500),
+              ),
             ),
           ],
         ),
