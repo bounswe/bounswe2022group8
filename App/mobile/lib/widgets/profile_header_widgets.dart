@@ -17,7 +17,6 @@ import 'package:artopia/utils/colorPalette.dart';
 
 Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
- 
 
   return Container(
     width: double.infinity,
@@ -57,11 +56,13 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                             width: 130,
                             height: 130,
                             child: CircleAvatar(
+                                
                               foregroundImage: Image.network(
                                       me.imageUrl)
                                   .image,
                               radius: 10,
-                            ),
+
+                                ),
                           ),
                         ),
                       ),
