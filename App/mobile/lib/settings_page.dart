@@ -1,24 +1,13 @@
-import 'package:artopia/art_items_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/landing_page.dart';
 import 'profile.dart';
-import 'package:artopia/routes.dart';
-import 'package:artopia/widgets/profile_header_widgets.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/change_password.dart';
-import 'package:artopia/profile.dart';
-import 'package:flutter/material.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/profile.dart';
+
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -349,7 +338,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             SizedBox(
               child: image != null

@@ -5,9 +5,7 @@ import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/settings_page.dart';
-import 'templates.dart';
 import 'dart:async';
-import 'package:google_fonts/google_fonts.dart';
 
 
 class ChangePassword extends StatefulWidget {
