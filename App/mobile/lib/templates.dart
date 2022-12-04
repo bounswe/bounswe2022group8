@@ -285,3 +285,56 @@ class _ErrorMessageState extends State<ErrorMessage> {
     return Container();
   }
 }
+
+class SecurCodeInput extends StatefulWidget {
+  final usernameController = TextEditingController();
+  SecurCodeInput({Key? key}) : super(key: key);
+
+  @override
+  State<SecurCodeInput> createState() => _SecurCodeInputState();
+}
+
+class _SecurCodeInputState extends State<SecurCodeInput> {
+  final textUtils = TextUtils();
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        textUtils.buildText(
+            "Secure Code",
+            14,
+            Colors.white,
+            FontWeight.bold),
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(120, 175, 180, 255),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          height: 60,
+          child: TextField(
+            maxLength: 6,
+            controller: widget.usernameController,
+            keyboardType: TextInputType.name,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.only(top: 14),
+                prefixIcon: const Icon(
+                  Icons.email,
+                  color: Colors.white,
+                ),
+                hintText: "Enter the temporary code that we sent",
+                hintStyle: GoogleFonts.inter(
+                    fontSize: 14,
+                    color: Colors.white54,
+                ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
