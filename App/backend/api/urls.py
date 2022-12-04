@@ -13,7 +13,7 @@ from .views.artitem import get_artitems, artitems_by_userid, artitems_by_usernam
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
 from .views.user import users_api
-from .views.like import like_artitem, unlike_artitem, isLiked_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment, isLiked_comment
+from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
