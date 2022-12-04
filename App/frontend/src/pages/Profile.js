@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import UploadCard from "../components/UploadCard";
-import { SampleGallery } from "./data/SampleGallery";
 
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
@@ -35,6 +34,17 @@ function Profile(props) {
     followings: 0,
   });
 
+  const [userGallery, setUserGallery] = useState([]);
+
+  const AWS = require("aws-sdk");
+  dotenv.config();
+  AWS.config.update({
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  });
+
+  const s3 = new AWS.S3();
+
   useEffect(() => {
     // dont forget the put the slash at the end
     fetch(`${host}/api/v1/users/profile/me/`, {
@@ -46,15 +56,7 @@ function Profile(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
-        const AWS = require("aws-sdk");
-        dotenv.config();
-        AWS.config.update({
-          accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-        });
-
-        const s3 = new AWS.S3();
+        //console.log(response);
 
         var params = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -78,10 +80,54 @@ function Profile(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, token]);
 
+  // THIS IS BAD.
+  useEffect(() => {
+    if (profileInfo.username) {
+      fetch(`${host}/api/v1/artitems/users/username/${profileInfo.username}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response.length);
+
+          var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+          var gallery = [];
+
+          for (let i = 0; i < response.length; i++) {
+            var params = {
+              Bucket: bucket,
+              Key: response[i].artitem_path,
+            };
+
+            var artitem_url = s3.getSignedUrl("getObject", params);
+
+            gallery.push({
+              id: response[i].id,
+              owner: response[i].owner,
+              title: response[i].title,
+              description: response[i].description,
+              type: response[i].type,
+              tags: response[i].tags,
+              artitem_path: artitem_url,
+              created_at: response[i].created_at,
+            });
+          }
+
+          setUserGallery(gallery);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [host, token, profileInfo.username]);
+
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
   const [upload, setUpload] = useState(false);
   const [postError, setPostError] = useState(false); // essentially for the upload card
+  const [uploadInfoError, setUploadInfoError] = useState(false); // essentially for the upload card
 
   function handleArtItems() {
     setNavTab(true);
@@ -96,6 +142,7 @@ function Profile(props) {
   function handleUpload() {
     setUpload(!upload);
     setPostError(false);
+    setUploadInfoError(false);
   }
 
   function goToArtItem() {
@@ -186,15 +233,17 @@ function Profile(props) {
             marginBottom={upload ? "1rem" : "0rem"}
             postError={postError}
             setPostError={(error) => setPostError(error)}
+            uploadInfoError={uploadInfoError}
+            setUploadInfoError={(error) => setUploadInfoError(error)}
           />
           {navTab ? (
             // what if gallery is empty ?
             <div className="gallery">
-              {SampleGallery.map((val, key) => {
+              {userGallery.map((val, key) => {
                 return (
-                  <div key={key} className="gallery-item">
+                  <div key={val.id} className="gallery-item">
                     <img
-                      src={val.src}
+                      src={val.artitem_path}
                       className="gallery-image"
                       alt=""
                       onClick={() => goToArtItem()}

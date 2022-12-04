@@ -1,11 +1,24 @@
 .upload-container {
+  position: relative;
   box-sizing: border-box;
   /* real height, border and margin bottom will be set in the Profile Page */
   height: 0px;
   border: 2px dashed #bcb1c1;
   margin-bottom: 1rem;
-
   transition: all 0.3s;
+}
+
+.upload-container-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 200, 200, 0.25);
+  overflow: hidden;
+  z-index: 2;
 }
 
 .upload-grid {
@@ -125,5 +138,13 @@ input[type="file"] {
   color: #ef233c;
   font-size: 20px;
   margin-top: 5rem;
+  font-weight: 300;
+}
+
+.upload-info-error {
+  color: #ef233c;
+  margin-top: 0.75rem;
+  margin-bottom: -0.75rem;
+  font-size: 14px;
   font-weight: 300;
 }

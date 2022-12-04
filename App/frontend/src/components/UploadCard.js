@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { RiDragDropLine } from "react-icons/ri";
@@ -22,17 +22,21 @@ function UploadCard(props) {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [tags, setTags] = useState([]);
-  const [base64Image, setBase64Image] = useState("");
+  const [base64Image, setBase64Image] = useState("olmadi");
 
   const [preview, setPreview] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // console.log(username);
 
   async function handlePreview(e) {
     if (e.target.files) {
       setPreview(true);
       props.setPostError(false);
       setPreviewImage(URL.createObjectURL(e.target.files[0]));
-      setBase64Image(toBase64(e.target.files[0]));
+      setBase64Image(await toBase64(e.target.files[0]));
     }
   }
 
@@ -54,14 +58,17 @@ function UploadCard(props) {
     setPreview(true);
     props.setPostError(false);
     setPreviewImage(URL.createObjectURL(e.dataTransfer.files[0]));
-    setBase64Image(toBase64(e.dataTransfer.files[0]));
+    setBase64Image(await toBase64(e.dataTransfer.files[0]));
   }
 
   function handlePost(e) {
+    e.preventDefault();
     if (previewImage === "") {
-      e.preventDefault();
       props.setPostError(true);
+    } else if (title === "" || description === "" || type === "") {
+      props.setUploadInfoError(true);
     } else {
+      setIsLoading(true);
       fetch(`${host}/api/v1/artitems/me/upload/`, {
         method: "POST",
         body: JSON.stringify({
@@ -69,15 +76,23 @@ function UploadCard(props) {
           description: description,
           type: type,
           tags: tags,
-          art_image: base64Image,
+          artitem_image: base64Image,
         }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
       })
-        .then((response) => response.json())
-        .then((response) => {})
+        .then((response) => {
+          setIsLoading(false);
+          window.location.reload(true);
+          // props.forceUpdate();
+          // console.log(response);
+          return response.json();
+        })
+        .then((response) => {
+          // console.log(response);
+        })
         .catch((error) => console.error("Error:", error));
     }
   }
@@ -119,6 +134,22 @@ function UploadCard(props) {
         marginBottom: props.marginBottom,
       }}
     >
+      <div
+        className="upload-container-loading"
+        style={{ visibility: isLoading ? "visible" : "hidden" }}
+      >
+        <div
+          class="spinner-border"
+          style={{
+            width: "6rem",
+            height: "6rem",
+            color: "black",
+          }}
+          role="status"
+        >
+          <span class="sr-only"></span>
+        </div>
+      </div>
       <div
         className="upload-grid"
         style={{ display: props.height === "0px" ? "none" : "grid" }}
@@ -181,6 +212,12 @@ function UploadCard(props) {
             being discovered
           </header>
 
+          {props.uploadInfoError && (
+            <div className="upload-info-error">
+              Title, description and category fields may not be left blank.
+            </div>
+          )}
+
           <div className="form-group mt-4">
             <label className="access-label" style={{ color: "#ffc9ff" }}>
               Title
@@ -217,7 +254,7 @@ function UploadCard(props) {
             <input
               type="text"
               className="form-control mt-1"
-              placeholder="Painting, sculpture, digital art..."
+              placeholder="Painting, photography, digital art..."
               name="type"
               id="type"
               style={{ fontSize: "14px" }}
