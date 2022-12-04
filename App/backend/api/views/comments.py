@@ -34,8 +34,7 @@ from django.contrib.auth.models import AnonymousUser
                     "lft": 3,
                     "rght": 4,
                     "tree_id": 1,
-                    "level": 2,
-                    "isLiked": True
+                    "level": 2
                 }
             }
         ),
@@ -129,17 +128,8 @@ def CommentView(request, artitemid, id):
     if (request.method == "GET"):
         try:
             comment = Comment.objects.get(id=id)
-            data = CommentSerializer(comment).data.copy()
-
-            if(isinstance(request.user, AnonymousUser)):
-                data["isLiked"] = False
-            else:
-                try:
-                    LikeComment.objects.get(user=request.user, comment=comment)
-                    data["isLiked"] = True
-                except:
-                    data["isLiked"] = False
-            return Response(data, status=status.HTTP_200_OK)
+            serializer = CommentSerializer(comment)
+            return Response(serializer, status=status.HTTP_200_OK)
         except Comment.DoesNotExist:
             message = {
                 'detail': 'Comment with given id does not exist.'}
