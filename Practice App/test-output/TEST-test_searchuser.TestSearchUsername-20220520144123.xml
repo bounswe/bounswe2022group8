@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test_searchuser.TestSearchUsername-20220520144123" tests="1" file="test_searchuser.py" time="0.161" timestamp="2022-05-20T14:41:39" failures="0" errors="0" skipped="0">
-	<testcase classname="test_searchuser.TestSearchUsername" name="test_search_by_username" time="0.161" timestamp="2022-05-20T14:41:39" file="tests\test_searchuser.py" line="32">
-		<system-out><![CDATA[TestSearchUsername:setUp_:begin
-TestSearchUsername:setUp_:end
-]]></system-out>
-	</testcase>
-</testsuite>
