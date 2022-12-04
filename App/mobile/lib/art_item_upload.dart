@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/profile_page.dart';
+import 'package:artopia/profile.dart';
 
 class UploadArtItem extends StatefulWidget {
   @override
@@ -12,15 +13,15 @@ class UploadArtItem extends StatefulWidget {
 }
 
 class _UploadArtItem extends State<UploadArtItem> {
-  final _formKey = GlobalKey<FormState>();
+  Future<Profile> myProfile = getMyProfile();
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
+  final _formKey = GlobalKey<FormState>();
 
   XFile? image;
 
   final ImagePicker picker = ImagePicker();
 
-  //we can upload image from camera or from gallery based on parameter
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
 
@@ -132,65 +133,24 @@ class _UploadArtItem extends State<UploadArtItem> {
         ),
       ),
       body: Center(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.
+      child: Container(
+      //alignment: Alignment.bottomCenter,
+      height: double.infinity,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        /*
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40,
+          vertical: 60,
+        ),
+        */
+        child:
+        Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.height / 3.5,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: colorPalette.blackShadows,
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                onPressed: () {
-                  myAlert();
-                  //Navigator.pop(context);
-                  //getImage(ImageSource.gallery);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.photo_size_select_actual_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    textUtils.buildText(
-                        "Choose", 20, Colors.black, FontWeight.w500),
-                  ],
-                ),
-              ),
             ),
 
-            SizedBox(
-              height: 10,
-            ),
-            //if image not null show the image
-            //if image null show text
-            image != null
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.file(
-                        //to show image, you type like this.
-                        File(image!.path),
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width,
-                        height: 300,
-                      ),
-                    ),
-                  )
-                : textUtils.buildText(
-                    "No Art Item", 20, Colors.black, FontWeight.w500),
-            SizedBox(
-              height: 10,
-            ),
             SizedBox(
               child: Form(
                 key: _formKey,
@@ -243,66 +203,127 @@ class _UploadArtItem extends State<UploadArtItem> {
                       ),
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.title_outlined,
-                              color: colorPalette.darkPurple),
-                          hintText: 'Please write the title of your art item',
-                          labelText: 'Title',
-                          prefixIconColor: Colors.red,
-                          hoverColor: Colors.red,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 5.0, right: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.center,
+                          child: textUtils.buildText(
+                              "Upload an art item", 25, Colors.black, FontWeight.w500),
                         ),
-                        validator: (value) {
-                          if (value?.isEmpty ?? true) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.description_rounded,
-                              color: colorPalette.darkPurple),
-                          hintText: 'Please write the description of your art item',
-                          labelText: 'Description',
+                        const SizedBox(
+                          height: 10,
                         ),
-                        validator: (value) {
-                          if (value?.isEmpty ?? true) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.tag,
-                              color: colorPalette.darkPurple),
-                          hintText: 'Please write tags for your art item',
-                          labelText: 'Tags',
+                        TextFormField(
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.title_outlined,
+                                color: colorPalette.darkPurple),
+                            hintText: 'Please write the title of your art item',
+                            labelText: 'Title',
+                          ),
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (value) {
-                          if (value?.isEmpty ?? true) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.description_rounded,
+                                color: colorPalette.darkPurple),
+                            hintText:
+                                'Please write the description of your art item',
+                            labelText: 'Description',
+                          ),
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            icon:
+                                Icon(Icons.tag, color: colorPalette.darkPurple),
+                            hintText: 'Please write tags for your art item',
+                            labelText: 'Tags',
+                          ),
+                          validator: (value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.height / 3.5,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorPalette.blackShadows,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                onPressed: () {
+                  myAlert();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.photo_size_select_actual_outlined),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    textUtils.buildText(
+                        "Choose", 20, Colors.black, FontWeight.w500),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(
+              height: 10,
+            ),
+            //if image not null show the image
+            //if image null show text
+            image != null
+                ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.file(
+                  //to show image, you type like this.
+                  File(image!.path),
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  height: 300,
+                ),
+              ),
+            )
+                : textUtils.buildText(
+                "No art item is selected!", 20, Colors.black, FontWeight.w500),
+            SizedBox(
+              height: 10,
             ),
             SizedBox(
               child: ElevatedButton(
@@ -318,22 +339,27 @@ class _UploadArtItem extends State<UploadArtItem> {
                   if (_formKey.currentState!.validate() && (image == null)) {
                     // If the form is valid, display a Snackbar.
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please choose an art item.')),
+                      const SnackBar(
+                          content: Text('Please choose an art item.')),
                     );
                   }
                   if (_formKey.currentState!.validate() && (image != null)) {
                     // If the form is valid, display a Snackbar.
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('The art item is uploaded.')),
+                      const SnackBar(
+                          content: Text('The art item is uploaded.')),
                     );
                   }
                 },
                 child: textUtils.buildText(
-                    "Upload", 20, Colors.black, FontWeight.w500),
+                    "Submit", 20, Colors.black, FontWeight.w500),
               ),
             ),
           ],
         ),
+      ),
+      ),
+
       ),
     );
   }

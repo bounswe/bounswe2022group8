@@ -11,79 +11,11 @@ import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 
 
+
 Widget profileHeaderWidget(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
-  void myAlert() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text('Please choose media to select'),
-          content: Container(
-            height: MediaQuery.of(context).size.height / 6,
-            child: Column(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: colorPalette.blackShadows,
-                    foregroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UploadArtItem()
-                        //myAlert(),
-                        //Navigator.pop(context);
-                        //getImage(ImageSource.gallery);
-                      ),
-                    ),
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.image),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      textUtils.buildText(
-                          "From Gallery", 13, Colors.black, FontWeight.w500),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: colorPalette.blackShadows,
-                    foregroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    //getImage(ImageSource.camera);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.camera),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      textUtils.buildText(
-                          "From Camera", 13, Colors.black, FontWeight.w500),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -135,8 +67,8 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                 ],
               ),
               Padding(padding: const EdgeInsets.only(left: 20)),
-              Column( //Flex
-                //direction: Axis.vertical,
+              Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20),
@@ -156,14 +88,16 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                     ],
                   ),
                   SizedBox(height: 15),
-                  Container(
+                  Container (
+                    //padding: const EdgeInsets.all(16.0),
                     width: 200,
-                    child: Flexible(
-                      child: textUtils.buildText(
-                          me.bio, 12, Colors.white70, FontWeight.w500
-                      ),
+                    //width: MediaQuery.of(context).size.width*0.8,
+                    child: textUtils.buildText(
+                        me.bio, 12, Colors.white70, FontWeight.w500
                     ),
                   ),
+
+
                   SizedBox(height: 15),
                   Row(
                     children: [
@@ -192,7 +126,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                         ),
                       ),
                       textUtils.buildText(
-                          me.followers.toString(), 12, Colors.black, FontWeight.w500
+                          me.followers.toString(), 13, Colors.black, FontWeight.w500
                       ),
                       SizedBox(width: 20),
                       GestureDetector(
@@ -220,7 +154,7 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.only(right: 25),
+                padding: EdgeInsets.only(right: 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colorPalette.blackShadows,
@@ -229,12 +163,6 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  /*
-                  onPressed: () {
-                    myAlert();
-                    //UploadArtItem();
-                  },
-                  */
                   onPressed: () => {
                     Navigator.push(
                       context,
