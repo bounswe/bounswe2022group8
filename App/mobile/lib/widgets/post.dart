@@ -51,7 +51,7 @@ class _PostState extends State<Post> {
         color: colorPalette.blackShadows,
         size: 30,
       ),
-      tooltip: 'pURCHASE',
+      tooltip: 'Purchase',
       onPressed: () => {purchaseButtonPressed()},
     );
 

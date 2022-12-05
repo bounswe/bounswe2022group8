@@ -8,6 +8,8 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:artopia/variables.dart' ;
+
+import '../getimage.dart';
 class Comments extends StatefulWidget {
   final List<Comment> commentList;
   const Comments({Key? key, required this.commentList}) : super(key: key);
@@ -260,12 +262,11 @@ Future <List<List<Comment>>> getComments(artItemId) async {
   //print(response.body) ;      
   
   var commentsJson = jsonDecode(response.body)['data'] as List;
-    print(commentsJson) ;
 
   List<getCommentsClass> commentObjs = commentsJson.map((commentJson) => getCommentsClass.fromJson(commentJson)).toList();
+  print(commentsJson);
 
   List<List<Comment>> allcomments = [] ;
-  print(commentObjs) ;
   if (response.statusCode == 200) {
 for (var element in commentObjs) {
       print("commentobjs") ;
@@ -274,19 +275,22 @@ for (var element in commentObjs) {
     
     List<Comment> branch = [] ;
     print("parent") ;
-    branch.add(Comment(avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0pxYCCGBKN0MuhVp6RObFWmbeRIUNxM6YPA&usqp=CAU",content:element.body ,userName: "dogo") 
+    String profileUrl = await getImage(element.commented_by.profile_path);
+
+    branch.add(Comment(avatar: profileUrl,content:element.body ,userName: element.commented_by.username) 
 ) ;
     for (var childElement in commentObjs) {
       if(childElement.parent == element.id){
             print("child") ;
-
-    branch.add(Comment(avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0pxYCCGBKN0MuhVp6RObFWmbeRIUNxM6YPA&usqp=CAU",content:childElement.body ,userName: "dogo")) ;
+    String profileUrl = await getImage(childElement.commented_by.profile_path);
+    branch.add(Comment(avatar: profileUrl,content:childElement.body ,userName: childElement.commented_by.username)) ;
 
       } 
   }
   allcomments.add(branch) ;
 }}
 }
+
     return allcomments ;
 }
 
@@ -295,7 +299,7 @@ class getCommentsClass{
       int id;
       String body;
       int parent ;
-      int commented_by;
+      CommentUserClass commented_by;
       int commented_on;
       String created_at;
       int lft;
@@ -304,7 +308,18 @@ class getCommentsClass{
       int level;
       getCommentsClass(this.id,this.body,this.parent,this.commented_by,this.commented_on,this.created_at,this.lft,this.rght,this.tree_id,this.level) ;
     factory getCommentsClass.fromJson(dynamic json) {
-    return getCommentsClass(json['id'], json['body'],(json['parent']??0),json['commented_by'], json['commented_on'], json['created_at'], json['lft'],json['rght'] ,json['tree_id'], json['level']);
+    return getCommentsClass(json['id'], json['body'],(json['parent']??0),CommentUserClass.fromJson(json['commented_by']), json['commented_on'], json['created_at'], json['lft'],json['rght'] ,json['tree_id'], json['level']);
+  }
+    }
+class CommentUserClass{
+
+      int id;
+      String username;
+      String profile_path;
+  
+      CommentUserClass(this.id,this.username,this.profile_path) ;
+    factory CommentUserClass.fromJson(dynamic json) {
+    return CommentUserClass(json['id'], json['username'],json['profile_path']);
   }
     }
 
