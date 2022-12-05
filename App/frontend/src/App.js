@@ -3,7 +3,7 @@ import "./App.css";
 
 // DON'T EDIT ABOVE
 
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider, AuthenticatedRoute } from "./auth/authentication";
@@ -19,20 +19,6 @@ import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
 
 function App() {
-  const [artitemSrc, setArtitemSrc] = useState("");
-  const [artitemDescription, setArtitemDescription] = useState("");
-  const [artitemOwner, setArtitemOwner] = useState({});
-  const [artitemTitle, setArtitemTitle] = useState("");
-  const [artitemComments, setArtitemComments] = useState([]);
-
-  function handleArtItemClick(src, description, owner, title, comments) {
-    setArtitemSrc(src);
-    setArtitemDescription(description);
-    setArtitemOwner(owner);
-    setArtitemTitle(title);
-    setArtitemComments(comments);
-  }
-
   return (
     <AuthProvider>
       <Routes>
@@ -75,26 +61,11 @@ function App() {
           path="/my-profile"
           element={
             <AuthenticatedRoute>
-              <Profile
-                onArtItemClick={(src, description, owner, title, comments) =>
-                  handleArtItemClick(src, description, owner, title, comments)
-                }
-              />
+              <Profile />
             </AuthenticatedRoute>
           }
         />
-        <Route
-          path="/artitems/:artitem_id"
-          element={
-            <ArtItem
-              src={artitemSrc}
-              description={artitemDescription}
-              owner={artitemOwner}
-              title={artitemTitle}
-              comments={artitemComments}
-            />
-          }
-        />
+        <Route path="/artitems/:artitem_id" element={<ArtItem />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </AuthProvider>

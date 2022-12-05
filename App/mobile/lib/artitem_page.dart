@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'utils/textUtils.dart';
 import 'utils/colorPalette.dart';
 import 'package:flutter/services.dart';
+import 'artitem.dart';
 import 'comment_page.dart';
 import 'home_page.dart';
 
 class ArtItemPage extends StatefulWidget {
+  final ArtItem artitem ;
 
   //Post classinin icinden acildigi icin
-  const ArtItemPage({Key? key}) : super(key: key);
+  const ArtItemPage({Key? key, required this.artitem}) : super(key: key);
 
   @override
   State<ArtItemPage> createState() => _ArtItemPageState();
@@ -69,7 +71,7 @@ class _ArtItemPageState extends State<ArtItemPage> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: Column(
               children: [
-                Post().createArtItemPage(),
+                Post(artitem: widget.artitem).createArtItemPage(),
               ],
             ),
           ),
@@ -96,7 +98,7 @@ class _ArtItemPageState extends State<ArtItemPage> {
     print("comment button pressed");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const CommentPage()),
+      MaterialPageRoute(builder: (context) =>  CommentPage(artitem: widget.artitem)),
     );
   }
 
@@ -104,7 +106,7 @@ class _ArtItemPageState extends State<ArtItemPage> {
     print("purchase button pressed");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ArtItemPage()),
+      MaterialPageRoute(builder: (context) =>  ArtItemPage(artitem: widget.artitem)),
     );
   }
 }

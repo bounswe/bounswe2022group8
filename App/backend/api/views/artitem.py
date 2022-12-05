@@ -51,7 +51,8 @@ from django.core.files.base import ContentFile
                             "id": 11,
                             "username": "JosephBlocker",
                             "name": "Captain Joseph",
-                            "surname": "Blocker"
+                            "surname": "Blocker",
+                            "profile_path": "avatar/default.png"
                         },
                         "type": "sketch",
                         "tags": [],
@@ -98,7 +99,8 @@ def get_artitems(request):
                             "id": 11,
                             "username": "JosephBlocker",
                             "name": "Captain Joseph",
-                            "surname": "Blocker"
+                            "surname": "Blocker",
+                            "profile_path": "avatar/default.png"
                         },
                         "type": "sketch",
                         "tags": [1],
@@ -220,7 +222,8 @@ def delete_artitem(request, id):
                             "id": 11,
                             "username": "JosephBlocker",
                             "name": "Captain Joseph",
-                            "surname": "Blocker"
+                            "surname": "Blocker",
+                            "profile_path": "avatar/default.png"
                         },
                         "type": "sketch",
                         "tags": [],
@@ -269,7 +272,8 @@ def artitems_by_id(request, id):
                             "id": 11,
                             "username": "JosephBlocker",
                             "name": "Captain Joseph",
-                            "surname": "Blocker"
+                            "surname": "Blocker",
+                            "profile_path": "avatar/default.png"
                         },
                         "type": "sketch",
                         "tags": [],
@@ -319,7 +323,8 @@ def artitems_by_userid(request, id):
                             "id": 11,
                             "username": "JosephBlocker",
                             "name": "Captain Joseph",
-                            "surname": "Blocker"
+                            "surname": "Blocker",
+                            "profile_path": "avatar/default.png"
                         },
                         "type": "sketch",
                         "tags": [],
@@ -368,7 +373,8 @@ def artitems_by_username(request, username):
                             "id": 9,
                             "username": "till_i_collapse",
                             "name": "",
-                            "surname": ""
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
                         },
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",

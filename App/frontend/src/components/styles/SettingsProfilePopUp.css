@@ -8,14 +8,14 @@
   padding-top: 10px;
   padding-bottom: 20px;
   border-radius: 8px;
-  background-color: white;
+  background-color: #fafafa;
 }
 
 .settings-profile-pop-up-header {
   font-size: 24px;
   font-weight: 500;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 24px;
   margin-bottom: 40px;
 }
 

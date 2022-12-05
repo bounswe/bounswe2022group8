@@ -35,14 +35,22 @@ class _HomePageState extends State<HomePage> {
               "artopia", 25, Colors.white70, FontWeight.w500),
         ),
       ),
-      body: SingleChildScrollView(
+      body: FutureBuilder<List<ArtItem>>(
+          future: getAllArtItems(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArtItem>> snapshot) {
+            if (snapshot.hasData == false)
+              return SizedBox.shrink();
+            List<ArtItem> artItems = snapshot.requireData;
+
+            return  SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              for (var i = 0; i < 3; i++) (Post()),
+              for (ArtItem item in artItems ) (Post(artitem: item))
             ],
-          )),
-
+          ),
+    ) ;},),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: colorPalette.darkPurple,
         unselectedItemColor: colorPalette.darkPurple,

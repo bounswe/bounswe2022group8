@@ -1,4 +1,5 @@
-import '../artitem_page.dart';
+import 'package:artopia/artitem.dart';
+import 'package:artopia/artitem_page.dart';
 import 'package:flutter/material.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
@@ -11,10 +12,11 @@ import 'artitem_page_structure.dart';
 
 class Post extends StatefulWidget {
 
+  final ArtItem artitem ;
   //baglama isi icin bu satiri da commentli birakiyorum
   // final ArtItem artItem;
   final owner = "Author";
-  const Post({Key? key}) : super(key: key);
+  const Post({Key? key,required this.artitem}) : super(key: key);
 
   //baglama isini kolaylastirmak icin bu satiri burada birakmak mantikli.
   // PostsList({Key?key, required this.artItem}) : super(key: key);
@@ -23,7 +25,7 @@ class Post extends StatefulWidget {
   State<Post> createState() => _PostState();
 
 
-  createArtItemPage() => ArtItemPageStructue();
+  createArtItemPage() => ArtItemPageStructue(artitem: artitem,);
 }
 
 class _PostState extends State<Post> {
@@ -47,11 +49,11 @@ class _PostState extends State<Post> {
 
     IconButton purchaseButton = IconButton(
       icon: Icon(
-        Icons.attach_money,
+        Icons.description_outlined,
         color: colorPalette.blackShadows,
         size: 30,
       ),
-      tooltip: 'pURCHASE',
+      tooltip: 'Details',
       onPressed: () => {purchaseButtonPressed()},
     );
 
@@ -79,35 +81,35 @@ class _PostState extends State<Post> {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
+                     CircleAvatar(
                       radius: 16,
-                      backgroundImage: AssetImage("assets/images/profile.jpeg"),
+                      backgroundImage: Image.network(widget.artitem.profile_path).image,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    textUtils.buildText("selin", 16, colorPalette.blackShadows,
+                    textUtils.buildText(widget.artitem.username, 16, colorPalette.blackShadows,
                         FontWeight.w600),
                   ],
                 ),
                 Row(
                   children: [
-                    textUtils.buildText("Title", 16, colorPalette.blackShadows,
+                    textUtils.buildText(widget.artitem.title, 16, colorPalette.blackShadows,
                         FontWeight.w600),
                   ],
                 )
               ],
             ),
           ),
-          const SizedBox(height: 10),
-          Image.asset(
-            "assets/images/background.jpeg",
+           SizedBox(height: 10),
+          Image.network(
+            widget.artitem.artitem_path,
             height: MediaQuery.of(context).size.width,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
             fit: BoxFit.cover,
           ),
-          const SizedBox(height: 10),
+           SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Row(
@@ -132,7 +134,7 @@ class _PostState extends State<Post> {
     print("comment button pressed");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const CommentPage()),
+      MaterialPageRoute(builder: (context) =>  CommentPage(artitem:widget.artitem)),
     );
   }
 
@@ -140,7 +142,7 @@ class _PostState extends State<Post> {
     print("purchase button pressed");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ArtItemPage()),
+      MaterialPageRoute(builder: (context) =>  ArtItemPage(artitem: widget.artitem)),
     );
   }
 }

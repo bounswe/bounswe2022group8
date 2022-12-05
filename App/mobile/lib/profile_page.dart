@@ -102,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       alignment: Alignment.center,
                       height: 40,
                       child: textUtils.buildText(
-                          "Exibitions", 15, colorPalette.darkPurple, FontWeight.w500
+                          "Exhibitions", 15, colorPalette.darkPurple, FontWeight.w500
                       ),
                     ),
                   ],
