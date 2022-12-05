@@ -19,10 +19,10 @@ class _ArtItems extends State<ArtItems> {
   }
   commentButtonPressed() {
     print("comment button pressed");
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CommentPage()),
-    );
+    //Navigator.push(
+     // context,
+     // MaterialPageRoute(builder: (context) => const CommentPage(artitem: widget,)),
+   // );
   }
     Future<List<ArtItem>> artItemsofMe = getuserArtItems();
 

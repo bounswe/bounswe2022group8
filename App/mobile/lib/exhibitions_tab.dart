@@ -16,10 +16,10 @@ class _Exhibitions extends State<Exhibitions> {
   }
   commentButtonPressed() {
     print("comment button pressed");
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CommentPage()),
-    );
+ //   Navigator.push(
+   //   context,
+    //  MaterialPageRoute(builder: (context) => const CommentPage()),
+   // );
   }
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();

@@ -73,3 +73,26 @@ Future<Profile> getMyProfile() async {
 return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
   
 }
+
+Future<Profile> getOtherProfile(int id) async {
+  final response = await http.get(
+    Uri.parse(GET_OTHER_PROFILE_ENDPOINT + id.toString()),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Token ' + token 
+
+    }
+   )
+   ;
+  print(response.statusCode) ;
+  print(response.body) ;      
+  
+  Map<String, dynamic> body = jsonDecode(response.body);
+  
+  if (response.statusCode == 200) {
+    String profileUrl = await getImage(body['profile_path']) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+  }
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+  
+}
