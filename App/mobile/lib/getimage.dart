@@ -23,7 +23,7 @@ Future<String> getImage(String path) async {
     region: region,
     service: AWSService.s3,
   );
-  String host = 'cmpe451-development.s3.amazonaws.com';
+  String host = 'cmpe451-production.s3.amazonaws.com';
 
 final request = AWSHttpRequest.get(
     Uri.https(host, path),

@@ -68,7 +68,7 @@ Future<Profile> getMyProfile() async {
   
   if (response.statusCode == 200) {
     String profileUrl = await getImage(body['profile_path']) ;
-    return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
   }
 return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
   

@@ -6,6 +6,8 @@ import 'package:artopia/profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
 
+import 'getimage.dart';
+
 
 class ArtItem extends StatefulWidget {
   ArtItem({
@@ -38,7 +40,7 @@ class _ArtItemState extends State<ArtItem> {
 
 Future<ArtItem> getAllArtItems() async {
   final response = await http.get(
-      Uri.parse(GET_ALL_ART_ITEM_ENDPOINT+"1"),
+      Uri.parse(GET_ALL_ART_ITEM_ENDPOINT),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Token $token'
@@ -51,7 +53,7 @@ Future<ArtItem> getAllArtItems() async {
   Map<String, dynamic> body = jsonDecode(response.body);
 
   if (response.statusCode == 200) {
-    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], owner: "Suleyman Cakir", type: body["type"], tags: "AA", artitem_path: body["artitem_path"]) ;
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], owner: body[""], type: body["type"], tags: "", artitem_path: body["artitem_path"]) ;
     print(x.description);
     print(x.id);
     print(x.title);
@@ -60,7 +62,35 @@ Future<ArtItem> getAllArtItems() async {
   return  ArtItem(id: body["id"], title: "ERROR", description:"ERROR", owner: "ERROR", type: "ERROR", tags:"ERROR", artitem_path: "ERROR");
 
 }
+Future <List<ArtItem>> getuserArtItems() async {
+  final response = await http.get(
+      Uri.parse(GET_USER_ART_ITEM_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
 
+      }
+  );
+  print(response.statusCode) ;
+  print(response.body) ;
+
+  List <dynamic> items = jsonDecode(response.body);
+  List <ArtItem> userArtItems = [] ;
+  if (response.statusCode == 200) {
+    for (var body in items) {
+    String itemURL = await getImage(body['artitem_path']) ;
+
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], owner: body["owner"]["username"], type: body["type"], tags: "AA", artitem_path: itemURL) ;
+    print(x.description);
+    print(x.id);
+    print(x.title);
+    userArtItems.add(x);
+  }
+  }
+  print(userArtItems);
+  return userArtItems ;
+
+}
 
 
 

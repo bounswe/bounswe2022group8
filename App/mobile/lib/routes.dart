@@ -109,7 +109,6 @@ class HomePageRoute extends StatelessWidget {
     return const ExitProfileButton();
   }
 }
-*/
 
 class ProfilePageRoute extends StatelessWidget {
   const ProfilePageRoute({Key? key}) : super(key: key);

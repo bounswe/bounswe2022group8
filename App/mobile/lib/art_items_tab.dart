@@ -1,9 +1,12 @@
+import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
 import 'package:artopia/profile.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/widgets/post.dart';
 import 'package:artopia/comment_page.dart';
+import 'package:artopia/artitem.dart';
+
 
 class ArtItems extends StatefulWidget {
   @override
@@ -21,39 +24,41 @@ class _ArtItems extends State<ArtItems> {
       MaterialPageRoute(builder: (context) => const CommentPage()),
     );
   }
+    Future<List<ArtItem>> artItemsofMe = getuserArtItems();
+
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
   late OverlayEntry _popupDialog;
   List<String> imageUrls = [
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
+    
   ];
 
   @override
+  
   Widget build(BuildContext context) {
-    return Scaffold(
+    
+
+return Scaffold(
       backgroundColor: colorPalette.palePurplePantone,
-      body: GridView.count(
+      body: FutureBuilder<List<ArtItem>>(
+          future: artItemsofMe,
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArtItem>> snapshot) {
+            if (snapshot.hasData == false)
+              return SizedBox.shrink();
+            List<ArtItem> artItems = snapshot.requireData;
+
+            for (ArtItem element in artItems) imageUrls.add(element.artitem_path) ;
+            imageUrls.map(_createGridTileWidget).toList();
+            return GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 1.0,
-        children: imageUrls.map(_createGridTileWidget).toList(),
+          children: imageUrls.map(_createGridTileWidget).toList(),   
+              
+            );
+              }
       ),
-    );
+    ); 
   }
 
   Widget _createGridTileWidget(String url) => Builder(
