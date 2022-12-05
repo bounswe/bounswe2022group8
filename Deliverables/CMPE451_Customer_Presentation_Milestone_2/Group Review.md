@@ -171,6 +171,8 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 * PR Review: Reset Password API
 * PR Review: Comment related APIs
 * PR Review: CI/CD Integration
+* PR Review: Like/Unlike API
+* Frontend PR Reviews: API Integrations
 * Configuration of `.env` and `.production.env` files to hide all of our secret information including AWS credentials, database credentials, email information and S3 bucket information, for both development and production sites.
 * Generation of the class diagram fron Django using `graphviz`.
 * Updating the class diagram. Filling up the `API` section of the Milestone II document.
@@ -234,7 +236,7 @@ PR reviews:<br>
 * [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215) 
 * [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271) (We worked as pair on this)
 * [feature/FE-20](https://github.com/bounswe/bounswe2022group8/pull/322)
-* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
+* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR due to the errors and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
 
 </details>
