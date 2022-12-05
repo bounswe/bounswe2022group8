@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:artopia/profile.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/widgets/post.dart';
-import 'package:artopia/comment_page.dart';
+import 'profile.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'widgets/post.dart';
+import 'comment_page.dart';
 
 class ArtItems extends StatefulWidget {
   @override

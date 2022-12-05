@@ -1,13 +1,13 @@
-import 'package:artopia/artitem_page.dart';
+import '../artitem_page.dart';
 import 'package:flutter/material.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/comment_page.dart';
+import '../utils/colorPalette.dart';
+import '../utils/textUtils.dart';
+import '../comment_page.dart';
 
 import 'artitem_page_structure.dart';
 
 //  baglama isi yaparken kullanilacak.
-// import 'package:artopia/artitem.dart';
+// import 'artitem.dart';
 
 class Post extends StatefulWidget {
 

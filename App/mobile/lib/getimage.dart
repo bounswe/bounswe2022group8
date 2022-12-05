@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/landing_page.dart';
-import 'package:artopia/login_page.dart';
+import 'home_page.dart';
+import 'landing_page.dart';
+import 'login_page.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -23,7 +23,7 @@ Future<String> getImage(String path) async {
     region: region,
     service: AWSService.s3,
   );
-  String host = 'cmpe451-development.s3.amazonaws.com';
+  String host = 'cmpe451-production.s3.amazonaws.com';
 
 final request = AWSHttpRequest.get(
     Uri.https(host, path),

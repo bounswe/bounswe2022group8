@@ -1,8 +1,11 @@
 import 'dart:convert';
-import 'package:artopia/variables.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+import 'variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:artopia/profile.dart';
+import 'profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
 
@@ -60,7 +63,46 @@ Future<ArtItem> getAllArtItems() async {
   return  ArtItem(id: body["id"], title: "ERROR", description:"ERROR", owner: "ERROR", type: "ERROR", tags:"ERROR", artitem_path: "ERROR");
 
 }
+Future<String> uploadArtItem(title, description, String tags, XFile? image) async {
+  List<String> tagArray = tags.split(',') ;
+  String base64Image = '"data:image/jpeg;base64,' ;
+  if (image != null) {
+  File(image.path).readAsBytes().then((value) async {
 
+   base64Image = base64Image +   base64Encode(value);
+    final response = await http.post(
+      Uri.parse(UPLOAD_ART_ITEM_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      body: jsonEncode(<String, dynamic>{
+      'title': title,
+      'description' : description,
+      'type' : "Sketch",
+      'tags' : [],
+      "artitem_image": base64Image,
+    })
+  );
+  print(response.statusCode) ;
+  print(response.body) ;
+
+
+  if (response.statusCode == 201) {
+
+    return  "OK";
+  }
+  return  "response.body" ;
+
+
+ 
+}) ;
+  }
+     
+    return "not ok." ;
+   
+}
 
 
 

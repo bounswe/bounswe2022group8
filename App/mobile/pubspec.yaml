@@ -46,6 +46,9 @@ dependencies:
   dotted_border: ^2.0.0+3
   url_launcher: ^6.1.6
   comment_tree: ^0.3.0
+  image_downloader: ^0.31.0
+  aws_common: ^0.3.3
+  aws_signature_v4: ^0.3.1
   #profile: ^0.0.1
 
 dev_dependencies:
