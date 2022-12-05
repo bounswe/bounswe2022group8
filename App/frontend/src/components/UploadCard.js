@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { RiDragDropLine } from "react-icons/ri";

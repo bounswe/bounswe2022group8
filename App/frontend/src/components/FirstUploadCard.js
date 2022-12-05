@@ -1,5 +1,4 @@
 import "./styles/FirstUploadCard.css";
-import { BsPlusCircle } from "react-icons/bs";
 
 function FirstUploadCard(props) {
   return (

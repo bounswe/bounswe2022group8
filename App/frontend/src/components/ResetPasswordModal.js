@@ -1,11 +1,8 @@
-import React, { useState, useReducer } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import CloseButton from "react-bootstrap/CloseButton";
 import { HiArrowLeft } from "react-icons/hi";
-import { HOST } from "../constants/host";
 import "./styles/Access.css";
 
-import { useAuth } from "../auth/authentication";
 
 function ResetPassword(props) {
   return (

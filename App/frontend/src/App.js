@@ -3,7 +3,7 @@ import "./App.css";
 
 // DON'T EDIT ABOVE
 
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider, AuthenticatedRoute } from "./auth/authentication";
