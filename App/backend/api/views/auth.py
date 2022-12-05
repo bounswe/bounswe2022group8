@@ -299,7 +299,7 @@ def resetPasswordLoggedView(request):
         request_body=passwordSerializer,
         operation_description="Account deletion API. This API takes the password as a parameter and deletes the user account. Login is required",
         operation_summary="Account deletion API.",
-        tags=['account_delete'],
+        tags=['auth'],
         responses={
             status.HTTP_204_NO_CONTENT: openapi.Response(
                 description="The user account has been successfully deleted.",
@@ -325,7 +325,7 @@ def resetPasswordLoggedView(request):
 def delete_account(request):
     data = request.data
     user = request.user
-    if(data['password'] == user.password):
+    if(user.check_password(data['password'])):
         try:
             user.delete()
             return Response({'Success': 'The user account has successfully been deleted!'}, status=status.HTTP_204_NO_CONTENT)
