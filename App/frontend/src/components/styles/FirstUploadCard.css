@@ -1,0 +1,28 @@
+.first-upload-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bcb1c1;
+  height: 535px;
+  border: 1px solid #bcb1c1;
+  background-color: transparent;
+}
+
+.first-upload-card-content {
+  display: block;
+}
+
+.first-upload-card-header {
+  font-size: 20px;
+  text-align: center;
+}
+
+.first-upload-btn {
+  height: 250px;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.first-upload-btn:hover {
+  transform: scale(1.05);
+}

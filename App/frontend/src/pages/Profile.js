@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import UploadCard from "../components/UploadCard";
+import bluebuilding from "../images/bluebuilding.jfif";
 
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
 import "./styles/Profile.css";
+import FirstUploadCard from "../components/FirstUploadCard";
 
 function Profile(props) {
   function scrollToTop() {
@@ -238,20 +240,28 @@ function Profile(props) {
           />
           {navTab ? (
             // what if gallery is empty ?
-            <div className="gallery">
-              {userGallery.map((val, key) => {
-                return (
-                  <div key={val.id} className="gallery-item">
-                    <img
-                      src={val.artitem_path}
-                      className="gallery-image"
-                      alt={val.description}
-                      onClick={() => goToArtItem(val.id)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <>
+              {userGallery.length === 0 && !upload && (
+                <div className="gallery-item">
+                  <FirstUploadCard onClick={() => handleUpload()} />
+                </div>
+              )}
+
+              <div className="gallery">
+                {userGallery.map((val, key) => {
+                  return (
+                    <div key={val.id} className="gallery-item">
+                      <img
+                        src={val.artitem_path}
+                        className="gallery-image"
+                        alt={val.description}
+                        onClick={() => goToArtItem(val.id)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           ) : (
             <div className="gallery">
               <div className="gallery-item" tabIndex="0">
