@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/profile.dart';
-
+import 'profile_page.dart';
+import 'profile.dart';
+import 'artitem.dart';
 class UploadArtItem extends StatefulWidget {
   @override
   _UploadArtItem createState() => _UploadArtItem();
@@ -17,8 +17,10 @@ class _UploadArtItem extends State<UploadArtItem> {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
   final _formKey = GlobalKey<FormState>();
-
   XFile? image;
+  final TextEditingController title = TextEditingController();
+  final TextEditingController description = TextEditingController();
+  final TextEditingController tags = TextEditingController();
 
   final ImagePicker picker = ImagePicker();
 
@@ -217,6 +219,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: title,
                           decoration: InputDecoration(
                             icon: Icon(Icons.title_outlined,
                                 color: colorPalette.darkPurple),
@@ -234,6 +237,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: description,
                           decoration: InputDecoration(
                             icon: Icon(Icons.description_rounded,
                                 color: colorPalette.darkPurple),
@@ -252,6 +256,7 @@ class _UploadArtItem extends State<UploadArtItem> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: tags,
                           decoration: InputDecoration(
                             icon:
                                 Icon(Icons.tag, color: colorPalette.darkPurple),
@@ -345,6 +350,21 @@ class _UploadArtItem extends State<UploadArtItem> {
                   }
                   if (_formKey.currentState!.validate() && (image != null)) {
                     // If the form is valid, display a Snackbar.
+                    String tagString = tags.text;
+                    String titleString = title.text;
+                    String descriptionString = description.text ;
+                    print(tagString + " " + titleString + " " + descriptionString);
+                              uploadArtItem(titleString, descriptionString,tagString,image).then((value) {
+                                if (value == "OK") {
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => const ProfilePage());
+                                  Navigator.pushReplacement(context, route);
+                                } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('The art item is not uploaded.')),
+                    );                                }
+                              });
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                           content: Text('The art item is uploaded.')),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'profile.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/change_password.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'profile_page.dart';
+import 'change_password.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-
+import 'profile.dart' ;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -20,6 +20,10 @@ class _SettingsPageState extends State<SettingsPage> {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController surname = TextEditingController();
+  final TextEditingController bio = TextEditingController();
+  final TextEditingController location = TextEditingController();
 
   XFile? image;
 
@@ -257,6 +261,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(
                           height: 35,
                           child: TextFormField(
+                            controller: name,
                             decoration: InputDecoration(
                               icon: Icon(Icons.person,
                                   color: colorPalette.darkPurple),
@@ -277,6 +282,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(
                           height: 35,
                           child: TextFormField(
+                            controller: surname,
                             decoration: InputDecoration(
                               icon: Icon(Icons.person,
                                   color: colorPalette.darkPurple),
@@ -297,6 +303,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(
                           height: 35,
                           child: TextFormField(
+                            controller: bio,
                             decoration: InputDecoration(
                               icon: Icon(Icons.description_rounded,
                                   color: colorPalette.darkPurple),
@@ -317,6 +324,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(
                           height: 35,
                           child: TextFormField(
+                            controller: location,
                             decoration: InputDecoration(
                               icon: Icon(Icons.person_pin_circle_outlined,
                                   color: colorPalette.darkPurple),
@@ -410,7 +418,25 @@ class _SettingsPageState extends State<SettingsPage> {
                           content: Text('Please choose a profile photo.')),
                     );
                   }
-                },
+                 if (_formKey.currentState!.validate() && (image != null)) {
+                    // If the form is valid, display a Snackbar.
+                    String nameString = name.text;
+                    String surnameString = surname.text;
+                    String bioString = bio.text ;
+                    String locationString = location.text ;
+
+                              uploadProfile(nameString, surnameString,bioString,locationString,image).then((value) {
+                                if (value == "OK") {
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => const ProfilePage());
+                                  Navigator.pushReplacement(context, route);
+                                } 
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => const ProfilePage());
+                                  Navigator.pushReplacement(context, route);
+
+                              });
+                }},
                 child: textUtils.buildText(
                     "Save", 20, Colors.black, FontWeight.w500),
               ),

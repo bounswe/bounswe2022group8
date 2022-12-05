@@ -1,8 +1,8 @@
 import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
+import '../utils/colorPalette.dart';
+import '../utils/textUtils.dart';
 
 class ArtItemPageStructue extends StatefulWidget {
   final ArtItem artitem ;

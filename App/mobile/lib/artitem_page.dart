@@ -1,7 +1,7 @@
-import 'package:artopia/widgets/post.dart';
+import 'widgets/post.dart';
 import 'package:flutter/material.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'utils/colorPalette.dart';
 import 'package:flutter/services.dart';
 import 'artitem.dart';
 import 'comment_page.dart';

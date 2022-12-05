@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'profile.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/settings_page.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'profile_page.dart';
+import 'settings_page.dart';
 import 'dart:async';
 
 

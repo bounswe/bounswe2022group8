@@ -5,7 +5,7 @@ import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/widgets/post.dart';
 import 'package:artopia/comment_page.dart';
-import 'package:artopia/artitem.dart';
+
 
 
 class ArtItems extends StatefulWidget {

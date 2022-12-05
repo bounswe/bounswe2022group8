@@ -1,6 +1,6 @@
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/widgets/comments.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'widgets/comments.dart';
 import 'package:flutter/material.dart';
 import 'package:comment_tree/comment_tree.dart';
 import 'package:flutter/services.dart';
