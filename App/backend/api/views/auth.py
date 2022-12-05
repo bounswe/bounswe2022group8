@@ -325,7 +325,7 @@ def resetPasswordLoggedView(request):
 def delete_account(request):
     data = request.data
     user = request.user
-    if(data['password'] == user.password):
+    if(user.check_password(data['password'])):
         try:
             user.delete()
             return Response({'Success': 'The user account has successfully been deleted!'}, status=status.HTTP_204_NO_CONTENT)
