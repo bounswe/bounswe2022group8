@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bfe728e-fa2d-4b8c-8c89-f381068d5633" name="Changes" comment="" />
+    <list default="true" id="8bfe728e-fa2d-4b8c-8c89-f381068d5633" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/App/mobile/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/App/mobile/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

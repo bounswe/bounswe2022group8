@@ -2,6 +2,7 @@
 /build/*
 /macos/*
 /.flutter-plugins-dependencies
+/.flutter-plugins
 App/mobile/.flutter-plugins
 App/mobile/.flutter-plugins-dependencies
 App/mobile/pubspec.lock
