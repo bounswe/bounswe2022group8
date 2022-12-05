@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import UploadCard from "../components/UploadCard";
-import bluebuilding from "../images/bluebuilding.jfif";
 
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
@@ -37,6 +36,9 @@ function Profile(props) {
   });
 
   const [userGallery, setUserGallery] = useState([]);
+
+  // just to decide after two unnecessary renders whether the gallery is empty or not
+  const [emptyGallery, setEmptyGallery] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -120,6 +122,12 @@ function Profile(props) {
           }
 
           setUserGallery(gallery);
+
+          if (gallery.length === 0) {
+            setEmptyGallery(true);
+          } else {
+            setEmptyGallery(false);
+          }
         })
         .catch((error) => console.error("Error:", error));
     }
@@ -151,6 +159,9 @@ function Profile(props) {
     navigate(`/artitems/${id}`);
     scrollToTop();
   }
+
+  // renders unnecessarily twice --> PROBLEM
+  // console.log(userGallery.length);
 
   return (
     <Layout>
@@ -241,7 +252,7 @@ function Profile(props) {
           {navTab ? (
             // what if gallery is empty ?
             <>
-              {userGallery.length === 0 && !upload && (
+              {emptyGallery === true && !upload && (
                 <div className="gallery-item">
                   <FirstUploadCard onClick={() => handleUpload()} />
                 </div>
