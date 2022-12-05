@@ -55,4 +55,6 @@ export const AuthenticatedRoute = ({ children }) => {
     return <Navigate to="/"/>;
   }
   return children;
+
 };
+

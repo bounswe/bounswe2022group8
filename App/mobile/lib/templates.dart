@@ -134,9 +134,10 @@ class _PasswordInputState extends State<PasswordInput> {
           ),
           height: 60,
           child: TextField(
+            autocorrect: false,
             controller: widget.passwordController,
             obscureText: true,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
                 border: InputBorder.none,

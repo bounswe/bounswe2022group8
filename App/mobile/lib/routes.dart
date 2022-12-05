@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:artopia/login_page.dart';
 import 'package:artopia/signup_page.dart';
+import 'package:artopia/settings_page.dart';
 import 'package:artopia/templates.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
@@ -70,6 +71,7 @@ class SignUpScreenRoute extends StatelessWidget {
   }
 }
 
+
 class ForgotPasswordScreenRoute extends StatelessWidget {
   ForgotPasswordScreenRoute({Key? key}) : super(key: key);
   final TextUtils textUtils = TextUtils();
@@ -97,6 +99,8 @@ class ForgotPasswordScreenRoute extends StatelessWidget {
   }
 }
 
+
+
 class HomePageRoute extends StatelessWidget {
   const HomePageRoute({Key? key}) : super(key: key);
 
@@ -105,9 +109,17 @@ class HomePageRoute extends StatelessWidget {
     return const ExitProfileButton();
   }
 }
+*/
 
 class ProfilePageRoute extends StatelessWidget {
   const ProfilePageRoute({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+class SettingsPageRoute extends StatelessWidget {
+  const SettingsPageRoute({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container();

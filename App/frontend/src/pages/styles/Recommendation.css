@@ -1,0 +1,180 @@
+.recommendation-container {
+  max-width: 1400px;
+  min-height: 80vh;
+  margin: 100px 100px 100px 100px;
+  padding: 0 2.5rem;
+}
+
+/*Artitem*/
+.recommended-artitems {
+  padding: 20px 40px;
+}
+.recommended-artitems h1 {
+  color: #f7c2ea;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.recommended-artitems a {
+  color: #f7c2ea;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-left: 1070px;
+}
+.recommended-artitems .list {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+.recommended-artitems .list .artitem {
+  min-width: 215px;
+  max-width: 215px;;
+  height: auto;
+  padding: 15px;
+  background-color: #2a2031;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+.recommended-artitems .list .artitem:hover {
+  background-color: #4a3c4a;
+}
+.recommended-artitems .list .artitem img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.recommended-artitems .list .artitem .context {
+  position: relative;
+}
+
+.recommended-artitems .list .artitem h4 {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recommended-artitems .list .artitem p {
+  color: #989898;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+/*Exhibition*/
+.recommended-exhibitions {
+  padding: 20px 40px;
+}
+.recommended-exhibitions h1 {
+  color: #f7c2ea;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.recommended-exhibitions a {
+  color: #f7c2ea;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-left: 1070px;
+}
+.recommended-exhibitions .list {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+.recommended-exhibitions .list .exhibition {
+  min-width: 215px;
+  max-width: 215px;
+  height: auto;
+  padding: 15px;
+  background-color: #2a2031;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+.recommended-exhibitions .list .exhibition:hover {
+  background-color: #4a3c4a;
+}
+.recommended-exhibitions .list .exhibition img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.recommended-exhibitions .list .exhibition .context {
+  position: relative;
+}
+
+.recommended-exhibitions .list .exhibition h4 {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recommended-exhibitions .list .exhibition p {
+  color: #989898;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+/*Users*/
+.recommended-users {
+  padding: 20px 40px;
+}
+.recommended-users h1 {
+  color: #f7c2ea;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.recommended-users a {
+  color: #f7c2ea;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-left: 1070px;
+}
+.recommended-users .list {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+.recommended-users .list .user {
+  min-width: 215px;
+  height: auto;
+  padding: 15px;
+  background-color: #2a2031;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+.recommended-users .list .user:hover {
+  background-color: #4a3c4a;
+}
+.recommended-users .list .user img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.recommended-users .list .user .context {
+  position: relative;
+}
+
+.recommended-users .list .user h4 {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recommended-users .list .user p {
+  color: #989898;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
+}
