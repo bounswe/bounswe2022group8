@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from ..serializers.like import LikeArtItemSerializer, LikeCommentSerializer
-from ..serializers.serializers import UserSerializer
+from ..serializers.serializers import UserSerializer, ArtItemSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -148,7 +148,7 @@ def get_liked_artitems_of_user(request, id):
     try:
         user = User.objects.get(pk=id)
         liked_artitems = [liked.artitem for liked in LikeArtItem.objects.filter(user=user)]
-        artitems = LikeArtItemSerializer(liked_artitems, many=True)
+        artitems = ArtItemSerializer(liked_artitems, many=True)
         return Response(artitems.data, status=status.HTTP_200_OK)
     except User.DoesNotExist:
         return Response({"Not Found": "Any user with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
