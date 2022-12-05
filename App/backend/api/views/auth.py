@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from knox.models import AuthToken
 
-from ..serializers.auth import RegisterSerializer, LoginSerializer, resetRequestSerializer, resetPasswordSerializer, passwordSerializer
+from ..serializers.auth import RegisterSerializer, LoginSerializer, resetRequestSerializer, resetPasswordSerializer, passwordSerializer, userDeleteSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 
@@ -296,7 +296,7 @@ def resetPasswordLoggedView(request):
 
 @swagger_auto_schema(
         method='DELETE',
-        request_body=passwordSerializer,
+        request_body=userDeleteSerializer,
         operation_description="Account deletion API. This API takes the password as a parameter and deletes the user account. Login is required",
         operation_summary="Account deletion API.",
         tags=['auth'],
