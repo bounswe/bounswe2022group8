@@ -127,6 +127,8 @@ function Settings() {
         console.log(response.detail);
       })
       .catch((error) => console.error("Error:", error));
+
+      setNewPassword("");
   }
 
   async function handlePreview(e) {
@@ -332,6 +334,7 @@ function Settings() {
               placeholder="New Password"
               id="password"
               name="password"
+              value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>

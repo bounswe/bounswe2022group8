@@ -7,7 +7,6 @@ import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 
 import "./styles/Sidebar.css";
-import { useNavigate } from "react-router-dom";
 
 function Sidebar(props) {
   function scrollToTop() {
@@ -19,8 +18,6 @@ function Sidebar(props) {
   }
 
   const { token, clearToken } = useAuth();
-
-  const navigate = useNavigate();
 
   function handleLogOut() {
     var host = HOST;
@@ -38,10 +35,6 @@ function Sidebar(props) {
         props.onClickLogOut();
       })
       .catch((error) => console.error("Error:", error));
-  }
-
-  function goToSettings(){
-    //navigate('/settings');
   }
 
   return (

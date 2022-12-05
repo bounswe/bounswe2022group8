@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import UploadCard from "../components/UploadCard";
@@ -8,6 +8,7 @@ import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
 import "./styles/Profile.css";
+import FirstUploadCard from "../components/FirstUploadCard";
 
 function Profile(props) {
   function scrollToTop() {
@@ -35,6 +36,9 @@ function Profile(props) {
   });
 
   const [userGallery, setUserGallery] = useState([]);
+
+  // just to decide after two unnecessary renders whether the gallery is empty or not
+  const [emptyGallery, setEmptyGallery] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -92,7 +96,7 @@ function Profile(props) {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response.length);
+          // console.log(response.length);
 
           var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
           var gallery = [];
@@ -118,6 +122,12 @@ function Profile(props) {
           }
 
           setUserGallery(gallery);
+
+          if (gallery.length === 0) {
+            setEmptyGallery(true);
+          } else {
+            setEmptyGallery(false);
+          }
         })
         .catch((error) => console.error("Error:", error));
     }
@@ -145,23 +155,13 @@ function Profile(props) {
     setUploadInfoError(false);
   }
 
-  function goToArtItem(id, artitem_path, description, owner, title) {
-    fetch(`${host}/api/v1/artitems/${id}/comments/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response.data);
-        props.onArtItemClick(artitem_path, description, owner, title, response.data);
-        navigate(`/artitems/${id}`);
-        scrollToTop();
-      })
-      .catch((error) => console.error("Error:", error));
+  function goToArtItem(id) {
+    navigate(`/artitems/${id}`);
+    scrollToTop();
   }
+
+  // renders unnecessarily twice --> PROBLEM
+  // console.log(userGallery.length);
 
   return (
     <Layout>
@@ -251,28 +251,28 @@ function Profile(props) {
           />
           {navTab ? (
             // what if gallery is empty ?
-            <div className="gallery">
-              {userGallery.map((val, key) => {
-                return (
-                  <div key={val.id} className="gallery-item">
-                    <img
-                      src={val.artitem_path}
-                      className="gallery-image"
-                      alt={val.description}
-                      onClick={() =>
-                        goToArtItem(
-                          val.id,
-                          val.artitem_path,
-                          val.description,
-                          val.owner,
-                          val.title
-                        )
-                      }
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <>
+              {emptyGallery === true && !upload && (
+                <div className="gallery-item">
+                  <FirstUploadCard onClick={() => handleUpload()} />
+                </div>
+              )}
+
+              <div className="gallery">
+                {userGallery.map((val, key) => {
+                  return (
+                    <div key={val.id} className="gallery-item">
+                      <img
+                        src={val.artitem_path}
+                        className="gallery-image"
+                        alt={val.description}
+                        onClick={() => goToArtItem(val.id)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           ) : (
             <div className="gallery">
               <div className="gallery-item" tabIndex="0">
