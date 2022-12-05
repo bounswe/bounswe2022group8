@@ -14,14 +14,14 @@ function SettingsPasswordPopUp(props) {
             strokeWidth: "0px",
           }}
         />
-        Your password has been successfully updated
+        Your password has been updated successfully 
       </header>
       <div className="settings-password-pop-up-buttons">
         <button
           onClick={props.onClickOkay}
           className="btn btn-primary settings-password-pop-up-btn"
         >
-          Cool
+          Okay
         </button>
       </div>
     </div>
