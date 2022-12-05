@@ -12,6 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username',  'is_level2', 'name', 'surname',
                   'email', 'profile_path', 'created_at', 'updated_at']
 
+class CommentUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'profile_path']
+
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,6 +40,11 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'body', 'parent', 'commented_by', 'commented_on', 'created_at', 'lft', 'rght', 'tree_id', 'level']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep["commented_by"] = CommentUserSerializer(instance.commented_by).data 
+        return rep
 
 
 class SimpleUserSerializer(serializers.ModelSerializer):

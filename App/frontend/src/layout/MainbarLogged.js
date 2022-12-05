@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Searchbar from "../components/Searchbar";
 import MenuButton from "../components/MenuButton";
 import { SlEnvolope } from "react-icons/sl";
+import artopia_logo from "../images/artopia_logo.png";
 
 import "./styles/Mainbar.css";
 
@@ -32,7 +33,7 @@ function MainbarLogged(props) {
       <Container fluid>
         <Link to="/" style={{ textDecoration: "none" }} onClick={scrollToTop}>
           <Navbar.Brand className="ms-4 me-5" style={{ color: "white" }}>
-            App Name
+            <img className="logo-image" src={artopia_logo} alt="logo" />
           </Navbar.Brand>
         </Link>
         <Navbar.Collapse>

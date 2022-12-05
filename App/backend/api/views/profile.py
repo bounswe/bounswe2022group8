@@ -5,17 +5,19 @@ from ..serializers.profile import UserProfileSerializer, UserUpdateProfileSerial
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from knox.auth import TokenAuthentication, AuthToken
+from django.contrib.auth.models import AnonymousUser
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from drf_yasg import openapi
 import base64
 from django.core.files.base import ContentFile
 from ..utils import ProfileImageStorage
+from ..models.user import Follow
 
 
 @ swagger_auto_schema(
     method='get',
-    operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID.",
+    operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID. isFollowed field returns True if currently logged-in user follows the given user. Defaults to False if user is a guest user.",
     operation_summary="Get profile information of a user by unique ID.",
     tags=['profile'],
     responses={
@@ -23,6 +25,7 @@ from ..utils import ProfileImageStorage
             description="Successfully retrieved the profile information of a user.",
             examples={
                 "application/json": {
+                    "id": 1,
                     "username": "pothepanda",
                     "email": "po@jade.edu",
                     "location": "China",
@@ -30,7 +33,10 @@ from ..utils import ProfileImageStorage
                     "surname": "Ping",
                     "about": """The foretold Dragon Warrior of legend, a master of the Panda Style of Kung Fu, noodle lover and an art enthusiast.""",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2,
+                    "isFollowed": True
                 }
             }
         ),
@@ -50,8 +56,18 @@ def profile_api(request, id):
     if (request.method == "GET"):
         try:
             user = User.objects.get(pk=id)
-            serializer = UserProfileSerializer(user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            data = UserProfileSerializer(user).data.copy()
+            
+            if(isinstance(request.user, AnonymousUser)):
+                data["isFollowed"] = False
+            else:
+                try:
+                    Follow.objects.get(from_user=request.user, to_user=user)
+                    data["isFollowed"] = True
+                except:
+                    data["isFollowed"] = False
+            
+            return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"Not Found": "Any user with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
     else:
@@ -68,6 +84,7 @@ def profile_api(request, id):
             description="Successfully retrieved the profile information of the current user.",
             examples={
                 "application/json": {
+                    "id": 1,
                     "username": "budgie",
                     "email": "budgie@mit.edu",
                     "name": "Salvador",
@@ -75,8 +92,9 @@ def profile_api(request, id):
                     "about": "Salvador the budgie who has a deep passion for paintings, especially budgie paintings.",
                     "location": "İstanbul",
                     "profile_path": "avatar/default.png",
-                    "is_level2": False
-
+                    "is_level2": False,
+                    "followers": 3,
+                    "followings": 2
                 }
             }
         ),
@@ -110,6 +128,7 @@ def profile_api(request, id):
             description="Successfully updated the profile of the user, here are the updated values:",
             examples={
                 "application/json": {
+                    "id": 1,
                     "name": "Captain Joseph",
                     "surname": "Blocker",
                     "about": "A veteran of the Indian Wars, who is deeply interested in impressionist art.",
@@ -146,6 +165,7 @@ def profile_me_api(request):
         """
         user = request.user
         serializer = UserProfileSerializer(user)
+ 
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
 

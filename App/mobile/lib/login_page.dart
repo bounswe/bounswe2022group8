@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_mustafa/home_page.dart';
-import 'package:flutter_app_mustafa/routes.dart';
+import 'package:artopia/home_page.dart';
+import 'package:artopia/routes.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/utils/colorPalette.dart';
 import 'templates.dart';
-import 'login.dart' ;
-class LoginScreen extends StatefulWidget {
+import 'login.dart';
 
+class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  
   String _error = "Hello There!";
-  final UsernameInputObject = UsernameInput() ;
+  final TextUtils textUtils = TextUtils();
+  final ColorPalette colorPalette = ColorPalette();
+  final UsernameInputObject = UsernameInput();
   final PasswordInputObject = PasswordInput(name: "Password");
-  Future<String>? _loginResponseMessage ;
+  Future<String>? _loginResponseMessage;
 
   void _setErrorMessage({String error = ""}) {
-    setState((){
+    setState(() {
       _error = error;
     });
   }
@@ -36,22 +39,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  gradient:SweepGradient(
-                      center: FractionalOffset.topRight,
-                      colors: <Color>[
-                        Color.fromARGB(120, 0, 8, 193),
-                        Color.fromARGB(120, 33, 70, 199),
-                        Color.fromARGB(120, 175, 180, 255),
-                        Color.fromARGB(120, 166, 225, 255),
-                      ],
-                    stops: <double>[0.25, 0.60, 0.750, 1],
-                  )
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/background.jpeg'),
+                      fit: BoxFit.cover),
                 ),
               ),
               Container(
                 alignment: Alignment.topCenter,
                 height: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal : 0, vertical: 40),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 40),
                 child: Column(
                   children: const <Widget>[
                     LandingPageRoute(),
@@ -69,76 +66,54 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  <Widget>[
-                       const Text(
-                          "Login",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "OpenSans",
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        )
-                      ),
-                      const SizedBox(height:5),
-                      Text(
-                          _error,
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )
-                      ),
+                    children: <Widget>[
+                      textUtils.buildText("Login", 30,
+                          Colors.white, FontWeight.bold),
+                      const SizedBox(height: 5),
+                      textUtils.buildText(_error, 16,
+                          Colors.white, FontWeight.bold),
                       UsernameInputObject,
                       const SizedBox(height: 10),
                       PasswordInputObject,
                       const SizedBox(height: 20),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          onPressed: (){
-                          
-                          String username = UsernameInputObject.usernameController.text  ;
-                          String password = PasswordInputObject.passwordController.text  ;
-                          login(username,password).then((value){
-                            if (value == "OK"){
-                            Route route = MaterialPageRoute(builder: (context) => const HomePage());
-                            Navigator.pushReplacement(context, route);
-                            }
-                            else{
-                            _setErrorMessage(error:value);
-                            }
-                            print(value);
-                            }) ;
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(12.5),
-                            minimumSize: const Size(400, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              String username =
+                                  UsernameInputObject.usernameController.text;
+                              String password =
+                                  PasswordInputObject.passwordController.text;
+                              login(username, password).then((value) {
+                                if (value == "OK") {
+                                  Route route = MaterialPageRoute(
+                                      builder: (context) => const HomePage());
+                                  Navigator.pushReplacement(context, route);
+                                } else {
+                                  _setErrorMessage(error: value);
+                                }
+                                print(value);
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(12.5),
+                              minimumSize: const Size(400, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              backgroundColor: colorPalette.russianGreen,
                             ),
-                            backgroundColor: Colors.white,
-                          ),
-                          child: const Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontFamily: "OpenSans",
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
+                            child: textUtils.buildText("LOGIN", 20,
+                                Colors.white, FontWeight.bold),
                         ),
                       ),
                       // ForgotPassword(),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

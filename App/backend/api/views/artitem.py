@@ -14,6 +14,7 @@ from knox.auth import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from drf_yasg import openapi
 import base64
+import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
 
@@ -126,7 +127,7 @@ def post_artitem(request):
             try:
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
-                id_ = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
+                id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
                 filename = 'artitem-{pk}.png'.format(
                     pk=id_)
                 request.data['artitem_image'] = ContentFile(decoded, filename)
@@ -190,7 +191,10 @@ def delete_artitem(request, id):
             artitem = ArtItem.objects.get(pk=id)
             u = request.user
             if (artitem.owner == u):
+                client = boto3.client('s3') 
+                client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=artitem.artitem_path)
                 artitem.delete()
+                            
             else:
                 return Response({"Invalid Attempt": "Cannot delete art item of another user."}, status=status.HTTP_403_FORBIDDEN)
             return Response(status=status.HTTP_204_NO_CONTENT)
