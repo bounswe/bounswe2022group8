@@ -40,6 +40,9 @@ function Profile(props) {
   // just to decide after two unnecessary renders whether the gallery is empty or not
   const [emptyGallery, setEmptyGallery] = useState(null);
 
+  // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
+  const [newImageUploaded, setNewImageUploaded] = useState(true);
+
   const AWS = require("aws-sdk");
   dotenv.config();
   AWS.config.update({
@@ -131,7 +134,7 @@ function Profile(props) {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username]);
+  }, [host, token, profileInfo.username, newImageUploaded]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
@@ -248,6 +251,9 @@ function Profile(props) {
             setPostError={(error) => setPostError(error)}
             uploadInfoError={uploadInfoError}
             setUploadInfoError={(error) => setUploadInfoError(error)}
+            newImageUploaded = {newImageUploaded}
+            setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
+            closeUploadCard = {() => setUpload(false)}
           />
           {navTab ? (
             // what if gallery is empty ?

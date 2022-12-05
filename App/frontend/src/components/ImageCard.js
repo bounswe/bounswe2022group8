@@ -4,7 +4,9 @@ function ImageCard(props) {
   return (
     <div className="ic-container">
       <img className="ic-image" src={props.source} alt="" />
-      <button className="ic-button">{props.name}</button>
+      <button onClick={props.onClick} className="ic-button">
+        {props.name}
+      </button>
     </div>
   );
 }

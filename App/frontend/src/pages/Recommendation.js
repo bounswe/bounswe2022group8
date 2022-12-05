@@ -1,29 +1,132 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { HOST } from "../constants/host";
 import Layout from "../layout/Layout";
 
 import defaultUserImage from "../images/defaultUserImage.png";
 import "./styles/Recommendation.css";
+import * as dotenv from "dotenv";
 import { SampleArtItems } from "./data/SampleArtItems";
 import { SampleExhibitions } from "./data/SampleExhibitions";
 import { SampleUsers } from "./data/SampleUsers";
 
 function Recommendation(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
+  const navigate = useNavigate();
+
+  var host = HOST;
+
+  const [artItemInfos, setArtItemInfos] = useState([]);
+  const [artItemPaths, setArtItemPaths] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [allUsersPhotos, setAllUsersPhotos] = useState([]);
+
+  const AWS = require("aws-sdk");
+  dotenv.config();
+  AWS.config.update({
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  });
+
+  const s3 = new AWS.S3();
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/artitems/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log(response);
+        setArtItemInfos(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var art_item_paths = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          art_item_paths.push(artitem_url);
+        }
+
+        setArtItemPaths(art_item_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
+  function goToArtItem(id) {
+    navigate(`/artitems/${id}`);
+    scrollToTop();
+  }
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/profile/users/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log(response);
+        setAllUsers(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var profile_photos = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].profile_path,
+          };
+
+          var profile_path = s3.getSignedUrl("getObject", params);
+
+          profile_photos.push(profile_path);
+        }
+
+        setAllUsersPhotos(profile_photos);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   return (
     <Layout>
       <main>
         <div class="recommendation-container">
           <div class="recommended-artitems">
             <h1>
-              Discover Art Items <a href="/discover-artitems">SEE MORE</a>
+              Discover Art Items <Link to="/discover-artitems">SEE MORE</Link>
             </h1>
 
             <div class="list">
-              {SampleArtItems.map((val, key) => {
+              {artItemInfos.slice(0, 5).map((val, index) => {
                 return (
-                  <div key={key} className="artitem">
-                    <img src={val.src} alt="" />
+                  <div key={val.id} className="artitem">
+                    <img
+                      onClick={() => goToArtItem(val.id)}
+                      src={artItemPaths[index]}
+                      alt={val.description}
+                    />
                     <div class="context">
-                      <h4>{val.name}</h4>
+                      <h4>{val.title}</h4>
                       <p>{val.description}</p>
                     </div>
                   </div>
@@ -35,7 +138,7 @@ function Recommendation(props) {
           <div class="recommended-exhibitions">
             <h1>
               Discover Exhibitions{" "}
-              <a href="/discover-exhibitions">SEE MORE</a>
+              <Link to="/discover-exhibitions">SEE MORE</Link>
             </h1>
             <div class="list">
               {SampleExhibitions.map((val, key) => {
@@ -56,13 +159,13 @@ function Recommendation(props) {
           <div class="recommended-users">
             <h1>
               Users you may want to follow...{" "}
-              <a href="/discover-users">SEE MORE</a>
+              <Link to="/discover-users">SEE MORE</Link>
             </h1>
             <div class="list">
-              {SampleUsers.map((val, key) => {
+              {allUsers.slice(0, 5).map((val, index) => {
                 return (
-                  <div key={key} className="user">
-                    <img src={defaultUserImage} alt="" />
+                  <div key={val.id} className="user">
+                    <img src={allUsersPhotos[index]} alt="" />
                     <div class="context">
                       <h4>{val.username}</h4>
                       <p>{val.name}</p>
