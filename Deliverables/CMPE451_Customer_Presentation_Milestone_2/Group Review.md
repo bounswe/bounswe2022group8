@@ -55,9 +55,20 @@
 
 <details>
     <summary> Sinem Koçoğlu </summary>
-
-
- 
+    
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |  :----: |
+ |  Meeting |  Attended weekly meeting #5.    |  1 hour  |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+ |  Meeting - FE |  Attended Week 5 FE Meeting.    |  40 minutes |  [Week 5 FE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Frontend-Meeting-Notes-2) |
+  |  Meeting |  Attended Week 9 Meeting #6.   |  2 hours  |  [Week 9 Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+  |  Meeting - FE |  Attended Week 7 FE Meeting.   |  2 hours  |  [Week 7 FE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-Frontend-Meeting-Notes-3)|
+ | Implementation | First view of profile page created on branch feature/FE-10 | 7 hour |  [Issue: #241](https://github.com/bounswe/bounswe2022group8/issues/241) |
+|Research|Study different settings pages to discuss in lab session with frontend team |3 hours||
+|Implementation|Improved profile page |3 hours|[Issue:#241](https://github.com/bounswe/bounswe2022group8/issues/241)|
+ | Implementation | First view of recommendation page created on branch feature/FE-15 | 7 hour|[Issue:#267](https://github.com/bounswe/bounswe2022group8/issues/267) |
+| Implementation | Research and improvements on recommendation page | 4 hour |[PR](https://github.com/bounswe/bounswe2022group8/pull/304)|
+| Implementation | Adding logo and correcting typos on frontend.| 30 min | [Issue:#305](https://github.com/bounswe/bounswe2022group8/issues/305) and [PR](https://github.com/bounswe/bounswe2022group8/pull/309) |
+ | Implementation | Working on branch feature/FE-17 to satisfy tasks stated in issues | 7 hour| [Issue:#306](https://github.com/bounswe/bounswe2022group8/issues/306) and [Issue:#307](https://github.com/bounswe/bounswe2022group8/issues/307) but not completed due to health issues. |
 </details>
 
 <details>
