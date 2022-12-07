@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from .user import User
+from django.template.defaultfilters import date
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -22,8 +23,13 @@ class ArtItem(models.Model):
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps
 
+    @property
+    def create_date(self):
+        return date(self.created_at, "m/d/Y H:M'")
+    
     def __str__(self):
         return "Art item: " + self.title
