@@ -86,7 +86,8 @@ REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': 'ERROR',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'knox.auth.TokenAuthentication',
-    ]
+    ],
+    'DATETIME_FORMAT': '%d-%m-%Y %H:%M:%S'
 }
 
 WSGI_APPLICATION = 'backend.wsgi.application'
@@ -125,11 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
 
 from datetime import timedelta
 
@@ -163,3 +159,8 @@ SWAGGER_SETTINGS = {
     "DEFAULT_MODEL_RENDERING": "example"
 
 }
+
+TIME_ZONE = 'Europe/Istanbul'
+USE_I18N = True
+USE_L10N = False 
+USE_TZ = True

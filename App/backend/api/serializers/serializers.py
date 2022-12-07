@@ -29,7 +29,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class ArtItemSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
+    #created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
 
     class Meta:
         model = ArtItem
