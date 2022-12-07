@@ -157,6 +157,81 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 * Let me provide the Postman Collection [here](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_2/CmpE451%20API.postman_collection.json). `{{prod}}` stands for `34.125.134.88`.
 
 ## 6. User Interface and User Experience
+<details>
+    <summary>Web</summary>
+    
+#### Home Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Home.js)
+* UI: 
+    ![home1](https://user-images.githubusercontent.com/98259272/206314671-eb4af8f4-8797-4566-bda5-080aaa9887b0.png)
+    ![home2](https://user-images.githubusercontent.com/98259272/206314697-bda8a10b-5ae5-4067-9288-fba2c832e600.png)
+    ![home3](https://user-images.githubusercontent.com/98259272/206314712-4f061c77-5682-43dc-a6df-b2e7f52e8bc3.png)
+#### Login Pop-up
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/LoginModal.js) 
+* UI:
+    ![login](https://user-images.githubusercontent.com/98259272/206314720-4d8d4686-a2ed-4e5f-bedc-91f47cd60b48.png)
+
+#### Sign up Pop-up
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/SignupModal.js)
+* UI:
+    ![sign up](https://user-images.githubusercontent.com/98259272/206314739-5d915561-841c-4fc1-aa34-1ae606aba007.png)
+
+#### Profile Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Profile.js)
+* UI:
+    ![profile1](https://user-images.githubusercontent.com/98259272/206314750-01434d05-cfbe-4665-9478-928f66405e6f.png)
+    ![profile2](https://user-images.githubusercontent.com/98259272/206314761-bdcd97c6-105f-4d72-8c8e-9b87b9487b0d.png)
+    ![profile3](https://user-images.githubusercontent.com/98259272/206314774-7a50be9b-33b4-4e5f-ae02-8ebdd6a6d493.png)
+  
+#### Art Item Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/ArtItem.js)
+* UI:
+    ![artitem](https://user-images.githubusercontent.com/98259272/206314832-ea8251b1-3b17-41ee-9b25-50a5fba2421b.png)
+   
+#### Sidebar
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/layout/Sidebar.js)
+* UI:
+    ![sidebar](https://user-images.githubusercontent.com/98259272/206314785-ed9f93fb-f379-48f5-ac3b-1b85ceb3b849.png)
+  
+#### Discover Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Recommendation.js)
+* UI:
+    ![discover1](https://user-images.githubusercontent.com/98259272/206314854-f91c8f4a-a42b-49fb-a3c2-eb628a1a99fa.png)
+    ![discover2](https://user-images.githubusercontent.com/98259272/206316175-3c63bd4c-4123-4f04-93b7-de8eedaa3de6.png)
+    ![discover3](https://user-images.githubusercontent.com/98259272/206314894-b96a2ae9-78cc-4409-a868-575e7a25bbcf.png)
+    
+#### Discover Art Items Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedArtitems.js)
+* UI:
+    ![discoart1](https://user-images.githubusercontent.com/98259272/206316819-9e98f960-58d1-4c23-988d-01ffd9522637.png)
+    ![discoart2](https://user-images.githubusercontent.com/98259272/206316825-56c4fd40-2ab5-48dc-bded-b3e1dea11277.png)
+
+#### Discover Users Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedUsers.js)
+* UI:
+    ![discouser](https://user-images.githubusercontent.com/98259272/206316838-56189929-9b02-49ab-9f6f-955735e23b14.png)    
+    
+#### Settings Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Settings.js) 
+* UI:
+    ![settings1](https://user-images.githubusercontent.com/98259272/206314803-0b12152a-c167-4cc4-8b89-373c2ef5c228.png)
+    ![settings2](https://user-images.githubusercontent.com/98259272/206314814-b4355a4a-b507-4bf0-b828-a7f4b9c68880.png)
+
+</details>   
+
+<details>
+    <summary>Mobile</summary>
+</details> 
 
 ## 7. Annotations
 
