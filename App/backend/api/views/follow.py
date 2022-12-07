@@ -131,8 +131,8 @@ def unfollow_user(request, id):
                                     "surname": "",
                                     "email": "ryan@outlook.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:37:44.598661Z",
-                                    "updated_at": "2022-11-18T12:37:44.598661Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 },
                                 {
                                     "id": 5,
@@ -142,8 +142,8 @@ def unfollow_user(request, id):
                                     "surname": "",
                                     "email": "cohen@hotmail.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:36:28.726155Z",
-                                    "updated_at": "2022-11-18T12:36:28.726155Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 }
                             ],
                         }
@@ -179,8 +179,8 @@ def get_my_followers(request):
                                     "surname": "",
                                     "email": "till@outlook.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:58:08.730853Z",
-                                    "updated_at": "2022-11-18T12:58:08.730853Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 },
                                 {
                                     "id": 10,
@@ -190,8 +190,8 @@ def get_my_followers(request):
                                     "surname": "",
                                     "email": "lostButWon@princeton.edu",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T13:00:27.744864Z",
-                                    "updated_at": "2022-11-18T13:00:27.744864Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 },
                                 {
                                     "id": 5,
@@ -201,8 +201,8 @@ def get_my_followers(request):
                                     "surname": "",
                                     "email": "cohen@hotmail.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:36:28.726155Z",
-                                    "updated_at": "2022-11-18T12:36:28.726155Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 }
                             ],
                         }
@@ -238,8 +238,8 @@ def get_my_followings(request):
                                     "surname": "",
                                     "email": "ryan@outlook.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:37:44.598661Z",
-                                    "updated_at": "2022-11-18T12:37:44.598661Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 },
                                 {
                                     "id": 5,
@@ -249,8 +249,8 @@ def get_my_followings(request):
                                     "surname": "",
                                     "email": "cohen@hotmail.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:36:28.726155Z",
-                                    "updated_at": "2022-11-18T12:36:28.726155Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 }
                             ],
                         }
@@ -295,8 +295,8 @@ def get_followers(request, id):
                                     "surname": "",
                                     "email": "greg@gmail.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T11:30:11.383870Z",
-                                    "updated_at": "2022-11-18T11:30:11.383870Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 },
                                 {
                                     "id": 6,
@@ -306,8 +306,8 @@ def get_followers(request, id):
                                     "surname": "",
                                     "email": "ryan@outlook.com",
                                     "profile_path": "avatar/default.png",
-                                    "created_at": "2022-11-18T12:37:44.598661Z",
-                                    "updated_at": "2022-11-18T12:37:44.598661Z"
+                                    "created_at": "08-12-2022 00:38:25",
+                                    "updated_at": "08-12-2022 00:38:25"
                                 }
                             ],
                         }

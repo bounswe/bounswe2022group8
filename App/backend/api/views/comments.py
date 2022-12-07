@@ -32,7 +32,7 @@ from django.core import serializers
                         "profile_path": "avatar/default.png"
                     },
                     "commented_on": 1,
-                    "created_at": "2022-11-12T21:13:50.580335Z",
+                    "created_at": "08-12-2022 00:38:25",
                     "lft": 3,
                     "rght": 4,
                     "tree_id": 1,
@@ -70,7 +70,7 @@ from django.core import serializers
                         "profile_path": "avatar/default.png"
                     },
                     "commented_on": 1,
-                    "created_at": "2022-11-13T16:34:03.316236Z",
+                    "created_at": "08-12-2022 00:38:25",
                     "lft": 6,
                     "rght": 7,
                     "tree_id": 1,
@@ -212,7 +212,7 @@ def CommentView(request, artitemid, id):
                         "profile_path": "avatar/default.png"
                     },
                     "commented_on": 1,
-                    "created_at": "2022-11-13T16:34:13.231104Z",
+                    "created_at": "08-12-2022 00:38:25",
                     "lft": 1,
                     "rght": 2,
                     "tree_id": 6,
@@ -253,7 +253,7 @@ def CommentView(request, artitemid, id):
                                 "profile_path": "avatar/default.png"
                             },
                             "commented_on": 1,
-                            "created_at": "2022-11-12T20:48:33.527802Z",
+                            "created_at": "08-12-2022 00:38:25",
                             "lft": 1,
                             "rght": 10,
                             "tree_id": 1,
@@ -269,7 +269,7 @@ def CommentView(request, artitemid, id):
                                 "profile_path": "avatar/default.png"
                             },
                             "commented_on": 1,
-                            "created_at": "2022-11-12T20:48:59.238290Z",
+                            "created_at": "08-12-2022 00:38:25",
                             "lft": 2,
                             "rght": 9,
                             "tree_id": 1,
@@ -285,7 +285,7 @@ def CommentView(request, artitemid, id):
                                 "profile_path": "avatar/default.png"
                             },
                             "commented_on": 1,
-                            "created_at": "2022-11-12T21:13:50.580335Z",
+                            "created_at": "08-12-2022 00:38:25",
                             "lft": 3,
                             "rght": 4,
                             "tree_id": 1,

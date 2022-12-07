@@ -7,9 +7,6 @@ from ..models.user import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
-    updated_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
-
     class Meta:
         model = User
         fields = ['id', 'username',  'is_level2', 'name', 'surname',
@@ -22,14 +19,12 @@ class CommentUserSerializer(serializers.ModelSerializer):
 
 
 class TagSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
     class Meta:
         model = Tag
         fields = ['id', 'tagname', 'description', 'created_at', 'updated_at']
 
 
 class ArtItemSerializer(serializers.ModelSerializer):
-    #created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
 
     class Meta:
         model = ArtItem
@@ -43,7 +38,6 @@ class ArtItemSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%d-%m-%Y %H:%m', input_formats=None)
     class Meta:
         model = Comment
         fields = ['id', 'body', 'parent', 'commented_by', 'commented_on', 'created_at', 'lft', 'rght', 'tree_id', 'level']

@@ -381,7 +381,7 @@ def artitems_by_username(request, username):
                         "type": "sketch",
                         "tags": [],
                         "artitem_path": "artitem/artitem-0.png",
-                        "created_at": "2022-11-18T13:51:56.342042Z"
+                        "created_at": "08-12-2022 00:38:25"
                     }
                 ]
             }
