@@ -51,6 +51,8 @@ As you might know, at the first milestone stage we had already implemented the r
 
 From this point onward, we plan on adding several more functionalities to our app. First off, we will supply frontend-backend connections for the APIs that were created but not yet used (such as tags and forgot password and follow). Simultaneously, we will continue with annotation research (standards, libraries) and get to implementing as soon as possible. We have also held a general meeting and went over the remaining tasks. Revised the priority of each task and allocated our resources accordingly (which systems we wanted to start implementing first etc.). And consequently, we have made some updates to our project plan as well. On a more practical level you may expect to see annotations, exhibition and bidding systems implemented very soon. We’re looking forward to making it to the finish line.
 
+**Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
+
 
 
 
