@@ -336,7 +336,7 @@ Although we don't have an annotation implementation yet, we are aware of the imp
 
 ## 8. Standards
 
-During the implementation process of our project, as a whole team, we took great care to comply with W3C standards and we tried to research and comply with best practices, especially in accessibility and privacy issues. The parts we paid particular attention to can be categorized under the following items:
+During the implementation process of our project, as a whole team, we took great care to comply with W3C standards and we tried to research and comply with best practices, especially in accessibility, security and privacy issues. The parts we paid particular attention to can be categorized under the following items:
 
 * All passwords were hashed with the sha256 hashing algorithm and all data exchanges involving passwords took place over the encoded versions of these passwords. Of course, they are also encrypted in our database.
 
