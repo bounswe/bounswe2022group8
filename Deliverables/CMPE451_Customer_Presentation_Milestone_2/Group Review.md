@@ -269,6 +269,7 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 </details> 
 
 ## 7. Annotations
+Although we don't have an annotation implementation yet, we are aware of the importance of annotations and annotation implementation is at the top of our to-do list until the next milestone. As a result of the notes we took during the Milestone 2 presentations and the research we did, we decided to use @recogito/recogito-js and @recogito/annotorious react libraries for text annotations and image annotations respectively. Also, on the backend, we have already started setting up the annotation server.
 
 ## 8. Standards
 
