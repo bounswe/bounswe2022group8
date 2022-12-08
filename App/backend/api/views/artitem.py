@@ -60,7 +60,15 @@ from django.core.files.base import ContentFile
                     }
                 ]
             }
-        )
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
     }
 )
 @api_view(["GET"])
@@ -84,11 +92,11 @@ def get_artitems(request):
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the art item', default="Joel Miller from TLOU universe."),
             "type": openapi.Schema(type=openapi.TYPE_STRING, description='type of the art item', default="Sketch"),
             "tags": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='an array of tag IDs attached to the art item (can be empty)', default=[1]),
-            "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string"),
+            "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string")
         }),
     responses={
-        status.HTTP_200_OK: openapi.Response(
-            description="Successfully retrieved all the art items in the system.",
+        status.HTTP_201_CREATED: openapi.Response(
+            description="Successfully created an art item.",
             examples={
                 "application/json": [
                     {
@@ -108,7 +116,19 @@ def get_artitems(request):
                     }
                 ]
             }
-        )
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {"detail": "Invalid token."}
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad Request is raised when the given data is not enough to be serialized as an art item object.",
+            examples={
+                "application/json": {"type": ["This field is required."]}
+            }
+        ),
     }
 )
 @api_view(["POST"])
@@ -136,7 +156,7 @@ def post_artitem(request):
                 request.data['artitem_path'] = artitem_image_storage.location + \
                     "/" + filename
             except:
-                return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"Invalid Input": "Given artitem image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
         request.data["owner"] = request.user.id
         serializer = ArtItemSerializer(data=request.data)
@@ -175,7 +195,7 @@ def post_artitem(request):
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="User cannot be found.",
+            description="Invalid token.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
@@ -252,7 +272,6 @@ def artitems_by_id(request, id):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-
 
 @ swagger_auto_schema(
     method='get',
@@ -384,6 +403,14 @@ def artitems_by_username(request, username):
                         "created_at": "08-12-2022 00:38:25"
                     }
                 ]
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
             }
         ),
     }
