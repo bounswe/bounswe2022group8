@@ -12,13 +12,44 @@
 9. [Individual Reports](#9-individual-reports)
 
 ## 1. Executive Summary
-### *Summary*
+### *Description*
+We are a group of Bogazici University students who are taking the CMPE451 course in the Fall 2022 semester. We are developing an Art Community Platform where users can share their art items, interact with other users via comments, exhibitions and do much more. Users can view different art items through the feed on the home page. Registered users, can upload their own art items, share personal information through their profile and discover others’ art through the discover/recommendation page. They can also participate in exhibitions, share the geolocation of their exhibition, and interact with other users via comments. Registered users can even sell and make offers on art items through our app. 
 
+### *Changes since Milestone 1 (Current Status)*
 
-### *Changes since Milestone 1*
-
+As you might know, at the first milestone stage we had already implemented the register and sign-in functionality, along with the initial versions of the homepage both for web and mobile. Since then, we have added several main features to our app which I will list below for ease of reading.
+#### Backend
+*	Art item model updated, CRUD APIs implemented.
+*	User Profile upload/update APIs implemented.
+*	Comments model updated, CRUD APIs implemented.
+*	Forgot password + password update APIs implemented. Email for the application created/configured.
+*	Tag CRUD APIs implemented.
+*	User delete API implemented(may need update).
+*	Follow model updated, CRUD APIs implemented.
+*	Like, unlike API implemented ?
+*	We also created workflows for automated build and push of dockerfiles using Github Actions and Github Packages.
+#### Web frontend
+*	Profile page created, connected.
+*	Settings/profile update page created, connected.
+*	Discover page implemented, connected for users and art items.
+*	Static exhibition page created.
+*	Art item page created, connected(+upload art item).
+*	Comments for the art item implemented.
+*	Password update through settings.
+#### Mobile
+*	Profile page created, connected.
+*	Settings/profile update page created, connected.
+*	Styling updated to match web.
+*	Art item page created, connected (+upload art item).
+*	Comments for the art item implemented.
+*	Home page created.
+*	Forgot password + password update functionality implemented/connected.
 
 ### *Future Plans*
+
+From this point onward, we plan on adding several more functionalities to our app. First off, we will supply frontend-backend connections for the APIs that were created but not yet used (such as tags and forgot password and follow). Simultaneously, we will continue with annotation research (standards, libraries) and get to implementing as soon as possible. We have also held a general meeting and went over the remaining tasks. Revised the priority of each task and allocated our resources accordingly (which systems we wanted to start implementing first etc.). And consequently, we have made some updates to our project plan as well. On a more practical level you may expect to see annotations, exhibition and bidding systems implemented very soon. We’re looking forward to making it to the finish line.
+
+
 
 
 ## 2. Summary of Work
