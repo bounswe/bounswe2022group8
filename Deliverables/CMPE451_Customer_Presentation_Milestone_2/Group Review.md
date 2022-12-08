@@ -336,6 +336,18 @@ Although we don't have an annotation implementation yet, we are aware of the imp
 
 ## 8. Standards
 
+During the implementation process of our project, as a whole team, we took great care to comply with W3C standards and we tried to research and comply with best practices, especially in accessibility and privacy issues. The parts we paid particular attention to can be categorized under the following items:
+
+* All passwords were hashed with the sha256 hashing algorithm and all data exchanges involving passwords took place over the encoded versions of these passwords. Of course, they are also encrypted in our database.
+
+* Since we are an art application, images are the most important part of our application. That's why we paid special attention to the security of the images. Our images are stored in AWS S3 private bucket in a very secure way with Amazon assurance. These images cannot be accessed without the key of the bucket. So even if someone accesses the url of any user's image, they will not be able to open it directly. Most importantly, we have not hard coded any key in the code and we have always tried to implement best practices for security in general. 
+
+* In the whole process of writing the application, we took care to get minimum data from our users. We made many things such as name and location optional. Each registered user has a unique and encrypted authentication token specific to the session and this token is stored in local storage. Except for this information, we have not kept any information about the user in local storage so far.
+
+* We made sure to provide metadata in our application. We used alt attribute in almost every image and we used aria-label tag in many of our interactive elements.
+
+* We tried not to write the whole application as a bunch of meaningless divs. We did our best to increase tag diversity by using different HTML tags for different purposes. 
+
 ## 9. Individual Reports 
 
 <details>
