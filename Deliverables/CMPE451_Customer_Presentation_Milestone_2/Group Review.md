@@ -25,8 +25,9 @@ As you might know, at the first milestone stage we had already implemented the r
 *	Forgot password + password update APIs implemented. Email for the application created/configured.
 *	Tag CRUD APIs implemented.
 *	User delete API implemented(may need update).
+*	Like/unlike artitems/comments APIs _partially_ implemented.
 *	Follow model updated, CRUD APIs implemented.
-*	Like, unlike API implemented ?
+*	Amazon S3 integration is done for the image storage.
 *	We also created workflows for automated build and push of dockerfiles using Github Actions and Github Packages.
 #### Web frontend
 *	Profile page created, connected.
