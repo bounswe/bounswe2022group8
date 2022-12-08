@@ -26,10 +26,6 @@ class ArtItem(models.Model):
     
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps
-
-    @property
-    def create_date(self):
-        return date(self.created_at, "m/d/Y H:M'")
     
     def __str__(self):
         return "Art item: " + self.title
