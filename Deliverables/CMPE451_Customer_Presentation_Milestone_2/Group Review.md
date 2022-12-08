@@ -378,6 +378,63 @@ I mainly worked on mobile app so I gave all of my effort to develop mobile appli
 </details>
 
 <details>
+    <summary> Sinem Koçoğlu </summary>
+    
+I am Sinem Koçoğlu and I am member of group 8 frontend team.
+
+### Responsibilities
+* Creation of the first design of profile page.
+* Study different settings pages to discuss in lab session with Furkan Keskin.
+* Improvement on profile page and first design of art item page.
+* Creation and design of recommendation pages.
+* Logo integration and typo correction on frontend.
+* PR Review: hotfix/FE-20
+* PR Review: feature/FE-23
+* Adding user interfaces for web to the Milestone II document.
+* Taking notes during Week#10 Meeting#7
+* Providing follow functionality on frontend. (not completed due to health issues)
+* Providing hover over text annotation on frontend. (not completed due to health issues)
+
+### Main Contributions
+I have created the first design of profile page. Then, worked on design of settings page but I couldn't create a good design. That's why, Furkan Keskin took the responsibility of it and I created the first view of art item page that was improved by Furkan Keskin later. Then, I took the responsibility of creation of recommendation pages of frontend. I made changes according to the feedback we got in Milestone I presentation. I couldn't complete my tasks due to some health issues. They will be provided until final milestone.
+    
+**Code Related Issues**
+* [FE-10](https://github.com/bounswe/bounswe2022group8/issues/241)
+* [FE-15](https://github.com/bounswe/bounswe2022group8/issues/267)
+* [FE-16](https://github.com/bounswe/bounswe2022group8/issues/305)
+* [FE-17](https://github.com/bounswe/bounswe2022group8/issues/307)
+
+**Management Related Issues**
+* [GEN-36](https://github.com/bounswe/bounswe2022group8/issues/336)
+
+
+**Pull Requests**
+* [feature/FE-16](https://github.com/bounswe/bounswe2022group8/pull/309)
+* [feature/FE-15](https://github.com/bounswe/bounswe2022group8/pull/304)
+
+
+**Unit Tests**
+
+You can find frotend unittests [here](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
+
+My unittests:
+    
+* SignupModal.test.js
+* SettingsProfilePopUp.test.js
+* SettingsPasswordPopUp.test.js
+
+
+**Additional**
+    
+PR reviews:
+* [hotfix/FE-20](https://github.com/bounswe/bounswe2022group8/pull/337)
+* [feature/FE-23](https://github.com/bounswe/bounswe2022group8/pull/339)
+
+
+</details>
+
+
+<details>
     <summary> Karahan Sarıtaş </summary>
     
 I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I'm working in the backend team.
