@@ -182,6 +182,8 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 ## 4. Progress According to Requirements
 
+The requirements page of the application [here](https://github.com/bounswe/bounswe2022group8/wiki/Requirements).
+
 ### 1.1. User Requirements
 
 <details>
