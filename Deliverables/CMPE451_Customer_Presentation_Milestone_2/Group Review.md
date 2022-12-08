@@ -213,6 +213,12 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/SignupModal.js)
 * UI:
     ![sign up](https://user-images.githubusercontent.com/98259272/206314739-5d915561-841c-4fc1-aa34-1ae606aba007.png)
+    
+#### Reset Password Pop-up
+    
+ * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/ResetPasswordModal.js)
+ * UI:
+    ![forgotpassword](https://user-images.githubusercontent.com/98259272/206521742-d41bf4a8-331b-4567-ae2a-d8400b53404a.png)
 
 #### Profile Page
     
