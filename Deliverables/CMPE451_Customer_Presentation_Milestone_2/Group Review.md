@@ -28,6 +28,7 @@ As you might know, at the first milestone stage we had already implemented the r
 *	Like/unlike artitems/comments APIs _partially_ implemented.
 *	Follow model updated, CRUD APIs implemented.
 *	Amazon S3 integration is done for the image storage.
+*	Swagger integration is done for the documentation of APIs.
 *	We also created workflows for automated build and push of dockerfiles using Github Actions and Github Packages.
 #### Web frontend
 *	Profile page created, connected.
