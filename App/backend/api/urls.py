@@ -14,7 +14,7 @@ from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_f
 from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
 from .views.user import users_api
-
+from .views.exhibition import get_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid, delete_offline_exhibition, delete_online_exhibition
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
@@ -76,8 +76,16 @@ urlpatterns = [
     path('users/<int:id>/followings/', get_followings, name="get_followings"),
     path('artitems/me/followings/', artitems_of_followings, name="get_artitems_of_followings"),
     path('artitems/tags/<int:id>', TagView, name="Tagview"),
-    path('artitems/tags/', TagsView, name="TagsView")
-
+    path('artitems/tags/', TagsView, name="TagsView"),
+    path('exhibitions/', get_exhibitions, name="get_exhibitions"),
+    path('exhibitions/me/offline/', create_offline_exhibition, name="create_offline_exhibitions"),
+    path('exhibitions/me/online/', create_online_exhibition, name="create_online_exhibitions"),
+    path('exhibitions/online/<int:id>', get_online_exhibitions_by_id, name="get_online_exhibition_by_id"),
+    path('exhibitions/offline/<int:id>', get_offline_exhibitions_by_id, name="get_offline_exhibitions_by_id"),
+    path('exhibitions/users/<int:userid>/offline/', get_offline_exhibitions_by_userid, name="get_offline_exhibitions_by_userid"),
+    path('exhibitions/users/<int:userid>/online/', get_online_exhibitions_by_userid, name="get_online_exhibitions_by_userid"),
+    path('exhibitions/users/offline/<int:id>', delete_offline_exhibition, name="delete_offline_exhibition_by_id"),
+    path('exhibitions/users/online/<int:id>', delete_online_exhibition, name="delete_online_exhibition_by_id"),
 ]
 
 # added to give us the option to choose between default Response template and regular json
