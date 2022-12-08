@@ -173,8 +173,16 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Mustafa Cihan </summary>
     
-
-
+ |  Task Type   | Task Description |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |
+ | Implementation | Redesigning landing page | [MOB-6: Revising Landing Page](https://github.com/bounswe/bounswe2022group8/issues/238)|
+ | Implementation | Creating Art Item Pages | [MOB-8: Creating Art Item Pages](https://github.com/bounswe/bounswe2022group8/issues/282)|
+ | Implementation | Revise Signup and Login page | [MOB-13: Revise Signup and Login page](https://github.com/bounswe/bounswe2022group8/issues/287)|
+ | Implementation | Revising Homepage | [MOB-14: Revising Homepage](https://github.com/bounswe/bounswe2022group8/issues/289)|
+ | Implementation | Static Comment Page| [MOB-15: Static Comment Page](https://github.com/bounswe/bounswe2022group8/issues/315)|
+ | Implementation | Connecting Comment Page| [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)|
+ 
+    
 </details>
 
 
