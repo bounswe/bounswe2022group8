@@ -182,6 +182,53 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 ## 4. Progress According to Requirements
 
+### 1.1. User Requirements
+
+<details>
+    <summary> 1.1.1. Registration/Login </summary>
+    
+* 1.1.1.1. Users shall be able to register to the application providing their e-mail, username and password.
+    * 1.1.1.1.1. Both e-mail and username shall be unique for each account.
+    * 1.1.1.1.2. Username of the user must start with a letter, cannot end with an underscore, must have at least 6 characters and can consist of letters, numbers or underscores.
+    * 1.1.1.1.3. Passwords of the user must have at least 10 characters, cannot be similar to his e-mail or username and cannot be a common password.
+* 1.1.1.2. Users shall be able to log in to the application using their credentials, (username or e-mail), and password.
+* 1.1.1.3. Logged-in users shall be able to safely log out.
+* 1.1.1.4. Registered users shall be able to reset their passwords when logged in from profile settings.
+    
+</details>
+
+<details>
+    <summary> 1.1.2. Guest Users </summary>
+    
+* 1.1.2.1. Guest users shall be able to view the publicly visible art items on the platform.
+* 1.1.2.2. Guest users shall be able to zoom in to an art item to examine it more closely.
+* 1.1.2.3. Guest users shall be able to read the comments.
+</details>
+
+<details>
+    <summary> 1.1.3. Profile Management </summary>
+     
+* 1.1.3.1. Registered users shall be able to edit their personal information shown on their profile pages.
+    * 1.1.3.1.1. Registered users shall be able to add short descriptions about themselves on their profile pages.
+    * 1.1.3.1.2. Registered users shall be able to provide name, surname, age and location.
+    * 1.1.3.1.3. Registered users shall be able to upload/change their profile picture.
+        
+</details>
+        
+<details>
+    <summary> 1.1.4. User Interaction </summary>
+
+* 1.1.4.3. Registered users shall be able to upload and share art items.
+    * 1.1.4.3.3. Registered users shall be able to add a title to the art item they upload.
+    * 1.1.4.3.5. Registered users shall be able to add a description to the art item they upload.
+* 1.1.4.5. Registered users shall be able to make comments on art items.
+</details>
+
+### 2.6 Security
+
+* 2.6.1. User passwords shall be at least 10 characters long and cannot consist entirely of letters.
+* 2.6.2. User passwords shall be stored in a database using PBKDF2 algorithm with a SHA256 hash.
+    
 ## 5. API Endpoints
 **Author: Karahan Sarıtaş**
 
