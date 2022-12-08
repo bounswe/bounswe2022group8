@@ -58,12 +58,19 @@ function ArtItem(props) {
         setArtitemOwnerID(response.owner.id);
         setArtitemTitle(response.title);
 
-        var params = {
+        var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
           Key: response.artitem_path,
         };
 
-        setArtitemSrc(s3.getSignedUrl("getObject", params));
+        setArtitemSrc(s3.getSignedUrl("getObject", params_artitem));
+
+        var params_owner_pp = {
+          Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+          Key: response.owner.profile_path,
+        };
+
+        setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params_owner_pp));
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -99,29 +106,7 @@ function ArtItem(props) {
       })
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
-
-  // UNNECESSARY API CALL JUST TO GET THE PROFILE PATH OF THE ART ITEM OWNER
-  useEffect(() => {
-    if (artitemOwnerID) {
-      fetch(`${host}/api/v1/users/profile/${artitemOwnerID}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Token ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          var params = {
-            Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
-            Key: response.profile_path,
-          };
-
-          setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params));
-        })
-        .catch((error) => console.error("Error:", error));
-    }
-  }, [host, artitemOwnerID]);
+  
 
   function handleSendComment(e) {
     e.preventDefault();

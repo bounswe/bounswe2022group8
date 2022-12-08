@@ -3,7 +3,6 @@ import Layout from "../../layout/Layout";
 import { HOST } from "../../constants/host";
 import * as dotenv from "dotenv";
 
-import defaultUserImage from "../../images/defaultUserImage.png";
 import "../styles/RecommendedUsers.css";
 
 function RecommendedUsers(props) {

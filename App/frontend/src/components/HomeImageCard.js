@@ -1,6 +1,6 @@
-import "./styles/ImageCard.css";
+import "./styles/HomeImageCard.css";
 
-function ImageCard(props) {
+function HomeImageCard(props) {
   return (
     <div className="ic-container">
       <img className="ic-image" src={props.source} alt="" />
@@ -11,4 +11,4 @@ function ImageCard(props) {
   );
 }
 
-export default ImageCard;
+export default HomeImageCard;
