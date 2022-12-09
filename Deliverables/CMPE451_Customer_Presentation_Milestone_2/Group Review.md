@@ -330,14 +330,14 @@ From this point onward, we plan on adding several more functionalities to our ap
 |Software Requirements Specification | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)|
 |Software Design (UML):Use-Case Diagram | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram)|
 |Software Design (UML):Class Diagram | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)|
-|Software Design (UML):Sequence Diagram | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/Diagrams/Sequence%20Diagram.pdf)|
+|Software Design (UML):Sequence Diagram | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)|
 |[Scenario: Art Follower User](https://github.com/bounswe/bounswe2022group8/wiki/Scenario:-Art-Follower-User) | No changes | - |
 |[Scenario: Verified User/Artist Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2) | No changes | - |
 |[Scenario: Collaboration Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-3) | No changes | - |
 |[Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)| No changes | - |
 |Individual Contribution Reports | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_2/Group%20Review.md#9-individual-reports)|
 |[Web App](http://34.125.134.88/#) | No changes | - |
-|Mobile App - APK | Changed | [Latest version](https://drive.google.com/file/d/1WmzjtpnnZOTnT85iAjdy66XsYuOXlAop/view?usp=share_link)|
+|Mobile App - APK | Changed | [Latest version](https://drive.google.com/drive/folders/1pxyOYx00xKzcZZpRGAp4a4VH943BzH--?usp=share_link)|
 |Group Review | Changed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_2/Group%20Review.md)|
 
 
