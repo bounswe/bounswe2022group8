@@ -642,50 +642,6 @@ PR reviews:<br>
 </details>
 
 
-<details>
-    <summary> Sena Mumcu </summary>
-
-I am Sena Mumcu, a member and the communicator of group 8. I am working in the backend subgroup of our team. 
-    
-### Responsibilities
-I am responsible for the backend side of our developments.
-* Implementing the Tag related API endpoints.
-* Testing the API endpoints I have written and documenting them using Swagger.
-* Reviewing and testing my backendteam-members' PRs.
-* Researching user flags in Django to implement tag creation and deletion APIs.
-* Presenting the artist use case scenario during the second customer review. 
-* Helping the new backend team member get onboard.
-    
-### Main Contribution
-
-My main contributions include coding API endpoints as well as supporting the team in management related issues. I tried to review my teammates's work quickly as possible to help the team progress and did my best to implement API endpoints.
-    
-**Code Related Issues**
-* [BE-23: [API] Tag Managing](https://github.com/bounswe/bounswe2022group8/issues/277)
-* [BE-25: Research on Moderator Flags](https://github.com/bounswe/bounswe2022group8/issues/278)
-* [BE-26: [API] Semantic and Lexical Search](https://github.com/bounswe/bounswe2022group8/issues/279)
-
-**Management Related Issues**
-* [MIL-10: Milestone 2 Requirements](https://github.com/bounswe/bounswe2022group8/issues/299)
-* [Meeting Notes: Week 9 BE Meeting 4](https://github.com/bounswe/bounswe2022group8/issues/297)
-* [Week 9 - Meeting #6(29.11.2022)](https://github.com/bounswe/bounswe2022group8/issues/296)
-* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
-* [BE-31: Meeting Notes: Week 7 Backend-Meeting #3](https://github.com/bounswe/bounswe2022group8/issues/264)
-    
-### Pull Requests
-* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
-    
-### Unit Tests
-* Unfortunately I didn't write any unit tests.
-    
-### Additional Information
-**PR reviews** 
-* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294#issuecomment-1331032342)
-* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/291#issuecomment-1331030915)
-* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249#issuecomment-1318197777)
-* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247#issuecomment-1318189615)
-    
-</details>
 
 <details>
     <summary> Mustafa Cihan </summary>
@@ -712,6 +668,40 @@ I mainly worked on mobile app so I gave all of my effort to develop mobile appli
 * [feature/MOB-6](https://github.com/bounswe/bounswe2022group8/pull/239)
 * [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314)
 * [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
+</details>
+
+
+<details>
+    <summary> Mustafa Emre Erengül </summary>
+I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
+
+### Responsibilities
+In the mobile application part of our project, we had some implementations that we would like to add before the Second Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating a profile page, settings (editing profile) page, change password page, updating profile photo page and a page that allows users to add a new art item to their profile.
+    
+### Main Contributions
+I implemented a profile page that allows users to dislay their uploaded art items and the exhibitions that they are attending. One can see user's username, name, surname, bio, location and profile photo by looking at this page. I also implement a settings page to enable users to make changes over this fields. Moreover a user can change his/her password and profile photo. Lastly I created an upload art item page which allows users to add new art items to their profile.  <br/>
+
+**Code Related Issues**
+* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
+* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
+* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
+* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
+* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
+    
+**Management Related Issues**
+* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
+    
+**Pull Requests**
+* [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
+* [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
+* [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
+
+***Additional***
+
+* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314) (reviewed)
+* [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
+    
 </details>
 
 <details>
@@ -856,6 +846,51 @@ PR reviews:
 
 </details>
 
+<details>
+    <summary> Sena Mumcu </summary>
+
+I am Sena Mumcu, a member and the communicator of group 8. I am working in the backend subgroup of our team. 
+    
+### Responsibilities
+I am responsible for the backend side of our developments.
+* Implementing the Tag related API endpoints.
+* Testing the API endpoints I have written and documenting them using Swagger.
+* Reviewing and testing my backendteam-members' PRs.
+* Researching user flags in Django to implement tag creation and deletion APIs.
+* Presenting the artist use case scenario during the second customer review. 
+* Helping the new backend team member get onboard.
+    
+### Main Contribution
+
+My main contributions include coding API endpoints as well as supporting the team in management related issues. I tried to review my teammates's work quickly as possible to help the team progress and did my best to implement API endpoints.
+    
+**Code Related Issues**
+* [BE-23: [API] Tag Managing](https://github.com/bounswe/bounswe2022group8/issues/277)
+* [BE-25: Research on Moderator Flags](https://github.com/bounswe/bounswe2022group8/issues/278)
+* [BE-26: [API] Semantic and Lexical Search](https://github.com/bounswe/bounswe2022group8/issues/279)
+
+**Management Related Issues**
+* [MIL-10: Milestone 2 Requirements](https://github.com/bounswe/bounswe2022group8/issues/299)
+* [Meeting Notes: Week 9 BE Meeting 4](https://github.com/bounswe/bounswe2022group8/issues/297)
+* [Week 9 - Meeting #6(29.11.2022)](https://github.com/bounswe/bounswe2022group8/issues/296)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
+* [BE-31: Meeting Notes: Week 7 Backend-Meeting #3](https://github.com/bounswe/bounswe2022group8/issues/264)
+    
+### Pull Requests
+* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
+    
+### Unit Tests
+* Unfortunately I didn't write any unit tests.
+    
+### Additional Information
+**PR reviews** 
+* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294#issuecomment-1331032342)
+* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/291#issuecomment-1331030915)
+* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249#issuecomment-1318197777)
+* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247#issuecomment-1318189615)
+    
+</details>
+
 
 <details>
     <summary> Karahan Sarıtaş </summary>
@@ -947,36 +982,4 @@ PR reviews:<br>
     
 </details>
 
-<details>
-    <summary> Mustafa Emre Erengül </summary>
-I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
-
-### Responsibilities
-In the mobile application part of our project, we had some implementations that we would like to add before the Second Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating a profile page, settings (editing profile) page, change password page, updating profile photo page and a page that allows users to add a new art item to their profile.
-    
-### Main Contributions
-I implemented a profile page that allows users to dislay their uploaded art items and the exhibitions that they are attending. One can see user's username, name, surname, bio, location and profile photo by looking at this page. I also implement a settings page to enable users to make changes over this fields. Moreover a user can change his/her password and profile photo. Lastly I created an upload art item page which allows users to add new art items to their profile.  <br/>
-
-**Code Related Issues**
-* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
-* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
-* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
-* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
-* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
-    
-**Management Related Issues**
-* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
-* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
-    
-**Pull Requests**
-* [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
-* [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
-* [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
-
-***Additional***
-
-* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314) (reviewed)
-* [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
-    
-</details>
 
