@@ -135,6 +135,10 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Implementation | Implemented and tested tag related API endpoints and documented them using Swagger | 5 hours | Related [issue](https://github.com/bounswe/bounswe2022group8/issues/277) and [PR](https://github.com/bounswe/bounswe2022group8/pull/292) |
 | MIL2 | Reviewed requirements and documented the requirements addressed in the second milestone | 2 hours | Related issues [here](https://github.com/bounswe/bounswe2022group8/issues/298) and [here](https://github.com/bounswe/bounswe2022group8/issues/299) |
 | MIL2 | Prepared and presented the artist use case scenario during the Customer Review 2 |  1 hour | Related discussion can be seen [here](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+| Review | Reviewed the PR involving the updated class diagram. | 30 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/294) |
+| Review | Reviewd the PR for the `UserProfileSerializer` | 30 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/291) |
+| Review | Reviewed the PR for the Swagger and AWS S3 integration | 45 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/249) |
+| Review | Reviewed the PR for the AWS S3 integration with our application | 40 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/247) |
 
 
 </details>
