@@ -82,7 +82,7 @@ urlpatterns = [
     path('artitems/<int:id>/likers/', get_users_who_liked_artitem, name="get_users_who_liked_artitem"),
     path('users/comments/<int:id>/like/', like_comment, name="like_comment"),
     path('users/comments/<int:id>unlike/', unlike_comment, name="unlike_comment"),
-    path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment")
+    path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment"),
     path('artitems/tags/<int:id>', TagView, name="Tagview"),
     path('artitems/tags/', TagsView, name="TagsView")
 
