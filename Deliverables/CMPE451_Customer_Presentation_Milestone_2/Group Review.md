@@ -143,7 +143,7 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Documentation | Changing Label Systems | 45 minutes | [Issue GEN-33](https://github.com/bounswe/bounswe2022group8/issues/273)|
 | Design | Creating Several Logo Designs | 8 hours | [Issue GEN-32](https://github.com/bounswe/bounswe2022group8/issues/268)|
 | Presentation | Preparing for Milestone 2 Customer Presentation  |  1 hour | - |
-| Implementation | Implementing the Forgot and Confirm Password Pages | 6 hours | [Issue MOB-21](https://github.com/bounswe/bounswe2022group8/issues/350) [PR feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/319)|
+| Implementation | Implementing the Forgot and Confirm Password Pages | 6 hours | [Issue MOB-21](https://github.com/bounswe/bounswe2022group8/issues/350) [PR feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/329)|
 | Review | Reviewing the Issue | 15 minutes | [Issue GEN-35](https://github.com/bounswe/bounswe2022group8/issues/290)|
 | Documentation | Documenting Milestone 2 Deliverables | 1.5 hours | - |
 
@@ -922,61 +922,3 @@ I implemented a profile page that allows users to dislay their uploaded art item
 * [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
     
 </details>
-
-<details>
-    <summary> Elif Bayraktar </summary>
-    
-I am Elif, a member of group 8 and I am currently working on the backend team.
-
-### Responsibilities
-* Creating APIs for password reset (both for with or without login)(x3 APIs in total).
-* Configuring app settings and an email server for sending automated otp emails through the app for password reset.
-* Updating the comment model to accommodate replies and the hierarchy (using django-mptt).
-* Creating APIs for CRUD comment operations and get all comments of art item(x5 APIs in total).
-* Creating Swagger documentation for all of these APIs.
-* Researching about GitHub Packages, Personal Access Tokens and how to use them in workflows.
-* Creating GitHub Workflow for building and pushing docker images.
-* Writing the executive summary for the milestone2 report.
-* PR Review: Swagger Integration feature/BE-14
-* PR Review: hotfix/BE-14
-* PR Review: Feature/BE-23 Tag APIs    
-* PR Review: feature/BE-27 Account deletion API
-
-
-
-### Main Contributions
-I already listed my main responsibilities and contributions above. Other than those, I tried to write detailed explanations about usage of the tools I integrated (such as github packages) and provided detailed explanations for my PRs. I tried to help teammates with testing their code when available.
-    
-**Code Related Issues**
-* [BE-19: Implementation of Reset Password API (Forgot password & logged in)](https://github.com/bounswe/bounswe2022group8/issues/254)
-* [BE-20: Comment System](https://github.com/bounswe/bounswe2022group8/issues/261)
-* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
-    
-**Management Related Issues**
-* [MIL-8: Milestone 2 Group Review/Executive Summary](https://github.com/bounswe/bounswe2022group8/issues/295)
-* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
-
-
-**Pull Requests**
-* [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259)
-* [PR:Feature/be 20](https://github.com/bounswe/bounswe2022group8/pull/262)
-* [PR:Feature/BE11](https://github.com/bounswe/bounswe2022group8/pull/215)
-    
-
-**Unit Tests**
-
-* `test_comment_creation`
-* `test_comment_deletion_cascaded` 
-
-**Additional**
-    
-PR reviews:<br>
-* [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245)
-* [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
-* [PR:feature/BE-27 Account deletion API](https://github.com/bounswe/bounswe2022group8/pull/319)
-* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
-
-    
-
-</details>
-
