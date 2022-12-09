@@ -449,6 +449,16 @@ I am responsible for the backend side of our developments.
 * [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
 * [BE-31: Meeting Notes: Week 7 Backend-Meeting #3](https://github.com/bounswe/bounswe2022group8/issues/264)
     
+### Pull Requests
+* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
+    
+### Unit Tests
+* Unfortunately I didn't write any unit tests.
+    
+### Additional Information
+** PR reviews ** 
+    * 
+    
 </details>
 
 <details>
