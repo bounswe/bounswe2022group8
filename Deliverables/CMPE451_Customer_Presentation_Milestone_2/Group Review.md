@@ -140,6 +140,21 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Mustafa Emre Erengül </summary>
     
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |  :----: |
+ |  Planning  |  Attended Week5 Group Meeting.    |  1 hour  |  [Week5- Group Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+ |  Planning  |  Attended Week5 Mobile Meeting.     |  1 hour  |  [Week5- MOB Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Mobile-Meeting-Notes-2) |
+ |  Planning  |  Review the plan for the second milestone during the lab time.     |  1 hour  |   |
+ |  Planning  |  Attended Week7 Mobile Meeting.     |  1 hour  |  [Week7- MOB Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022)) |
+| Research | Research about how to implement the page navigations. | 60 minutes | 
+| Implementation | Profile page with the header widget is created. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
+| Implementation | Tabs are added and profile page is completed. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
+|  Planning  |  Attended Week8 Mobile Meeting.     |  2 hours  |  [Week8- MOB Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022)) |
+| Implementation | Art item upload page is implemented. | 240 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
+|  Planning  |  Attended Week9 Group Meeting.    |  1 hour  |  [Week9- Group Meeting #9](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+| Implementation | Profile settings  page is implemented. | 180 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
+| Implementation | Profile photo change page is implemented. | 150 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
+| Implementation | Change password page is implemented. | 180 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
 
 
 
