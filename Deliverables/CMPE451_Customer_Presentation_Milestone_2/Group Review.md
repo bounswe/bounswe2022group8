@@ -672,6 +672,43 @@ I mainly worked on mobile app so I gave all of my effort to develop mobile appli
 
 
 <details>
+    <summary> Metehan Dundar </summary>
+    
+I am Metehan, a member of group 8. I was working on backend team of the project, after Milestone 1, I am currently working on the mobile team.
+
+### Responsibilities
+* Changing label ordering/systems.
+* Creating several logo designs.
+* Presenting mobile application to customers as an art-dummy user.
+* Implementing the forgot and confirm password pages.
+* Research on Annotation.
+
+### Main Contributions
+I already listed my main responsibilities and contributions above. Other than those, since I changed the team, many thanks to Dogukan, I fastly integrated to mobile team, and I contributed their coding works.
+    
+**Code Related Issues**
+* [MOB-21: Forgot & Confirm Password Pages)](https://github.com/bounswe/bounswe2022group8/issues/350)
+    
+**Management Related Issues**
+* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268)
+* [GEN-33: Label Ordering](https://github.com/bounswe/bounswe2022group8/issues/273)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
+
+
+**Pull Requests**
+* [feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/319)
+    
+
+**Unit Tests**
+* Unfortunately I didn't write any unit tests.
+
+
+**Additional**
+* [GEN-35](https://github.com/bounswe/bounswe2022group8/issues/290)
+
+</details>
+
+<details>
     <summary> Mustafa Emre Erengül </summary>
 I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
 
@@ -980,41 +1017,4 @@ PR reviews:<br>
 * [feature/FE-22](https://github.com/bounswe/bounswe2022group8/pull/334)
 * [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR due to the errors and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
-</details>
-
-<details>
-    <summary> Metehan Dundar </summary>
-    
-I am Metehan, a member of group 8. I was working on backend team of the project, after Milestone 1, I am currently working on the mobile team.
-
-### Responsibilities
-* Changing label ordering/systems.
-* Creating several logo designs.
-* Presenting mobile application to customers as an art-dummy user.
-* Implementing the forgot and confirm password pages.
-* Research on Annotation.
-
-### Main Contributions
-I already listed my main responsibilities and contributions above. Other than those, since I changed the team, many thanks to Dogukan, I fastly integrated to mobile team, and I contributed their coding works.
-    
-**Code Related Issues**
-* [MOB-21: Forgot & Confirm Password Pages)](https://github.com/bounswe/bounswe2022group8/issues/350)
-    
-**Management Related Issues**
-* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268)
-* [GEN-33: Label Ordering](https://github.com/bounswe/bounswe2022group8/issues/273)
-* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
-
-
-**Pull Requests**
-* [feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/319)
-    
-
-**Unit Tests**
-* Unfortunately I didn't write any unit tests.
-
-
-**Additional**
-* [GEN-35](https://github.com/bounswe/bounswe2022group8/issues/290)
-
 </details>
