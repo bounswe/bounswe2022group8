@@ -672,7 +672,7 @@ I mainly worked on mobile app so I gave all of my effort to develop mobile appli
 
 
 <details>
-    <summary> Metehan Dundar </summary>
+    <summary> Metehan Dündar </summary>
     
 I am Metehan, a member of group 8. I was working on backend team of the project, after Milestone 1, I am currently working on the mobile team.
 
