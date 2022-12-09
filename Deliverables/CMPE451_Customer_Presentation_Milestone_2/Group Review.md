@@ -222,18 +222,18 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Implementation | Designed and implemented a Forgot Password pop up | 1 hours | [#260](https://github.com/bounswe/bounswe2022group8/issues/260), [PR](https://github.com/bounswe/bounswe2022group8/pull/271)  |
 | Implementation | Designed and implemented an interface for art item upload from the user profile page. Created a loading interface as well. Also made the necessary API calls. | 7 hours |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   | 
 | Implementation  | Designed and implemented the art item page interface. Connected it to backend. Art item page includes comment interface as well. Comments are connected to the backend too. |  10 hours  | [#310](https://github.com/bounswe/bounswe2022group8/issues/310), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
-| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.5 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
+| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.30 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
 | Implementation  | Created an interface for first upload | 2 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/330)     |
 | Implementation  | Fixed some of the warnings in the application | 30 minutes | [PR](https://github.com/bounswe/bounswe2022group8/pull/330) |
 | Implementation  | Created some loading screens and notification pop-ups for a better user experience | 3 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)  |
 | Implementation  | Connected the home and discover pages to the backend |  1 hour | [PR](https://github.com/bounswe/bounswe2022group8/pull/334)  |
 | Testing | Wrote unit tests for some components | 1 hour | [#338](https://github.com/bounswe/bounswe2022group8/issues/338), [PR](https://github.com/bounswe/bounswe2022group8/pull/339)  |
 | Planning   | Updated our project plan in line with the meetings  | 30 minutes |   |
-| Review | Reviewed the following PRs: [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252), [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/256), [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270) |  1 hour |   |
-| Presentation  | Created a sample gallery for the presentation | 45 minutes  |     |
-| MIL2 |  Filled in the Annotations section in the Milestone 2 report  | 30 minutes   |  [#341](https://github.com/bounswe/bounswe2022group8/issues/341)  |
-| MIL2 |  Filled in the Standards section in the Milestone 2 report  | 1.5 hours   |  [#342](https://github.com/bounswe/bounswe2022group8/issues/342)  |
 
+
+
+    
+    
 </details>   
     
 <details>
@@ -868,23 +868,21 @@ I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on t
 
 ### Responsibilities
 Setting the environment for the mobile development and learning basic Flutter/Dart to implement the initial pages. Creating the basic version of the mobile app which can run the functionalities that Backend team provided. Debugging the error-messages and dependency problems. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
-
+    
 ### Main Contributions
 Help to launch the initial version of the mobile app. Contribute to creation of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also designing issues and the colour palette for the app background.<br/>
 
 **Code Related Issues**
-* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198) (reviewed & closed)
-* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213) (reviewed & closed)
-
+* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
+* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
+* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
+* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
+* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
+    
 **Management Related Issues**
-* [GEN-4: Updating Wiki pages related to the last semester](https://github.com/bounswe/bounswe2022group8/issues/156) (opened)
-* [GEN-5: Adding CmpE451 section to the personal Timesheet pages](https://github.com/bounswe/bounswe2022group8/issues/157) (opened)
-* [GEN-7: Update the Communication Plan](https://github.com/bounswe/bounswe2022group8/issues/159) (contributed)
-* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162) (contributed)
-* [GEN-22: Revise Search](https://github.com/bounswe/bounswe2022group8/issues/174) (completed)
-* [GEN-23: Revise Location](https://github.com/bounswe/bounswe2022group8/issues/175) (completed)
-* [MIL-5: Milestone 1 Group Review](https://github.com/bounswe/bounswe2022group8/issues/226) (opened)
-
+* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
+    
 **Pull Requests**
 * [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
 * [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
