@@ -456,8 +456,11 @@ I am responsible for the backend side of our developments.
 * Unfortunately I didn't write any unit tests.
     
 ### Additional Information
-** PR reviews ** 
-    * 
+**PR reviews** 
+* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294#issuecomment-1331032342)
+* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/291#issuecomment-1331030915)
+* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249#issuecomment-1318197777)
+* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247#issuecomment-1318189615)
     
 </details>
 
