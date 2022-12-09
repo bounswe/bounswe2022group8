@@ -81,50 +81,6 @@ From this point onward, we plan on adding several more functionalities to our ap
     <summary> Elif Bayraktar </summary>
 
 
-| Hours spent | Task Type             | Task Description |
-|  Week 6 |              |  |
-|  :----:       |  :----:   |  :----: |
-|  1 hour 15 minutes  |  review   |  Reviewed the Swagger PR. [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245) |
-|   5 hours      |  research/coding   |  Researched for and coded the Reset Password APIs. Researched for sending automated emails through the app. Tested through the terminal. [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259), [Issue:#254](https://github.com/bounswe/bounswe2022group8/issues/254) |
-|   20 minutes      |  review   |  Reviewed the hotfix PR. [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)  |
-|   5 hours      |  research/coding   |  Researched alternative ways for Reset Password APIs (django-otp), implemented password update API. [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259)  |
-|   4 hours      |  research/coding   |  Updated comment model using django-mptt. Implemented Comment APIs. [PR:Feature/be 20](https://github.com/bounswe/bounswe2022group8/pull/262), [Issue:#261](https://github.com/bounswe/bounswe2022group8/issues/261)  |
-|   1 hour      |  coding/documentation   |  Added swagger documentaton for comment APIs.  |
-
-| Week 7  |             |  |
-|  :----:       |  :----:   |  :----: |
-|  2.5 hours   |  coding   |  Updated comment get APIs to not require login.  [related comment](https://github.com/bounswe/bounswe2022group8/pull/262#issuecomment-1318972368) | 
-
-|  Week 8 |              |  |
-|  :----:       |  :----:   |  :----: |
-|  1h+ hour   |  coding   |  Configured production email settings, solved merge conflicts and and merged. [related comment](https://github.com/bounswe/bounswe2022group8/pull/259#issuecomment-1319093869)  |
-|  6.5 hours   |  devops/coding   |  Created Github Workflow for building and pushing docker images to Github Packages. [PR:Feature/BE11](https://github.com/bounswe/bounswe2022group8/pull/215), [issue](https://github.com/bounswe/bounswe2022group8/issues/209) |
-|  2 hours   |  research   |  Researched annotation.  |
-
-
-
-| Week 9|             |  |
-|  :----:       |  :----:   |  :----: |
-|  1 hour   |  review   |  Reviewed,fixed account deletion API PR. [PR:feature/BE-27 Account deletion API](https://github.com/bounswe/bounswe2022group8/pull/319)  |
-|  1 hour   |  research   |  Researched annotation.  |
-|  0.5 hour   |  research/upkeep   |  Investigated frontend code to add quasi-static content for milestone demo.  |
-
-
-
-| Week 10  |              |  |
-|  :----:       |  :----:   |  :----: |
-|  2 hours   |  documentation   |  Wrote executive summary for milestone2 report. [#295](https://github.com/bounswe/bounswe2022group8/issues/295) |
-|  2 hours   |  documentation   |  Wrote the timesheet.  |
-  * I also participated in all of the General and Backend meetings.   
-    
-    
-| Weekly meetings  |              |  |
-|  :----:       |  :----:   |  :----: |
-|  Meeting |  Attended weekly meeting #5.    |  1 hour  |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
-|  Meeting - BE |  Attended backend weekly meeting #2.    |  45 minutes |  [Week 5 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
-|  Meeting |  Attended Week 9 Meeting #6.   |  2 hours  |  [Week 9 Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
-|  Meeting - BE |  Attended Week 7 BE Meeting.   |  2 hours  |  [Week 7 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022))|
-|  Meeting - BE |  Attended Week 9 BE Meeting.   |  2 hours  |  [Week 9 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-9--BE-Meeting-%234-(29.11.2022))|
 
 </details>
 
@@ -138,7 +94,23 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 <details>
     <summary> Mustafa Emre Erengül </summary>
-    
+
+ |  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |  :----: |
+ |  Planning  |  Attended Week5 Group Meeting.    |  1 hour  |  [Week5- Group Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+ |  Planning  |  Attended Week5 Mobile Meeting.     |  1 hour  |  [Week5- MOB Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Mobile-Meeting-Notes-2) |
+ |  Planning  |  Review the plan for the second milestone during the lab time.     |  1 hour  |   |
+ |  Planning  |  Attended Week7 Mobile Meeting.     |  1 hour  |  [Week7- MOB Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022)) |
+| Research | Research about how to implement the page navigations. | 60 minutes | 
+| Implementation | Profile page with the header widget is created. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
+| Implementation | Tabs are added and profile page is completed. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
+|  Planning  |  Attended Week8 Mobile Meeting.     |  2 hours  |  [Week8- MOB Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022)) |
+| Implementation | Art item upload page is implemented. | 240 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
+|  Planning  |  Attended Week9 Group Meeting.    |  1 hour  |  [Week9- Group Meeting #9](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+| Implementation | Profile settings  page is implemented. | 180 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
+| Implementation | Profile photo change page is implemented. | 150 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
+| Implementation | Change password page is implemented. | 180 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
+ 
 
 
 
