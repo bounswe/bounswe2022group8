@@ -115,3 +115,8 @@ class resetPasswordSerializer(serializers.Serializer):
 #just used for swagger
 class passwordSerializer(serializers.Serializer):
     new_password = serializers.CharField(default="new_user_password")
+
+#also used for swagger
+class userDeleteSerializer(serializers.Serializer):
+    password = serializers.CharField(default="user_password")
+    
