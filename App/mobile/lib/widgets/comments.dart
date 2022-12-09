@@ -121,7 +121,7 @@ class _CommentsState extends State<Comments> {
                           const SizedBox(
                             width: 8,
                           ),
-                          const Text('5d'),
+                          const Text(''),
                           const SizedBox(
                             width: 8,
                           ),
@@ -181,7 +181,7 @@ class _CommentsState extends State<Comments> {
                           const SizedBox(
                             width: 8,
                           ),
-                          const Text('5d'),
+                          const Text(''),
                           const SizedBox(
                             width: 8,
                           ),
@@ -206,7 +206,7 @@ class _CommentsState extends State<Comments> {
                           SizedBox(
                             width: 55,
                             height: 33,
-                            child: buildTextButton("Edit", Colors.white54, () => print("Edit")),
+                            child: buildTextButton("", Colors.white54, () => print("Edit")),
                           ),
                           const SizedBox(
                             width: 12,
@@ -215,7 +215,7 @@ class _CommentsState extends State<Comments> {
                           SizedBox(
                             width: 60,
                             height: 33,
-                            child: buildTextButton("Delete", Colors.white54, () => print("Delete")),
+                            child: buildTextButton("", Colors.white54, () => print("Delete")),
                           ),
                         ],
                       ),

@@ -8,9 +8,11 @@ from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from ..models.user import User
-from ..models.models import Comment, ArtItem
+from ..models.models import Comment, ArtItem, LikeComment
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.contrib.auth.models import AnonymousUser
+
 
 
 @swagger_auto_schema(
@@ -135,7 +137,7 @@ def CommentView(request, artitemid, id):
         try:
             comment = Comment.objects.get(id=id)
             serializer = CommentSerializer(comment)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer, status=status.HTTP_200_OK)
         except Comment.DoesNotExist:
             message = {
                 'detail': 'Comment with given id does not exist.'}

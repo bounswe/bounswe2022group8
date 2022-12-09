@@ -5,7 +5,7 @@ from knox.models import AuthToken
 
 from ..models.user import User
 from ..models.user import Follow
-from ..models.artitem import ArtItem
+from ..models.artitem import ArtItem, LikeArtItem
 from ..serializers.serializers import ArtItemSerializer
 from ..serializers.auth import RegisterSerializer, LoginSerializer
 from rest_framework import permissions
@@ -17,6 +17,8 @@ import base64
 import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
+from django.contrib.auth.models import AnonymousUser
+
 
 from drf_yasg import openapi
 
@@ -56,6 +58,7 @@ from django.core.files.base import ContentFile
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -112,6 +115,7 @@ def get_artitems(request):
                         },
                         "type": "sketch",
                         "tags": [1],
+                        "likes": 0,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -247,7 +251,8 @@ def delete_artitem(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "isLiked": False
 
                     }
                 ]
@@ -268,8 +273,16 @@ def artitems_by_id(request, id):
     if request.method == "GET":
         try:
             artitem = ArtItem.objects.get(pk=id)
-            serializer = ArtItemSerializer(artitem)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            data = ArtItemSerializer(artitem).data.copy()
+            if(isinstance(request.user, AnonymousUser)):
+                data["isLiked"] = False
+            else:
+                try:
+                    LikeArtItem.objects.get(user=request.user, artitem=artitem)
+                    data["isLiked"] = True
+                except:
+                    data["isLiked"] = False
+            return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -296,6 +309,7 @@ def artitems_by_id(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -347,6 +361,7 @@ def artitems_by_userid(request, id):
                         },
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
                     }
                 ]
@@ -399,6 +414,7 @@ def artitems_by_username(request, username):
                         "description": "Joel Miller from TLOU universe.",
                         "type": "sketch",
                         "tags": [],
+                        "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
                         "created_at": "08-12-2022 00:38:25"
                     }

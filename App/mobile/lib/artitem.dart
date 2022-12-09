@@ -1,8 +1,11 @@
 import 'dart:convert';
-import 'package:artopia/variables.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+import 'variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:artopia/profile.dart';
+import 'profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
 
@@ -15,22 +18,36 @@ class ArtItem extends StatefulWidget {
     required this.id,
     required this.title,
     required this.description,
-    required this.owner,
+    required this.username,
     required this.type,
     required this.tags,
     required this.artitem_path,
+    required this.profile_path,
   });
   final int id;
   final String title;
   final String description;
-  final String owner;
+  final String username;
   final String type;
   final String tags;
   final String artitem_path;
+  final String profile_path;
   @override
   State<ArtItem> createState() => _ArtItemState();
 }
+class ArtItemUserClass{
 
+      int id;
+      String username;
+      String name;
+      String surname;
+      String profile_path;
+  
+      ArtItemUserClass(this.id,this.username,this.name, this.surname,this.profile_path) ;
+    factory ArtItemUserClass.fromJson(dynamic json) {
+    return ArtItemUserClass(json['id'], json['username'],json['name'], json['surname'],json['profile_path']);
+  }
+    }
 class _ArtItemState extends State<ArtItem> {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +55,7 @@ class _ArtItemState extends State<ArtItem> {
   }
 }
 
-Future<ArtItem> getAllArtItems() async {
+Future <List<ArtItem>> getAllArtItems() async {
   final response = await http.get(
       Uri.parse(GET_ALL_ART_ITEM_ENDPOINT),
       headers: <String, String>{
@@ -47,20 +64,26 @@ Future<ArtItem> getAllArtItems() async {
 
       }
   );
-  print(response.statusCode) ;
-  print(response.body) ;
+ // print(response.statusCode) ;
+ // print(response.body) ;
 
-  Map<String, dynamic> body = jsonDecode(response.body);
-
+List <dynamic> items = jsonDecode(response.body);
+  List <ArtItem> userArtItems = [] ;
   if (response.statusCode == 200) {
-    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], owner: body[""], type: body["type"], tags: "", artitem_path: body["artitem_path"]) ;
+    for (var body in items) {
+    ArtItemUserClass owner = ArtItemUserClass.fromJson(body['owner']);
+    print(owner);
+    String itemURL = await getImage(body['artitem_path']) ;
+    //Profile profile = await getOtherProfile(owner.id);
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username, type: body["type"], tags: "", artitem_path: itemURL,profile_path: owner.profile_path) ;
     print(x.description);
     print(x.id);
     print(x.title);
-    return x;
+    userArtItems.add(x);
   }
-  return  ArtItem(id: body["id"], title: "ERROR", description:"ERROR", owner: "ERROR", type: "ERROR", tags:"ERROR", artitem_path: "ERROR");
-
+  }
+  print(userArtItems);
+  return userArtItems ;
 }
 Future <List<ArtItem>> getuserArtItems() async {
   final response = await http.get(
@@ -78,9 +101,11 @@ Future <List<ArtItem>> getuserArtItems() async {
   List <ArtItem> userArtItems = [] ;
   if (response.statusCode == 200) {
     for (var body in items) {
+    ArtItemUserClass owner = ArtItemUserClass.fromJson(body['owner']);
+    print(owner);
     String itemURL = await getImage(body['artitem_path']) ;
 
-    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], owner: body["owner"]["username"], type: body["type"], tags: "AA", artitem_path: itemURL) ;
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username, type: body["type"], tags: "AA", artitem_path: itemURL, profile_path: "",) ;
     print(x.description);
     print(x.id);
     print(x.title);
@@ -91,7 +116,46 @@ Future <List<ArtItem>> getuserArtItems() async {
   return userArtItems ;
 
 }
+Future<String> uploadArtItem(title, description, String tags, XFile? image) async {
+  List<String> tagArray = tags.split(',') ;
+  String base64Image = '"data:image/jpeg;base64,' ;
+  if (image != null) {
+  File(image.path).readAsBytes().then((value) async {
 
+   base64Image = base64Image +   base64Encode(value);
+    final response = await http.post(
+      Uri.parse(UPLOAD_ART_ITEM_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      body: jsonEncode(<String, dynamic>{
+      'title': title,
+      'description' : description,
+      'type' : "Sketch",
+      'tags' : [],
+      "artitem_image": base64Image,
+    })
+  );
+  print(response.statusCode) ;
+  print(response.body) ;
+
+
+  if (response.statusCode == 201) {
+
+    return  "OK";
+  }
+  return  "response.body" ;
+
+
+ 
+}) ;
+  }
+     
+    return "not ok." ;
+   
+}
 
 
 

@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Dockerize the Frontend
+
+### Go to bounswe2022group8/App/frontend folder from the terminal and run the following commands:
+
+docker build -t frontend .
+docker run -d -p 80:80 frontend 
+
+### You can acces the app from IP address of the machine that you dockerized the app (34.125.134.88 for our case)
+
+

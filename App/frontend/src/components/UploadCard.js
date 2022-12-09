@@ -85,9 +85,15 @@ function UploadCard(props) {
       })
         .then((response) => {
           setIsLoading(false);
-          window.location.reload(true);
-          // props.forceUpdate();
-          // console.log(response);
+          props.setNewImageUploaded();
+          props.closeUploadCard();
+
+          closePreview();
+          setTitle("");
+          setDescription("");
+          setType("");
+          setTags([]);
+
           return response.json();
         })
         .then((response) => {
@@ -229,6 +235,7 @@ function UploadCard(props) {
               name="title"
               id="title"
               style={{ fontSize: "14px" }}
+              value={title}
               onChange={handleTitle}
             />
           </div>
@@ -244,6 +251,7 @@ function UploadCard(props) {
               id="description"
               style={{ fontSize: "14px", resize: "none" }}
               rows="2"
+              value={description}
               onChange={handleDescription}
             />
           </div>
@@ -258,6 +266,7 @@ function UploadCard(props) {
               name="type"
               id="type"
               style={{ fontSize: "14px" }}
+              value={type}
               onChange={handleType}
             />
           </div>
@@ -272,6 +281,7 @@ function UploadCard(props) {
               name="tags"
               id="tags"
               style={{ fontSize: "14px" }}
+              value={tags}
               onChange={handleTags}
             />
           </div>

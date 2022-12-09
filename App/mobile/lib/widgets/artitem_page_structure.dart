@@ -1,10 +1,12 @@
+import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
+import '../utils/colorPalette.dart';
+import '../utils/textUtils.dart';
 
 class ArtItemPageStructue extends StatefulWidget {
-  const ArtItemPageStructue({Key? key}) : super(key: key);
+  final ArtItem artitem ;
+  const ArtItemPageStructue({Key? key , required  this.artitem}) : super(key: key);
 
   @override
   State<ArtItemPageStructue> createState() => _ArtItemPageStructueState();
@@ -40,15 +42,15 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              textUtils.buildText("TITLE GOES HERE", 32, colorPalette.blackShadows,
+              textUtils.buildText(widget.artitem.title, 32, colorPalette.blackShadows,
                   FontWeight.w600),
             ],
           ),
           const Padding(
             padding: EdgeInsets.only(left: 10, top: 10, right: 10),
           ),
-          Image.asset(
-            "assets/images/background.jpeg",
+          Image.network(
+            widget.artitem.artitem_path,
             height: MediaQuery.of(context).size.width,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
@@ -67,14 +69,14 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
                   const SizedBox(
                     width: 15,
                   ),
-                  const CircleAvatar(
+                   CircleAvatar(
                     radius: 25,
-                    backgroundImage: AssetImage("assets/images/profile.jpeg"),
+                    backgroundImage: Image.network( widget.artitem.profile_path).image,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  textUtils.buildText("selin", 20, colorPalette.blackShadows,
+                  textUtils.buildText(widget.artitem.username, 20, colorPalette.blackShadows,
                       FontWeight.w600),
                 ],
               ),
@@ -96,7 +98,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
               color: Colors.black,
               width: MediaQuery.of(context).size.width,
               height: 250,
-              child: textUtils.buildText("Description goes here", 20, colorPalette.blackShadows,
+              child: textUtils.buildText(widget.artitem.description, 20, colorPalette.blackShadows,
                   FontWeight.w600),
             ),
           ),

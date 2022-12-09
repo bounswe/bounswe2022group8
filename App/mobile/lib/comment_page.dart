@@ -1,14 +1,17 @@
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/widgets/comments.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'widgets/comments.dart';
 import 'package:flutter/material.dart';
 import 'package:comment_tree/comment_tree.dart';
 import 'package:flutter/services.dart';
 
+import 'artitem.dart';
 import 'home_page.dart';
 
 class CommentPage extends StatefulWidget {
-  const CommentPage({Key? key}) : super(key: key);
+  final ArtItem artitem ;
+
+  const CommentPage({Key? key, required this.artitem}) : super(key: key);
 
   @override
   State<CommentPage> createState() => _CommentPageState();
@@ -17,7 +20,7 @@ class CommentPage extends StatefulWidget {
 class _CommentPageState extends State<CommentPage> {
   bool replyState = false;
   final textUtils = TextUtils();
-  Future<List<List<Comment>>> allcomments = getComments(1);
+  //Future<List<List<Comment>>> allcomments = getComments(this.artitem.id);
   final CommentInputObject = TextEditingController();
   final ColorPalette colorPalette = ColorPalette();
   final List<Comment> commentLi = [
@@ -112,7 +115,7 @@ class _CommentPageState extends State<CommentPage> {
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: FutureBuilder<List<List<Comment>>>(
-                          future: allcomments,
+                          future: getComments(widget.artitem.id),
                           builder: (BuildContext context,
                               AsyncSnapshot<List<List<Comment>>> snapshot) {
                             if (snapshot.hasData == false)
@@ -146,13 +149,12 @@ class _CommentPageState extends State<CommentPage> {
                   ),
                   onPressed: () {
                     String comment = CommentInputObject.text;
-                    postComment(1, 1, comment, true).then((value) {
+                    postComment(widget.artitem.id, 1, comment, true).then((value) {
                       if (value == "OK") {
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CommentPage()),
-                          (Route<dynamic> route) => false,
+                              builder: (context) => CommentPage(artitem: widget.artitem)),
                         );
                       }
                     });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/landing_page.dart';
-import 'package:artopia/login_page.dart';
+import 'home_page.dart';
+import 'landing_page.dart';
+import 'login_page.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';

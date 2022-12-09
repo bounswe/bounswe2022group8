@@ -1,4 +1,8 @@
-import 'package:artopia/getimage.dart';
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
+import 'getimage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
@@ -72,4 +76,67 @@ Future<Profile> getMyProfile() async {
   }
 return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
   
+}
+
+Future<Profile> getOtherProfile(int id) async {
+  final response = await http.get(
+    Uri.parse(GET_OTHER_PROFILE_ENDPOINT + id.toString()),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Token ' + token 
+
+    }
+   )
+   ;
+  print(response.statusCode) ;
+  print(response.body) ;      
+  
+  Map<String, dynamic> body = jsonDecode(response.body);
+  
+  if (response.statusCode == 200) {
+    String profileUrl = await getImage(body['profile_path']) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+  }
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+  
+}
+Future<String> uploadProfile(name, surname, bio, location,  XFile? image) async {
+  String base64Image = '"data:image/jpeg;base64,' ;
+  if (image != null) {
+  File(image.path).readAsBytes().then((value) async {
+
+   base64Image = base64Image +   base64Encode(value);
+   final response = await http.put(
+      Uri.parse(UPDATE_PROFILE_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      body: jsonEncode(<String, dynamic>{
+      'name': name,
+      'surname' : surname,
+      'about' : bio,
+      'location' : location,
+      "profile_image": base64Image,
+    })
+  );
+  print(response.statusCode) ;
+  print(response.body) ;
+  print(base64Image) ;
+  Map<String, dynamic> body = jsonDecode(response.body);
+
+  if (response.statusCode == 200) {
+
+    return  "OK";
+  }
+   
+   else {
+    return "not ok." ;
+   }
+  
+  });
+  
+}
+return "not ok." ;
 }

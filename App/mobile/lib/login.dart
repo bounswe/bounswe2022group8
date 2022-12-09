@@ -21,7 +21,6 @@ Future<String> login(username,password) async {
 
   if (response.statusCode == 200) {
       token = body['token'] ;
-      registered_password = password;
       registered_username = username;
       return "OK" ;
   }
