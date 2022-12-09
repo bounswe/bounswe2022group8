@@ -1,23 +1,28 @@
-import 'package:artopia/utils/colorPalette.dart';
-import 'package:artopia/utils/textUtils.dart';
-import 'package:artopia/widgets/comments.dart';
+import 'utils/colorPalette.dart';
+import 'utils/textUtils.dart';
+import 'widgets/comments.dart';
 import 'package:flutter/material.dart';
 import 'package:comment_tree/comment_tree.dart';
 import 'package:flutter/services.dart';
 
+import 'artitem.dart';
 import 'home_page.dart';
 
 class CommentPage extends StatefulWidget {
-  const CommentPage({Key? key}) : super(key: key);
+  final ArtItem artitem ;
+
+  const CommentPage({Key? key, required this.artitem}) : super(key: key);
 
   @override
   State<CommentPage> createState() => _CommentPageState();
 }
 
 class _CommentPageState extends State<CommentPage> {
+  bool replyState = false;
   final textUtils = TextUtils();
+  //Future<List<List<Comment>>> allcomments = getComments(this.artitem.id);
+  final CommentInputObject = TextEditingController();
   final ColorPalette colorPalette = ColorPalette();
-
   final List<Comment> commentLi = [
     Comment(
       avatar:
@@ -72,6 +77,10 @@ class _CommentPageState extends State<CommentPage> {
     ),
   ];
 
+  void _update(bool value) {
+    setState(() => replyState = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,19 +114,28 @@ class _CommentPageState extends State<CommentPage> {
                   color: Colors.black,
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      child: Column(
-                        children: <Widget>[
-                          Comments(commentList: commentLi),
-                          Comments(commentList: commentHi),
-                          Comments(commentList: commentMid),
-                          Comments(commentList: comment),
-                          Comments(commentList: commentLi),
-                        ],
-                      )),
+                      child: FutureBuilder<List<List<Comment>>>(
+                          future: getComments(widget.artitem.id),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<List<Comment>>> snapshot) {
+                            if (snapshot.hasData == false)
+                              return SizedBox.shrink();
+                            List<List<Comment>> artItemcomments =
+                                snapshot.requireData;
+                            List<Comments> commentWidgets = [];
+
+                            for (var element in artItemcomments)
+                              commentWidgets
+                                  .add(Comments(commentList: element));
+                            return Column(
+                              children: commentWidgets,
+                            );
+                          })),
                 ),
               ),
               ListTile(
                 title: TextFormField(
+                  controller: CommentInputObject,
                   style: TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     labelText: "Add a comment...",
@@ -127,10 +145,22 @@ class _CommentPageState extends State<CommentPage> {
                 ),
                 trailing: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: colorPalette.hunterGreen,
+                    backgroundColor: colorPalette.russianGreen,
                   ),
-                  onPressed: () {},
-                  child: textUtils.buildText("Post", 18, colorPalette.blackShadows, FontWeight.w400),
+                  onPressed: () {
+                    String comment = CommentInputObject.text;
+                    postComment(widget.artitem.id, 1, comment, true).then((value) {
+                      if (value == "OK") {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentPage(artitem: widget.artitem)),
+                        );
+                      }
+                    });
+                  },
+                  child: textUtils.buildText("Post", 18,
+                      colorPalette.palePurplePantone, FontWeight.w500),
                 ),
               ),
             ],

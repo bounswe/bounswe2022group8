@@ -1,15 +1,11 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
+import 'getimage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:artopia/home_page.dart';
-import 'package:artopia/routes.dart';
-import 'package:artopia/profile.dart';
-import 'package:artopia/profile_page.dart';
-import 'package:artopia/templates.dart';
-import 'package:artopia/register.dart';
 import 'dart:core';
-import 'package:avatar_glow/avatar_glow.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -75,8 +71,72 @@ Future<Profile> getMyProfile() async {
   Map<String, dynamic> body = jsonDecode(response.body);
   
   if (response.statusCode == 200) {
-    return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: body["name"], username: registered_username) ;
+    String profileUrl = await getImage(body['profile_path']) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
   }
 return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
   
+}
+
+Future<Profile> getOtherProfile(int id) async {
+  final response = await http.get(
+    Uri.parse(GET_OTHER_PROFILE_ENDPOINT + id.toString()),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Token ' + token 
+
+    }
+   )
+   ;
+  print(response.statusCode) ;
+  print(response.body) ;      
+  
+  Map<String, dynamic> body = jsonDecode(response.body);
+  
+  if (response.statusCode == 200) {
+    String profileUrl = await getImage(body['profile_path']) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+  }
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+  
+}
+Future<String> uploadProfile(name, surname, bio, location,  XFile? image) async {
+  String base64Image = '"data:image/jpeg;base64,' ;
+  if (image != null) {
+  File(image.path).readAsBytes().then((value) async {
+
+   base64Image = base64Image +   base64Encode(value);
+   final response = await http.put(
+      Uri.parse(UPDATE_PROFILE_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      body: jsonEncode(<String, dynamic>{
+      'name': name,
+      'surname' : surname,
+      'about' : bio,
+      'location' : location,
+      "profile_image": base64Image,
+    })
+  );
+  print(response.statusCode) ;
+  print(response.body) ;
+  print(base64Image) ;
+  Map<String, dynamic> body = jsonDecode(response.body);
+
+  if (response.statusCode == 200) {
+
+    return  "OK";
+  }
+   
+   else {
+    return "not ok." ;
+   }
+  
+  });
+  
+}
+return "not ok." ;
 }

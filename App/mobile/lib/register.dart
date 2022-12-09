@@ -24,7 +24,6 @@ Future<String> register(username,email,password,confirmPassword) async {
   if (response.statusCode == 201) {
       token = body['token'] ;
       registered_username = username ;
-      registered_password = password ;
       return "OK" ;
   }
   else {

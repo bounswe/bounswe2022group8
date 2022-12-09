@@ -28,7 +28,11 @@ from django.contrib.auth.models import AnonymousUser
                     "id": 3,
                     "body": "Third comment",
                     "parent": 2,
-                    "commented_by": 1,
+                    "commented_by": {
+                        "id": 1,
+                        "username": "zamasssnla",
+                        "profile_path": "avatar/default.png"
+                    },
                     "commented_on": 1,
                     "created_at": "2022-11-12T21:13:50.580335Z",
                     "lft": 3,
@@ -62,7 +66,11 @@ from django.contrib.auth.models import AnonymousUser
                     "id": 10,
                     "body": "comment update body",
                     "parent": 4,
-                    "commented_by": 3,
+                    "commented_by": {
+                        "id": 1,
+                        "username": "zamasssnla",
+                        "profile_path": "avatar/default.png"
+                    },
                     "commented_on": 1,
                     "created_at": "2022-11-13T16:34:03.316236Z",
                     "lft": 6,
@@ -200,7 +208,11 @@ def CommentView(request, artitemid, id):
                     "id": 11,
                     "body": "comment body",
                     "parent": 4,
-                    "commented_by": 3,
+                    "commented_by": {
+                        "id": 1,
+                        "username": "zamasssnla",
+                        "profile_path": "avatar/default.png"
+                    },
                     "commented_on": 1,
                     "created_at": "2022-11-13T16:34:13.231104Z",
                     "lft": 1,
@@ -237,7 +249,11 @@ def CommentView(request, artitemid, id):
                             "id": 1,
                             "body": "first comment",
                             # "parent": null,
-                            "commented_by": 2,
+                            "commented_by": {
+                                "id": 1,
+                                "username": "zamasssnla",
+                                "profile_path": "avatar/default.png"
+                            },
                             "commented_on": 1,
                             "created_at": "2022-11-12T20:48:33.527802Z",
                             "lft": 1,
@@ -249,7 +265,11 @@ def CommentView(request, artitemid, id):
                             "id": 2,
                             "body": "first reply",
                             "parent": 1,
-                            "commented_by": 2,
+                            "commented_by": {
+                                "id": 1,
+                                "username": "zamasssnla",
+                                "profile_path": "avatar/default.png"
+                            },
                             "commented_on": 1,
                             "created_at": "2022-11-12T20:48:59.238290Z",
                             "lft": 2,
@@ -261,7 +281,11 @@ def CommentView(request, artitemid, id):
                             "id": 3,
                             "body": "Third comment",
                             "parent": 2,
-                            "commented_by": 1,
+                            "commented_by": {
+                                "id": 1,
+                                "username": "zamasssnla",
+                                "profile_path": "avatar/default.png"
+                            },
                             "commented_on": 1,
                             "created_at": "2022-11-12T21:13:50.580335Z",
                             "lft": 3,

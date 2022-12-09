@@ -12,8 +12,10 @@ from .views.profile import profile_api, profile_me_api
 from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
+from .views.tags import TagView, TagsView
 from .views.user import users_api
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
+
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
@@ -81,6 +83,8 @@ urlpatterns = [
     path('users/comments/<int:id>/like/', like_comment, name="like_comment"),
     path('users/comments/<int:id>unlike/', unlike_comment, name="unlike_comment"),
     path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment")
+    path('artitems/tags/<int:id>', TagView, name="Tagview"),
+    path('artitems/tags/', TagsView, name="TagsView")
 
 ]
 

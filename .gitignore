@@ -1,5 +1,7 @@
 App/mobile/.dart_tool/
 App/mobile/macos/
+App/mobile/.flutter-plugins
+App/mobile/.flutter-plugins-dependencies
 
 # ignore environment 
 env/
@@ -202,3 +204,5 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+.flutter-plugins
+.flutter-plugins-dependencies

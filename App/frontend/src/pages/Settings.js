@@ -1,12 +1,24 @@
 import React, { useEffect, useState, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
+import SettingsProfilePopUp from "../components/SettingsProfilePopUp";
+import SettingsPasswordPopUp from "../components/SettingsPasswordPopUp";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import * as dotenv from "dotenv";
 
 import "./styles/Settings.css";
+import Backdrop from "../components/Backdrop";
 
 function Settings() {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const { token } = useAuth();
   var host = HOST;
 
@@ -29,6 +41,16 @@ function Settings() {
     (state, newState) => ({ ...state, ...newState }),
     []
   );
+
+  // For PASSWORD-RESET PUT
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordStatus, setNewPasswordStatus] = useState(null);
+  const [newPasswordResponse, setNewPasswordResponse] = useState(null);
+
+  const [isProfilePopUpOpen, setIsProfilePopUpOpen] = useState(false);
+  const [isPasswordPopUpOpen, setIsPasswordPopUpOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -69,6 +91,45 @@ function Settings() {
       })
       .catch((error) => console.error("Error:", error));
   }, [host, token]);
+
+  // console.log(newPassword);
+
+  function handlePasswordChange(e) {
+    e.preventDefault();
+
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/profile/me/password-reset/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        new_password: newPassword,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        setNewPasswordStatus(response.status);
+        if (response.status === 200) {
+          setIsPasswordPopUpOpen(true);
+        }
+        return response.json();
+      })
+      .then((response) => {
+        // if successfull detail is string,
+        // if not and empty detail is string
+        // else detail is an array
+        if (Array.isArray(response.detail)) {
+          setNewPasswordResponse(response.detail[0]);
+        } else {
+          setNewPasswordResponse(response.detail);
+        }
+        console.log(response.detail);
+      })
+      .catch((error) => console.error("Error:", error));
+
+      setNewPassword("");
+  }
 
   async function handlePreview(e) {
     if (e.target.files) {
@@ -116,7 +177,7 @@ function Settings() {
   function handleProfileSubmit(e) {
     e.preventDefault();
 
-    console.log(profileInput);
+    // console.log(profileInput);
     fetch(`${host}/api/v1/users/profile/me/`, {
       method: "PUT",
       body: JSON.stringify(profileInput),
@@ -125,7 +186,10 @@ function Settings() {
         Authorization: `Token ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        setIsProfilePopUpOpen(true);
+        return response.json();
+      })
       .then((response) => {})
       .catch((error) => console.error("Error:", error));
   }
@@ -137,8 +201,31 @@ function Settings() {
     // console.log(value);
   };
 
+  function goToProfile() {
+    setIsProfilePopUpOpen(false);
+    navigate("/my-profile");
+    scrollToTop();
+  }
+
   return (
     <Layout>
+      {isProfilePopUpOpen && (
+        <>
+          <SettingsProfilePopUp
+            onClickProfile={() => goToProfile()}
+            onClickStay={() => setIsProfilePopUpOpen(false)}
+          />
+          <Backdrop onClick={() => setIsProfilePopUpOpen(false)} />
+        </>
+      )}
+      {isPasswordPopUpOpen && (
+        <>
+          <SettingsPasswordPopUp
+            onClickOkay={() => setIsPasswordPopUpOpen(false)}
+          />
+          <Backdrop onClick={() => setIsPasswordPopUpOpen(false)} />
+        </>
+      )}
       <div className="settings-container">
         <header className="settings-header">Settings</header>
 
@@ -148,7 +235,7 @@ function Settings() {
 
           <div className="mt-3">
             <label className="access-label">Profile Photo</label>
-            <div className="pp-container mt-1 hadow-sm">
+            <div className="pp-container mt-1 shadow-sm">
               <img
                 src={profileInfo.profile_image_url}
                 alt=""
@@ -191,13 +278,15 @@ function Settings() {
 
           <div className="form-group mt-3">
             <label className="access-label">Bio</label>
-            <input
+            <textarea
               type="text"
               className="form-control mt-1"
               placeholder="Make yourself known to people"
               name="about"
               id="about"
               defaultValue={profileInfo.about}
+              rows="3"
+              style={{ resize: "none" }}
               onChange={handleInput}
             />
           </div>
@@ -226,6 +315,17 @@ function Settings() {
           <header className="settings-card-header">Password</header>
           <p className="settings-card-describe">Change your password.</p>
 
+          {newPasswordStatus === 400 && (
+            <div
+              className="form-error"
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              {newPasswordResponse}
+            </div>
+          )}
+
           <div className="form-group mt-3 mb-5">
             <label className="access-label">Password</label>
             <input
@@ -233,13 +333,16 @@ function Settings() {
               className="form-control mt-1"
               placeholder="New Password"
               id="password"
-              required
               name="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
 
           <div className="settings-btn-container">
-            <button className="btn btn-primary">Save Changes</button>
+            <button className="btn btn-primary" onClick={handlePasswordChange}>
+              Save Changes
+            </button>
           </div>
         </form>
       </div>

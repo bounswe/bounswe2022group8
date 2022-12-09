@@ -1,46 +1,69 @@
+import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
+import 'package:artopia/profile.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/widgets/post.dart';
+import 'package:artopia/comment_page.dart';
 
-class Gallery extends StatefulWidget {
+
+
+class ArtItems extends StatefulWidget {
   @override
-  _GalleryState createState() => _GalleryState();
+  _ArtItems createState() => _ArtItems();
 }
 
-class _GalleryState extends State<Gallery> {
+class _ArtItems extends State<ArtItems> {
+  likeButtonPressed() {
+    print("like button pressed");
+  }
+  commentButtonPressed() {
+    print("comment button pressed");
+    //Navigator.push(
+     // context,
+     // MaterialPageRoute(builder: (context) => const CommentPage(artitem: widget,)),
+   // );
+  }
+    Future<List<ArtItem>> artItemsofMe = getuserArtItems();
+
+  final ColorPalette colorPalette = ColorPalette();
+  final textUtils = TextUtils();
   late OverlayEntry _popupDialog;
   List<String> imageUrls = [
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
-    'https://placeimg.com/640/480/tech',
-    'https://placeimg.com/640/480/animals',
-    'https://placeimg.com/640/480/arch',
-    'https://placeimg.com/640/480/nature',
-    'https://placeimg.com/640/480/people',
+    
   ];
 
   @override
+  
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView.count(
+    
+
+return Scaffold(
+      backgroundColor: colorPalette.palePurplePantone,
+      body: FutureBuilder<List<ArtItem>>(
+          future: artItemsofMe,
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArtItem>> snapshot) {
+            if (snapshot.hasData == false)
+              return SizedBox.shrink();
+            List<ArtItem> artItems = snapshot.requireData;
+
+            for (ArtItem element in artItems) imageUrls.add(element.artitem_path) ;
+            imageUrls.map(_createGridTileWidget).toList();
+            return GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 1.0,
-        children: imageUrls.map(_createGridTileWidget).toList(),
+          children: imageUrls.map(_createGridTileWidget).toList(),   
+              
+            );
+              }
       ),
-    );
+    ); 
   }
 
   Widget _createGridTileWidget(String url) => Builder(
         builder: (context) => GestureDetector(
-          onLongPress: () {
+          onLongPress:() {
             _popupDialog = _createPopupDialog(url);
             Overlay.of(context)?.insert(_popupDialog);
           },
@@ -55,38 +78,47 @@ class _GalleryState extends State<Gallery> {
         child: _createPopupContent(url),
       ),
     );
-  }
 
+  }
   Widget _createPhotoTitle() => Container(
       width: double.infinity,
-      color: Colors.white,
+      color: colorPalette.blackShadows,
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: NetworkImage('https://placeimg.com/640/480/people'),
+          backgroundImage: Image.asset("assets/images/blank_profile.jpeg").image,
         ),
         title: Text(
-          'john.doe',
+          'selin',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
       ));
 
   Widget _createActionBar() => Container(
         padding: EdgeInsets.symmetric(vertical: 10.0),
-        color: Colors.white,
+        color: colorPalette.blackShadows,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(
-              Icons.favorite_border,
-              color: Colors.black,
+            IconButton(
+              icon: const Icon(
+                Icons.favorite,
+                color: Colors.black,
+              ),
+                onPressed: () => likeButtonPressed(),
             ),
-            Icon(
-              Icons.chat_bubble_outline_outlined,
-              color: Colors.black,
+            IconButton(
+              icon: const Icon(
+                Icons.chat,
+                color: Colors.black,
+              ),
+                onPressed: () => commentButtonPressed(),
             ),
-            Icon(
-              Icons.send,
-              color: Colors.black,
+            IconButton(
+              icon: const Icon(
+                Icons.attach_money,
+                color: Colors.black,
+              ),
+              onPressed: () => print("money button pressed"),
             ),
           ],
         ),
@@ -99,9 +131,9 @@ class _GalleryState extends State<Gallery> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _createPhotoTitle(),
+              //_createPhotoTitle(),
               Image.network(url, fit: BoxFit.fitWidth),
-              _createActionBar(),
+              //_createActionBar(),
             ],
           ),
         ),

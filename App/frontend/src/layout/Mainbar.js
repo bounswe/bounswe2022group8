@@ -32,7 +32,7 @@ function Mainbar(props) {
       <Container fluid>
         <Link to="/" onClick={scrollToTop} style={{ textDecoration: "none" }}>
           <Navbar.Brand className="ms-4 me-5" style={{ color: "white" }}>
-          <img className="logo-image" src={artopia_logo} />
+            <img className="logo-image" src={artopia_logo} alt="logo" />
           </Navbar.Brand>
         </Link>
         <Navbar.Collapse>

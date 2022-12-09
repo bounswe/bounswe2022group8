@@ -16,48 +16,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final EmailInputObject = EmailInput();
-  final PasswordInputObject = PasswordInput(name: "Password");
   final textUtils = TextUtils();
   final ColorPalette colorPalette = ColorPalette();
   // Future<ArtItem> artitemfuture = getAllArtItems();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.black,
       // backgroundColor: colorPalette.darkPurple,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
+          centerTitle: true,
+          automaticallyImplyLeading: false,
           backgroundColor: colorPalette.darkPurple,
-          leading: IconButton(
-            icon: Icon(Icons.account_circle_rounded),
-            tooltip: 'Go to your profile',
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
-              )
-            },
-          ),
           title: textUtils.buildText(
               "artopia", 25, Colors.white70, FontWeight.w500),
         ),
       ),
-      body: SingleChildScrollView(
+      body: FutureBuilder<List<ArtItem>>(
+          future: getAllArtItems(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArtItem>> snapshot) {
+            if (snapshot.hasData == false)
+              return SizedBox.shrink();
+            List<ArtItem> artItems = snapshot.requireData;
+
+            return  SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              for (var i = 0; i < 3; i++) (
-                  Post()
-              ),
+              for (ArtItem item in artItems ) (Post(artitem: item))
             ],
-          )),
-
+          ),
+    ) ;},),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: colorPalette.darkPurple,
+        unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
+          setState(() {
+          });
           if (value == 1) {
             Navigator.push(
               context,
