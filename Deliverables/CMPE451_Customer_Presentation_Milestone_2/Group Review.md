@@ -436,6 +436,8 @@ I am responsible for the backend side of our developments.
 * Helping the new backend team member get onboard.
     
 ### Main Contribution
+
+My main contributions include coding API endpoints as well as supporting the team in management related issues. I tried to review my teammates's work quickly as possible to help the team progress and did my best to implement API endpoints.
     
 **Code Related Issues**
 * [BE-23: [API] Tag Managing](https://github.com/bounswe/bounswe2022group8/issues/277)
