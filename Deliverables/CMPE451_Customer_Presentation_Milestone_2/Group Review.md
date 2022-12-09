@@ -378,6 +378,92 @@ I mainly worked on mobile app so I gave all of my effort to develop mobile appli
 </details>
 
 <details>
+    <summary> Furkan Keskin </summary>
+I'm Furkan Keskin and I'm a member of the group 8 frontend team.
+    
+### Responsibilities
+* Form error interface.
+* Finding a solution to the cache bug.
+* Forgot Password interface.
+* Settings Page interface and connections.
+* Reset Password interface and connection.
+* Profile Page interface and connections.
+* Art Item Upload interface and connections.
+* Handling the front end side of the image upload. (AWS s3, base 64, preview etc.)
+* Art Item Page interface and connections.
+* Comment Section interface and connections.
+* Tag interface.
+* Connecting the home and discover pages.
+* Transitions between pages for a better user experience such as loading screens and notification pop-ups.
+* Writing unit tests for some components.
+* CSS and design improvements when Sinem needed help.
+* Communication with the backend team for the integration stage.
+* Project Plan updates.
+* Note taker in a general meeting.
+* Note taker in multiple front-end meetings.
+* PR and issue reviews of the front end side.
+* Testing some API endpoints from postman. (Some backend PR reviews as well)
+* Providing sample art items/gallery for the presentation.
+* Presenting the web side of the project.
+* Filling in the Annotations section in the Milestone 2 report.
+* Filling in the Standards section in the Milestone 2 report.
+    
+### Main Contributions
+Since we are a fairly small sub-team, my responsibilities were not exactly in line with the project plan and were updated regularly, but in general I was able to take the above responsibilities and deliver them. Though I didn't do a very good job with some of them. 
+
+    
+**Code Related Issues**
+* [FE-7](https://github.com/bounswe/bounswe2022group8/issues/232)
+* [FE-8](https://github.com/bounswe/bounswe2022group8/issues/233)
+* [FE-10](https://github.com/bounswe/bounswe2022group8/issues/241)
+* [FE-11](https://github.com/bounswe/bounswe2022group8/issues/257)
+* [FE-12](https://github.com/bounswe/bounswe2022group8/issues/260)
+* [FE-14](https://github.com/bounswe/bounswe2022group8/issues/266)
+* [FE-20](https://github.com/bounswe/bounswe2022group8/issues/310)
+* [FE-23](https://github.com/bounswe/bounswe2022group8/issues/338)
+    
+    
+**Management Related Issues**
+* [MIL-14](https://github.com/bounswe/bounswe2022group8/issues/340)
+* [MIL-15](https://github.com/bounswe/bounswe2022group8/issues/341)
+* [MIL-16](https://github.com/bounswe/bounswe2022group8/issues/342)
+    
+    
+**Pull Requests**  
+* [feature/FE-8](https://github.com/bounswe/bounswe2022group8/pull/253)
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271)
+* [feature/FE-20](https://github.com/bounswe/bounswe2022group8/pull/322)
+* [feature/FE-21](https://github.com/bounswe/bounswe2022group8/pull/330)
+* [feature/FE-22](https://github.com/bounswe/bounswe2022group8/pull/334)
+* [hotfix/FE-20](https://github.com/bounswe/bounswe2022group8/pull/337)
+* [feature/FE-23](https://github.com/bounswe/bounswe2022group8/pull/339)
+    
+
+**Unit Tests**
+
+You can find frontend unit tests [here.](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
+
+My unittests:
+    
+* `HomeFooter.test.js`
+* `IntroImage.test.js`
+* `LoginModal.test.js`
+* `ResetPasswordModal.test.js`
+* `Searchbar.test.js`
+    
+    
+**Additional**
+    
+PR reviews:
+* [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252)
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/256)
+* [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270)
+    
+    
+</details>
+
+
+<details>
     <summary> Sinem Koçoğlu </summary>
     
 I am Sinem Koçoğlu and I am member of group 8 frontend team.
