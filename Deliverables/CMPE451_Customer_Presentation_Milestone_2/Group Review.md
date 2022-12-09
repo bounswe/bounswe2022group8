@@ -436,6 +436,19 @@ I am responsible for the backend side of our developments.
 * Helping the new backend team member get onboard.
     
 ### Main Contribution
+    
+**Code Related Issues**
+* [BE-23: [API] Tag Managing](https://github.com/bounswe/bounswe2022group8/issues/277)
+* [BE-25: Research on Moderator Flags](https://github.com/bounswe/bounswe2022group8/issues/278)
+* [BE-26: [API] Semantic and Lexical Search](https://github.com/bounswe/bounswe2022group8/issues/279)
+
+**Management Related Issues**
+* [MIL-10: Milestone 2 Requirements](https://github.com/bounswe/bounswe2022group8/issues/299)
+* [Meeting Notes: Week 9 BE Meeting 4](https://github.com/bounswe/bounswe2022group8/issues/297)
+* [Week 9 - Meeting #6(29.11.2022)](https://github.com/bounswe/bounswe2022group8/issues/296)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
+* [BE-31: Meeting Notes: Week 7 Backend-Meeting #3](https://github.com/bounswe/bounswe2022group8/issues/264)
+    
 </details>
 
 <details>
