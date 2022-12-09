@@ -79,7 +79,9 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 <details>
     <summary> Elif Bayraktar </summary>
-    
+
+
+| Hours spent | Task Type             | Task Description |
 |  Week 6 |              |  |
 |  :----:       |  :----:   |  :----: |
 |  1 hour 15 minutes  |  review   |  Reviewed the Swagger PR. [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245) |
@@ -114,8 +116,8 @@ From this point onward, we plan on adding several more functionalities to our ap
 |  2 hours   |  documentation   |  Wrote executive summary for milestone2 report. [#295](https://github.com/bounswe/bounswe2022group8/issues/295) |
 |  2 hours   |  documentation   |  Wrote the timesheet.  |
   * I also participated in all of the General and Backend meetings.   
-
-
+    
+    
 | Weekly meetings  |              |  |
 |  :----:       |  :----:   |  :----: |
 |  Meeting |  Attended weekly meeting #5.    |  1 hour  |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
@@ -123,8 +125,6 @@ From this point onward, we plan on adding several more functionalities to our ap
 |  Meeting |  Attended Week 9 Meeting #6.   |  2 hours  |  [Week 9 Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
 |  Meeting - BE |  Attended Week 7 BE Meeting.   |  2 hours  |  [Week 7 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022))|
 |  Meeting - BE |  Attended Week 9 BE Meeting.   |  2 hours  |  [Week 9 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-9--BE-Meeting-%234-(29.11.2022))|
-
-
 
 </details>
 
@@ -139,21 +139,6 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Mustafa Emre Erengül </summary>
     
-|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
- |  :----:        |  :----:   |  :----: |  :----: |
- |  Planning  |  Attended Week5 Group Meeting.    |  1 hour  |  [Week5- Group Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
- |  Planning  |  Attended Week5 Mobile Meeting.     |  1 hour  |  [Week5- MOB Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Mobile-Meeting-Notes-2) |
- |  Planning  |  Review the plan for the second milestone during the lab time.     |  1 hour  |   |
- |  Planning  |  Attended Week7 Mobile Meeting.     |  1 hour  |  [Week7- MOB Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022)) |
-| Research | Research about how to implement the page navigations. | 60 minutes | 
-| Implementation | Profile page with the header widget is created. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-| Implementation | Tabs are added and profile page is completed. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-|  Planning  |  Attended Week8 Mobile Meeting.     |  2 hours  |  [Week8- MOB Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022)) |
-| Implementation | Art item upload page is implemented. | 240 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-|  Planning  |  Attended Week9 Group Meeting.    |  1 hour  |  [Week9- Group Meeting #9](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
-| Implementation | Profile settings  page is implemented. | 180 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-| Implementation | Profile photo change page is implemented. | 150 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
-| Implementation | Change password page is implemented. | 180 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
 
 
 
@@ -222,19 +207,10 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Implementation | Designed and implemented a Forgot Password pop up | 1 hours | [#260](https://github.com/bounswe/bounswe2022group8/issues/260), [PR](https://github.com/bounswe/bounswe2022group8/pull/271)  |
 | Implementation | Designed and implemented an interface for art item upload from the user profile page. Created a loading interface as well. Also made the necessary API calls. | 7 hours |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   | 
 | Implementation  | Designed and implemented the art item page interface. Connected it to backend. Art item page includes comment interface as well. Comments are connected to the backend too. |  10 hours  | [#310](https://github.com/bounswe/bounswe2022group8/issues/310), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
-| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.5 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
-| Implementation  | Created an interface for first upload | 2 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/330)     |
-| Implementation  | Fixed some of the warnings in the application | 30 minutes | [PR](https://github.com/bounswe/bounswe2022group8/pull/330) |
-| Implementation  | Created some loading screens and notification pop-ups for a better user experience | 3 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)  |
-| Implementation  | Connected the home and discover pages to the backend |  1 hour | [PR](https://github.com/bounswe/bounswe2022group8/pull/334)  |
-| Testing | Wrote unit tests for some components | 1 hour | [#338](https://github.com/bounswe/bounswe2022group8/issues/338), [PR](https://github.com/bounswe/bounswe2022group8/pull/339)  |
-| Planning   | Updated our project plan in line with the meetings  | 30 minutes |   |
-| Review | Reviewed the following PRs: [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252), [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/256), [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270) |  1 hour |   |
-| Presentation  | Created a sample gallery for the presentation | 45 minutes  |     |
-| MIL2 |  Filled in the Annotations section in the Milestone 2 report  | 30 minutes   |  [#341](https://github.com/bounswe/bounswe2022group8/issues/341)  |
-| MIL2 |  Filled in the Standards section in the Milestone 2 report  | 1.5 hours   |  [#342](https://github.com/bounswe/bounswe2022group8/issues/342)  |
+| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.30 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
 
-    
+
+
 </details>   
     
 <details>
@@ -284,27 +260,28 @@ From this point onward, we plan on adding several more functionalities to our ap
   > Implementation tasks involve documentation with Swagger, testing the functionality on both local and Dockerized version of the application.
 </details>
 
+
+
+
 <details>
     <summary> Doğukan Türksoy </summary>
     
-
-
-
-</details>
-
-
-<details>
-    <summary> Mustafa Cihan </summary>
-    
  |  Task Type   | Task Description |Related Link(s) |
  |  :----:        |  :----:   |  :----: |
- | Implementation | Redesigning landing page | [MOB-6: Revising Landing Page](https://github.com/bounswe/bounswe2022group8/issues/238)|
- | Implementation | Creating Art Item Pages | [MOB-8: Creating Art Item Pages](https://github.com/bounswe/bounswe2022group8/issues/282)|
- | Implementation | Revise Signup and Login page | [MOB-13: Revise Signup and Login page](https://github.com/bounswe/bounswe2022group8/issues/287)|
- | Implementation | Revising Homepage | [MOB-14: Revising Homepage](https://github.com/bounswe/bounswe2022group8/issues/289)|
- | Implementation | Static Comment Page| [MOB-15: Static Comment Page](https://github.com/bounswe/bounswe2022group8/issues/315)|
+ | Implementation | Connecting Profile Page | [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Connecting Art Item Page | [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Connecting Reset Password Pages | |
+ | Implementation | Connecting Homepage |[MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
  | Implementation | Connecting Comment Page| [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)|
- 
+ | Implementation | Connections of AWS S3 bucket on mobile part| [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)|
+ | Implementation | Connecting Upload Art Item page |[MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Helped Backend for sending reset emails.  | https://github.com/bounswe/bounswe2022group8/pull/259 |
+ | Implementation | Initialized and configured Gmail account for the project.| https://github.com/bounswe/bounswe2022group8/pull/259|
+ | Deployment | Frontend Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Deployment | Backend Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Deployment | Android Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Meetings | Attended MOB Meeting #3, MOB Meeting #4, General Meeting #6 | https://github.com/bounswe/bounswe2022group8/wiki |
+    
     
 </details>
 
@@ -457,49 +434,6 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 
 <details>
     <summary>Mobile</summary>
-    
-![WhatsApp Image 2022-12-08 at 17 02 24 (1)](https://user-images.githubusercontent.com/63647591/206468755-0e058571-7d0e-429f-89ed-99805534b118.jpeg)
-
-* [Art Item Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/artitem_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 24](https://user-images.githubusercontent.com/63647591/206468808-e494c652-2304-49cb-b135-35c53e8e6a88.jpeg)
-
-* [Home Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/home_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 22 (3)](https://user-images.githubusercontent.com/63647591/206469044-d4fe0297-d7ac-44d5-9a83-1e8d6a378f13.jpeg)
-
-* [Comment Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/comment_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 23 (1)](https://user-images.githubusercontent.com/63647591/206468920-495ab94f-48e9-4804-9b32-205a62c259ac.jpeg)
-
-* [Landing Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/landing_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 21](https://user-images.githubusercontent.com/63647591/206469185-678ae22a-5dbf-40e6-98fe-6f6279fc967f.jpeg)
-
-* [Forgot Password Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/forgot_password.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 22](https://user-images.githubusercontent.com/63647591/206469169-97c4a5cf-dc6c-46eb-a093-79f3eb83369b.jpeg)
-
-* [Signup Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/signup_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 22 (1)](https://user-images.githubusercontent.com/63647591/206469155-4dd0b650-80de-4a0a-af7e-deea3cd879da.jpeg)
-
-10
-
-![WhatsApp Image 2022-12-08 at 17 02 23](https://user-images.githubusercontent.com/63647591/206470476-c5052cae-bae4-42e4-af34-96adc1dfbaf9.jpeg)
-11
-![WhatsApp Image 2022-12-08 at 17 02 24 (2)](https://user-images.githubusercontent.com/63647591/206470543-919bc932-28e3-484d-88ab-d229083fc049.jpeg)
-
-![WhatsApp Image 2022-12-08 at 17 03 40](https://user-images.githubusercontent.com/63647591/206470594-2e111062-cb08-4dbe-8105-a51ed192b2c9.jpeg)
-
-* [Profile Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/profile_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 24 (3)](https://user-images.githubusercontent.com/63647591/206470617-afc23bbf-8071-4c0d-80a5-4a1971f4c2c6.jpeg)
-
-* [Login Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/login_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 22 (2)](https://user-images.githubusercontent.com/63647591/206471187-d4f020ca-f54c-47ca-85c3-6826817a1754.jpeg)
-
 </details> 
 
 ## 7. Annotations
@@ -861,32 +795,32 @@ PR reviews:<br>
 * [feature/FE-22](https://github.com/bounswe/bounswe2022group8/pull/334)
 * [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR due to the errors and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
+
 </details>
 
 <details>
-    <summary> Mustafa Emre Erengül </summary>
-I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
+    <summary> Doğukan Türksoy </summary>
+    
+I am Doğukan Türksoy, a member of group 8. I am at mobile part of our project.
 
 ### Responsibilities
-Setting the environment for the mobile development and learning basic Flutter/Dart to implement the initial pages. Creating the basic version of the mobile app which can run the functionalities that Backend team provided. Debugging the error-messages and dependency problems. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
-    
+I am responsible for mobile part and deployment. 
 ### Main Contributions
-Help to launch the initial version of the mobile app. Contribute to creation of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also designing issues and the colour palette for the app background.<br/>
+For this milestone I mainly worked on backend-mobile connections of out project. I connected profile page, update profile page, upload art item page, reset password , home page, art item page and comment pages. Moreover, worked on the connection of AWS S3 bucket to the mobile for fetching images. I also deployed the frontend, backend and mobile. <br/>
 
 **Code Related Issues**
-* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
-* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
-* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
-* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
-* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
-    
+* [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)
+* [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)
+* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
+
+  
 **Management Related Issues**
-* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
-* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
-    
+* [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)
+* [MIL-18: User Interface / User Experience](https://github.com/bounswe/bounswe2022group8/issues/349)
+
 **Pull Requests**
-* [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
-* [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
-* [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
-    
+* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
+* [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
+
+
 </details>
