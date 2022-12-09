@@ -140,9 +140,35 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Review | Reviewed the PR for the Swagger and AWS S3 integration | 45 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/249) |
 | Review | Reviewed the PR for the AWS S3 integration with our application | 40 minutes | Reviewed [PR](https://github.com/bounswe/bounswe2022group8/pull/247) |
 
-
 </details>
 
+<details>
+    <summary> Furkan Keskin </summary>
+    
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+|  :----:        |  :----:   |  :----: |  :----: |    
+|  Meeting |  Attended weekly meeting #5.    |  1 hour  |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+|  Meeting - FE |  Attended Week 5 FE Meeting.    |  40 minutes |  [Week 5 FE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Frontend-Meeting-Notes-2) |
+|  Meeting |  Attended Week 9 Meeting #6.   |  2 hours  |  [Week 9 Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+|  Meeting - FE |  Attended Week 7 FE Meeting.   |  2 hours  |  [Week 7 FE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-Frontend-Meeting-Notes-3)|
+|  Documentation | Took notes during the weekly meeting #5 and documented them in wiki   |  30 minutes |  [#235](https://github.com/bounswe/bounswe2022group8/issues/235)  |
+|  Documentation | Took notes during the frontend meeting #2 and documented them in wiki   |  30 minutes |  [#236](https://github.com/bounswe/bounswe2022group8/issues/236)  |
+|  Documentation | Took notes during the frontend meeting #3 and documented them in wiki   |  30 minutes |  [#265](https://github.com/bounswe/bounswe2022group8/issues/265)  |
+|  Implementation  | Solved the cache bug  |  5 hours  |  [#232](https://github.com/bounswe/bounswe2022group8/issues/232)  |
+|  Implementation  | Parameterized the URLs | 40 minutes| [#233](https://github.com/bounswe/bounswe2022group8/issues/233)  | 
+|  Implementation/Research | Handled the frontend side of the image upload | 8.5 hours | [#266](https://github.com/bounswe/bounswe2022group8/issues/266), [PR](https://github.com/bounswe/bounswe2022group8/pull/271) |   
+| Research | Researched art related web sites' profile pages, settings, art item pages, post areas, grid systems etc.  | 4 hours | [#241](https://github.com/bounswe/bounswe2022group8/issues/241)    |    
+| Implementation | Improved Sinem's profile page interface considerably and connected to backend | 8 hours  |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241) |
+| Implementation | Designed and implemented a Settings page interface and connected to backend | 5 hours  | [#257](https://github.com/bounswe/bounswe2022group8/issues/257), [PR](https://github.com/bounswe/bounswe2022group8/pull/271)    |
+| Implementation | Designed and implemented a Forgot Password pop up | 1 hours | [#260](https://github.com/bounswe/bounswe2022group8/issues/260), [PR](https://github.com/bounswe/bounswe2022group8/pull/271)  |
+| Implementation | Designed and implemented an interface for art item upload from the user profile page. Created a loading interface as well. Also made the necessary API calls. | 7 hours |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   | 
+| Implementation  | Designed and implemented the art item page interface. Connected it to backend. Art item page includes comment interface as well. Comments are connected to the backend too. |  10 hours  | [#310](https://github.com/bounswe/bounswe2022group8/issues/310), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
+| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.30 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
+
+
+
+</details>   
+    
 <details>
     <summary> Karahan Sarıtaş </summary>
 
