@@ -456,6 +456,49 @@ We used Swagger to document our APIs and provide exemplary inputs/outputs for ot
 
 <details>
     <summary>Mobile</summary>
+    
+![WhatsApp Image 2022-12-08 at 17 02 24 (1)](https://user-images.githubusercontent.com/63647591/206468755-0e058571-7d0e-429f-89ed-99805534b118.jpeg)
+
+* [Art Item Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/artitem_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 24](https://user-images.githubusercontent.com/63647591/206468808-e494c652-2304-49cb-b135-35c53e8e6a88.jpeg)
+
+* [Home Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/home_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 22 (3)](https://user-images.githubusercontent.com/63647591/206469044-d4fe0297-d7ac-44d5-9a83-1e8d6a378f13.jpeg)
+
+* [Comment Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/comment_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 23 (1)](https://user-images.githubusercontent.com/63647591/206468920-495ab94f-48e9-4804-9b32-205a62c259ac.jpeg)
+
+* [Landing Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/landing_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 21](https://user-images.githubusercontent.com/63647591/206469185-678ae22a-5dbf-40e6-98fe-6f6279fc967f.jpeg)
+
+* [Forgot Password Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/forgot_password.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 22](https://user-images.githubusercontent.com/63647591/206469169-97c4a5cf-dc6c-46eb-a093-79f3eb83369b.jpeg)
+
+* [Signup Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/signup_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 22 (1)](https://user-images.githubusercontent.com/63647591/206469155-4dd0b650-80de-4a0a-af7e-deea3cd879da.jpeg)
+
+10
+
+![WhatsApp Image 2022-12-08 at 17 02 23](https://user-images.githubusercontent.com/63647591/206470476-c5052cae-bae4-42e4-af34-96adc1dfbaf9.jpeg)
+11
+![WhatsApp Image 2022-12-08 at 17 02 24 (2)](https://user-images.githubusercontent.com/63647591/206470543-919bc932-28e3-484d-88ab-d229083fc049.jpeg)
+
+![WhatsApp Image 2022-12-08 at 17 03 40](https://user-images.githubusercontent.com/63647591/206470594-2e111062-cb08-4dbe-8105-a51ed192b2c9.jpeg)
+
+* [Profile Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/profile_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 24 (3)](https://user-images.githubusercontent.com/63647591/206470617-afc23bbf-8071-4c0d-80a5-4a1971f4c2c6.jpeg)
+
+* [Login Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/login_page.dart)
+
+![WhatsApp Image 2022-12-08 at 17 02 22 (2)](https://user-images.githubusercontent.com/63647591/206471187-d4f020ca-f54c-47ca-85c3-6826817a1754.jpeg)
+
 </details> 
 
 ## 7. Annotations
