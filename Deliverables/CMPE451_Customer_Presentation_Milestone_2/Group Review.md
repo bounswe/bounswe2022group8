@@ -199,6 +199,11 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 
 ## 3. Status of Deliverables
+* Latest version of the requirements can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/Requirements).
+* Latest version of the class diagram can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram).
+* Latest version of the use case diagram can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram).
+* Latest version of the sequence diagram can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/Practice-App---Sequence-Diagrams).
+
 
 ## 4. Progress According to Requirements
 
@@ -593,7 +598,7 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 * Configuration of `.env` and `.production.env` files to hide all of our secret information including AWS credentials, database credentials, email information and S3 bucket information, for both development and production sites.
 * Generation of the class diagram fron Django using `graphviz`.
 * Updating the class diagram. Filling up the `API` section of the Milestone II document.
-
+* Updating existing APIs in accordance with the requests coming from frontend and mobile during the milestone week.
 
 ### Main Contributions
 Already listed all of my responsibilities and contributions above. Overall, I worked so hard to pushed the team forward, handled some of the challenging tasks in our path and guided people throughout the procedure. Critically reviewed pull requests of other team members. I showed uttermost respect to the mutual agreements we did in the meetings and therefore did my best to meet all the deadlines specified for our tasks. Unfortunatelly I couldn't see the same respect from others though.
@@ -614,6 +619,7 @@ Already listed all of my responsibilities and contributions above. Overall, I wo
 * [MIL-9: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/298)
 * [MIL-11:  Milestone 2 Deliverables](https://github.com/bounswe/bounswe2022group8/issues/300)
 * [MIL-12: Update Class Diagram](https://github.com/bounswe/bounswe2022group8/issues/303)
+* [MIL-13: Pre-Release Version 0.2.0](https://github.com/bounswe/bounswe2022group8/issues/335)
 
 
 **Pull Requests**
@@ -630,6 +636,7 @@ Already listed all of my responsibilities and contributions above. Overall, I wo
 * [feature/BE-22 #2](https://github.com/bounswe/bounswe2022group8/pull/291)
 * [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294)
 * [feature/BE-29](https://github.com/bounswe/bounswe2022group8/pull/320)
+* [feature/BE-30](https://github.com/bounswe/bounswe2022group8/pull/333)
 * [hotfix/BE-11](https://github.com/bounswe/bounswe2022group8/pull/301)
 
 **Unit Tests**
@@ -653,6 +660,7 @@ PR reviews:<br>
 * [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215) 
 * [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271) (We worked as pair on this)
 * [feature/FE-20](https://github.com/bounswe/bounswe2022group8/pull/322)
+* [feature/FE-22](https://github.com/bounswe/bounswe2022group8/pull/334)
 * [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR due to the errors and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
 
