@@ -128,6 +128,9 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Meeting - BE| Attended backend weekly meeting #2 | 45 minutes | [Weekly BE Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
 | Meeting - BE| Attended backend weekly meeting #3 | 2 hours | [Weekly BE Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022)) |
 | Meeting - BE| Attended backend weekly meeting #4 | 2 hours | [Weekly BE Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-9--BE-Meeting-%234-(29.11.2022)) |
+| Documentation | Took notes during the weekly backend meeting #3 and documented them in wiki | 30 minutes | Related [issue](https://github.com/bounswe/bounswe2022group8/issues/264)| 
+| Documentation | Took notes during the general meeting #6 and documented them in wiki | 30 minutes | Related [issue](https://github.com/bounswe/bounswe2022group8/issues/296)| 
+| Documentation | Took notes during the backend meeting #4 and documented them in wiki | 30 minutes | Related [issue](https://github.com/bounswe/bounswe2022group8/issues/297)| 
 
 
 </details>
