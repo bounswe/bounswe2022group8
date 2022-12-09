@@ -80,7 +80,6 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Elif Bayraktar </summary>
     
-| Hours spent | Task Type             | Task Description |
 |  Week 6 |              |  |
 |  :----:       |  :----:   |  :----: |
 |  1 hour 15 minutes  |  review   |  Reviewed the Swagger PR. [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245) |
