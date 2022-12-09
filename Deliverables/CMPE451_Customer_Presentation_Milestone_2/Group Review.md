@@ -704,7 +704,7 @@ I already listed my main responsibilities and contributions above. Other than th
 
 
 **Additional**
-* [GEN-35](https://github.com/bounswe/bounswe2022group8/issues/290)
+* [GEN-34](https://github.com/bounswe/bounswe2022group8/issues/275)(On-hold)
 
 </details>
 
