@@ -94,23 +94,7 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 <details>
     <summary> Mustafa Emre Erengül </summary>
-
- |  Task Type   | Task Description |  Time Spent    |Related Link(s) |
- |  :----:        |  :----:   |  :----: |  :----: |
- |  Planning  |  Attended Week5 Group Meeting.    |  1 hour  |  [Week5- Group Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
- |  Planning  |  Attended Week5 Mobile Meeting.     |  1 hour  |  [Week5- MOB Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Mobile-Meeting-Notes-2) |
- |  Planning  |  Review the plan for the second milestone during the lab time.     |  1 hour  |   |
- |  Planning  |  Attended Week7 Mobile Meeting.     |  1 hour  |  [Week7- MOB Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022)) |
-| Research | Research about how to implement the page navigations. | 60 minutes | 
-| Implementation | Profile page with the header widget is created. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-| Implementation | Tabs are added and profile page is completed. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-|  Planning  |  Attended Week8 Mobile Meeting.     |  2 hours  |  [Week8- MOB Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022)) |
-| Implementation | Art item upload page is implemented. | 240 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-|  Planning  |  Attended Week9 Group Meeting.    |  1 hour  |  [Week9- Group Meeting #9](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
-| Implementation | Profile settings  page is implemented. | 180 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-| Implementation | Profile photo change page is implemented. | 150 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
-| Implementation | Change password page is implemented. | 180 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
- 
+    
 
 
 
@@ -180,9 +164,17 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Implementation | Designed and implemented an interface for art item upload from the user profile page. Created a loading interface as well. Also made the necessary API calls. | 7 hours |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   | 
 | Implementation  | Designed and implemented the art item page interface. Connected it to backend. Art item page includes comment interface as well. Comments are connected to the backend too. |  10 hours  | [#310](https://github.com/bounswe/bounswe2022group8/issues/310), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
 | Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.30 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
+| Implementation  | Created an interface for first upload | 2 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/330)     |
+| Implementation  | Fixed some of the warnings in the application | 30 minutes | [PR](https://github.com/bounswe/bounswe2022group8/pull/330) |
+| Implementation  | Created some loading screens and notification pop-ups for a better user experience | 3 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)  |
+| Implementation  | Connected the home and discover pages to the backend |  1 hour | [PR](https://github.com/bounswe/bounswe2022group8/pull/334)  |
+| Testing | Wrote unit tests for some components | 1 hour | [#338](https://github.com/bounswe/bounswe2022group8/issues/338), [PR](https://github.com/bounswe/bounswe2022group8/pull/339)  |
+| Planning   | Updated our project plan in line with the meetings  | 30 minutes |   |
 
 
 
+    
+    
 </details>   
     
 <details>
