@@ -82,8 +82,8 @@ From this point onward, we plan on adding several more functionalities to our ap
 
 
 | Hours spent | Task Type             | Task Description |
-|  Week 6 |              |  |
 |  :----:       |  :----:   |  :----: |
+|  Week 6 |              |  |
 |  1 hour 15 minutes  |  review   |  Reviewed the Swagger PR. [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245) |
 |   5 hours      |  research/coding   |  Researched for and coded the Reset Password APIs. Researched for sending automated emails through the app. Tested through the terminal. [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259), [Issue:#254](https://github.com/bounswe/bounswe2022group8/issues/254) |
 |   20 minutes      |  review   |  Reviewed the hotfix PR. [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)  |
@@ -115,6 +115,7 @@ From this point onward, we plan on adding several more functionalities to our ap
 |  :----:       |  :----:   |  :----: |
 |  2 hours   |  documentation   |  Wrote executive summary for milestone2 report. [#295](https://github.com/bounswe/bounswe2022group8/issues/295) |
 |  2 hours   |  documentation   |  Wrote the timesheet.  |
+|  50  minutes   |  documentation   |  Wrote individual report for milestone2.  |
   * I also participated in all of the General and Backend meetings.   
     
     
@@ -822,5 +823,57 @@ For this milestone I mainly worked on backend-mobile connections of out project.
 * [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
 * [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
 
+
+</details>
+
+<details>
+    <summary> Elif Bayraktar </summary>
+    
+I am Elif, a member of group 8 and I am currently working on the backend team.
+
+### Responsibilities
+* Creating APIs for password reset (both for with or without login)(x3 APIs in total).
+* Configuring app settings and an email server for sending automated otp emails through the app for password reset.
+* Updating the comment model to accommodate replies and the hierarchy (using django-mptt).
+* Creating APIs for CRUD comment operations and get all comments of art item(x5 APIs in total).
+* Creating Swagger documentation for all of these APIs.
+* Researching about GitHub Packages, Personal Access Tokens and how to use them in workflows.
+* Creating GitHub Workflow for building and pushing docker images.
+* Writing the executive summary for the milestone2 report.
+* PR Review: Swagger Integration feature/BE-14
+* PR Review: hotfix/BE-14
+* PR Review: Feature/BE-23 Tag APIs    
+* PR Review: feature/BE-27 Account deletion API
+
+
+
+### Main Contributions
+I already listed my main responsibilities and contributions above. Other than those, I tried to write detailed explanations about usage of the tools I integrated (such as github packages) and provided detailed explanations for my PRs. I tried to help teammates with testing their code when available.
+    
+**Code Related Issues**
+* [BE-19: Implementation of Reset Password API (Forgot password & logged in)](https://github.com/bounswe/bounswe2022group8/issues/254)
+* [BE-20: Comment System](https://github.com/bounswe/bounswe2022group8/issues/261)
+* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
+    
+**Management Related Issues**
+* [MIL-8: Milestone 2 Group Review/Executive Summary](https://github.com/bounswe/bounswe2022group8/issues/295)
+* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
+
+
+**Pull Requests**
+* [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259)
+* [PR:Feature/be 20](https://github.com/bounswe/bounswe2022group8/pull/262)
+* [PR:Feature/BE11](https://github.com/bounswe/bounswe2022group8/pull/215)
+    
+
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245)
+* [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
+* [PR:feature/BE-27 Account deletion API](https://github.com/bounswe/bounswe2022group8/pull/319)
+* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
+
+    
 
 </details>
