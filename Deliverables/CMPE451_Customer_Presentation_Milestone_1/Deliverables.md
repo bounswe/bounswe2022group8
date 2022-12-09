@@ -160,9 +160,7 @@ Help to launch the initial version of the mobile app. Contribute to creation of 
 * [MIL-5: Milestone 1 Group Review](https://github.com/bounswe/bounswe2022group8/issues/226) (opened)
     
 **Pull Requests**
-* [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)
-* [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)
-* [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219) (reviewed)
     
 </details>
 
