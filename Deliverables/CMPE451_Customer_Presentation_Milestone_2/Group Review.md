@@ -222,17 +222,18 @@ From this point onward, we plan on adding several more functionalities to our ap
 | Implementation | Designed and implemented a Forgot Password pop up | 1 hours | [#260](https://github.com/bounswe/bounswe2022group8/issues/260), [PR](https://github.com/bounswe/bounswe2022group8/pull/271)  |
 | Implementation | Designed and implemented an interface for art item upload from the user profile page. Created a loading interface as well. Also made the necessary API calls. | 7 hours |  [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   | 
 | Implementation  | Designed and implemented the art item page interface. Connected it to backend. Art item page includes comment interface as well. Comments are connected to the backend too. |  10 hours  | [#310](https://github.com/bounswe/bounswe2022group8/issues/310), [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
-| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.30 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
+| Implementation   | Interface for tags are designed and implemented; however not connected yet.  | 1.5 hours  | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)   |
 | Implementation  | Created an interface for first upload | 2 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/330)     |
 | Implementation  | Fixed some of the warnings in the application | 30 minutes | [PR](https://github.com/bounswe/bounswe2022group8/pull/330) |
 | Implementation  | Created some loading screens and notification pop-ups for a better user experience | 3 hours | [PR](https://github.com/bounswe/bounswe2022group8/pull/322)  |
 | Implementation  | Connected the home and discover pages to the backend |  1 hour | [PR](https://github.com/bounswe/bounswe2022group8/pull/334)  |
 | Testing | Wrote unit tests for some components | 1 hour | [#338](https://github.com/bounswe/bounswe2022group8/issues/338), [PR](https://github.com/bounswe/bounswe2022group8/pull/339)  |
 | Planning   | Updated our project plan in line with the meetings  | 30 minutes |   |
+| Review | Reviewed the following PRs: [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252), [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/256), [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270) |  1 hour |   |
+| Presentation  | Created a sample gallery for the presentation | 45 minutes  |     |
+| MIL2 |  Filled in the Annotations section in the Milestone 2 report  | 30 minutes   |  [#341](https://github.com/bounswe/bounswe2022group8/issues/341)  |
+| MIL2 |  Filled in the Standards section in the Milestone 2 report  | 1.5 hours   |  [#342](https://github.com/bounswe/bounswe2022group8/issues/342)  |
 
-
-
-    
     
 </details>   
     
