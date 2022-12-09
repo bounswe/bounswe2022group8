@@ -131,7 +131,21 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Metehan Dündar </summary>
 
-
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+|  :----:        |  :----:   |  :----: |  :----: |
+|  Meeting - GEN |  Read Week 5 GEN Meeting Notes on Discord.    |  20 minutes|  [Week 5 GEN Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5)|
+|  Meeting - BE |  Read Week 5 BE Meeting Notes on Discord.    |  20 minutes|  [Week 5 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022))|
+|  Meeting - BE |  Attended Week 7 BE Meeting.    |  2 hours|  [Week 7 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022))|
+|  Meeting - MOB |  Attended Week 7 MOB Meeting.   | 1 hours  |  [Week 7 MOB Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022))|
+|  Meeting - MOB |  Attended Week 8 MOB Meeting.   |  2 hours  |  [Week 8 MOB Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022))|
+|  Meeting - GEN |  Attended Week 9 General Meeting.   |  1 hour  |  [Week 9 General Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022))|
+|  Meeting - GEN |  Read Week 10 GEN Meeting Notes on Discord.    |  20 minutes|  [Week 10 GE N Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-10-Meeting-%237-(07.12.2022))|
+| Documentation | Changing Label Systems | 45 minutes | [Issue GEN-33](https://github.com/bounswe/bounswe2022group8/issues/273)|
+| Design | Creating Several Logo Designs | 8 hours | [Issue GEN-32](https://github.com/bounswe/bounswe2022group8/issues/268)|
+| Presentation | Preparing for Milestone 2 Customer Presentation  |  1 hour | - |
+| Implementation | Implementing the Forgot and Confirm Password Pages | 6 hours | [Issue MOB-21](https://github.com/bounswe/bounswe2022group8/issues/350) [PR feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/319)|
+| Review | Reviewing the Issue | 15 minutes | [Issue GEN-35](https://github.com/bounswe/bounswe2022group8/issues/290)|
+| Documentation | Documenting Milestone 2 Deliverables | 1.5 hours | - |
 
 </details>
 
