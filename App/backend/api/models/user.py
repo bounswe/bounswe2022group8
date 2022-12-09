@@ -86,3 +86,4 @@ class Follow(models.Model):
     
     def __str__(self):
         return str(self.from_user) + " follows " + str(self.to_user)
+

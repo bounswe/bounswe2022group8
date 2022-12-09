@@ -27,3 +27,28 @@ class ArtItem(models.Model):
 
     def __str__(self):
         return "Art item: " + self.title
+
+    @property
+    def get_numberof_likes(self):
+        return len([liked.user for liked in LikeArtItem.objects.filter(artitem=self)])
+
+    @property
+    def get_users_who_liked(self):
+        return [liked.user for liked in LikeArtItem.objects.filter(artitem=self)]
+
+    
+class LikeArtItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    artitem = models.ForeignKey(ArtItem, on_delete=models.CASCADE, related_name="+")
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="%(app_label)s_%(class)s_unique_relationships",
+            fields=["user", "artitem"],
+            ),
+        ]
+        ordering = ["-liked_at"]
+
+    def __str__(self):
+        return str(self.user) + " liked " + str(self.artitem)

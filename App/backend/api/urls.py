@@ -14,6 +14,7 @@ from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_f
 from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
 from .views.user import users_api
+from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
 
 
 from knox import views as knox_views
@@ -75,6 +76,13 @@ urlpatterns = [
     path('users/<int:id>/followers/', get_followers, name="get_followers"),
     path('users/<int:id>/followings/', get_followings, name="get_followings"),
     path('artitems/me/followings/', artitems_of_followings, name="get_artitems_of_followings"),
+    path('users/artitems/<int:id>/like/', like_artitem, name="like_artitem"),
+    path('users/artitems/<int:id>/unlike/', unlike_artitem, name="unlike_artitem"),
+    path('users/<int:id>/liked-artitems/', get_liked_artitems_of_user, name="get_liked_artitems_of_user"),
+    path('artitems/<int:id>/likers/', get_users_who_liked_artitem, name="get_users_who_liked_artitem"),
+    path('users/comments/<int:id>/like/', like_comment, name="like_comment"),
+    path('users/comments/<int:id>unlike/', unlike_comment, name="unlike_comment"),
+    path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment"),
     path('artitems/tags/<int:id>', TagView, name="Tagview"),
     path('artitems/tags/', TagsView, name="TagsView")
 
