@@ -887,5 +887,11 @@ I implemented a profile page that allows users to dislay their uploaded art item
 * [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
 * [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
 * [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
+
+***Additional***
+    
+PR reviews:
+* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314) (reviewed)
+* [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
     
 </details>
