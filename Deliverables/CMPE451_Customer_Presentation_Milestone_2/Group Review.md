@@ -121,7 +121,13 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Sena Mumcu </summary>
     
-
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |  :----: |
+| Meeting | Attended weekly meeting #5 | 1 hour | [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+| Meeting | Attended weekly meeting #6 | 1 hour | [Weekly Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+| Meeting - BE| Attended backend weekly meeting #2 | 45 minutes | [Weekly BE Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
+| Meeting - BE| Attended backend weekly meeting #3 | 2 hours | [Weekly BE Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022)) |
+| Meeting - BE| Attended backend weekly meeting #4 | 2 hours | [Weekly BE Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-9--BE-Meeting-%234-(29.11.2022)) |
 
 
 </details>
