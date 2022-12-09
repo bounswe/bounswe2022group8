@@ -61,6 +61,18 @@ From this point onward, we plan on adding several more functionalities to our ap
 <details>
     <summary> Serdar Akol </summary>
 
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |  :----: |
+ |  Meeting |  Attended weekly meeting #5.    |  1 hour  |  [Weekly Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
+ |  Meeting - BE |  Attended backend weekly meeting #2.    |  45 minutes |  [Week 5 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) |
+  |  Meeting |  Attended Week 9 Meeting #6.   |  2 hours  |  [Week 9 Meeting #6](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
+  |  Meeting - BE |  Attended Week 7 BE Meeting.   |  2 hours  |  [Week 7 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-7-BE-Meeting-%233-(15.11.2022))|
+ |  Meeting - BE |  Attended Week 9 BE Meeting.   |  2 hours  |  [Week 9 BE Meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-9--BE-Meeting-%234-(29.11.2022))|
+| PR Review | Reviewing the Follow related APIs | 40 minutes | [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/274)|
+| PR Review | Reviewing the Art item related APIs | 40 minutes | [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)|
+| Backend Repository Review | Reviewing the whole backend hierarchy, implementations and tests |  ~5 hours | - |
+| Implementation | Implementing the Account/User deletion APIs | ~2 hours | [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276) [PR feature/BE-27](https://github.com/bounswe/bounswe2022group8/pull/319)|
+| Implementation | Implementing the Like/Unlike Art item and comment APIs | ~10 hours | [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302), [PR feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315)|
 
 
 </details>
@@ -349,6 +361,50 @@ During the implementation process of our project, as a whole team, we took great
 * We tried not to write the whole application as a bunch of meaningless divs. We did our best to increase tag diversity by using different HTML tags for different purposes. 
 
 ## 9. Individual Reports 
+
+<details>
+    <summary> Serdar Akol </summary>
+I am Serdar Akol a member of group 8. I used to work on mobile application side of the project, after Milestone 1 report I have been transferred
+to the backend side of the project.
+
+### Responsibilities
+I am responsible for backend side of the project. 
+* Following the implementations of my team.
+* Reviewing the PRs of my team members.
+* Implementing Like/Unlike feature for Art items. 
+* Implementing Like/Unlike feature for comments. 
+* Implementing Account/User deletion API. 
+
+
+### Main Contributions
+My main contributions are also the ones listed above. Since, I have been transferred to backend team after the first milestone report. I have struggled to addopt to the team at first. But thanks to Karahan and all my other backend team, I could catch the team up. <br/>
+
+| PR Review | Reviewing the Follow related APIs | 40 minutes | [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/274)|
+| PR Review | Reviewing the Art item related APIs | 40 minutes | [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)|
+| Backend Repository Review | Reviewing the whole backend hierarchy, implementations and tests |  ~5 hours | - |
+| Implementation | Implementing the Account/User deletion APIs | ~2 hours | [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276) [PR feature/BE-27](https://github.com/bounswe/bounswe2022group8/pull/319)|
+| Implementation | Implementing the Like/Unlike Art item and comment APIs | ~10 hours | [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302), [PR feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315)|
+
+**Code Related Issues**
+* [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276)
+* [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302)
+  
+**Management Related Issues**
+* Unfortunatelly, I don't have any management related issues.
+
+**Pull Requests**
+* [feature/BE-27](https://github.com/bounswe/bounswe2022group8/pull/319)
+* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315)
+
+**Additional**
+    
+PR reviews:
+* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/274)
+* [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)    
+
+</details>
+
+
 
 <details>
     <summary> Mustafa Cihan </summary>
