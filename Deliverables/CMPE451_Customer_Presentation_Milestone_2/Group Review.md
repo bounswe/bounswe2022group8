@@ -379,12 +379,6 @@ I am responsible for backend side of the project.
 ### Main Contributions
 My main contributions are also the ones listed above. Since, I have been transferred to backend team after the first milestone report. I have struggled to addopt to the team at first. But thanks to Karahan and all my other backend team, I could catch the team up. <br/>
 
-| PR Review | Reviewing the Follow related APIs | 40 minutes | [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/274)|
-| PR Review | Reviewing the Art item related APIs | 40 minutes | [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)|
-| Backend Repository Review | Reviewing the whole backend hierarchy, implementations and tests |  ~5 hours | - |
-| Implementation | Implementing the Account/User deletion APIs | ~2 hours | [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276) [PR feature/BE-27](https://github.com/bounswe/bounswe2022group8/pull/319)|
-| Implementation | Implementing the Like/Unlike Art item and comment APIs | ~10 hours | [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302), [PR feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315)|
-
 **Code Related Issues**
 * [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276)
 * [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302)
