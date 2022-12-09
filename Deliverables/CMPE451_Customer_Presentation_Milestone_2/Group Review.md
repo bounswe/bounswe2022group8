@@ -299,13 +299,29 @@ From this point onward, we plan on adding several more functionalities to our ap
   > Implementation tasks involve documentation with Swagger, testing the functionality on both local and Dockerized version of the application.
 </details>
 
+
 <details>
     <summary> Doğukan Türksoy </summary>
-    
+ 
+ |  Task Type   | Task Description |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |
+ | Implementation | Connecting Profile Page | [MOB-20: Backend Connections of uploading image and updating profile(https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Connecting Art Item Page | [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Connecting Reset Password Pages | |
+ | Implementation | Connecting Homepage |[MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Connections of AWS S3 bucket on mobile part| [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)|
+ | Implementation | Connecting Upload Art Item page |[MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)|
+ | Implementation | Helped Backend for sending reset emails.  | https://github.com/bounswe/bounswe2022group8/pull/259 |
+ | Implementation | Initialized and configured Gmail account for the project.| https://github.com/bounswe/bounswe2022group8/pull/259|
+ | Deployment | Frontend Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Deployment | Backend Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Deployment | Android Deployment | [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)|
+ | Meetings | Attended MOB Meeting #3, MOB Meeting #4, General Meeting #6 | https://github.com/bounswe/bounswe2022group8/wiki |
 
 
 
 </details>
+
 
 
 <details>
@@ -1018,3 +1034,28 @@ PR reviews:<br>
 * [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) (I've lost so much time with this PR due to the errors and couldn't even merge it yet. I don't know why but the guy literally opened it without running the application)
     
 </details>
+
+<details>
+    <summary> Doğukan Türksoy </summary>
+    
+I am Doğukan Türksoy, a member of group 8. I am at mobile part of our project.
+
+### Responsibilities
+I am responsible for mobile part and deployment. 
+
+### Main Contributions
+For this milestone I mainly worked on backend-mobile connections of out project. I connected profile page, update profile page, upload art item page, reset password , home page, art item page and comment pages. Moreover, worked on the connection of AWS S3 bucket to the mobile for fetching images. I also deployed the frontend, backend and mobile. <br/>
+    
+***Code Related Issues***
+* [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)
+* [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)
+* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
+    
+***Management Related Issues***
+* [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)
+* [MIL-18: User Interface / User Experience](https://github.com/bounswe/bounswe2022group8/issues/349)
+    
+***Pull Requests***
+* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
+* [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
+   </details>
