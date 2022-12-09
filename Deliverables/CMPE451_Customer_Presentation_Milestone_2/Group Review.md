@@ -421,6 +421,22 @@ PR reviews:
 </details>
 
 
+<details>
+    <summary> Sena Mumcu </summary>
+
+I am Sena Mumcu, a member and the communicator of group 8. I am working in the backend subgroup of our team. 
+    
+### Responsibilities
+I am responsible for the backend side of our developments.
+* Implementing the Tag related API endpoints.
+* Testing the API endpoints I have written and documenting them using Swagger.
+* Reviewing and testing my backendteam-members' PRs.
+* Researching user flags in Django to implement tag creation and deletion APIs.
+* Presenting the artist use case scenario during the second customer review. 
+* Helping the new backend team member get onboard.
+    
+### Main Contribution
+</details>
 
 <details>
     <summary> Mustafa Cihan </summary>
