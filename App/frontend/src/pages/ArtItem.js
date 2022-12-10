@@ -8,11 +8,16 @@ import * as dotenv from "dotenv";
 
 import "./styles/ArtItem.css";
 
+import { Annotorious } from "@recogito/annotorious";
+import "@recogito/annotorious/dist/annotorious.min.css";
+
 function ArtItem(props) {
   const { artitem_id } = useParams();
 
   var host = HOST;
   const { token } = useAuth();
+
+  const imageElement = useRef(null);
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -71,6 +76,17 @@ function ArtItem(props) {
         };
 
         setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params_owner_pp));
+
+        let annotorious = null;
+
+        if (imageElement.current) {
+          annotorious = new Annotorious({
+            image: imageElement.current,
+          });
+
+          //annotorious.on
+          //...annotation backend connection...
+        }
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -106,7 +122,6 @@ function ArtItem(props) {
       })
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
-  
 
   function handleSendComment(e) {
     e.preventDefault();
@@ -142,7 +157,17 @@ function ArtItem(props) {
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
-            <img id="image" src={artitemSrc} alt={artitemDescription} />
+            {token ? (
+              <img
+                ref={imageElement}
+                id="image"
+                src={artitemSrc}
+                alt={artitemDescription}
+              />
+            ) : (
+              <img id="image" src={artitemSrc} alt={artitemDescription} />
+            )}
+
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
               <Tag tagname="human"></Tag>
