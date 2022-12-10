@@ -18,7 +18,13 @@ import RecommendedUsers from "./pages/RecommendedPages/RecommendedUsers";
 import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
 
+import { Recogito } from "@recogito/recogito-js";
+import "@recogito/recogito-js/dist/recogito.min.css";
+
 function App() {
+
+  const r = new Recogito({ content: document.getElementById("root") });
+
   return (
     <AuthProvider>
       <Routes>
