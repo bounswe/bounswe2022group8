@@ -259,13 +259,14 @@ def artitems_by_id(request, id):
             data = ArtItemSerializer(artitem).data.copy()
             if(isinstance(request.user, AnonymousUser)):
                 data["isLiked"] = False
+                #print("anonymous")
             else:
                 try:
                     LikeArtItem.objects.get(user=request.user, artitem=artitem)
                     data["isLiked"] = True
                 except:
                     data["isLiked"] = False
-                
+                #print("not anonymous")
                 instance = artitem
                 object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
