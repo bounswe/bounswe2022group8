@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import Tag from "../components/Tag";
@@ -9,10 +9,18 @@ import * as dotenv from "dotenv";
 import "./styles/ArtItem.css";
 
 function ArtItem(props) {
-  const { artitem_id } = useParams();
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
 
   var host = HOST;
   const { token } = useAuth();
+  const { artitem_id } = useParams();
+  const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -106,7 +114,6 @@ function ArtItem(props) {
       })
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
-  
 
   function handleSendComment(e) {
     e.preventDefault();
@@ -137,6 +144,11 @@ function ArtItem(props) {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [artitemComments]);
 
+  function goToProfile(id) {
+    navigate(`/users/${id}`);
+    scrollToTop();
+  }
+
   return (
     <Layout>
       <div className="artitem-post-container">
@@ -154,7 +166,12 @@ function ArtItem(props) {
           </div>
           <div id="info-container">
             <div id="owner">
-              <img id="owner-profile-photo" src={artitemOwnerPhoto} alt="" />
+              <img
+                id="owner-profile-photo"
+                src={artitemOwnerPhoto}
+                alt=""
+                onClick={() => goToProfile(artitemOwnerID)}
+              />
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
             <div id="title-and-description">
@@ -181,6 +198,7 @@ function ArtItem(props) {
                       className="comment-owner-profile-photo"
                       src={commentPhotos[index]}
                       alt=""
+                      onClick={() => goToProfile(val.commented_by.id)}
                     />
                     <div>
                       <div className="comment-owner">

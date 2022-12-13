@@ -63,6 +63,7 @@
 }
 
 .artitem-post-container #owner-profile-photo {
+  cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
@@ -116,6 +117,7 @@
 }
 
 .artitem-post-container .comment-owner-profile-photo {
+  cursor: pointer;
   height: 2.25rem;
   width: 2.25rem;
   border-radius: 50%;

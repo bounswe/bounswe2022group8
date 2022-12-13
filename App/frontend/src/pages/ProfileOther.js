@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../layout/Layout";
 
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
-import UploadCard from "../components/UploadCard";
-import FirstUploadCard from "../components/FirstUploadCard";
 import "./styles/Profile.css";
 
-function Profile(props) {
+function ProfileOther(props) {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -21,6 +19,7 @@ function Profile(props) {
 
   var host = HOST;
   const { token } = useAuth();
+  const { user_id } = useParams();
   const navigate = useNavigate();
 
   const [profileInfo, setProfileInfo] = useState({
@@ -36,12 +35,6 @@ function Profile(props) {
 
   const [userGallery, setUserGallery] = useState([]);
 
-  // just to decide after two unnecessary renders whether the gallery is empty or not
-  const [emptyGallery, setEmptyGallery] = useState(null);
-
-  // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
-  const [newImageUploaded, setNewImageUploaded] = useState(true);
-
   const AWS = require("aws-sdk");
   dotenv.config();
   AWS.config.update({
@@ -52,12 +45,11 @@ function Profile(props) {
   const s3 = new AWS.S3();
 
   useEffect(() => {
-    // dont forget the put the slash at the end
-    fetch(`${host}/api/v1/users/profile/me/`, {
+    fetch(`${host}/api/v1/users/profile/${user_id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        // Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
@@ -124,37 +116,20 @@ function Profile(props) {
           }
 
           setUserGallery(gallery);
-
-          if (gallery.length === 0) {
-            setEmptyGallery(true);
-          } else {
-            setEmptyGallery(false);
-          }
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username, newImageUploaded]);
+  }, [host, token, profileInfo.username]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
-  const [upload, setUpload] = useState(false);
-  const [postError, setPostError] = useState(false); // essentially for the upload card
-  const [uploadInfoError, setUploadInfoError] = useState(false); // essentially for the upload card
 
   function handleArtItems() {
     setNavTab(true);
-    setUpload(false);
   }
 
   function handleExhibitions() {
     setNavTab(false);
-    setUpload(false);
-  }
-
-  function handleUpload() {
-    setUpload(!upload);
-    setPostError(false);
-    setUploadInfoError(false);
   }
 
   function goToArtItem(id) {
@@ -178,15 +153,29 @@ function Profile(props) {
               />
             </div>
             <div>
-              <div>
-                <h1 className="profile-username">{profileInfo.username} </h1>
+              <div style={{ display: "inline" }}>
+                <div style={{ display: "inline-block" }}>
+                  <h1 className="profile-username">{profileInfo.username} </h1>
+                  {profileInfo.name && (
+                    <p className="profile-name">{profileInfo.name}</p>
+                  )}
+                </div>
+
+                <button
+                  className="btn profile-follow-btn"
+                  style={{ marginBottom: profileInfo.name ? "2.8rem" : "8px" }}
+                >
+                  Follow
+                </button>
               </div>
 
-              {profileInfo.name && (
-                <p className="profile-name">{profileInfo.name}</p>
-              )}
               {profileInfo.about && (
-                <p className="profile-bio">{profileInfo.about}</p>
+                <p
+                  className="profile-bio"
+                  style={{ marginTop: profileInfo.name ? "0.0rem" : "0.8rem" }}
+                >
+                  {profileInfo.about}
+                </p>
               )}
               {profileInfo.location && (
                 <p className="profile-location">
@@ -234,50 +223,27 @@ function Profile(props) {
           >
             Exhibitions
           </button>
-          <button className="btn btn-upload" onClick={() => handleUpload()}>
-            Upload
-          </button>
         </div>
 
         <hr className="tab-line"></hr>
 
         <main>
-          <UploadCard
-            height={upload ? "535px" : "0px"}
-            border={upload ? "2px dashed #bcb1c1" : "2px dashed transparent"}
-            marginBottom={upload ? "1rem" : "0rem"}
-            postError={postError}
-            setPostError={(error) => setPostError(error)}
-            uploadInfoError={uploadInfoError}
-            setUploadInfoError={(error) => setUploadInfoError(error)}
-            newImageUploaded={newImageUploaded}
-            setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
-            closeUploadCard={() => setUpload(false)}
-          />
           {navTab ? (
-            // what if gallery is empty ?
-            <>
-              {emptyGallery === true && !upload && (
-                <div className="gallery-item">
-                  <FirstUploadCard onClick={() => handleUpload()} />
-                </div>
-              )}
-
-              <div className="gallery">
-                {userGallery.map((val, key) => {
-                  return (
-                    <div key={val.id} className="gallery-item">
-                      <img
-                        src={val.artitem_path}
-                        className="gallery-image"
-                        alt={val.description}
-                        onClick={() => goToArtItem(val.id)}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </>
+            // what if gallery is empty ?  --> do nothing for the other profile
+            <div className="gallery">
+              {userGallery.map((val, key) => {
+                return (
+                  <div key={val.id} className="gallery-item">
+                    <img
+                      src={val.artitem_path}
+                      className="gallery-image"
+                      alt={val.description}
+                      onClick={() => goToArtItem(val.id)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             <div className="gallery">
               <div className="gallery-item" tabIndex="0">
@@ -309,4 +275,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default ProfileOther;
