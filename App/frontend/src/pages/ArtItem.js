@@ -30,6 +30,7 @@ function ArtItem(props) {
   const [artitemComments, setArtitemComments] = useState([]);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
+  const [myID, setMyID] = useState(null);
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
@@ -115,6 +116,22 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
 
+  // GET CURRENTLY LOGGED IN USERS' ID
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   function handleSendComment(e) {
     e.preventDefault();
     if (newComment !== "") {
@@ -145,7 +162,12 @@ function ArtItem(props) {
   }, [artitemComments]);
 
   function goToProfile(id) {
-    navigate(`/users/${id}`);
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
     scrollToTop();
   }
 

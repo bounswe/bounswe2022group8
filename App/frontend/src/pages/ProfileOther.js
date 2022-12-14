@@ -31,9 +31,13 @@ function ProfileOther(props) {
     profile_image_url: null,
     followers: 0,
     followings: 0,
+    is_followed: null,
   });
 
   const [userGallery, setUserGallery] = useState([]);
+
+  // JUST TO CAUSE A STATE CHANGE AFTER A FOLLOW ACTION
+  const [updateFollow, setUpdateFollow] = useState(true);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -49,7 +53,7 @@ function ProfileOther(props) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
@@ -73,10 +77,11 @@ function ProfileOther(props) {
           profile_image_url: profile_image_url,
           followers: response.followers,
           followings: response.followings,
+          is_followed: response.isFollowed,
         });
       })
       .catch((error) => console.error("Error:", error));
-  }, [host, token]);
+  }, [host, token, updateFollow]);
 
   // THIS IS BAD.
   useEffect(() => {
@@ -137,6 +142,42 @@ function ProfileOther(props) {
     scrollToTop();
   }
 
+  function handleFollow() {
+    fetch(`${host}/api/v1/users/follow/${user_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setUpdateFollow(!updateFollow);
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function handleUnfollow() {
+    fetch(`${host}/api/v1/users/unfollow/${user_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        setUpdateFollow(!updateFollow);
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function handleFollowAction() {
+    if (profileInfo.is_followed) handleUnfollow();
+    else handleFollow();
+  }
+
   // renders unnecessarily twice --> PROBLEM
   // console.log(userGallery.length);
 
@@ -163,9 +204,10 @@ function ProfileOther(props) {
 
                 <button
                   className="btn profile-follow-btn"
-                  style={{ marginBottom: profileInfo.name ? "2.8rem" : "8px" }}
+                  style={{ marginBottom: profileInfo.name ? "2.8rem" : "6px" }}
+                  onClick={() => handleFollowAction()}
                 >
-                  Follow
+                  {profileInfo.is_followed ? "Unfollow" : "Follow"}
                 </button>
               </div>
 
