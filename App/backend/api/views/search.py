@@ -20,4 +20,4 @@ class LexSearchView(ListAPIView):
     queryset = ArtItem.objects.all()
     serializer_class = ArtItemSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('title', 'description')#, 'tag__tagname', 'user__name', 'user__surname')
+    search_fields = ('title', 'description', 'owner__name', 'owner__surname', 'tags__tagname')
