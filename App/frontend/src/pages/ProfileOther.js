@@ -49,38 +49,43 @@ function ProfileOther(props) {
   const s3 = new AWS.S3();
 
   useEffect(() => {
-    fetch(`${host}/api/v1/users/profile/${user_id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        //console.log(response);
-
-        var params = {
-          Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
-          Key: response.profile_path,
-        };
-
-        // signed profile image url --> for display in frontend
-        var profile_image_url = s3.getSignedUrl("getObject", params);
-
-        setProfileInfo({
-          username: response.username,
-          email: response.email,
-          name: response.name,
-          about: response.about,
-          location: response.location,
-          profile_image_url: profile_image_url,
-          followers: response.followers,
-          followings: response.followings,
-          is_followed: response.isFollowed,
-        });
+    
+    if (token) {
+      fetch(`${host}/api/v1/users/profile/${user_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json())
+        .then((response) => {
+          //console.log(response);
+
+          var params = {
+            Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+            Key: response.profile_path,
+          };
+
+          // signed profile image url --> for display in frontend
+          var profile_image_url = s3.getSignedUrl("getObject", params);
+
+          setProfileInfo({
+            username: response.username,
+            email: response.email,
+            name: response.name,
+            about: response.about,
+            location: response.location,
+            profile_image_url: profile_image_url,
+            followers: response.followers,
+            followings: response.followings,
+            is_followed: response.isFollowed,
+          });
+        })
+        .catch((error) => console.error("Error:", error));
+    } else {
+      // MUST HANDLE THE CASE FOR GUEST USERS
+    }
   }, [host, token, updateFollow]);
 
   // THIS IS BAD.
