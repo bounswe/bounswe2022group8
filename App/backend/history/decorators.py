@@ -20,7 +20,6 @@ from django.contrib.auth.models import AnonymousUser
 #         return newrelic.agent.function_trace()(function)
 
 def bject_viewed_decorator(view_func):
-    print("came there")
     @functools.wraps(view_func)
     def wrapper(request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -29,7 +28,6 @@ def bject_viewed_decorator(view_func):
             except view_func.model.DoesNotExist:
                 instance = None
             object_viewed_signal.send(instance.__class__, instance=instance, request=request)
-            print("came here")
             return view_func(request, *args, **kwargs)
         return view_func(request, *args, **kwargs)  
     return wrapper
@@ -40,19 +38,12 @@ def auth_test_function(user):
     return False
 
 def object_viewed_decorator():
-    #print("came 1")
     def decorator(view):
         @wraps(view)
         def _wrapped_view(request, *args, **kwargs):
-            #print("came 2")
-            #print(request.user)
             if(isinstance(request.user, AnonymousUser)):
-                #print("what")
-                #print(request.user)
                 pass
             else:
-                #print("came 3")
-                #print(kwargs["id"])
                 try:
                     artitem = ArtItem.objects.get(pk=kwargs["id"])
                     instance = artitem
@@ -61,8 +52,6 @@ def object_viewed_decorator():
                    # instance = view.get_object()
                 except view.model.DoesNotExist:
                     instance = None
-                #object_viewed_signal.send(instance.__class__, instance=instance, request=request)
-                #print("came here")
                 return view(request, *args, **kwargs)
 
             # if not auth_test_function(request.user):
