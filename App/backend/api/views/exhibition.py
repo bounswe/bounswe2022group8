@@ -17,6 +17,7 @@ import base64
 import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
+from django.db import IntegrityError
 
 from drf_yasg import openapi
 
@@ -70,7 +71,8 @@ from drf_yasg import openapi
                         "country": "Türkiye",
                         "address": "Beyoglu",
                         "latitude": 41.40338,
-                        "longitude": 28.97835
+                        "longitude": 28.97835,
+                        "status": "On Going"
                     }
                 ],
                 "Virtual Exhibitions": [
@@ -111,7 +113,8 @@ from drf_yasg import openapi
                         "start_date": "08-12-2022 16:00:00",
                         "end_date": "10-12-2020 16:00:00",
                         "created_at": "08-12-2022 23:32:34",
-                        "updated_at": "08-12-2022 23:32:34"
+                        "updated_at": "08-12-2022 23:32:34",
+                        "status": "On Going"
                     }
                 ]
             }
@@ -179,7 +182,8 @@ def get_exhibitions(request):
                 "start_date": "08-12-2022 16:00:00",
                 "end_date": "10-12-2020 16:00:00",
                 "created_at": "08-12-2022 23:32:34",
-                "updated_at": "08-12-2022 23:32:34"
+                "updated_at": "08-12-2022 23:32:34",
+                "status": "On Going"
                 }
             }
         ),
@@ -246,7 +250,8 @@ def get_online_exhibitions_by_id(request, id):
                     "country": "Türkiye",
                     "address": "Beyoglu",
                     "latitude": 41.40338,
-                    "longitude": 28.97835
+                    "longitude": 28.97835,
+                    "status": "On Going"
                 }
             }
         ),
@@ -314,7 +319,8 @@ def get_offline_exhibitions_by_id(request, id):
                             "country": "Türkiye",
                             "address": "Beyoglu",
                             "latitude": 41.40338,
-                            "longitude": 28.97835
+                            "longitude": 28.97835,
+                            "status": "On Going"
                         }
                     ]
             }
@@ -389,7 +395,8 @@ def get_offline_exhibitions_by_userid(request, id):
                             "start_date": "08-12-2022 16:00:00",
                             "end_date": "10-12-2020 16:00:00",
                             "created_at": "08-12-2022 23:32:34",
-                            "updated_at": "08-12-2022 23:32:34"
+                            "updated_at": "08-12-2022 23:32:34",
+                            "status": "On Going"
                         }
                     ]
             }
@@ -473,7 +480,8 @@ def get_online_exhibitions_by_userid(request, id):
                     "country": "Türkiye",
                     "address": "Beyoglu",
                     "latitude": 41.40338,
-                    "longitude": 28.97835
+                    "longitude": 28.97835,
+                    "status": "On Going"
                 }
             }
         ),
@@ -532,12 +540,16 @@ def create_offline_exhibition(request):
         serializer = OfflineExhibitionSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
-            artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            try:
+                serializer.save()
+
+                artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except IntegrityError:
+                return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 
 @ swagger_auto_schema(
@@ -599,6 +611,7 @@ def create_offline_exhibition(request):
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
+                    "status": "On Going",
                     "uploaded_images": [
                         {
                             "id": 62,
@@ -691,7 +704,10 @@ def create_online_exhibition(request):
         # If not, upload each image to S3 afterwards.
 
         if serializer.is_valid():
-            virtualexhibition = serializer.save()
+            try:
+                virtualexhibition = serializer.save()
+            except IntegrityError:
+                return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
             returndata = serializer.data
             images = []
             savedimgs = []

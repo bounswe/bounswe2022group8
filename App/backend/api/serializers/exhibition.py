@@ -8,11 +8,13 @@ from .serializers import TagSerializer, SimpleUserSerializer, ArtItemSerializer,
 from ..models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionArtItem
 
 class OfflineExhibitionSerializer(serializers.ModelSerializer):
+    status = serializers.ReadOnlyField(source='get_status')
+
     class Meta:
         model = OfflineExhibition
         fields = ['id', 'owner', 'title', 'description', 'poster', 'collaborators', 'start_date', 'end_date', 'created_at', 'updated_at', 
-        'city', 'country', 'address', 'latitude', 'longitude']
-
+        'city', 'country', 'address', 'latitude', 'longitude', 'status']
+    
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep["poster"] = SimpleArtItemSerializer(instance.poster).data
@@ -32,9 +34,10 @@ class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'virtualExhibition', 'artitem_path', 'created_at']
 
 class VirtualExhibitionSerializer(serializers.ModelSerializer):
+    status = serializers.ReadOnlyField(source='get_status')
     class Meta:
         model = VirtualExhibition
-        fields = ['id', 'owner', 'title', 'description', 'poster', 'collaborators', 'artitems_gallery', 'start_date', 'end_date', 'created_at', 'updated_at']
+        fields = ['id', 'owner', 'title', 'description', 'poster', 'collaborators', 'artitems_gallery', 'start_date', 'end_date', 'created_at', 'updated_at', 'status']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
