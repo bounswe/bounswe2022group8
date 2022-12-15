@@ -16,8 +16,15 @@ function ArtItem(props) {
 
   var host = HOST;
   const { token } = useAuth();
+  const [userid, setUserid] = useState();
 
+  /*Image Annotation*/
+  // Ref to the image DOM element
   const imageElement = useRef(null);
+
+  // The current Annotorious instance
+  const [anno, setAnno] = useState();
+  /*Image Annotation*/
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -76,17 +83,6 @@ function ArtItem(props) {
         };
 
         setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params_owner_pp));
-
-        let annotorious = null;
-
-        if (imageElement.current) {
-          annotorious = new Annotorious({
-            image: imageElement.current,
-          });
-
-          //annotorious.on
-          //...annotation backend connection...
-        }
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -151,6 +147,64 @@ function ArtItem(props) {
     // scroll to bottom every time messages change
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [artitemComments]);
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log(response);
+        setUserid(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+
+    /*Image Annotation*/
+    let annotorious = null;
+
+    if (imageElement.current) {
+      annotorious = new Annotorious({
+        image: imageElement.current,
+        widgets: ["COMMENT"],
+      });
+
+      // Load annotations in W3C Web Annotation format
+      //anno.loadAnnotations(url); //url'yi değiştir.
+
+      //...annotation backend connection...
+      // Event handlers
+      annotorious.on("createAnnotation", (annotation) => {
+        annotation["creator"] = userid;
+        annotation["target"]["source"] =
+          annotation["target"]["source"].split(/[?]/)[0];
+        console.log("created", annotation);
+        //fetch with method 'POST'
+      });
+
+      annotorious.on("updateAnnotation", (annotation, previous) => {
+        console.log("updated", annotation, previous);
+        //fetch with method 'PUT'
+      });
+
+      annotorious.on("deleteAnnotation", (annotation) => {
+        console.log("deleted", annotation);
+        //fetch with method 'DELETE'
+      });
+
+      //Get methodu da olacak annotationları görmek için. Bir buton koyup gösterecek şekilde olabilir.
+    }
+
+    // Keep current Annotorious instance in state
+    setAnno(annotorious);
+
+    // Cleanup: destroy current instance
+    return () => annotorious.destroy();
+  }, [host, token]);
+  /*Image Annotation*/
 
   return (
     <Layout>

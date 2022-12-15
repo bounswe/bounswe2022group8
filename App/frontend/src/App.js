@@ -22,8 +22,10 @@ import { Recogito } from "@recogito/recogito-js";
 import "@recogito/recogito-js/dist/recogito.min.css";
 
 function App() {
-
-  const r = new Recogito({ content: document.getElementById("root") });
+  const r = new Recogito({
+    content: document.getElementById("root"),
+    widgets: ["COMMENT"],
+  });
 
   return (
     <AuthProvider>
