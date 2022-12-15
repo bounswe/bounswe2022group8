@@ -19,112 +19,120 @@ If there is only one @context value, then it must be provided as a string.
 """
 
 # Default values:
-TYPE = "Annotation"
+FORMAT = "text/plain"
 CONTEXT = "http://www.w3.org/ns/anno.jsonld"
 URL = "http://34.125.134.88/"  # default url
 
-class Body(models.Model):
-    body = models.TextField(unique=True)
+class TypeEnum(models.TextChoices):
+    annotation = 'Annotation'
+    image = 'Image'
+    text = 'Text'
+    dataset = 'Dataset'
+    sound = 'Sound'
+    vidoe = 'Video'
+    textualbody = 'TextualBody'
 
-class TextualBody(models.Model):
-    pass
+class MotivationEnum(models.TextChoices):
+    assessing = 'Assessing'
+    bookmarking = 'Bookmarking'
+    classifying = 'Classifying'
+    commenting = 'Commenting'
+    describing = 'Describing'
+    editing = 'Editing'
+    highlighting = 'Highlighting'
+    identifying = 'Identifying'
+    linking = "Linking"
+    moderating = "Moderating"
+    questioning = "Questioning"
+    replying = "Replying"
+    tagging = "Tagging"
+
+class SelectorEnum(models.TextChoices):
+    fragment = "FragmentSelector"
+    svg = "SvgSelector"
+    css = "CssSelector"
+    xpath = "XPathSelector"
+    textquote = "TextQuoteSelector"
+    textposition = "TextPositionSelector"
+    dataposition = "DataPositionSelector"
 
 class Type(models.Model):
-    type = models.TextField(unique=True)
+    type = models.TextField(unique=True, choices=TypeEnum.choices)
 
+class Motivation(models.Model):
+    motivation = models.TextField(unique=True, choices=MotivationEnum.choices)
+
+class Selector(models.Model):
+    value = models.TextField()
+    type = models.TextField(unique=True, choices=SelectorEnum.choices)
+
+"""
+"body": "http://34.125.134.88/body<id>"  (id will be stored in the field - serializer will serialize as shown)
+"type": "TextualBody",
+"value": "Nice picture"
+"format": "text/plain"
+"created": "2015-10-13T13:00:00Z"
+"purpose": "questioning"
+"""
+class Body(models.Model):
+    body = models.TextField(primary_key=True)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.textualbody)  # create a type object with "annotation" type
+    value = models.TextField()
+    format = models.TextField(default=FORMAT)
+    created = models.DateTimeField(auto_now=True)
+    purpose = models.ForeignKey(Motivation, on_delete=models.CASCADE, to_field='motivation', blank=True, null=True)
+
+"""
+"target": "http://34.125.134.88/target<id>"    (id will be stored in the field - serializer will serialize as shown)
+"type": "TextualBody",
+"source": "http://34.125.134.88/artitems/14",  
+"format": "image/png",
+"language": ["en"],
+"type": "image",
+"selector": {
+      "type": "FragmentSelector",
+      "conformsTo": "http://www.w3.org/TR/media-frags/",
+      "value": "xywh=pixel:270,120,90,170"
+    }
+"""
 class Target(models.Model):
-    target = models.TextField(unique=True)
+    source = models.TextField()
+    target = models.TextField(primary_key=True)
     format = models.TextField(blank=True)
-    language = ArrayField(models.CharField(max_length=10, blank=True), blank=True, null=True)
-    textDirection = models.TextField(blank=True)
-    processingLanguage = models.TextField(blank=True)
+    language = ArrayField(models.CharField(max_length=10, blank=True, default="en"), blank=True, null=True)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.image)  # create a type object with "annotation" type
+    selector = models.ForeignKey(Selector, on_delete=models.CASCADE)
 
 class Annotation(models.Model):  # id is created implicitly
     context = models.TextField(default=CONTEXT)
     url = models.TextField(default=URL)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TYPE)  # create a type object with "annotation" type
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.annotation)  # create a type object with "annotation" type
     body = models.ForeignKey(Body, on_delete=models.CASCADE, to_field='body')
     target = models.ForeignKey(Target, on_delete=models.CASCADE, to_field='target')
+    creator = models.BigIntegerField()    # id of the creator
+    created = models.DateTimeField(auto_now=True)
+    modified = models.DateTimeField(auto_now=True)
 
+##### HELPERS
+
+def create_or_return_motivation(motivation):
+    try:
+        motivationEnum = MotivationEnum[motivation]
+        obj = Motivation.objects.filter(motivation=motivationEnum)
+        if(obj): return obj[0]
+        else: return Motivation.objects.create(motivation=motivationEnum)
+    except:
+        return -1
+
+def create_or_return_type(type):
+    try:
+        typeEnum = TypeEnum[type]
+        obj = Type.objects.filter(type=typeEnum)
+        if(obj): return obj[0]
+        else: return Type.objects.create(type=typeEnum)
+    except:
+        return -1
 """
-class TextAnnotation(models.Model):
-    @staticmethod
-    def context():
-        return "http://www.w3.org/ns/anno.jsonld"
-
-    @staticmethod
-    def type():
-        return "Annotation"
-
-    motivation = models.TextField()
-    body = models.ForeignKey('Body', on_delete=models.CASCADE)
-    target = models.ForeignKey('Target', on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.id)
-
-
-class ImageAnnotation(models.Model):
-    @staticmethod
-    def context():
-        return "http://www.w3.org/ns/anno.jsonld"
-
-    @staticmethod
-    def type():
-        return "Annotation"
-
-    motivation = models.TextField()
-    body = models.ForeignKey('Body', on_delete=models.CASCADE)
-    target = models.ForeignKey('ImageTarget', on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.id)
-
-
-class Body(models.Model):
-    value = models.TextField()
-
-    @staticmethod
-    def type():
-        return "TextualBody"
-
-    @staticmethod
-    def language():
-        return "en"
-
-    @staticmethod
-    def format():
-        return "text/html"
-
-    def __str__(self):
-        return str(self.id)
-
-
-class ImageTarget(models.Model):
-    source = models.TextField()
-    scope = models.TextField()
-    selector = models.ForeignKey('FragmentSelector', on_delete=models.CASCADE)
-
-    @staticmethod
-    def type():
-        return "Image"
-
-    def __str__(self):
-        return str(self.id)
-
-
-class Target(models.Model):
-    source = models.TextField()
-    selector = models.ForeignKey('Selector', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.id)
-
-
 class FragmentSelector(models.Model):
     value = models.TextField()
 
