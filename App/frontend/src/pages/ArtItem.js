@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
-import { HOST } from "../constants/host";
+import { ANNOHOST, HOST } from "../constants/host";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
@@ -15,6 +15,7 @@ function ArtItem(props) {
   const { artitem_id } = useParams();
 
   var host = HOST;
+  var annotationhost = ANNOHOST;
   const { token } = useAuth();
   const [userid, setUserid] = useState();
 
@@ -23,7 +24,7 @@ function ArtItem(props) {
   const imageElement = useRef(null);
 
   // The current Annotorious instance
-  const [anno, setAnno] = useState(null);
+  const [anno, setAnno] = useState();
 
   const [isHideAnnoButtonClicked, setIsHideAnnoButtonClicked] = useState(false);
   /*Image Annotation*/
@@ -164,7 +165,9 @@ function ArtItem(props) {
         setUserid(response.id);
       })
       .catch((error) => console.error("Error:", error));
+  }, [host, token]);
 
+  useEffect(() => {
     /*Image Annotation*/
     let annotorious = null;
 
@@ -174,44 +177,93 @@ function ArtItem(props) {
         widgets: ["COMMENT"],
       });
 
+      console.log(imageElement);
       // Load annotations in W3C Web Annotation format
       //Loads annotations from a JSON URL.
       //The method returns a promise, in case you want to perform an action after the annotations have loaded
-      //anno.loadAnnotations(url); //I am not sure if we use this to get annotations.
+      annotorious
+        .loadAnnotations(
+          `${annotationhost}/api/v1/annotations/image/artitems/${artitem_id}`
+        )
+        .catch((error) => console.error("Error:", error));
+      /* If there are no annotations on an art item, such error
+           Error: TypeError: (e || []).map is not a function at jc.setAnnotations
+           may be seen on console 
+      */
 
       //Or do this
       //fetch with method 'GET' to get annotations
       //annotorious.setAnnotations(annotations); //annotations are what we get by fetch
       //Renders the list of annotations to the image, removing any previously existing annotations.
+      /*fetch(`${host}/api/v1/annotations/image/artitems/${artitem_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json", 
+          Authorization: `Token ${token}`,
+        },
+      })
+        //.then((response) => response.json())
+        .then((response) => {
+          //console.log(response);
+          annotorious.setAnnotations(response);
+        })
+        .catch((error) => console.error("Error:", error));*/
 
+      
       //...annotation backend connection...
       // Event handlers
       annotorious.on("createAnnotation", (annotation) => {
-        annotation["creator"] = userid;
+        annotation["creator"] = `${userid}`;
         annotation["target"]["source"] =
           annotation["target"]["source"].split(/[?]/)[0];
+        annotation["body"]=annotation.body[0];
         console.log("created", annotation);
+        console.log("JSON.stringfy", JSON.stringify(annotation));
         //fetch with method 'POST'
+        fetch(`${annotationhost}/api/v1/annotations/image/`, {
+          method: "POST",
+          body: JSON.stringify(annotation),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        }).catch((error) => console.error("Error:", error));
       });
 
-      annotorious.on("updateAnnotation", (annotation, previous) => {
-        console.log("updated", annotation, previous);
+      annotorious.on("updateAnnotation", (annotation) => {
+        console.log("updated", annotation);
+        annotation["body"]=annotation.body[0];
         //fetch with method 'PUT'
+        fetch(`${annotationhost}/api/v1/annotations/image/`, {
+          method: "PUT",
+          body: JSON.stringify(annotation),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        }).catch((error) => console.error("Error:", error));
       });
 
       annotorious.on("deleteAnnotation", (annotation) => {
         console.log("deleted", annotation);
+        let annotId = annotation.id.split(/[@]/)[1];
+        console.log("annot id", annotId);
         //fetch with method 'DELETE'
+        fetch(`${annotationhost}/api/v1/annotations/${annotId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        }).catch((error) => console.error("Error:", error));
       });
     }
-
     // Keep current Annotorious instance in state
     setAnno(annotorious);
 
     // Cleanup: destroy current instance
     return () => annotorious.destroy();
-  }, [host, token, userid]);
-  /*Image Annotation*/
+  }, [userid]);
 
   function hideAnnotations() {
     anno.setVisible(false);
