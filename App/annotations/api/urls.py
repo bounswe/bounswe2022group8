@@ -21,7 +21,7 @@ urlpatterns = [
     path('annotations/image/', annotate_image, name="annotate"),
     path('annotations/image/users/<int:userid>', get_image_annotation_by_user_id, name="get image annotations of a user"),
     path('annotations/image/artitems/<int:artitemid>', get_image_annotation_by_artitem_id, name="get image annotations on an art item"),
-    path('annotations/<int:id>', delete_annotation_by_id, name="delete an image annotation")
+    path('annotations/<int:id>', delete_annotation_by_id, name="delete an image annotation"),
 ]
 
 # added to give us the option to choose between default Response template and regular json
