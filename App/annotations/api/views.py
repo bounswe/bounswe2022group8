@@ -491,3 +491,62 @@ def create_body(body_data):
     body_data['purpose'] = purpose.motivation
     body_serializer = AnnotationBodySerializer(data=body_data)
     return body_serializer
+
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="Image Annotations API. This endpoint can be used to get image annotations by a specific user on a specific art item.",
+    operation_summary="Return image annotations on an art item.",
+    tags=['Image Annotations'],
+    responses={
+          status.HTTP_200_OK: openapi.Response(
+            description="Successfully returned all the image annotations on the given art item.",
+            examples={
+                "application/json": [
+                    {
+                        "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
+                        "body": {
+                            "id": "http://34.125.134.88/body1",
+                            "value": "Nice picture",
+                            "type": "Text",
+                            "format": "text/plain",
+                            "created": "2022-12-16T15:31:23.803026Z",
+                            "purpose": "Commenting"
+                        },
+                        "type": "Annotation",
+                        "target": {
+                            "id": "http://34.125.134.88/image15",
+                            "source": "http://34.125.134.88/artitems/14",
+                            "type": "Image",
+                            "selector": {
+                                "value": "xywh=pixel:270,120,90,170",
+                                "type": "FragmentSelector",
+                                "conformsTo": "http://www.w3.org/TR/media-frags/"
+                            }
+                        },
+                        "creator": 1,
+                        "@context": "http://www.w3.org/ns/anno.jsonld"
+                    }
+                ]
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Not found.",
+            examples={
+                "application/json": {
+                    "Not Found": "Any annotation created by the user with given id does not exist."
+                }
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def get_image_annotation_by_artitem_user_id(request, userid, artitemid):
+    imageAnnotations = Annotation.objects.filter(creator=userid, target__selector__type="FragmentSelector", target__source__contains="artitem-{}.png".format(artitemid)) # we might have to update this filter
+    if(imageAnnotations):
+        serializer = AnnotationSerializer(imageAnnotations, many = True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({"Not Found": "There is no annotation on the given art item."}, status=status.HTTP_404_NOT_FOUND)
+
