@@ -38,6 +38,14 @@
   display: block;
 }
 
+.artitem-post-container .anno-show-hide-button {
+  display: block;
+  background-color: #ffc9ff;
+  color: #18121c;
+  border-radius: 0.3rem;
+  font-size: 15px;
+}
+
 .artitem-post-container #info-container {
   color: #ffffff;
   background-color: #0e0a10;

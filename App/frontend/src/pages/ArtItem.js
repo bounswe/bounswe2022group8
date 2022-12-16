@@ -23,7 +23,9 @@ function ArtItem(props) {
   const imageElement = useRef(null);
 
   // The current Annotorious instance
-  const [anno, setAnno] = useState();
+  const [anno, setAnno] = useState(null);
+
+  const [isHideAnnoButtonClicked, setIsHideAnnoButtonClicked] = useState(false);
   /*Image Annotation*/
 
   const [artitemSrc, setArtitemSrc] = useState("");
@@ -173,7 +175,14 @@ function ArtItem(props) {
       });
 
       // Load annotations in W3C Web Annotation format
-      //anno.loadAnnotations(url); //url'yi değiştir.
+      //Loads annotations from a JSON URL.
+      //The method returns a promise, in case you want to perform an action after the annotations have loaded
+      //anno.loadAnnotations(url); //I am not sure if we use this to get annotations.
+
+      //Or do this
+      //fetch with method 'GET' to get annotations
+      //annotorious.setAnnotations(annotations); //annotations are what we get by fetch
+      //Renders the list of annotations to the image, removing any previously existing annotations.
 
       //...annotation backend connection...
       // Event handlers
@@ -194,8 +203,6 @@ function ArtItem(props) {
         console.log("deleted", annotation);
         //fetch with method 'DELETE'
       });
-
-      //Get methodu da olacak annotationları görmek için. Bir buton koyup gösterecek şekilde olabilir.
     }
 
     // Keep current Annotorious instance in state
@@ -203,9 +210,17 @@ function ArtItem(props) {
 
     // Cleanup: destroy current instance
     return () => annotorious.destroy();
-  }, [host, token]);
+  }, [host, token, userid]);
   /*Image Annotation*/
 
+  function hideAnnotations() {
+    anno.setVisible(false);
+    setIsHideAnnoButtonClicked(true);
+  }
+  function showAnnotations() {
+    anno.setVisible(true);
+    setIsHideAnnoButtonClicked(false);
+  }
   return (
     <Layout>
       <div className="artitem-post-container">
@@ -230,6 +245,21 @@ function ArtItem(props) {
               <Tag tagname="pink"></Tag>
               <Tag tagname="night"></Tag>
             </div>
+
+            <div>
+              <button
+                className="anno-show-hide-button"
+                onClick={() => {
+                  isHideAnnoButtonClicked
+                    ? showAnnotations()
+                    : hideAnnotations();
+                }}
+              >
+                {isHideAnnoButtonClicked
+                  ? "Show Annotations"
+                  : "Hide Annotations"}
+              </button>
+            </div>
           </div>
           <div id="info-container">
             <div id="owner">
@@ -237,7 +267,7 @@ function ArtItem(props) {
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
             <div id="title-and-description">
-              <div id="title">{artitemTitle}</div>
+              <div id="title">{artitemTitle} </div>
               <div id="description">{artitemDescription}</div>
             </div>
             <br></br>
