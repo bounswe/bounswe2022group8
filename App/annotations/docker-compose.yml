@@ -1,0 +1,24 @@
+version: "3.8"
+   
+services:
+  web:
+    build: .
+    # image: 6f6e28ad14df  (ID of the image - look at it from your local Docker)
+    command: python /project/manage.py runserver 0.0.0.0:8000 --settings=annotations.settings.production
+    volumes:
+      - .:/project
+    ports:
+      - 8080:8000  # bind the port 8000 in container to port 8080 outside
+    depends_on:
+      - db
+    env_file:
+      - annotations/settings/.production.env
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
