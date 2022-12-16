@@ -14,8 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view as swagger_get_schema_view
+
+from . import views
+
+schema_view = swagger_get_schema_view(
+    openapi.Info(
+        title="Artopia Annotation Service API Documentation",
+        default_version='v1.0',
+        description="Artopia Annotation API Endpoints",
+    ),
+    public=True,
+)
+# You can open the Swagger documentation from here on local: localhost:8000/api/v1/swagger/schema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', views.home, name="index"),
+        path('api/v1/', 
+        include([
+            path('', include('api.urls')),
+            path('swagger/schema/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
+        ])
+    ),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

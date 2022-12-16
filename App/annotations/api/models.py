@@ -22,6 +22,7 @@ If there is only one @context value, then it must be provided as a string.
 FORMAT = "text/plain"
 CONTEXT = "http://www.w3.org/ns/anno.jsonld"
 URL = "http://34.125.134.88/"  # default url
+CONFORM = "http://www.w3.org/TR/media-frags/"
 
 class TypeEnum(models.TextChoices):
     annotation = 'Annotation'
@@ -48,13 +49,13 @@ class MotivationEnum(models.TextChoices):
     tagging = "Tagging"
 
 class SelectorEnum(models.TextChoices):
-    fragment = "FragmentSelector"
-    svg = "SvgSelector"
-    css = "CssSelector"
-    xpath = "XPathSelector"
-    textquote = "TextQuoteSelector"
-    textposition = "TextPositionSelector"
-    dataposition = "DataPositionSelector"
+    fragmentselector = "FragmentSelector"
+    svgselector = "SvgSelector"
+    cssselector = "CssSelector"
+    xpathselector = "XPathSelector"
+    textquoteselector = "TextQuoteSelector"
+    textpositionselector = "TextPositionSelector"
+    datapositionselector = "DataPositionSelector"
 
 class Type(models.Model):
     type = models.TextField(unique=True, choices=TypeEnum.choices)
@@ -62,9 +63,13 @@ class Type(models.Model):
 class Motivation(models.Model):
     motivation = models.TextField(unique=True, choices=MotivationEnum.choices)
 
+class SelectorType(models.Model):
+    selectorType = models.TextField(unique=True, choices=SelectorEnum.choices)
+
 class Selector(models.Model):
     value = models.TextField()
-    type = models.TextField(unique=True, choices=SelectorEnum.choices)
+    type = models.ForeignKey(SelectorType, on_delete=models.CASCADE, to_field='selectorType')
+    conformsTo = models.TextField(default=CONFORM, blank=True)
 
 """
 "body": "http://34.125.134.88/body<id>"  (id will be stored in the field - serializer will serialize as shown)
@@ -75,12 +80,11 @@ class Selector(models.Model):
 "purpose": "questioning"
 """
 class Body(models.Model):
-    body = models.TextField(primary_key=True)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.textualbody)  # create a type object with "annotation" type
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
     value = models.TextField()
     format = models.TextField(default=FORMAT)
     created = models.DateTimeField(auto_now=True)
-    purpose = models.ForeignKey(Motivation, on_delete=models.CASCADE, to_field='motivation', blank=True, null=True)
+    purpose = models.ForeignKey(Motivation, on_delete=models.CASCADE, to_field='motivation',  blank=True, null=True)
 
 """
 "target": "http://34.125.134.88/target<id>"    (id will be stored in the field - serializer will serialize as shown)
@@ -97,18 +101,17 @@ class Body(models.Model):
 """
 class Target(models.Model):
     source = models.TextField()
-    target = models.TextField(primary_key=True)
     format = models.TextField(blank=True)
-    language = ArrayField(models.CharField(max_length=10, blank=True, default="en"), blank=True, null=True)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.image)  # create a type object with "annotation" type
+    language = ArrayField(models.CharField(max_length=10, blank=True), blank=True, null=True)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', blank=True, null=True)  # create a type object with "annotation" type
     selector = models.ForeignKey(Selector, on_delete=models.CASCADE)
 
 class Annotation(models.Model):  # id is created implicitly
+    uuid = models.TextField()                       # coming from frontend
     context = models.TextField(default=CONTEXT)
-    url = models.TextField(default=URL)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type', default=TypeEnum.annotation)  # create a type object with "annotation" type
-    body = models.ForeignKey(Body, on_delete=models.CASCADE, to_field='body')
-    target = models.ForeignKey(Target, on_delete=models.CASCADE, to_field='target')
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
+    body = models.ForeignKey(Body, on_delete=models.CASCADE, to_field='id', blank=True, null=True)
+    target = models.ForeignKey(Target, on_delete=models.CASCADE, to_field='id')
     creator = models.BigIntegerField()    # id of the creator
     created = models.DateTimeField(auto_now=True)
     modified = models.DateTimeField(auto_now=True)
@@ -132,55 +135,12 @@ def create_or_return_type(type):
         else: return Type.objects.create(type=typeEnum)
     except:
         return -1
-"""
-class FragmentSelector(models.Model):
-    value = models.TextField()
 
-    @staticmethod
-    def conformsTo():
-        return "http://www.w3.org/TR/media-frags/"
-
-    @staticmethod
-    def type():
-        return "FragmentSelector"
-
-    def __str__(self):
-        return str(self.id)
-
-
-class Selector(models.Model):
-    startSelector = models.ForeignKey('StartEndSelector', on_delete=models.CASCADE, related_name='startSelector')
-    endSelector = models.ForeignKey('StartEndSelector', on_delete=models.CASCADE, related_name='endSelector')
-
-    @staticmethod
-    def type():
-        return "RangeSelector"
-
-    def __str__(self):
-        return str(self.id)
-
-
-class StartEndSelector(models.Model):
-    value = models.TextField()
-    refinedBy = models.ForeignKey('RefinedBy', on_delete=models.CASCADE)
-
-    @staticmethod
-    def type():
-        return "XPathSelector"
-
-    def __str__(self):
-        return str(self.id)
-
-
-class RefinedBy(models.Model):
-    start = models.IntegerField()
-    end = models.IntegerField()
-
-    @staticmethod
-    def type():
-        return "TextPositionSelector"
-
-    def __str__(self):
-        return str(self.id)
-
-"""
+def create_or_return_selectortype(selectorType):
+    try:
+        selectorTypeEnum = SelectorEnum[selectorType]
+        obj = SelectorType.objects.filter(selectorType=selectorTypeEnum)
+        if(obj): return obj[0]
+        else: return SelectorType.objects.create(selectorType=selectorTypeEnum)
+    except:
+        return -1

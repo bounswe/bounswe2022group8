@@ -4,38 +4,53 @@ from rest_framework import serializers
 class AnnotationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annotation
-        fields = ['id', 'context', 'body', 'type', 'target', 'url', 'creator']
+        fields = ['uuid', 'id', 'context', 'body', 'type', 'target', 'creator']
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['@context'] = rep['context']
-        rep['id'] = rep['url'] + "anno" + str(rep['id'])
         rep['type'] = str(rep['type'])          # convert Enum to string
+        rep['target'] = AnnotationTargetSerializer(instance.target).data
+        if(not rep['body']): rep.pop('body')
+        else: rep['body'] = AnnotationBodySerializer(instance.body).data
+        rep['id'] = rep['uuid'] + "@" + str(rep['id'])  # change the name
+        rep.pop('uuid')
         rep.pop('context')
-        rep.pop('url')
         return rep
 
 class AnnotationBodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Body
-        fields =  ['body', 'value', 'type', 'format', 'created', 'purpose']
+        fields =  ['id', 'value', 'type', 'format', 'created', 'purpose']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['type'] = str(rep['type'])          # convert Enum to string
-        rep['id'] = URL + "body{}".format(rep['body'])
+        rep['id'] = URL + "body{}".format(rep['id'])
         rep['purpose'] = str(rep['purpose'])
-        rep.pop('body')
         return rep
 
 class AnnotationTargetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Type
-        field = ['target', 'source', 'format', 'language', 'type', 'selector']
+        model = Target
+        fields = ['id', 'source', 'format', 'language', 'type', 'selector']
     
     def to_representation(self, instance):
-        pass
+        rep = super().to_representation(instance)
+        rep['type'] = str(rep['type'])          # convert Enum to string
+        rep['selector'] = AnnotationSelectorSerializer(instance.selector).data
+        rep['id'] = URL + "{}{}".format(rep['type'].lower(), rep['id'])
+        if(not rep['language']): rep.pop('language')
+        if(not rep['format']): rep.pop('format')
+        return rep
 
-class SelectorSerializer(serializers.ModelSerializer):
-    pass
+class AnnotationSelectorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selector
+        fields = ['value', 'type', 'conformsTo']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['type'] = str(rep['type'])          # convert Enum to string
+        return rep
 
