@@ -56,7 +56,7 @@ from django.core.files.base import ContentFile
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -105,7 +105,7 @@ def get_artitems(request):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [1],
                         "likes": 0,
                         "artitem_path": "artitem/docker.jpg"
@@ -229,7 +229,7 @@ def delete_artitem(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
                         "isLiked": False
@@ -288,7 +288,7 @@ def artitems_by_id(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -340,7 +340,7 @@ def artitems_by_userid(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -393,7 +393,7 @@ def artitems_by_username(request, username):
                         },
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",
-                        "category": "drawing",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
