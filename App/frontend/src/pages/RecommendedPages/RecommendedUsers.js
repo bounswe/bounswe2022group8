@@ -5,7 +5,8 @@ import Layout from "../../layout/Layout";
 import { HOST } from "../../constants/host";
 import * as dotenv from "dotenv";
 
-import "../styles/RecommendedUsers.css";
+// import "../styles/RecommendedUsers.css";
+import "../styles/Recommendation.css";
 
 function RecommendedUsers(props) {
   function scrollToTop() {
@@ -99,20 +100,25 @@ function RecommendedUsers(props) {
   return (
     <Layout>
       <div className="recommendation-container">
-        <div class="recommended-users">
-          <div class="userlist">
+        <div class="recommendation-grid">
+          <h1 className="page-header">Users you may want to follow...</h1>
+          <div class="list">
             {allUsers.map((val, index) => {
               return (
                 <div
                   key={val.id}
-                  className="user"
+                  className="recommendation-card"
                   onClick={() => goToProfile(val.id)}
                 >
-                  <img src={allUsersPhotos[index]} alt="" />
-                  <div class="context">
+                  <img
+                    className="profile-photo"
+                    src={allUsersPhotos[index]}
+                    alt=""
+                  />
+                  <div class="profile-context">
                     <h4>{val.username}</h4>
-                    <p>{val.name}</p>
-                    <p>{val.location}</p>
+                    {/*<p>{val.name}</p>
+                    <p>{val.location}</p>*/}
                   </div>
                 </div>
               );

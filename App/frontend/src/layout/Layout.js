@@ -97,6 +97,7 @@ function Layout(props) {
 
   function handleClickLogOut() {
     navigate("/");
+    scrollToTop();
   }
 
   function handleSidebar() {

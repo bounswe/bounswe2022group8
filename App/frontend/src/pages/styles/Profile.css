@@ -9,14 +9,13 @@
 .profile-page-container {
   max-width: 1400px;
   min-height: 80vh;
-  margin: 0 auto 10rem auto;
+  margin: 7rem auto 10rem auto;
   padding: 0 2.5rem;
 }
 
 /* Profile info*/
 .profile-container {
   display: flex;
-  margin-top: 7rem;
   margin-bottom: 2.5rem;
   gap: 2.5rem;
   align-items: flex-start;

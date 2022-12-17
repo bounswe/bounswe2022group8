@@ -136,79 +136,97 @@ function Recommendation(props) {
 
   return (
     <Layout>
-      <main>
-        <div class="recommendation-container">
-          <div class="recommended-artitems">
-            <h1>
-              Discover Art Items <Link to="/discover-artitems">SEE MORE</Link>
-            </h1>
+      <div class="recommendation-container">
+        <div class="recommendation-grid">
+          <h1>Discover Art Items</h1>
 
-            <div class="list">
-              {artItemInfos.slice(0, 5).map((val, index) => {
-                return (
-                  <div
-                    key={val.id}
-                    className="artitem"
-                    onClick={() => goToArtItem(val.id)}
-                  >
-                    <img src={artItemPaths[index]} alt={val.description} />
-                    <div class="context">
-                      <h4>{val.title}</h4>
-                      <p>{val.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="see-more">
+            <Link to="/discover-artitems" onClick={scrollToTop}>
+              SEE MORE
+            </Link>
           </div>
 
-          <div class="recommended-exhibitions">
-            <h1>
-              Discover Exhibitions{" "}
-              <Link to="/discover-exhibitions">SEE MORE</Link>
-            </h1>
-            <div class="list">
-              {SampleExhibitions.map((val, key) => {
-                return (
-                  <div key={key} className="exhibition">
-                    <img src={val.src} alt="" />
-                    <div class="context">
-                      <h4>{val.name}</h4>
-                      <p>{val.owner}</p>
-                      <p>{val.date}</p>
-                    </div>
+          <div class="list">
+            {artItemInfos.slice(0, 5).map((val, index) => {
+              return (
+                <div
+                  key={val.id}
+                  className="recommendation-card"
+                  onClick={() => goToArtItem(val.id)}
+                >
+                  <img
+                    className="art-related"
+                    src={artItemPaths[index]}
+                    alt={val.description}
+                  />
+                  <div class="artitem-context">
+                    <h4>{val.title}</h4>
+                    <p>{val.description}</p>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div class="recommended-users">
-            <h1>
-              Users you may want to follow...{" "}
-              <Link to="/discover-users">SEE MORE</Link>
-            </h1>
-            <div class="list">
-              {allUsers.slice(0, 5).map((val, index) => {
-                return (
-                  <div
-                    key={val.id}
-                    className="user"
-                    onClick={() => goToProfile(val.id)}
-                  >
-                    <img src={allUsersPhotos[index]} alt="" />
-                    <div class="context">
-                      <h4>{val.username}</h4>
-                      <p>{val.name}</p>
-                      <p>{val.location}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </main>
+
+        <div class="recommendation-grid">
+          <h1>Discover Exhibitions</h1>
+
+          <div className="see-more">
+            <Link to="/discover-exhibitions" onClick={scrollToTop}>
+              SEE MORE
+            </Link>
+          </div>
+
+          <div class="list">
+            {SampleExhibitions.map((val, key) => {
+              return (
+                <div key={key} className="recommendation-card">
+                  <img className="art-related" src={val.src} alt="" />
+                  <div class="artitem-context">
+                    <h4>{val.name}</h4>
+                    {/*<p>{val.owner}</p>
+                    <p>{val.date}</p>*/}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="recommendation-grid">
+          <h1>Users you may want to follow...</h1>
+
+          <div className="see-more">
+            <Link to="/discover-users" onClick={scrollToTop}>
+              SEE MORE
+            </Link>
+          </div>
+
+          <div class="list">
+            {allUsers.slice(0, 5).map((val, index) => {
+              return (
+                <div
+                  key={val.id}
+                  className="recommendation-card"
+                  onClick={() => goToProfile(val.id)}
+                >
+                  <img
+                    className="profile-photo"
+                    src={allUsersPhotos[index]}
+                    alt=""
+                  />
+                  <div class="profile-context">
+                    <h4>{val.username}</h4>
+                    <p>{val.name}</p>
+                    <p>{val.location}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 }
