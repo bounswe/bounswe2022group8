@@ -38,6 +38,9 @@ function ArtItem(props) {
   // JUST TO CAUSE A STATE CHANGE AFTER A COMMENT POSTED
   const [updateComments, setUpdateComments] = useState(true);
 
+  // SEND COMMENT CLICK ACTION FOR GUEST USERS
+  const [guestClick, setGuestClick] = useState(false);
+
   // DUMMY DIV IN ORDER TO DETECT THE END OF THE MESSAGES
   const bottomRef = useRef(null);
 
@@ -134,22 +137,26 @@ function ArtItem(props) {
 
   function handleSendComment(e) {
     e.preventDefault();
-    if (newComment !== "") {
-      fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
-        method: "POST",
-        body: JSON.stringify({
-          body: newComment,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setUpdateComments(!updateComments);
+    if (token) {
+      if (newComment !== "") {
+        fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
+          method: "POST",
+          body: JSON.stringify({
+            body: newComment,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
         })
-        .catch((error) => console.error("Error:", error));
+          .then((response) => response.json())
+          .then((response) => {
+            setUpdateComments(!updateComments);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
     }
 
     // clear the input box after the message is sent
@@ -172,7 +179,10 @@ function ArtItem(props) {
   }
 
   return (
-    <Layout>
+    <Layout
+      guestClick={guestClick}
+      cancelGuestClick={() => setGuestClick(false)}
+    >
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">

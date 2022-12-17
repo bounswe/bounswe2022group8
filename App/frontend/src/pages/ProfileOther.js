@@ -40,7 +40,7 @@ function ProfileOther(props) {
   const [updateFollow, setUpdateFollow] = useState(true);
 
   // FOLLOW CLICK ACTION FOR GUEST USERS
-  const [followClicked, setFollowClicked] = useState(false);
+  const [guestClick, setGuestClick] = useState(false);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -167,7 +167,7 @@ function ProfileOther(props) {
         })
         .catch((error) => console.error("Error:", error));
     } else {
-      setFollowClicked(true);
+      setGuestClick(true);
     }
   }
 
@@ -195,8 +195,8 @@ function ProfileOther(props) {
 
   return (
     <Layout
-      followClicked={followClicked}
-      cancelFollowClick={() => setFollowClicked(false)}
+      guestClick={guestClick}
+      cancelGuestClick={() => setGuestClick(false)}
     >
       <div className="profile-page-container">
         <header>

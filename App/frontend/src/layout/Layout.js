@@ -53,11 +53,11 @@ function Layout(props) {
 
   // 2 UNNECESSARY RE-RENDERS --> BAD
   useEffect(() => {
-    if (props.followClicked) {
+    if (props.guestClick) {
       handleLogIn();
-      props.cancelFollowClick();
+      props.cancelGuestClick();
     }
-  }, [props.followClicked]);
+  }, [props.guestClick]);
 
   function handleResPass() {
     setResPassIsOpen(true);
