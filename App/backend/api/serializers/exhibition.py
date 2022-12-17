@@ -5,7 +5,7 @@ from ..models.models import Comment
 from ..models.artitem import Tag, ArtItem
 from ..models.user import User
 from .serializers import TagSerializer, SimpleUserSerializer, ArtItemSerializer, SimpleArtItemSerializer
-from ..models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionArtItem
+from ..models.exhibition import OfflineExhibition, VirtualExhibition
 
 class OfflineExhibitionSerializer(serializers.ModelSerializer):
     status = serializers.ReadOnlyField(source='get_status')
@@ -22,22 +22,35 @@ class OfflineExhibitionSerializer(serializers.ModelSerializer):
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
+class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
+    likes = serializers.ReadOnlyField(source='get_numberof_likes')
+    class Meta:
+        model = ArtItem
+        fields = ['id', 'title', 'tags', 'description', 'type', 'artitem_path',  'likes', 'created_at']
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep["tags"] = TagSerializer(instance.tags.all(), many=True).data 
+        return rep
 
 class ExhibitionArtItemSerializer(serializers.ModelSerializer):
+    likes = serializers.ReadOnlyField(source='get_numberof_likes')
     class Meta:
-        model = ExhibitionArtItem
-        fields = ['id', 'virtualExhibition', 'owner', 'artitem_path', 'artitem_image', 'created_at']
+        model = ArtItem
+        fields = ['id',  'owner', 'title', 'tags', 'description', 'type', 'virtualExhibition', 'artitem_path', 'artitem_image', 'likes', 'created_at']
 
-class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExhibitionArtItem
-        fields = ['id', 'virtualExhibition', 'artitem_path', 'created_at']
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep["tags"] = TagSerializer(instance.tags.all(), many=True).data 
+        rep["owner"] = SimpleUserSerializer(instance.owner).data
+        return rep
 
 class VirtualExhibitionSerializer(serializers.ModelSerializer):
     status = serializers.ReadOnlyField(source='get_status')
+    artitems_upload = serializers.ReadOnlyField(source='get_uploaded_artitems')
     class Meta:
         model = VirtualExhibition
-        fields = ['id', 'owner', 'title', 'description', 'poster', 'collaborators', 'artitems_gallery', 'start_date', 'end_date', 'created_at', 'updated_at', 'status']
+        fields = ['id', 'owner', 'title', 'description', 'poster', 'collaborators', 'artitems_gallery', 'start_date', 'end_date', 'created_at', 'updated_at', 'status', 'artitems_upload']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -45,4 +58,5 @@ class VirtualExhibitionSerializer(serializers.ModelSerializer):
         rep["collaborators"] = SimpleUserSerializer(instance.collaborators, many=True).data
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         rep["artitems_gallery"] = SimpleArtItemSerializer(instance.artitems_gallery, many=True).data
+        rep["artitems_upload"] = SimpleExhibitionArtItemSerializer(rep['artitems_upload'], many=True).data
         return rep
