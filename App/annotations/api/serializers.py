@@ -38,19 +38,60 @@ class AnnotationTargetSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['type'] = str(rep['type'])          # convert Enum to string
-        rep['selector'] = AnnotationSelectorSerializer(instance.selector).data
+        rep['selector'] = SelectorSerializer(instance.selector).data['selector']
+        if(rep['selector'][0]['type'] == SelectorEnum.fragmentselector): rep['selector'] = rep['selector'][0]  # image annotation
         rep['id'] = URL + "{}{}".format(rep['type'].lower(), rep['id'])
         if(not rep['language']): rep.pop('language')
         if(not rep['format']): rep.pop('format')
         return rep
 
-class AnnotationSelectorSerializer(serializers.ModelSerializer):
+class FragmentSelectorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Selector
+        model = FragmentSelector
         fields = ['value', 'type', 'conformsTo']
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['type'] = str(rep['type'])          # convert Enum to string
         return rep
+
+class TextQuoteSelectorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TextQuoteSelector
+        fields = ['exact', 'type']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['type'] = str(rep['type'])          # convert Enum to string
+        return rep
+
+class TextPositionSelectorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TextPositionSelector
+        fields = ['start', 'end', 'type']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['type'] = str(rep['type'])          # convert Enum to string
+        return rep
+
+class SelectorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selector
+        fields = ['fragmentSelector', 'textQuoteSelector', 'textPositionSelector']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['fragmentSelector'] = FragmentSelectorSerializer(instance.fragmentSelector).data
+        rep['textQuoteSelector'] = TextQuoteSelectorSerializer(instance.textQuoteSelector).data
+        rep['textPositionSelector'] = TextPositionSelectorSerializer(instance.textPositionSelector).data
+        rep['selector'] = []
+        if(instance.fragmentSelector): rep['selector'].append(rep['fragmentSelector'])
+        if(instance.textQuoteSelector): rep['selector'].append(rep['textQuoteSelector'])
+        if(instance.textPositionSelector): rep['selector'].append(rep['textPositionSelector'])
+        rep.pop('fragmentSelector')
+        rep.pop('textQuoteSelector')
+        rep.pop('textPositionSelector')
+        return rep
+
 

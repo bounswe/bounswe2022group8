@@ -18,11 +18,16 @@ from drf_yasg import openapi
 
 # SWAGGER: localhost:8000/api/v1/swagger/schema
 urlpatterns = [
-    path('annotations/image/', annotate_image, name="annotate"),
+    path('annotations/', annotate, name="annotate"),
+    path('annotations/image/', get_image_annotations, name="get image annotations"),
+    path('annotations/text/', get_text_annotations, name="get text annotations"),
+    path('annotations/text/users/<int:userid>/artitems/<int:artitemid>', get_text_annotation_by_artitem_user_id, name="get text annotations on a specific art item by a user"),
+    path('annotations/text/artitems/<int:artitemid>', get_text_annotations_by_artitem_id, name="get text annotations on an art item"),
     path('annotations/image/users/<int:userid>', get_image_annotation_by_user_id, name="get image annotations of a user"),
-    path('annotations/image/artitems/<int:artitemid>', get_image_annotation_by_artitem_id, name="get image annotations on an art item"),
+    path('annotations/image/artitems/<int:artitemid>', get_image_annotation_by_artitem_id, name="get image annotations on an art item by a user"),
     path('annotations/<int:id>', delete_annotation_by_id, name="delete an image annotation"),
-    path('annotations/image/users/<int:userid>/artitems/<int:artitemid>', get_image_annotation_by_artitem_user_id, name="get image annotations on a specific art item by a user")
+    path('annotations/image/users/<int:userid>/artitems/<int:artitemid>', get_image_annotation_by_artitem_user_id, name="get image annotations on a specific art item by a user"),
+    path('annotations/text/users/<int:userid>', get_text_annotations_by_userid, name="get text annotations of a user")
 ]
 
 # added to give us the option to choose between default Response template and regular json
