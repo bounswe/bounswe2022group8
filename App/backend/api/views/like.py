@@ -126,7 +126,7 @@ def unlike_artitem(request, id):
                             "name": "Captain Joseph",
                             "surname": "Blocker"
                         },
-                        "type": "sketch",
+                        "category": "drawing",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg"
                     }
