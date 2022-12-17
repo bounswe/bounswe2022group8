@@ -169,6 +169,25 @@ function ArtItem(props) {
 
   useEffect(() => {
     /*Image Annotation*/
+
+    //Or do this
+    //fetch with method 'GET' to get annotations
+    //annotorious.setAnnotations(annotations); //annotations are what we get by fetch
+    //Renders the list of annotations to the image, removing any previously existing annotations.
+    /*fetch(`${host}/api/v1/annotations/image/artitems/${artitem_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json", 
+          Authorization: `Token ${token}`,
+        },
+      })
+        //.then((response) => response.json())
+        .then((response) => {
+          //console.log(response);
+          annotorious.setAnnotations(response);
+        })
+        .catch((error) => console.error("Error:", error));*/
+
     let annotorious = null;
 
     if (imageElement.current) {
@@ -183,40 +202,25 @@ function ArtItem(props) {
       //The method returns a promise, in case you want to perform an action after the annotations have loaded
       annotorious
         .loadAnnotations(
-          `${annotationhost}/api/v1/annotations/image/artitems/${artitem_id}`
+          `${annotationhost}/api/v1/annotations/image/users/${userid}/artitems/${artitem_id}`
         )
         .catch((error) => console.error("Error:", error));
       /* If there are no annotations on an art item, such error
            Error: TypeError: (e || []).map is not a function at jc.setAnnotations
            may be seen on console 
       */
+      annotorious.on("clickAnnotation", function (annotation, element) {
+        console.log("annotation", annotation);
+        annotorious.readOnly = !annotorious.readOnly;
+      });
 
-      //Or do this
-      //fetch with method 'GET' to get annotations
-      //annotorious.setAnnotations(annotations); //annotations are what we get by fetch
-      //Renders the list of annotations to the image, removing any previously existing annotations.
-      /*fetch(`${host}/api/v1/annotations/image/artitems/${artitem_id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json", 
-          Authorization: `Token ${token}`,
-        },
-      })
-        //.then((response) => response.json())
-        .then((response) => {
-          //console.log(response);
-          annotorious.setAnnotations(response);
-        })
-        .catch((error) => console.error("Error:", error));*/
-
-      
       //...annotation backend connection...
       // Event handlers
       annotorious.on("createAnnotation", (annotation) => {
         annotation["creator"] = `${userid}`;
         annotation["target"]["source"] =
           annotation["target"]["source"].split(/[?]/)[0];
-        annotation["body"]=annotation.body[0];
+        annotation["body"] = annotation.body[0];
         console.log("created", annotation);
         console.log("JSON.stringfy", JSON.stringify(annotation));
         //fetch with method 'POST'
@@ -227,12 +231,20 @@ function ArtItem(props) {
             "Content-Type": "application/json",
             Authorization: `Token ${token}`,
           },
-        }).catch((error) => console.error("Error:", error));
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            //console.log(response);
+            annotation.id = response.id;
+          })
+          .catch((error) => console.error("Error:", error));
       });
 
-      annotorious.on("updateAnnotation", (annotation) => {
+      annotorious.on("updateAnnotation", (annotation, previous) => {
+        annotation["body"] = annotation.body[0];
         console.log("updated", annotation);
-        annotation["body"]=annotation.body[0];
+        console.log("previous", previous);
+        console.log("annotation id", annotation.id);
         //fetch with method 'PUT'
         fetch(`${annotationhost}/api/v1/annotations/image/`, {
           method: "PUT",
@@ -242,6 +254,7 @@ function ArtItem(props) {
             Authorization: `Token ${token}`,
           },
         }).catch((error) => console.error("Error:", error));
+        //console.log("created annotation id",)
       });
 
       annotorious.on("deleteAnnotation", (annotation) => {
@@ -263,7 +276,7 @@ function ArtItem(props) {
 
     // Cleanup: destroy current instance
     return () => annotorious.destroy();
-  }, [userid]);
+  }, [annotationhost, userid]);
 
   function hideAnnotations() {
     anno.setVisible(false);
