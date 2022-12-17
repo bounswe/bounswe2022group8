@@ -3,6 +3,7 @@ import Mainbar from "./Mainbar";
 import MainbarLogged from "./MainbarLogged";
 import Signup from "../components/SignupModal";
 import Login from "../components/LoginModal";
+import ResetPassword from "../components/ResetPasswordModal";
 import Backdrop from "../components/Backdrop";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../auth/authentication";
@@ -10,7 +11,6 @@ import { useAuth } from "../auth/authentication";
 import { useNavigate } from "react-router-dom";
 
 import "./styles/Layout.css";
-import ResetPassword from "../components/ResetPasswordModal";
 
 function Layout(props) {
   function scrollToTop() {
@@ -38,10 +38,26 @@ function Layout(props) {
     setLogInIsOpen(false);
   }
 
+  // 2 UNNECESSARY RE-RENDERS --> BAD
+  useEffect(() => {
+    if (props.joinClicked) {
+      handleSignUp();
+      props.cancelJoinClick();
+    }
+  }, [props.joinClicked]);
+
   function handleLogIn() {
     setLogInIsOpen(true);
     setSignUpIsOpen(false);
   }
+
+  // 2 UNNECESSARY RE-RENDERS --> BAD
+  useEffect(() => {
+    if (props.followClicked) {
+      handleLogIn();
+      props.cancelFollowClick();
+    }
+  }, [props.followClicked]);
 
   function handleResPass() {
     setResPassIsOpen(true);
@@ -79,18 +95,12 @@ function Layout(props) {
     }
   }
 
-  // when log out is clicked, re-render server side and redirect to home page
   function handleClickLogOut() {
-    window.location.replace("/"); // window.location.href("/") might also be used
+    navigate("/");
   }
 
   function handleSidebar() {
     setSidebarOpen(!sidebarOpen);
-  }
-
-  function goToMyProfile(){
-    navigate('/:username');
-    scrollToTop();
   }
 
   // changes color of the navbar w.r.t scrollY position
@@ -142,7 +152,6 @@ function Layout(props) {
           mainbarOpen={mainbarOpen}
           sidebarOpen={sidebarOpen}
           onClickMenu={() => handleSidebar()}
-          onClickProfile={() => goToMyProfile()}
         />
       ) : (
         <Mainbar

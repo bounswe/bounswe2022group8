@@ -26,9 +26,10 @@ function HomeGalleryCard(props) {
     <>
       <div className="gallery-container">
         <div className="gallery-header">Discover Exhibitions</div>
+        <div style= {{color: "white", cursor: "pointer"}} onClick={() => navigate(`/users/${1}`)}>TEST PROFILE</div>
         <div className="gallery-row">
           <HomeImageCard
-            onClick={{/*() => goToArtItem(13)*/}}
+            onClick={() => goToArtItem(1)}
             source={lost}
             name="Lost Highway"
           />

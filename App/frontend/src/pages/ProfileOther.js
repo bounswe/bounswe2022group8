@@ -39,6 +39,9 @@ function ProfileOther(props) {
   // JUST TO CAUSE A STATE CHANGE AFTER A FOLLOW ACTION
   const [updateFollow, setUpdateFollow] = useState(true);
 
+  // FOLLOW CLICK ACTION FOR GUEST USERS
+  const [followClicked, setFollowClicked] = useState(false);
+
   const AWS = require("aws-sdk");
   dotenv.config();
   AWS.config.update({
@@ -49,43 +52,46 @@ function ProfileOther(props) {
   const s3 = new AWS.S3();
 
   useEffect(() => {
-    
+    var config = {};
+
     if (token) {
-      fetch(`${host}/api/v1/users/profile/${user_id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          //console.log(response);
-
-          var params = {
-            Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
-            Key: response.profile_path,
-          };
-
-          // signed profile image url --> for display in frontend
-          var profile_image_url = s3.getSignedUrl("getObject", params);
-
-          setProfileInfo({
-            username: response.username,
-            email: response.email,
-            name: response.name,
-            about: response.about,
-            location: response.location,
-            profile_image_url: profile_image_url,
-            followers: response.followers,
-            followings: response.followings,
-            is_followed: response.isFollowed,
-          });
-        })
-        .catch((error) => console.error("Error:", error));
+      config = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
     } else {
-      // MUST HANDLE THE CASE FOR GUEST USERS
+      config = { "Content-Type": "application/json" };
     }
+
+    fetch(`${host}/api/v1/users/profile/${user_id}`, {
+      method: "GET",
+      headers: config,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log(response);
+
+        var params = {
+          Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+          Key: response.profile_path,
+        };
+
+        // signed profile image url --> for display in frontend
+        var profile_image_url = s3.getSignedUrl("getObject", params);
+
+        setProfileInfo({
+          username: response.username,
+          email: response.email,
+          name: response.name,
+          about: response.about,
+          location: response.location,
+          profile_image_url: profile_image_url,
+          followers: response.followers,
+          followings: response.followings,
+          is_followed: response.isFollowed,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
   }, [host, token, updateFollow]);
 
   // THIS IS BAD.
@@ -95,7 +101,6 @@ function ProfileOther(props) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
         },
       })
         .then((response) => response.json())
@@ -148,19 +153,22 @@ function ProfileOther(props) {
   }
 
   function handleFollow() {
-    fetch(`${host}/api/v1/users/follow/${user_id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setUpdateFollow(!updateFollow);
+    if (token) {
+      fetch(`${host}/api/v1/users/follow/${user_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json())
+        .then((response) => {
+          setUpdateFollow(!updateFollow);
+        })
+        .catch((error) => console.error("Error:", error));
+    } else {
+      setFollowClicked(true);
+    }
   }
 
   function handleUnfollow() {
@@ -172,7 +180,6 @@ function ProfileOther(props) {
       },
     })
       .then((response) => {
-        console.log(response);
         setUpdateFollow(!updateFollow);
       })
       .catch((error) => console.error("Error:", error));
@@ -187,7 +194,10 @@ function ProfileOther(props) {
   // console.log(userGallery.length);
 
   return (
-    <Layout>
+    <Layout
+      followClicked={followClicked}
+      cancelFollowClick={() => setFollowClicked(false)}
+    >
       <div className="profile-page-container">
         <header>
           <div className="profile-container">
