@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/authentication";
 import Layout from "../../layout/Layout";
 import { HOST } from "../../constants/host";
 import * as dotenv from "dotenv";
@@ -6,10 +8,21 @@ import * as dotenv from "dotenv";
 import "../styles/RecommendedUsers.css";
 
 function RecommendedUsers(props) {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   var host = HOST;
+  const { token } = useAuth();
+  const navigate = useNavigate();
 
   const [allUsers, setAllUsers] = useState([]);
   const [allUsersPhotos, setAllUsersPhotos] = useState([]);
+  const [myID, setMyID] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -52,6 +65,37 @@ function RecommendedUsers(props) {
       .catch((error) => console.error("Error:", error));
   }, [host]);
 
+  // GET CURRENTLY LOGGED IN USERS' ID
+  // IN REAL SHOULD NOT RECOMMEND HERSELF
+  // SHOULD NOT GET HER ID
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
+  // IN REAL SHOULD NOT RECOMMEND HERSELF
+  // SHOULD NOT GET HER ID
+  // THIS CHECK SHOULD BE UNNECESSARY
+  function goToProfile(id) {
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
+    scrollToTop();
+  }
+
   return (
     <Layout>
       <div className="recommendation-container">
@@ -59,7 +103,11 @@ function RecommendedUsers(props) {
           <div class="userlist">
             {allUsers.map((val, index) => {
               return (
-                <div key={val.id} className="user">
+                <div
+                  key={val.id}
+                  className="user"
+                  onClick={() => goToProfile(val.id)}
+                >
                   <img src={allUsersPhotos[index]} alt="" />
                   <div class="context">
                     <h4>{val.username}</h4>

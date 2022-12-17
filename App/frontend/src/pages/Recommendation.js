@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/authentication";
 import { Link } from "react-router-dom";
 import { HOST } from "../constants/host";
 import Layout from "../layout/Layout";
 
-import defaultUserImage from "../images/defaultUserImage.png";
 import "./styles/Recommendation.css";
 import * as dotenv from "dotenv";
-import { SampleArtItems } from "./data/SampleArtItems";
 import { SampleExhibitions } from "./data/SampleExhibitions";
-import { SampleUsers } from "./data/SampleUsers";
 
 function Recommendation(props) {
   function scrollToTop() {
@@ -20,14 +18,15 @@ function Recommendation(props) {
     });
   }
 
-  const navigate = useNavigate();
-
   var host = HOST;
+  const { token } = useAuth();
+  const navigate = useNavigate();
 
   const [artItemInfos, setArtItemInfos] = useState([]);
   const [artItemPaths, setArtItemPaths] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allUsersPhotos, setAllUsersPhotos] = useState([]);
+  const [myID, setMyID] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -70,8 +69,36 @@ function Recommendation(props) {
       .catch((error) => console.error("Error:", error));
   }, [host]);
 
+  // GET CURRENTLY LOGGED IN USERS' ID
+  // IN REAL SHOULD NOT RECOMMEND HERSELF
+  // SHOULD NOT GET HER ID
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   function goToArtItem(id) {
     navigate(`/artitems/${id}`);
+    scrollToTop();
+  }
+
+  function goToProfile(id) {
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
     scrollToTop();
   }
 
@@ -119,12 +146,12 @@ function Recommendation(props) {
             <div class="list">
               {artItemInfos.slice(0, 5).map((val, index) => {
                 return (
-                  <div key={val.id} className="artitem">
-                    <img
-                      onClick={() => goToArtItem(val.id)}
-                      src={artItemPaths[index]}
-                      alt={val.description}
-                    />
+                  <div
+                    key={val.id}
+                    className="artitem"
+                    onClick={() => goToArtItem(val.id)}
+                  >
+                    <img src={artItemPaths[index]} alt={val.description} />
                     <div class="context">
                       <h4>{val.title}</h4>
                       <p>{val.description}</p>
@@ -164,7 +191,11 @@ function Recommendation(props) {
             <div class="list">
               {allUsers.slice(0, 5).map((val, index) => {
                 return (
-                  <div key={val.id} className="user">
+                  <div
+                    key={val.id}
+                    className="user"
+                    onClick={() => goToProfile(val.id)}
+                  >
                     <img src={allUsersPhotos[index]} alt="" />
                     <div class="context">
                       <h4>{val.username}</h4>

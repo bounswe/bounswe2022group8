@@ -88,8 +88,9 @@ function Layout(props) {
     setSidebarOpen(!sidebarOpen);
   }
 
-  function goToProfile(){
+  function goToMyProfile(){
     navigate('/:username');
+    scrollToTop();
   }
 
   // changes color of the navbar w.r.t scrollY position
@@ -141,7 +142,7 @@ function Layout(props) {
           mainbarOpen={mainbarOpen}
           sidebarOpen={sidebarOpen}
           onClickMenu={() => handleSidebar()}
-          onClickProfile={() => goToProfile()}
+          onClickProfile={() => goToMyProfile()}
         />
       ) : (
         <Mainbar

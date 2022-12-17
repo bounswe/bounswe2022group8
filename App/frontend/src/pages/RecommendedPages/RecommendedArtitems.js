@@ -76,12 +76,12 @@ function RecommendedArtitems(props) {
           <div className="gallery">
             {artItemInfos.map((val, index) => {
               return (
-                <div key={val.id} className="artitem">
-                  <img
-                    onClick={() => goToArtItem(val.id)}
-                    src={artItemPaths[index]}
-                    alt={val.description}
-                  />
+                <div
+                  key={val.id}
+                  className="artitem"
+                  onClick={() => goToArtItem(val.id)}
+                >
+                  <img src={artItemPaths[index]} alt={val.description} />
                   <div class="context">
                     <h4>{val.title}</h4>
                     <p>{val.description}</p>
