@@ -63,13 +63,25 @@ class Type(models.Model):
 class Motivation(models.Model):
     motivation = models.TextField(unique=True, choices=MotivationEnum.choices)
 
-class SelectorType(models.Model):
-    selectorType = models.TextField(unique=True, choices=SelectorEnum.choices)
+class FragmentSelector(models.Model):
+    value = models.TextField()
+    type = SelectorEnum.fragmentselector
+    conformsTo = models.TextField(default=CONFORM, blank=True)
+
+class TextQuoteSelector(models.Model):
+    exact = models.TextField()
+    type = SelectorEnum.textquoteselector
+
+class TextPositionSelector(models.Model):
+    start = models.BigIntegerField()
+    end = models.BigIntegerField()
+    type = SelectorEnum.textpositionselector
 
 class Selector(models.Model):
-    value = models.TextField()
-    type = models.ForeignKey(SelectorType, on_delete=models.CASCADE, to_field='selectorType')
-    conformsTo = models.TextField(default=CONFORM, blank=True)
+    fragmentSelector = models.ForeignKey(FragmentSelector, on_delete= models.CASCADE, blank=True, null=True)
+    textQuoteSelector = models.ForeignKey(TextQuoteSelector,  on_delete= models.CASCADE, blank=True, null=True)
+    textPositionSelector = models.ForeignKey(TextPositionSelector, on_delete= models.CASCADE, blank=True, null=True)
+    
 
 """
 "body": "http://34.125.134.88/body<id>"  (id will be stored in the field - serializer will serialize as shown)
@@ -133,14 +145,5 @@ def create_or_return_type(type):
         obj = Type.objects.filter(type=typeEnum)
         if(obj): return obj[0]
         else: return Type.objects.create(type=typeEnum)
-    except:
-        return -1
-
-def create_or_return_selectortype(selectorType):
-    try:
-        selectorTypeEnum = SelectorEnum[selectorType]
-        obj = SelectorType.objects.filter(selectorType=selectorTypeEnum)
-        if(obj): return obj[0]
-        else: return SelectorType.objects.create(selectorType=selectorTypeEnum)
     except:
         return -1
