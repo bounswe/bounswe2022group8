@@ -12,7 +12,7 @@ class AnnotationSerializer(serializers.ModelSerializer):
         rep['type'] = str(rep['type'])          # convert Enum to string
         rep['target'] = AnnotationTargetSerializer(instance.target).data
         if(not rep['body']): rep.pop('body')
-        else: rep['body'] = AnnotationBodySerializer(instance.body).data
+        else: rep['body'] = AnnotationBodySerializer(instance.body, many=True).data
         rep['id'] = rep['uuid'] + "@" + str(rep['id'])  # change the name
         rep.pop('uuid')
         rep.pop('context')

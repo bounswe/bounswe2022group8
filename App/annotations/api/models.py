@@ -110,7 +110,7 @@ class Annotation(models.Model):  # id is created implicitly
     uuid = models.TextField()                       # coming from frontend
     context = models.TextField(default=CONTEXT)
     type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
-    body = models.ForeignKey(Body, on_delete=models.CASCADE, to_field='id', blank=True, null=True)
+    body = models.ManyToManyField(Body)
     target = models.ForeignKey(Target, on_delete=models.CASCADE, to_field='id')
     creator = models.BigIntegerField()    # id of the creator
     created = models.DateTimeField(auto_now=True)

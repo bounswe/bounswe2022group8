@@ -18,11 +18,11 @@ from .serializers import *
   "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b",
   "type": "Annotation",
   "creator" : user-id, 
-  "body": {
+  "body": [{
     "id": "http://34.125.134.88/body1",
     "type": "TextualBody",
     "value": "Nice picture"
-  },
+  }],
   "target": {
     "id": "https://cmpe451-development.s3.amazonaws.com/artitem/artitem-1.png"
     "source": "http://34.125.134.88/artitems/14"
@@ -68,14 +68,14 @@ from .serializers import *
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
@@ -115,14 +115,14 @@ from .serializers import *
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
@@ -166,14 +166,14 @@ from .serializers import *
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
@@ -237,12 +237,12 @@ def annotate_image(request):
 
                 if('body'  in request.data): # annotation without body - possible
                     # create body
-                    body_data = data['body']
+                    body_data = data['body'][0]  # it's a list of one element
 
                     body_serializer = create_body(body_data)
                     if(body_serializer.is_valid()):
                         b = body_serializer.save()
-                        data['body'] = b.id
+                        data['body'] = [b.id]
                     else:
                         selector.delete() # target gets deleted automatically - CASCADE
                         return Response(body_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -304,18 +304,18 @@ def annotate_image(request):
     
                 if('body'  in request.data): # annotation without body - possible
                     # create body
-                    body_data = data['body']
+                    body_data = data['body'][0]
                     body_serializer = create_body(body_data)
                     if(body_serializer.is_valid()):
                         body = body_serializer.save()
-                        data['body'] = body.id
+                        data['body'] = [body.id]
                     else:
                         selector.delete() # target gets deleted automatically - CASCADE
                         return Response(body_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                     
-                    imageAnnotation.body = body
+                    imageAnnotation.body.set([body])
                 else:
-                    imageAnnotation.body = None
+                    imageAnnotation.body.set([]) 
 
                 imageAnnotation.target = target
                 imageAnnotation.save()
@@ -340,14 +340,14 @@ def annotate_image(request):
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
@@ -397,14 +397,14 @@ def get_image_annotation_by_user_id(request, userid):
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
@@ -506,14 +506,14 @@ def create_body(body_data):
                 "application/json": [
                     {
                         "id": "#218d01ff-f077-4cc3-992d-1c81c426e51b@9",
-                        "body": {
+                        "body": [{
                             "id": "http://34.125.134.88/body1",
                             "value": "Nice picture",
                             "type": "Text",
                             "format": "text/plain",
                             "created": "2022-12-16T15:31:23.803026Z",
                             "purpose": "Commenting"
-                        },
+                        }],
                         "type": "Annotation",
                         "target": {
                             "id": "http://34.125.134.88/image15",
