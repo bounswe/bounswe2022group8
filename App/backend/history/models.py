@@ -29,7 +29,6 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
         content_type    = ContentType.objects.get_for_model(sender),
         object_id       = instance.id,
     )
-    print("here")
     if(isinstance(instance, ArtItem)):
         instance.increaseViews()
 
