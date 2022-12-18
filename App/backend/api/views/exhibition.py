@@ -428,6 +428,7 @@ def get_online_exhibitions_by_id(request, id):
                     return Response({"Invalid Input": "Please check the format for removing art items."}, status=status.HTTP_400_BAD_REQUEST)
 
             serializer = VirtualExhibitionSerializer(virtualExhibition)
+            virtualExhibition.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             return Response({"Not Found": "There is no virtual exhibition with the given id such that the current user is a collaborator"}, status=status.HTTP_404_NOT_FOUND)
