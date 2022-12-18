@@ -21,6 +21,8 @@ from django.contrib.auth.models import AnonymousUser
 
 
 from drf_yasg import openapi
+from history.decorators import object_viewed_decorator
+from history.signals import object_viewed_signal
 
 # List of routes / method / action:
 #
@@ -248,6 +250,7 @@ def delete_artitem(request, id):
         ),
     }
 )
+#@object_viewed_decorator()
 @api_view(["GET"])
 def artitems_by_id(request, id):
     if request.method == "GET":
@@ -256,12 +259,16 @@ def artitems_by_id(request, id):
             data = ArtItemSerializer(artitem).data.copy()
             if(isinstance(request.user, AnonymousUser)):
                 data["isLiked"] = False
+                #print("anonymous")
             else:
                 try:
                     LikeArtItem.objects.get(user=request.user, artitem=artitem)
                     data["isLiked"] = True
                 except:
                     data["isLiked"] = False
+                #print("not anonymous")
+                instance = artitem
+                object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
