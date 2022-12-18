@@ -28,7 +28,7 @@ class AbstractExhibition(models.Model):
         currentTime = timezone.now()
         if(self.start_date > currentTime): return "Not Started Yet"
         elif(self.end_date < currentTime): return "Finished"
-        else: return "On Going"
+        else: return "Ongoing"
 
     def __str__(self):
         return "Exhibition: " + self.title
