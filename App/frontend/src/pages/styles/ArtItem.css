@@ -260,3 +260,17 @@
 .artitem-post-container #image-container::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.artitem-post-container #image-container .display-image-annotation-text-container {
+  display: block;
+  background-color: #ffdeff;
+  color: #18121c;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #bcb1c1;
+  margin-top: 0.6rem;
+  margin-right: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+}
