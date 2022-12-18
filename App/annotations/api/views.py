@@ -501,7 +501,6 @@ def create_selector(selector_data):
         else:  # image annotation
             fragmentSelector = FragmentSelector.objects.create(value=selector_data['value'])
             selector_ser['fragmentSelector'] = fragmentSelector.id
-        print(selector_ser)
         selector_serializer = SelectorSerializer(data=selector_ser)
         return selector_serializer
     except:
