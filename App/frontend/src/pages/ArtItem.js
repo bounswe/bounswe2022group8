@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import Tag from "../components/Tag";
@@ -9,10 +9,18 @@ import * as dotenv from "dotenv";
 import "./styles/ArtItem.css";
 
 function ArtItem(props) {
-  const { artitem_id } = useParams();
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
 
   var host = HOST;
   const { token } = useAuth();
+  const { artitem_id } = useParams();
+  const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -22,12 +30,16 @@ function ArtItem(props) {
   const [artitemComments, setArtitemComments] = useState([]);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
+  const [myID, setMyID] = useState(null);
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
 
   // JUST TO CAUSE A STATE CHANGE AFTER A COMMENT POSTED
   const [updateComments, setUpdateComments] = useState(true);
+
+  // SEND COMMENT CLICK ACTION FOR GUEST USERS
+  const [guestClick, setGuestClick] = useState(false);
 
   // DUMMY DIV IN ORDER TO DETECT THE END OF THE MESSAGES
   const bottomRef = useRef(null);
@@ -106,26 +118,45 @@ function ArtItem(props) {
       })
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
-  
+
+  // GET CURRENTLY LOGGED IN USERS' ID
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
 
   function handleSendComment(e) {
     e.preventDefault();
-    if (newComment !== "") {
-      fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
-        method: "POST",
-        body: JSON.stringify({
-          body: newComment,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setUpdateComments(!updateComments);
+    if (token) {
+      if (newComment !== "") {
+        fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
+          method: "POST",
+          body: JSON.stringify({
+            body: newComment,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
         })
-        .catch((error) => console.error("Error:", error));
+          .then((response) => response.json())
+          .then((response) => {
+            setUpdateComments(!updateComments);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
     }
 
     // clear the input box after the message is sent
@@ -137,8 +168,21 @@ function ArtItem(props) {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [artitemComments]);
 
+  function goToProfile(id) {
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
+    scrollToTop();
+  }
+
   return (
-    <Layout>
+    <Layout
+      guestClick={guestClick}
+      cancelGuestClick={() => setGuestClick(false)}
+    >
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
@@ -154,7 +198,12 @@ function ArtItem(props) {
           </div>
           <div id="info-container">
             <div id="owner">
-              <img id="owner-profile-photo" src={artitemOwnerPhoto} alt="" />
+              <img
+                id="owner-profile-photo"
+                src={artitemOwnerPhoto}
+                alt=""
+                onClick={() => goToProfile(artitemOwnerID)}
+              />
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
             <div id="title-and-description">
@@ -181,6 +230,7 @@ function ArtItem(props) {
                       className="comment-owner-profile-photo"
                       src={commentPhotos[index]}
                       alt=""
+                      onClick={() => goToProfile(val.commented_by.id)}
                     />
                     <div>
                       <div className="comment-owner">

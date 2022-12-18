@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import { HOST } from "../constants/host";
 import "./styles/Access.css";
@@ -20,11 +20,12 @@ function Login(props) {
   const [credentialIncorrect, setCredentialIncorrect] = useState(false);
   const [passwordIncorrect, setPasswordIncorrect] = useState(false);
 
+  var host = HOST;
   const { saveToken } = useAuth();
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    var host = HOST;
 
     fetch(`${host}/api/v1/auth/login/`, {
       method: "POST",
@@ -54,7 +55,10 @@ function Login(props) {
           ? setPasswordIncorrect(true)
           : setPasswordIncorrect(false);
 
-        if (response.token) saveToken(response.token);
+        if (response.token) {
+          saveToken(response.token);
+          navigate("/discover");
+        }
       })
       .catch((error) => console.error("Error:", error));
   }
@@ -129,8 +133,7 @@ function Login(props) {
           <Link onClick={props.onClickResPass}>Forgot password?</Link>
         </p>
         <p className="text-center mt-2">
-          Not on Artopia yet?{" "}
-          <Link onClick={props.onClickSignUp}>Sign up</Link>
+          Not on Artopia yet? <Link onClick={props.onClickSignUp}>Sign up</Link>
         </p>
       </div>
     </form>

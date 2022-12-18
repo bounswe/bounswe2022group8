@@ -1,40 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
-import Signup from "./SignupModal";
-import Login from "./LoginModal";
-import Backdrop from "../components/Backdrop";
 import background from "../images/aurora.jpg";
 import { useAuth } from "../auth/authentication";
 
 import "./styles/IntroImage.css";
 
-function IntroImage() {
+function IntroImage(props) {
   const { token } = useAuth();
-  const [signUpIsOpen, setSignUpIsOpen] = useState(false);
-  const [logInIsOpen, setLogInIsOpen] = useState(false);
 
-  function handleSignUp() {
-    setSignUpIsOpen(true);
-    setLogInIsOpen(false);
-  }
-
-  function handleLogIn() {
-    setLogInIsOpen(true);
-    setSignUpIsOpen(false);
-  }
-
-  function handleCloseForm() {
-    setSignUpIsOpen(false);
-    setLogInIsOpen(false);
-  }
-
-  function handleSubmitSignUp() {
-    setSignUpIsOpen(false);
-  }
-
-  function handleSubmitLogIn() {
-    setLogInIsOpen(false);
-  }
   return (
     <div>
       <div className="background-image-container">
@@ -53,7 +26,7 @@ function IntroImage() {
                 className="btn-on-background-image"
                 as="a"
                 variant=""
-                onClick={() => handleSignUp()}
+                onClick={props.onJoinClick}
               >
                 JOIN NOW
               </Button>
@@ -61,23 +34,6 @@ function IntroImage() {
           )}
         </div>
       </div>
-      {signUpIsOpen && (
-        <Signup
-          onSubmitSignUp={() => handleSubmitSignUp()}
-          onClickLogIn={() => handleLogIn()}
-          onClickClose={() => handleCloseForm()}
-        />
-      )}
-      {logInIsOpen && (
-        <Login
-          onSubmitLogIn={() => handleSubmitLogIn()}
-          onClickSignUp={() => handleSignUp()}
-          onClickClose={() => handleCloseForm()}
-        />
-      )}
-      {(signUpIsOpen || logInIsOpen) && (
-        <Backdrop onClick={() => handleCloseForm()} />
-      )}
     </div>
   );
 }

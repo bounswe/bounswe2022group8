@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import { HOST } from "../constants/host";
 import "./styles/Access.css";
@@ -23,6 +23,7 @@ function Signup(props) {
   const [confirmPasswordError, setConfirmPasswordError] = useState(null);
 
   const { saveToken } = useAuth();
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -54,7 +55,10 @@ function Signup(props) {
           ? setConfirmPasswordError(response.password_confirm[0])
           : setConfirmPasswordError(null);
 
-        if (response.token) saveToken(response.token);
+        if (response.token) {
+          saveToken(response.token);
+          navigate("/discover");
+        }
       })
       .catch((error) => console.error("Error:", error));
   }
