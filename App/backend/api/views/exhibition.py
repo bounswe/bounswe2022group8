@@ -56,7 +56,7 @@ from drf_yasg import openapi
                             "owner": 1,
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
-                            "type": "poster",
+                            "category": "poster",
                             "tags": [],
                             "artitem_path": "artitem/artitem-1.png",
                             "created_at": "08-12-2022 23:31:44"
@@ -91,7 +91,7 @@ from drf_yasg import openapi
                             "owner": 1,
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
-                            "type": "poster",
+                            "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-4.png",
                             "created_at": "08-12-2022 23:32:34"
@@ -103,7 +103,7 @@ from drf_yasg import openapi
                                 "owner": 1,
                                 "title": "Portrait of Joel Miller",
                                 "description": "Joel Miller from TLOU universe.",
-                                "type": "sketch",
+                                "category": "OT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-3.png",
                                 "created_at": "08-12-2022 23:32:18"
@@ -160,7 +160,7 @@ def get_exhibitions(request):
                     "owner": 1,
                     "title": "My Offline Exhibition",
                     "description": "Art exhibition at street 123.",
-                    "type": "poster",
+                    "category": "OT",
                     "tags": [],
                     "artitem_path": "artitem/artitem-4.png",
                     "created_at": "08-12-2022 23:32:34"
@@ -172,7 +172,7 @@ def get_exhibitions(request):
                         "owner": 1,
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",
-                        "type": "sketch",
+                        "category": "OT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-3.png",
                         "created_at": "08-12-2022 23:32:18"
@@ -238,7 +238,7 @@ def get_exhibitions(request):
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
             "add_via_gallery": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] IDs of art items from organizer's gallery", default=[2]),
-            "add_via_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"type": "sketch","artitem_image": "data:image/jpeg;base64,<base64string>"}]),
+            "add_via_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"category": "OT","artitem_image": "data:image/jpeg;base64,<base64string>"}]),
             "remove": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] List of IDs of art items to be removed", default=[3]),
         }),
     responses={
@@ -261,7 +261,7 @@ def get_exhibitions(request):
                         "owner": 1,
                         "title": "Joel Miller",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-61.png",
                         "created_at": "08-12-2022 23:18:13"
@@ -273,7 +273,7 @@ def get_exhibitions(request):
                             "owner": 1,
                             "title": "Portrait of Joel Miller",
                             "description": "Joel Miller from TLOU universe.",
-                            "type": "sketch",
+                            "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
                             "created_at": "08-12-2022 23:15:21"
@@ -381,7 +381,7 @@ def get_online_exhibitions_by_id(request, id):
                             inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                             inddata["title"] = artitem_data["title"]
                             if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
-                            inddata["type"] = artitem_data["type"]
+                            inddata["category"] = artitem_data["category"]
                             inddata["description"] = artitem_data["description"]
                             objects.append(inddata)
                         except:
@@ -458,7 +458,7 @@ def get_online_exhibitions_by_id(request, id):
                         "owner": 1,
                         "title": "My Offline Exhibition",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-1.png",
                         "created_at": "08-12-2022 23:31:44"
@@ -577,7 +577,7 @@ def get_offline_exhibitions_by_id(request, id):
                                 "owner": 1,
                                 "title": "My Offline Exhibition",
                                 "description": "Art exhibition at street 123.",
-                                "type": "poster",
+                                "category": "PT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-1.png",
                                 "created_at": "08-12-2022 23:31:44"
@@ -649,7 +649,7 @@ def get_offline_exhibitions_by_userid(request, userid):
                                 "owner": 1,
                                 "title": "My Offline Exhibition",
                                 "description": "Art exhibition at street 123.",
-                                "type": "poster",
+                                "category": "PT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-4.png",
                                 "created_at": "08-12-2022 23:32:34"
@@ -661,7 +661,7 @@ def get_offline_exhibitions_by_userid(request, userid):
                                     "owner": 1,
                                     "title": "Portrait of Joel Miller",
                                     "description": "Joel Miller from TLOU universe.",
-                                    "type": "sketch",
+                                    "category": "OT",
                                     "tags": [],
                                     "artitem_path": "artitem/artitem-3.png",
                                     "created_at": "08-12-2022 23:32:18"
@@ -743,7 +743,7 @@ def get_online_exhibitions_by_userid(request, userid):
                         "owner": 1,
                         "title": "My Offline Exhibition",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-2.png",
                         "created_at": "08-12-2022 19:42:06"
@@ -792,7 +792,7 @@ def create_offline_exhibition(request):
         artitemdata['title'] = request.data['title']
         artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['type'] = 'poster'
+        artitemdata['category'] = 'PT'
 
         #### Create a ContentFile using the poster provided by the user
         try:
@@ -845,7 +845,7 @@ def create_offline_exhibition(request):
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
             "artitems_gallery": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] IDs of art items from organizer's gallery", default=[2]),
-            "artitems_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"type": "sketch","artitem_image": "data:image/jpeg;base64,<base64string>"}])
+            "artitems_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"category": "OT","artitem_image": "data:image/jpeg;base64,<base64string>"}])
         }),
     responses={
         status.HTTP_201_CREATED: openapi.Response(
@@ -867,7 +867,7 @@ def create_offline_exhibition(request):
                         "owner": 1,
                         "title": "Joel Miller",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-61.png",
                         "created_at": "08-12-2022 23:18:13"
@@ -879,7 +879,7 @@ def create_offline_exhibition(request):
                             "owner": 1,
                             "title": "Portrait of Joel Miller",
                             "description": "Joel Miller from TLOU universe.",
-                            "type": "sketch",
+                            "category": "sketch",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
                             "created_at": "08-12-2022 23:15:21"
@@ -931,7 +931,7 @@ def create_online_exhibition(request):
         artitemdata['title'] = request.data['title']
         artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['type'] = 'poster'
+        artitemdata['category'] = 'poster'
 
         #### Create a ContentFile using the poster provided by the user
         try:
@@ -964,7 +964,7 @@ def create_online_exhibition(request):
                     data = fetch_image(artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                     data["title"] = artitem_data["title"]
                     if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
-                    data["type"] = artitem_data["type"]
+                    data["category"] = artitem_data["category"]
                     data["description"] = artitem_data["description"]
                     objects.append(data)
                 except:
