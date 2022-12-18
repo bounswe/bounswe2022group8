@@ -11,6 +11,9 @@ import "./styles/ArtItem.css";
 import { Annotorious } from "@recogito/annotorious";
 import "@recogito/annotorious/dist/annotorious.min.css";
 
+import { Recogito } from "@recogito/recogito-js";
+import "@recogito/recogito-js/dist/recogito.min.css";
+
 function ArtItem(props) {
   const { artitem_id } = useParams();
 
@@ -31,6 +34,13 @@ function ArtItem(props) {
   const [clickedAnnotationText, setClickedAnnotationText] = useState(null);
   const [clickedAnnotationOwner, setClickedAnnotationOwner] = useState(null);
   /*Image Annotation*/
+
+  /*Text Annotation*/
+  const textElement = useRef(null);
+
+  const[textAnno,setTextAnno]=useState();
+
+  /*Text Annotation*/
 
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
@@ -174,7 +184,7 @@ function ArtItem(props) {
 
   useEffect(() => {
     /*Image Annotation*/
-    if (token) {
+    if (token && userid) {
       let annotorious = null;
 
       if (imageElement.current) {
@@ -315,6 +325,92 @@ function ArtItem(props) {
     }
   }, [annotationhost, token, userid]);
 
+  useEffect(() => {
+    //Text Annotation
+    if (token && userid) {
+      if (textElement.current) {
+        const r = new Recogito({
+          content: textElement.current,
+          widgets: ["COMMENT"],
+        });
+
+        r.loadAnnotations(
+            `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
+          )
+          .catch((error) => console.error("Error:", error));
+
+        // Event handlers
+        r.on("createAnnotation", (annotation) =>{
+          annotation["creator"] = userid;
+          annotation["target"]["source"] =artitemSrc.split(/[?]/)[0];
+          console.log("created", annotation)
+          //fetch with method 'POST'
+          fetch(`${annotationhost}/api/v1/annotations/`, {
+            method: "POST",
+            body: JSON.stringify(annotation),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              annotation.id = response.id;
+              console.log(annotation.id);
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        /*r.on("updateAnnotation", function (annotation,previous) {
+          console.log("updated", annotation);
+          console.log("previous",previous);
+          //fetch with method 'PUT'
+          fetch(`${annotationhost}/api/v1/annotations/`, {
+            method: "PUT",
+            body: JSON.stringify(annotation),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            /*.then(setClickedAnnotationText(annotation.body[0].value))
+            .then(
+              fetch(`${host}/api/v1/users/profile/${annotation.creator}`, {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Token ${token}`,
+                },
+              })
+                .then((response) => response.json())
+                .then((response) => {
+                  //console.log(response);
+                  setClickedAnnotationOwner(response.username);
+                })
+                .catch((error) => console.error("Error:", error))
+            )*/
+            /*.catch((error) => console.error("Error:", error));
+        });*/
+
+        r.on("deleteAnnotation", function (annotation) {
+          console.log("deleted", annotation);
+          let annotId = annotation.id.split(/[@]/)[1];
+          //console.log("annot id", annotId);
+          //fetch with method 'DELETE'
+          fetch(`${annotationhost}/api/v1/annotations/${annotId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            /*.then(setClickedAnnotationText(null))
+            .then(setClickedAnnotationOwner(null))*/
+            .catch((error) => console.error("Error:", error));
+        });
+
+        setTextAnno(r);
+      }
+    }
+  }, [userid,annotationhost, token, artitemSrc]);
+
   function hideAnnotations() {
     anno.setVisible(false);
     setIsHideAnnoButtonClicked(true);
@@ -386,8 +482,20 @@ function ArtItem(props) {
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
             <div id="title-and-description">
-              <div id="title">{artitemTitle} </div>
-              <div id="description">{artitemDescription}</div>
+              {token ? (                            
+                <div ref={textElement} id="title">
+                  {artitemTitle}
+                </div>
+              ) : (
+                <div id="title">{artitemTitle} </div>
+              )}
+              {token ? (
+                <div ref={textElement} id="description">
+                  {artitemDescription}
+                </div>
+              ) : (
+                <div id="description">{artitemDescription}</div>
+              )}
             </div>
             <br></br>
             <div id="comments">
