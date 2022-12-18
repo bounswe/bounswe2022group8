@@ -429,8 +429,8 @@ def get_online_exhibitions_by_id(request, id):
 
             serializer = VirtualExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except VirtualExhibition.DoesNotExist:
-            return Response({"Not Found": "Either there is no virtual exhibitino with the given ID or current user is not a collaborator."}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            return Response({"Not Found": "There is no virtual exhibition with the given id such that the current user is a collaborator"}, status=status.HTTP_404_NOT_FOUND)
 
 
 @ swagger_auto_schema(
