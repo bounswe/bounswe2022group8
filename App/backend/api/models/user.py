@@ -7,7 +7,7 @@ import hashlib
 # from .artitem import ArtItem
 # from history.models import History
 
-#levelTreshold = 10
+#levelThreshold = 10
 
 class User(AbstractUser):
     is_level2 = models.BooleanField('Level2 user (active)', default=False)
@@ -60,13 +60,13 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
         return code_string
 
-# #level calculation is not dynamic, meaning even if levelTreshold is later raised, gained is_level2 status is not lost 
+# #level calculation is not dynamic, meaning even if levelThreshold is later raised, gained is_level2 status is not lost 
 #     def calculateLevel(self, *args, **kwargs):
 #         comments = Comment.objects._mptt_filter(commented_by=self).count()
 #         artitems = ArtItem.objects.filter(owner=self).count()
 #         visits = History.objects.filter(user=self).count()
 #         result = 0.8*artitems + 0.1*comments + 0.02*visits
-#         if(result>levelTreshold and not self.is_level2):
+#         if(result>levelThreshold and not self.is_level2):
 #             self.is_level2 = True
 #         return self.is_level2
 

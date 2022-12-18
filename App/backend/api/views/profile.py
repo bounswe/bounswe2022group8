@@ -20,7 +20,7 @@ from history.models import History
 
 from history.signals import object_viewed_signal
 
-levelTreshold = 3
+levelThreshold = 10
 
 @ swagger_auto_schema(
     method='get',
@@ -241,7 +241,7 @@ def LevelView(request):
                     'detail': 'User has already reached level 2.'}
                 return Response(message, status=status.HTTP_200_OK)
             else:
-                #level calculation is not dynamic, meaning even if levelTreshold is later raised, gained is_level2 status is not lost 
+                #level calculation is not dynamic, meaning even if levelThreshold is later raised, gained is_level2 status is not lost 
                 comments = Comment.objects._mptt_filter(commented_by=user).count()
                 print(comments)
                 artitems = ArtItem.objects.filter(owner=user).count()
@@ -250,7 +250,7 @@ def LevelView(request):
                 print(visits)
                 result = 0.8*artitems + 0.1*comments + 0.02*visits
                 print(result)
-                if(result>levelTreshold and not user.is_level2):
+                if(result>levelThreshold and not user.is_level2):
                     user.is_level2 = True
                     user.save()
                     #save
