@@ -85,7 +85,7 @@ def get_artitems(request):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the art item', default="Portrait of Joel Miller"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the art item', default="Joel Miller from TLOU universe."),
-            "category": openapi.Schema(type=openapi.TYPE_STRING, description='category of the art item', default="other"),
+            "category": openapi.Schema(type=openapi.TYPE_STRING, description='category of the art item', default="OT"),
             "tags": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='an array of tag IDs attached to the art item (can be empty)', default=[1]),
             "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string"),
         }),
