@@ -14,7 +14,13 @@ from django.core.files.base import ContentFile
 from ..utils import ProfileImageStorage
 from ..models.user import Follow
 
+from ..models.models import Comment
+from ..models.artitem import ArtItem
+from history.models import History
+
 from history.signals import object_viewed_signal
+
+levelTreshold = 3
 
 @ swagger_auto_schema(
     method='get',
@@ -199,3 +205,68 @@ def profile_me_api(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     else:
         return Response({"detail": "Method \"{}\" not allowed.".format(request.method)})
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="Calculates  (+updates) and returns user is_level2 status.",
+    operation_summary="Calculate user level.",
+    tags=['level'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully calculated user level.",
+            examples={
+                "application/json": {
+                    "detail": "Congratulations! You are now a level 2 user."
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description='Invalid token.',
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def LevelView(request):
+    data = request.data
+    if (request.method == "GET"):
+        if request.user.is_authenticated:
+            user = request.user
+            if(user.is_level2):
+                message = {
+                    'detail': 'User has already reached level 2.'}
+                return Response(message, status=status.HTTP_200_OK)
+            else:
+                #level calculation is not dynamic, meaning even if levelTreshold is later raised, gained is_level2 status is not lost 
+                comments = Comment.objects._mptt_filter(commented_by=user).count()
+                print(comments)
+                artitems = ArtItem.objects.filter(owner=user).count()
+                print(artitems)
+                visits = History.objects.filter(user=user).count()
+                print(visits)
+                result = 0.8*artitems + 0.1*comments + 0.02*visits
+                print(result)
+                if(result>levelTreshold and not user.is_level2):
+                    user.is_level2 = True
+                    user.save()
+                    #save
+                level = user.is_level2
+                if(level):
+                    message = {
+                        'detail': 'Congratulations! You are now a level 2 user.'}
+                    return Response(message, status=status.HTTP_200_OK)
+                else:
+                    message = {
+                        'detail': 'Sorry, you do not qualify for level 2 yet. Do not give up, sharing and discovering more amazing content will definitely help.'}
+                    return Response(message, status=status.HTTP_200_OK)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+    else:
+        message = {'detail': 'Method not alllowed.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
