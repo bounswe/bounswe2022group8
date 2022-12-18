@@ -3,6 +3,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import random
 import hashlib
+from .models import Comment
+from .artitem import ArtItem
+
+levelTreshold = 10
 
 class User(AbstractUser):
     is_level2 = models.BooleanField('Level2 user (active)', default=False)
@@ -54,6 +58,17 @@ class User(AbstractUser):
         self.otp = hashlib.sha256(code_string.encode('utf-8')).hexdigest()
         super().save(*args, **kwargs)
         return code_string
+
+#level calculation is not dynamic, meaning even if levelTreshold is later raised, gained is_level2 status is not lost 
+    def calculateLevel(self, *args, **kwargs):
+        comments = Comment.objects._mptt_filter(commented_by=self)
+        artitems = ArtItem.objects.filter(owner=self)
+        result = 0.8*artitems + 0.1*comments
+        if(result>levelTreshold and not self.is_level2):
+            self.is_level2 = True
+        return self.is_level2
+
+
 
     def __str__(self):
         return self.name + " " + self.surname 
