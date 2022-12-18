@@ -71,7 +71,7 @@ from drf_yasg import openapi
                         "address": "Beyoglu",
                         "latitude": 41.40338,
                         "longitude": 28.97835,
-                        "status": "On Going"
+                        "status": "Ongoing"
                     }
                 ],
                 "Virtual Exhibitions": [
@@ -113,7 +113,7 @@ from drf_yasg import openapi
                         "end_date": "10-12-2020 16:00:00",
                         "created_at": "08-12-2022 23:32:34",
                         "updated_at": "08-12-2022 23:32:34",
-                        "status": "On Going"
+                        "status": "Ongoing"
                     }
                 ]
             }
@@ -182,7 +182,7 @@ def get_exhibitions(request):
                 "end_date": "10-12-2020 16:00:00",
                 "created_at": "08-12-2022 23:32:34",
                 "updated_at": "08-12-2022 23:32:34",
-                "status": "On Going"
+                "status": "Ongoing"
                 }
             }
         ),
@@ -283,7 +283,7 @@ def get_exhibitions(request):
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
-                    "status": "On Going",
+                    "status": "Ongoing",
                     "uploaded_images": [
                         {
                             "id": 62,
@@ -473,7 +473,7 @@ def get_online_exhibitions_by_id(request, id):
                     "address": "Beyoglu",
                     "latitude": 41.40338,
                     "longitude": 28.97835,
-                    "status": "On Going"
+                    "status": "Ongoing"
                 }
             }
         ),
@@ -592,7 +592,7 @@ def get_offline_exhibitions_by_id(request, id):
                             "address": "Beyoglu",
                             "latitude": 41.40338,
                             "longitude": 28.97835,
-                            "status": "On Going"
+                            "status": "Ongoing"
                         }
                     ]
             }
@@ -671,7 +671,7 @@ def get_offline_exhibitions_by_userid(request, userid):
                             "end_date": "10-12-2020 16:00:00",
                             "created_at": "08-12-2022 23:32:34",
                             "updated_at": "08-12-2022 23:32:34",
-                            "status": "On Going"
+                            "status": "Ongoing"
                         }
                     ]
             }
@@ -758,7 +758,7 @@ def get_online_exhibitions_by_userid(request, userid):
                     "address": "Beyoglu",
                     "latitude": 41.40338,
                     "longitude": 28.97835,
-                    "status": "On Going"
+                    "status": "Ongoing"
                 }
             }
         ),
@@ -889,7 +889,7 @@ def create_offline_exhibition(request):
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
-                    "status": "On Going",
+                    "status": "Ongoing",
                     "uploaded_images": [
                         {
                             "id": 62,
