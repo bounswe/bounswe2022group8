@@ -71,7 +71,8 @@ class User(AbstractUser):
 
 
     def __str__(self):
-        return self.name + " " + self.surname 
+        return "User: " + self.name + " " + self.surname 
+        
 
     @property
     def get_followers(self):

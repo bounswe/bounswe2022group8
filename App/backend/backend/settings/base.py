@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'mptt',
     'django_extensions',
+    'history',
 ]
 
 MIDDLEWARE = [
