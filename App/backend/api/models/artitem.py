@@ -19,7 +19,9 @@ class ArtItem(models.Model):
     class Category(models.TextChoices):
         ARCHITECTURE = 'AR', _('Architecture')
         SCULPTURE = 'SC', _('Sculpture')
+        SKETCH = 'SK', _('Sketch')
         DRAWING = 'DR', _('Drawing')
+        POSTER = 'PT', _('Poster')
         PHOTOGRAPHY = 'PH', _('Photography')
         PRINTS = 'PR', _('Prints')
         PAINTING_ACRYLIC = 'PA', _('Painting/Acrylic')
