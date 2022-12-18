@@ -61,7 +61,8 @@ from django.core.files.base import ContentFile
                         "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5
                     }
                 ]
             }
@@ -118,7 +119,8 @@ def get_artitems(request):
                         "category": "DR",
                         "tags": [1],
                         "likes": 0,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5
                     }
                 ]
             }
@@ -254,6 +256,7 @@ def delete_artitem(request, id):
                         "category": "DR",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5,
                         "isLiked": False
 
                     }
@@ -317,7 +320,8 @@ def artitems_by_id(request, id):
                         "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5
                     }
                 ]
             }
@@ -369,7 +373,8 @@ def artitems_by_userid(request, id):
                         "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5
                     }
                 ]
             }
@@ -423,7 +428,8 @@ def artitems_by_username(request, username):
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
-                        "created_at": "08-12-2022 00:38:25"
+                        "created_at": "08-12-2022 00:38:25",
+                        "number_of_views": 5
                     }
                 ]
             }
