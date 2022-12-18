@@ -5,6 +5,8 @@ from django.conf import settings
 
 from .signals import object_viewed_signal
 
+from api.models.artitem import ArtItem
+
 User = settings.AUTH_USER_MODEL
 
 class History(models.Model):
@@ -27,5 +29,8 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
         content_type    = ContentType.objects.get_for_model(sender),
         object_id       = instance.id,
     )
+    print("here")
+    if(isinstance(instance, ArtItem)):
+        instance.increaseViews()
 
 object_viewed_signal.connect(object_viewed_receiver)
