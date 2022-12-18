@@ -56,7 +56,7 @@ from django.core.files.base import ContentFile
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -85,7 +85,7 @@ def get_artitems(request):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the art item', default="Portrait of Joel Miller"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the art item', default="Joel Miller from TLOU universe."),
-            "type": openapi.Schema(type=openapi.TYPE_STRING, description='type of the art item', default="Sketch"),
+            "category": openapi.Schema(type=openapi.TYPE_STRING, description='category of the art item', default="OT"),
             "tags": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='an array of tag IDs attached to the art item (can be empty)', default=[1]),
             "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string"),
         }),
@@ -105,7 +105,7 @@ def get_artitems(request):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [1],
                         "likes": 0,
                         "artitem_path": "artitem/docker.jpg"
@@ -229,7 +229,7 @@ def delete_artitem(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
                         "isLiked": False
@@ -288,7 +288,7 @@ def artitems_by_id(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -340,7 +340,7 @@ def artitems_by_userid(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg"
@@ -393,7 +393,7 @@ def artitems_by_username(request, username):
                         },
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
