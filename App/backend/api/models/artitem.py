@@ -49,7 +49,12 @@ class ArtItem(models.Model):
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
-    
+    number_of_views = models.IntegerField(default=0)
+
+    def increaseViews(self, *args, **kwargs):
+        self.number_of_views += 1
+        super().save(*args, **kwargs)
+
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps
     

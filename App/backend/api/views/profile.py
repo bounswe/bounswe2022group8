@@ -15,6 +15,7 @@ from ..utils import ProfileImageStorage
 from ..models.user import Follow
 import datetime
 
+from history.signals import object_viewed_signal
 
 @ swagger_auto_schema(
     method='get',
@@ -67,6 +68,9 @@ def profile_api(request, id):
                     data["isFollowed"] = True
                 except:
                     data["isFollowed"] = False
+
+                instance = user
+                object_viewed_signal.send(User, instance=instance, request=request)
             
             return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
