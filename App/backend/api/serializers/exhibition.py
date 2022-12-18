@@ -26,7 +26,7 @@ class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
     class Meta:
         model = ArtItem
-        fields = ['id', 'title', 'tags', 'description', 'type', 'artitem_path',  'likes', 'created_at']
+        fields = ['id', 'title', 'tags', 'description', 'category', 'artitem_path',  'likes', 'created_at']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -37,7 +37,7 @@ class ExhibitionArtItemSerializer(serializers.ModelSerializer):
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
     class Meta:
         model = ArtItem
-        fields = ['id',  'owner', 'title', 'tags', 'description', 'type', 'virtualExhibition', 'artitem_path', 'artitem_image', 'likes', 'created_at']
+        fields = ['id',  'owner', 'title', 'tags', 'description', 'category', 'virtualExhibition', 'artitem_path', 'artitem_image', 'likes', 'created_at']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)

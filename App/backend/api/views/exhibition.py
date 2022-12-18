@@ -56,7 +56,7 @@ from drf_yasg import openapi
                             "owner": 1,
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
-                            "category": "poster",
+                            "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-1.png",
                             "created_at": "08-12-2022 23:31:44"
@@ -931,7 +931,7 @@ def create_online_exhibition(request):
         artitemdata['title'] = request.data['title']
         artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['category'] = 'poster'
+        artitemdata['category'] = 'PT'
 
         #### Create a ContentFile using the poster provided by the user
         try:
