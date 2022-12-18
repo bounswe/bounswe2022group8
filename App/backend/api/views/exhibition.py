@@ -4,10 +4,9 @@ from knox.models import AuthToken
 
 from ..models.user import User
 from ..models.artitem import ArtItem
-from ..models.exhibition import AbstractExhibition, OfflineExhibition, VirtualExhibition, ExhibitionArtItem
+from ..models.exhibition import OfflineExhibition, VirtualExhibition
 from ..serializers.serializers import ArtItemSerializer
-from ..serializers.auth import RegisterSerializer, LoginSerializer
-from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibitionSerializer, ExhibitionArtItemSerializer, SimpleExhibitionArtItemSerializer
+from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibitionSerializer, SimpleExhibitionArtItemSerializer, ExhibitionArtItemSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from knox.auth import TokenAuthentication
@@ -18,7 +17,7 @@ import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
 from django.db import IntegrityError
-
+from django.db.models import Q
 from drf_yasg import openapi
 
 #  http://${host}:8000/api/v1/exhibitions/                        / GET    / Return all of the exhibitions in the system
@@ -57,7 +56,7 @@ from drf_yasg import openapi
                             "owner": 1,
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
-                            "type": "poster",
+                            "category": "poster",
                             "tags": [],
                             "artitem_path": "artitem/artitem-1.png",
                             "created_at": "08-12-2022 23:31:44"
@@ -92,7 +91,7 @@ from drf_yasg import openapi
                             "owner": 1,
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
-                            "type": "poster",
+                            "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-4.png",
                             "created_at": "08-12-2022 23:32:34"
@@ -104,7 +103,7 @@ from drf_yasg import openapi
                                 "owner": 1,
                                 "title": "Portrait of Joel Miller",
                                 "description": "Joel Miller from TLOU universe.",
-                                "type": "sketch",
+                                "category": "OT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-3.png",
                                 "created_at": "08-12-2022 23:32:18"
@@ -161,7 +160,7 @@ def get_exhibitions(request):
                     "owner": 1,
                     "title": "My Offline Exhibition",
                     "description": "Art exhibition at street 123.",
-                    "type": "poster",
+                    "category": "OT",
                     "tags": [],
                     "artitem_path": "artitem/artitem-4.png",
                     "created_at": "08-12-2022 23:32:34"
@@ -173,7 +172,7 @@ def get_exhibitions(request):
                         "owner": 1,
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",
-                        "type": "sketch",
+                        "category": "OT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-3.png",
                         "created_at": "08-12-2022 23:32:18"
@@ -197,7 +196,128 @@ def get_exhibitions(request):
         ),
     }
 )
-@api_view(["GET"])
+@ swagger_auto_schema(
+    method='delete',
+    operation_description="Deletes a virtual exhibition by its ID. This endpoint requires authentication.",
+    operation_summary="Deletes a virtual exhibition by its ID.",
+    tags=['exhibitions'],
+    responses={
+        status.HTTP_204_NO_CONTENT: openapi.Response(
+            description="Successfully deleted the exhibition.",
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Exhibition cannot be found.",
+            examples={
+                "application/json": {"Not Found": "Any exhibition with the given ID doesn't exist."}
+            }
+        ),
+        status.HTTP_403_FORBIDDEN: openapi.Response(
+            description="User attempts to delete another user's exhibition.",
+            examples={
+                "application/json": {"Invalid Attempt": "Cannot delete exhibition of another user."}
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
+    }
+)
+@swagger_auto_schema(
+    method='put',
+    operation_description="Exhibitions API. Edits an online exhibition. You can add new images to the exhibition using this API.",
+    operation_summary="Updates an already existing online exhibition.",
+    tags=['exhibitions'],
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
+            "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
+            "add_via_gallery": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] IDs of art items from organizer's gallery", default=[2]),
+            "add_via_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"category": "OT","artitem_image": "data:image/jpeg;base64,<base64string>"}]),
+            "remove": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] List of IDs of art items to be removed", default=[3]),
+        }),
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully updated the virtual exhibition.",
+            examples={
+                "application/json": {
+                    "id": 27,
+                    "owner": {
+                        "id": 1,
+                        "username": "deneme",
+                        "name": "",
+                        "surname": "",
+                        "profile_path": "avatar/default.png"
+                    },
+                    "title": "My Offline Exhibition",
+                    "description": "Art exhibition at street 123.",
+                    "poster": {
+                        "id": 61,
+                        "owner": 1,
+                        "title": "Joel Miller",
+                        "description": "Art exhibition at street 123.",
+                        "category": "PT",
+                        "tags": [],
+                        "artitem_path": "artitem/artitem-61.png",
+                        "created_at": "08-12-2022 23:18:13"
+                    },
+                    "collaborators": [],
+                    "artitems_gallery": [
+                        {
+                            "id": 57,
+                            "owner": 1,
+                            "title": "Portrait of Joel Miller",
+                            "description": "Joel Miller from TLOU universe.",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/artitem-57.png",
+                            "created_at": "08-12-2022 23:15:21"
+                        }
+                    ],
+                    "start_date": "08-12-2022 16:00:00",
+                    "end_date": "10-12-2020 16:00:00",
+                    "created_at": "08-12-2022 23:18:13",
+                    "updated_at": "08-12-2022 23:18:13",
+                    "status": "On Going",
+                    "uploaded_images": [
+                        {
+                            "id": 62,
+                            "virtualExhibition": 27,
+                            "artitem_path": "artitem/artitem-62.png",
+                            "created_at": "08-12-2022 23:18:16"
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad Request is raised when the given data is not compatible with the requirements.",
+            examples={
+                "application/json": {"Bad Request": "You can't update an already finished exhibition."},
+            }
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Requested virtual exhibition cannot be found",
+            examples={
+                "application/json": {"Not Found": "Any virtual exhibition with the given ID doesn't exist."}
+            }
+        ),
+    }
+)
+@api_view(["GET", "DELETE", "PUT"])
 @permission_classes([permissions.AllowAny])
 def get_online_exhibitions_by_id(request, id):
     if request.method == "GET":
@@ -207,8 +327,110 @@ def get_online_exhibitions_by_id(request, id):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except VirtualExhibition.DoesNotExist:
             return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+    elif (request.method == "DELETE"):
+        if(request.user.is_authenticated):
+            try:
+                virtualexhibition = VirtualExhibition.objects.get(pk=id)
+                u = request.user
+                if (virtualexhibition.owner == u):
+                    client = boto3.client('s3') 
+                    client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=virtualexhibition.poster.artitem_path)
 
+                    images = ArtItem.objects.filter(virtualExhibition=virtualexhibition.id)  # uploaded images only for the exhibition
+                    for image in images:
+                        client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=image.artitem_path)
+                    virtualexhibition.poster.delete()
+                    virtualexhibition.delete()
+                                
+                else:
+                    return Response({"Invalid Attempt": "Cannot delete virtual exhibition of another user."}, status=status.HTTP_403_FORBIDDEN)
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            except VirtualExhibition.DoesNotExist:
+                return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    elif (request.method == "PUT"):
+        userid = request.user.id
+        try:
+            query = (Q(collaborators=userid))            # user is a collaborator 
+            query.add(Q(owner=userid), Q.OR)             # user is the owner
+            query.add(Q(pk=id), Q.AND)                   # a virtual exhibition with the given id exists
 
+            virtualExhibition = VirtualExhibition.objects.filter(query)[0]
+            
+            if(virtualExhibition.get_status == "Finished"):
+                return Response({"Bad Request": "You can't update an already finished exhibition."}, status=status.HTTP_400_BAD_REQUEST)
+            data = request.data
+            if("title" in data):
+                virtualExhibition.title = data["title"]
+            if("description" in data):
+                virtualExhibition.description = data["description"]
+            if("add_via_gallery" in data and data["add_via_upload"]):
+                try:
+                    for img in data["add_via_gallery"]:
+                        virtualExhibition.artitems_gallery.add(img)
+                except:
+                    return Response({"Not Found": "Given art item images are not found."}, status=status.HTTP_404_NOT_FOUND)
+            if("add_via_upload" in data and data["add_via_upload"]):
+                artitem_image_storage = ArtItemStorage()
+                try:
+                    objects = []
+                    for artitem_data in data["add_via_upload"]:
+                        try:
+                            inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                            inddata["title"] = artitem_data["title"]
+                            if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
+                            inddata["category"] = artitem_data["category"]
+                            inddata["description"] = artitem_data["description"]
+                            objects.append(inddata)
+                        except:
+                            return Response({"Invalid Input": "Please check the required field for uploaded art item images."}, status=status.HTTP_400_BAD_REQUEST)
+                    savedimgs = []
+                    images = []
+                    for obj in objects:
+                        obj["virtualExhibition"] = virtualExhibition.id
+                        imgserializer = ExhibitionArtItemSerializer(data=obj)
+                        if imgserializer.is_valid():
+                            filename = imgserializer.validated_data.get('artitem_image').name
+                            images.append((filename, imgserializer.validated_data.get('artitem_image')))
+                            img = imgserializer.save()
+                            savedimgs.append(img)
+                        else:
+                            for savedimg in savedimgs:
+                                uas =  ArtItem.objects.get(pk=savedimg.id)
+                                uas.delete()            # delete the images
+                            return Response(imgserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                        
+                        for i in images:
+                            artitem_image_storage.save(i[0],  i[1])
+                except:
+                    return Response({"Not Found": "Uploaded images do not comply with the expected input format."}, status=status.HTTP_404_NOT_FOUND)
+            
+
+            if("remove" in data):
+                ids_to_remove = data["remove"]
+                try:
+                    
+                    client = boto3.client('s3') 
+                    for idRemove in ids_to_remove:
+                        objRemove = ArtItem.objects.get(pk=idRemove)
+                        if objRemove in virtualExhibition.artitems_gallery.all():
+                            virtualExhibition.artitems_gallery.remove(idRemove)
+                        else:
+                            artitem = ArtItem.objects.get(pk=idRemove, virtualExhibition=virtualExhibition.id)
+                            client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=artitem.artitem_path)
+                            artitem.delete()
+                except:
+                    for savedimg in savedimgs:
+                        uas =  ArtItem.objects.get(pk=savedimg.id)
+                        uas.delete()            # delete the images
+                    return Response({"Invalid Input": "Please check the format for removing art items."}, status=status.HTTP_400_BAD_REQUEST)
+
+            serializer = VirtualExhibitionSerializer(virtualExhibition)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except VirtualExhibition.DoesNotExist:
+            return Response({"Not Found": "Either there is no virtual exhibitino with the given ID or current user is not a collaborator."}, status=status.HTTP_404_NOT_FOUND)
 
 
 @ swagger_auto_schema(
@@ -236,7 +458,7 @@ def get_online_exhibitions_by_id(request, id):
                         "owner": 1,
                         "title": "My Offline Exhibition",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-1.png",
                         "created_at": "08-12-2022 23:31:44"
@@ -265,7 +487,38 @@ def get_online_exhibitions_by_id(request, id):
         ),
     }
 )
-@api_view(["GET"])
+@ swagger_auto_schema(
+    method='delete',
+    operation_description="Deletes an offline exhibition by its ID. This endpoint requires authentication.",
+    operation_summary="Deletes an offline exhibition by its ID.",
+    tags=['exhibitions'],
+    responses={
+        status.HTTP_204_NO_CONTENT: openapi.Response(
+            description="Successfully deleted the exhibition.",
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Exhibition cannot be found.",
+            examples={
+                "application/json": {"Not Found": "Any exhibition with the given ID doesn't exist."}
+            }
+        ),
+        status.HTTP_403_FORBIDDEN: openapi.Response(
+            description="User attempts to delete another user's exhibition.",
+            examples={
+                "application/json": {"Invalid Attempt": "Cannot delete exhibition of another user."}
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
+    }
+)
+@api_view(["GET", "DELETE"])
 @permission_classes([permissions.AllowAny])
 def get_offline_exhibitions_by_id(request, id):
     if request.method == "GET":
@@ -275,13 +528,32 @@ def get_offline_exhibitions_by_id(request, id):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except OfflineExhibition.DoesNotExist:
             return Response({"Not Found": "Any offline exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+    elif request.method == "DELETE":
+        if(request.user.is_authenticated):
+            try:
+                offlineExhibitions = OfflineExhibition.objects.get(pk=id)
+                u = request.user
+                if (offlineExhibitions.owner == u):
+                    client = boto3.client('s3') 
+                    client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=offlineExhibitions.poster.artitem_path)
+                    offlineExhibitions.poster.delete()
+                    offlineExhibitions.delete()
+                                
+                else:
+                    return Response({"Invalid Attempt": "Cannot delete art item of another user."}, status=status.HTTP_403_FORBIDDEN)
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            except OfflineExhibition.DoesNotExist:
+                return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            message = {'detail': 'Invalid token.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 
 
 @ swagger_auto_schema(
     method='get',
-    operation_description="Exhibitions API. Returns the offline exhibitions of a user with the given id.",
+    operation_description="Exhibitions API. Returns the offline exhibitions of a user with the given id (User can be either the organizer or the collaborator).",
     operation_summary="Get offline exhibitions of a specific user.",
     tags=['exhibitions'],
     responses={
@@ -305,7 +577,7 @@ def get_offline_exhibitions_by_id(request, id):
                                 "owner": 1,
                                 "title": "My Offline Exhibition",
                                 "description": "Art exhibition at street 123.",
-                                "type": "poster",
+                                "category": "PT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-1.png",
                                 "created_at": "08-12-2022 23:31:44"
@@ -337,11 +609,14 @@ def get_offline_exhibitions_by_id(request, id):
 )
 @api_view(["GET"])
 @permission_classes([permissions.AllowAny])
-def get_offline_exhibitions_by_userid(request, id):
+def get_offline_exhibitions_by_userid(request, userid):
     if request.method == "GET":
         try:
-            User.objects.get(pk=id)
-            offlineExhibitions = OfflineExhibition.objects.filter(owner=id)
+            User.objects.get(pk=userid)
+            query = (Q(collaborators=userid))            # user is a collaborator 
+            query.add(Q(owner=userid), Q.OR)             # user is the owner
+
+            offlineExhibitions = OfflineExhibition.objects.filter(query)
             serializer = OfflineExhibitionSerializer(offlineExhibitions, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
@@ -350,7 +625,7 @@ def get_offline_exhibitions_by_userid(request, id):
 
 @ swagger_auto_schema(
     method='get',
-    operation_description="Exhibitions API. Returns the offline exhibitions of a user with the given id.",
+    operation_description="Exhibitions API. Returns the offline exhibitions of a user with the given id (User can be either the organizer or the collaborator).",
     operation_summary="Get offline exhibitions of a specific user.",
     tags=['exhibitions'],
     responses={
@@ -374,7 +649,7 @@ def get_offline_exhibitions_by_userid(request, id):
                                 "owner": 1,
                                 "title": "My Offline Exhibition",
                                 "description": "Art exhibition at street 123.",
-                                "type": "poster",
+                                "category": "PT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-4.png",
                                 "created_at": "08-12-2022 23:32:34"
@@ -386,7 +661,7 @@ def get_offline_exhibitions_by_userid(request, id):
                                     "owner": 1,
                                     "title": "Portrait of Joel Miller",
                                     "description": "Joel Miller from TLOU universe.",
-                                    "type": "sketch",
+                                    "category": "OT",
                                     "tags": [],
                                     "artitem_path": "artitem/artitem-3.png",
                                     "created_at": "08-12-2022 23:32:18"
@@ -413,16 +688,18 @@ def get_offline_exhibitions_by_userid(request, id):
 )
 @api_view(["GET"])
 @permission_classes([permissions.AllowAny])
-def get_online_exhibitions_by_userid(request, id):
+def get_online_exhibitions_by_userid(request, userid):
     if request.method == "GET":
         try:
-            User.objects.get(pk=id)
-            virtualExhibitions = VirtualExhibition.objects.filter(owner=id)
+            User.objects.get(pk=userid)
+
+            query = (Q(collaborators=userid))            # user is a collaborator 
+            query.add(Q(owner=userid), Q.OR)             # user is the owner
+            virtualExhibitions = VirtualExhibition.objects.filter(query)
             serializer = VirtualExhibitionSerializer(virtualExhibitions, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-
 
 
 
@@ -466,7 +743,7 @@ def get_online_exhibitions_by_userid(request, id):
                         "owner": 1,
                         "title": "My Offline Exhibition",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-2.png",
                         "created_at": "08-12-2022 19:42:06"
@@ -515,11 +792,11 @@ def create_offline_exhibition(request):
         artitemdata['title'] = request.data['title']
         artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['type'] = 'poster'
+        artitemdata['category'] = 'PT'
 
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"])
+            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -542,14 +819,15 @@ def create_offline_exhibition(request):
         if serializer.is_valid():
             try:
                 serializer.save()
-
                 artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
+                poster.delete()
                 return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
         else:
+            poster.delete()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 
 
 @ swagger_auto_schema(
@@ -567,7 +845,7 @@ def create_offline_exhibition(request):
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
             "artitems_gallery": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description="[ONLY FOR ONLINE EXHIBITIONS] IDs of art items from organizer's gallery", default=[2]),
-            "artitems_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_STRING), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=["img1-base64", "img2-base64"])
+            "artitems_upload": openapi.Schema(type=openapi.TYPE_ARRAY,  items=openapi.Items(type=openapi.TYPE_OBJECT), description='[ONLY FOR ONLINE EXHIBITIONS] List of base64 encodings for uploaded images', default=[{"title" : "Portrait of Joel Miller","description" :"Joel Miller from TLOU universe.","tags": [],"category": "OT","artitem_image": "data:image/jpeg;base64,<base64string>"}])
         }),
     responses={
         status.HTTP_201_CREATED: openapi.Response(
@@ -587,9 +865,9 @@ def create_offline_exhibition(request):
                     "poster": {
                         "id": 61,
                         "owner": 1,
-                        "title": "My Offline Exhibition",
+                        "title": "Joel Miller",
                         "description": "Art exhibition at street 123.",
-                        "type": "poster",
+                        "category": "PT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-61.png",
                         "created_at": "08-12-2022 23:18:13"
@@ -601,7 +879,7 @@ def create_offline_exhibition(request):
                             "owner": 1,
                             "title": "Portrait of Joel Miller",
                             "description": "Joel Miller from TLOU universe.",
-                            "type": "sketch",
+                            "category": "sketch",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
                             "created_at": "08-12-2022 23:15:21"
@@ -653,11 +931,11 @@ def create_online_exhibition(request):
         artitemdata['title'] = request.data['title']
         artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['type'] = 'poster'
+        artitemdata['category'] = 'poster'
 
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"])
+            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -681,11 +959,17 @@ def create_online_exhibition(request):
         artitemdata['owner'] = request.user.id
         objects = []
         if("artitems_upload" in request.data):
-            for base64 in request.data["artitems_upload"]:
+            for artitem_data in request.data["artitems_upload"]:
                 try:
-                    objects.append(fetch_image(artitemdata.copy(), artitem_image_storage, base64))
+                    data = fetch_image(artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                    data["title"] = artitem_data["title"]
+                    if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
+                    data["category"] = artitem_data["category"]
+                    data["description"] = artitem_data["description"]
+                    objects.append(data)
                 except:
-                    return Response({"Invalid Input": "Uploaded image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
+                    poster.delete()
+                    return Response({"Invalid Input": "Please check the required field for uploaded art item images."}, status=status.HTTP_400_BAD_REQUEST)
             
         if('artitems_gallery' in request.data and not validate_ids(request.data['artitems_gallery'], request.data["owner"])):
             return Response({"Invalid Input": "Given art items either do not exist or belong to someone else. A user cannot add an art item belonging to someone else to his exhibition."}, status=status.HTTP_400_BAD_REQUEST)
@@ -694,7 +978,7 @@ def create_online_exhibition(request):
 
         # So, the main logic in the following code is this:
         # For all uploaded art items, first we have to decode them.
-        # ExhibitionArtItem object has a foreign key to Exhibition.
+        # ArtItem object has a foreign key to Exhibition.
         # First, I decode each base64 string to an object above. objects is an array of objects corresponding to images.
         # Then, I create the exhibition object. 
         # After creating the exhibition object, we have to create ExhibitionArtItem objects.
@@ -707,6 +991,7 @@ def create_online_exhibition(request):
             try:
                 virtualexhibition = serializer.save()
             except IntegrityError:
+                poster.delete()
                 return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
             returndata = serializer.data
             images = []
@@ -721,7 +1006,7 @@ def create_online_exhibition(request):
                     savedimgs.append(img)
                 else:
                     for savedimg in savedimgs:
-                        uas =  ExhibitionArtItem.objects.get(pk=savedimg.id)
+                        uas =  ArtItem.objects.get(pk=savedimg.id)
                         uas.delete()            # delete the images
                     virtualexhibition.delete()  # delete the exhibition
                     return Response(imgserializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -729,132 +1014,26 @@ def create_online_exhibition(request):
             for i in images:
                 artitem_image_storage.save(i[0],  i[1])
             artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
-            
-            returndata["uploaded_images"] = SimpleExhibitionArtItemSerializer(savedimgs, many=True).data
-            return Response(returndata, status=status.HTTP_201_CREATED)
+    
+            returndata = VirtualExhibitionSerializer(virtualexhibition)
+            return Response(returndata.data, status=status.HTTP_201_CREATED)
         else:
+            poster.delete()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
 
-@ swagger_auto_schema(
-    method='delete',
-    operation_description="Deletes an offline exhibition by its ID. This endpoint requires authentication.",
-    operation_summary="Deletes an offline exhibition by its ID.",
-    tags=['exhibitions'],
-    responses={
-        status.HTTP_204_NO_CONTENT: openapi.Response(
-            description="Successfully deleted the exhibition.",
-        ),
-        status.HTTP_404_NOT_FOUND: openapi.Response(
-            description="Exhibition cannot be found.",
-            examples={
-                "application/json": {"Not Found": "Any exhibition with the given ID doesn't exist."}
-            }
-        ),
-        status.HTTP_403_FORBIDDEN: openapi.Response(
-            description="User attempts to delete another user's exhibition.",
-            examples={
-                "application/json": {"Invalid Attempt": "Cannot delete exhibition of another user."}
-            }
-        ),
-        status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="Invalid token.",
-            examples={
-                "application/json": {
-                    "detail": "Invalid token."
-                }
-            }
-        ),
-    }
-)
-@api_view(['DELETE'])
-@permission_classes([permissions.IsAuthenticated])
-@authentication_classes([TokenAuthentication])
-def delete_offline_exhibition(request, id):
-    if request.method == "DELETE":
-        try:
-            offlineExhibitions = OfflineExhibition.objects.get(owner=id)
-            u = request.user
-            if (offlineExhibitions.owner == u):
-                client = boto3.client('s3') 
-                client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=offlineExhibitions.poster.artitem_path)
-                offlineExhibitions.delete()
-                            
-            else:
-                return Response({"Invalid Attempt": "Cannot delete art item of another user."}, status=status.HTTP_403_FORBIDDEN)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except OfflineExhibition.DoesNotExist:
-            return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-
-
-
-
-@ swagger_auto_schema(
-    method='delete',
-    operation_description="Deletes a virtual exhibition by its ID. This endpoint requires authentication.",
-    operation_summary="Deletes a virtual exhibition by its ID.",
-    tags=['exhibitions'],
-    responses={
-        status.HTTP_204_NO_CONTENT: openapi.Response(
-            description="Successfully deleted the exhibition.",
-        ),
-        status.HTTP_404_NOT_FOUND: openapi.Response(
-            description="Exhibition cannot be found.",
-            examples={
-                "application/json": {"Not Found": "Any exhibition with the given ID doesn't exist."}
-            }
-        ),
-        status.HTTP_403_FORBIDDEN: openapi.Response(
-            description="User attempts to delete another user's exhibition.",
-            examples={
-                "application/json": {"Invalid Attempt": "Cannot delete exhibition of another user."}
-            }
-        ),
-        status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="Invalid token.",
-            examples={
-                "application/json": {
-                    "detail": "Invalid token."
-                }
-            }
-        ),
-    }
-)
-@api_view(['DELETE'])
-@permission_classes([permissions.IsAuthenticated])
-@authentication_classes([TokenAuthentication])
-def delete_online_exhibition(request, id):
-    if request.method == "DELETE":
-        try:
-            virtualexhibition = VirtualExhibition.objects.get(owner=id)
-            u = request.user
-            if (virtualexhibition.owner == u):
-                client = boto3.client('s3') 
-                client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=virtualexhibition.poster.artitem_path)
-
-                images = ExhibitionArtItem.objects.filter(virtualExhibition=virtualexhibition.id)
-                for image in images:
-                    client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=image.artitem_path)
-                virtualexhibition.delete()
-                            
-            else:
-                return Response({"Invalid Attempt": "Cannot delete virtual exhibition of another user."}, status=status.HTTP_403_FORBIDDEN)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except VirtualExhibition.DoesNotExist:
-            return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-
-
 
 ### HELPER FUNCTIONS ####
-def fetch_image(artitemdata, artitem_image_storage, base64s):
+def fetch_image(artitemdata, artitem_image_storage, base64s, user):
     image_data = base64s.split("base64,")[1]
     decoded = base64.b64decode(image_data)
+
     id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
     filename = 'artitem-{pk}.png'.format(pk=id_)
-
     artitemdata['artitem_image'] = ContentFile(decoded, filename)
     artitemdata['artitem_path'] = artitem_image_storage.location + \
         "/" + filename
+    artitemdata["owner"] = user.id
     return artitemdata
 
 def validate_ids(artitems, userid):

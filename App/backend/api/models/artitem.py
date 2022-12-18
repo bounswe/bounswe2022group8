@@ -5,6 +5,7 @@ from django.conf import settings
 from .user import User
 from django.template.defaultfilters import date
 
+
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
     description = models.CharField(max_length=500)  # description about the tag
@@ -23,6 +24,7 @@ class ArtItem(models.Model):
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
+    virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
     
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps

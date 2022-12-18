@@ -47,10 +47,7 @@ class VirtualExhibition(AbstractExhibition):
 
     @property
     def get_uploaded_artitems(self):
-        return ExhibitionArtItem.objects.filter(virtualExhibition=self)
-
-class ExhibitionArtItem(ArtItem):
-    virtualExhibition =  models.ForeignKey(VirtualExhibition, on_delete=models.CASCADE)  # upladed for the exhibition and will be gone if the exhibition is deleted
+        return ArtItem.objects.filter(virtualExhibition=self)
 
 class OfflineExhibition(AbstractExhibition):
     city = models.CharField(max_length=200,blank=True, null=True)
