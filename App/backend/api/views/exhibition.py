@@ -368,7 +368,7 @@ def get_online_exhibitions_by_id(request, id):
             virtualExhibition.title = data["title"]
         if("description" in data):
             virtualExhibition.description = data["description"]
-        if("add_via_gallery" in data and data["add_via_upload"]):
+        if("add_via_gallery" in data and data["add_via_gallery"]):
             try:
                 for img in data["add_via_gallery"]:
                     virtualExhibition.artitems_gallery.add(img)
