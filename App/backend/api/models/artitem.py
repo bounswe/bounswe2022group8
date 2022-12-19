@@ -3,7 +3,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from .user import User
+
+from django.template.defaultfilters import date
 from django.utils.translation import gettext_lazy as _
+
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -45,6 +48,7 @@ class ArtItem(models.Model):
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
+    virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
     number_of_views = models.IntegerField(default=0)
 
     def increaseViews(self, *args, **kwargs):
@@ -53,7 +57,7 @@ class ArtItem(models.Model):
 
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps
-
+    
     def __str__(self):
         return "Art item: " + self.title
 

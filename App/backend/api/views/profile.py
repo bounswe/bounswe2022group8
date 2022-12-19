@@ -13,6 +13,7 @@ import base64
 from django.core.files.base import ContentFile
 from ..utils import ProfileImageStorage
 from ..models.user import Follow
+import datetime
 
 from history.signals import object_viewed_signal
 
@@ -194,7 +195,8 @@ def profile_me_api(request):
         if ('profile_image' in request.data):
             profile_image_storage.save(
                 request.data['profile_image'].name,  request.data['profile_image'])
-      
+
+        serializer.updated_at =  datetime.datetime.now()  
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     else:
