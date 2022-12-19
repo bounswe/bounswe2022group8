@@ -100,6 +100,48 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='VirtualExhibition',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=200)),
+                ('description', models.CharField(max_length=500)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('start_date', models.DateTimeField()),
+                ('end_date', models.DateTimeField()),
+                ('artitems_gallery', models.ManyToManyField(blank=True, related_name='gallery', to='api.artitem')),
+                ('collaborators', models.ManyToManyField(blank=True, related_name='virtualCollaborators', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('poster', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='api.artitem')),
+            ],
+            options={
+                'ordering': ['-created_at'],
+            },
+        ),
+        migrations.CreateModel(
+            name='OfflineExhibition',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=200)),
+                ('description', models.CharField(max_length=500)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('start_date', models.DateTimeField()),
+                ('end_date', models.DateTimeField()),
+                ('city', models.CharField(blank=True, max_length=200, null=True)),
+                ('country', models.CharField(blank=True, max_length=200, null=True)),
+                ('address', models.CharField(blank=True, max_length=200, null=True)),
+                ('latitude', models.FloatField()),
+                ('longitude', models.FloatField()),
+                ('collaborators', models.ManyToManyField(blank=True, related_name='offlineCollaborators', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('poster', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='api.artitem')),
+            ],
+            options={
+                'ordering': ['-created_at'],
+            },
+        ),
+        migrations.CreateModel(
             name='LikeComment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -139,6 +181,19 @@ class Migration(migrations.Migration):
             model_name='artitem',
             name='tags',
             field=models.ManyToManyField(blank=True, to='api.tag'),
+        ),
+        migrations.AddField(
+            model_name='artitem',
+            name='virtualExhibition',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='api.virtualexhibition'),
+        ),
+        migrations.AddConstraint(
+            model_name='virtualexhibition',
+            constraint=models.CheckConstraint(check=models.Q(('end_date__gt', models.F('start_date'))), name='api_virtualexhibition has valid start-end dates.'),
+        ),
+        migrations.AddConstraint(
+            model_name='offlineexhibition',
+            constraint=models.CheckConstraint(check=models.Q(('end_date__gt', models.F('start_date'))), name='api_offlineexhibition has valid start-end dates.'),
         ),
         migrations.AddConstraint(
             model_name='likecomment',
