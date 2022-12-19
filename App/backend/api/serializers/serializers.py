@@ -63,3 +63,7 @@ class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'name', 'surname',  'profile_path']
+
+class ArtItemByTagQuerySerializer(serializers.Serializer):
+    tags = serializers.CharField(default="1,2,3")
+  
