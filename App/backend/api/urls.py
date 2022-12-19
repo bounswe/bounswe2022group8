@@ -8,7 +8,7 @@ Function views
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views.auth import RegisterView, LoginView, resetRequestView, resetPasswordView, resetPasswordLoggedView, delete_account
-from .views.profile import profile_api, profile_me_api
+from .views.profile import profile_api, profile_me_api, LevelView
 from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings, artitems_by_tags
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
@@ -86,6 +86,7 @@ urlpatterns = [
     path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment"),
     path('tags/<int:id>', TagView, name="Tagview"),
     path('tags/', TagsView, name="TagsView"),
+    path('users/me/level', LevelView, name="LevelView"),
     path('exhibitions/', get_exhibitions, name="get_exhibitions"),
     path('exhibitions/me/offline/', create_offline_exhibition, name="create_offline_exhibitions"),
     path('exhibitions/me/online/', create_online_exhibition, name="create_online_exhibitions"),
