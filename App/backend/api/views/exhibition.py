@@ -358,81 +358,84 @@ def get_online_exhibitions_by_id(request, id):
             query.add(Q(pk=id), Q.AND)                   # a virtual exhibition with the given id exists
 
             virtualExhibition = VirtualExhibition.objects.filter(query)[0]
-            
-            if(virtualExhibition.get_status == "Finished"):
-                return Response({"Bad Request": "You can't update an already finished exhibition."}, status=status.HTTP_400_BAD_REQUEST)
-            data = request.data
-            if("title" in data):
-                virtualExhibition.title = data["title"]
-            if("description" in data):
-                virtualExhibition.description = data["description"]
-            if("add_via_gallery" in data and data["add_via_upload"]):
-                try:
-                    for img in data["add_via_gallery"]:
-                        virtualExhibition.artitems_gallery.add(img)
-                except:
-                    return Response({"Not Found": "Given art item images are not found."}, status=status.HTTP_404_NOT_FOUND)
-            if("add_via_upload" in data and data["add_via_upload"]):
-                artitem_image_storage = ArtItemStorage()
-                try:
-                    objects = []
-                    for artitem_data in data["add_via_upload"]:
-                        try:
-                            inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
-                            inddata["title"] = artitem_data["title"]
-                            if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
-                            inddata["category"] = artitem_data["category"]
-                            inddata["description"] = artitem_data["description"]
-                            objects.append(inddata)
-                        except:
-                            return Response({"Invalid Input": "Please check the required field for uploaded art item images."}, status=status.HTTP_400_BAD_REQUEST)
-                    savedimgs = []
-                    images = []
-                    for obj in objects:
-                        obj["virtualExhibition"] = virtualExhibition.id
-                        imgserializer = ExhibitionArtItemSerializer(data=obj)
-                        if imgserializer.is_valid():
-                            filename = imgserializer.validated_data.get('artitem_image').name
-                            images.append((filename, imgserializer.validated_data.get('artitem_image')))
-                            img = imgserializer.save()
-                            savedimgs.append(img)
-                        else:
-                            for savedimg in savedimgs:
-                                uas =  ArtItem.objects.get(pk=savedimg.id)
-                                uas.delete()            # delete the images
-                            return Response(imgserializer.errors, status=status.HTTP_400_BAD_REQUEST)
-                        
-                        for i in images:
-                            artitem_image_storage.save(i[0],  i[1])
-                except:
-                    return Response({"Not Found": "Uploaded images do not comply with the expected input format."}, status=status.HTTP_404_NOT_FOUND)
-            
-
-            if("remove" in data):
-                ids_to_remove = data["remove"]
-                try:
-                    
-                    client = boto3.client('s3') 
-                    for idRemove in ids_to_remove:
-                        objRemove = ArtItem.objects.get(pk=idRemove)
-                        if objRemove in virtualExhibition.artitems_gallery.all():
-                            virtualExhibition.artitems_gallery.remove(idRemove)
-                        else:
-                            artitem = ArtItem.objects.get(pk=idRemove, virtualExhibition=virtualExhibition.id)
-                            client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=artitem.artitem_path)
-                            artitem.delete()
-                except:
-                    for savedimg in savedimgs:
-                        uas =  ArtItem.objects.get(pk=savedimg.id)
-                        uas.delete()            # delete the images
-                    return Response({"Invalid Input": "Please check the format for removing art items."}, status=status.HTTP_400_BAD_REQUEST)
-
-            serializer = VirtualExhibitionSerializer(virtualExhibition)
-            virtualExhibition.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             return Response({"Not Found": "There is no virtual exhibition with the given id such that the current user is a collaborator"}, status=status.HTTP_404_NOT_FOUND)
 
+        if(virtualExhibition.get_status == "Finished"):
+            return Response({"Bad Request": "You can't update an already finished exhibition."}, status=status.HTTP_400_BAD_REQUEST)
+        data = request.data
+        if("title" in data):
+            virtualExhibition.title = data["title"]
+        if("description" in data):
+            virtualExhibition.description = data["description"]
+        if("add_via_gallery" in data and data["add_via_upload"]):
+            try:
+                for img in data["add_via_gallery"]:
+                    virtualExhibition.artitems_gallery.add(img)
+            except:
+                return Response({"Not Found": "Given art item images are not found."}, status=status.HTTP_404_NOT_FOUND)
+        if("add_via_upload" in data and data["add_via_upload"]):
+            artitem_image_storage = ArtItemStorage()
+            try:
+                objects = []
+                for artitem_data in data["add_via_upload"]:
+                    try:
+                        inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                        inddata["title"] = artitem_data["title"]
+                        if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
+                        inddata["category"] = artitem_data["category"]
+                        inddata["description"] = artitem_data["description"]
+                        objects.append(inddata)
+                    except:
+                        return Response({"Invalid Input": "Please check the required field for uploaded art item images."}, status=status.HTTP_400_BAD_REQUEST)
+                savedimgs = []
+                images = []
+                for obj in objects:
+                    obj["virtualExhibition"] = virtualExhibition.id
+                    imgserializer = ExhibitionArtItemSerializer(data=obj)
+                    if imgserializer.is_valid():
+                        filename = imgserializer.validated_data.get('artitem_image').name
+                        images.append((filename, imgserializer.validated_data.get('artitem_image')))
+                        img = imgserializer.save()
+                        savedimgs.append(img)
+                    else:
+                        for savedimg in savedimgs:
+                            uas =  ArtItem.objects.get(pk=savedimg.id)
+                            uas.delete()            # delete the images
+                        return Response(imgserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    
+                    for i in images:
+                        artitem_image_storage.save(i[0],  i[1])
+            except:
+                return Response({"Not Found": "Uploaded images do not comply with the expected input format."}, status=status.HTTP_404_NOT_FOUND)
+        
+
+        if("remove" in data):
+            ids_to_remove = data["remove"]
+            try:
+                
+                client = boto3.client('s3') 
+                for idRemove in ids_to_remove:
+                    objRemove = ArtItem.objects.get(pk=idRemove)
+                    if objRemove in virtualExhibition.artitems_gallery.all():
+                        virtualExhibition.artitems_gallery.remove(idRemove)
+                    else:
+                        artitem = ArtItem.objects.get(pk=idRemove, virtualExhibition=virtualExhibition.id)
+                        client.delete_object(Bucket=ArtItemStorage().bucket_name, Key=artitem.artitem_path)
+                        artitem.delete()
+            except:
+                for savedimg in savedimgs:
+                    uas =  ArtItem.objects.get(pk=savedimg.id)
+                    uas.delete()            # delete the images
+                return Response({"Invalid Input": "Please check the format for removing art items."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = VirtualExhibitionSerializer(virtualExhibition)
+        try:
+            virtualExhibition.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+       
 
 @ swagger_auto_schema(
     method='get',
