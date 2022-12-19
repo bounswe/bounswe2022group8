@@ -174,6 +174,7 @@ def profile_me_api(request):
         In views where we require authentication, we can simply get the user from request.user. So practical!
         """
         user = request.user
+        user.calculateLevel()
         serializer = UserProfileSerializer(user)
  
         return Response(serializer.data, status=status.HTTP_200_OK)
