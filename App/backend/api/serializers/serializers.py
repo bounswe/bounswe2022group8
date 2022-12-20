@@ -2,7 +2,7 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from ..models.models import Comment
-from ..models.artitem import Tag, ArtItem
+from ..models.artitem import Tag, ArtItem, Bid
 from ..models.user import User
 
 
@@ -63,3 +63,21 @@ class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'name', 'surname',  'profile_path']
+
+class BidArtItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ArtItem
+        fields = ['id', 'title', 'category', 'artitem_path']
+
+
+class BidSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bid
+        fields = ['id', 'artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep["buyer"] = CommentUserSerializer(instance.buyer).data 
+        rep["artitem"] = BidArtItemSerializer(instance.artitem).data 
+        return rep
