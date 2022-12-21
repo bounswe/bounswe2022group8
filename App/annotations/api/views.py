@@ -200,7 +200,33 @@ from .serializers import *
         ),
     }
 )
-@api_view(['POST', 'GET', 'PUT'])
+
+
+
+@swagger_auto_schema(
+    method='DELETE',
+    operation_description="Annotations API. This endpoint can be used to delete the annotation with the given id. IDs of the annotations are in this format: #\{uuid\}. Please provide the uuid as a query parameter (do not include the # sign).",
+    operation_summary="Delete an annotation.",
+    tags=['Image Annotations', 'Text Annotations'],
+    responses={
+        status.HTTP_204_NO_CONTENT: openapi.Response(
+            description="Successfully deleted the annotation.",
+        ),
+        status.HTTP_404_NOT_FOUND: openapi.Response(
+            description="Annotation cannot be found.",
+            examples={
+                "application/json": {"Not Found": "There is no annotation with the given id."}
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="ID of the annotation is not given.",
+            examples={
+                "application/json":{"Bad Request": "Please provide the id of the annotation as a query parameter."}
+            }
+        ),
+    }
+)
+@api_view(['POST', 'GET', 'PUT', 'DELETE'])
 def annotate(request):
     if(request.method == 'POST'):
         if('target' not in request.data):
@@ -228,12 +254,11 @@ def annotate(request):
                 else: type = create_or_return_type(data['type'].lower()).type
                 
                 data['type'] = type
-                try:
-                    data['uuid'] = data['id']
-                    data.pop('id')
-                except:
+
+                if('id' not in data):
                     selector.delete()
                     return Response({"Invalid request": "Annotation must have an id."}, status=status.HTTP_400_BAD_REQUEST)
+                data['id'] = data['id'][1:] # get rid of # sign
 
                 if('body'  in request.data): # annotation without body - possible
                     # create body
@@ -266,9 +291,11 @@ def annotate(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif(request.method=='PUT'):
         try:
-            if("@" not in request.data["id"]):
-                return Response({"Invalid request": "This annotation must be created first."}, status=status.HTTP_400_BAD_REQUEST)
-            id = int(request.data["id"].split("@")[1])
+            id = request.data["id"][1:]
+        except:
+            return Response({"Invalid request": "Please provide the id of the annotation without '#' sign."}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
             imageAnnotation = Annotation.objects.get(id=id) # we might have to update this filter
         except:
             return Response({"Not Found": "There is no annotation with the given id."}, status=status.HTTP_404_NOT_FOUND)
@@ -296,10 +323,7 @@ def annotate(request):
                 else: type = create_or_return_type(data['type'].lower()).type
                 
                 data['type'] = type
-                try:
-                    data['uuid'] = data['id']
-                    data.pop('id')
-                except:
+                if('id' not in data):
                     selector.delete()
                     return Response({"Invalid request": "Annotation must have an id."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -328,7 +352,16 @@ def annotate(request):
                 return Response(target_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(selector_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+    elif(request.method=='DELETE'):
+        if('id' not in request.query_params):
+            return Response({"Bad Request": "Please provide the id of the annotation as a query parameter."}, status=status.HTTP_400_BAD_REQUEST)
+        id = request.query_params['id']
+        try:
+            annotation = Annotation.objects.get(id=id) # we might have to update this filter
+            annotation.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Annotation.DoesNotExist:
+            return Response({"Not Found": "There is no annotation with the given id."}, status=status.HTTP_404_NOT_FOUND)
     
 @swagger_auto_schema(
     method='GET',
@@ -443,34 +476,6 @@ def get_image_annotation_by_artitem_id(request, artitemid):
     else:
         return Response({"Not Found": "There is no annotation on the given art item."}, status=status.HTTP_404_NOT_FOUND)
 
-
-
-
-@swagger_auto_schema(
-    method='DELETE',
-    operation_description="Annotations API. This endpoint can be used to delete the annotation with the given id. IDs of the annotations are in this format: #\{uuid\}@id. It's enough to provide the integer number at the end. For example, for this id (#218d01ff-f077-4cc3-992d-1c81c426e51b@23), just provide the last number 23.",
-    operation_summary="Delete an annotation.",
-    tags=['Image Annotations', 'Text Annotations'],
-    responses={
-        status.HTTP_204_NO_CONTENT: openapi.Response(
-            description="Successfully deleted the annotation.",
-        ),
-        status.HTTP_404_NOT_FOUND: openapi.Response(
-            description="Annotation cannot be found.",
-            examples={
-                "application/json": {"Not Found": "There is no annotation with the given id."}
-            }
-        ),
-    }
-)
-@api_view(['DELETE'])
-def delete_annotation_by_id(request, id):
-    try:
-        annotation = Annotation.objects.get(id=id) # we might have to update this filter
-        annotation.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    except Annotation.DoesNotExist:
-        return Response({"Not Found": "There is no annotation with the given id."}, status=status.HTTP_404_NOT_FOUND)
 
 
 """
@@ -691,7 +696,7 @@ def get_image_annotations(request):
             examples={
                 "application/json": [
                     {
-                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193@3",
+                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193",
                         "body": [
                             {
                                 "id": "http://34.125.134.88/body4",
@@ -756,7 +761,7 @@ def get_text_annotation_by_artitem_user_id(request, userid, artitemid):
             examples={
                 "application/json": [
                     {
-                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193@3",
+                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193",
                         "body": [
                             {
                                 "id": "http://34.125.134.88/body4",
@@ -822,7 +827,7 @@ def get_text_annotations_by_artitem_id(request, artitemid):
             examples={
                 "application/json": [
                     {
-                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193@3",
+                        "id": "#2395b9aa-64f0-46a7-a561-90f67ebb2193",
                         "body": [
                             {
                                 "id": "http://34.125.134.88/body4",

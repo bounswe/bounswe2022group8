@@ -119,7 +119,7 @@ class Target(models.Model):
     selector = models.ForeignKey(Selector, on_delete=models.CASCADE)
 
 class Annotation(models.Model):  # id is created implicitly
-    uuid = models.TextField()                       # coming from frontend
+    id = models.TextField(primary_key = True)                    # coming from frontend
     context = models.TextField(default=CONTEXT)
     type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
     body = models.ManyToManyField(Body)

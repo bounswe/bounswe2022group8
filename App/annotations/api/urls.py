@@ -25,7 +25,6 @@ urlpatterns = [
     path('annotations/text/artitems/<int:artitemid>', get_text_annotations_by_artitem_id, name="get text annotations on an art item"),
     path('annotations/image/users/<int:userid>', get_image_annotation_by_user_id, name="get image annotations of a user"),
     path('annotations/image/artitems/<int:artitemid>', get_image_annotation_by_artitem_id, name="get image annotations on an art item by a user"),
-    path('annotations/<int:id>', delete_annotation_by_id, name="delete an image annotation"),
     path('annotations/image/users/<int:userid>/artitems/<int:artitemid>', get_image_annotation_by_artitem_user_id, name="get image annotations on a specific art item by a user"),
     path('annotations/text/users/<int:userid>', get_text_annotations_by_userid, name="get text annotations of a user")
 ]
