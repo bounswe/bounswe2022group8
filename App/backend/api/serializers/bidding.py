@@ -14,6 +14,5 @@ class bidPostSerializer(serializers.Serializer):
 #just used for swagger
 class bidUpdateSerializer(serializers.Serializer):
 
-    body = serializers.CharField(default="This is the updated comment.")
-    accepted = serializers.BooleanField(default=False)
+    response = serializers.CharField(default="AC")
     

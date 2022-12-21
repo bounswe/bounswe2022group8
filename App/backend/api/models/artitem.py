@@ -59,6 +59,7 @@ class ArtItem(models.Model):
     number_of_views = models.IntegerField(default=0)
     sale_status = models.CharField(max_length=2, choices=SaleStatus.choices, default=SaleStatus.NOTFORSALE)
     minimum_price = models.PositiveIntegerField(default=0)
+    bought_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="bought_art")
 
     def increaseViews(self, *args, **kwargs):
         self.number_of_views += 1
@@ -97,12 +98,17 @@ class LikeArtItem(models.Model):
 
 
 class Bid(models.Model):
+    class Response(models.TextChoices):
+        REJECTED = 'RE', _('Rejected')
+        ACCEPTED = 'AC', _('Accepted')
+        NORESPONSE = 'NR', _('No Response')
+
     artitem = models.ForeignKey(ArtItem, on_delete=models.CASCADE)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.FloatField(validators=[MinValueValidator(0.0)])
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(blank=True, null=True)
-    accepted = models.BooleanField(default=False)
+    accepted = models.CharField(max_length=2, choices=Response.choices, default=Response.NORESPONSE)
 
     def save(self, *args, **kwargs):
         if not self.deadline:

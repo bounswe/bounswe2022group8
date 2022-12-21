@@ -24,7 +24,7 @@ class VirtualExhibitionAdmin(admin.ModelAdmin):
     list_display = ['id', 'owner', 'title', 'description', 'poster',  'start_date', 'end_date', 'created_at', 'updated_at']
 
 class BidAdmin(admin.ModelAdmin):
-    list_display = ['artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
+    list_display = ['id', 'artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
 
 
 admin.site.register(User, UserAdmin)
