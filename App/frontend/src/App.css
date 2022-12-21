@@ -21,6 +21,13 @@
   outline: none !important;
 }
 
+.form-select:focus {
+  border-color: #18121c !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 .form-error {
   margin-top: 0.4em;
   margin-bottom: -0.4em;

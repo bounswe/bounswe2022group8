@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
+import { CategoryDict } from "./data/Categories";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
@@ -25,10 +26,11 @@ function ArtItem(props) {
   const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
+  const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
+  const [artitemCategory, setArtitemCategory] = useState("");
   const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
   const [artitemOwnerID, setArtitemOwnerID] = useState(null);
-  const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemComments, setArtitemComments] = useState([]);
   const [artitemLikes, setArtitemLikes] = useState(0);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
@@ -77,10 +79,11 @@ function ArtItem(props) {
       .then((response) => response.json())
       .then((response) => {
         // console.log(response);
+        setArtitemTitle(response.title);
         setArtitemDescription(response.description);
+        setArtitemCategory(response.category);
         setArtitemOwnerUsername(response.owner.username);
         setArtitemOwnerID(response.owner.id);
-        setArtitemTitle(response.title);
         setIsLiked(response.isLiked);
 
         var params_artitem = {
@@ -272,6 +275,7 @@ function ArtItem(props) {
             <div id="title-and-description">
               <div id="title">{artitemTitle}</div>
               <div id="description">{artitemDescription}</div>
+              <div>{CategoryDict[artitemCategory]}</div>
             </div>
             <br></br>
             <div id="comments">
