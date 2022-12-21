@@ -291,7 +291,7 @@ def annotate(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif(request.method=='PUT'):
         try:
-            id = request.data["id"]
+            id = request.data["id"][1:]
         except:
             return Response({"Invalid request": "Please provide the id of the annotation without '#' sign."}, status=status.HTTP_400_BAD_REQUEST)
             
