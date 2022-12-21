@@ -4,7 +4,7 @@ from rest_framework import serializers
 class AnnotationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annotation
-        fields = ['uuid', 'id', 'context', 'body', 'type', 'target', 'creator']
+        fields = ['id', 'context', 'body', 'type', 'target', 'creator']
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -13,8 +13,7 @@ class AnnotationSerializer(serializers.ModelSerializer):
         rep['target'] = AnnotationTargetSerializer(instance.target).data
         if(not rep['body']): rep.pop('body')
         else: rep['body'] = AnnotationBodySerializer(instance.body, many=True).data
-        rep['id'] = rep['uuid'] + "@" + str(rep['id'])  # change the name
-        rep.pop('uuid')
+        rep['id'] = "#" + rep['id']
         rep.pop('context')
         return rep
 
