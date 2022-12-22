@@ -31,6 +31,7 @@ class User(AbstractUser):
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
     profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
+    new_bid_flag = models.BooleanField(default=False)
     
     #OTP (one time password for password reset)
     otp = models.CharField(max_length=256, null=True, blank=True)

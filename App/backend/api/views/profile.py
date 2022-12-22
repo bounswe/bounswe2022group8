@@ -177,8 +177,11 @@ def profile_me_api(request):
         user = request.user
         user.calculateLevel()
         serializer = UserProfileSerializer(user)
+        mydata = serializer.data
+        user.new_bid_flag = False
+        user.save()
  
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(mydata, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
 
         # BASE64 DECODING

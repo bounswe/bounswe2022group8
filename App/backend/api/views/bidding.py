@@ -98,7 +98,7 @@ from dateutil import parser
 @swagger_auto_schema(
     method='POST',
     request_body=bidPostSerializer,
-    operation_description="This endpoint with POST request creates a bid on an art item. Authentication is required.",
+    operation_description="This endpoint with POST request creates a bid on an art item. Authentication is required. Deadline has to be at least 10 minutes later than bidding time.",
     operation_summary="Bid on an art item.",
     tags=['bids'],
     responses={
@@ -228,6 +228,8 @@ def BidArtItemView(request, artitemid):
                             serializer = BidSerializer(data=data)
                             if serializer.is_valid():
                                 serializer.save()
+                                artitem.owner.new_bid_flag = True
+                                artitem.owner.save()
                                 return Response(serializer.data, status=status.HTTP_201_CREATED)
                             else:
                                 # catch serializer integrity error
