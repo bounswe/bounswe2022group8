@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from ..serializers.serializers import BidSerializer
-from ..serializers.bidding import bidPostSerializer, bidUpdateSerializer
+from ..serializers.bidding import bidPostSerializer, bidUpdateSerializer, artItemBidUpdateSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -143,8 +143,41 @@ from dateutil import parser
         ),
     }
 )
+@swagger_auto_schema(
+    method='PUT',
+    request_body=artItemBidUpdateSerializer,
+    operation_description="This endpoint with PUT request updates the sale_status and minimum_price of an art item. Authentication (+ownership) is required. minimum_price parameter is not required when closing the item to sale. ",
+    operation_summary="Update sale status of an art item.",
+    tags=['bids'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="The art item sale status is successfully updated.",
+            examples={
+                "application/json": {
+                    "detail": "The art item is successfully closed to sale."
+                },
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Invalid sale status.",
+            examples={
+                "application/json": {
+                    "detail": "The art item is already for sale."
+                },
+            }
+        ),
+        status.HTTP_403_FORBIDDEN: openapi.Response(
+            description="Forbidden action.",
+            examples={
+                "application/json": {
+                    "detail": "Only the owner can update sale status of art item."
+                },
+            }
+        ),
+    }
+)
 #@login_required
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PUT'])
 def BidArtItemView(request, artitemid):
     if request.user.is_authenticated:
         user = request.user
@@ -202,6 +235,47 @@ def BidArtItemView(request, artitemid):
                     else:
                         message = {'detail': 'Bid has to exceed minimum price.'}
                         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        elif (request.method == "PUT"):
+            if(user != artitem.owner):
+                message = {
+                    'detail': 'Only the owner can update sale status of art item.'}
+                return Response(message, status=status.HTTP_403_FORBIDDEN)
+            else:
+                if(artitem.sale_status == 'SO'):
+                    message = {'detail': 'Sorry, this art item is already sold.'}
+                    return Response(message, status=status.HTTP_400_BAD_REQUEST)
+                elif(artitem.sale_status == 'FS'):
+                    if(data["sale_status"] == 'FS'):
+                        message = {'detail': 'The art item is already for sale.'}
+                        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+                    if(data["sale_status"] == 'NS'):
+                        artitem.sale_status = 'NS'
+                        artitem.save()
+                        message = {'detail': 'The art item is successfully closed to sale.'}
+                        return Response(message, status=status.HTTP_200_OK)
+                    else:
+                        message = {'detail': 'Invalid sale status input.'}
+                        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+                #'NS'
+                else:
+                    if(data["sale_status"] == 'NS'):
+                        message = {'detail': 'The art item is already not for sale.'}
+                        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+                    if(data["sale_status"] == 'FS'):
+                        if(data["minimum_price"] > 0.0 ):
+                            artitem.sale_status = 'FS'
+                            artitem.minimum_price = data["minimum_price"]
+                            artitem.save()
+                            message = {'detail': 'The art item sale status is successfully updated.'}
+                            return Response(message, status=status.HTTP_200_OK)
+                        else:
+                            message = {'detail': 'Minimum price has to be a positive number.'}
+                            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+                    else:
+                        message = {'detail': 'Invalid sale status input.'}
+                        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            
     else:
         message = {'detail': 'Invalid token.'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
