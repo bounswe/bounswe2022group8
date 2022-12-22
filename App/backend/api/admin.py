@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models.models import Comment
-from .models.artitem import Tag, ArtItem, Bid
+from .models.artitem import Tag, ArtItem, Bid, NewBids
 from .models.user import User
 from .models.exhibition import OfflineExhibition, VirtualExhibition
 
@@ -34,3 +34,4 @@ admin.site.register(ArtItem, ArtItemAdmin)
 admin.site.register(OfflineExhibition, OfflineExhibitionAdmin)
 admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)
 admin.site.register(Bid, BidAdmin)
+admin.site.register(NewBids)

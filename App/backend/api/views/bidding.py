@@ -8,7 +8,7 @@ from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from ..models.user import User
-from ..models.artitem import ArtItem, Bid
+from ..models.artitem import ArtItem, Bid, NewBids
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib.auth.models import AnonymousUser
@@ -228,8 +228,12 @@ def BidArtItemView(request, artitemid):
                             serializer = BidSerializer(data=data)
                             if serializer.is_valid():
                                 serializer.save()
-                                artitem.owner.new_bid_flag = True
-                                artitem.owner.save()
+                                owner = artitem.owner
+                                owner.new_bid_flag = True
+                                newbids = NewBids.objects.get(user=owner)
+                                newbids.new_bids.add(artitem)
+                                newbids.save()
+                                owner.save()
                                 return Response(serializer.data, status=status.HTTP_201_CREATED)
                             else:
                                 # catch serializer integrity error

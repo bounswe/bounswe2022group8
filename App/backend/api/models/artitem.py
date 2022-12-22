@@ -10,6 +10,8 @@ from django.utils.translation import gettext_lazy as _
 import datetime
 from django.core.validators import MinValueValidator 
 
+from ..signals import user_created_signal
+
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
     description = models.CharField(max_length=500)  # description about the tag
@@ -118,3 +120,20 @@ class Bid(models.Model):
     def __str__(self):
         return str(self.buyer) + " bid " + str(self.amount)  + " on " + str(self.artitem) 
 
+class NewBids(models.Model):
+    user = models.OneToOneField(User,
+        primary_key=True,
+        on_delete=models.CASCADE,
+        help_text=_('User (Required).'),
+    )
+    new_bids = models.ManyToManyField(ArtItem, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "NewBids"
+
+def user_created_receiver(sender, request, *args, **kwargs):
+    new_newbids         = NewBids.objects.create(
+        user            =  sender
+    )
+
+user_created_signal.connect(user_created_receiver)
