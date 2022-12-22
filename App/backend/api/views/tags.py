@@ -10,6 +10,7 @@ from ..models.user import User
 from ..models.artitem import Tag
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.contrib.auth.models import AnonymousUser
 
 
 @swagger_auto_schema(
@@ -160,6 +161,9 @@ def TagView(request, id):
 def TagsView(request):
     data = request.data
     if (request.method == "POST"):
+        if(isinstance(request.user, AnonymousUser)):
+            message = {'Invalid request': 'Guest users cannot create tags.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
         if request.user.is_level2 or request.user.is_superuser:
             serializer = TagSerializer(data=data)
             if serializer.is_valid():
