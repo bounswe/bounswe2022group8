@@ -91,3 +91,7 @@ class NewBidsSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance) 
         rep["new_bids"] = BidArtItemSerializer(instance.new_bids, many=True).data 
         return rep
+        
+class ArtItemByTagQuerySerializer(serializers.Serializer):
+    tags = serializers.CharField(default="1,2,3")
+  

@@ -25,7 +25,7 @@ function ArtItem(props) {
   const [artitemSrc, setArtitemSrc] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
   const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
-  const [artitemOwnerID, setArtitemOwnerID] = useState(null);
+  // const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemComments, setArtitemComments] = useState([]);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
@@ -67,7 +67,6 @@ function ArtItem(props) {
         // console.log(response);
         setArtitemDescription(response.description);
         setArtitemOwnerUsername(response.owner.username);
-        setArtitemOwnerID(response.owner.id);
         setArtitemTitle(response.title);
 
         var params_artitem = {
