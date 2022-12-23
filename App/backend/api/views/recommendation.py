@@ -14,14 +14,16 @@ from dateutil import parser
 
 from history.models import History
 from ..models.artitem import ArtItem
+from ..models.exhibition import OfflineExhibition, VirtualExhibition
 
 from django.contrib.contenttypes.models import ContentType
 from ..serializers.serializers import ArtItemSerializer
+from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibitionSerializer
 
 
 @swagger_auto_schema(
     method='GET',
-    operation_description="This endpoint with GET request returns a list of 15 art items that have been curated for users interests and that the user has never seen before. This is ofcourse the case if such items exist in the database. Authentication is required.",
+    operation_description="This endpoint with GET request returns a list of 15 art items that have been curated for users interests, are popular and that the user has never seen before. This is ofcourse the case if such items exist in the database. Authentication is required.",
     operation_summary="Get recommended art items for user.",
     tags=['recommendation'],
     responses={
@@ -89,7 +91,7 @@ from ..serializers.serializers import ArtItemSerializer
             }
         ),
         status.HTTP_400_BAD_REQUEST: openapi.Response(
-            description="No bids on art item.",
+            description="Authentication required.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
@@ -147,6 +149,161 @@ def RecommendArtItemView(request):
             #print(artitems)
             serializer = ArtItemSerializer(artitems, many=True)
             message = {'artitems': serializer.data}
+            return Response(message, status=status.HTTP_200_OK)        
+    else:
+        message = {'detail': 'Invalid token.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="This endpoint with GET request returns a list of 15 exhibitions (10 virtual + 5 offline) that are popular and that the user has never seen before. This is ofcourse the case if such items exist in the database. Authentication is required.",
+    operation_summary="Get recommended exhibitions for user.",
+    tags=['recommendation'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully received recommended exhibitions.",
+            examples={
+                "application/json": {
+                    "exhibitions": [
+                        {
+                            "id": 2,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "Art Online",
+                            "description": "A collection of beautiful paintings.",
+                            "poster": {
+                                "id": 2,
+                                "owner": 2,
+                                "title": "Art Online",
+                                "description": "A collection of beautiful paintings.",
+                                "category": "PT",
+                                "tags": [],
+                                "artitem_path": "artitem/artitem-2.png",
+                                "created_at": "23-12-2022 19:15:22"
+                            },
+                            "collaborators": [
+                                {
+                                    "id": 2,
+                                    "username": "string",
+                                    "name": "st",
+                                    "surname": "ring",
+                                    "profile_path": "avatar/default.png"
+                                }
+                            ],
+                            "start_date": "08-12-2022 16:00:00",
+                            "end_date": "25-12-2022 16:00:00",
+                            "created_at": "23-12-2022 19:15:22",
+                            "updated_at": "23-12-2022 21:02:11",
+                            "city": "İstanbul",
+                            "country": "Türkiye",
+                            "address": "Pera Palace Hotel - Beyoglu",
+                            "latitude": 28.978359,
+                            "longitude": 41.40338,
+                            "status": "Ongoing"
+                        },
+                        {
+                            "id": 1,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "virt exh",
+                            "description": "nförö",
+                            "poster": {
+                                "id": 3,
+                                "owner": 2,
+                                "title": "mldm",
+                                "description": "cöşd",
+                                "category": "PH",
+                                "tags": [],
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "created_at": "23-12-2022 20:08:29"
+                            },
+                            "collaborators": [],
+                            "artitems_gallery": [
+                                {
+                                    "id": 6,
+                                    "owner": 2,
+                                    "title": "dwefv",
+                                    "description": "vdf",
+                                    "category": "PT",
+                                    "tags": [],
+                                    "artitem_path": "artitem/defaultart.jpg",
+                                    "created_at": "23-12-2022 20:44:14"
+                                },
+                                {
+                                    "id": 5,
+                                    "owner": 2,
+                                    "title": "vvmvc",
+                                    "description": "scerc",
+                                    "category": "PH",
+                                    "tags": [],
+                                    "artitem_path": "artitem/defaultart.jpg",
+                                    "created_at": "23-12-2022 20:43:55"
+                                }
+                            ],
+                            "start_date": "23-12-2022 22:12:54",
+                            "end_date": "26-12-2022 22:12:58",
+                            "created_at": "23-12-2022 22:13:09",
+                            "updated_at": "23-12-2022 22:13:09",
+                            "status": "Ongoing",
+                            "artitems_upload": []
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Authentication required.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def RecommendExhibitionView(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if (request.method == "GET"):
+            offline = OfflineExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            #print(offline)
+            online = VirtualExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            
+            exhibitions1 = []
+            for item in offline:
+                histories = History.objects.filter(user=user, is_exhibition_off=True, exhibition_id=item.id)
+                if(len(histories) == 0):
+                    exhibitions1.append(item)
+                if(len(exhibitions1)>=5):
+                    break
+            #print(exhibitions1)
+            exhibitions2 = []
+            for item in online:
+                histories = History.objects.filter(user=user, is_exhibition_on=True, exhibition_id=item.id)
+                if(len(histories) == 0):
+                    exhibitions2.append(item)
+                if(len(exhibitions2)>=16):
+                    break
+            #print(exhibitions2)
+            
+            #not returning exhibitions that have already been viewed, can add if found fitting
+
+            serializer1 = OfflineExhibitionSerializer(exhibitions1, many=True)
+            serializer2 = VirtualExhibitionSerializer(exhibitions2, many=True)
+            #can separate if it is easier for the frontend
+            message = {'exhibitions': serializer1.data + serializer2.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
         message = {'detail': 'Invalid token.'}

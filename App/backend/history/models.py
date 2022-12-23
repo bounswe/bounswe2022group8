@@ -7,7 +7,7 @@ from .signals import object_viewed_signal
 
 from api.models.artitem import ArtItem
 from api.models.user import UserInterest
-from api.models.exhibition import AbstractExhibition
+from api.models.exhibition import AbstractExhibition, OfflineExhibition
 
 User = settings.AUTH_USER_MODEL
 
@@ -19,6 +19,9 @@ class History(models.Model):
     viewed_on       = models.DateTimeField(auto_now_add=True)
     is_art          = models.BooleanField(default=False)
     art_id          = models.IntegerField(default=-1)
+    is_exhibition_off   = models.BooleanField(default=False)
+    is_exhibition_on   = models.BooleanField(default=False)
+    exhibition_id   = models.IntegerField(default=-1)
 
     def __str__(self):
         return "%s viewed: on %s by %s" %(self.content_object, self.viewed_on, self.user)
@@ -44,5 +47,12 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
     elif(isinstance(instance, AbstractExhibition)):
         instance.increaseViews()
         instance.updatePopularity()
+        if(isinstance(instance, OfflineExhibition)):
+            new_history.is_exhibition_off =True
+            new_history.exhibition_id =instance.pk
+        else:
+            new_history.is_exhibition_on =True
+            new_history.exhibition_id =instance.pk
+        new_history.save()
 
 object_viewed_signal.connect(object_viewed_receiver)
