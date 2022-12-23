@@ -5,7 +5,7 @@ from ..serializers.serializers import UserSerializer, ArtItemSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from ..models.user import User
+from ..models.user import User, UserInterest
 from ..models.artitem import ArtItem, LikeArtItem
 from ..models.models import Comment, LikeComment
 from django.contrib.auth.decorators import login_required
@@ -59,6 +59,8 @@ def like_artitem(request, id):
         try:
             like = LikeArtItem.objects.create(user=current_user, artitem=artitem)
             artitem.updatePopularity()
+            userinterest = UserInterest.objects.get(user = request.user)
+            userinterest.updateInterest(artitem.category, 2)
             serializer = LikeArtItemSerializer(like)
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError:

@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from knox.models import AuthToken
 
-from ..models.user import User
+from ..models.user import User, UserInterest
 from ..models.user import Follow
 from ..models.artitem import ArtItem, LikeArtItem
 from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
@@ -179,6 +179,8 @@ def post_artitem(request):
                     filename,  request.data['artitem_image'])
 
             serializer.save()
+            userinterest = UserInterest.objects.get(user = request.user)
+            userinterest.updateInterest(request.data["category"], 2)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
