@@ -275,7 +275,7 @@ function ArtItem(props) {
             <div id="title-and-description">
               <div id="title">{artitemTitle}</div>
               <div id="description">{artitemDescription}</div>
-              <div>{CategoryDict[artitemCategory]}</div>
+              <em id="category">Category: {" "} {CategoryDict[artitemCategory]}</em>
             </div>
             <br></br>
             <div id="comments">
