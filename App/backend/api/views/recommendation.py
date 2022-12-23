@@ -384,3 +384,300 @@ def RecommendUserView(request):
     else:
         message = {'detail': 'Invalid token.'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+#anonymous ones ############################################################################################################
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="This endpoint with GET request returns a list of 25 art items that are popular. This is ofcourse the case if such items exist in the database. Authentication is not required.",
+    operation_summary="Get recommended art items, anonymous.",
+    tags=['recommendation'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully received recommended art.",
+            examples={
+                "application/json": {
+                    "artitems": [
+                        {
+                            "id": 5,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "vvmvc",
+                            "description": "scerc",
+                            "category": "PH",
+                            "tags": [],
+                            "artitem_path": "artitem/defaultart.jpg",
+                            "likes": 0,
+                            "number_of_views": 0,
+                            "created_at": "23-12-2022 20:43:55"
+                        },
+                        {
+                            "id": 7,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "fervc",
+                            "description": "vdfv",
+                            "category": "PW",
+                            "tags": [],
+                            "artitem_path": "artitem/defaultart.jpg",
+                            "likes": 0,
+                            "number_of_views": 0,
+                            "created_at": "23-12-2022 20:44:30"
+                        },
+                        {
+                            "id": 6,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "dwefv",
+                            "description": "vdf",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/defaultart.jpg",
+                            "likes": 0,
+                            "number_of_views": 0,
+                            "created_at": "23-12-2022 20:44:14"
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Authentication required.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def AnonymousRecommendArtItemView(request):
+    if (request.method == "GET"):
+        artitems = []
+
+        items = ArtItem.objects.all()
+        for item in items:
+            artitems.append(item)
+            if (len(artitems) >= 25):
+                break
+
+        #print(artitems)
+        serializer = ArtItemSerializer(artitems, many=True)
+        message = {'artitems': serializer.data}
+        return Response(message, status=status.HTTP_200_OK)
+
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="This endpoint with GET request returns a list of 16 exhibitions (11 virtual + 5 offline) that are popular. This is ofcourse the case if such items exist in the database. Authentication is not required.",
+    operation_summary="Get recommended exhibitions, anonymous.",
+    tags=['recommendation'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully received recommended exhibitions.",
+            examples={
+                "application/json": {
+                    "exhibitions": [
+                        {
+                            "id": 2,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "Art Online",
+                            "description": "A collection of beautiful paintings.",
+                            "poster": {
+                                "id": 2,
+                                "owner": 2,
+                                "title": "Art Online",
+                                "description": "A collection of beautiful paintings.",
+                                "category": "PT",
+                                "tags": [],
+                                "artitem_path": "artitem/artitem-2.png",
+                                "created_at": "23-12-2022 19:15:22"
+                            },
+                            "collaborators": [
+                                {
+                                    "id": 2,
+                                    "username": "string",
+                                    "name": "st",
+                                    "surname": "ring",
+                                    "profile_path": "avatar/default.png"
+                                }
+                            ],
+                            "start_date": "08-12-2022 16:00:00",
+                            "end_date": "25-12-2022 16:00:00",
+                            "created_at": "23-12-2022 19:15:22",
+                            "updated_at": "23-12-2022 21:02:11",
+                            "city": "İstanbul",
+                            "country": "Türkiye",
+                            "address": "Pera Palace Hotel - Beyoglu",
+                            "latitude": 28.978359,
+                            "longitude": 41.40338,
+                            "status": "Ongoing"
+                        },
+                        {
+                            "id": 1,
+                            "owner": {
+                                "id": 2,
+                                "username": "string",
+                                "name": "st",
+                                "surname": "ring",
+                                "profile_path": "avatar/default.png"
+                            },
+                            "title": "virt exh",
+                            "description": "nförö",
+                            "poster": {
+                                "id": 3,
+                                "owner": 2,
+                                "title": "mldm",
+                                "description": "cöşd",
+                                "category": "PH",
+                                "tags": [],
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "created_at": "23-12-2022 20:08:29"
+                            },
+                            "collaborators": [],
+                            "artitems_gallery": [
+                                {
+                                    "id": 6,
+                                    "owner": 2,
+                                    "title": "dwefv",
+                                    "description": "vdf",
+                                    "category": "PT",
+                                    "tags": [],
+                                    "artitem_path": "artitem/defaultart.jpg",
+                                    "created_at": "23-12-2022 20:44:14"
+                                },
+                                {
+                                    "id": 5,
+                                    "owner": 2,
+                                    "title": "vvmvc",
+                                    "description": "scerc",
+                                    "category": "PH",
+                                    "tags": [],
+                                    "artitem_path": "artitem/defaultart.jpg",
+                                    "created_at": "23-12-2022 20:43:55"
+                                }
+                            ],
+                            "start_date": "23-12-2022 22:12:54",
+                            "end_date": "26-12-2022 22:12:58",
+                            "created_at": "23-12-2022 22:13:09",
+                            "updated_at": "23-12-2022 22:13:09",
+                            "status": "Ongoing",
+                            "artitems_upload": []
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Authentication required.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def AnonymousRecommendExhibitionView(request):
+        if (request.method == "GET"):
+            offline = OfflineExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            online = VirtualExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            
+            exhibitions1 = []
+            for item in offline:
+                exhibitions1.append(item)
+                if(len(exhibitions1)>=5):
+                    break
+            exhibitions2 = []
+            for item in online:
+                exhibitions2.append(item)
+                if(len(exhibitions2)>=16):
+                    break
+
+            serializer1 = OfflineExhibitionSerializer(exhibitions1, many=True)
+            serializer2 = VirtualExhibitionSerializer(exhibitions2, many=True)
+            #can separate if it is easier for the frontend
+            message = {'exhibitions': serializer1.data + serializer2.data}
+            return Response(message, status=status.HTTP_200_OK)        
+
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="This endpoint with GET request returns a list of 25 users that are popular. This is ofcourse the case if such items(users) exist in the database. Authentication is not required.",
+    operation_summary="Get recommended users, anonymous.",
+    tags=['recommendation'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully received recommended users.",
+            examples={
+                "application/json": {
+                    "users": [
+                        {
+                            "id": 2,
+                            "username": "string",
+                            "is_level2": "false",
+                            "name": "st",
+                            "surname": "ring",
+                            "email": "user@example.com",
+                            "profile_path": "avatar/default.png",
+                            "created_at": "23-12-2022 19:12:57",
+                            "updated_at": "23-12-2022 20:03:35"
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Authentication required.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def AnonymousRecommendUserView(request):
+        if (request.method == "GET"):
+
+            myusers = []
+
+            users = User.objects.all().order_by('-popularity').exclude(is_superuser=True)
+
+            for item in users:
+                myusers.append(item)
+                    
+                if(len(myusers)>=25):
+                    break
+
+            serializer = UserSerializer(myusers, many=True)
+            message = {'users': serializer.data}
+            return Response(message, status=status.HTTP_200_OK)        
+
