@@ -28,7 +28,7 @@ schema_view = swagger_get_schema_view(
     openapi.Info(
         title="Artopia API Documentation",
         default_version='v1.0',
-        description="Documentation of our API endpoints",
+        description="Documentation of our API endpoints"
     ),
     public=True,
 )

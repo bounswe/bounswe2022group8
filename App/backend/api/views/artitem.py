@@ -28,8 +28,8 @@ from history.signals import object_viewed_signal
 #
 #  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format
 #  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://${host}:8000/api/v1/artitems/me/<id>                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
-#  http://${host}:8000/api/v1/artitems/me/                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/<id>                    / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/                        / POST   / create an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
 #  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
 #
@@ -104,7 +104,7 @@ def get_artitems(request):
         status.HTTP_201_CREATED: openapi.Response(
             description="Successfully created an art item.",
             examples={
-                "application/json": [
+                "application/json": 
                     {
                         "id": 2,
                         "title": "Docker",
@@ -120,9 +120,8 @@ def get_artitems(request):
                         "tags": [1],
                         "likes": 0,
                         "artitem_path": "artitem/docker.jpg",
-                        "number_of_views": 5
+                        "number_of_views": 0
                     }
-                ]
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
@@ -134,7 +133,7 @@ def get_artitems(request):
         status.HTTP_400_BAD_REQUEST: openapi.Response(
             description="Bad Request is raised when the given data is not enough to be serialized as an art item object.",
             examples={
-                "application/json": {"type": ["This field is required."]}
+                "application/json": {"category": ["This field is required."]}
             }
         ),
     }
@@ -157,6 +156,7 @@ def post_artitem(request):
             try:
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
+                # iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=
                 id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
                 filename = 'artitem-{pk}.png'.format(
                     pk=id_)
