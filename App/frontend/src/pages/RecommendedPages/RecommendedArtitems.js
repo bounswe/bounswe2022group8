@@ -4,7 +4,6 @@ import { HOST } from "../../constants/host";
 import Layout from "../../layout/Layout";
 import * as dotenv from "dotenv";
 
-// import "../styles/RecommendedArtitems.css";
 import "../styles/Recommendation.css";
 
 function RecommendedArtitems(props) {

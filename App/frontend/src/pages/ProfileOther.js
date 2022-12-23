@@ -222,7 +222,7 @@ function ProfileOther(props) {
                   style={{ marginBottom: profileInfo.name ? "2.8rem" : "6px" }}
                   onClick={() => handleFollowAction()}
                 >
-                  {profileInfo.is_followed ? "Unfollow" : "Follow"}
+                  {profileInfo.is_followed ? "Following" : "Follow"}
                 </button>
               </div>
 
