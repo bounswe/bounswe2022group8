@@ -57,6 +57,10 @@ CmpE 451
    ```cmd
    python manage.py test api/tests
    ```
+* Running the tests will generate XML reports within the `test-output` folder. You can remove them with the following command:
+   ```cmd
+   rm test-output/*
+   ```
 ### Migrations
 Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema.
 
