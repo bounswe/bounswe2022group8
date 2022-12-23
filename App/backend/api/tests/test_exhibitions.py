@@ -3,7 +3,6 @@ from faker import Faker
 
 from ..models.user import User
 from ..models.artitem import ArtItem
-from ..models.exhibition import ExhibitionArtItem
 from ..serializers.serializers import ArtItem, ArtItemSerializer
 from ..views.exhibition import validate_ids, fetch_image
 from ..utils import ArtItemStorage
@@ -36,19 +35,19 @@ class ArtItemTest(TestCase):
         artitem4 = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user2) # id = 7
         artitem5 = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user2) # id = 8
 
-        self.assertTrue(validate_ids([4, 5], user1.id))
-        self.assertTrue(validate_ids([6], user1.id))
-        self.assertTrue(validate_ids([7, 8], user2.id))
-        self.assertFalse(validate_ids([2, 4], user1.id))
-        self.assertFalse(validate_ids([2, 4], user2.id))
-        self.assertFalse(validate_ids([9], user2.id))
+        self.assertTrue(validate_ids([artitem1.id], user1.id))
+        self.assertTrue(validate_ids([artitem1.id, artitem2.id], user1.id))
+        self.assertTrue(validate_ids([artitem4.id, artitem5.id], user2.id))
+        self.assertFalse(validate_ids([artitem3.id, artitem4.id], user1.id))
+        self.assertFalse(validate_ids([artitem2.id], user2.id))
+        self.assertFalse(validate_ids([artitem5.id], user1.id))
 
     def test_fetch_image(self):
         # test fetch_image function
-
+        user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem_image_storage = ArtItemStorage()
         artitemdata = {}
-        artitem_data = fetch_image(artitemdata, artitem_image_storage, test_base64)
+        artitem_data = fetch_image(artitemdata, artitem_image_storage, test_base64, user)
 
         self.assertEqual(artitem_data["artitem_path"], "artitem/artitem-1.png")
         self.assertTrue(isinstance(artitem_data["artitem_image"], ContentFile))
