@@ -20,6 +20,8 @@ from django.db import IntegrityError
 from django.db.models import Q
 from drf_yasg import openapi
 
+from history.signals import object_viewed_signal
+
 #  http://${host}:8000/api/v1/exhibitions/                        / GET    / Return all of the exhibitions in the system
 #  http://${host}:8000/api/v1/exhibitions/online/<id>             / GET    / Return an online exhibition with the given id
 #  http://${host}:8000/api/v1/exhibitions/offline/<id>            / GET    / Return an offline exhibition with the given id
@@ -323,6 +325,7 @@ def get_online_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = VirtualExhibition.objects.get(pk=id)
+            object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = VirtualExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except VirtualExhibition.DoesNotExist:
@@ -528,6 +531,7 @@ def get_offline_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = OfflineExhibition.objects.get(pk=id)
+            object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = OfflineExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except OfflineExhibition.DoesNotExist:
