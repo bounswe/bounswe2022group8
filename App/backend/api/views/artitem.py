@@ -260,7 +260,10 @@ def delete_artitem(request, id):
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
                         "number_of_views": 5,
-                        "isLiked": False
+                        "sale_status": "FS",
+                        "minimum_price": 50,
+                        "bought_by": "null",
+                        "isLiked": "False"
 
                     }
                 ]
