@@ -366,6 +366,7 @@ def BidArtItemView(request, artitemid):
     }
 )
 @swagger_auto_schema(
+    operation_id="artitems_bids_response",
     method='PUT',
     request_body=bidUpdateSerializer,
     operation_description="This endpoint with PUT request is used by owner to respond to a bid. Authentication is required. Parameter response can either be AC or RE.",

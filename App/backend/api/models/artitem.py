@@ -126,7 +126,7 @@ class NewBids(models.Model):
         on_delete=models.CASCADE,
         help_text=_('User (Required).'),
     )
-    new_bids = models.ManyToManyField(ArtItem, null=True, blank=True)
+    new_bids = models.ManyToManyField(ArtItem, blank=True)
 
     class Meta:
         verbose_name_plural = "NewBids"
