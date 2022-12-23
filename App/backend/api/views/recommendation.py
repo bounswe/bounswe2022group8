@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from ..models.user import User, UserInterest
+from ..models.user import User, UserInterest, Follow
 from django.core import serializers
 from django.contrib.auth.models import AnonymousUser
 import datetime
@@ -17,7 +17,7 @@ from ..models.artitem import ArtItem
 from ..models.exhibition import OfflineExhibition, VirtualExhibition
 
 from django.contrib.contenttypes.models import ContentType
-from ..serializers.serializers import ArtItemSerializer
+from ..serializers.serializers import ArtItemSerializer, UserSerializer
 from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibitionSerializer
 
 
@@ -157,7 +157,7 @@ def RecommendArtItemView(request):
 
 @swagger_auto_schema(
     method='GET',
-    operation_description="This endpoint with GET request returns a list of 15 exhibitions (10 virtual + 5 offline) that are popular and that the user has never seen before. This is ofcourse the case if such items exist in the database. Authentication is required.",
+    operation_description="This endpoint with GET request returns a list of 16 exhibitions (11 virtual + 5 offline) that are popular and that the user has never seen before. This is ofcourse the case if such items exist in the database. Authentication is required.",
     operation_summary="Get recommended exhibitions for user.",
     tags=['recommendation'],
     responses={
@@ -304,6 +304,82 @@ def RecommendExhibitionView(request):
             serializer2 = VirtualExhibitionSerializer(exhibitions2, many=True)
             #can separate if it is easier for the frontend
             message = {'exhibitions': serializer1.data + serializer2.data}
+            return Response(message, status=status.HTTP_200_OK)        
+    else:
+        message = {'detail': 'Invalid token.'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@swagger_auto_schema(
+    method='GET',
+    operation_description="This endpoint with GET request returns a list of 16 users that are popular, have similar interest to the user and that the user is not following. This is ofcourse the case if such items(users) exist in the database. Authentication is required. If no users with similar interest found, just popular users are returned.",
+    operation_summary="Get recommended users for the user.",
+    tags=['recommendation'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully received recommended users.",
+            examples={
+                "application/json": {
+                    "users": [
+                        {
+                            "id": 2,
+                            "username": "string",
+                            "is_level2": "false",
+                            "name": "st",
+                            "surname": "ring",
+                            "email": "user@example.com",
+                            "profile_path": "avatar/default.png",
+                            "created_at": "23-12-2022 19:12:57",
+                            "updated_at": "23-12-2022 20:03:35"
+                        }
+                    ]
+                }
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Authentication required.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                },
+            }
+        ),
+    }
+)
+@api_view(['GET'])
+def RecommendUserView(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if (request.method == "GET"):
+
+            userinterest = UserInterest.objects.get(user=user)
+
+            myusers = []
+
+            users = User.objects.all().order_by('-popularity').exclude(id=user.id).exclude(is_superuser=True)
+
+            for item in users:
+                try:
+                    Follow.objects.get(from_user=user, to_user=item)
+                except Follow.DoesNotExist:
+                    iteminterest=UserInterest.objects.get(user=item)
+                    if((iteminterest.first or iteminterest.second or iteminterest.third) == (userinterest.first or userinterest.second or userinterest.third)):
+                        myusers.append(item)
+                    
+                if(len(myusers)>=16):
+                    break
+
+            if(len(myusers)<16):
+                for item in users:
+                    try:
+                        Follow.objects.get(from_user=user, to_user=item)
+                    except Follow.DoesNotExist:
+                        myusers.append(item)
+
+                    if(len(myusers)>=16):
+                        break           
+            serializer = UserSerializer(myusers, many=True)
+            message = {'users': serializer.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
         message = {'detail': 'Invalid token.'}

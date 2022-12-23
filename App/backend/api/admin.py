@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models.models import Comment
 from .models.artitem import Tag, ArtItem, LikeArtItem
-from .models.user import User, UserInterest
+from .models.user import User, UserInterest, Follow
 from .models.exhibition import OfflineExhibition, VirtualExhibition
 
 class UserAdmin(admin.ModelAdmin):
@@ -34,3 +34,4 @@ admin.site.register(OfflineExhibition, OfflineExhibitionAdmin)
 admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)
 admin.site.register(LikeArtItem)
 admin.site.register(UserInterest, UserInterestAdmin)
+admin.site.register(Follow)
