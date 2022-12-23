@@ -1,4 +1,4 @@
-.settings-profile-pop-up-container {
+.delete-artitem-pop-up-container {
   position: fixed;
   z-index: 2100; /* backdrop z-index = 2000 */
   top: 35%;
@@ -11,7 +11,7 @@
   background-color: #fafafa;
 }
 
-.settings-profile-pop-up-header {
+.delete-artitem-pop-up-header {
   font-size: 24px;
   font-weight: 400;
   text-align: center;
@@ -19,13 +19,13 @@
   margin-bottom: 40px;
 }
 
-.settings-profile-pop-up-buttons {
+.delete-artitem-pop-up-buttons {
   margin-bottom: 12px;
   text-align: right;
   margin-right: 34px;
   margin-left: 34px;
 }
 
-.settings-profile-pop-up-btn {
+.delete-artitem-pop-up-btn {
   margin-left: 20px;
 }
