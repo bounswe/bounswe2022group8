@@ -179,6 +179,7 @@ def post_artitem(request):
                     filename,  request.data['artitem_image'])
 
             serializer.save()
+            request.user.updatePopularity()
             userinterest = UserInterest.objects.get(user = request.user)
             userinterest.updateInterest(request.data["category"], 2)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

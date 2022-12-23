@@ -32,6 +32,7 @@ class User(AbstractUser):
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
     profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
+    popularity = models.FloatField(default=0)
     
     #OTP (one time password for password reset)
     otp = models.CharField(max_length=256, null=True, blank=True)
@@ -86,6 +87,24 @@ class User(AbstractUser):
     #     # create an instance of user interests
     #     UserInterest.objects.create(user=self)
 
+    def updatePopularity(self, *args, **kwargs):
+
+        ArtItem = apps.get_model('api', 'ArtItem')
+        VirtualExhibition = apps.get_model('api', 'VirtualExhibition')
+        OfflineExhibition = apps.get_model('api', 'OfflineExhibition')
+        
+
+        followers = self.get_followers
+        #print(followers)
+        artitems = ArtItem.objects.filter(owner=self).count()
+        #print(artitems)
+        ownedExhibitions = OfflineExhibition.objects.filter(owner=self).count() + VirtualExhibition.objects.filter(owner=self).count()
+        #print(ownedExhibitions)
+        #collaboratedExhibitions = VirtualExhibition.objects.filter(collaborators__in=[self]).count()
+
+        self.popularity = followers + 0.5*artitems + 2*ownedExhibitions
+        #print(self.popularity)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return "User: " + self.name + " " + self.surname 

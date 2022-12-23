@@ -828,6 +828,7 @@ def create_offline_exhibition(request):
             try:
                 serializer.save()
                 artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
+                request.user.updatePopularity()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
                 poster.delete()
@@ -998,6 +999,7 @@ def create_online_exhibition(request):
         if serializer.is_valid():
             try:
                 virtualexhibition = serializer.save()
+                request.user.updatePopularity()
             except IntegrityError:
                 poster.delete()
                 return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
