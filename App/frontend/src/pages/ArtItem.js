@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { ANNOHOST, HOST } from "../constants/host";
+import { CategoryDict } from "./data/Categories";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart } from "react-icons/io";
 
 import "./styles/ArtItem.css";
 
@@ -17,7 +20,13 @@ import "@recogito/recogito-js/dist/recogito.min.css";
 //import { BiMessageAltDetail } from "react-icons/bi";
 
 function ArtItem(props) {
-  const { artitem_id } = useParams();
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
 
   var host = HOST;
   var annotationhost = ANNOHOST;
@@ -44,21 +53,30 @@ function ArtItem(props) {
 
   //const [displayableTextAnno, setDisplayableTextAnno] = useState(null);
   /*Text Annotation*/
+  const { artitem_id } = useParams();
+  const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
+  const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
+  const [artitemCategory, setArtitemCategory] = useState("");
   const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
   const [artitemOwnerID, setArtitemOwnerID] = useState(null);
-  const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemComments, setArtitemComments] = useState([]);
+  const [artitemLikes, setArtitemLikes] = useState(0);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+  const [myID, setMyID] = useState(null);
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
 
   // JUST TO CAUSE A STATE CHANGE AFTER A COMMENT POSTED
   const [updateComments, setUpdateComments] = useState(true);
+
+  // SEND COMMENT CLICK ACTION FOR GUEST USERS
+  const [guestClick, setGuestClick] = useState(false);
 
   // DUMMY DIV IN ORDER TO DETECT THE END OF THE MESSAGES
   const bottomRef = useRef(null);
@@ -74,20 +92,30 @@ function ArtItem(props) {
 
   // GET THE ART ITEM'S PROPERTIES
   useEffect(() => {
+    var config = {};
+
+    if (token) {
+      config = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
+    } else {
+      config = { "Content-Type": "application/json" };
+    }
+
     fetch(`${host}/api/v1/artitems/${artitem_id}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
-      },
+      headers: config,
     })
       .then((response) => response.json())
       .then((response) => {
         // console.log(response);
+        setArtitemTitle(response.title);
         setArtitemDescription(response.description);
+        setArtitemCategory(response.category);
         setArtitemOwnerUsername(response.owner.username);
         setArtitemOwnerID(response.owner.id);
-        setArtitemTitle(response.title);
+        setIsLiked(response.isLiked);
 
         var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -138,28 +166,98 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
 
+  // GET THE ART ITEM'S LIKES
+  useEffect(() => {
+    fetch(`${host}/api/v1/artitems/${artitem_id}/likers/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response);
+        setArtitemLikes(response.length);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
+  // GET CURRENTLY LOGGED IN USERS' ID
+  useEffect(() => {
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   function handleSendComment(e) {
     e.preventDefault();
-    if (newComment !== "") {
-      fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
-        method: "POST",
-        body: JSON.stringify({
-          body: newComment,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setUpdateComments(!updateComments);
+    if (token) {
+      if (newComment !== "") {
+        fetch(`${host}/api/v1/artitems/${artitem_id}/comments/`, {
+          method: "POST",
+          body: JSON.stringify({
+            body: newComment,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
         })
-        .catch((error) => console.error("Error:", error));
+          .then(() => {
+            setUpdateComments(!updateComments);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
     }
 
     // clear the input box after the message is sent
     setNewComment("");
+  }
+
+  function handleLike() {
+    if (token) {
+      if (isLiked) {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/unlike/`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes - 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      } else {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/like/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes + 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
+    }
   }
 
   useEffect(() => {
@@ -412,8 +510,21 @@ function ArtItem(props) {
     setIsHideAnnoButtonClicked(false);
   }
 
+  function goToProfile(id) {
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
+    scrollToTop();
+  }
+
   return (
-    <Layout>
+    <Layout
+      guestClick={guestClick}
+      cancelGuestClick={() => setGuestClick(false)}
+    >
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
@@ -467,14 +578,20 @@ function ArtItem(props) {
 
           <div id="info-container">
             <div id="owner">
-              <img id="owner-profile-photo" src={artitemOwnerPhoto} alt="" />
+              <img
+                id="owner-profile-photo"
+                src={artitemOwnerPhoto}
+                alt=""
+                onClick={() => goToProfile(artitemOwnerID)}
+              />
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
 
             <div ref={token ? textElement : null}>
               <div id="title-and-description">
-                <div id="title">{artitemTitle} </div>
+                <div id="title">{artitemTitle}</div>
                 <div id="description">{artitemDescription}</div>
+                <em id="category">Category: {CategoryDict[artitemCategory]}</em>
               </div>
               <br></br>
               <div id="comments">
@@ -496,13 +613,13 @@ function ArtItem(props) {
                         className="comment-owner-profile-photo"
                         src={commentPhotos[index]}
                         alt=""
+                        onClick={() => goToProfile(val.commented_by.id)}
                       />
                       <div>
                         <div className="comment-owner">
                           {val.commented_by.username}
                         </div>
                         <div className="comment-text">{val.body}</div>
-
                         <div className="comment-info"> {val.created_at} </div>
                       </div>
                     </div>
@@ -511,35 +628,59 @@ function ArtItem(props) {
                 <div ref={bottomRef} />
               </div>
             </div>
-            <div id="stats">
-              <span id="likes">0 likes</span>
-              <span>{artitemComments.length} comments</span>
+          </div>
+          <div id="stats">
+            <div id="likes">{artitemLikes} likes</div>
+            <div>{artitemComments.length} comments</div>
+            <div>
+              {isLiked ? (
+                <IoIosHeart
+                  style={{
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                    strokeWidth: "0.8rem",
+                    color: "#ffc9ff",
+                  }}
+                  onClick={handleLike}
+                />
+              ) : (
+                <IoIosHeartEmpty
+                  style={{
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                    strokeWidth: "0.8rem",
+                    color: "#ffffff",
+                  }}
+                  onClick={handleLike}
+                />
+              )}
             </div>
-            <div className="add-comment-container">
-              <div>
-                <textarea
-                  type="text"
-                  className="add-comment-input"
-                  placeholder="Add comment..."
-                  name="comment"
-                  rows="3"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                ></textarea>
-              </div>
-              <div className="btn-comment-container">
-                <button
-                  className="btn btn-comment"
-                  type="submit"
-                  onClick={handleSendComment}
-                >
-                  Send
-                </button>
-              </div>
+          </div>
+          <div className="add-comment-container">
+            <div>
+              <textarea
+                type="text"
+                className="add-comment-input"
+                placeholder="Add comment..."
+                name="comment"
+                rows="3"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="btn-comment-container">
+              <button
+                className="btn btn-comment"
+                type="submit"
+                onClick={handleSendComment}
+              >
+                Send
+              </button>
             </div>
           </div>
         </div>
       </div>
+
       {/*<div className="artitem-post-properties">
         <div className="tag-container">
           <div className="tag"></div>

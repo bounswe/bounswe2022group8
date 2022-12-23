@@ -21,6 +21,13 @@
   outline: none !important;
 }
 
+.form-select:focus {
+  border-color: #18121c !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 .form-error {
   margin-top: 0.4em;
   margin-bottom: -0.4em;
@@ -31,6 +38,14 @@
 
 .form-control-error {
   border-color: #d90429 !important; /* overriding form-control when there is an error */
+}
+
+.form-success {
+  margin-top: 0.4em;
+  margin-bottom: -0.4em;
+  font-size: 13px;
+  font-weight: 600;
+  color: #198754;
 }
 
 /* ------- BUTTONS ------- */

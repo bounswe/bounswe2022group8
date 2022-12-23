@@ -1,0 +1,18 @@
+export const CategoryDict = {
+  PH: "Photography",
+  DR: "Drawing",
+  PD: "Digital Art",
+  SC: "Sculpture",
+  AR: "Architecture",
+  PR: "Prints",
+  PA: "Acrylic painting",
+  PO: "Oil painting",
+  PW: "Watercolor painting",
+  PM: "Mural painting",
+  PG: "Gouache painting",
+  PP: "Pastel painting",
+  PE: "Encaustic painting",
+  PF: "Fresco painting",
+  PS: "Spray painting",
+  OT: "Other",
+};

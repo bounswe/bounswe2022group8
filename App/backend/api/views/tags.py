@@ -10,6 +10,7 @@ from ..models.user import User
 from ..models.artitem import Tag
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.contrib.auth.models import AnonymousUser
 
 
 @swagger_auto_schema(
@@ -25,8 +26,8 @@ from django.core import serializers
                     "id": 1,
                     "tagname": "ocean",
                     "description": "test",
-                    "created_at": "2022-11-13T16:34:03.316236Z",
-                    "updated_at": "2022-11-13T16:34:03.316236Z"
+                    "created_at": "08-12-2022 00:38:25",
+                    "updated_at": "08-12-2022 00:38:25"
                 }
             }
         ),
@@ -113,8 +114,8 @@ def TagView(request, id):
                     "id": 1,
                     "tagname": "ocean",
                     "description": "test",
-                    "created_at": "2022-11-13T16:34:03.316236Z",
-                    "updated_at": "2022-11-13T16:34:03.316236Z"
+                    "created_at": "08-12-2022 00:38:25",
+                    "updated_at": "08-12-2022 00:38:25"
                 }
             }
         ),
@@ -141,8 +142,8 @@ def TagView(request, id):
                     "id": 1,
                     "tagname": "ocean",
                     "description": "test",
-                    "created_at": "2022-11-13T16:34:03.316236Z",
-                    "updated_at": "2022-11-13T16:34:03.316236Z"
+                    "created_at": "08-12-2022 00:38:25",
+                    "updated_at": "08-12-2022 00:38:25"
                 }
             }
         ),
@@ -160,6 +161,9 @@ def TagView(request, id):
 def TagsView(request):
     data = request.data
     if (request.method == "POST"):
+        if(isinstance(request.user, AnonymousUser)):
+            message = {'Invalid request': 'Guest users cannot create tags.'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
         if request.user.is_level2 or request.user.is_superuser:
             serializer = TagSerializer(data=data)
             if serializer.is_valid():

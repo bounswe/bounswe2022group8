@@ -4,8 +4,7 @@ import { HOST } from "../../constants/host";
 import Layout from "../../layout/Layout";
 import * as dotenv from "dotenv";
 
-import "../styles/RecommendedArtitems.css";
-//import "../styles/Recommendation.css";
+import "../styles/Recommendation.css";
 
 function RecommendedArtitems(props) {
   function scrollToTop() {
@@ -72,17 +71,22 @@ function RecommendedArtitems(props) {
   return (
     <Layout>
       <div class="recommendation-container">
-        <div class="recommended-artitems">
-          <div className="gallery">
+        <div class="recommendation-grid">
+          <h1 className="page-header">Discover Art Items</h1>
+          <div className="art-gallery">
             {artItemInfos.map((val, index) => {
               return (
-                <div key={val.id} className="artitem">
+                <div
+                  key={val.id}
+                  className="recommendation-card"
+                  onClick={() => goToArtItem(val.id)}
+                >
                   <img
-                    onClick={() => goToArtItem(val.id)}
+                    className="art-related"
                     src={artItemPaths[index]}
                     alt={val.description}
                   />
-                  <div class="context">
+                  <div class="artitem-context">
                     <h4>{val.title}</h4>
                     <p>{val.description}</p>
                   </div>

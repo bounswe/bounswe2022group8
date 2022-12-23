@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models.models import Comment
 from .models.artitem import Tag, ArtItem
 from .models.user import User
-
+from .models.exhibition import OfflineExhibition, VirtualExhibition
 
 class UserAdmin(admin.ModelAdmin):
    # exclude = ('otp',)
@@ -17,7 +17,16 @@ class CommentAdmin(admin.ModelAdmin):
 class ArtItemAdmin(admin.ModelAdmin):
     list_display = ['title', 'id', 'description', 'owner', 'artitem_image']
 
+class OfflineExhibitionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'owner', 'title', 'description', 'poster', 'start_date', 'end_date', 'created_at', 'updated_at', 'city', 'country', 'address', 'latitude', 'longitude']
+
+class VirtualExhibitionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'owner', 'title', 'description', 'poster',  'start_date', 'end_date', 'created_at', 'updated_at']
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(ArtItem, ArtItemAdmin)
+admin.site.register(OfflineExhibition, OfflineExhibitionAdmin)
+admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)

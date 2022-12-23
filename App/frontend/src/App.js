@@ -10,6 +10,7 @@ import { AuthProvider, AuthenticatedRoute } from "./auth/authentication";
 
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import ProfileOther from "./pages/ProfileOther";
 
 import Recommendation from "./pages/Recommendation";
 import RecommendedArtitems from "./pages/RecommendedPages/RecommendedArtitems";
@@ -66,8 +67,17 @@ function App() {
             </AuthenticatedRoute>
           }
         />
+        <Route path="/users/:user_id" element={<ProfileOther />} />
+
         <Route path="/artitems/:artitem_id" element={<ArtItem />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/settings"
+          element={
+            <AuthenticatedRoute>
+              <Settings />
+            </AuthenticatedRoute>
+          }
+        />
       </Routes>
     </AuthProvider>
   );

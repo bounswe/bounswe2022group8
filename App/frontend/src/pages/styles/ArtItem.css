@@ -71,6 +71,8 @@
 }
 
 .artitem-post-container #owner-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
@@ -94,7 +96,7 @@
   /*background-color: #fafafa;*/
   flex: 1 1 0;
   /*overflow-y: scroll;*/
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
   /*color: #18121c;*/
 }
 
@@ -109,12 +111,11 @@
 
 .artitem-post-container #description {
   font-size: 14px;
-  font-weight: 5px;
+  margin-bottom: 0.25rem;
 }
 
-.artitem-post-container #type {
-  font-size: 14px;
-  font-weight: 5px;
+.artitem-post-container #category {
+  font-size: 13px;
 }
 
 .artitem-post-container .comment {
@@ -124,6 +125,8 @@
 }
 
 .artitem-post-container .comment-owner-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
   height: 2.25rem;
   width: 2.25rem;
   border-radius: 50%;
@@ -156,12 +159,18 @@
 .artitem-post-container #stats {
   /*background-color: #fafafa;
   border-top: 1px solid #d9d9d9;*/
-  flex: 0 0 10px;
-  /*border-radius: 0px 0px 2px 0px;*/
+  display: flex;
+  /*flex: 0 0 10px;
+  border-radius: 0px 0px 2px 0px;*/
   padding: 8px 10px;
   font-size: 15px;
   font-weight: 500;
   /*height: fit-content*/
+}
+
+.artitem-post-container #stats div:last-child {
+  margin-left: auto;
+  margin-right: 12px;
 }
 
 .artitem-post-container #likes {
