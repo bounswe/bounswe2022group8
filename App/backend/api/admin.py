@@ -15,7 +15,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ['body', 'id', 'parent', 'commented_by', 'commented_on', 'created_at']
 
 class ArtItemAdmin(admin.ModelAdmin):
-    list_display = ['title', 'id', 'description', 'owner', 'artitem_image']
+    list_display = ['title', 'id', 'description', 'owner', 'artitem_image', 'category']
 
 class OfflineExhibitionAdmin(admin.ModelAdmin):
     list_display = ['id', 'owner', 'title', 'description', 'poster', 'start_date', 'end_date', 'created_at', 'updated_at', 'city', 'country', 'address', 'latitude', 'longitude']
@@ -23,6 +23,8 @@ class OfflineExhibitionAdmin(admin.ModelAdmin):
 class VirtualExhibitionAdmin(admin.ModelAdmin):
     list_display = ['id', 'owner', 'title', 'description', 'poster',  'start_date', 'end_date', 'created_at', 'updated_at']
 
+class UserInterestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'first', 'second', 'third']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)
@@ -31,4 +33,4 @@ admin.site.register(ArtItem, ArtItemAdmin)
 admin.site.register(OfflineExhibition, OfflineExhibitionAdmin)
 admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)
 admin.site.register(LikeArtItem)
-admin.site.register(UserInterest)
+admin.site.register(UserInterest, UserInterestAdmin)

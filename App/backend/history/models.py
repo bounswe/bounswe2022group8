@@ -17,6 +17,8 @@ class History(models.Model):
     object_id       = models.PositiveIntegerField()
     content_object  = GenericForeignKey() #the actual object
     viewed_on       = models.DateTimeField(auto_now_add=True)
+    is_art          = models.BooleanField(default=False)
+    art_id          = models.IntegerField(default=-1)
 
     def __str__(self):
         return "%s viewed: on %s by %s" %(self.content_object, self.viewed_on, self.user)
@@ -32,6 +34,9 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
         object_id       = instance.id,
     )
     if(isinstance(instance, ArtItem)):
+        new_history.is_art =True
+        new_history.art_id =instance.pk
+        new_history.save()
         instance.increaseViews()
         instance.updatePopularity()
         userinterest = UserInterest.objects.get(user = request.user)
