@@ -58,6 +58,7 @@ def like_artitem(request, id):
         artitem = ArtItem.objects.get(pk=id)
         try:
             like = LikeArtItem.objects.create(user=current_user, artitem=artitem)
+            artitem.updatePopularity()
             serializer = LikeArtItemSerializer(like)
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError:

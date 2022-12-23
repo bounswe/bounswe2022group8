@@ -50,10 +50,17 @@ class ArtItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
     number_of_views = models.IntegerField(default=0)
+    popularity = models.FloatField(default=0)
 
     def increaseViews(self, *args, **kwargs):
         self.number_of_views += 1
         super().save(*args, **kwargs)
+
+    def updatePopularity(self, *args, **kwargs):
+        self.popularity = 0.1*((self.created_at.year - 2020)*365 + self.created_at.month*30 + self.created_at.day) + 2*self.get_numberof_likes + self.number_of_views
+        print(self.popularity)
+        super().save(*args, **kwargs)
+
 
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamps

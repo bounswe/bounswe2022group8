@@ -31,5 +31,6 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
     )
     if(isinstance(instance, ArtItem)):
         instance.increaseViews()
+        instance.updatePopularity()
 
 object_viewed_signal.connect(object_viewed_receiver)
