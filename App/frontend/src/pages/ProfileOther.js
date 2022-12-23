@@ -290,13 +290,18 @@ function ProfileOther(props) {
             <div className="gallery">
               {userGallery.map((val, key) => {
                 return (
-                  <div key={val.id} className="gallery-item">
+                  <div
+                    key={val.id}
+                    className="gallery-item"
+                    onClick={() => goToArtItem(val.id)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <img
                       src={val.artitem_path}
                       className="gallery-image"
                       alt={val.description}
-                      onClick={() => goToArtItem(val.id)}
                     />
+                    <div className="gallery-image-options-container"></div>
                   </div>
                 );
               })}
