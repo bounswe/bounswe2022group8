@@ -216,6 +216,15 @@ def BidArtItemView(request, artitemid):
                     message = {'detail': 'Sorry, this art item is already sold.'}
                     return Response(message, status=status.HTTP_400_BAD_REQUEST)
                 else:
+                    try:
+                        previousBids = Bid.objects.filter(buyer=user, artitem=artitem, accepted='NR')
+                        for bid in previousBids:
+                            if(bid.deadline.replace(tzinfo=None) > datetime.datetime.now().replace(tzinfo=None)):
+                                message = {
+                                    'detail': 'You can not bid while you have a nonexpired bid on this art item.'}
+                                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+                    except Bid.DoesNotExist:
+                        pass
                     if(data["amount"] >= artitem.minimum_price):
                         #if(make_aware(datetime.datetime.strptime(data["deadline"], "yyyy'-'MM'-'dd'T'HH':'mm':'ss")) <= (datetime.datetime.now() + datetime.timedelta(minutes=10))):
                         if(parser.parse(data["deadline"]).replace(tzinfo=None) <= (datetime.datetime.now().replace(tzinfo=None) + datetime.timedelta(minutes=10))):
