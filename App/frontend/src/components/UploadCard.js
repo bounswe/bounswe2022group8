@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
+import { CategoryOptions } from "./data/Categories";
 import { RiDragDropLine } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -10,19 +12,11 @@ function UploadCard(props) {
   const { token } = useAuth();
   var host = HOST;
 
-  /*const [uploadInfo, setUploadInfo] = useState({
-    title: "",
-    description: "",
-    type: "",
-    tags: [],
-    artitem_image: "",
-  });*/
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
+  const [category, setCategory] = useState(null);
   const [tags, setTags] = useState([]);
-  const [base64Image, setBase64Image] = useState("olmadi");
+  const [base64Image, setBase64Image] = useState("");
 
   const [preview, setPreview] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -65,7 +59,7 @@ function UploadCard(props) {
     e.preventDefault();
     if (previewImage === "") {
       props.setPostError(true);
-    } else if (title === "" || description === "" || type === "") {
+    } else if (title === "" || description === "") {
       props.setUploadInfoError(true);
     } else {
       setIsLoading(true);
@@ -74,7 +68,7 @@ function UploadCard(props) {
         body: JSON.stringify({
           title: title,
           description: description,
-          type: type,
+          category: category ? category.value : "OT",
           tags: tags,
           artitem_image: base64Image,
         }),
@@ -83,7 +77,7 @@ function UploadCard(props) {
           Authorization: `Token ${token}`,
         },
       })
-        .then((response) => {
+        .then(() => {
           setIsLoading(false);
           props.setNewImageUploaded();
           props.closeUploadCard();
@@ -91,13 +85,8 @@ function UploadCard(props) {
           closePreview();
           setTitle("");
           setDescription("");
-          setType("");
+          setCategory(null);
           setTags([]);
-
-          return response.json();
-        })
-        .then((response) => {
-          // console.log(response);
         })
         .catch((error) => console.error("Error:", error));
     }
@@ -121,9 +110,8 @@ function UploadCard(props) {
     setDescription(value);
   }
 
-  function handleType(e) {
-    const value = e.target.value;
-    setType(value);
+  function handleCategory(selectedOption) {
+    setCategory({ value: selectedOption.value, label: selectedOption.label });
   }
 
   function handleTags(e) {
@@ -220,7 +208,7 @@ function UploadCard(props) {
 
           {props.uploadInfoError && (
             <div className="upload-info-error">
-              Title, description and category fields may not be left blank.
+              Title and description fields may not be left blank.
             </div>
           )}
 
@@ -255,21 +243,41 @@ function UploadCard(props) {
               onChange={handleDescription}
             />
           </div>
+
           <div className="form-group mt-3">
             <label className="access-label" style={{ color: "#ffc9ff" }}>
               Category
             </label>
-            <input
-              type="text"
-              className="form-control mt-1"
-              placeholder="Painting, photography, digital art..."
-              name="type"
-              id="type"
-              style={{ fontSize: "14px" }}
-              value={type}
-              onChange={handleType}
+            <Select
+              className="mt-1"
+              placeholder="Select category"
+              options={CategoryOptions}
+              maxMenuHeight={170}
+              styles={{
+                control: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  borderRadius: "6px",
+                  borderColor: "#18121c",
+                  boxShadow: "none",
+                  outline: "none",
+                }),
+                menu: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  color: "#000000",
+                }),
+                option: (baseStyles) => ({
+                  ...baseStyles,
+                  paddingTop: "3px",
+                  paddingBottom: "3px",
+                }),
+              }}
+              value={category}
+              onChange={handleCategory}
             />
           </div>
+
           <div className="form-group mt-3">
             <label className="access-label" style={{ color: "#ffc9ff" }}>
               Tags
