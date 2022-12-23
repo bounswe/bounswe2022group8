@@ -2,10 +2,12 @@ from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from .user import User
+from .user import User, UserInterest
 
 from django.template.defaultfilters import date
 from django.utils.translation import gettext_lazy as _
+
+from ..signals import user_created_signal
 
 
 class Tag(models.Model):
@@ -92,3 +94,11 @@ class LikeArtItem(models.Model):
 
     def __str__(self):
         return str(self.user) + " liked " + str(self.artitem)
+
+def user_created_receiver(sender, request, *args, **kwargs):
+    # new_newbids         = NewBids.objects.create(
+    #     user            =  sender
+    # )
+    userInterest = UserInterest.objects.create(user=sender)
+
+user_created_signal.connect(user_created_receiver)
