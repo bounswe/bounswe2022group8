@@ -6,6 +6,7 @@ from django.conf import settings
 from .signals import object_viewed_signal
 
 from api.models.artitem import ArtItem
+from api.models.user import UserInterest
 
 User = settings.AUTH_USER_MODEL
 
@@ -32,5 +33,7 @@ def object_viewed_receiver(sender, instance, request, *args, **kwargs):
     if(isinstance(instance, ArtItem)):
         instance.increaseViews()
         instance.updatePopularity()
+        userinterest = UserInterest.objects.get(user = request.user)
+        userinterest.updateInterest(instance.category, 1)
 
 object_viewed_signal.connect(object_viewed_receiver)
