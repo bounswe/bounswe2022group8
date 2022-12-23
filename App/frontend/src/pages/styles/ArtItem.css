@@ -58,7 +58,7 @@
   max-height: 90vh;*/
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 
 .artitem-post-container #owner {
@@ -95,7 +95,7 @@
 .artitem-post-container #comments {
   /*background-color: #fafafa;*/
   flex: 1 1 0;
-  /*overflow-y: scroll;*/
+  overflow-y: scroll;
   padding: 0px 10px 10px 10px;
   /*color: #18121c;*/
 }

@@ -444,6 +444,7 @@ function ArtItem(props) {
 
         // Event handlers
         r.on("createAnnotation", (annotation) => {
+          console.log("i am here");
           annotation["creator"] = userid;
           annotation["target"]["source"] = artitemSrc.split(/[?]/)[0];
           //fetch with method 'POST'
@@ -587,95 +588,94 @@ function ArtItem(props) {
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
 
-            <div ref={token ? textElement : null}>
-              <div id="title-and-description">
-                <div id="title">{artitemTitle}</div>
-                <div id="description">{artitemDescription}</div>
-                <em id="category">Category: {CategoryDict[artitemCategory]}</em>
-              </div>
-              <br></br>
-              <div id="comments">
-                {artitemComments.length === 0 && (
-                  <div
-                    style={{
-                      color: "#bcb1c1",
-                      fontSize: "14px",
-                      textAlign: "center",
-                    }}
-                  >
-                    No comments yet
-                  </div>
-                )}
-                {artitemComments.map((val, index) => {
-                  return (
-                    <div key={val.id} className="comment">
-                      <img
-                        className="comment-owner-profile-photo"
-                        src={commentPhotos[index]}
-                        alt=""
-                        onClick={() => goToProfile(val.commented_by.id)}
-                      />
-                      <div>
-                        <div className="comment-owner">
-                          {val.commented_by.username}
-                        </div>
-                        <div className="comment-text">{val.body}</div>
-                        <div className="comment-info"> {val.created_at} </div>
-                      </div>
-                    </div>
-                  );
-                })}
-                <div ref={bottomRef} />
-              </div>
+            <div ref={token ? textElement : null} id="title-and-description">
+              <div id="title">{artitemTitle}</div>
+              <div id="description">{artitemDescription}</div>
+              <em id="category">Category: {CategoryDict[artitemCategory]}</em>
             </div>
-          </div>
-          <div id="stats">
-            <div id="likes">{artitemLikes} likes</div>
-            <div>{artitemComments.length} comments</div>
-            <div>
-              {isLiked ? (
-                <IoIosHeart
+            <br></br>
+            <div id="comments">
+              {artitemComments.length === 0 && (
+                <div
                   style={{
-                    fontSize: "1.5rem",
-                    cursor: "pointer",
-                    strokeWidth: "0.8rem",
-                    color: "#ffc9ff",
+                    color: "#bcb1c1",
+                    fontSize: "14px",
+                    textAlign: "center",
                   }}
-                  onClick={handleLike}
-                />
-              ) : (
-                <IoIosHeartEmpty
-                  style={{
-                    fontSize: "1.5rem",
-                    cursor: "pointer",
-                    strokeWidth: "0.8rem",
-                    color: "#ffffff",
-                  }}
-                  onClick={handleLike}
-                />
+                >
+                  No comments yet
+                </div>
               )}
+              {artitemComments.map((val, index) => {
+                return (
+                  <div key={val.id} className="comment">
+                    <img
+                      className="comment-owner-profile-photo"
+                      src={commentPhotos[index]}
+                      alt=""
+                      onClick={() => goToProfile(val.commented_by.id)}
+                    />
+                    <div>
+                      <div className="comment-owner">
+                        {val.commented_by.username}
+                      </div>
+                      <div className="comment-text">{val.body}</div>
+                      <div className="comment-info"> {val.created_at} </div>
+                    </div>
+                  </div>
+                );
+              })}
+              <div ref={bottomRef} />
             </div>
-          </div>
-          <div className="add-comment-container">
-            <div>
-              <textarea
-                type="text"
-                className="add-comment-input"
-                placeholder="Add comment..."
-                name="comment"
-                rows="3"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              ></textarea>
+
+            <div id="stats">
+              <div id="likes">{artitemLikes} likes</div>
+              <div>{artitemComments.length} comments</div>
+              <div>
+                {isLiked ? (
+                  <IoIosHeart
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffc9ff",
+                    }}
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <IoIosHeartEmpty
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffffff",
+                    }}
+                    onClick={handleLike}
+                  />
+                )}
+              </div>
             </div>
-            <div className="btn-comment-container">
-              <button
-                className="btn btn-comment"
-                type="submit"
-                onClick={handleSendComment}
-              >
-                Send
-              </button>
+            <div className="add-comment-container">
+              <div>
+                <textarea
+                  type="text"
+                  className="add-comment-input"
+                  placeholder="Add comment..."
+                  name="comment"
+                  rows="3"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                ></textarea>
+              </div>
+              <div className="btn-comment-container">
+                <button
+                  className="btn btn-comment"
+                  type="submit"
+                  onClick={handleSendComment}
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>
