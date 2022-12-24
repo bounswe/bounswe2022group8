@@ -444,7 +444,6 @@ function ArtItem(props) {
           widgets: ["COMMENT"],
         });
 
-        console.log(r);
         r.loadAnnotations(
           `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
         )
