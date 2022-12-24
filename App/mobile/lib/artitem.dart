@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
+import 'package:flutter_native_image/flutter_native_image.dart';
 
 import 'getimage.dart';
 
@@ -19,19 +20,21 @@ class ArtItem extends StatefulWidget {
     required this.title,
     required this.description,
     required this.username,
-    required this.type,
     required this.tags,
     required this.artitem_path,
     required this.profile_path,
+    required this.likes,
   });
   final int id;
   final String title;
   final String description;
   final String username;
-  final String type;
-  final String tags;
+  final List<dynamic> tags;
   final String artitem_path;
   final String profile_path;
+  final int likes;
+  
+
   @override
   State<ArtItem> createState() => _ArtItemState();
 }
@@ -64,21 +67,25 @@ Future <List<ArtItem>> getAllArtItems() async {
 
       }
   );
- // print(response.statusCode) ;
- // print(response.body) ;
+  //print(response.statusCode) ;
+  print(response.body) ;
 
 List <dynamic> items = jsonDecode(response.body);
   List <ArtItem> userArtItems = [] ;
   if (response.statusCode == 200) {
     for (var body in items) {
     ArtItemUserClass owner = ArtItemUserClass.fromJson(body['owner']);
-    print(owner);
+    String profileUrl = await getImage(owner.profile_path) ;
+
     String itemURL = await getImage(body['artitem_path']) ;
+    print(owner.name);
+
     //Profile profile = await getOtherProfile(owner.id);
-    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username, type: body["type"], tags: "", artitem_path: itemURL,profile_path: owner.profile_path) ;
-    print(x.description);
-    print(x.id);
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username,  tags: body["tags"], artitem_path: itemURL,profile_path: profileUrl, likes : body["likes"]) ;
+    //print(x.description);
+    //print(x.id);
     print(x.title);
+    print("Finished") ;
     userArtItems.add(x);
   }
   }
@@ -86,6 +93,7 @@ List <dynamic> items = jsonDecode(response.body);
   return userArtItems ;
 }
 Future <List<ArtItem>> getuserArtItems() async {
+  print("started") ;
   final response = await http.get(
       Uri.parse(GET_USER_ART_ITEM_ENDPOINT),
       headers: <String, String>{
@@ -94,25 +102,31 @@ Future <List<ArtItem>> getuserArtItems() async {
 
       }
   );
-  print(response.statusCode) ;
-  print(response.body) ;
+  //print(response.statusCode) ;
+  //print(response.body) ;
 
   List <dynamic> items = jsonDecode(response.body);
   List <ArtItem> userArtItems = [] ;
   if (response.statusCode == 200) {
     for (var body in items) {
     ArtItemUserClass owner = ArtItemUserClass.fromJson(body['owner']);
-    print(owner);
+    //print(owner);
     String itemURL = await getImage(body['artitem_path']) ;
-
-    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username, type: body["type"], tags: "AA", artitem_path: itemURL, profile_path: "",) ;
-    print(x.description);
-    print(x.id);
-    print(x.title);
+try{
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username,  tags: body["tags"], artitem_path: itemURL, profile_path: "", likes: body["likes"]) ;
     userArtItems.add(x);
+
+}
+catch (e){
+  print(e) ;
+}
+    //print(x.description);
+    //print(x.id);
+    //print(x.title);
   }
   }
   print(userArtItems);
+  print("returned");
   return userArtItems ;
 
 }
@@ -120,7 +134,9 @@ Future<String> uploadArtItem(title, description, String tags, XFile? image) asyn
   List<String> tagArray = tags.split(',') ;
   String base64Image = '"data:image/jpeg;base64,' ;
   if (image != null) {
-  File(image.path).readAsBytes().then((value) async {
+      File compimage =    (await FlutterNativeImage.compressImage(image.path,
+        quality: 25));
+  File(compimage.path).readAsBytes().then((value) async {
 
    base64Image = base64Image +   base64Encode(value);
     final response = await http.post(
@@ -134,7 +150,7 @@ Future<String> uploadArtItem(title, description, String tags, XFile? image) asyn
       'title': title,
       'description' : description,
       'type' : "Sketch",
-      'tags' : [],
+      'tags' : tagArray,
       "artitem_image": base64Image,
     })
   );

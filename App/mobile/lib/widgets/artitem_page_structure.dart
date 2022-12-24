@@ -83,7 +83,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  textUtils.buildText("458 likes", 13, colorPalette.blackShadows,
+                  textUtils.buildText(widget.artitem.likes.toString() + " likes", 13, colorPalette.blackShadows,
                       FontWeight.w600),
                   const SizedBox(
                     width: 15,
