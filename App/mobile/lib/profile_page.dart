@@ -1,3 +1,4 @@
+import 'package:artopia/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
@@ -136,6 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
             );
           }
           else if (value == 2) {
+              token = "" ;
               Route route =
               MaterialPageRoute(builder: (context) => LandingPage());
               Navigator.pushReplacement(context, route);
