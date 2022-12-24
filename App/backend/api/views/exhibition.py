@@ -1044,4 +1044,143 @@ def validate_ids(artitems, userid):
     owned_artitems = ArtItem.objects.filter(owner=userid)
     owned_artitem_ids = [i.id for i in owned_artitems]
     return all([True if artitemid in owned_artitem_ids else False for artitemid in artitems])  # all given art items should belong to the current user
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Exhibitions API. Returns all the exhibitions of the currently logged-in user. Requires authentication.",
+    operation_summary="Get all the exhibitions of the user.",
+    tags=['exhibitions'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the exhibitions of the user.",
+            examples={
+                "application/json": {
+                "Offline Exhibitions":  {
+                    "owner":
+                    [
+                    {
+                        "id": 1,
+                        "owner": {
+                            "id": 1,
+                            "username": "denemes",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "My Offline Exhibition",
+                        "description": "Art exhibition at street 123.",
+                        "poster": {
+                            "id": 1,
+                            "owner": 1,
+                            "title": "My Offline Exhibition",
+                            "description": "Art exhibition at street 123.",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/artitem-1.png",
+                            "created_at": "08-12-2022 23:31:44"
+                        },
+                        "collaborators": [],
+                        "start_date": "08-12-2022 16:00:00",
+                        "end_date": "10-12-2020 16:00:00",
+                        "created_at": "08-12-2022 23:31:44",
+                        "updated_at": "08-12-2022 23:31:44",
+                        "city": "İstanbul",
+                        "country": "Türkiye",
+                        "address": "Beyoglu",
+                        "latitude": 41.40338,
+                        "longitude": 28.97835,
+                        "status": "Ongoing"
+                    }
+                    ],
+                    "collaborator": []
+                },
+                "Virtual Exhibitions": {
+                    "owner":
+                     [
+                    {
+                        "id": 1,
+                        "owner": {
+                            "id": 1,
+                            "username": "denemes",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "My Offline Exhibition",
+                        "description": "Art exhibition at street 123.",
+                        "poster": {
+                            "id": 4,
+                            "owner": 1,
+                            "title": "My Offline Exhibition",
+                            "description": "Art exhibition at street 123.",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/artitem-4.png",
+                            "created_at": "08-12-2022 23:32:34"
+                        },
+                        "collaborators": [],
+                        "artitems_gallery": [
+                            {
+                                "id": 3,
+                                "owner": 1,
+                                "title": "Portrait of Joel Miller",
+                                "description": "Joel Miller from TLOU universe.",
+                                "category": "OT",
+                                "tags": [],
+                                "artitem_path": "artitem/artitem-3.png",
+                                "created_at": "08-12-2022 23:32:18"
+                            }
+                        ],
+                        "start_date": "08-12-2022 16:00:00",
+                        "end_date": "10-12-2020 16:00:00",
+                        "created_at": "08-12-2022 23:32:34",
+                        "updated_at": "08-12-2022 23:32:34",
+                        "status": "Ongoing"
+                    }
+                ],
+                "collaborator": []
+                }
+            }
+            }
+        )
+    }
+)
+@api_view(["GET"])
+@permission_classes([permissions.AllowAny])
+@authentication_classes([TokenAuthentication])
+def get_my_exhibitions(request):
+    if (request.method == "GET"):
+        current_userid = request.user.id
+
+        query = Q(owner=current_userid)           # user is the owner
+        virtualExhibitions = VirtualExhibition.objects.filter(query) # get virtual exhibitions in which the user is the owner
+        serializer = VirtualExhibitionSerializer(virtualExhibitions, many=True)
+        virtual_owner = serializer.data
+
+        query = (Q(collaborators=current_userid))  # user is a collaborator 
+        virtualExhibitions = VirtualExhibition.objects.filter(query)
+        serializer = VirtualExhibitionSerializer(virtualExhibitions, many=True)
+        virtual_collaborator = serializer.data
+
+        query = Q(owner=current_userid)      # user is the owner 
+        offlineExhibitions = OfflineExhibition.objects.filter(query)
+        serializer = OfflineExhibitionSerializer(offlineExhibitions, many=True)
+        offline_owner = serializer.data
+
+        query = (Q(collaborators=current_userid))  # user is a collaborator 
+        offlineExhibitions = OfflineExhibition.objects.filter(query)
+        serializer = OfflineExhibitionSerializer(offlineExhibitions, many=True)
+        offline_collaborator = serializer.data
         
+        data = {
+            "Offline Exhibitions": {
+                "owner": offline_owner,
+                "collaborator": offline_collaborator
+            },
+            "Virtual Exhibitions": {
+                "owner": virtual_owner,
+                "collaborator": virtual_collaborator
+            }
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
