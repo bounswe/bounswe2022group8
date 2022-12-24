@@ -35,6 +35,7 @@ class ArtItemSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance)
         rep["tags"] = TagSerializer(instance.tags.all(), many=True).data 
         rep["owner"] = SimpleUserSerializer(instance.owner).data
+        rep['bought_by'] = CommentUserSerializer(instance.bought_by).data if rep['bought_by'] else None
         return rep
 
 class SimpleArtItemSerializer(serializers.ModelSerializer):

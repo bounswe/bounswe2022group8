@@ -281,7 +281,7 @@ def BidArtItemView(request, artitemid):
                             artitem.sale_status = 'FS'
                             artitem.minimum_price = data["minimum_price"]
                             artitem.save()
-                            message = {'detail': 'The art item sale status is successfully updated.'}
+                            message = {'detail': 'The art item is successfully put on sale.'}
                             return Response(message, status=status.HTTP_200_OK)
                         else:
                             message = {'detail': 'Minimum price has to be a positive number.'}
