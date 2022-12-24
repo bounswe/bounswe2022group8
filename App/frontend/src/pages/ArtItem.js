@@ -60,6 +60,7 @@ function ArtItem(props) {
   const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
   const [artitemCategory, setArtitemCategory] = useState("");
+  const [artitemTags, setArtitemTags] = useState([]);
   const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
   const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemComments, setArtitemComments] = useState([]);
@@ -113,6 +114,7 @@ function ArtItem(props) {
         setArtitemTitle(response.title);
         setArtitemDescription(response.description);
         setArtitemCategory(response.category);
+        setArtitemTags(response.tags);
         setArtitemOwnerUsername(response.owner.username);
         setArtitemOwnerID(response.owner.id);
         setIsLiked(response.isLiked);
@@ -544,12 +546,9 @@ function ArtItem(props) {
             )}
 
             <div className="tag-container">
-              <Tag tagname="nature"></Tag>
-              <Tag tagname="human"></Tag>
-              <Tag tagname="architecture"></Tag>
-              <Tag tagname="black"></Tag>
-              <Tag tagname="pink"></Tag>
-              <Tag tagname="night"></Tag>
+              {artitemTags.map((val) => {
+                return <Tag key={val.id} tagname={val.tagname}></Tag>;
+              })}
             </div>
 
             {token ? (

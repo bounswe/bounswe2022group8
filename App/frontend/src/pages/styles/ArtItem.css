@@ -239,7 +239,8 @@
 
 /* width */
 .artitem-post-container #comments::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  height: 10px;
 }
 
 /* Track */
@@ -259,7 +260,8 @@
 
 /* width */
 .artitem-post-container #image-container::-webkit-scrollbar {
-  width: 1px;
+  width: 5px;
+  height: 10px;
 }
 
 /* Track */
