@@ -536,7 +536,7 @@ function ArtItem(props) {
                   ref={imageElement}
                   src={artitemSrc}
                   alt={artitemDescription}
-                  style={{ height: "100%"}}
+                  style={{ height: "100%" }}
                 />
               </div>
             ) : (
