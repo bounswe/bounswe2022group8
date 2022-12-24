@@ -284,12 +284,16 @@ def get_exhibitions(request):
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
                     "status": "Ongoing",
-                    "uploaded_images": [
+                    "artitems_upload": [
                         {
-                            "id": 62,
-                            "virtualExhibition": 27,
-                            "artitem_path": "artitem/artitem-62.png",
-                            "created_at": "08-12-2022 23:18:16"
+                            "id": 3,
+                            "title": "Portrait of Joel Miller",
+                            "tags": [],
+                            "description": "Joel Miller from TLOU universe.",
+                            "category": "OT",
+                            "artitem_path": "artitem/artitem-3.png",
+                            "likes": 0,
+                            "created_at": "24-12-2022 14:02:33"
                         }
                     ]
                 }
@@ -894,12 +898,16 @@ def create_offline_exhibition(request):
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
                     "status": "Ongoing",
-                    "uploaded_images": [
+                    "artitems_upload": [
                         {
-                            "id": 62,
-                            "virtualExhibition": 27,
-                            "artitem_path": "artitem/artitem-62.png",
-                            "created_at": "08-12-2022 23:18:16"
+                            "id": 3,
+                            "title": "Portrait of Joel Miller",
+                            "tags": [],
+                            "description": "Joel Miller from TLOU universe.",
+                            "category": "OT",
+                            "artitem_path": "artitem/artitem-3.png",
+                            "likes": 0,
+                            "created_at": "24-12-2022 14:02:33"
                         }
                     ]
                 }
