@@ -536,7 +536,7 @@ function ArtItem(props) {
                   ref={imageElement}
                   src={artitemSrc}
                   alt={artitemDescription}
-                  style={{ height: "100%"}}
+                  style={{ height: "100%" }}
                 />
               </div>
             ) : (
@@ -553,7 +553,7 @@ function ArtItem(props) {
             </div>
 
             {token ? (
-              <div>
+              <div className="button-container">
                 <button
                   className="anno-show-hide-button"
                   onClick={() => {
@@ -566,6 +566,9 @@ function ArtItem(props) {
                     ? "Show Annotations"
                     : "Hide Annotations"}
                 </button>
+                {userid===artitemOwnerID ?
+                null
+                :<button className="make-offer-button">Make Offer</button>}
               </div>
             ) : null}
 
@@ -582,7 +585,76 @@ function ArtItem(props) {
                 : null}
               {token ? clickedAnnotationText : null}
             </div>
-          </div>
+
+            
+                    <div className="table">
+                      <table className="bidder-list">
+                        <thead>
+                          <tr>
+                            <th className="text-center" >
+                              <span style={{fontSize:"15px"}}>From</span>
+                            </th>
+                            <th className="text-center">
+                              <span style={{fontSize:"15px"}}>Price</span>
+                            </th>
+                            <th className="text-center">
+                              <span style={{fontSize:"15px"}}>Deadline</span>
+                            </th>
+                            <th className="text-center">
+                              <span style={{fontSize:"15px"}}>Status</span>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td >
+                              <img
+                              id="bidder-profile-photo"
+                                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                alt=""
+                              />
+                              <span class="user-name">Mila Kunis</span>
+                              
+                            </td>
+                            <td className="text-center">2013/08/08</td>
+                            <td class="text-center">
+                              <span class="label label-default">Inactive</span>
+                            </td>
+                            <td className="text-center">
+                              <span>mila@kunis.com</span>
+                            </td>
+                            
+                          </tr>
+                          
+                            
+                          
+                          <tr>
+                            <td>
+                              <img
+                              id="bidder-profile-photo"
+                                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                alt=""
+                              />
+                              <span class="user-name">Mila Kunis</span>
+                              
+                            </td>
+                            <td className="text-center">2013/08/08</td>
+                            <td class="text-center">
+                              <span class="label label-default">Inactive</span>
+                            </td>
+                            <td className="text-center">
+                              <span>mila@kunis.com</span>
+                            </td>
+                            
+                          </tr>
+                        </tbody>
+
+                      </table>
+                    </div>
+                    
+               </div>
+            
 
           <div id="info-container">
             <div id="owner">
