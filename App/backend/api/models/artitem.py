@@ -7,6 +7,10 @@ from .user import User
 from django.template.defaultfilters import date
 from django.utils.translation import gettext_lazy as _
 
+import datetime
+from django.core.validators import MinValueValidator 
+
+from ..signals import user_created_signal
 
 class Tag(models.Model):
     tagname = models.CharField(max_length=100)
@@ -40,6 +44,11 @@ class ArtItem(models.Model):
         PAINTING_OTHER = 'OP', _("Painting Other")
         OTHER = 'OT', _("Other")
 
+    class SaleStatus(models.TextChoices):
+        NOTFORSALE = 'NS', _('Not For Sale')
+        FORSALE = 'FS', _('For Sale')
+        SOLD = 'SO', _('Sold')
+
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -50,6 +59,9 @@ class ArtItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
     number_of_views = models.IntegerField(default=0)
+    sale_status = models.CharField(max_length=2, choices=SaleStatus.choices, default=SaleStatus.NOTFORSALE)
+    minimum_price = models.PositiveIntegerField(default=0)
+    bought_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="bought_art")
 
     def increaseViews(self, *args, **kwargs):
         self.number_of_views += 1
@@ -85,3 +97,43 @@ class LikeArtItem(models.Model):
 
     def __str__(self):
         return str(self.user) + " liked " + str(self.artitem)
+
+
+class Bid(models.Model):
+    class Response(models.TextChoices):
+        REJECTED = 'RE', _('Rejected')
+        ACCEPTED = 'AC', _('Accepted')
+        NORESPONSE = 'NR', _('No Response')
+
+    artitem = models.ForeignKey(ArtItem, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.FloatField(validators=[MinValueValidator(0.0)])
+    created_at = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(blank=True, null=True)
+    accepted = models.CharField(max_length=2, choices=Response.choices, default=Response.NORESPONSE)
+
+    def save(self, *args, **kwargs):
+        if not self.deadline:
+            self.deadline = datetime.datetime.now() + datetime.timedelta(days=2)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.buyer) + " bid " + str(self.amount)  + " on " + str(self.artitem) 
+
+class NewBids(models.Model):
+    user = models.OneToOneField(User,
+        primary_key=True,
+        on_delete=models.CASCADE,
+        help_text=_('User (Required).'),
+    )
+    new_bids = models.ManyToManyField(ArtItem, blank=True)
+
+    class Meta:
+        verbose_name_plural = "NewBids"
+
+def user_created_receiver(sender, request, *args, **kwargs):
+    new_newbids         = NewBids.objects.create(
+        user            =  sender
+    )
+
+user_created_signal.connect(user_created_receiver)

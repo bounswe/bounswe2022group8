@@ -65,7 +65,10 @@ from django.core.files.base import ContentFile
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -123,7 +126,10 @@ def get_artitems(request):
                         "tags": [1],
                         "likes": 0,
                         "artitem_path": "artitem/docker.jpg",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -260,7 +266,10 @@ def delete_artitem(request, id):
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
                         "number_of_views": 5,
-                        "isLiked": False
+                        "sale_status": "FS",
+                        "minimum_price": 50,
+                        "bought_by": None,
+                        "isLiked": "False"
 
                     }
                 ]
@@ -324,7 +333,10 @@ def artitems_by_id(request, id):
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -377,7 +389,10 @@ def artitems_by_userid(request, id):
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/docker.jpg",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -432,7 +447,10 @@ def artitems_by_username(request, username):
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
                         "created_at": "08-12-2022 00:38:25",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -490,7 +508,10 @@ def artitems_of_followings(request):
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
                         "created_at": "08-12-2022 00:38:25",
-                        "number_of_views": 5
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None
                     }
                 ]
             }
