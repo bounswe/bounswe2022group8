@@ -295,7 +295,7 @@ class ArtItemTest(TestCase):
 
     def tearDown(self):
         # cleaning up after the test
-        print("TestExhibition:setUp_:begin")
+        print("TestExhibition:tearDown_:begin")
 
         # do something
-        print("TestExhibition:setUp_:end")
+        print("TestExhibition:tearDown_:end")

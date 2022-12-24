@@ -357,6 +357,6 @@ class TestAnnotations(TestCase):
 
     # cleaning
     def tearDown(self):
-        print("TestAnnotation:setUp_:begin")
-        print("TestAnnotation:setUp_:end")
+        print("TestAnnotation:tearDown_:begin")
+        print("TestAnnotation:tearDown_:end")
 

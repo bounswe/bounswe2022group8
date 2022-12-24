@@ -155,7 +155,7 @@ class FollowTest(TestCase):
 
     def tearDown(self):
         # cleaning up after the test
-        print("TestArtItem:setUp_:begin")
+        print("TestArtItem:tearDown_:begin")
 
         # do something
-        print("TestArtItem:setUp_:end")
+        print("TestArtItem:tearDown_:end")
