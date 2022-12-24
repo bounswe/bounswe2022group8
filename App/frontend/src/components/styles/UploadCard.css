@@ -122,6 +122,20 @@ input[type="file"] {
   font-weight: 500;
 }
 
+@media (max-width: 1000px) {
+  .upload-info .upload-info-header {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 850px) {
+  .upload-info .upload-info-header {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+
 .upload-post-btn {
   margin-top: 0.6rem;
   background-color: #ffc9ff;

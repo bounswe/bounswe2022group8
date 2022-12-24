@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
+import { CategoryDict } from "./data/Categories";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart } from "react-icons/io";
 
 import "./styles/ArtItem.css";
 
@@ -23,13 +26,16 @@ function ArtItem(props) {
   const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
-  const [artitemDescription, setArtitemDescription] = useState("");
-  const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
-  // const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemTitle, setArtitemTitle] = useState("");
+  const [artitemDescription, setArtitemDescription] = useState("");
+  const [artitemCategory, setArtitemCategory] = useState("");
+  const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
+  const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemComments, setArtitemComments] = useState([]);
+  const [artitemLikes, setArtitemLikes] = useState(0);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const [myID, setMyID] = useState(null);
 
   // COMMENT BODY TO BE POSTED
@@ -55,19 +61,30 @@ function ArtItem(props) {
 
   // GET THE ART ITEM'S PROPERTIES
   useEffect(() => {
+    var config = {};
+
+    if (token) {
+      config = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
+    } else {
+      config = { "Content-Type": "application/json" };
+    }
+
     fetch(`${host}/api/v1/artitems/${artitem_id}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
-      },
+      headers: config,
     })
       .then((response) => response.json())
       .then((response) => {
         // console.log(response);
-        setArtitemDescription(response.description);
-        setArtitemOwnerUsername(response.owner.username);
         setArtitemTitle(response.title);
+        setArtitemDescription(response.description);
+        setArtitemCategory(response.category);
+        setArtitemOwnerUsername(response.owner.username);
+        setArtitemOwnerID(response.owner.id);
+        setIsLiked(response.isLiked);
 
         var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -118,6 +135,23 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
 
+  // GET THE ART ITEM'S LIKES
+  useEffect(() => {
+    fetch(`${host}/api/v1/artitems/${artitem_id}/likers/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response);
+        setArtitemLikes(response.length);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   // GET CURRENTLY LOGGED IN USERS' ID
   useEffect(() => {
     fetch(`${host}/api/v1/users/profile/me/`, {
@@ -148,8 +182,7 @@ function ArtItem(props) {
             Authorization: `Token ${token}`,
           },
         })
-          .then((response) => response.json())
-          .then((response) => {
+          .then(() => {
             setUpdateComments(!updateComments);
           })
           .catch((error) => console.error("Error:", error));
@@ -160,6 +193,40 @@ function ArtItem(props) {
 
     // clear the input box after the message is sent
     setNewComment("");
+  }
+
+  function handleLike() {
+    if (token) {
+      if (isLiked) {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/unlike/`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes - 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      } else {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/like/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes + 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
+    }
   }
 
   useEffect(() => {
@@ -208,6 +275,7 @@ function ArtItem(props) {
             <div id="title-and-description">
               <div id="title">{artitemTitle}</div>
               <div id="description">{artitemDescription}</div>
+              <em id="category">Category: {" "} {CategoryDict[artitemCategory]}</em>
             </div>
             <br></br>
             <div id="comments">
@@ -244,8 +312,31 @@ function ArtItem(props) {
               <div ref={bottomRef} />
             </div>
             <div id="stats">
-              <span id="likes">0 likes</span>
-              <span>{artitemComments.length} comments</span>
+              <div id="likes">{artitemLikes} likes</div>
+              <div>{artitemComments.length} comments</div>
+              <div>
+                {isLiked ? (
+                  <IoIosHeart
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffc9ff",
+                    }}
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <IoIosHeartEmpty
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffffff",
+                    }}
+                    onClick={handleLike}
+                  />
+                )}
+              </div>
             </div>
             <div className="add-comment-container">
               <div>

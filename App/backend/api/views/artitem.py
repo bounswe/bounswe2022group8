@@ -6,7 +6,7 @@ from knox.models import AuthToken
 from ..models.user import User
 from ..models.user import Follow
 from ..models.artitem import ArtItem, LikeArtItem
-from ..serializers.serializers import ArtItemSerializer
+from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
 from ..serializers.auth import RegisterSerializer, LoginSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
@@ -18,6 +18,9 @@ import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
 from django.contrib.auth.models import AnonymousUser
+from django.db.models import Q
+from functools import reduce
+import operator
 
 
 from drf_yasg import openapi
@@ -456,3 +459,61 @@ def artitems_of_followings(request):
     artitems = ArtItem.objects.filter(owner__in=followings)
     serializer = ArtItemSerializer(artitems, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns art items having all the tags provided the request body.",
+    operation_summary="Get art items by tag.",
+    query_serializer=ArtItemByTagQuerySerializer,
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items with the given tags.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "owner": {
+                            "id": 9,
+                            "username": "till_i_collapse",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "Portrait of Joel Miller",
+                        "description": "Joel Miller from TLOU universe.",
+                        "category": "DR",
+                        "tags": [],
+                        "likes": 5,
+                        "artitem_path": "artitem/artitem-0.png",
+                        "created_at": "08-12-2022 00:38:25",
+                        "number_of_views": 5
+                    }
+                ]
+            }
+        ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad Request is raised when the request body doesn't comply with the expected body format.",
+            examples={
+                "application/json": {"tags": ["This field is required."]}
+            }
+        ),
+    }
+)
+@api_view(["GET"])
+def artitems_by_tags(request):
+    if("tags" not in request.query_params):
+        return Response({"tags": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+    
+    splitted = request.query_params['tags'].split(",")
+    # chained filters approach
+    artitems = ArtItem.objects.all()
+    for tag in splitted:
+       artitems = artitems.filter(tags=int(tag))
+    
+    serializer = ArtItemSerializer(artitems, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+   

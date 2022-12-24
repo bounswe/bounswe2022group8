@@ -4,7 +4,6 @@ import Layout from "../../layout/Layout";
 import { SampleExhibitions } from "../data/SampleExhibitions";
 
 import "../styles/Recommendation.css";
-// import "../styles/RecommendedExhibitions.css";
 
 function RecommendedExhibitions(props) {
   return (

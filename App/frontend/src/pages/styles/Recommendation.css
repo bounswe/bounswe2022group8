@@ -1,5 +1,6 @@
 .recommendation-container {
-  max-width: 1400px;
+  width: 80vw;
+  min-width: 1400px;
   min-height: 80vh;
   margin: 5.5rem auto 10rem auto;
   padding: 0 2.5rem;
@@ -42,7 +43,7 @@
 }
 
 .recommendation-grid .art-gallery {
-  columns: 5;
+  columns: 6;
   column-gap: 1.25rem;
 }
 

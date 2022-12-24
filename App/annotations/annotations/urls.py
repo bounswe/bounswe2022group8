@@ -1,4 +1,4 @@
-"""backend URL Configuration
+"""annotations URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -26,14 +26,14 @@ from . import views
 
 schema_view = swagger_get_schema_view(
     openapi.Info(
-        title="Artopia API Documentation",
+        title="Artopia Annotation Service API Documentation",
         default_version='v1.0',
-        description="Artopia API Endpoints",
+        description="Artopia Annotation API Endpoints",
     ),
     public=True,
 )
-
 # You can open the Swagger documentation from here on local: localhost:8000/api/v1/swagger/schema
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="index"),

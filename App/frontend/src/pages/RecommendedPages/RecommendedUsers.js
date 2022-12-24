@@ -5,7 +5,6 @@ import Layout from "../../layout/Layout";
 import { HOST } from "../../constants/host";
 import * as dotenv from "dotenv";
 
-// import "../styles/RecommendedUsers.css";
 import "../styles/Recommendation.css";
 
 function RecommendedUsers(props) {
