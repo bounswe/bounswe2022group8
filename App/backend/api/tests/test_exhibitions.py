@@ -1,26 +1,27 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from faker import Faker
 
 from ..models.user import User
 from ..models.artitem import ArtItem
-from ..serializers.serializers import ArtItem, ArtItemSerializer
-from ..views.exhibition import validate_ids, fetch_image
+from ..serializers.serializers import ArtItem, ArtItemSerializer, SimpleUserSerializer
+from ..views.exhibition import validate_ids, fetch_image, create_offline_exhibition
 from ..utils import ArtItemStorage
 from django.core.files.base import ContentFile
+from .utils import utils
 """
 setUp() function is like a constructor for our test. It creates some mock data.
 Thanks to the django.test, mock data is deleted automatically after the test, you do not have to worry about your database.
 tearDown() function is like a destructor, it deletes the objects.
 """
-test_base64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
-
 class ArtItemTest(TestCase):
     # preparing to test
     def setUp(self):
         # setting up for the test
         print("TestExhibition:setUp_:begin")
         self.faker = Faker()
-
+        self.factory = RequestFactory()
+        self.user1 = utils.register()
+        self.user2 = utils.register()
         # do something
         print("TestExhibition:setUp_:end")
 
@@ -47,10 +48,86 @@ class ArtItemTest(TestCase):
         user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem_image_storage = ArtItemStorage()
         artitemdata = {}
-        artitem_data = fetch_image(artitemdata, artitem_image_storage, test_base64, user)
+        artitem_data = fetch_image(artitemdata, artitem_image_storage, utils.BASE64, user)
 
         self.assertEqual(artitem_data["artitem_path"], "artitem/artitem-1.png")
         self.assertTrue(isinstance(artitem_data["artitem_image"], ContentFile))
+
+    # POST offline exhibition
+    def test_create_offline_exhibition(self):
+        data = {
+            "title": self.faker.pystr(min_chars = 10),
+            "description": self.faker.paragraph(nb_sentences=3),
+            "start_date": "2020-12-08T13:00:00.000Z",
+            "end_date": "2020-12-10T13:00:00.000Z",
+            "poster": utils.BASE64,
+            "collaborators": [self.user2['user']['id']],
+            "city": self.faker.city(),
+            "country": self.faker.country(),
+            "address": self.faker.address(),
+            "longitude": self.faker.longitude(),
+            "latitude": self.faker.latitude()
+        }
+
+        header = {"HTTP_AUTHORIZATION": "Token " + self.user1["token"]}
+        request = self.factory.post('exhibitions/me/offline/', data, **header, content_type='application/json')
+        response = create_offline_exhibition(request) 
+        actual = response.data
+        self.assertEqual(response.status_code, 201)
+
+        user = User.objects.get(pk=self.user1['user']['id'])
+        expected_user = SimpleUserSerializer(user).data
+        actual_user = actual['owner']
+        self.assertEqual(actual_user, expected_user)
+
+        collaborator = User.objects.get(pk=self.user2['user']['id'])
+        expected_collaborator = SimpleUserSerializer(collaborator).data
+        actual_collaborator = actual['collaborators'][0]
+        self.assertEqual(actual_collaborator, expected_collaborator)
+
+        actual_data = {
+            "title": actual['title'],
+            "description": actual['description'],
+            "city": actual['city'],
+            "country": actual['country'],
+            "address": actual['address'],
+            "longitude": actual['longitude'],
+            "latitude": actual['latitude'],
+            "status": actual['status'] 
+        }
+        data.pop('poster')
+        data.pop('collaborators')
+        data.pop('start_date')
+        data.pop('end_date')
+        data['status'] = "Finished"
+        data['longitude'] = float (data['longitude'])
+        data['latitude'] = float (data['latitude'])
+    
+
+        self.assertEqual(actual_data, data)
+
+    # POST online exhibition
+    def test_create_offline_exhibition_invalid(self):
+        data = {
+            "title": self.faker.pystr(min_chars = 10),
+            "description": self.faker.paragraph(nb_sentences=3),
+            "start_date": "2022-12-08T13:00:00.000Z",
+            "end_date": "2020-12-10T13:00:00.000Z",
+            "poster": utils.BASE64,
+            "collaborators": [self.user2['user']['id']],
+            "city": self.faker.city(),
+            "country": self.faker.country(),
+            "address": self.faker.address(),
+            "longitude": self.faker.longitude(),
+            "latitude": self.faker.latitude()
+        }
+
+        header = {"HTTP_AUTHORIZATION": "Token " + self.user1["token"]}
+        request = self.factory.post('exhibitions/me/offline/', data, **header, content_type='application/json')
+        response = create_offline_exhibition(request) 
+        actual = response.data
+        self.assertEqual(response.status_code, 400)
+
 
     def tearDown(self):
         # cleaning up after the test

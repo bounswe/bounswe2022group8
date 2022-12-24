@@ -717,7 +717,7 @@ def get_online_exhibitions_by_userid(request, userid):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
-            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2022-12-08T13:00:00.000Z"),
+            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2020-12-08T13:00:00.000Z"),
             "end_date": openapi.Schema(type=openapi.TYPE_STRING, description='end date of the exhibition', default="2020-12-10T13:00:00.000Z"),
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
@@ -753,7 +753,7 @@ def get_online_exhibitions_by_userid(request, userid):
                         "created_at": "08-12-2022 19:42:06"
                     },
                     "collaborators": [],
-                    "start_date": "08-12-2022 16:00:00",
+                    "start_date": "08-12-2020 16:00:00",
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 19:42:06",
                     "updated_at": "08-12-2022 19:42:06",
@@ -844,7 +844,7 @@ def create_offline_exhibition(request):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
-            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2022-12-08T13:00:00.000Z"),
+            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2020-12-08T13:00:00.000Z"),
             "end_date": openapi.Schema(type=openapi.TYPE_STRING, description='end date of the exhibition', default="2020-12-10T13:00:00.000Z"),
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
@@ -889,7 +889,7 @@ def create_offline_exhibition(request):
                             "created_at": "08-12-2022 23:15:21"
                         }
                     ],
-                    "start_date": "08-12-2022 16:00:00",
+                    "start_date": "08-12-2020 16:00:00",
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",

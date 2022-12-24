@@ -13,7 +13,6 @@ setUp() function is like a constructor for our test. It creates some mock data.
 Thanks to the django.test, mock data is deleted automatically after the test, you do not have to worry about your database.
 tearDown() function is like a destructor, it deletes the objects.
 """
-BASE64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
 
 class ArtItemTest(TestCase):
     # preparing to test
@@ -62,7 +61,7 @@ class ArtItemTest(TestCase):
         title = self.faker.pystr(min_chars = 10)
         description  = self.faker.paragraph(nb_sentences=3)
         category = ArtItem.Category.DRAWING.value
-        artitem_image = BASE64
+        artitem_image = utils.BASE64
 
         data = {
             "title": title,
