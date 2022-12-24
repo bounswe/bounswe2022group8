@@ -523,6 +523,10 @@ function ArtItem(props) {
     scrollToTop();
   }
 
+  function goToSearchResults(id) {
+    navigate(`/artitems/tag/${id}`);
+  }
+
   return (
     <Layout
       guestClick={guestClick}
@@ -547,7 +551,13 @@ function ArtItem(props) {
 
             <div className="tag-container">
               {artitemTags.map((val) => {
-                return <Tag key={val.id} tagname={val.tagname}></Tag>;
+                return (
+                  <Tag
+                    key={val.id}
+                    tagname={val.tagname}
+                    onClick={() => goToSearchResults(val.id)}
+                  />
+                );
               })}
             </div>
 
@@ -686,12 +696,6 @@ function ArtItem(props) {
           </div>
         </div>
       </div>
-
-      {/*<div className="artitem-post-properties">
-        <div className="tag-container">
-          <div className="tag"></div>
-        </div>
-      </div>*/}
     </Layout>
   );
 }

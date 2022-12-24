@@ -18,9 +18,9 @@ import RecommendedExhibitions from "./pages/RecommendedPages/RecommendedExhibiti
 import RecommendedUsers from "./pages/RecommendedPages/RecommendedUsers";
 import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
-
   return (
     <AuthProvider>
       <Routes>
@@ -78,6 +78,8 @@ function App() {
             </AuthenticatedRoute>
           }
         />
+
+        <Route path="/artitems/tag/:tag_id" element={<SearchResults />} />
       </Routes>
     </AuthProvider>
   );
