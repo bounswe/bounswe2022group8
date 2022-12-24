@@ -293,14 +293,6 @@
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
 }
 
-.artitem-post-container #info-container .r6o-editor {
-  transform: translate(350px, 0px) !important;
-}
-
-.artitem-post-container #info-container .r6o-editor .r6o-arrow {
-  padding-right: 380px;
-}
-
 /*.artitem-post-container .btn-show-text-annotations {
   margin-bottom: 2px;
   margin-top: 5px;

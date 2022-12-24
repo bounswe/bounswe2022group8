@@ -518,7 +518,7 @@ def create_target(target_data):
     return target_serializer
 
 def create_body(body_data):
-    type = create_or_return_type("text")
+    type = create_or_return_type("textualbody")
     purpose = create_or_return_motivation("commenting")
     body_data["type"] = type.type
     body_data['purpose'] = purpose.motivation

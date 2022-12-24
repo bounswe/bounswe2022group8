@@ -34,19 +34,19 @@ class TypeEnum(models.TextChoices):
     textualbody = 'TextualBody'
 
 class MotivationEnum(models.TextChoices):
-    assessing = 'Assessing'
-    bookmarking = 'Bookmarking'
-    classifying = 'Classifying'
-    commenting = 'Commenting'
-    describing = 'Describing'
-    editing = 'Editing'
-    highlighting = 'Highlighting'
-    identifying = 'Identifying'
-    linking = "Linking"
-    moderating = "Moderating"
-    questioning = "Questioning"
-    replying = "Replying"
-    tagging = "Tagging"
+    assessing = 'assessing'
+    bookmarking = 'bookmarking'
+    classifying = 'classifying'
+    commenting = 'commenting'
+    describing = 'describing'
+    editing = 'editing'
+    highlighting = 'highlighting'
+    identifying = 'identifying'
+    linking = "linking"
+    moderating = "moderating"
+    questioning = "questioning"
+    replying = "replying"
+    tagging = "tagging"
 
 class SelectorEnum(models.TextChoices):
     fragmentselector = "FragmentSelector"

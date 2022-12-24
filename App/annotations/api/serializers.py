@@ -20,13 +20,13 @@ class AnnotationSerializer(serializers.ModelSerializer):
 class AnnotationBodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Body
-        fields =  ['id', 'value', 'type', 'format', 'created', 'purpose']
+        fields =  ['value', 'type', 'purpose']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['type'] = str(rep['type'])          # convert Enum to string
-        rep['id'] = URL + "body{}".format(rep['id'])
-        rep['purpose'] = str(rep['purpose'])
+        #rep['id'] = URL + "body{}".format(rep['id'])
+        #rep['purpose'] = str(rep['purpose'])
         return rep
 
 class AnnotationTargetSerializer(serializers.ModelSerializer):
