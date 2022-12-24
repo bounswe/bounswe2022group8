@@ -38,6 +38,6 @@ final request = AWSHttpRequest.get(
     serviceConfiguration: serviceConfiguration,
     expiresIn: const Duration(minutes: 10),
   );
-  safePrint('Download URL:' + signedUrl.toString());
+  //safePrint('Download URL:' + signedUrl.toString());
   return(signedUrl.toString()) ;
 }
