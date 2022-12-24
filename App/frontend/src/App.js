@@ -20,6 +20,7 @@ import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
 
 function App() {
+
   return (
     <AuthProvider>
       <Routes>
