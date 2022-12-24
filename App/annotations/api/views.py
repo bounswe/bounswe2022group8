@@ -62,7 +62,7 @@ from .serializers import *
         }),
     responses={
           status.HTTP_201_CREATED: openapi.Response(
-            description="Successfully created an image annotation in the system.",
+            description="Successfully created an annotation in the system.",
             examples={
                 "application/json": [
                     {
@@ -159,8 +159,8 @@ from .serializers import *
             "target": openapi.Schema(type=openapi.TYPE_OBJECT, description='target of the annotation', default='{"source": "https://cmpe451-development.s3.amazonaws.com/artitem/artitem-1.png","selector": {"type": "FragmentSelector","conformsTo": "http://www.w3.org/TR/media-frags/","value": "xywh=pixel:270,120,90,170"}}'),
         }),
     responses={
-          status.HTTP_201_CREATED: openapi.Response(
-            description="Successfully created an image annotation in the system.",
+          status.HTTP_200_OK: openapi.Response(
+            description="Successfully updated the annotation.",
             examples={
                 "application/json": [
                     {
@@ -299,7 +299,9 @@ def annotate(request):
             imageAnnotation = Annotation.objects.get(id=id) # we might have to update this filter
         except:
             return Response({"Not Found": "There is no annotation with the given id."}, status=status.HTTP_404_NOT_FOUND)
-
+        
+        if('target' not in request.data):
+            return Response({"Invalid request": "There must be a target associated with the annotation"}, status=status.HTTP_400_BAD_REQUEST)
         target_data = request.data['target']
         if('selector' not in target_data):
             return Response({"Invalid request": "Target must have a selector"}, status=status.HTTP_400_BAD_REQUEST)
