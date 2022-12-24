@@ -8,7 +8,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from ..models.artitem import ArtItem
 from ..models.user import User
-from ..serializers.serializers import ArtItemSerializer
+from ..serializers.serializers import ArtItemSerializer, SimpleUserSerializer
 
 from drf_yasg.utils import swagger_auto_schema
 from django.contrib.auth.models import AnonymousUser
@@ -55,3 +55,36 @@ class LexSearchView(ListAPIView):
     serializer_class = ArtItemSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('title', 'description', 'owner__name', 'owner__surname', 'tags__tagname')
+
+
+#  http://${host}:8000/api/v1/search-lex-user/  [Method= GET]
+
+@swagger_auto_schema(
+    # method='get',
+    operation_description= "Searchs for users' username, name and surname.",
+    operation_summary="Get all the users according to the search filter.",
+    tags=['search'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the users according to the search params.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 1,
+                        "username" : "profiladam",
+                        "name": "Furkan",
+                        "surname" : "Keskin",
+                        "profile_path": "dummy_path"
+                    }
+                ]
+            }
+        )
+    }
+
+)
+
+class LexSearchUserView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = SimpleUserSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('username', 'name', 'surname')

@@ -13,7 +13,7 @@ from .views.artitem import get_artitems, artitems_by_userid, artitems_by_usernam
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
-from .views.search import LexSearchView
+from .views.search import LexSearchView, LexSearchUserView
 from .views.user import users_api
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
 
@@ -87,7 +87,8 @@ urlpatterns = [
     path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment"),
     path('artitems/tags/<int:id>', TagView, name="Tagview"),
     path('artitems/tags/', TagsView, name="TagsView"),
-    path('search-lex/', LexSearchView.as_view(), name='LexicalSearch')
+    path('search-lex/', LexSearchView.as_view(), name='LexicalSearch'),
+    path('search-lex-user/', LexSearchUserView.as_view(), name='LexicalSearchUser')
 
 ]
 
