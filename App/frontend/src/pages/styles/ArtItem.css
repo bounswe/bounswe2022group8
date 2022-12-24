@@ -27,6 +27,13 @@
   overflow-y: scroll;
 }
 
+.artitem-post-container #image-wrap {
+  display: flex;
+  justify-content: center;
+  max-height: 77vh;
+  margin-bottom: 1.8rem;
+}
+
 .artitem-post-container #image {
   object-fit: contain;
   width: 100%;

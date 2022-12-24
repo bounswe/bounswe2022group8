@@ -529,12 +529,19 @@ function ArtItem(props) {
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
-            <img
-              ref={token ? imageElement : null}
-              id="image"
-              src={artitemSrc}
-              alt={artitemDescription}
-            />
+            {token ? (
+              <div id="image-wrap">
+                <img
+                  id="image"
+                  ref={imageElement}
+                  src={artitemSrc}
+                  alt={artitemDescription}
+                  style={{ height: "100%"}}
+                />
+              </div>
+            ) : (
+              <img id="image" src={artitemSrc} alt={artitemDescription} />
+            )}
 
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
