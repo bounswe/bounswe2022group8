@@ -537,7 +537,10 @@ def create_body(body_data):
     purpose = create_or_return_motivation("commenting")
     body_data["type"] = type.type
     body_data['purpose'] = purpose.motivation
-    creator = Creator.objects.get(pk=body_data['creator']['id'])
+    try:
+        creator = Creator.objects.get(pk=body_data['creator']['id'])
+    except Creator.DoesNotExist:
+        creator = None
     if(creator):
         body_data['creator'] = creator.id
         body_serializer = AnnotationBodySerializer(data=body_data)
