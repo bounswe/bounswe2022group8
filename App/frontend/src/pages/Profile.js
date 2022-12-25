@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
-import UploadCard from "../components/UploadCard";
 
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
-import "./styles/Profile.css";
+import UploadCard from "../components/UploadCard";
 import FirstUploadCard from "../components/FirstUploadCard";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import DeleteArtItemPopUp from "../components/DeleteArtItemPopUp";
+import Backdrop from "../components/Backdrop";
+import "./styles/Profile.css";
 
 function Profile(props) {
   function scrollToTop() {
@@ -19,9 +22,8 @@ function Profile(props) {
     });
   }
 
-  const { token } = useAuth();
   var host = HOST;
-
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   const [profileInfo, setProfileInfo] = useState({
@@ -42,6 +44,11 @@ function Profile(props) {
 
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
   const [newImageUploaded, setNewImageUploaded] = useState(true);
+  const [artItemDeleted, setArtItemDeleted] = useState(false);
+
+  const [deleteButton, setDeleteButton] = useState(false);
+  const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
+  const [artItemToBeDeletedID, setArtItemToBeDeletedID] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -134,7 +141,7 @@ function Profile(props) {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username, newImageUploaded]);
+  }, [host, token, profileInfo.username, newImageUploaded, artItemDeleted]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
@@ -163,11 +170,42 @@ function Profile(props) {
     scrollToTop();
   }
 
+  function openDeletePopUp(id) {
+    setDeleteButton(false);
+    setIsDeletePopUpOpen(true);
+    setArtItemToBeDeletedID(id);
+  }
+
+  function handleDeleteArtItem() {
+    fetch(`${host}/api/v1/artitems/me/remove/${artItemToBeDeletedID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        setIsDeletePopUpOpen(false);
+        setArtItemDeleted(!artItemDeleted);
+        scrollToTop();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
   // renders unnecessarily twice --> PROBLEM
   // console.log(userGallery.length);
 
   return (
     <Layout>
+      {isDeletePopUpOpen && (
+        <>
+          <DeleteArtItemPopUp
+            onClickCancel={() => setIsDeletePopUpOpen(false)}
+            onClickDelete={(id) => handleDeleteArtItem(id)}
+          />
+          <Backdrop onClick={() => setIsDeletePopUpOpen(false)} />
+        </>
+      )}
       <div className="profile-page-container">
         <header>
           <div className="profile-container">
@@ -251,9 +289,9 @@ function Profile(props) {
             setPostError={(error) => setPostError(error)}
             uploadInfoError={uploadInfoError}
             setUploadInfoError={(error) => setUploadInfoError(error)}
-            newImageUploaded = {newImageUploaded}
+            newImageUploaded={newImageUploaded}
             setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
-            closeUploadCard = {() => setUpload(false)}
+            closeUploadCard={() => setUpload(false)}
           />
           {navTab ? (
             // what if gallery is empty ?
@@ -267,13 +305,41 @@ function Profile(props) {
               <div className="gallery">
                 {userGallery.map((val, key) => {
                   return (
-                    <div key={val.id} className="gallery-item">
+                    <div
+                      key={val.id}
+                      className="gallery-item"
+                      onMouseLeave={() => setDeleteButton(false)}
+                    >
                       <img
                         src={val.artitem_path}
                         className="gallery-image"
                         alt={val.description}
-                        onClick={() => goToArtItem(val.id)}
                       />
+                      <div className="gallery-image-options-container">
+                        <div
+                          role="link"
+                          className="gallery-image-link"
+                          onClick={() => goToArtItem(val.id)}
+                          style={{
+                            pointerEvents: deleteButton ? "none" : "auto",
+                            cursor: deleteButton ? "auto" : "pointer",
+                          }}
+                        ></div>
+                        <BsThreeDotsVertical
+                          role="select"
+                          className="gallery-image-options"
+                          onClick={() => setDeleteButton(!deleteButton)}
+                        />
+                        {deleteButton && (
+                          <div
+                            role="button"
+                            className="delete-card"
+                            onClick={() => openDeletePopUp(val.id)}
+                          >
+                            Delete
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}

@@ -1,0 +1,18 @@
+export const CategoryOptions = [
+  { value: "PH", label: "Photography" },
+  { value: "DR", label: "Drawing" },
+  { value: "PD", label: "Digital Art" },
+  { value: "SC", label: "Sculpture" },
+  { value: "AR", label: "Architecture" },
+  { value: "PR", label: "Prints" },
+  { value: "PA", label: "Acrylic painting" },
+  { value: "PO", label: "Oil painting" },
+  { value: "PW", label: "Watercolor painting" },
+  { value: "PM", label: "Mural painting" },
+  { value: "PG", label: "Gouache painting" },
+  { value: "PP", label: "Pastel painting" },
+  { value: "PE", label: "Encaustic painting" },
+  { value: "PF", label: "Fresco painting" },
+  { value: "PS", label: "Spray painting" },
+  { value: "OT", label: "Other" },
+];

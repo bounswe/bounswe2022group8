@@ -6,7 +6,7 @@ from knox.models import AuthToken
 from ..models.user import User
 from ..models.user import Follow
 from ..models.artitem import ArtItem, LikeArtItem
-from ..serializers.serializers import ArtItemSerializer
+from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
 from ..serializers.auth import RegisterSerializer, LoginSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
@@ -18,16 +18,21 @@ import boto3
 from django.core.files.base import ContentFile
 from ..utils import ArtItemStorage
 from django.contrib.auth.models import AnonymousUser
+from django.db.models import Q
+from functools import reduce
+import operator
 
 
 from drf_yasg import openapi
+from history.decorators import object_viewed_decorator
+from history.signals import object_viewed_signal
 
 # List of routes / method / action:
 #
 #  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format
 #  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://${host}:8000/api/v1/artitems/me/<id>                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
-#  http://${host}:8000/api/v1/artitems/me/                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/<id>                    / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/                        / POST   / create an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
 #  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
 #
@@ -56,14 +61,26 @@ from django.core.files.base import ContentFile
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
-        )
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="User cannot be found.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
     }
 )
 @api_view(["GET"])
@@ -85,15 +102,15 @@ def get_artitems(request):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the art item', default="Portrait of Joel Miller"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the art item', default="Joel Miller from TLOU universe."),
-            "type": openapi.Schema(type=openapi.TYPE_STRING, description='type of the art item', default="Sketch"),
+            "category": openapi.Schema(type=openapi.TYPE_STRING, description='category of the art item', default="OT"),
             "tags": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='an array of tag IDs attached to the art item (can be empty)', default=[1]),
-            "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string"),
+            "artitem_image": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the image', default="base64 string")
         }),
     responses={
-        status.HTTP_200_OK: openapi.Response(
-            description="Successfully retrieved all the art items in the system.",
+        status.HTTP_201_CREATED: openapi.Response(
+            description="Successfully created an art item.",
             examples={
-                "application/json": [
+                "application/json": 
                     {
                         "id": 2,
                         "title": "Docker",
@@ -105,14 +122,29 @@ def get_artitems(request):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [1],
                         "likes": 0,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
-                ]
             }
-        )
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {"detail": "Invalid token."}
+            }
+        ),
+        status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad Request is raised when the given data is not enough to be serialized as an art item object.",
+            examples={
+                "application/json": {"category": ["This field is required."]}
+            }
+        ),
     }
 )
 @api_view(["POST"])
@@ -133,6 +165,7 @@ def post_artitem(request):
             try:
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
+                # iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=
                 id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
                 filename = 'artitem-{pk}.png'.format(
                     pk=id_)
@@ -140,7 +173,7 @@ def post_artitem(request):
                 request.data['artitem_path'] = artitem_image_storage.location + \
                     "/" + filename
             except:
-                return Response({"Invalid Input": "Given profile image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"Invalid Input": "Given artitem image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
         request.data["owner"] = request.user.id
         serializer = ArtItemSerializer(data=request.data)
@@ -179,7 +212,7 @@ def post_artitem(request):
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="User cannot be found.",
+            description="Invalid token.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
@@ -229,10 +262,14 @@ def delete_artitem(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "artitem_path": "artitem/docker.jpg",
-                        "isLiked": False
+                        "number_of_views": 5,
+                        "sale_status": "FS",
+                        "minimum_price": 50,
+                        "bought_by": None,
+                        "isLiked": "False"
 
                     }
                 ]
@@ -248,6 +285,7 @@ def delete_artitem(request, id):
         ),
     }
 )
+#@object_viewed_decorator()
 @api_view(["GET"])
 def artitems_by_id(request, id):
     if request.method == "GET":
@@ -256,16 +294,19 @@ def artitems_by_id(request, id):
             data = ArtItemSerializer(artitem).data.copy()
             if(isinstance(request.user, AnonymousUser)):
                 data["isLiked"] = False
+                #print("anonymous")
             else:
                 try:
                     LikeArtItem.objects.get(user=request.user, artitem=artitem)
                     data["isLiked"] = True
                 except:
                     data["isLiked"] = False
+                #print("not anonymous")
+                instance = artitem
+                object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
-
 
 @ swagger_auto_schema(
     method='get',
@@ -288,10 +329,14 @@ def artitems_by_id(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -340,10 +385,14 @@ def artitems_by_userid(request, id):
                             "surname": "Blocker",
                             "profile_path": "avatar/default.png"
                         },
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
-                        "artitem_path": "artitem/docker.jpg"
+                        "artitem_path": "artitem/docker.jpg",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
             }
@@ -393,13 +442,25 @@ def artitems_by_username(request, username):
                         },
                         "title": "Portrait of Joel Miller",
                         "description": "Joel Miller from TLOU universe.",
-                        "type": "sketch",
+                        "category": "DR",
                         "tags": [],
                         "likes": 5,
                         "artitem_path": "artitem/artitem-0.png",
-                        "created_at": "2022-11-18T13:51:56.342042Z"
+                        "created_at": "08-12-2022 00:38:25",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None,
                     }
                 ]
+            }
+        ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
             }
         ),
     }
@@ -416,3 +477,64 @@ def artitems_of_followings(request):
     artitems = ArtItem.objects.filter(owner__in=followings)
     serializer = ArtItemSerializer(artitems, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Returns art items having all the tags provided the request body.",
+    operation_summary="Get art items by tag.",
+    query_serializer=ArtItemByTagQuerySerializer,
+    tags=['artitems'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the art items with the given tags.",
+            examples={
+                "application/json": [
+                    {
+                        "id": 2,
+                        "owner": {
+                            "id": 9,
+                            "username": "till_i_collapse",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "Portrait of Joel Miller",
+                        "description": "Joel Miller from TLOU universe.",
+                        "category": "DR",
+                        "tags": [],
+                        "likes": 5,
+                        "artitem_path": "artitem/artitem-0.png",
+                        "created_at": "08-12-2022 00:38:25",
+                        "number_of_views": 5,
+                        "sale_status": "NS",
+                        "minimum_price": 200,
+                        "bought_by": None
+                    }
+                ]
+            }
+        ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+            description="Bad Request is raised when the request body doesn't comply with the expected body format.",
+            examples={
+                "application/json": {"tags": ["This field is required."]}
+            }
+        ),
+    }
+)
+@api_view(["GET"])
+def artitems_by_tags(request):
+    if("tags" not in request.query_params):
+        return Response({"tags": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+    
+    splitted = request.query_params['tags'].split(",")
+    # chained filters approach
+    artitems = ArtItem.objects.all()
+    for tag in splitted:
+       artitems = artitems.filter(tags=int(tag))
+    
+    serializer = ArtItemSerializer(artitems, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+   

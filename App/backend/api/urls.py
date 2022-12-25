@@ -8,15 +8,16 @@ Function views
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views.auth import RegisterView, LoginView, resetRequestView, resetPasswordView, resetPasswordLoggedView, delete_account
-from .views.profile import profile_api, profile_me_api
-from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings
+from .views.profile import profile_api, profile_me_api, LevelView
+from .views.artitem import get_artitems, artitems_by_userid, artitems_by_username, artitems_by_id, post_artitem, delete_artitem, artitems_of_followings, artitems_by_tags
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
 from .views.search import LexSearchView, LexSearchUserView
 from .views.user import users_api
+from .views.exhibition import get_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
-
+from .views.bidding import BidArtItemView, BidView
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
@@ -85,11 +86,21 @@ urlpatterns = [
     path('users/comments/<int:id>/like/', like_comment, name="like_comment"),
     path('users/comments/<int:id>unlike/', unlike_comment, name="unlike_comment"),
     path('comments/<int:id>/likers/', get_users_who_liked_comment, name="get_users_who_liked_comment"),
-    path('artitems/tags/<int:id>', TagView, name="Tagview"),
-    path('artitems/tags/', TagsView, name="TagsView"),
-    path('search-lex/', LexSearchView.as_view(), name='LexicalSearch'),
-    path('search-lex-user/', LexSearchUserView.as_view(), name='LexicalSearchUser')
-
+    path('tags/<int:id>', TagView, name="Tagview"),
+    path('tags/', TagsView, name="TagsView"),
+    path('users/me/level', LevelView, name="LevelView"),
+    path('exhibitions/', get_exhibitions, name="get_exhibitions"),
+    path('exhibitions/me/offline/', create_offline_exhibition, name="create_offline_exhibitions"),
+    path('exhibitions/me/online/', create_online_exhibition, name="create_online_exhibitions"),
+    path('exhibitions/online/<int:id>', get_online_exhibitions_by_id, name="get_online_exhibition_by_id"),
+    path('exhibitions/offline/<int:id>', get_offline_exhibitions_by_id, name="get_offline_exhibitions_by_id"),
+    path('exhibitions/users/<int:userid>/offline/', get_offline_exhibitions_by_userid, name="get_offline_exhibitions_by_userid"),
+    path('exhibitions/users/<int:userid>/online/', get_online_exhibitions_by_userid, name="get_online_exhibitions_by_userid"),
+    path('artitems/<int:artitemid>/bids/', BidArtItemView, name="BidArtItemView"),
+    path('artitems/bids/<int:id>/', BidView, name="BidView"),
+    path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),
+    path('search/lexical/', LexSearchView.as_view(), name='LexicalSearch'),
+    path('search/lexical/user/', LexSearchUserView.as_view(), name='LexicalSearchUser')
 ]
 
 # added to give us the option to choose between default Response template and regular json

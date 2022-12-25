@@ -1,0 +1,31 @@
+.delete-artitem-pop-up-container {
+  position: fixed;
+  z-index: 2100; /* backdrop z-index = 2000 */
+  top: 35%;
+  left: calc(50% - 305px); /* %50 - width/2 */
+  width: 610px;
+  box-shadow: 0px 0px 6px #ffffff;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.delete-artitem-pop-up-header {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 40px;
+}
+
+.delete-artitem-pop-up-buttons {
+  margin-bottom: 12px;
+  text-align: right;
+  margin-right: 34px;
+  margin-left: 34px;
+}
+
+.delete-artitem-pop-up-btn {
+  margin-left: 20px;
+}
