@@ -470,7 +470,7 @@ function ArtItem(props) {
             console.log((error) => console.error("Error:", error));
           }
         });
-        console.log(r);
+        
         r.on("cancelSelected",(selected)=>{
           r.readOnly=false;
         });
