@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
+import 'TextAnnotation.dart';
 
 class ArtItemPageStructue extends StatefulWidget {
   final ArtItem artitem ;
@@ -15,9 +16,22 @@ class ArtItemPageStructue extends StatefulWidget {
 class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
   final textUtils = TextUtils();
   final colorPalette = ColorPalette();
+  bool annotationSelected = false;
+  String annotationButtonString = "Show Annotations";
 
   @override
   Widget build(BuildContext context) {
+
+    void changeAnnotationSelected() {
+      setState(() {
+        annotationSelected = !annotationSelected;
+        if (annotationSelected) {
+          annotationButtonString = "Hide Annotations";
+        } else {
+          annotationButtonString = "Show Annotations";
+        }
+      });
+    }
 
 
     return Container(
@@ -88,6 +102,12 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
                   const SizedBox(
                     width: 15,
                   ),
+                  TextButton(onPressed:()=>{
+                    changeAnnotationSelected(),
+                  }, child:
+                  textUtils.buildText(annotationButtonString, 13, colorPalette.blackShadows,
+                      FontWeight.w600),
+                  ),
                 ],
               ),
             ],
@@ -98,7 +118,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
               color: Colors.black,
               width: MediaQuery.of(context).size.width,
               height: 250,
-              child: textUtils.buildText(widget.artitem.description, 20, colorPalette.blackShadows,
+              child: annotationSelected ? AnnotableTextField(descriptionText: widget.artitem.description) :  textUtils.buildText(widget.artitem.description, 20, colorPalette.blackShadows,
                   FontWeight.w600),
             ),
           ),
