@@ -45,18 +45,19 @@ class TestAnnotations(TestCase):
     def test_body_serializer(self):
       typeText = create_or_return_type("text")
       motivation = create_or_return_motivation("commenting")
+      creator = Creator.objects.create(id=1, name=self.faker.pystr())
       value = self.faker.paragraph(nb_sentences=3)
 
-      body = Body.objects.create(type=typeText, value=value, purpose=motivation)
+      body = Body.objects.create(type=typeText, value=value, purpose=motivation, creator = creator)
 
       actual = AnnotationBodySerializer(body).data
       actual.pop('created')
+      actual.pop('modified')
+      actual.pop('creator')
 
-      expected = {'id': 'http://34.125.134.88/body{}'.format(body.id), 
-      'value': value, 
+      expected = { 'value': value, 
       'type': 'Text', 
-      'format': 'text/plain', 
-      'purpose': 'Commenting'}
+      'purpose': 'commenting'}
       self.assertEqual(expected, actual)
 
     def test_fragment_selector_serializer(self):
@@ -77,7 +78,7 @@ class TestAnnotations(TestCase):
       self.assertEqual(type2, -1)
       self.assertEqual(type1.type.value, "Image")
       self.assertEqual(motivation2, -1)
-      self.assertEqual(motivation1.motivation.value, "Commenting")   
+      self.assertEqual(motivation1.motivation.value, "commenting")   
     
     def tearDown(self):
       pass
