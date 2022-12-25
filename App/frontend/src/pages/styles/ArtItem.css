@@ -280,11 +280,35 @@
   background: #555;
 }
 
+/*.artitem-post-container .button-container {
+  display: grid;
+}*/
+
+
+/*Bidding*/
+
+.artitem-post-container .put-on-sale-button {
+  background-color: #ffc9ff;
+  color: #0e0a10;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-right: auto;
+  padding: 0.rem ;
+  border-color: #ffc9ff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.artitem-post-container .put-on-sale-button:hover,
+.artitem-post-container .put-on-sale-button:active{
+  color: #ffc9ff!important;
+  background-color: #0e0a10 !important;
+}
+
 .artitem-post-container
   #image-container
-  .display-image-annotation-text-container {
+  .put-on-sale-form-container {
   display: block;
-  background-color: #ffdeff;
+  background-color: #fad3fa;
   color: #18121c;
   border-radius: 4px;
   font-size: 15px;
@@ -292,24 +316,26 @@
   border: 1px solid #bcb1c1;
   margin-top: 0.6rem;
   margin-right: 0.6rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  width: 30%;
 }
 
-.artitem-post-container #info-container .r6o-editor {
-  transform: translate(350px, 0px) !important;
+.artitem-post-container .change-sale-status-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.3rem ;
+  border-color: #ffc9ff;
+}
+.artitem-post-container .change-sale-status-button:hover,
+.artitem-post-container .change-sale-status-button:active{
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
 }
 
-.artitem-post-container #info-container .r6o-editor .r6o-arrow {
-  padding-right: 380px;
-}
-
-/*.artitem-post-container .button-container {
-  display: grid;
-}*/
-
-
-/*Bidding*/
 .artitem-post-container .make-offer-button {
   background-color: #ffc9ff;
   color: #18121c;
@@ -330,7 +356,7 @@
   #image-container
   .make-offer-form-container {
   display: block;
-  background-color: #ffdeff;
+  background-color: #fad3fa;
   color: #18121c;
   border-radius: 4px;
   font-size: 15px;
@@ -360,6 +386,39 @@
   margin-left: auto;
   padding: 0.3rem ;
   border-color: #ffc9ff;
+}
+
+.artitem-post-container .accept-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.1rem ;
+  border-color: #ffc9ff;
+  margin-bottom: 5px;
+  width: 70px;
+}
+.artitem-post-container .accept-offer-button:hover,
+.artitem-post-container .accept-offer-button:active{
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
+}
+
+.artitem-post-container .reject-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.1rem ;
+  border-color: #ffc9ff;
+  width: 70px;
+}
+.artitem-post-container .reject-offer-button:hover,
+.artitem-post-container .reject-offer-button:active{
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
 }
 
 .artitem-post-container #bidder-profile-photo {

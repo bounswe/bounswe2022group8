@@ -79,8 +79,12 @@ function ArtItem(props) {
   );
   const biddingStatus={"NS":"Not For Sale","FS":"For Sale","SO":"SOLD"};
   const [saleStatus, setSaleStatus] = useState(null);
-  //const [minPriceOfArtitem, setMinPriceOfArtitem] = useState(null);
-  //const [boughtBy, setBoughtBy] = useState(null);
+  const [minPriceOfArtitem, setMinPriceOfArtitem] = useState(null);
+  const [boughtBy, setBoughtBy] = useState(null);
+  const [isPutOnSaleButtonClicked,setIsPutOnSaleButtonClicked] = useState(false);
+  const [isRemoveFromSaleButtonClicked,setIsRemoveFromSaleButtonClicked] = useState(false);
+  const [minPriceInput,setMinPriceInput]=useState(null);
+  const [putOnSaleMessage,setPutOnSaleMessage] = useState(null);
 
 
   // COMMENT BODY TO BE POSTED
@@ -131,6 +135,8 @@ function ArtItem(props) {
         setArtitemOwnerID(response.owner.id);
         setIsLiked(response.isLiked);
         setSaleStatus(response.sale_status);
+        setMinPriceOfArtitem(response.minimum_price);
+        setBoughtBy(response.bought_by);
 
         var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -558,9 +564,56 @@ function ArtItem(props) {
     ///not successful
     //show error message about input format to user 
   }
-  function handleChangeInSaleStatus(selectedOption) {
-    setSaleStatus({ value: selectedOption.value, label: selectedOption.label });
-    //PUT api call to change sale status
+  const handleMinPriceInput= (event) => {
+    const name = event.target.name;
+    const newValue = parseFloat(event.target.value);
+    setMinPriceInput({ [name]: newValue });
+  }
+  function handleSendMinPrice(){
+    //PUT api call to change sale status and min price "FS" minPriceInput
+    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        "sale_status": "FS",
+        "minimum_price": minPriceInput["minimumprice"]
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("response", response);
+        if(response.status===200){
+          setSaleStatus("FS");
+          setMinPriceOfArtitem(minPriceInput["minimumprice"]);
+          setIsPutOnSaleButtonClicked(false);
+        }  
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function handleRemoveFromSale(){
+    setIsRemoveFromSaleButtonClicked(true);
+    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        "sale_status": "NS"
+      }),
+      headers: {
+        "Content-Type": "application/json",
+         Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("response", response);
+        if(response.status===200){
+          setSaleStatus("FS");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   }
 
   return (
@@ -628,46 +681,28 @@ function ArtItem(props) {
                 <button className="make-offer-button" onClick={()=> handleMakeOffer()}>Make Offer</button>
                 :null}
 
-            {token && userid===artitemOwnerID ?
-              <Select
-              className="mt-1"
-              options={[ {value: "NS", label: "Not For Sale"},{value: "FS", label: "For Sale"},{value: "SO", label: "Sold"}]}
-              styles={{
-                control: (baseStyles) => ({
-                  ...baseStyles,
-                  fontSize: "14px",
-                  borderRadius: "6px",
-                  borderColor: "#18121c",
-                  boxShadow: "none",
-                  outline: "none",
-                  marginRight:"auto",
-                  width:"150px",
-                  marginBottom:"30px",
-                }),
-                menu: (baseStyles) => ({
-                  ...baseStyles,
-                  fontSize: "14px",
-                  color: "#000000",
-                  width:"150px",
-                  marginBottom:"30px",
-                }),
-                option: (baseStyles) => ({
-                  ...baseStyles,
-                  paddingTop: "3px",
-                  paddingBottom: "3px",
-                  width:"150px",
-                }),
-                placeholder:(baseStyles) => ({
-                  ...baseStyles,
-                  color:"#18121c",
-                }),
-              }}
-              placeholder={biddingStatus[saleStatus]}
-              value={saleStatus}
-              onChange={handleChangeInSaleStatus}   //For sale'e çeviriyorsa min fiyat vermeli
-            />
-            :null}
+            {token && userid===artitemOwnerID && saleStatus==="NS" ?
+              <button className="put-on-sale-button" onClick={()=>setIsPutOnSaleButtonClicked(!isPutOnSaleButtonClicked)}>Put On Sale</button>
+              :null}
+
+              {isPutOnSaleButtonClicked?
+              <div className="put-on-sale-form-container">
+                <label style={{display:"block"}}>Minimum Price</label>
+              <input style={{marginRight:"auto"}}
+              type="minimumprice"
+            placeholder="minimum price"
+            name="minimumprice"
+            id="minimumprice"
+            required
+            onChange={handleMinPriceInput}/> 
+            <button className="change-sale-status-button" onClick={()=>handleSendMinPrice()}>Send</button></div>
+                :null}
+
+            {token && userid===artitemOwnerID && saleStatus==="FS" ?
+              <button className="put-on-sale-button" onClick={()=>handleRemoveFromSale()}>Remove From Sale</button>
+              :null}
             
+
             {isMakeOfferClicked ?
             <div className="make-offer-form-container">
               <label>Amount</label>
@@ -694,7 +729,7 @@ function ArtItem(props) {
             </div>
             :null}
             
-            {saleStatus!=="NS" ?
+            {token && saleStatus!=="NS"  ?
                     <div className="table">
                       <table className="bidder-list">
                         <thead>
@@ -731,7 +766,9 @@ function ArtItem(props) {
                               <span class="label label-default">Inactive</span>
                             </td>
                             <td className="text-center">
-                              <span>mila@kunis.com</span>
+                              
+                              <button className="accept-offer-button">Accept</button>
+                              <button className="reject-offer-button">Reject</button>
                             </td>
                             
                           </tr>
