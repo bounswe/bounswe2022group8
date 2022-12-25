@@ -39,9 +39,11 @@ function Profile(props) {
   });
 
   const [userGallery, setUserGallery] = useState([]);
+  const [onlineExhibitions, setOnlineExhibitions] = useState([]);
 
   // just to decide after two unnecessary renders whether the gallery is empty or not
   const [emptyGallery, setEmptyGallery] = useState(null);
+  const [emptyOnlineExhibitions, setEmptyOnlineExhibitions] = useState(null);
 
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
   const [newArtItemUploaded, setNewArtItemUploaded] = useState(true);
@@ -124,7 +126,7 @@ function Profile(props) {
 
             var artitem_url = s3.getSignedUrl("getObject", params);
 
-            gallery.push({
+            /*gallery.push({
               id: response[i].id,
               owner: response[i].owner,
               title: response[i].title,
@@ -133,6 +135,12 @@ function Profile(props) {
               tags: response[i].tags,
               artitem_path: artitem_url,
               created_at: response[i].created_at,
+            });*/
+
+            gallery.push({
+              id: response[i].id,
+              description: response[i].description,
+              artitem_path: artitem_url,
             });
           }
 
@@ -147,6 +155,47 @@ function Profile(props) {
         .catch((error) => console.error("Error:", error));
     }
   }, [host, token, profileInfo.username, newArtItemUploaded, artItemDeleted]);
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/exhibitions/users/1/online/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response.length);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var online_exhibitions = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].poster.artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          online_exhibitions.push({
+            id: response[i].id,
+            description: response[i].description,
+            artitem_path: artitem_url,
+          });
+        }
+
+        setOnlineExhibitions(online_exhibitions);
+
+        if (online_exhibitions.length === 0) {
+          setEmptyOnlineExhibitions(true);
+        } else {
+          setEmptyOnlineExhibitions(false);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token, newOnlineExhibitionUploaded]);
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -230,10 +279,10 @@ function Profile(props) {
     scrollToTop();
   }
 
-  function openDeletePopUp(id) {
+  function openDeletePopUp(id, tab) {
     setDeleteButton(false);
     setIsDeletePopUpOpen(true);
-    setArtItemToBeDeletedID(id);
+    if (tab == 0) setArtItemToBeDeletedID(id);
   }
 
   function handleDeleteArtItem() {
@@ -405,7 +454,7 @@ function Profile(props) {
                           <div
                             role="button"
                             className="delete-card"
-                            onClick={() => openDeletePopUp(val.id)}
+                            onClick={() => openDeletePopUp(val.id, navTab)}
                           >
                             Delete
                           </div>
@@ -438,27 +487,46 @@ function Profile(props) {
                 users={users}
               />
               <div className="gallery">
-                <div className="gallery-item" tabIndex="0">
-                  <img
-                    src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
-                    className="gallery-image"
-                    alt=""
-                  />
-                </div>
-                <div className="gallery-item" tabIndex="0">
-                  <img
-                    src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                    className="gallery-image"
-                    alt=""
-                  />
-                </div>
-                <div className="gallery-item" tabIndex="0">
-                  <img
-                    src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                    className="gallery-image"
-                    alt=""
-                  />
-                </div>
+                {onlineExhibitions.map((val, key) => {
+                  return (
+                    <div
+                      key={val.id}
+                      className="gallery-item"
+                      onMouseLeave={() => setDeleteButton(false)}
+                    >
+                      <img
+                        src={val.artitem_path}
+                        className="gallery-image"
+                        alt={val.description}
+                      />
+                      <div className="gallery-image-options-container">
+                        <div
+                          role="link"
+                          className="gallery-image-link"
+                          onClick={() => goToArtItem(val.id)}
+                          style={{
+                            pointerEvents: deleteButton ? "none" : "auto",
+                            cursor: deleteButton ? "auto" : "pointer",
+                          }}
+                        ></div>
+                        <BsThreeDotsVertical
+                          role="select"
+                          className="gallery-image-options"
+                          onClick={() => setDeleteButton(!deleteButton)}
+                        />
+                        {deleteButton && (
+                          <div
+                            role="button"
+                            className="delete-card"
+                            onClick={() => openDeletePopUp(val.id, navTab)}
+                          >
+                            Delete
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </>
           )}
