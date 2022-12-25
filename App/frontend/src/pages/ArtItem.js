@@ -333,7 +333,6 @@ function ArtItem(props) {
             annotorious.readOnly = true;
           }
           console.log("annotation", annotation);
-          //setClickedAnnotationText(annotation.body[0].value);
           fetch(`${host}/api/v1/users/profile/${annotation.creator}`, {
             method: "GET",
             headers: {
@@ -342,16 +341,10 @@ function ArtItem(props) {
             },
           })
             .then((response) => response.json())
-            //.then((response) => {
-            //console.log(response);
-            //setClickedAnnotationOwner(response.username);
-            //})
             .catch((error) => console.error("Error:", error));
         });
 
         annotorious.on("cancelSelected", function (selection) {
-          //setClickedAnnotationText(null);
-          //setClickedAnnotationOwner(null);
           annotorious.readOnly = false;
         });
 
@@ -361,7 +354,7 @@ function ArtItem(props) {
           } else {
             annotorious.readOnly = false;
           }
-          //setClickedAnnotationText(selected.body[0].value);
+
           fetch(`${host}/api/v1/users/profile/${selected.creator}`, {
             method: "GET",
             headers: {
@@ -370,10 +363,6 @@ function ArtItem(props) {
             },
           })
             .then((response) => response.json())
-            //.then((response) => {
-              //console.log(response);
-              //setClickedAnnotationOwner(response.username);
-            //})
             .catch((error) => console.error("Error:", error));
         });
 
@@ -417,10 +406,6 @@ function ArtItem(props) {
                 },
               })
                 .then((response) => response.json())
-                //.then((response) => {
-                //console.log(response);
-                //setClickedAnnotationOwner(response.username);
-                //})
                 .catch((error) => console.error("Error:", error))
             )
             .catch((error) => console.error("Error:", error));
@@ -436,10 +421,7 @@ function ArtItem(props) {
             headers: {
               "Content-Type": "application/json",
             },
-          })
-            //.then(setClickedAnnotationText(null))
-            //.then(setClickedAnnotationOwner(null))
-            .catch((error) => console.error("Error:", error));
+          }).catch((error) => console.error("Error:", error));
         });
       }
       // Keep current Annotorious instance in state
@@ -475,6 +457,23 @@ function ArtItem(props) {
           })
           .catch((error) => console.error("Error:", error));
 
+        r.on("selectAnnotation", (selected) => {
+          console.log("selected", selected);
+          //console.log("id",selected["body"][0]["creator"]["id"]);
+          try {
+            if (parseInt(selected["body"][0]["creator"]["id"]) === userid) {
+              r.readOnly = false;
+            } else {
+              r.readOnly = true;
+            }
+          } catch (error) {
+            console.log((error) => console.error("Error:", error));
+          }
+        });
+        console.log(r);
+        r.on("cancelSelected",(selected)=>{
+          r.readOnly=false;
+        });
         r.loadAnnotations(
           `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
         )
@@ -499,12 +498,13 @@ function ArtItem(props) {
             .then((response) => response.json())
             .then((response) => {
               console.log("created in db", response);
+              r.readOnly = false;
             })
             .catch((error) => console.error("Error:", error));
         });
 
         r.on("updateAnnotation", function (annotation, previous) {
-          if (parseInt(annotation["creator"]) === userid) {
+          if (parseInt(annotation["body"][0]["creator"]["id"]) === userid) {
             console.log("updated in frontend", annotation);
             console.log("previous", previous);
             //fetch with method 'PUT'
@@ -520,19 +520,11 @@ function ArtItem(props) {
                 console.log("updated in db", response);
               })
               .catch((error) => console.error("Error:", error));
-          } else {
-            r.loadAnnotations(
-              `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
-            )
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => console.error("Error:", error));
           }
         });
 
         r.on("deleteAnnotation", function (annotation) {
-          if (parseInt(annotation["creator"]) === userid) {
+          if (parseInt(annotation["body"][0]["creator"]["id"]) === userid) {
             console.log("deleted", annotation);
             let annotId = annotation.id.split(/[#]/)[1];
             //console.log("annot id", annotId);
@@ -543,14 +535,6 @@ function ArtItem(props) {
                 "Content-Type": "application/json",
               },
             }).catch((error) => console.error("Error:", error));
-          } else {
-            r.loadAnnotations(
-              `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
-            )
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => console.error("Error:", error));
           }
         });
 
