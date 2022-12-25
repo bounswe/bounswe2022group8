@@ -28,7 +28,7 @@
   color: #ffffff;
   display: flex;
   justify-content: center;
-  margin-top: 32vh;
+  margin-top: 34vh;
   width: 100px;
   font-size: 28px;
   cursor: pointer;
@@ -88,19 +88,23 @@
   max-width: 20vw;
   min-width: 280px;
   border-left: 1px solid #bcb1c1;
-  padding-left: 10px;
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
   display: flex;
   flex-direction: column;
   /*overflow-y: scroll;*/
 }
 
+.exhibition-collaborators {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 .exhibition-owner {
-  /*background-color: #fafafa;
-  border-bottom: 1px solid #d9d9d9;*/
-  flex: 0 0 50px;
-  /*border-radius: 0px 5px 0px 0px;*/
-  justify-content: space-between;
-  /*max-height: 70px;*/
+  width: 3.5rem;
 }
 
 .exhibition-owner-profile-photo {
@@ -109,10 +113,36 @@
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
-  margin-left: 15px;
-  margin-right: 4px;
-  margin-bottom: 5px;
-  margin-top: 8px;
+}
+
+.exhibition-title {
+  font-size: 18px;
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+}
+
+.exhibition-description {
+  font-size: 14px;
+  margin-bottom: 2rem;
+}
+
+.exhibition-date {
+  font-size: 14px;
+}
+
+.exhibition-status {
+  font-size: 14px;
+  margin-bottom: 1.1rem;
+}
+
+.exhibition-visit-link {
+  font-size: 14px;
+  color: #bcb1c1;
+}
+
+.exhibition-visit-link:hover,
+.exhibition-visit-link:active {
+  color: #bcb1c1;
 }
 
 /* width */

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import Layout from "../layout/Layout";
@@ -80,9 +80,51 @@ function Exhibition(props) {
           </div>
 
           <div className="exhibition-info-container">
-            <div className="exhibition-owner">
-              <img className="exhibition-owner-profile-photo" src={""} alt="" />
+            <div className="exhibition-collaborators">
+              <div className="exhibition-owner">
+                <img
+                  className="exhibition-owner-profile-photo"
+                  src={""}
+                  alt=""
+                />
+              </div>
+              <div className="exhibition-owner">
+                <img
+                  className="exhibition-owner-profile-photo"
+                  src={""}
+                  alt=""
+                />
+              </div>
+              <div className="exhibition-owner">
+                <img
+                  className="exhibition-owner-profile-photo"
+                  src={""}
+                  alt=""
+                />
+              </div>
+              <div className="exhibition-owner">
+                <img
+                  className="exhibition-owner-profile-photo"
+                  src={""}
+                  alt=""
+                />
+              </div>
             </div>
+
+            <header className="exhibition-title">Title comes here</header>
+            <div className="exhibition-description">
+              Description comes here here here here herer herer hehre ehr her h
+            </div>
+            <div className="exhibition-date">
+              Start Date: <span style={{ color: "#bcb1c1" }}>25.12.2022</span>
+            </div>
+            <div className="exhibition-date">
+              End Date: <span style={{ color: "#bcb1c1" }}>27.12.2022</span>
+            </div>
+            <div className="exhibition-status">
+              Status: <i style={{ color: "#bcb1c1" }}>Ongoing</i>
+            </div>
+            <Link className="exhibition-visit-link">Visit Art Item</Link>
           </div>
         </div>
       </div>
