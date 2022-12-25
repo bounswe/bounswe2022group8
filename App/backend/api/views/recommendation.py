@@ -142,7 +142,8 @@ def RecommendArtItemView(request):
                 for item in items:
                     histories = History.objects.filter(user=user, is_art=True, art_id=item.id)
                     if(len(histories)==0):
-                        artitems.append(item)
+                        if(item not in artitems):
+                            artitems.append(item)
                     if(len(artitems)>=15):
                         break
 
@@ -402,7 +403,8 @@ def RecommendUserView(request):
                     try:
                         Follow.objects.get(from_user=user, to_user=item)
                     except Follow.DoesNotExist:
-                        myusers.append(item)
+                        if(item not in myusers):
+                            myusers.append(item)
 
                     if(len(myusers)>=16):
                         break           
