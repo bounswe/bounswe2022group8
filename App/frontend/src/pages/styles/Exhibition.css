@@ -1,0 +1,122 @@
+.exhibition-post-container {
+  display: grid;
+  margin-top: 120px;
+  margin-left: 35px;
+  margin-right: 35px;
+  height: calc(100vh - 130px);
+  /*padding: 10px;
+    overflow: hidden;
+    background-color: red;*/
+  margin-bottom: 0px;
+}
+
+.exhibition-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.exhibition-container {
+  background-color: #0e0a10;
+  flex: 1 1 200px;
+  padding: 0 50px;
+  overflow: auto;
+}
+
+.artitem-focused {
+  object-fit: contain;
+  width: 100%;
+  height: 82%;
+  margin-bottom: 0.8rem;
+}
+
+.exhibition-linear-container {
+  display: flex;
+  color: white;
+  overflow-x: auto;
+  /*overflow-y: hidden;*/
+  height: calc(17% - 1rem);
+}
+
+.exhibition-linear-image-wrap:hover .exhibition-linear-image-cover,
+.exhibition-linear-image-wrap:focus .exhibition-linear-image-cover {
+  display: none;
+}
+
+.exhibition-linear-image-wrap {
+  display: flex;
+  position: relative;
+  margin-right: 0.6rem;
+}
+
+.exhibition-linear-image {
+  object-fit: contain;
+  cursor: pointer;
+  height: 12vh;
+}
+
+.exhibition-linear-image-cover {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.exhibition-info-container {
+  color: #ffffff;
+  background-color: #0e0a10;
+  flex: 1 4 300px;
+  max-width: 20vw;
+  min-width: 280px;
+  border-left: 1px solid #bcb1c1;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  /*overflow-y: scroll;*/
+}
+
+.exhibition-owner {
+  /*background-color: #fafafa;
+  border-bottom: 1px solid #d9d9d9;*/
+  flex: 0 0 50px;
+  /*border-radius: 0px 5px 0px 0px;*/
+  justify-content: space-between;
+  /*max-height: 70px;*/
+}
+
+.exhibition-owner-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-right: 4px;
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+/* width */
+.exhibition-linear-container::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+.exhibition-linear-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.exhibition-linear-container::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.exhibition-linear-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
