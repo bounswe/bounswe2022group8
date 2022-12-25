@@ -48,12 +48,18 @@ function Profile(props) {
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
   const [newArtItemUploaded, setNewArtItemUploaded] = useState(true);
   const [artItemDeleted, setArtItemDeleted] = useState(false);
+
+  // <--- COME BACK HERE --->
   const [newOnlineExhibitionUploaded, setNewOnlineExhibitionUploaded] =
     useState(true);
+  const [onlineExhibitionDeleted, setOnlineExhibitionDeleted] = useState(false);
 
   const [deleteButton, setDeleteButton] = useState(false);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
   const [artItemToBeDeletedID, setArtItemToBeDeletedID] = useState(null);
+  const [onlineExhibitionToBeDeletedID, setOnlineExhibitionToBeDeletedID] =
+    useState(null);
+
   const [tags, setTags] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -195,7 +201,7 @@ function Profile(props) {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, [host, token, newOnlineExhibitionUploaded]);
+  }, [host, token, newOnlineExhibitionUploaded, onlineExhibitionDeleted]);
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -279,10 +285,19 @@ function Profile(props) {
     scrollToTop();
   }
 
-  function openDeletePopUp(id, tab) {
+  function openDeletePopUp(id) {
     setDeleteButton(false);
     setIsDeletePopUpOpen(true);
-    if (tab == 0) setArtItemToBeDeletedID(id);
+    if (navTab === 0) setArtItemToBeDeletedID(id);
+    else if (navTab === 1) setOnlineExhibitionToBeDeletedID(id);
+  }
+
+  function handleDelete() {
+    if (navTab === 0) {
+      handleDeleteArtItem();
+    } else if (navTab === 1) {
+      handleDeleteOnlineExhibition();
+    }
   }
 
   function handleDeleteArtItem() {
@@ -301,8 +316,26 @@ function Profile(props) {
       .catch((error) => console.error("Error:", error));
   }
 
-  // renders unnecessarily twice --> PROBLEM
-  // console.log(userGallery.length);
+  function handleDeleteOnlineExhibition() {
+    fetch(
+      `${host}/api/v1/exhibitions/online/${onlineExhibitionToBeDeletedID}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+
+        setIsDeletePopUpOpen(false);
+        setOnlineExhibitionDeleted(!onlineExhibitionDeleted);
+        scrollToTop();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
 
   return (
     <Layout>
@@ -310,7 +343,8 @@ function Profile(props) {
         <>
           <DeleteArtItemPopUp
             onClickCancel={() => setIsDeletePopUpOpen(false)}
-            onClickDelete={(id) => handleDeleteArtItem(id)}
+            onClickDelete={() => handleDelete()}
+            navTab={navTab}
           />
           <Backdrop onClick={() => setIsDeletePopUpOpen(false)} />
         </>
@@ -419,7 +453,9 @@ function Profile(props) {
               />
               {emptyGallery === true && !upload && (
                 <div className="gallery-item">
-                  <FirstUploadCard onClick={() => handleUpload()} />
+                  <FirstUploadCard onClick={() => handleUpload()}>
+                    Upload your first art item
+                  </FirstUploadCard>
                 </div>
               )}
               <div className="gallery">
@@ -454,7 +490,7 @@ function Profile(props) {
                           <div
                             role="button"
                             className="delete-card"
-                            onClick={() => openDeletePopUp(val.id, navTab)}
+                            onClick={() => openDeletePopUp(val.id)}
                           >
                             Delete
                           </div>
@@ -486,6 +522,13 @@ function Profile(props) {
                 userGallery={userGallery}
                 users={users}
               />
+              {emptyOnlineExhibitions === true && !upload && (
+                <div className="gallery-item">
+                  <FirstUploadCard onClick={() => handleUpload()}>
+                    Organise an online exhibition
+                  </FirstUploadCard>
+                </div>
+              )}
               <div className="gallery">
                 {onlineExhibitions.map((val, key) => {
                   return (
