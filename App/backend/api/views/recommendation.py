@@ -90,7 +90,7 @@ from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibit
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -152,7 +152,7 @@ def RecommendArtItemView(request):
             return Response(message, status=status.HTTP_200_OK)        
     else:
         message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @swagger_auto_schema(
@@ -262,7 +262,7 @@ def RecommendArtItemView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -307,7 +307,7 @@ def RecommendExhibitionView(request):
             return Response(message, status=status.HTTP_200_OK)        
     else:
         message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @swagger_auto_schema(
@@ -336,7 +336,7 @@ def RecommendExhibitionView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -383,7 +383,7 @@ def RecommendUserView(request):
             return Response(message, status=status.HTTP_200_OK)        
     else:
         message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 #anonymous ones ############################################################################################################
@@ -455,14 +455,6 @@ def RecommendUserView(request):
                         }
                     ]
                 }
-            }
-        ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
-            description="Authentication required.",
-            examples={
-                "application/json": {
-                    "detail": "Invalid token."
-                },
             }
         ),
     }
@@ -592,7 +584,7 @@ def AnonymousRecommendArtItemView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -653,7 +645,7 @@ def AnonymousRecommendExhibitionView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
