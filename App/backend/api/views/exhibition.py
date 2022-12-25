@@ -356,7 +356,7 @@ def get_online_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
     elif (request.method == "PUT"):
         userid = request.user.id
         try:
@@ -558,7 +558,7 @@ def get_offline_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 

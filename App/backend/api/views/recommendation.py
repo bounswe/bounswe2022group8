@@ -90,7 +90,7 @@ from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibit
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -273,7 +273,7 @@ def RecommendArtItemView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -365,7 +365,7 @@ def RecommendExhibitionView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -499,14 +499,6 @@ def RecommendUserView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
-            description="Authentication required.",
-            examples={
-                "application/json": {
-                    "detail": "Invalid token."
-                },
-            }
-        ),
     }
 )
 @api_view(['GET'])
@@ -634,7 +626,7 @@ def AnonymousRecommendArtItemView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
@@ -695,7 +687,7 @@ def AnonymousRecommendExhibitionView(request):
                 }
             }
         ),
-        status.HTTP_400_BAD_REQUEST: openapi.Response(
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
             description="Authentication required.",
             examples={
                 "application/json": {
