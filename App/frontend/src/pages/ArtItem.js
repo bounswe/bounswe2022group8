@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef,useReducer } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { ANNOHOST, HOST } from "../constants/host";
@@ -17,7 +17,6 @@ import "@recogito/annotorious/dist/annotorious.min.css";
 
 import { Recogito } from "@recogito/recogito-js";
 import "@recogito/recogito-js/dist/recogito.min.css";
-
 
 function ArtItem(props) {
   function scrollToTop() {
@@ -69,23 +68,29 @@ function ArtItem(props) {
   const [myID, setMyID] = useState(null);
 
   //BIDDING
-  const [isMakeOfferClicked,setIsMakeOfferClicked] = useState(false);
+  const [isMakeOfferClicked, setIsMakeOfferClicked] = useState(false);
   const [newOffer, setNewOffer] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      amount: "",
+      amount: null,
       deadline: "",
     }
   );
-  const biddingStatus={"NS":"Not For Sale","FS":"For Sale","SO":"SOLD"};
+  const biddingStatus = { NS: "Not For Sale", FS: "For Sale", SO: "SOLD" };
+  const bidresponses = { AC: "Accepted", NS: "No Response", RE: "Rejected" };
+  const [bids, setBids] = useState([]);
+  const [bidPhotos, setBidPhotos] = useState([]);
   const [saleStatus, setSaleStatus] = useState(null);
   const [minPriceOfArtitem, setMinPriceOfArtitem] = useState(null);
   const [boughtBy, setBoughtBy] = useState(null);
-  const [isPutOnSaleButtonClicked,setIsPutOnSaleButtonClicked] = useState(false);
-  const [isRemoveFromSaleButtonClicked,setIsRemoveFromSaleButtonClicked] = useState(false);
-  const [minPriceInput,setMinPriceInput]=useState(null);
-  const [putOnSaleMessage,setPutOnSaleMessage] = useState(null);
-
+  const [isPutOnSaleButtonClicked, setIsPutOnSaleButtonClicked] =
+    useState(false);
+  const [isRemoveFromSaleButtonClicked, setIsRemoveFromSaleButtonClicked] =
+    useState(false);
+  const [minPriceInput, setMinPriceInput] = useState(null);
+  const [putOnSaleMessage, setPutOnSaleMessage] = useState(null);
+  const [rejectButtonClicked, setRejectButtonClicked] = useState(false);
+  const [acceptButtonClicked, setAcceptButtonClicked] = useState(false);
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
@@ -543,39 +548,56 @@ function ArtItem(props) {
   }
 
   //BIDDING
-  function handleMakeOffer(){
+  useEffect(() => {
+    // GET bids on an art item
+    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setBids(response["bids"]);
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var bid_photos = [];
+
+        for (let i = 0; i < response["bids"].length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response["bids"][i].buyer.profile_path,
+          };
+
+          var profile_url = s3.getSignedUrl("getObject", params);
+          bid_photos.push(profile_url);
+        }
+
+        setBidPhotos(bid_photos);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, artitem_id, token]);
+
+  function handleMakeOffer() {
     setIsMakeOfferClicked(true);
   }
-  function handleCancelMakingOffer(){
+  function handleCancelMakingOffer() {
     setIsMakeOfferClicked(false);
-    setNewOffer({amount:"", deadline:""});
+    setNewOffer({ amount: null, deadline: "" });
   }
   const handleOfferInput = (event) => {
     const name = event.target.name;
     const newValue = event.target.value;
     setNewOffer({ [name]: newValue });
   };
-  function handleSendOffer(){
+  function handleSendOffer() {
+    console.log("newOffer", newOffer);
     //POST api call here
-    ///if successfull 
-    //should trigger useEffect of GET bids on artitem request
-    //setIsMakeOfferClicked(false);  
-    //setNewOffer({amount:"", deadline:""});
-    ///not successful
-    //show error message about input format to user 
-  }
-  const handleMinPriceInput= (event) => {
-    const name = event.target.name;
-    const newValue = parseFloat(event.target.value);
-    setMinPriceInput({ [name]: newValue });
-  }
-  function handleSendMinPrice(){
-    //PUT api call to change sale status and min price "FS" minPriceInput
     fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
-      method: "PUT",
+      method: "POST",
       body: JSON.stringify({
-        "sale_status": "FS",
-        "minimum_price": minPriceInput["minimumprice"]
+        amount: parseFloat(newOffer.amount),
+        deadline: newOffer.deadline,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -585,35 +607,106 @@ function ArtItem(props) {
       .then((response) => response.json())
       .then((response) => {
         console.log("response", response);
-        if(response.status===200){
-          setSaleStatus("FS");
-          setMinPriceOfArtitem(minPriceInput["minimumprice"]);
-          setIsPutOnSaleButtonClicked(false);
-        }  
+        setIsMakeOfferClicked(false);
+        setNewOffer({ amount: null, deadline: "" });
+      })
+      .catch((error) => console.error("Error:", error));
+    ///not successful
+    //show error message about input format to user
+  }
+  const handleMinPriceInput = (event) => {
+    const name = event.target.name;
+    const newValue = parseFloat(event.target.value);
+    setMinPriceInput({ [name]: newValue });
+  };
+  function handleSendMinPrice() {
+    //PUT api call to change sale status and min price "FS" minPriceInput
+    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        sale_status: "FS",
+        minimum_price: minPriceInput["minimumprice"],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log("response", response);
+        setSaleStatus("FS");
+        setMinPriceOfArtitem(minPriceInput["minimumprice"]);
+        setIsPutOnSaleButtonClicked(false);
+        setPutOnSaleMessage(response["detail"]);
       })
       .catch((error) => console.error("Error:", error));
   }
 
-  function handleRemoveFromSale(){
+  function handleRemoveFromSale() {
     setIsRemoveFromSaleButtonClicked(true);
     fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
       method: "PUT",
       body: JSON.stringify({
-        "sale_status": "NS"
+        sale_status: "NS",
       }),
       headers: {
         "Content-Type": "application/json",
-         Authorization: `Token ${token}`,
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
       .then((response) => {
         console.log("response", response);
-        if(response.status===200){
-          setSaleStatus("FS");
-        }
+        setSaleStatus("NS");
+        setIsRemoveFromSaleButtonClicked(true);
+        setIsPutOnSaleButtonClicked(false);
       })
       .catch((error) => console.error("Error:", error));
+  }
+
+  const handleRejectOffer = (bidId) => {
+    fetch(`${host}/api/v1/artitems/bids/${bidId}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        response: "RE",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("response", response);
+        setRejectButtonClicked(!rejectButtonClicked);
+        //renewPage();
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+  function handleAcceptOffer(bidId) {
+    fetch(`${host}/api/v1/artitems/bids/${bidId}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        response: "AC",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("response", response);
+        setAcceptButtonClicked(true);
+        setSaleStatus("SO");
+        //renewPage();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  function renewPage() {
+    navigate(`/artitems/${artitem_id}`);
   }
 
   return (
@@ -648,18 +741,18 @@ function ArtItem(props) {
             </div>
 
             {token ? (
-                <button
-                  className="anno-show-hide-button"
-                  onClick={() => {
-                    isHideAnnoButtonClicked
-                      ? showAnnotations()
-                      : hideAnnotations();
-                  }}
-                >
-                  {isHideAnnoButtonClicked
-                    ? "Show Annotations"
-                    : "Hide Annotations"}
-                </button>
+              <button
+                className="anno-show-hide-button"
+                onClick={() => {
+                  isHideAnnoButtonClicked
+                    ? showAnnotations()
+                    : hideAnnotations();
+                }}
+              >
+                {isHideAnnoButtonClicked
+                  ? "Show Annotations"
+                  : "Hide Annotations"}
+              </button>
             ) : null}
 
             <div
@@ -676,132 +769,212 @@ function ArtItem(props) {
               {token ? clickedAnnotationText : null}
             </div>
 
-             
-            {userid!==artitemOwnerID && token && saleStatus==="FS" ?
-                <button className="make-offer-button" onClick={()=> handleMakeOffer()}>Make Offer</button>
-                :null}
+            {token && userid === artitemOwnerID && saleStatus === "NS" ? (
+              <button
+                className="put-on-sale-button"
+                onClick={() =>
+                  setIsPutOnSaleButtonClicked(!isPutOnSaleButtonClicked)
+                }
+              >
+                Put On Sale
+              </button>
+            ) : null}
 
-            {token && userid===artitemOwnerID && saleStatus==="NS" ?
-              <button className="put-on-sale-button" onClick={()=>setIsPutOnSaleButtonClicked(!isPutOnSaleButtonClicked)}>Put On Sale</button>
-              :null}
-
-              {isPutOnSaleButtonClicked?
-              <div className="put-on-sale-form-container">
-                <label style={{display:"block"}}>Minimum Price</label>
-              <input style={{marginRight:"auto"}}
-              type="minimumprice"
-            placeholder="minimum price"
-            name="minimumprice"
-            id="minimumprice"
-            required
-            onChange={handleMinPriceInput}/> 
-            <button className="change-sale-status-button" onClick={()=>handleSendMinPrice()}>Send</button></div>
-                :null}
-
-            {token && userid===artitemOwnerID && saleStatus==="FS" ?
-              <button className="put-on-sale-button" onClick={()=>handleRemoveFromSale()}>Remove From Sale</button>
-              :null}
-            
-
-            {isMakeOfferClicked ?
-            <div className="make-offer-form-container">
-              <label>Amount</label>
-              <input style={{marginLeft:"5px"}}
-              type="amount"
-            placeholder="100"
-            name="amount"
-            id="amount"
-            required
-            defaultValue={newOffer.amount}
-            onChange={handleOfferInput}/>
-              <label style={{marginLeft:"15px"}}>Deadline</label>
-              <input style={{marginLeft:"5px"}} type="deadline"
-            placeholder="27-12-2022 15:30:45"
-            name="deadline"
-            id="deadline"
-            required
-            defaultValue={newOffer.deadline}
-            onChange={handleOfferInput}/>
-            <div style={{display:"inline-block",marginTop:"5px"}}>
-              <button className="cancel-make-offer-button" onClick={()=>handleCancelMakingOffer()}>Cancel</button>
-              <button className="send-offer-button" onClick={()=> handleSendOffer()}>Send</button>
+            {isPutOnSaleButtonClicked ? (
+              <div>
+                <div className="put-on-sale-form-container">
+                  <label style={{ display: "block" }}>Minimum Price</label>
+                  <input
+                    style={{ marginRight: "auto" }}
+                    type="minimumprice"
+                    placeholder="minimum price"
+                    name="minimumprice"
+                    id="minimumprice"
+                    required
+                    onChange={handleMinPriceInput}
+                  />
+                  <button
+                    className="change-sale-status-button"
+                    onClick={() => handleSendMinPrice()}
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
-            </div>
-            :null}
-            
-            {token && saleStatus!=="NS"  ?
-                    <div className="table">
-                      <table className="bidder-list">
-                        <thead>
-                          <tr>
-                            <th className="text-center" >
-                              <span style={{fontSize:"15px"}}>From</span>
-                            </th>
-                            <th className="text-center">
-                              <span style={{fontSize:"15px"}}>Price</span>
-                            </th>
-                            <th className="text-center">
-                              <span style={{fontSize:"15px"}}>Deadline</span>
-                            </th>
-                            <th className="text-center">
-                              <span style={{fontSize:"15px"}}>Status</span>
-                            </th>
-                          </tr>
-                        </thead>
+            ) : null}
 
-                        {saleStatus==="SO" ? <tbody>This art item was sold.</tbody>:  ///////
-                        <tbody>
-                        <tr>
-                            <td >
-                              <img
-                              id="bidder-profile-photo"
-                                src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                alt=""
-                              />
-                              <span class="user-name">Mila Kunis</span>
-                              
-                            </td>
-                            <td className="text-center">2013/08/08</td>
-                            <td class="text-center">
-                              <span class="label label-default">Inactive</span>
-                            </td>
-                            <td className="text-center">
-                              
-                              <button className="accept-offer-button">Accept</button>
-                              <button className="reject-offer-button">Reject</button>
-                            </td>
-                            
-                          </tr>
-                        
-                          
-                          <tr>
+            {token && userid === artitemOwnerID && saleStatus === "FS" ? (
+              <button
+                className="put-on-sale-button"
+                onClick={() => handleRemoveFromSale()}
+              >
+                Remove From Sale
+              </button>
+            ) : null}
+
+            {userid !== artitemOwnerID && token && saleStatus === "FS" ? (
+              <button
+                className="make-offer-button"
+                onClick={() => handleMakeOffer()}
+              >
+                Make Offer
+              </button>
+            ) : null}
+
+            {isMakeOfferClicked ? (
+              <div className="make-offer-form-container">
+                <label style={{ display: "block" }}>
+                  Minimum price for this art item is {minPriceOfArtitem}$.
+                </label>
+                <label>Amount</label>
+                <input
+                  style={{ marginLeft: "5px" }}
+                  type="amount"
+                  placeholder={minPriceOfArtitem}
+                  name="amount"
+                  id="amount"
+                  required
+                  onChange={handleOfferInput}
+                />
+                <label style={{ marginLeft: "15px" }}>Deadline</label>
+                <input
+                  style={{ marginLeft: "5px" }}
+                  type="deadline"
+                  placeholder="2022-12-27 15:30:45"
+                  name="deadline"
+                  id="deadline"
+                  required
+                  onChange={handleOfferInput}
+                />
+                <div
+                  style={{
+                    display: "inline-block",
+                    marginTop: "5px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  <button
+                    className="cancel-make-offer-button"
+                    onClick={() => handleCancelMakingOffer()}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="send-offer-button"
+                    onClick={() => handleSendOffer()}
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
+            {token && userid === artitemOwnerID && saleStatus !== "NS" ? (
+              <div className="table">
+                <table className="bidder-list">
+                  <thead>
+                    <tr>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>From</span>
+                      </th>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>Price</span>
+                      </th>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>Deadline</span>
+                      </th>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>Status</span>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  {bids.length === 0 ? (
+                    <tbody>
+                      <td></td>
+                      <td style={{ textAlign: "right" }}>No offers yet</td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  ) : (
+                    <tbody>
+                      {bids.map((val, index) => {
+                        return (
+                          <tr key={val.id}>
                             <td>
                               <img
-                              id="bidder-profile-photo"
-                                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                id="bidder-profile-photo"
+                                src={bidPhotos[index]}
                                 alt=""
                               />
-                              <span class="user-name">Mila Kunis</span>
-                              
+                              <span class="user-name">
+                                {val.buyer.username}
+                              </span>
                             </td>
-                            <td className="text-center">2013/08/08</td>
+                            <td className="text-center">{val.amount}</td>
                             <td class="text-center">
-                              <span class="label label-default">Inactive</span>
+                              <span class="label label-default">
+                                {val.deadline}
+                              </span>
                             </td>
                             <td className="text-center">
-                              <span>mila@kunis.com</span>
+                              {saleStatus === "SO" ? (
+                                <td className="text-center">
+                                  {bidresponses[val.accepted]}
+                                </td>
+                              ) : val.accepted === "NR" ? (
+                                <div>
+                                  <button
+                                    className="accept-offer-button"
+                                    onClick={() => handleAcceptOffer(val.id)}
+                                  >
+                                    Accept
+                                  </button>
+                                  <button
+                                    className="reject-offer-button"
+                                    onClick={() => handleRejectOffer(val.id)}
+                                  >
+                                    Reject
+                                  </button>
+                                </div>
+                              ) : (
+                                <span className="text-center">
+                                  {bidresponses[val.accepted]}
+                                </span>
+                              )}
                             </td>
-                            
                           </tr>
-                        </tbody>
-                        }
-
-                      </table>
-                    </div>
-                    :null}
-                    
-               </div>
-            
+                        );
+                      })}
+                    </tbody>
+                  )}
+                </table>
+              </div>
+            ) : null}
+            {token && userid !== artitemOwnerID && saleStatus === "S" ? (
+              <div className="table">
+                <table className="bidder-list">
+                  <thead>
+                    <tr>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>To</span>
+                      </th>
+                      <th className="text-center">
+                        <span style={{ fontSize: "15px" }}>Status</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td>
+                      <img id="bidder-profile-photo" src="" alt="" />
+                      <span class="user-name">{boughtBy}</span>
+                    </td>
+                    <td className="text-center">SOLD</td>
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+          </div>
 
           <div id="info-container">
             <div id="owner">

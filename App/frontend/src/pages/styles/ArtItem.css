@@ -280,12 +280,7 @@
   background: #555;
 }
 
-/*.artitem-post-container .button-container {
-  display: grid;
-}*/
-
-
-/*Bidding*/
+/*BIDDING*/
 
 .artitem-post-container .put-on-sale-button {
   background-color: #ffc9ff;
@@ -293,20 +288,18 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-right: auto;
-  padding: 0.rem ;
+  padding: 0.2rem;
   border-color: #ffc9ff;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 .artitem-post-container .put-on-sale-button:hover,
-.artitem-post-container .put-on-sale-button:active{
-  color: #ffc9ff!important;
+.artitem-post-container .put-on-sale-button:active {
+  color: #ffc9ff !important;
   background-color: #0e0a10 !important;
 }
 
-.artitem-post-container
-  #image-container
-  .put-on-sale-form-container {
+.artitem-post-container #image-container .put-on-sale-form-container {
   display: block;
   background-color: #fad3fa;
   color: #18121c;
@@ -327,11 +320,11 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-left: auto;
-  padding: 0.3rem ;
+  padding: 0.3rem;
   border-color: #ffc9ff;
 }
 .artitem-post-container .change-sale-status-button:hover,
-.artitem-post-container .change-sale-status-button:active{
+.artitem-post-container .change-sale-status-button:active {
   color: #0e0a10 !important;
   background-color: #ffc9ff !important;
 }
@@ -342,19 +335,16 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-left: auto;
-  padding: 0.3rem ;
+  padding: 0.3rem;
   border-color: #ffc9ff;
-  display: grid;
 }
 .artitem-post-container .make-offer-button:hover,
-.artitem-post-container .make-offer-button:active{
-  color: white!important;
+.artitem-post-container .make-offer-button:active {
+  color: white !important;
   background-color: #0e0a10 !important;
 }
 
-.artitem-post-container
-  #image-container
-  .make-offer-form-container {
+.artitem-post-container #image-container .make-offer-form-container {
   display: block;
   background-color: #fad3fa;
   color: #18121c;
@@ -363,9 +353,10 @@
   font-weight: 500;
   border: 1px solid #bcb1c1;
   margin-top: 0.6rem;
-  margin-right: 0.6rem;
+  margin-right: auto;
   margin-bottom: 0.6rem;
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  width: 75%;
 }
 
 .artitem-post-container .cancel-make-offer-button {
@@ -373,9 +364,9 @@
   color: #ffc9ff;
   border-radius: 0.3rem;
   font-size: 15px;
-  margin-left: 510px;
+  margin-left: auto;
   margin-right: auto;
-  padding: 0.3rem ;
+  padding: 0.3rem;
   border-color: #ffc9ff;
 }
 .artitem-post-container .send-offer-button {
@@ -384,7 +375,7 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-left: auto;
-  padding: 0.3rem ;
+  padding: 0.3rem;
   border-color: #ffc9ff;
 }
 
@@ -394,13 +385,13 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-left: auto;
-  padding: 0.1rem ;
+  padding: 0.1rem;
   border-color: #ffc9ff;
   margin-bottom: 5px;
   width: 70px;
 }
 .artitem-post-container .accept-offer-button:hover,
-.artitem-post-container .accept-offer-button:active{
+.artitem-post-container .accept-offer-button:active {
   color: #0e0a10 !important;
   background-color: #ffc9ff !important;
 }
@@ -411,12 +402,12 @@
   border-radius: 0.3rem;
   font-size: 15px;
   margin-left: auto;
-  padding: 0.1rem ;
+  padding: 0.1rem;
   border-color: #ffc9ff;
   width: 70px;
 }
 .artitem-post-container .reject-offer-button:hover,
-.artitem-post-container .reject-offer-button:active{
+.artitem-post-container .reject-offer-button:active {
   color: #0e0a10 !important;
   background-color: #ffc9ff !important;
 }
@@ -435,183 +426,122 @@
 
 /* USER LIST TABLE */
 
+.bidder-list {
+  width: 100%;
+}
 .bidder-list tbody td > img {
   position: relative;
-	max-width: 50px;
-	float: left;
-	margin-right: 15px;
-
+  max-width: 50px;
+  float: left;
+  margin-right: 15px;
 }
 .bidder-list tbody td .user-name {
-	display: block;
-	font-size: 1.25em;
-	padding-top: 4px;
+  display: block;
+  font-size: 1.25em;
+  padding-top: 4px;
   margin-top: 10px;
-	margin-left: 60px;
+  margin-left: 60px;
   font-size: 15px;
   padding-left: 30px;
 }
 
 /* TABLES */
 .table {
-    border-collapse: separate;
-    border-color: #ffc9ff;
-    color: white;
-    margin-top: 10px;  
+  border-collapse: separate;
+  border-color: #ffc9ff;
+  color: white;
+  margin-top: 10px;
 }
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
-	background-color: transparent;
+  background-color: transparent;
 }
 .table thead > tr > th {
-	border-bottom: 1px solid #C2C2C2;
-	padding-bottom: 0;
-  border-top: 1px solid #C2C2C2;
+  border-bottom: 1px solid #c2c2c2;
+  padding-bottom: 0;
+  border-top: 1px solid #c2c2c2;
 }
 .table tbody > tr > td {
-	font-size: 0.875em;
-	background-color: transparent;
-	border-top: 10px solid #18121c;
-	vertical-align: middle;
-	padding: 12px 8px;
+  font-size: 0.875em;
+  background-color: transparent;
+  border-top: 10px solid #18121c;
+  vertical-align: middle;
+  padding: 12px 8px;
   width: 30%;
 }
 .table tbody > tr > td:first-child,
 .table thead > tr > th:first-child {
-	padding-left: 20px;
+  padding-left: 20px;
 }
 .table thead > tr > th span {
-	border-bottom: 2px solid #C2C2C2;
-	display: inline-block;
-	padding: 0 5px;
-	padding-bottom: 5px;
-	font-weight: normal;
+  border-bottom: 2px solid #c2c2c2;
+  display: inline-block;
+  padding: 0 5px;
+  padding-bottom: 5px;
+  font-weight: normal;
 }
 .table thead > tr > th > a span {
-	color: #344644;
+  color: #344644;
 }
 .table thead > tr > th > a span:after {
-	content: "\f0dc";
-	font-family: FontAwesome;
-	font-style: normal;
-	font-weight: normal;
-	text-decoration: inherit;
-	margin-left: 5px;
-	font-size: 0.75em;
+  content: "\f0dc";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  margin-left: 5px;
+  font-size: 0.75em;
 }
 .table thead > tr > th > a.asc span:after {
-	content: "\f0dd";
+  content: "\f0dd";
 }
 .table thead > tr > th > a.desc span:after {
-	content: "\f0de";
+  content: "\f0de";
 }
 .table thead > tr > th > a:hover span {
-	text-decoration: none;
-	color: #2bb6a3;
-	border-color: #2bb6a3;
+  text-decoration: none;
+  color: #2bb6a3;
+  border-color: #2bb6a3;
 }
 .table.table-hover tbody > tr > td {
-	-webkit-transition: background-color 0.15s ease-in-out 0s;
-	transition: background-color 0.15s ease-in-out 0s;
+  -webkit-transition: background-color 0.15s ease-in-out 0s;
+  transition: background-color 0.15s ease-in-out 0s;
 }
 
-.table tbody tr{
+.table tbody tr {
   background-color: transparent;
   font-size: 16px;
 }
 .table tbody tr td .call-type {
-	display: block;
-	font-size: 0.75em;
-	text-align: center;
+  display: block;
+  font-size: 0.75em;
+  text-align: center;
 }
 .table tbody tr td .first-line {
-	line-height: 1.5;
-	font-weight: 400;
-	font-size: 1.125em;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 1.125em;
 }
 .table tbody tr td .first-line span {
-	font-size: 0.875em;
-	color: #969696;
-	font-weight: 300;
+  font-size: 0.875em;
+  color: #969696;
+  font-weight: 300;
 }
 .table tbody tr td .second-line {
-	font-size: 0.875em;
-	line-height: 1.2;
+  font-size: 0.875em;
+  line-height: 1.2;
 }
 .table a.table-link {
-	margin: 0 5px;
-	font-size: 1.125em;
+  margin: 0 5px;
+  font-size: 1.125em;
 }
 .table a.table-link:hover {
-	text-decoration: none;
-	color: #2aa493;
+  text-decoration: none;
+  color: #2aa493;
 }
 .table a.table-link.danger {
-	color: #fe635f;
+  color: #fe635f;
 }
 .table a.table-link.danger:hover {
-	color: #dd504c;
-}
-
-.table-products tbody > tr > td {
-	background: none;
-	border: none;
-	border-bottom: 1px solid #ebebeb;
-	-webkit-transition: background-color 0.15s ease-in-out 0s;
-	transition: background-color 0.15s ease-in-out 0s;
-	position: relative;
-}
-.table-products tbody > tr:hover > td {
-	text-decoration: none;
-	background-color: #f6f6f6;
-}
-.table-products .name {
-	display: block;
-	font-weight: 600;
-	padding-bottom: 7px;
-}
-.table-products .price {
-	display: block;
-	text-decoration: none;
-	width: 50%;
-	float: left;
-	font-size: 0.875em;
-}
-.table-products .price > i {
-	color: #8dc859;
-}
-.table-products .warranty {
-	display: block;
-	text-decoration: none;
-	width: 50%;
-	float: left;
-	font-size: 0.875em;
-}
-.table-products .warranty > i {
-	color: #f1c40f;
-}
-.table tbody > tr.table-line-fb > td {
-	background-color: #9daccb;
-	color: #262525;
-}
-.table tbody > tr.table-line-twitter > td {
-	background-color: #9fccff;
-	color: #262525;
-}
-.table tbody > tr.table-line-plus > td {
-	background-color: #eea59c;
-	color: #262525;
-}
-.table-stats .status-social-icon {
-	font-size: 1.9em;
-	vertical-align: bottom;
-}
-.table-stats .table-line-fb .status-social-icon {
-	color: #556484;
-}
-.table-stats .table-line-twitter .status-social-icon {
-	color: #5885b8;
-}
-.table-stats .table-line-plus .status-social-icon {
-	color: #a75d54;
+  color: #dd504c;
 }
