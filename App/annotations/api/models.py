@@ -34,19 +34,19 @@ class TypeEnum(models.TextChoices):
     textualbody = 'TextualBody'
 
 class MotivationEnum(models.TextChoices):
-    assessing = 'Assessing'
-    bookmarking = 'Bookmarking'
-    classifying = 'Classifying'
-    commenting = 'Commenting'
-    describing = 'Describing'
-    editing = 'Editing'
-    highlighting = 'Highlighting'
-    identifying = 'Identifying'
-    linking = "Linking"
-    moderating = "Moderating"
-    questioning = "Questioning"
-    replying = "Replying"
-    tagging = "Tagging"
+    assessing = 'assessing'
+    bookmarking = 'bookmarking'
+    classifying = 'classifying'
+    commenting = 'commenting'
+    describing = 'describing'
+    editing = 'editing'
+    highlighting = 'highlighting'
+    identifying = 'identifying'
+    linking = "linking"
+    moderating = "moderating"
+    questioning = "questioning"
+    replying = "replying"
+    tagging = "tagging"
 
 class SelectorEnum(models.TextChoices):
     fragmentselector = "FragmentSelector"
@@ -82,7 +82,10 @@ class Selector(models.Model):
     textQuoteSelector = models.ForeignKey(TextQuoteSelector,  on_delete= models.CASCADE, blank=True, null=True)
     textPositionSelector = models.ForeignKey(TextPositionSelector, on_delete= models.CASCADE, blank=True, null=True)
     
-
+class Creator(models.Model):
+    id = models.BigIntegerField(primary_key = True)  
+    name = models.TextField()
+    
 """
 "body": "http://34.125.134.88/body<id>"  (id will be stored in the field - serializer will serialize as shown)
 "type": "TextualBody",
@@ -95,7 +98,9 @@ class Body(models.Model):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
     value = models.TextField()
     format = models.TextField(default=FORMAT)
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
     purpose = models.ForeignKey(Motivation, on_delete=models.CASCADE, to_field='motivation',  blank=True, null=True)
 
 """
