@@ -151,8 +151,19 @@ def RecommendArtItemView(request):
             message = {'artitems': serializer.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
-        message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        if (request.method == "GET"):
+            artitems = []
+
+            items = ArtItem.objects.all()
+            for item in items:
+                artitems.append(item)
+                if (len(artitems) >= 25):
+                    break
+
+            #print(artitems)
+            serializer = ArtItemSerializer(artitems, many=True)
+            message = {'artitems': serializer.data}
+            return Response(message, status=status.HTTP_200_OK)
 
 
 @swagger_auto_schema(
@@ -306,8 +317,26 @@ def RecommendExhibitionView(request):
             message = {'exhibitions': serializer1.data + serializer2.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
-        message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        if (request.method == "GET"):
+            offline = OfflineExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            online = VirtualExhibition.objects.filter(start_date__lte=datetime.datetime.now(), end_date__gte=datetime.datetime.now()).order_by('-popularity')
+            
+            exhibitions1 = []
+            for item in offline:
+                exhibitions1.append(item)
+                if(len(exhibitions1)>=5):
+                    break
+            exhibitions2 = []
+            for item in online:
+                exhibitions2.append(item)
+                if(len(exhibitions2)>=16):
+                    break
+
+            serializer1 = OfflineExhibitionSerializer(exhibitions1, many=True)
+            serializer2 = VirtualExhibitionSerializer(exhibitions2, many=True)
+            #can separate if it is easier for the frontend
+            message = {'exhibitions': serializer1.data + serializer2.data}
+            return Response(message, status=status.HTTP_200_OK)
 
 
 @swagger_auto_schema(
@@ -382,8 +411,21 @@ def RecommendUserView(request):
             message = {'users': serializer.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
-        message = {'detail': 'Invalid token.'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        if (request.method == "GET"):
+
+            myusers = []
+
+            users = User.objects.all().order_by('-popularity').exclude(is_superuser=True)
+
+            for item in users:
+                myusers.append(item)
+                    
+                if(len(myusers)>=25):
+                    break
+
+            serializer = UserSerializer(myusers, many=True)
+            message = {'users': serializer.data}
+            return Response(message, status=status.HTTP_200_OK) 
 
 
 #anonymous ones ############################################################################################################
