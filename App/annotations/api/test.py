@@ -101,7 +101,11 @@ class TestAnnotations(TestCase):
         "creator" : creator, 
         "body": [{
           "type": bodytype,
-          "value": bodyvalue
+          "value": bodyvalue,
+          "creator": {
+            "id": 1,
+            "name": "joseph.blocker"
+        }
         }],
         "target": {
           "source": source,
@@ -119,13 +123,16 @@ class TestAnnotations(TestCase):
       self.assertEqual(response.status_code, 201)
       expected_body = {
         "value": bodyvalue,
-        "type": "Text",
-        "format": "text/plain",
-        "purpose": "Commenting"
+        "type": "TextualBody",
+        "purpose": "commenting",
+        "creator": {
+            "id": 1,
+            "name": "joseph.blocker"
+        }
       }
       actual_body = response.data['body'][0] # it returns a list
       actual_body.pop('created')
-      actual_body.pop('id')
+      actual_body.pop('modified')
 
       self.assertEqual(actual_body, expected_body)
 
@@ -159,6 +166,10 @@ class TestAnnotations(TestCase):
             {
                 "value": bodyvalue,
                 "type": bodytype,
+                "creator": {
+                "id": 1,
+                "name": "joseph.blocker"
+            }
             }
         ],
         "type": "Annotation",
@@ -186,13 +197,16 @@ class TestAnnotations(TestCase):
       self.assertEqual(response.status_code, 201)
       expected_body = {
         "value": bodyvalue,
-        "type": "Text",
-        "format": "text/plain",
-        "purpose": "Commenting"
+        "type": "TextualBody",
+        "purpose": "commenting",
+        "creator": {
+            "id": 1,
+            "name": "joseph.blocker"
+        }
       }
       actual_body = response.data['body'][0] # it returns a list
       actual_body.pop('created')
-      actual_body.pop('id')
+      actual_body.pop('modified')
 
       self.assertEqual(actual_body, expected_body)
 
@@ -232,7 +246,11 @@ class TestAnnotations(TestCase):
         "creator" : creator, 
         "body": [{
           "type": "TextualBody",
-          "value": updbody
+          "value": updbody,
+        "creator": {
+            "id": 1,
+            "name": "joseph.blocker"
+        }
         }],
         "target": {
           "source": img_annotation['target']['source'],
