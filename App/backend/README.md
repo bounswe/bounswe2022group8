@@ -57,6 +57,14 @@ CmpE 451
    ```cmd
    python manage.py test api/tests
    ```
+* Running the tests will generate XML reports within the `test-output` folder. You can remove them with the following command:
+   ```cmd
+   rm test-output/*
+   ```
+* To run an individual unit test, you can provide the name of the function directly. For example, you can run `test_get_my_profile` function only as follows:
+   ```cmd
+   python manage.py test -k test_get_my_profile
+   ```
 ### Migrations
 Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema.
 

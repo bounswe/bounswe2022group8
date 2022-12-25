@@ -73,6 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Go to bounswe2022group8/App/frontend folder from the terminal and run the following commands:
 
 docker build -t frontend .
+
 docker run -d -p 80:80 frontend 
 
 ### You can acces the app from IP address of the machine that you dockerized the app (34.125.134.88 for our case)

@@ -165,3 +165,6 @@ TIME_ZONE = 'Europe/Istanbul'
 USE_I18N = True
 USE_L10N = False 
 USE_TZ = True
+
+TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
+TEST_OUTPUT_DIR = 'test-output/'
