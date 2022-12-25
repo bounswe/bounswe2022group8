@@ -263,8 +263,11 @@ def annotate(request):
                 if('body'  in request.data): # annotation without body - possible
                     # create body
                     body_data = data['body'][0]  # it's a list of one element
-
-                    body_serializer = create_body(body_data)
+                    if('creator' not in body_data):
+                        return Response({"Invalid input": "Body must have a creator."}, status=status.HTTP_400_BAD_REQUEST)
+                    body_serializer, cond = create_body(body_data)
+                    if(not cond):
+                        return Response(body_serializer, status=status.HTTP_400_BAD_REQUEST)
                     if(body_serializer.is_valid()):
                         b = body_serializer.save()
                         data['body'] = [b.id]
@@ -327,18 +330,30 @@ def annotate(request):
                     selector.delete()
                     return Response({"Invalid request": "Annotation must have an id."}, status=status.HTTP_400_BAD_REQUEST)
 
+                from datetime import datetime    
+                prevCurrent = imageAnnotation.body.all()[0].created  
+                current = datetime.now()
+
     
                 if('body'  in request.data): # annotation without body - possible
                     # create body
                     body_data = data['body'][0]
-                    body_serializer = create_body(body_data)
+                    if('creator' not in body_data):
+                        return Response({"Invalid input": "Body must have a creator."}, status=status.HTTP_400_BAD_REQUEST)
+                    body_serializer, cond = create_body(body_data)
+                    if(not cond):
+                        return Response(body_serializer, status=status.HTTP_400_BAD_REQUEST)
                     if(body_serializer.is_valid()):
                         body = body_serializer.save()
+                        body.created = prevCurrent
+                        body.modified = current
+                        body.save()
                         data['body'] = [body.id]
                     else:
                         selector.delete() # target gets deleted automatically - CASCADE
                         return Response(body_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-                    
+                
+
                     imageAnnotation.body.set([body])
                 else:
                     imageAnnotation.body.set([]) 
@@ -522,8 +537,18 @@ def create_body(body_data):
     purpose = create_or_return_motivation("commenting")
     body_data["type"] = type.type
     body_data['purpose'] = purpose.motivation
-    body_serializer = AnnotationBodySerializer(data=body_data)
-    return body_serializer
+    creator = Creator.objects.get(pk=body_data['creator']['id'])
+    if(creator):
+        body_data['creator'] = creator.id
+        body_serializer = AnnotationBodySerializer(data=body_data)
+        return body_serializer, True
+    creator_serializer = CreatorSerializer(data = body_data['creator'])
+    if(creator_serializer.is_valid()):
+        c = creator_serializer.save()
+        body_data['creator'] = c.id
+        body_serializer = AnnotationBodySerializer(data=body_data)
+        return body_serializer, True
+    else: return creator_serializer.errors, False
 
 
 

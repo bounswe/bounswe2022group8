@@ -82,7 +82,10 @@ class Selector(models.Model):
     textQuoteSelector = models.ForeignKey(TextQuoteSelector,  on_delete= models.CASCADE, blank=True, null=True)
     textPositionSelector = models.ForeignKey(TextPositionSelector, on_delete= models.CASCADE, blank=True, null=True)
     
-
+class Creator(models.Model):
+    id = models.BigIntegerField(primary_key = True)  
+    name = models.TextField()
+    
 """
 "body": "http://34.125.134.88/body<id>"  (id will be stored in the field - serializer will serialize as shown)
 "type": "TextualBody",
@@ -95,7 +98,9 @@ class Body(models.Model):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
     value = models.TextField()
     format = models.TextField(default=FORMAT)
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
     purpose = models.ForeignKey(Motivation, on_delete=models.CASCADE, to_field='motivation',  blank=True, null=True)
 
 """
