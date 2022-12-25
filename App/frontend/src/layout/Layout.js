@@ -96,8 +96,9 @@ function Layout(props) {
   }
 
   function handleClickLogOut() {
-    navigate("/");
-    scrollToTop();
+    window.location.replace("/");
+    /*navigate("/");
+    scrollToTop();*/
   }
 
   function handleSidebar() {

@@ -1,12 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
-import { HOST } from "../constants/host";
+import { ANNOHOST, HOST } from "../constants/host";
+import { CategoryDict } from "./data/Categories";
 import Tag from "../components/Tag";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart } from "react-icons/io";
 
 import "./styles/ArtItem.css";
+
+import { Annotorious } from "@recogito/annotorious";
+import "@recogito/annotorious/dist/annotorious.min.css";
+
+import { Recogito } from "@recogito/recogito-js";
+import "@recogito/recogito-js/dist/recogito.min.css";
+
+//import { BiMessageAltDetail } from "react-icons/bi";
 
 function ArtItem(props) {
   function scrollToTop() {
@@ -18,18 +29,44 @@ function ArtItem(props) {
   }
 
   var host = HOST;
+  var annotationhost = ANNOHOST;
   const { token } = useAuth();
+  const [userid, setUserid] = useState();
+
+  /*Image Annotation*/
+  // Ref to the image DOM element
+  const imageElement = useRef(null);
+
+  // The current Annotorious instance
+  const [anno, setAnno] = useState();
+
+  const [isHideAnnoButtonClicked, setIsHideAnnoButtonClicked] = useState(false);
+
+  const [clickedAnnotationText, setClickedAnnotationText] = useState(null);
+  const [clickedAnnotationOwner, setClickedAnnotationOwner] = useState(null);
+  /*Image Annotation*/
+
+  /*Text Annotation*/
+  const textElement = useRef(null);
+
+  const [textAnno, setTextAnno] = useState([]);
+
+  //const [displayableTextAnno, setDisplayableTextAnno] = useState(null);
+  /*Text Annotation*/
   const { artitem_id } = useParams();
   const navigate = useNavigate();
 
   const [artitemSrc, setArtitemSrc] = useState("");
-  const [artitemDescription, setArtitemDescription] = useState("");
-  const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
-  // const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemTitle, setArtitemTitle] = useState("");
+  const [artitemDescription, setArtitemDescription] = useState("");
+  const [artitemCategory, setArtitemCategory] = useState("");
+  const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
+  const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemComments, setArtitemComments] = useState([]);
+  const [artitemLikes, setArtitemLikes] = useState(0);
   const [artitemOwnerPhoto, setArtitemOwnerPhoto] = useState("");
   const [commentPhotos, setCommentPhotos] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const [myID, setMyID] = useState(null);
 
   // COMMENT BODY TO BE POSTED
@@ -55,19 +92,30 @@ function ArtItem(props) {
 
   // GET THE ART ITEM'S PROPERTIES
   useEffect(() => {
+    var config = {};
+
+    if (token) {
+      config = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
+    } else {
+      config = { "Content-Type": "application/json" };
+    }
+
     fetch(`${host}/api/v1/artitems/${artitem_id}`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: `Token ${token}`,
-      },
+      headers: config,
     })
       .then((response) => response.json())
       .then((response) => {
         // console.log(response);
-        setArtitemDescription(response.description);
-        setArtitemOwnerUsername(response.owner.username);
         setArtitemTitle(response.title);
+        setArtitemDescription(response.description);
+        setArtitemCategory(response.category);
+        setArtitemOwnerUsername(response.owner.username);
+        setArtitemOwnerID(response.owner.id);
+        setIsLiked(response.isLiked);
 
         var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -118,6 +166,23 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, updateComments]);
 
+  // GET THE ART ITEM'S LIKES
+  useEffect(() => {
+    fetch(`${host}/api/v1/artitems/${artitem_id}/likers/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response);
+        setArtitemLikes(response.length);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
   // GET CURRENTLY LOGGED IN USERS' ID
   useEffect(() => {
     fetch(`${host}/api/v1/users/profile/me/`, {
@@ -148,8 +213,7 @@ function ArtItem(props) {
             Authorization: `Token ${token}`,
           },
         })
-          .then((response) => response.json())
-          .then((response) => {
+          .then(() => {
             setUpdateComments(!updateComments);
           })
           .catch((error) => console.error("Error:", error));
@@ -162,10 +226,290 @@ function ArtItem(props) {
     setNewComment("");
   }
 
+  function handleLike() {
+    if (token) {
+      if (isLiked) {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/unlike/`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes - 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      } else {
+        fetch(`${host}/api/v1/users/artitems/${artitem_id}/like/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then(() => {
+            setIsLiked(!isLiked);
+            setArtitemLikes(artitemLikes + 1);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      setGuestClick(true);
+    }
+  }
+
   useEffect(() => {
     // scroll to bottom every time messages change
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [artitemComments]);
+
+  // GET user id of currently logged-in user
+  useEffect(() => {
+    if (token) {
+      fetch(`${host}/api/v1/users/profile/me/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          //console.log(response);
+          setUserid(response.id);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [host, token]);
+
+  /*Image Annotation*/
+  useEffect(() => {
+    if (token && userid && artitemSrc) {
+      let annotorious = null;
+
+      if (imageElement.current) {
+        annotorious = new Annotorious({
+          image: imageElement.current,
+          widgets: ["COMMENT"],
+        });
+
+        //console.log(imageElement);
+
+        // Load annotations in W3C Web Annotation format
+        // Loads annotations from a JSON URL.
+        // The method returns a promise, in case you want to perform an action after the annotations have loaded
+        annotorious
+          .loadAnnotations(
+            `${annotationhost}/api/v1/annotations/image/artitems/${artitem_id}`
+          )
+          .catch((error) => console.error("Error:", error));
+        /* If there are no annotations on an art item, such error
+           Error: TypeError: (e || []).map is not a function at jc.setAnnotations
+           may be seen on console 
+        */
+
+        // Following 3 event handler are to display annotation body under the image
+        annotorious.on("clickAnnotation", function (annotation, element) {
+          console.log("annotation", annotation);
+          setClickedAnnotationText(annotation.body[0].value);
+          fetch(`${host}/api/v1/users/profile/${annotation.creator}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Token ${token}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              //console.log(response);
+              setClickedAnnotationOwner(response.username);
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        annotorious.on("cancelSelected", function (selection) {
+          setClickedAnnotationText(null);
+          setClickedAnnotationOwner(null);
+        });
+
+        annotorious.on("changeSelected", function (selected, previous) {
+          setClickedAnnotationText(selected.body[0].value);
+          fetch(`${host}/api/v1/users/profile/${selected.creator}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Token ${token}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              //console.log(response);
+              setClickedAnnotationOwner(response.username);
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        //...annotation backend connection...
+        // Event handlers
+        annotorious.on("createAnnotation", (annotation) => {
+          annotation["creator"] = `${userid}`;
+          annotation["target"]["source"] =
+            annotation["target"]["source"].split(/[?]/)[0];
+          //fetch with method 'POST'
+          fetch(`${annotationhost}/api/v1/annotations/`, {
+            method: "POST",
+            body: JSON.stringify(annotation),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .catch((error) => console.error("Error:", error));
+        });
+
+        annotorious.on("updateAnnotation", (annotation, previous) => {
+          if (annotation.creator === previous.creator) {
+            console.log("updated", annotation);
+            console.log("previous", previous);
+            //fetch with method 'PUT'
+            fetch(`${annotationhost}/api/v1/annotations/`, {
+              method: "PUT",
+              body: JSON.stringify(annotation),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then(setClickedAnnotationText(annotation.body[0].value))
+              .then(
+                fetch(`${host}/api/v1/users/profile/${annotation.creator}`, {
+                  method: "GET",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Token ${token}`,
+                  },
+                })
+                  .then((response) => response.json())
+                  .then((response) => {
+                    //console.log(response);
+                    setClickedAnnotationOwner(response.username);
+                  })
+                  .catch((error) => console.error("Error:", error))
+              )
+              .catch((error) => console.error("Error:", error));
+          }
+        });
+
+        annotorious.on("deleteAnnotation", (annotation) => {
+          console.log("deleted", annotation);
+          let annotId = annotation.id.split(/[#]/)[1];
+          //console.log("annot id", annotId);
+          //fetch with method 'DELETE'
+          fetch(`${annotationhost}/api/v1/annotations/?id=${annotId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then(setClickedAnnotationText(null))
+            .then(setClickedAnnotationOwner(null))
+            .catch((error) => console.error("Error:", error));
+        });
+      }
+      // Keep current Annotorious instance in state
+      setAnno(annotorious);
+
+      // Cleanup: destroy current instance
+      return () => annotorious.destroy();
+    }
+  }, [annotationhost, token, userid, artitemSrc]);
+
+  /*Text Annotation*/
+  useEffect(() => {
+    if (token && userid && artitemSrc) {
+      if (textElement.current) {
+        const r = new Recogito({
+          content: textElement.current,
+          widgets: ["COMMENT"],
+        });
+
+        r.loadAnnotations(
+          `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
+        )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => console.error("Error:", error));
+
+        // Event handlers
+        r.on("createAnnotation", (annotation) => {
+          console.log("i am here");
+          annotation["creator"] = userid;
+          annotation["target"]["source"] = artitemSrc.split(/[?]/)[0];
+          //fetch with method 'POST'
+          fetch(`${annotationhost}/api/v1/annotations/`, {
+            method: "POST",
+            body: JSON.stringify(annotation),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              console.log("created in db", response);
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        r.on("updateAnnotation", function (annotation, previous) {
+          console.log("updated in frontend", annotation);
+          console.log("previous", previous);
+          //fetch with method 'PUT'
+          fetch(`${annotationhost}/api/v1/annotations/`, {
+            method: "PUT",
+            body: JSON.stringify(annotation),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              console.log("updated in db", response);
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        r.on("deleteAnnotation", function (annotation) {
+          console.log("deleted", annotation);
+          let annotId = annotation.id.split(/[#]/)[1];
+          //console.log("annot id", annotId);
+          //fetch with method 'DELETE'
+          fetch(`${annotationhost}/api/v1/annotations/?id=${annotId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).catch((error) => console.error("Error:", error));
+        });
+
+        setTextAnno(r);
+
+        return () => r.destroy();
+      }
+    }
+  }, [annotationhost, userid, token, artitemSrc]);
+
+  function hideAnnotations() {
+    anno.setVisible(false);
+    setIsHideAnnoButtonClicked(true);
+    setClickedAnnotationText(null);
+    setClickedAnnotationOwner(null);
+  }
+  function showAnnotations() {
+    anno.setVisible(true);
+    setIsHideAnnoButtonClicked(false);
+  }
 
   function goToProfile(id) {
     if (myID === id) {
@@ -185,7 +529,20 @@ function ArtItem(props) {
       <div className="artitem-post-container">
         <div className="artitem-post">
           <div id="image-container">
-            <img id="image" src={artitemSrc} alt={artitemDescription} />
+            {token ? (
+              <div id="image-wrap">
+                <img
+                  id="image"
+                  ref={imageElement}
+                  src={artitemSrc}
+                  alt={artitemDescription}
+                  style={{ height: "100%" }}
+                />
+              </div>
+            ) : (
+              <img id="image" src={artitemSrc} alt={artitemDescription} />
+            )}
+
             <div className="tag-container">
               <Tag tagname="nature"></Tag>
               <Tag tagname="human"></Tag>
@@ -194,7 +551,39 @@ function ArtItem(props) {
               <Tag tagname="pink"></Tag>
               <Tag tagname="night"></Tag>
             </div>
+
+            {token ? (
+              <div>
+                <button
+                  className="anno-show-hide-button"
+                  onClick={() => {
+                    isHideAnnoButtonClicked
+                      ? showAnnotations()
+                      : hideAnnotations();
+                  }}
+                >
+                  {isHideAnnoButtonClicked
+                    ? "Show Annotations"
+                    : "Hide Annotations"}
+                </button>
+              </div>
+            ) : null}
+
+            <div
+              className={
+                token && clickedAnnotationText
+                  ? "display-image-annotation-text-container"
+                  : ""
+              }
+            >
+              {token ? clickedAnnotationOwner : null}
+              {token && clickedAnnotationText && clickedAnnotationOwner
+                ? " : "
+                : null}
+              {token ? clickedAnnotationText : null}
+            </div>
           </div>
+
           <div id="info-container">
             <div id="owner">
               <img
@@ -205,9 +594,11 @@ function ArtItem(props) {
               />
               <div id="owner-username"> {artitemOwnerUsername} </div>
             </div>
-            <div id="title-and-description">
+
+            <div ref={token ? textElement : null} id="title-and-description">
               <div id="title">{artitemTitle}</div>
               <div id="description">{artitemDescription}</div>
+              <em id="category">Category: {CategoryDict[artitemCategory]}</em>
             </div>
             <br></br>
             <div id="comments">
@@ -243,9 +634,33 @@ function ArtItem(props) {
               })}
               <div ref={bottomRef} />
             </div>
+
             <div id="stats">
-              <span id="likes">0 likes</span>
-              <span>{artitemComments.length} comments</span>
+              <div id="likes">{artitemLikes} likes</div>
+              <div>{artitemComments.length} comments</div>
+              <div>
+                {isLiked ? (
+                  <IoIosHeart
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffc9ff",
+                    }}
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <IoIosHeartEmpty
+                    style={{
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                      strokeWidth: "0.8rem",
+                      color: "#ffffff",
+                    }}
+                    onClick={handleLike}
+                  />
+                )}
+              </div>
             </div>
             <div className="add-comment-container">
               <div>
@@ -272,6 +687,7 @@ function ArtItem(props) {
           </div>
         </div>
       </div>
+
       {/*<div className="artitem-post-properties">
         <div className="tag-container">
           <div className="tag"></div>

@@ -20,6 +20,7 @@ import hashlib
 
 from ..signals import user_created_signal
 
+
 class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 

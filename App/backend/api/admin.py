@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models.models import Comment
-from .models.artitem import Tag, ArtItem, LikeArtItem
-from .models.user import User, UserInterest, Follow
+from .models.artitem import Tag, ArtItem, LikeArtItem, Bid, NewBids 
+from .models.user import User, UserInterest, Follow 
 from .models.exhibition import OfflineExhibition, VirtualExhibition
 
 class UserAdmin(admin.ModelAdmin):
@@ -25,6 +25,9 @@ class VirtualExhibitionAdmin(admin.ModelAdmin):
 
 class UserInterestAdmin(admin.ModelAdmin):
     list_display = ['user', 'first', 'second', 'third']
+    
+class BidAdmin(admin.ModelAdmin):
+    list_display = ['id', 'artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)
@@ -35,3 +38,5 @@ admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)
 admin.site.register(LikeArtItem)
 admin.site.register(UserInterest, UserInterestAdmin)
 admin.site.register(Follow)
+admin.site.register(Bid, BidAdmin)
+admin.site.register(NewBids)

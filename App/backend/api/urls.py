@@ -17,6 +17,7 @@ from .views.user import users_api
 from .views.exhibition import get_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
 from .views.recommendation import RecommendArtItemView, RecommendExhibitionView, RecommendUserView, AnonymousRecommendArtItemView, AnonymousRecommendExhibitionView, AnonymousRecommendUserView
+from .views.bidding import BidArtItemView, BidView
 
 from knox import views as knox_views
 from drf_yasg.utils import swagger_auto_schema
@@ -102,6 +103,9 @@ urlpatterns = [
     path('recommendation/anonymous/artitem/', AnonymousRecommendArtItemView, name="AnonymousRecommendArtItem"),
     path('recommendation/anonymous/exhibition/', AnonymousRecommendExhibitionView, name="AnonymousRecommendExhibition"),
     path('recommendation/anonymous/user/', AnonymousRecommendUserView, name="AnonymousRecommendUser")
+    path('artitems/<int:artitemid>/bids/', BidArtItemView, name="BidArtItemView"),
+    path('artitems/bids/<int:id>/', BidView, name="BidView"),
+    path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags")
 ]
 
 # added to give us the option to choose between default Response template and regular json
