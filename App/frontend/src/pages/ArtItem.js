@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { ANNOHOST, HOST } from "../constants/host";
@@ -8,6 +8,7 @@ import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
+import Select from "react-select";
 
 import "./styles/ArtItem.css";
 
@@ -17,7 +18,6 @@ import "@recogito/annotorious/dist/annotorious.min.css";
 import { Recogito } from "@recogito/recogito-js";
 import "@recogito/recogito-js/dist/recogito.min.css";
 
-//import { BiMessageAltDetail } from "react-icons/bi";
 
 function ArtItem(props) {
   function scrollToTop() {
@@ -50,9 +50,8 @@ function ArtItem(props) {
   const textElement = useRef(null);
 
   const [textAnno, setTextAnno] = useState([]);
-
-  //const [displayableTextAnno, setDisplayableTextAnno] = useState(null);
   /*Text Annotation*/
+
   const { artitem_id } = useParams();
   const navigate = useNavigate();
 
@@ -68,6 +67,21 @@ function ArtItem(props) {
   const [commentPhotos, setCommentPhotos] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [myID, setMyID] = useState(null);
+
+  //BIDDING
+  const [isMakeOfferClicked,setIsMakeOfferClicked] = useState(false);
+  const [newOffer, setNewOffer] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      amount: "",
+      deadline: "",
+    }
+  );
+  const biddingStatus={"NS":"Not For Sale","FS":"For Sale","SO":"SOLD"};
+  const [saleStatus, setSaleStatus] = useState(null);
+  //const [minPriceOfArtitem, setMinPriceOfArtitem] = useState(null);
+  //const [boughtBy, setBoughtBy] = useState(null);
+
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
@@ -116,6 +130,7 @@ function ArtItem(props) {
         setArtitemOwnerUsername(response.owner.username);
         setArtitemOwnerID(response.owner.id);
         setIsLiked(response.isLiked);
+        setSaleStatus(response.sale_status);
 
         var params_artitem = {
           Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
@@ -521,6 +536,33 @@ function ArtItem(props) {
     scrollToTop();
   }
 
+  //BIDDING
+  function handleMakeOffer(){
+    setIsMakeOfferClicked(true);
+  }
+  function handleCancelMakingOffer(){
+    setIsMakeOfferClicked(false);
+    setNewOffer({amount:"", deadline:""});
+  }
+  const handleOfferInput = (event) => {
+    const name = event.target.name;
+    const newValue = event.target.value;
+    setNewOffer({ [name]: newValue });
+  };
+  function handleSendOffer(){
+    //POST api call here
+    ///if successfull 
+    //should trigger useEffect of GET bids on artitem request
+    //setIsMakeOfferClicked(false);  
+    //setNewOffer({amount:"", deadline:""});
+    ///not successful
+    //show error message about input format to user 
+  }
+  function handleChangeInSaleStatus(selectedOption) {
+    setSaleStatus({ value: selectedOption.value, label: selectedOption.label });
+    //PUT api call to change sale status
+  }
+
   return (
     <Layout
       guestClick={guestClick}
@@ -553,7 +595,6 @@ function ArtItem(props) {
             </div>
 
             {token ? (
-              <div className="button-container">
                 <button
                   className="anno-show-hide-button"
                   onClick={() => {
@@ -566,10 +607,6 @@ function ArtItem(props) {
                     ? "Show Annotations"
                     : "Hide Annotations"}
                 </button>
-                {userid===artitemOwnerID ?
-                null
-                :<button className="make-offer-button">Make Offer</button>}
-              </div>
             ) : null}
 
             <div
@@ -586,7 +623,78 @@ function ArtItem(props) {
               {token ? clickedAnnotationText : null}
             </div>
 
+             
+            {userid!==artitemOwnerID && token && saleStatus==="FS" ?
+                <button className="make-offer-button" onClick={()=> handleMakeOffer()}>Make Offer</button>
+                :null}
+
+            {token && userid===artitemOwnerID ?
+              <Select
+              className="mt-1"
+              options={[ {value: "NS", label: "Not For Sale"},{value: "FS", label: "For Sale"},{value: "SO", label: "Sold"}]}
+              styles={{
+                control: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  borderRadius: "6px",
+                  borderColor: "#18121c",
+                  boxShadow: "none",
+                  outline: "none",
+                  marginRight:"auto",
+                  width:"150px",
+                  marginBottom:"30px",
+                }),
+                menu: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  color: "#000000",
+                  width:"150px",
+                  marginBottom:"30px",
+                }),
+                option: (baseStyles) => ({
+                  ...baseStyles,
+                  paddingTop: "3px",
+                  paddingBottom: "3px",
+                  width:"150px",
+                }),
+                placeholder:(baseStyles) => ({
+                  ...baseStyles,
+                  color:"#18121c",
+                }),
+              }}
+              placeholder={biddingStatus[saleStatus]}
+              value={saleStatus}
+              onChange={handleChangeInSaleStatus}   //For sale'e çeviriyorsa min fiyat vermeli
+            />
+            :null}
             
+            {isMakeOfferClicked ?
+            <div className="make-offer-form-container">
+              <label>Amount</label>
+              <input style={{marginLeft:"5px"}}
+              type="amount"
+            placeholder="100"
+            name="amount"
+            id="amount"
+            required
+            defaultValue={newOffer.amount}
+            onChange={handleOfferInput}/>
+              <label style={{marginLeft:"15px"}}>Deadline</label>
+              <input style={{marginLeft:"5px"}} type="deadline"
+            placeholder="27-12-2022 15:30:45"
+            name="deadline"
+            id="deadline"
+            required
+            defaultValue={newOffer.deadline}
+            onChange={handleOfferInput}/>
+            <div style={{display:"inline-block",marginTop:"5px"}}>
+              <button className="cancel-make-offer-button" onClick={()=>handleCancelMakingOffer()}>Cancel</button>
+              <button className="send-offer-button" onClick={()=> handleSendOffer()}>Send</button>
+              </div>
+            </div>
+            :null}
+            
+            {saleStatus!=="NS" ?
                     <div className="table">
                       <table className="bidder-list">
                         <thead>
@@ -606,6 +714,7 @@ function ArtItem(props) {
                           </tr>
                         </thead>
 
+                        {saleStatus==="SO" ? <tbody>This art item was sold.</tbody>:  ///////
                         <tbody>
                         <tr>
                             <td >
@@ -626,8 +735,7 @@ function ArtItem(props) {
                             </td>
                             
                           </tr>
-                          
-                            
+                        
                           
                           <tr>
                             <td>
@@ -649,9 +757,11 @@ function ArtItem(props) {
                             
                           </tr>
                         </tbody>
+                        }
 
                       </table>
                     </div>
+                    :null}
                     
                </div>
             
