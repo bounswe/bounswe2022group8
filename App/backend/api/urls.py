@@ -100,7 +100,7 @@ urlpatterns = [
     path('artitems/bids/<int:id>/', BidView, name="BidView"),
     path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),
     path('search/lexical/', LexSearchView.as_view(), name='LexicalSearch'),
-    path('search/lexical/user/', LexSearchUserView.as_view(), name='LexicalSearchUser')
+    path('search/lexical/users/', LexSearchUserView.as_view(), name='LexicalSearchUser')
 ]
 
 # added to give us the option to choose between default Response template and regular json
