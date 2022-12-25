@@ -6,7 +6,8 @@ import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
-import UploadCard from "../components/UploadCard";
+import UploadArtitemCard from "../components/UploadArtitemCard";
+import UploadOnlineExhibitionCard from "../components/UploadOnlineExhibitionCard";
 import FirstUploadCard from "../components/FirstUploadCard";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import DeleteArtItemPopUp from "../components/DeleteArtItemPopUp";
@@ -43,13 +44,14 @@ function Profile(props) {
   const [emptyGallery, setEmptyGallery] = useState(null);
 
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
-  const [newImageUploaded, setNewImageUploaded] = useState(true);
+  const [newArtItemUploaded, setNewArtItemUploaded] = useState(true);
   const [artItemDeleted, setArtItemDeleted] = useState(false);
 
   const [deleteButton, setDeleteButton] = useState(false);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
   const [artItemToBeDeletedID, setArtItemToBeDeletedID] = useState(null);
   const [tags, setTags] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -142,7 +144,7 @@ function Profile(props) {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username, newImageUploaded, artItemDeleted]);
+  }, [host, token, profileInfo.username, newArtItemUploaded, artItemDeleted]);
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -169,19 +171,49 @@ function Profile(props) {
       .catch((error) => console.error("Error:", error));
   }, [host, token]);
 
-  // true -> art item --- false -> exhibition
-  const [navTab, setNavTab] = useState(true);
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/me/followers/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        var followers = [];
+
+        for (let i = 0; i < response.length; i++) {
+          followers.push({
+            value: response[i].id,
+            label: response[i].username,
+          });
+        }
+
+        setUsers(followers);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token, profileInfo.followers]);
+
+  // 0 --> art items, 1 --> online exhibitons, 2 --> offline/physical exhibitons
+  const [navTab, setNavTab] = useState(0);
   const [upload, setUpload] = useState(false);
   const [postError, setPostError] = useState(false); // essentially for the upload card
   const [uploadInfoError, setUploadInfoError] = useState(false); // essentially for the upload card
 
   function handleArtItems() {
-    setNavTab(true);
+    setNavTab(0);
     setUpload(false);
   }
 
-  function handleExhibitions() {
-    setNavTab(false);
+  function handleOnlineExhibitions() {
+    setNavTab(1);
+    setUpload(false);
+  }
+
+  function handleOfflineExhibitions() {
+    setNavTab(2);
     setUpload(false);
   }
 
@@ -285,7 +317,7 @@ function Profile(props) {
         <div className="tab-container">
           <button
             className={`btn btn-navtab + ${
-              navTab ? "btn-navtab-underline" : ""
+              navTab === 0 ? "btn-navtab-underline" : ""
             }`}
             onClick={() => handleArtItems()}
           >
@@ -293,11 +325,19 @@ function Profile(props) {
           </button>
           <button
             className={`btn btn-navtab + ${
-              !navTab ? "btn-navtab-underline" : ""
+              navTab === 1 ? "btn-navtab-underline" : ""
             }`}
-            onClick={() => handleExhibitions()}
+            onClick={() => handleOnlineExhibitions()}
           >
-            Exhibitions
+            Online Exhibitions
+          </button>
+          <button
+            className={`btn btn-navtab + ${
+              navTab === 2 ? "btn-navtab-underline" : ""
+            }`}
+            onClick={() => handleOfflineExhibitions()}
+          >
+            Physical Exhibitions
           </button>
           <button className="btn btn-upload" onClick={() => handleUpload()}>
             Upload
@@ -307,28 +347,30 @@ function Profile(props) {
         <hr className="tab-line"></hr>
 
         <main>
-          <UploadCard
-            height={upload ? "535px" : "0px"}
-            border={upload ? "2px dashed #bcb1c1" : "2px dashed transparent"}
-            marginBottom={upload ? "1rem" : "0rem"}
-            postError={postError}
-            setPostError={(error) => setPostError(error)}
-            uploadInfoError={uploadInfoError}
-            setUploadInfoError={(error) => setUploadInfoError(error)}
-            newImageUploaded={newImageUploaded}
-            setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
-            closeUploadCard={() => setUpload(false)}
-            tags={tags}
-          />
-          {navTab ? (
-            // what if gallery is empty ?
+          {navTab === 0 && (
             <>
+              <UploadArtitemCard
+                height={upload ? "535px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                newArtItemUploaded={newArtItemUploaded}
+                setNewArtItemUploaded={() =>
+                  setNewArtItemUploaded(!newArtItemUploaded)
+                }
+                closeUploadArtitemCard={() => setUpload(false)}
+                tags={tags}
+              />
               {emptyGallery === true && !upload && (
                 <div className="gallery-item">
                   <FirstUploadCard onClick={() => handleUpload()} />
                 </div>
               )}
-
               <div className="gallery">
                 {userGallery.map((val, key) => {
                   return (
@@ -372,30 +414,73 @@ function Profile(props) {
                 })}
               </div>
             </>
-          ) : (
-            <div className="gallery">
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
+          )}
+          {navTab === 1 && (
+            <>
+              <UploadOnlineExhibitionCard
+                height={upload ? "620px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                /*newImageUploaded={newImageUploaded}
+                setNewImageUploaded={() =>
+                  setNewImageUploaded(!newImageUploaded)
+                }*/
+                closeUploadArtitemCard={() => setUpload(false)}
+                userGallery={userGallery}
+                users={users}
+              />
+              <div className="gallery">
+                <div className="gallery-item" tabIndex="0">
+                  <img
+                    src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
+                    className="gallery-image"
+                    alt=""
+                  />
+                </div>
+                <div className="gallery-item" tabIndex="0">
+                  <img
+                    src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
+                    className="gallery-image"
+                    alt=""
+                  />
+                </div>
+                <div className="gallery-item" tabIndex="0">
+                  <img
+                    src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
+                    className="gallery-image"
+                    alt=""
+                  />
+                </div>
               </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-            </div>
+            </>
+          )}
+          {navTab === 2 && (
+            <>
+              <UploadArtitemCard
+                height={upload ? "535px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                /*newImageUploaded={newImageUploaded}
+                setNewImageUploaded={() =>
+                  setNewImageUploaded(!newImageUploaded)
+                }*/
+                closeUploadArtitemCard={() => setUpload(false)}
+                tags={tags}
+              />
+              <div style={{ color: "white" }}>PHYSICAL EXHIBITIONS HERE</div>
+            </>
           )}
         </main>
       </div>
