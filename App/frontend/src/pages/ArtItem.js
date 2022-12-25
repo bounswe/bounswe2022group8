@@ -444,6 +444,23 @@ function ArtItem(props) {
           widgets: ["COMMENT"],
         });
 
+        /*fetch(`${host}/api/v1/users/profile/${userid}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        })
+          .then((response2) => response2.json())
+          .then((response2) => {
+            r.setAuthInfo({
+              id: userid,
+              displayName: response2.username
+            });
+          })
+          .catch((error) => console.error("Error:", error));*/
+        
+       
         r.loadAnnotations(
           `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
         )
@@ -451,7 +468,7 @@ function ArtItem(props) {
             console.log(response);
           })
           .catch((error) => console.error("Error:", error));
-
+        
         // Event handlers
         r.on("createAnnotation", (annotation) => {
           annotation["creator"] = userid;
