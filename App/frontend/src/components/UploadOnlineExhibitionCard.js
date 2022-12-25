@@ -132,42 +132,56 @@ function UploadOnlineExhibitionCard(props) {
     setPosterBase64("");
   }
 
-  /*function handlePost(e) {
+  function handlePost(e) {
     e.preventDefault();
-    if (!preview) {
+    if (previewImages.length === 0 && artItemsGallery.length === 0) {
       props.setPostError(true);
-    } else if (title === "" || description === "") {
+    } else if (title === "" || description === "" || posterPreview === "") {
       props.setUploadInfoError(true);
     } else {
       setIsLoading(true);
-      fetch(`${host}/api/v1/artitems/me/upload/`, {
+      fetch(`${host}/api/v1/exhibitions/me/online/`, {
         method: "POST",
         body: JSON.stringify({
           title: title,
           description: description,
-          category: category ? category.value : "OT",
-          tags: tags.map(({ value }) => value),
-          artitem_image: base64Image,
+          collaborators: collaborators.map(({ value }) => value),
+          start_date: startDate,
+          end_date: endDate,
+          artitems_gallery: artItemsGallery,
+          artitems_upload: base64Images.map((base64) => ({
+            title: title,
+            description: "bu eser sadece exhibitiona özel",
+            tags: [],
+            category: "OT",
+            artitem_image: base64,
+          })),
+          poster: posterBase64,
         }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
       })
-        .then(() => {
+        .then((response) => {
           setIsLoading(false);
-          props.setNewImageUploaded();
-          props.closeUploadArtitemCard();
+          props.setNewOnlineExhibitionUploaded();
+          props.closeUploadOnlineExhibitionCard();
 
-          closePreview();
+          console.log(response);
+
           setTitle("");
           setDescription("");
-          setCategory(null);
-          setTags([]);
+          setCollaborators([]);
+          setStartDate(new Date());
+          setEndDate(new Date());
+          setPosterPreview("");
+          setPosterBase64("");
+          handleRemoveAll();
         })
         .catch((error) => console.error("Error:", error));
     }
-  }*/
+  }
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -443,7 +457,8 @@ function UploadOnlineExhibitionCard(props) {
 
           {props.uploadInfoError && (
             <div className="upload-info-error">
-              Title and description fields may not be left blank.
+              You must give your exhibition a title, a description and choose a
+              poster.
             </div>
           )}
 
@@ -540,7 +555,7 @@ function UploadOnlineExhibitionCard(props) {
             <button
               type="submit"
               className="btn upload-post-btn"
-              // onClick={handlePost}
+              onClick={handlePost}
             >
               Post
             </button>

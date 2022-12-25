@@ -46,6 +46,8 @@ function Profile(props) {
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
   const [newArtItemUploaded, setNewArtItemUploaded] = useState(true);
   const [artItemDeleted, setArtItemDeleted] = useState(false);
+  const [newOnlineExhibitionUploaded, setNewOnlineExhibitionUploaded] =
+    useState(true);
 
   const [deleteButton, setDeleteButton] = useState(false);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
@@ -427,11 +429,11 @@ function Profile(props) {
                 setPostError={(error) => setPostError(error)}
                 uploadInfoError={uploadInfoError}
                 setUploadInfoError={(error) => setUploadInfoError(error)}
-                /*newImageUploaded={newImageUploaded}
-                setNewImageUploaded={() =>
-                  setNewImageUploaded(!newImageUploaded)
-                }*/
-                closeUploadArtitemCard={() => setUpload(false)}
+                newOnlineExhibitionUploaded={newOnlineExhibitionUploaded}
+                setNewOnlineExhibitionUploaded={() =>
+                  setNewOnlineExhibitionUploaded(!newOnlineExhibitionUploaded)
+                }
+                closeUploadOnlineExhibitionCard={() => setUpload(false)}
                 userGallery={userGallery}
                 users={users}
               />
