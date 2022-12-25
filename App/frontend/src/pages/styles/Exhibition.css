@@ -16,13 +16,27 @@
   justify-content: center;
   overflow: hidden;
   width: 100%;
+  background-color: #0e0a10;
 }
 
 .exhibition-container {
-  background-color: #0e0a10;
   flex: 1 1 200px;
-  padding: 0 50px;
   overflow: auto;
+}
+
+.exhibition-arrow-container {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin-top: 32vh;
+  width: 100px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.exhibition-arrow-container:hover,
+.exhibition-arrow-container:active {
+  color: #ffc9ff;
 }
 
 .artitem-focused {
@@ -35,7 +49,7 @@
 .exhibition-linear-container {
   display: flex;
   color: white;
-  overflow-x: auto;
+  overflow-x: scroll;
   /*overflow-y: hidden;*/
   height: calc(17% - 1rem);
 }

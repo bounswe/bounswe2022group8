@@ -6,6 +6,8 @@ import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
 
 import { SampleGallery } from "./data/SampleGallery";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 import "./styles/Exhibition.css";
 
@@ -29,10 +31,27 @@ function Exhibition(props) {
     setFocusSrc(src);
   }
 
+  function handleNext() {
+    if (focusIdx !== SampleGallery.length - 1) {
+      setFocusIdx(focusIdx + 1);
+      setFocusSrc(SampleGallery[focusIdx + 1].src);
+    }
+  }
+
+  function handlePrevious() {
+    if (focusIdx !== 0) {
+      setFocusIdx(focusIdx - 1);
+      setFocusSrc(SampleGallery[focusIdx - 1].src);
+    }
+  }
+
   return (
     <Layout>
       <div className="exhibition-post-container">
         <div className="exhibition-post">
+          <div className="exhibition-arrow-container" onClick={handlePrevious}>
+            <IoIosArrowBack className="exhibition-arrow" />
+          </div>
           <div className="exhibition-container">
             <img className="artitem-focused" src={focusSrc} alt={""} />
             <div className="exhibition-linear-container">
@@ -55,6 +74,9 @@ function Exhibition(props) {
                 );
               })}
             </div>
+          </div>
+          <div className="exhibition-arrow-container" onClick={handleNext}>
+            <IoIosArrowForward className="exhibition-arrow" />
           </div>
 
           <div className="exhibition-info-container">
