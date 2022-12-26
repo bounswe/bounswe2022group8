@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
           ),
     ) ;},),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: colorPalette.darkPurple,
         unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
@@ -63,7 +64,12 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           }
-          if (value == 2) {
+          else if (value == 2) {//search
+            Route route =
+            MaterialPageRoute(builder: (context) => HomePage());
+            Navigator.pushReplacement(context, route);
+          }
+          else if (value == 3) {
             Route route =
                 MaterialPageRoute(builder: (context) => LandingPage());
             Navigator.pushReplacement(context, route);
@@ -77,6 +83,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.open_in_new_rounded),

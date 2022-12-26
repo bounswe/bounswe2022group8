@@ -25,7 +25,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
-  Future<Profile> myProfile = getMyProfile() ;
+  Future<Profile> myProfile = getMyProfile();
+
   List<bool> isSelected = [true, false];
   bool isButtonPressed = false;
   int flag = 0;
@@ -62,107 +63,110 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: colorPalette.russianGreen,
                 tooltip: 'Settings',
                 onPressed: () => {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
-                ),
-              },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
+                  ),
+                },
               ),
             ],
           ),
         ),
       ),
-      body:
-      DefaultTabController(
+      body: DefaultTabController(
         length: 2,
-        child:FutureBuilder<Profile>(
+        child: FutureBuilder<Profile>(
           future: myProfile, // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot<Profile> snapshot) {
-            if(snapshot.hasData == false)   return SizedBox.shrink();
-            final Profile me = snapshot.requireData ;
-          return NestedScrollView(
-          headerSliverBuilder: (context, _) {
-            return [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    selfProfile(context,me),
-                    //otherProfile(context,me),
-                  ],
-                ),
+            if (snapshot.hasData == false) return SizedBox.shrink();
+            final Profile me = snapshot.requireData;
+            return NestedScrollView(
+              headerSliverBuilder: (context, _) {
+                return [
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        //selfProfile(context,me),
+                        otherProfile(context, me),
+                      ],
+                    ),
+                  ),
+                ];
+              },
+              body: Column(
+                children: <Widget>[
+                  Material(
+                    color: colorPalette.blackShadows,
+                    child: TabBar(
+                      padding: const EdgeInsets.only(left: 0),
+                      labelColor: Colors.black,
+                      //unselectedLabelColor: Colors.grey[400],
+                      indicatorWeight: 3,
+                      indicatorColor: colorPalette.darkPurple,
+                      tabs: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          child: textUtils.buildText("Art Items", 15,
+                              colorPalette.darkPurple, FontWeight.w500),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          child: textUtils.buildText("Exhibitions", 15,
+                              colorPalette.darkPurple, FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: [ArtItems(), Exhibitions()],
+                    ),
+                  ),
+                ],
               ),
-            ];
+            );
           },
-          body: Column(
-            children: <Widget>[
-              Material(
-                color: colorPalette.blackShadows,
-                child: TabBar(
-                  padding: const EdgeInsets.only(left: 0),
-                  labelColor: Colors.black,
-                  //unselectedLabelColor: Colors.grey[400],
-                  indicatorWeight: 3,
-                  indicatorColor: colorPalette.darkPurple,
-                  tabs: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      child: textUtils.buildText(
-                          "Art Items", 15, colorPalette.darkPurple, FontWeight.w500
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      child: textUtils.buildText(
-                          "Exhibitions", 15, colorPalette.darkPurple, FontWeight.w500
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    ArtItems(),
-                    Exhibitions()
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-
-
-  }, 
-  ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        iconSize: 24,
         selectedItemColor: colorPalette.darkPurple,
         unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
-          print(value);
           if (value == 0) {
             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
+          } else if (value == 2) {//search
+            token = "";
+            Route route =
+                MaterialPageRoute(builder: (context) => HomePage());
+            Navigator.pushReplacement(context, route);
           }
-          else if (value == 2) {
-              token = "" ;
-              Route route =
-              MaterialPageRoute(builder: (context) => LandingPage());
-              Navigator.pushReplacement(context, route);
+          else if (value == 3) {
+            token = "";
+            Route route =
+            MaterialPageRoute(builder: (context) => LandingPage());
+            Navigator.pushReplacement(context, route);
           }
         },
         items: const [
           BottomNavigationBarItem(
+
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.open_in_new_rounded),
@@ -174,9 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   otherProfile(BuildContext context, Profile user) {
-
     return Container(
-
       width: double.infinity,
       decoration: BoxDecoration(
         color: colorPalette.graniteGray,
@@ -214,15 +216,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               width: 130,
                               height: 130,
                               child: CircleAvatar(
-
-
-                                foregroundImage: Image
-                                    .network(
-                                    user.imageUrl)
-
-                                    .image,
+                                foregroundImage:
+                                    Image.network(user.imageUrl).image,
                                 radius: 10,
-
                               ),
                             ),
                           ),
@@ -240,16 +236,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     Row(
                       children: [
                         textUtils.buildText(
-                            user.username, 18, Colors.white70, FontWeight.w500
-                        ),
+                            user.username, 18, Colors.white70, FontWeight.w500),
                       ],
                     ),
                     SizedBox(height: 5),
                     Row(
                       children: [
                         textUtils.buildText(
-                            user.name, 13, Colors.white70, FontWeight.w500
-                        ),
+                            user.name, 13, Colors.white70, FontWeight.w500),
                       ],
                     ),
                     SizedBox(height: 15),
@@ -258,11 +252,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 200,
                       //width: MediaQuery.of(context).size.width*0.8,
                       child: textUtils.buildText(
-                          user.bio, 12, Colors.white70, FontWeight.w500
-                      ),
+                          user.bio, 12, Colors.white70, FontWeight.w500),
                     ),
-
-
                     SizedBox(height: 15),
                     Row(
                       children: [
@@ -270,9 +261,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Icon(Icons.location_on),
-                            textUtils.buildText(
-                                user.location, 12, Colors.white70, FontWeight.w500
-                            ),
+                            textUtils.buildText(user.location, 12,
+                                Colors.white70, FontWeight.w500),
                           ],
                         ),
                       ],
@@ -282,37 +272,31 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          child: textUtils.buildText(
-                              "Followers ", 12, Colors.black87, FontWeight.w500
+                          child: textUtils.buildText("Followers ", 12,
+                              Colors.black87, FontWeight.w500),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           ),
-                          onTap: () =>
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    HomePage()),
-                              ),
                         ),
-                        textUtils.buildText(
-                            user.followers.toString(), 13, Colors.black,
-                            FontWeight.w500
+                        SizedBox(
+                          width: 5,
+                          child: textUtils.buildText(user.followers.toString(),
+                              13, Colors.black, FontWeight.w500),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         GestureDetector(
-
-                          child:
-                          textUtils.buildText(
-                              " Following ", 12, Colors.black87, FontWeight.w500
+                          child: textUtils.buildText(" Following ", 12,
+                              Colors.black87, FontWeight.w500),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           ),
-                          onTap: () =>
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    HomePage()),
-                              ),
                         ),
-                        textUtils.buildText(
-                            user.following.toString(), 13, Colors.black,
-                            FontWeight.w500
+                        SizedBox(
+                          width: 5,
+                          child: textUtils.buildText(user.following.toString(),
+                              13, Colors.black, FontWeight.w500),
                         ),
                       ],
                     ),
@@ -322,67 +306,59 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const Padding(padding: const EdgeInsets.only(top: 10)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child:
-                      Container(
-                        width: 100,
+                  padding: EdgeInsets.only(right: 20),
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          if (isButtonPressed == false) {
+                            if (flag == 0) {
+                              user.followers = user.followers + 1;
+                              flag = flag + 1;
+                            }
+                          } else {
+                            if (flag > 0) {
+                              user.followers = user.followers - 1;
+                              flag = 0;
+                            }
+                          }
+                          isButtonPressed = !isButtonPressed;
+                        });
+                      },
+                      style: isButtonPressed
+                          ? ElevatedButton.styleFrom(
+                              //pressed
+                              backgroundColor: colorPalette.frenchLilac,
+                              foregroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            )
+                          : ElevatedButton.styleFrom(
+                              //not_pressed
+                              backgroundColor: colorPalette.blackShadows,
+                              foregroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                      child: Container(
                         height: 30,
-                        child:
-                        ElevatedButton(
-                          onPressed: () async {
-                            setState(() {
-                              if(isButtonPressed == false){
-                                if(flag == 0){
-                                  user.followers = user.followers + 1;
-                                  flag = flag + 1;
-                                }
-                              }
-                              else{
-                                if(flag > 0){
-                                  user.followers = user.followers - 1;
-                                  flag= 0;
-                                }
-                              }
-                              isButtonPressed = !isButtonPressed;
-                            });
-                          },
-                          style: isButtonPressed ? ElevatedButton.styleFrom(//pressed
-                            backgroundColor: colorPalette.frenchLilac,
-                            foregroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ) :
-                          ElevatedButton.styleFrom(//not_pressed
-                            backgroundColor: colorPalette.blackShadows,
-                            foregroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          child:
-                          Container(
-                            height: 30,
-                            width: 65,
-                            child: Center(
-                                child: isButtonPressed ? textUtils.buildText(
-                                    "Following", 13, Colors.white, FontWeight.w500
-                                ) :
-                                textUtils.buildText(
-                                    "Follow", 13, Colors.white, FontWeight.w500
-                                )
-                            ),
-                          ),
-                        ),
+                        width: 65,
+                        child: Center(
+                            child: isButtonPressed
+                                ? textUtils.buildText("Following", 13,
+                                    Colors.white, FontWeight.w500)
+                                : textUtils.buildText("Follow", 13,
+                                    Colors.white, FontWeight.w500)),
                       ),
-
-
-
-
-
+                    ),
+                  ),
                 ),
               ],
             ),
