@@ -7,6 +7,8 @@ import 'package:artopia/routes.dart';
 import 'widgets/post.dart';
 import 'templates.dart';
 import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/search_page.dart';
+import 'package:artopia/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           }
           else if (value == 2) {//search
             Route route =
-            MaterialPageRoute(builder: (context) => HomePage());
+            MaterialPageRoute(builder: (context) => SearchPage());
             Navigator.pushReplacement(context, route);
           }
           else if (value == 3) {
