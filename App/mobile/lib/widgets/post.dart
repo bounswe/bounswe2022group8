@@ -132,7 +132,6 @@ class _PostState extends State<Post> {
   }
 
   commentButtonPressed() {
-    print("comment button pressed");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>  CommentPage(artitem:widget.artitem)),
@@ -140,7 +139,6 @@ class _PostState extends State<Post> {
   }
 
   purchaseButtonPressed() {
-    print("purchase button pressed");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>  ArtItemPage(artitem: widget.artitem)),
