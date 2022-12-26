@@ -17,20 +17,19 @@ Thanks to the django.test, mock data is deleted automatically after the test, yo
 tearDown() function is like a destructor, it deletes the objects.
 """
 
-class ArtItemTest(TestCase):
+class RecommendationTest(TestCase):
     # preparing to test
     def setUp(self):
         # setting up for the test
-        print("TestArtItem:setUp_:begin")
+        print("TestRecommendation:setUp_:begin")
         self.faker = Faker()
-        self.serializer = ArtItemSerializer()
         self.factory = RequestFactory()
         self.user = utils.register()
         self.user2 = utils.register()
         self.user11 = utils.register()
         self.user22 = utils.register()
         # do something
-        print("TestArtItem:setUp_:end")
+        print("TestRecommendation:setUp_:end")
 
     
 
@@ -286,7 +285,7 @@ class ArtItemTest(TestCase):
 
     def tearDown(self):
         # cleaning up after the test
-        print("TestArtItem:tearDown_:begin")
+        print("TestRecommendation:tearDown_:begin")
 
         # do something
-        print("TestArtItem:tearDown_:end")
+        print("TestRecommendation:tearDown_:end")
