@@ -1,97 +1,233 @@
-/*
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class CustomSearchDelegate extends SearchDelegate {
+import 'package:artopia/search.dart';
+import 'package:artopia/utils/colorPalette.dart';
+import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/settings_page.dart';
+import 'package:flutter/services.dart';
+import 'package:artopia/home_page.dart';
+import 'package:artopia/landing_page.dart';
+import 'package:artopia/profile_page.dart';
+import 'dart:core';
+
+class SearchPage extends StatefulWidget {
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
+  _SearchPageState createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final ColorPalette colorPalette = ColorPalette();
+  final textUtils = TextUtils();
+  String selectedPlace = "";
 
   @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    if (query.length < 3) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Text(
-              "Search term must be longer than two letters.",
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(40),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                width: 1,
+                color: colorPalette.darkPurple,
+              ),
             ),
-          )
-        ],
-      );
-    }
-
-    //Add the search term to the searchBloc.
-    //The Bloc will then handle the searching and add the results to the searchResults stream.
-    //This is the equivalent of submitting the search term to whatever search service you are using
-    InheritedBlocs.of(context)
-        .searchBloc
-        .searchTerm
-        .add(query);
-
-    return Column(
-      children: <Widget>[
-        //Build the results based on the searchResults stream in the searchBloc
-        StreamBuilder(
-          stream: InheritedBlocs.of(context).searchBloc.searchResults,
-          builder: (context, AsyncSnapshot<List<Result>> snapshot) {
-            if (!snapshot.hasData) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Center(child: CircularProgressIndicator()),
-                ],
-              );
-            } else if (snapshot.data.length == 0) {
-              return Column(
-                children: <Widget>[
-                  Text(
-                    "No Results Found.",
+          ),
+          child: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            backgroundColor: colorPalette.darkPurple,
+            title: textUtils.buildText(
+                "artopia", 25, Colors.white70, FontWeight.w500),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.settings),
+                color: colorPalette.russianGreen,
+                tooltip: 'Settings',
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()),
                   ),
-                ],
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Column(
+        children: <Widget>[
+          OutlinedButton.icon(
+            label: textUtils.buildText(
+                "Search", 18, Colors.white70, FontWeight.w500),
+            icon: Icon(Icons.search),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: colorPalette.darkPurple,
+              side: BorderSide(
+                color: colorPalette.darkPurple,
+              ),
+            ),
+            onPressed: () async {
+              final finalResult = await showSearch(
+                context: context,
+                delegate: Search(
+                  allCaliforniaPlaces: allCaliforniaLocations,
+                  californiaPlaceSuggestion: popularCaliforniaLocations,
+                ),
               );
-            } else {
-              var results = snapshot.data;
-              return ListView.builder(
-                itemCount: results.length,
-                itemBuilder: (context, index) {
-                  var result = results[index];
-                  return ListTile(
-                    title: Text(result.title),
-                  );
+              setState(
+                () {
+                  selectedPlace = finalResult!;
                 },
               );
-            }
-          },
-        ),
-      ],
-    );
-  }
+            },
+          ),
+          selectedPlace == ""
+              ? SizedBox.shrink()
+              : Container(
+                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                  color: colorPalette.darkPurple,
+                  child: textUtils.buildText(
+                      selectedPlace, 18, Colors.white70, FontWeight.w500),
+                ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: allCaliforniaLocations.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(allCaliforniaLocations[index]),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        iconSize: 24,
+        selectedItemColor: colorPalette.darkPurple,
+        unselectedItemColor: colorPalette.darkPurple,
+        onTap: (value) {
+          if (value == 0) {
+            Route route =
+            MaterialPageRoute(builder: (context) => HomePage());
+            Navigator.pushReplacement(context, route);
+          } else if (value == 1) {
+            Route route =
+            MaterialPageRoute(builder: (context) => ProfilePage());
+            Navigator.pushReplacement(context, route);
+          }
+          else if (value == 3) {
+            Route route =
+            MaterialPageRoute(builder: (context) => LandingPage());
+            Navigator.pushReplacement(context, route);
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // This method is called everytime the search term changes.
-    // If you want to add search suggestions as the user enters their search term, this is the place to do that.
-    return Column();
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.open_in_new_rounded),
+            label: 'Logout',
+          ),
+        ],
+      ),
+    );
   }
 }
 
- */
+final List<String> allCaliforniaLocations = [
+  "Alameda",
+  "Albany",
+  "Alhambra",
+  "Aliso Viejo",
+  "Alturas",
+  "Amador City",
+  "American Canyon",
+  "Anaheim",
+  "Anderson",
+  "Angels Camp",
+  "Antioch",
+  "Apple Valley",
+  "Arcadia",
+  "Arcata",
+  "Arroyo Grande",
+  "Artesia",
+  "Arvin",
+  "Atascadero",
+  "Atwater",
+  "Auburn",
+  "Avalon",
+  "Avenal",
+  "Azusa",
+  "Bakersfield",
+  "Baldwin Park",
+  "Banning",
+  "Barstow",
+  "Beaumont",
+  "Bell",
+  "Bell Gardens",
+  "Bellflower",
+  "Belmont",
+  "Belvedere",
+  "Benicia",
+  "Berkeley",
+  "Beverly Hills",
+  "Big Bear Lake",
+  "Biggs",
+  "Bishop",
+  "Bloomington",
+  "Blythe",
+  "Bodega Bay",
+  "Brawley",
+  "Brea",
+  "Brentwood",
+  "Brisbane",
+  "Buellton",
+  "Buena Park",
+  "Burbank",
+  "Burlingame",
+  "Buttonwillow",
+  "Byron",
+  "Calexico",
+  "Calimesa",
+  "Calipatria",
+];
+final List<String> popularCaliforniaLocations = [
+  "Alameda",
+  "Albany",
+  "Antioch",
+  "Apple Valley",
+  "Arcadia",
+  "Bakersfield",
+  "Baldwin Park",
+  "Beaumont",
+  "Bell",
+  "Bell Gardens",
+  "Bellflower",
+  "Belmont",
+  "Belvedere",
+  "Benicia",
+  "Berkeley",
+  "Beverly Hills",
+  "Brentwood",
+  "Brisbane",
+  "Buellton",
+  "Buena Park",
+  "Burbank",
+  "Calimesa",
+  "Calipatria",
+];

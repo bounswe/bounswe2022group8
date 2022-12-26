@@ -1,10 +1,11 @@
+import 'package:artopia/search_page.dart';
+import 'package:artopia/search.dart';
 import 'package:artopia/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
 import 'profile.dart';
-import 'package:artopia/widgets/self_profile.dart';
 import 'package:artopia/utils/colorPalette.dart';
 import 'package:artopia/utils/textUtils.dart';
 import 'package:artopia/settings_page.dart';
@@ -144,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
           } else if (value == 2) {//search
             token = "";
             Route route =
-                MaterialPageRoute(builder: (context) => HomePage());
+                MaterialPageRoute(builder: (context) => SearchPage());
             Navigator.pushReplacement(context, route);
           }
           else if (value == 3) {
