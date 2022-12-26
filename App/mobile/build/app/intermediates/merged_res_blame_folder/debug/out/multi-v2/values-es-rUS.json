@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es-rUS/values-es-rUS.xml",
+            "outputFile": "/Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es-rUS/values-es-rUS.xml",
             "map": [
                 {
-                    "source": "/Users/murat/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values-es-rUS/values-es-rUS.xml",
+                    "source": "/Users/mustafa/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values-es-rUS/values-es-rUS.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
