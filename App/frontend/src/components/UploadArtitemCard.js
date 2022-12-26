@@ -8,7 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import "./styles/UploadCard.css";
 
-function UploadCard(props) {
+function UploadArtitemCard(props) {
   const { token } = useAuth();
   var host = HOST;
 
@@ -79,8 +79,8 @@ function UploadCard(props) {
       })
         .then(() => {
           setIsLoading(false);
-          props.setNewImageUploaded();
-          props.closeUploadCard();
+          props.setNewArtItemUploaded();
+          props.closeUploadArtitemCard();
 
           closePreview();
           setTitle("");
@@ -328,4 +328,4 @@ function UploadCard(props) {
   );
 }
 
-export default UploadCard;
+export default UploadArtitemCard;

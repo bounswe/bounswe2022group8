@@ -19,6 +19,7 @@ import RecommendedUsers from "./pages/RecommendedPages/RecommendedUsers";
 import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
 import SearchResults from "./pages/SearchResults";
+import Exhibition from "./pages/Exhibition";
 
 function App() {
   return (
@@ -78,6 +79,11 @@ function App() {
             </AuthenticatedRoute>
           }
         />
+
+        <Route
+          path="/exhibitions/online/:online_id"
+          element={<Exhibition />}
+        ></Route>
 
         <Route path="/artitems/tag/:tag_id" element={<SearchResults />} />
       </Routes>
