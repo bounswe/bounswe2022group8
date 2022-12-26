@@ -24,6 +24,8 @@ from ..serializers.serializers import NewBidsSerializer
 
 levelThreshold = 10
 
+profilecount = 0
+
 @ swagger_auto_schema(
     method='get',
     operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID. isFollowed field returns True if currently logged-in user follows the given user. Defaults to False if user is a guest user.",
@@ -195,12 +197,17 @@ def profile_me_api(request):
         user.calculateLevel()
         serializer = UserProfileSerializer(user)
         mydata = serializer.data
-        user.new_bid_flag = False
-        user.save()
+
+        global profilecount
         newbids = NewBids.objects.get(user=user)
-        mydata.update(NewBidsSerializer(newbids).data) 
-        newbids.new_bids.clear()
-        newbids.save()
+        mydata.update(NewBidsSerializer(newbids).data)
+        if profilecount%2 == 1:
+            user.new_bid_flag = False
+            user.save() 
+            newbids.new_bids.clear()
+            newbids.save()
+
+        profilecount = profilecount + 1
  
         return Response(mydata, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
@@ -270,13 +277,13 @@ def LevelView(request):
             else:
                 #level calculation is not dynamic, meaning even if levelThreshold is later raised, gained is_level2 status is not lost 
                 comments = Comment.objects._mptt_filter(commented_by=user).count()
-                print(comments)
+                #print(comments)
                 artitems = ArtItem.objects.filter(owner=user).count()
-                print(artitems)
+                #print(artitems)
                 visits = History.objects.filter(user=user).count()
-                print(visits)
+                #print(visits)
                 result = 0.8*artitems + 0.1*comments + 0.02*visits
-                print(result)
+                #print(result)
                 if(result>levelThreshold and not user.is_level2):
                     user.is_level2 = True
                     user.save()
