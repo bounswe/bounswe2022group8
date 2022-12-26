@@ -79,7 +79,7 @@ class User(AbstractUser):
         artitems = ArtItem.objects.filter(owner=self).count()
         visits = History.objects.filter(user=self).count()
         result = 0.8*artitems + 0.1*comments + 0.02*visits
-        print(result)
+        #print(result)
         if(result>levelThreshold and not self.is_level2):
             self.is_level2 = True
         return self.is_level2

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_follow.FollowTest-20221226234750" tests="9" file="api/tests/test_follow.py" time="5.418" timestamp="2022-12-26T23:48:45" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_follow" time="0.578" timestamp="2022-12-26T23:48:40" file="api\tests\test_follow.py" line="66">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_follow_artitems" time="0.577" timestamp="2022-12-26T23:48:41" file="api\tests\test_follow.py" line="53">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_follow_creation" time="0.533" timestamp="2022-12-26T23:48:41" file="api\tests\test_follow.py" line="31">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_follow_deletion_cascaded" time="0.582" timestamp="2022-12-26T23:48:42" file="api\tests\test_follow.py" line="41">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_get_my_followers" time="0.560" timestamp="2022-12-26T23:48:42" file="api\tests\test_follow.py" line="92">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_get_my_followings" time="0.557" timestamp="2022-12-26T23:48:43" file="api\tests\test_follow.py" line="84">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_get_user_followers" time="0.554" timestamp="2022-12-26T23:48:44" file="api\tests\test_follow.py" line="101">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_get_user_followings" time="0.565" timestamp="2022-12-26T23:48:44" file="api\tests\test_follow.py" line="108">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_follow.FollowTest" name="test_unfollow" time="0.913" timestamp="2022-12-26T23:48:45" file="api\tests\test_follow.py" line="142">
+		<system-out><![CDATA[TestFollow:setUp_:begin
+TestFollow:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>
