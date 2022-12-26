@@ -1,4 +1,4 @@
-#Sat Dec 24 13:34:25 TRT 2022
+#Tue Dec 27 00:52:01 TRT 2022
 base.0=/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

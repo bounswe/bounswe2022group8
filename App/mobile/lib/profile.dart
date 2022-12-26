@@ -21,6 +21,7 @@ class Profile extends StatefulWidget {
     required this.location,
     required this.followers,
     required this.following,
+    required this.id,
   });
   final String imageUrl;
   final String username;
@@ -29,7 +30,7 @@ class Profile extends StatefulWidget {
   final String location;
   final int followers;
   final int following;
-
+  final int id;
   @override
   State<Profile> createState() => _ProfileState();
 }
@@ -74,9 +75,9 @@ Future<Profile> getMyProfile() async {
   
   if (response.statusCode == 200) {
     String profileUrl = await getImage(body['profile_path']) ;
-    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username,id : body["id"]) ;
   }
-return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",id : body["id"])  ;  
   
 }
 
@@ -97,9 +98,9 @@ Future<Profile> getOtherProfile(int id) async {
   
   if (response.statusCode == 200) {
     String profileUrl = await getImage(body['profile_path']) ;
-    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username) ;
+    return  Profile(bio: body["about"], followers: body['followers'], following: body['followings'], imageUrl: profileUrl, location: body["location"], name: body["name"], username: registered_username, id : body["id"]) ;
   }
-return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",)  ;  
+return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', location: body["location"], name: "Error", username: "Error",id : body["id"])  ;  
   
 }
 Future<String> uploadProfile(name, surname, bio, location,  XFile? image) async {
