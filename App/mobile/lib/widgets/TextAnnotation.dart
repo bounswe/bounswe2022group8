@@ -1,3 +1,4 @@
+import 'package:artopia/utils/textUtils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,11 +8,13 @@ import '../utils/colorPalette.dart';
 class Annotation {
   String userName;
   String annotationMessage;
-  int annotationX;
-  int annotationY;
+  int annotationX;  //start position of the annotation
+  int annotationY;  //end position of the annotation
 
   Annotation(this.userName, this.annotationMessage, this.annotationX,
       this.annotationY);
+
+  int get start => annotationX;
 }
 
 late String descriptionText;
@@ -35,78 +38,39 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
   final ColorPalette colorPalette = ColorPalette();
 
   //holds annotations of every character
-  final List<List<Annotation>> charAnnotations = List.generate(descriptionText.length, (index) => List.empty(growable: true));
+  final List<List<Annotation>> charAnnotations = List.generate(
+      descriptionText.length, (index) => List.empty(growable: true));
 
   //selected texts. 0 means not selected, 1 means selected and 2 means there exists more than one annotation
   final List<bool> isAnnotatedChar = List.filled(descriptionText.length, false);
 
-
-  @override
-  Widget build(BuildContext context) {
-    List<TextSpan> chars = [];
-
-
-    /*
+  /*
     THIS METHOD IS ONLY FOR TESTING PURPOSES
     ANNOTATIONS ARE NOT SAVED IN THE MOBILE SYSTEM
     THERE SHOULD BE API CALL TO GET ANNOTATIONS
     THERE SHOULD BE API CALL TO SAVE ANNOTATIONS
     AFTER GETTING ANNOTATIONS FROM API, THIS METHOD SHOULD BE CALLED TO FILL THE charAnnotations LIST AND isAnnotatedChar LIST
      */
-    void addAnnotation(String annotationMessage,int start, int end) {
-      String selectedText = descriptionText.substring(start, end);
-      setState(() {
-        for (int i = start; i < end; i++) {
-          charAnnotations[i].add(Annotation("user", annotationMessage, i, i));
-          isAnnotatedChar[i] = true;
-        }
-      });
+  void addAnnotation(String annotationMessage, int start, int end) {
+    setState(() {
+      for (int i = start; i < end; i++) {
+        charAnnotations[i].add(Annotation("user", annotationMessage, start, end));
+        isAnnotatedChar[i] = true;
       }
+    });
+  }
 
-    GestureRecognizer? returnRecognizer(int i) {
-      return TapGestureRecognizer()..onTap = () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Annotation"),
-              content: Text(charAnnotations[i][0].annotationMessage),
-              actions: [
-                TextButton(
-                  child: Text("Close"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      };
-    }
+  @override
+  Widget build(BuildContext context) {
+    TextUtils textUtils = TextUtils();
 
-    for (int i = 0; i < descriptionText.length; i++) {
-      chars.add(TextSpan(
-        text: descriptionText[i],
-        style: GoogleFonts.inter(
-          textStyle: GoogleFonts.inter(
-            fontSize: 20,
-            color: colorPalette.blackShadows,
-            fontWeight: FontWeight.w600,
-            backgroundColor: (isAnnotatedChar[i] && annotationSelected)
-                ? Colors.yellow
-                : Colors.transparent,
-          ),
-        ),
-        recognizer: (isAnnotatedChar[i] && annotationSelected) ? returnRecognizer(i) : null,
-      ));
-    }
+    List<TextSpan> chars = [];
 
-
-    AlertDialog AnnotationDialog(String substring, int annotationX, int annotationY, BuildContext context) {
+    AlertDialog AddAnnotationDialog(String substring, int annotationX,
+        int annotationY, BuildContext context) {
       final TextEditingController controller = TextEditingController();
       return AlertDialog(
-        title: const Text("Annotation"),
+        title: const Text("Add Annotation"),
         content: TextField(
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
@@ -133,15 +97,102 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
       );
     }
 
+    AlertDialog ShowAnnotationDialog(int i) {
+      return AlertDialog(
+        title: Text("Annotations"),
+        // content: Text(charAnnotations[i][0].annotationMessage),
+        content: Container(
+          height: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                  .size
+                  .height *
+              0.65,
+          width: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                  .size
+                  .width *
+              0.8,
+          child: ListView.builder(
+            itemCount: charAnnotations[i].length,
+            itemBuilder: (BuildContext context, int index) {
+              // return Text(charAnnotations[i][index].annotationMessage);
+              const SizedBox(
+                height: 25,
+              );
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.delete_outline_outlined,
+                        color: colorPalette.blackShadows, size: 22),
+                    tooltip: 'Delete',
+                    splashColor: Colors.white,
+                    onPressed: () => {deleteButtonPressed(i, index)},
+                  ),
+                  textUtils.buildText(charAnnotations[i][index].userName, 16,
+                      colorPalette.xiketic, FontWeight.w600),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Flexible(
+                    child: textUtils.buildText(
+                        charAnnotations[i][index].annotationMessage,
+                        15,
+                        colorPalette.xiketic,
+                        FontWeight.w400),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    }
+
+    GestureRecognizer? returnRecognizer(int i) {
+      return TapGestureRecognizer()
+        ..onTap = () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ShowAnnotationDialog(i);
+              });
+        };
+    }
+
+    for (int i = 0; i < descriptionText.length; i++) {
+      chars.add(TextSpan(
+        text: descriptionText[i],
+        style: GoogleFonts.inter(
+          textStyle: GoogleFonts.inter(
+            fontSize: 20,
+            color: colorPalette.blackShadows,
+            fontWeight: FontWeight.w600,
+            backgroundColor: (isAnnotatedChar[i] && annotationSelected)
+                ? Colors.yellow
+                : Colors.transparent,
+          ),
+        ),
+        recognizer: (isAnnotatedChar[i] && annotationSelected)
+            ? returnRecognizer(i)
+            : null,
+      ));
+    }
+
     setState(() {
-      for(int i = 0; i < charAnnotations.length; i++){
-        if(charAnnotations[i].isNotEmpty){
+      for (int i = 0; i < charAnnotations.length; i++) {
+        if (charAnnotations[i].isNotEmpty) {
           isAnnotatedChar[i] = true;
         }
       }
     });
-
-
 
     return SelectableText.rich(
       TextSpan(
@@ -159,26 +210,40 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
               'Copy',
             ),
             itemControl: ToolBarItemControl.copy),
-        annotationSelected ? ToolBarItem(
-            item: const Text(
-              'Select All',
-            ),
-            itemControl: ToolBarItemControl.selectAll) :
-        ToolBarItem(
-          item: const Text(
-            'Annotate',
-          ),
-          onItemPressed: (String substring, int annotationX, int annotationY) {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AnnotationDialog(
-                      substring, annotationX, annotationY, context);
-                });
-          },
-        )
+        annotationSelected
+            ? ToolBarItem(
+                item: const Text(
+                  'Select All',
+                ),
+                itemControl: ToolBarItemControl.selectAll)
+            : ToolBarItem(
+                item: const Text(
+                  'Annotate',
+                ),
+                onItemPressed:
+                    (String substring, int annotationX, int annotationY) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AddAnnotationDialog(
+                            substring, annotationX, annotationY, context);
+                      });
+                },
+              )
       ]),
     );
+  }
+
+  //TODO DELETE ANNOTATION FROM DATABASE
+  deleteButtonPressed(int charPos, int annotationPos) {
+    setState(() {
+      int start = charAnnotations[charPos][annotationPos].annotationX;
+      int end = charAnnotations[charPos][annotationPos].annotationY;
+      for(int i = start; i < end; i++){
+        isAnnotatedChar[i] = false;
+        charAnnotations[i].removeAt(annotationPos);
+      }
+    });
   }
 }
 
