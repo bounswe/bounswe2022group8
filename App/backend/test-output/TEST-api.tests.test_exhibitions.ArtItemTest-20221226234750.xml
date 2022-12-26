@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_exhibitions.ArtItemTest-20221226234750" tests="8" file="api/tests/test_exhibitions.py" time="23.546" timestamp="2022-12-26T23:48:40" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_collaborator_upload" time="6.513" timestamp="2022-12-26T23:48:23" file="api\tests\test_exhibitions.py" line="196">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_create_offline_exhibition" time="1.564" timestamp="2022-12-26T23:48:24" file="api\tests\test_exhibitions.py" line="58">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_create_online_exhibition" time="3.361" timestamp="2022-12-26T23:48:27" file="api\tests\test_exhibitions.py" line="111">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_delete_offline_exhibition" time="2.426" timestamp="2022-12-26T23:48:30" file="api\tests\test_exhibitions.py" line="264">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_delete_online_exhibition" time="4.244" timestamp="2022-12-26T23:48:34" file="api\tests\test_exhibitions.py" line="230">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_fetch_image" time="0.542" timestamp="2022-12-26T23:48:35" file="api\tests\test_exhibitions.py" line="47">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_get_all_exhibitions" time="4.345" timestamp="2022-12-26T23:48:39" file="api\tests\test_exhibitions.py" line="168">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_exhibitions.ArtItemTest" name="test_id_validation" time="0.552" timestamp="2022-12-26T23:48:40" file="api\tests\test_exhibitions.py" line="29">
+		<system-out><![CDATA[TestExhibition:setUp_:begin
+TestExhibition:setUp_:end
+TestExhibition:tearDown_:begin
+TestExhibition:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

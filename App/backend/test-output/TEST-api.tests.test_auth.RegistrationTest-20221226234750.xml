@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_auth.RegistrationTest-20221226234750" tests="7" file="api/tests/test_auth.py" time="1.724" timestamp="2022-12-26T23:48:08" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_login_1" time="0.081" timestamp="2022-12-26T23:48:07" file="api\tests\test_auth.py" line="94">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_login_2" time="0.547" timestamp="2022-12-26T23:48:07" file="api\tests\test_auth.py" line="108">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_logout_failure" time="0.075" timestamp="2022-12-26T23:48:07" file="api\tests\test_auth.py" line="130">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_logout_success" time="0.533" timestamp="2022-12-26T23:48:08" file="api\tests\test_auth.py" line="136">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_register_1" time="0.320" timestamp="2022-12-26T23:48:08" file="api\tests\test_auth.py" line="59">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_register_2" time="0.090" timestamp="2022-12-26T23:48:08" file="api\tests\test_auth.py" line="77">
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_auth.RegistrationTest" name="test_username_syntax" time="0.078" timestamp="2022-12-26T23:48:08" file="api\tests\test_auth.py" line="26">
+		<!--
+        Check the following rules for a username:
+        1) First character must be a letter
+        2) Last character cannot be an underscore
+        3) It can consist of letters, numbers and underscore (alphanum + underscore)
+        4) It must have at least 6 characters
+        -->
+		<system-out><![CDATA[TestRegister:setUp_:begin
+TestRegister:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

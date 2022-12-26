@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_profile.TestProfile-20221226234750" tests="4" file="api/tests/test_profile.py" time="1.562" timestamp="2022-12-26T23:48:47" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_profile.TestProfile" name="test_get_all_users" time="0.342" timestamp="2022-12-26T23:48:45" file="api\tests\test_profile.py" line="112">
+		<system-out><![CDATA[TestProfile:setUp_:begin
+TestProfile:setUp_:end
+TestProfile:tearDown_:begin
+TestProfile:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_profile.TestProfile" name="test_get_my_profile" time="0.579" timestamp="2022-12-26T23:48:46" file="api\tests\test_profile.py" line="27">
+		<system-out><![CDATA[TestProfile:setUp_:begin
+TestProfile:setUp_:end
+TestProfile:tearDown_:begin
+TestProfile:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_profile.TestProfile" name="test_get_user_by_id" time="0.320" timestamp="2022-12-26T23:48:46" file="api\tests\test_profile.py" line="125">
+		<system-out><![CDATA[TestProfile:setUp_:begin
+TestProfile:setUp_:end
+TestProfile:tearDown_:begin
+TestProfile:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_profile.TestProfile" name="test_update_profile" time="0.321" timestamp="2022-12-26T23:48:47" file="api\tests\test_profile.py" line="74">
+		<system-out><![CDATA[TestProfile:setUp_:begin
+TestProfile:setUp_:end
+TestProfile:tearDown_:begin
+TestProfile:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

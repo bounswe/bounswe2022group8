@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_artitems.ArtItemTest-20221226234750" tests="11" file="api/tests/test_artitems.py" time="16.316" timestamp="2022-12-26T23:48:07" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_artitem_creation" time="0.647" timestamp="2022-12-26T23:47:51" file="api\tests\test_artitems.py" line="30">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_artitem_deletion" time="0.599" timestamp="2022-12-26T23:47:51" file="api\tests\test_artitems.py" line="46">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_artitem_deletion_cascaded" time="0.703" timestamp="2022-12-26T23:47:52" file="api\tests\test_artitems.py" line="38">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_artitem_post" time="2.189" timestamp="2022-12-26T23:47:54" file="api\tests\test_artitems.py" line="57">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_artitems_of_followeds" time="1.638" timestamp="2022-12-26T23:47:56" file="api\tests\test_artitems.py" line="181">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_delete_artitem" time="2.600" timestamp="2022-12-26T23:47:59" file="api\tests\test_artitems.py" line="153">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_get_all_artitems" time="1.551" timestamp="2022-12-26T23:48:00" file="api\tests\test_artitems.py" line="102">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_get_artitem_by_id" time="1.617" timestamp="2022-12-26T23:48:02" file="api\tests\test_artitems.py" line="114">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_get_artitem_by_userid" time="1.539" timestamp="2022-12-26T23:48:03" file="api\tests\test_artitems.py" line="126">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_get_artitem_by_username" time="1.659" timestamp="2022-12-26T23:48:05" file="api\tests\test_artitems.py" line="139">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_artitems.ArtItemTest" name="test_invalid_delete_artitem" time="1.574" timestamp="2022-12-26T23:48:07" file="api\tests\test_artitems.py" line="170">
+		<system-out><![CDATA[TestArtItem:setUp_:begin
+TestArtItem:setUp_:end
+TestArtItem:tearDown_:begin
+TestArtItem:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

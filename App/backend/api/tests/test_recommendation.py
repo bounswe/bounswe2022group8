@@ -190,7 +190,7 @@ class RecommendationTest(TestCase):
         for i in range(0, 20):
             exhibition.append(utils.create_offline_exhibition(self.user11, self.user22))
 
-        print(exhibition[19])
+        #print(exhibition[19])
 
         myexh = OfflineExhibition.objects.get(id=exhibition[19]['id'])
 

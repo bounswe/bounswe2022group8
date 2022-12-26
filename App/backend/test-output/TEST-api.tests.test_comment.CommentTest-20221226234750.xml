@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_comment.CommentTest-20221226234750" tests="2" file="api/tests/test_comment.py" time="0.185" timestamp="2022-12-26T23:48:16" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_comment.CommentTest" name="test_comment_creation" time="0.097" timestamp="2022-12-26T23:48:16" file="api\tests\test_comment.py" line="24">
+		<system-out><![CDATA[TestComment:setUp_:begin
+TestComment:setUp_:end
+TestComment:tearDown_:begin
+TestComment:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_comment.CommentTest" name="test_comment_deletion_cascaded" time="0.088" timestamp="2022-12-26T23:48:16" file="api\tests\test_comment.py" line="35">
+		<system-out><![CDATA[TestComment:setUp_:begin
+TestComment:setUp_:end
+TestComment:tearDown_:begin
+TestComment:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

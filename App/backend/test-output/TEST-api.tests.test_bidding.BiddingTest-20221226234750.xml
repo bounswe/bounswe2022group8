@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_bidding.BiddingTest-20221226234750" tests="7" file="api/tests/test_bidding.py" time="7.242" timestamp="2022-12-26T23:48:16" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_bid_on_art_item" time="1.055" timestamp="2022-12-26T23:48:09" file="api\tests\test_bidding.py" line="59">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_bid_on_art_item_fail" time="1.049" timestamp="2022-12-26T23:48:11" file="api\tests\test_bidding.py" line="83">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_get_all_bids_on_art_item" time="1.012" timestamp="2022-12-26T23:48:12" file="api\tests\test_bidding.py" line="113">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_get_bid" time="1.043" timestamp="2022-12-26T23:48:13" file="api\tests\test_bidding.py" line="191">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_get_bids_on_art_item_fail" time="1.015" timestamp="2022-12-26T23:48:14" file="api\tests\test_bidding.py" line="136">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_open_item_for_sale" time="1.035" timestamp="2022-12-26T23:48:15" file="api\tests\test_bidding.py" line="38">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_bidding.BiddingTest" name="test_reply_to_bid" time="1.033" timestamp="2022-12-26T23:48:16" file="api\tests\test_bidding.py" line="162">
+		<system-out><![CDATA[TestBidding:setUp_:begin
+TestBidding:setUp_:end
+TestBidding:tearDown_:begin
+TestBidding:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

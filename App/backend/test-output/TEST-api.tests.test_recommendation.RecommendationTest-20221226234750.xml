@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.tests.test_recommendation.RecommendationTest-20221226234750" tests="6" file="api/tests/test_recommendation.py" time="28.280" timestamp="2022-12-26T23:49:15" failures="0" errors="0" skipped="0">
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_artitem" time="1.216" timestamp="2022-12-26T23:48:48" file="api\tests\test_recommendation.py" line="37">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_artitem_anonymous" time="1.592" timestamp="2022-12-26T23:48:50" file="api\tests\test_recommendation.py" line="146">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_artitem_viewed" time="1.270" timestamp="2022-12-26T23:48:51" file="api\tests\test_recommendation.py" line="91">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_exhibition_anonymous" time="21.936" timestamp="2022-12-26T23:49:13" file="api\tests\test_recommendation.py" line="183">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+		<system-err><![CDATA[C:\Users\karab\Documents\GitHub\CmpE 451\App\backend\env\lib\site-packages\django\db\models\fields\__init__.py:1564: RuntimeWarning: DateTimeField OfflineExhibition.end_date received a naive datetime (2022-12-26 23:49:13.270892) while time zone support is active.
+  warnings.warn(
+C:\Users\karab\Documents\GitHub\CmpE 451\App\backend\env\lib\site-packages\django\db\models\fields\__init__.py:1564: RuntimeWarning: DateTimeField OfflineExhibition.start_date received a naive datetime (2022-12-26 23:49:13.270892) while time zone support is active.
+  warnings.warn(
+C:\Users\karab\Documents\GitHub\CmpE 451\App\backend\env\lib\site-packages\django\db\models\fields\__init__.py:1564: RuntimeWarning: DateTimeField VirtualExhibition.end_date received a naive datetime (2022-12-26 23:49:13.272903) while time zone support is active.
+  warnings.warn(
+C:\Users\karab\Documents\GitHub\CmpE 451\App\backend\env\lib\site-packages\django\db\models\fields\__init__.py:1564: RuntimeWarning: DateTimeField VirtualExhibition.start_date received a naive datetime (2022-12-26 23:49:13.272903) while time zone support is active.
+  warnings.warn(
+]]></system-err>
+	</testcase>
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_user" time="1.112" timestamp="2022-12-26T23:49:14" file="api\tests\test_recommendation.py" line="214">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.tests.test_recommendation.RecommendationTest" name="test_recommendation_user_following" time="1.154" timestamp="2022-12-26T23:49:15" file="api\tests\test_recommendation.py" line="244">
+		<system-out><![CDATA[TestRecommendation:setUp_:begin
+TestRecommendation:setUp_:end
+TestRecommendation:tearDown_:begin
+TestRecommendation:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>
