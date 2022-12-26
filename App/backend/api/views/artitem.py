@@ -306,7 +306,8 @@ def artitems_by_id(request, id):
                     data["isLiked"] = False
                 #print("not anonymous")
                 instance = artitem
-                object_viewed_signal.send(instance.__class__, instance=instance, request=request)
+                if request.user.is_authenticated:
+                    object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)

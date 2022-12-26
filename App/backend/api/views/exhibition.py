@@ -329,7 +329,8 @@ def get_online_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = VirtualExhibition.objects.get(pk=id)
-            object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = VirtualExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except VirtualExhibition.DoesNotExist:
@@ -535,7 +536,8 @@ def get_offline_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = OfflineExhibition.objects.get(pk=id)
-            object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = OfflineExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except OfflineExhibition.DoesNotExist:
