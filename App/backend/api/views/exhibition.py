@@ -20,6 +20,8 @@ from django.db import IntegrityError
 from django.db.models import Q
 from drf_yasg import openapi
 
+from history.signals import object_viewed_signal
+
 #  http://${host}:8000/api/v1/exhibitions/                        / GET    / Return all of the exhibitions in the system
 #  http://${host}:8000/api/v1/exhibitions/online/<id>             / GET    / Return an online exhibition with the given id
 #  http://${host}:8000/api/v1/exhibitions/offline/<id>            / GET    / Return an offline exhibition with the given id
@@ -327,6 +329,8 @@ def get_online_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = VirtualExhibition.objects.get(pk=id)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = VirtualExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except VirtualExhibition.DoesNotExist:
@@ -353,7 +357,7 @@ def get_online_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
     elif (request.method == "PUT"):
         userid = request.user.id
         try:
@@ -532,6 +536,8 @@ def get_offline_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = OfflineExhibition.objects.get(pk=id)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = OfflineExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except OfflineExhibition.DoesNotExist:
@@ -554,7 +560,7 @@ def get_offline_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 
@@ -828,6 +834,7 @@ def create_offline_exhibition(request):
             try:
                 serializer.save()
                 artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
+                request.user.updatePopularity()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
                 poster.delete()
@@ -1002,6 +1009,7 @@ def create_online_exhibition(request):
         if serializer.is_valid():
             try:
                 virtualexhibition = serializer.save()
+                request.user.updatePopularity()
             except IntegrityError:
                 poster.delete()
                 return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)
