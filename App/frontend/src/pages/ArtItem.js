@@ -560,33 +560,35 @@ function ArtItem(props) {
   //BIDDING
   useEffect(() => {
     // GET bids on an art item
-    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setBids(response["bids"]);
-        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
-        var bid_photos = [];
-
-        for (let i = 0; i < response["bids"].length; i++) {
-          var params = {
-            Bucket: bucket,
-            Key: response["bids"][i].buyer.profile_path,
-          };
-
-          var profile_url = s3.getSignedUrl("getObject", params);
-          bid_photos.push(profile_url);
-        }
-
-        setBidPhotos(bid_photos);
+    if (userid === artitemOwnerID) {
+      fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
       })
-      .catch((error) => console.error("Error:", error));
-  }, [host, artitem_id, token]);
+        .then((response) => response.json())
+        .then((response) => {
+          setBids(response["bids"]);
+          var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+          var bid_photos = [];
+
+          for (let i = 0; i < response["bids"].length; i++) {
+            var params = {
+              Bucket: bucket,
+              Key: response["bids"][i].buyer.profile_path,
+            };
+
+            var profile_url = s3.getSignedUrl("getObject", params);
+            bid_photos.push(profile_url);
+          }
+
+          setBidPhotos(bid_photos);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [host, artitem_id, token, userid]);
 
   function handleMakeOffer() {
     setIsMakeOfferClicked(true);

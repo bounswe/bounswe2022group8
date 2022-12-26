@@ -559,17 +559,3 @@
   font-size: 0.875em;
   line-height: 1.2;
 }
-.table a.table-link {
-  margin: 0 5px;
-  font-size: 1.125em;
-}
-.table a.table-link:hover {
-  text-decoration: none;
-  color: #2aa493;
-}
-.table a.table-link.danger {
-  color: #fe635f;
-}
-.table a.table-link.danger:hover {
-  color: #dd504c;
-}
