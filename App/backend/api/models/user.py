@@ -5,6 +5,7 @@ import random
 import hashlib
 
 from django.apps import apps
+from django.utils.translation import gettext_lazy as _
 
 # from .models import Comment
 # from .artitem import ArtItem
@@ -31,6 +32,9 @@ class User(AbstractUser):
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
     profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
+
+    popularity = models.FloatField(default=0)
+
     new_bid_flag = models.BooleanField(default=False)
     
     #OTP (one time password for password reset)
@@ -80,6 +84,31 @@ class User(AbstractUser):
             self.is_level2 = True
         return self.is_level2
 
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     super().save(*args, **kwargs)
+    #     # create an instance of user interests
+    #     UserInterest.objects.create(user=self)
+
+    def updatePopularity(self, *args, **kwargs):
+
+        ArtItem = apps.get_model('api', 'ArtItem')
+        VirtualExhibition = apps.get_model('api', 'VirtualExhibition')
+        OfflineExhibition = apps.get_model('api', 'OfflineExhibition')
+        
+
+        followers = self.get_followers
+        #print(followers)
+        artitems = ArtItem.objects.filter(owner=self).count()
+        #print(artitems)
+        ownedExhibitions = OfflineExhibition.objects.filter(owner=self).count() + VirtualExhibition.objects.filter(owner=self).count()
+        #print(ownedExhibitions)
+        #collaboratedExhibitions = VirtualExhibition.objects.filter(collaborators__in=[self]).count()
+
+        self.popularity = followers + 0.5*artitems + 2*ownedExhibitions
+        #print(self.popularity)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return "User: " + self.name + " " + self.surname 
         
@@ -112,4 +141,75 @@ class Follow(models.Model):
     
     def __str__(self):
         return str(self.from_user) + " follows " + str(self.to_user)
+
+
+class UserInterest(models.Model):
+    user = models.OneToOneField(User,
+        primary_key=True,
+        on_delete=models.CASCADE,
+        help_text=_('User (Required).'),
+    )
+    AR = models.IntegerField(default=0)
+    SC = models.IntegerField(default=0)
+    SK = models.IntegerField(default=0)
+    DR = models.IntegerField(default=0)
+    PT = models.IntegerField(default=0)
+    PH = models.IntegerField(default=0)
+    PR = models.IntegerField(default=0)
+    PA = models.IntegerField(default=0)
+    PO = models.IntegerField(default=0)
+    PW = models.IntegerField(default=0)
+    PD = models.IntegerField(default=0)
+    PM = models.IntegerField(default=0)
+    PG = models.IntegerField(default=0)
+    PP = models.IntegerField(default=0)
+    PE = models.IntegerField(default=0)
+    PF = models.IntegerField(default=0)
+    PS = models.IntegerField(default=0)
+    OP = models.IntegerField(default=0)
+    OT = models.IntegerField(default=0)
+
+    class Category(models.TextChoices):
+        ARCHITECTURE = 'AR', _('Architecture')
+        SCULPTURE = 'SC', _('Sculpture')
+        SKETCH = 'SK', _('Sketch')
+        DRAWING = 'DR', _('Drawing')
+        POSTER = 'PT', _('Poster')
+        PHOTOGRAPHY = 'PH', _('Photography')
+        PRINTS = 'PR', _('Prints')
+        PAINTING_ACRYLIC = 'PA', _('Painting/Acrylic')
+        PAINTING_OILPAINT = 'PO', _("Painting Oilpaint")
+        PAINTING_WATERCOLOUR = 'PW', _("Painting Watercolour")
+        PAINTING_DIGITAL = 'PD', _("Painting Digital")
+        PAINTING_MURAL = 'PM', _("Painting Mural")
+        PAINTING_GOUACHE = 'PG', _("Painting Gouache")
+        PAINTING_PASTEL = 'PP', _("Painting Pastel")
+        PAINTING_ENCAUSTIC = 'PE', _("Painting Encaustic")
+        PAINTING_FRESCO = 'PF', _("Painting Fresco")
+        PAINTING_SPRAY = 'PS', _("Painting Spray")
+        PAINTING_OTHER = 'OP', _("Painting Other")
+        OTHER = 'OT', _("Other")
+
+    first = models.CharField(max_length=2, choices=Category.choices, default=Category.OTHER)
+    second = models.CharField(max_length=2, choices=Category.choices, default=Category.OTHER)
+    third = models.CharField(max_length=2, choices=Category.choices, default=Category.OTHER)
+
+    def updateFirstThree(self, field, *args, **kwargs):
+        if(getattr(self, field) > getattr(self, self.first)):
+            self.third = self.second
+            self.second = self.first
+            self.first = field
+        elif(getattr(self, field) > getattr(self, self.second)):
+            self.third = self.second
+            self.second = field
+        elif(getattr(self, field) > getattr(self, self.third)):
+            self.third = field
+        
+
+    def updateInterest(self, field, number, *args, **kwargs):
+        setattr(self, field, getattr(self, field) + number)
+        self.updateFirstThree(field)
+        super().save(*args, **kwargs)
+
+
 

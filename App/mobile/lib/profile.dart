@@ -10,6 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'variables.dart' ;
+import 'package:flutter_native_image/flutter_native_image.dart';
+
 class Profile extends StatefulWidget {
   Profile({
     required this.imageUrl,
@@ -25,7 +27,7 @@ class Profile extends StatefulWidget {
   final String name;
   final String bio;
   final String location;
-  final int followers;
+  int followers;
   final int following;
 
   @override
@@ -103,7 +105,10 @@ return  Profile(bio: body["about"], followers: 0, following: 0, imageUrl: '', lo
 Future<String> uploadProfile(name, surname, bio, location,  XFile? image) async {
   String base64Image = '"data:image/jpeg;base64,' ;
   if (image != null) {
-  File(image.path).readAsBytes().then((value) async {
+    File compimage =    (await FlutterNativeImage.compressImage(image.path,
+        quality: 20)) ;
+
+  File(compimage.path).readAsBytes().then((value) async {
 
    base64Image = base64Image +   base64Encode(value);
    final response = await http.put(

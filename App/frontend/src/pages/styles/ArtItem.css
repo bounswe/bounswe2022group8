@@ -559,3 +559,8 @@
   font-size: 0.875em;
   line-height: 1.2;
 }
+
+.r6o-widget.comment.editable:not(:first-child) {
+  display: none;
+}
+

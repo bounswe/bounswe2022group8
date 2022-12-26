@@ -20,13 +20,14 @@ class AnnotationSerializer(serializers.ModelSerializer):
 class AnnotationBodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Body
-        fields =  ['id', 'value', 'type', 'format', 'created', 'purpose']
+        fields =  ['value', 'type', 'purpose', 'created', 'modified', 'creator']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['type'] = str(rep['type'])          # convert Enum to string
-        rep['id'] = URL + "body{}".format(rep['id'])
-        rep['purpose'] = str(rep['purpose'])
+        rep['creator'] = CreatorSerializer(instance.creator).data
+        #rep['id'] = URL + "body{}".format(rep['id'])
+        #rep['purpose'] = str(rep['purpose'])
         return rep
 
 class AnnotationTargetSerializer(serializers.ModelSerializer):
@@ -94,3 +95,7 @@ class SelectorSerializer(serializers.ModelSerializer):
         return rep
 
 
+class CreatorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Creator
+        fields = ['id', 'name']    

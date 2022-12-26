@@ -60,6 +60,7 @@ def follow_user(request, id):
                 follow = Follow.objects.create(
                     from_user=current_user, to_user=user)
                 serializer = FollowSerializer(follow)
+                user.updatePopularity()
                 return Response(data=serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
                 return Response({"Invalid request": "Current user already follows the given user."}, status=status.HTTP_400_BAD_REQUEST)
