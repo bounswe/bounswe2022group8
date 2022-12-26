@@ -24,8 +24,6 @@ from ..serializers.serializers import NewBidsSerializer
 
 levelThreshold = 10
 
-profilecount = 0
-
 @ swagger_auto_schema(
     method='get',
     operation_description="Returns username, email, name, surname, about section, location and URL to the profile picture of the user with the given ID. isFollowed field returns True if currently logged-in user follows the given user. Defaults to False if user is a guest user.",
@@ -197,15 +195,12 @@ def profile_me_api(request):
         user.calculateLevel()
         serializer = UserProfileSerializer(user)
         mydata = serializer.data
-
-        global profilecount
+        user.new_bid_flag = False
+        user.save()
         newbids = NewBids.objects.get(user=user)
-        mydata.update(NewBidsSerializer(newbids).data)
-        if profilecount%2 == 1:
-            user.new_bid_flag = False
-            user.save() 
-            newbids.new_bids.clear()
-            newbids.save()
+        mydata.update(NewBidsSerializer(newbids).data) 
+        newbids.new_bids.clear()
+        newbids.save()
 
         profilecount = profilecount + 1
  
