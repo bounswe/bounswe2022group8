@@ -4,7 +4,7 @@ from knox.models import AuthToken
 
 from ..models.user import User
 from ..models.artitem import ArtItem
-from ..models.exhibition import OfflineExhibition, VirtualExhibition
+from ..models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionPoster
 from ..serializers.serializers import ArtItemSerializer
 from ..serializers.exhibition import OfflineExhibitionSerializer, SimpleExhibitionPosterSerializer, VirtualExhibitionSerializer, SimpleExhibitionArtItemSerializer, ExhibitionArtItemSerializer
 from rest_framework import permissions
@@ -98,7 +98,8 @@ from history.signals import object_viewed_signal
                                 "category": "OT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-3.png",
-                                "created_at": "08-12-2022 23:32:18"
+                                "created_at": "08-12-2022 23:32:18",
+                                "isExhibition": True
                             }
                         ],
                         "start_date": "08-12-2022 16:00:00",
@@ -162,7 +163,8 @@ def get_exhibitions(request):
                         "category": "OT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-3.png",
-                        "created_at": "08-12-2022 23:32:18"
+                        "created_at": "08-12-2022 23:32:18",
+                        "isExhibition": True
                     }
                 ],
                 "start_date": "08-12-2022 16:00:00",
@@ -258,7 +260,8 @@ def get_exhibitions(request):
                             "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
-                            "created_at": "08-12-2022 23:15:21"
+                            "created_at": "08-12-2022 23:15:21",
+                            "isExhibition": True
                         }
                     ],
                     "start_date": "08-12-2022 16:00:00",
@@ -275,7 +278,8 @@ def get_exhibitions(request):
                             "category": "OT",
                             "artitem_path": "artitem/artitem-3.png",
                             "likes": 0,
-                            "created_at": "24-12-2022 14:02:33"
+                            "created_at": "24-12-2022 14:02:33",
+                            "isExhibition": True
                         }
                     ]
                 }
@@ -366,9 +370,10 @@ def get_online_exhibitions_by_id(request, id):
             artitem_image_storage = ArtItemStorage()
             try:
                 objects = []
+                cnt = 0
                 for artitem_data in data["add_via_upload"]:
                     try:
-                        inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                        inddata, cnt = fetch_image(cnt, artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                         inddata["title"] = artitem_data["title"]
                         if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
                         inddata["category"] = artitem_data["category"]
@@ -643,7 +648,8 @@ def get_offline_exhibitions_by_userid(request, userid):
                                     "category": "OT",
                                     "tags": [],
                                     "artitem_path": "artitem/artitem-3.png",
-                                    "created_at": "08-12-2022 23:32:18"
+                                    "created_at": "08-12-2022 23:32:18",
+                                    "isExhibition": True
                                 }
                             ],
                             "start_date": "08-12-2022 16:00:00",
@@ -758,14 +764,16 @@ def get_online_exhibitions_by_userid(request, userid):
 @authentication_classes([TokenAuthentication])
 def create_offline_exhibition(request):
     if (request.method == "POST"):
+        cnt = 0
         if('poster' not in request.data):
             return Response({"poster": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
         artitem_image_storage = ArtItemStorage()
         artitemdata = {}
+        artitemdata['owner'] = request.user.id
 
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
+            artitemdata, cnt = fetch_image(cnt, artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -847,7 +855,8 @@ def create_offline_exhibition(request):
                             "category": "sketch",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
-                            "created_at": "08-12-2022 23:15:21"
+                            "created_at": "08-12-2022 23:15:21",
+                            "isExhibition": True
                         }
                     ],
                     "start_date": "08-12-2020 16:00:00",
@@ -864,7 +873,8 @@ def create_offline_exhibition(request):
                             "category": "OT",
                             "artitem_path": "artitem/artitem-3.png",
                             "likes": 0,
-                            "created_at": "24-12-2022 14:02:33"
+                            "created_at": "24-12-2022 14:02:33",
+                            "isExhibition": True
                         }
                     ]
                 }
@@ -892,13 +902,15 @@ def create_offline_exhibition(request):
 @authentication_classes([TokenAuthentication])
 def create_online_exhibition(request):
     if (request.method == "POST"):
+        cnt = 0
         if('poster' not in request.data):
             return Response({"poster": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
         artitem_image_storage = ArtItemStorage()
         artitemdata = {}
+        artitemdata['owner'] = request.user.id
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
+            artitemdata, cnt = fetch_image(cnt, artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -921,10 +933,11 @@ def create_online_exhibition(request):
         artitemdata = {}
         artitemdata['owner'] = request.user.id
         objects = []
+        cnt = 0
         if("artitems_upload" in request.data):
             for artitem_data in request.data["artitems_upload"]:
                 try:
-                    data = fetch_image(artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                    data, cnt = fetch_image(cnt, artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                     data["title"] = artitem_data["title"]
                     if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
                     data["category"] = artitem_data["category"]
@@ -949,7 +962,6 @@ def create_online_exhibition(request):
         # If it's valid, save the image object but do not upload it to S3 yet. Store the IDs of the saved image objects.
         # If any one of the serializers turn out to be invalid, delete all the images you created and return 400.
         # If not, upload each image to S3 afterwards.
-
         if serializer.is_valid():
             try:
                 virtualexhibition = serializer.save()
@@ -988,17 +1000,22 @@ def create_online_exhibition(request):
 
 
 ### HELPER FUNCTIONS ####
-def fetch_image(artitemdata, artitem_image_storage, base64s, user):
+def fetch_image(cnt, artitemdata, artitem_image_storage, base64s, user):
     image_data = base64s.split("base64,")[1]
     decoded = base64.b64decode(image_data)
 
-    id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
+
+    id_artitem = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id
+    id_poster = 0 if ExhibitionPoster.objects.count() == 0 else ExhibitionPoster.objects.latest('id').id
+    id_ = id_artitem + id_poster + 1 + cnt
+
+    cnt += 1
     filename = 'artitem-{pk}.png'.format(pk=id_)
     artitemdata['artitem_image'] = ContentFile(decoded, filename)
     artitemdata['artitem_path'] = artitem_image_storage.location + \
         "/" + filename
     artitemdata["owner"] = user.id
-    return artitemdata
+    return artitemdata, cnt
 
 def validate_ids(artitems, userid):
     owned_artitems = ArtItem.objects.filter(owner=userid)
