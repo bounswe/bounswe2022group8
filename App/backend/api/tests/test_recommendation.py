@@ -32,30 +32,6 @@ class ArtItemTest(TestCase):
         # do something
         print("TestArtItem:setUp_:end")
 
-    # def test_artitem_creation(self):
-    #     user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
-    #     artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
-
-    #     self.assertTrue(isinstance(artitem, ArtItem))
-    #     self.assertEqual(artitem.__str__(), "Art item: " + artitem.title)
-    #     self.assertEqual(artitem.artitem_image, 'artitem/defaultart.jpg')
-
-    # def test_artitem_deletion_cascaded(self):
-    #     user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
-    #     artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
-    #     id = artitem.id
-
-    #     user.delete()
-    #     self.assertFalse(ArtItem.objects.filter(id=id))   # empty list is False   
-
-    # def test_artitem_deletion(self):
-    #     user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
-    #     artitem = ArtItem.objects.create(title= self.faker.word(), description = self.faker.paragraph(nb_sentences=3), owner = user)
-    #     title = artitem.title
-
-
-    #     artitem.delete()
-    #     self.assertFalse(ArtItem.objects.filter(title=title))   # empty list is False   
     
 
     # GET Test | Tests if art item recommendation function will recommend a less popular art item that is in user's interest, as it is supposed to.
@@ -232,6 +208,79 @@ class ArtItemTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(20 in actual['exhibitions'][x]['id'] for x in actual)
         #self.assertEqual(len(actual['exhibitions']), 16)
+
+
+
+ # GET Test | Tests if user recommendation function will recommend a user with similar interest, as it is supposed to.
+    def test_recommendation_user(self):
+        #user is self.user
+        #user1 is will own all art items
+
+        userinterest11 = UserInterest.objects.get(user = User.objects.get(id=self.user11['user']['id']))
+        userinterest11.updateInterest('PW', 2)
+
+        userinterest11 = UserInterest.objects.get(user = User.objects.get(id=self.user11['user']['id']))
+        userinterest11.updateInterest('PF', 4)
+
+        userinterest22 = UserInterest.objects.get(user = User.objects.get(id=self.user22['user']['id']))
+        userinterest22.updateInterest('PW', 2)
+
+        header = {"HTTP_AUTHORIZATION": "Token " + self.user22["token"]}
+        request = self.factory.get('/recommendation/users/', **header, content_type='application/json')
+        response = RecommendUserView(request)
+        
+        actual = response.data
+        # print("actual is ")
+        # print(actual)
+
+        # print('printing')
+        # print(actual['artitems'][0])
+        # print(actual['artitems'][0]['id'])
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.user11['user']['id'] in actual['users'][x]['id'] for x in actual)
+
+
+# GET Test | Tests if user recommendation function will recommend a user with similar interest that the user is already following, which is not supposed to happen.
+    def test_recommendation_user_following(self):
+        #user is self.user
+        #user1 is will own all art items
+
+        userinterest11 = UserInterest.objects.get(user = User.objects.get(id=self.user11['user']['id']))
+        userinterest11.updateInterest('PW', 2)
+
+        userinterest11 = UserInterest.objects.get(user = User.objects.get(id=self.user11['user']['id']))
+        userinterest11.updateInterest('PF', 4)
+
+        userinterest22 = UserInterest.objects.get(user = User.objects.get(id=self.user22['user']['id']))
+        userinterest22.updateInterest('PW', 2)
+
+        header = {"HTTP_AUTHORIZATION": "Token " + self.user22["token"]}
+        request = self.factory.get('/recommendation/users/', **header, content_type='application/json')
+        response = RecommendUserView(request)
+        
+        actual = response.data
+        # print("actual is ")
+        # print(actual)
+
+        # print('printing')
+        # print(actual['artitems'][0])
+        # print(actual['artitems'][0]['id'])
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.user11['user']['id'] in actual['users'][x]['id'] for x in actual)
+
+        myfollow = Follow.objects.create(from_user=User.objects.get(id=self.user22['user']['id']), to_user=User.objects.get(id=self.user11['user']['id']))
+
+        header = {"HTTP_AUTHORIZATION": "Token " + self.user22["token"]}
+        request = self.factory.get('/recommendation/users/', **header, content_type='application/json')
+        response = RecommendUserView(request)
+        
+        actual = response.data
+
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.user11['user']['id'] not in actual['users'][x]['id'] for x in actual)
 
 
 
