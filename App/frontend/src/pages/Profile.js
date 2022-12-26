@@ -160,7 +160,15 @@ function Profile(props) {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username, newArtItemUploaded, artItemDeleted]);
+  }, [
+    host,
+    token,
+    profileInfo.username,
+    newArtItemUploaded,
+    artItemDeleted,
+    newOnlineExhibitionUploaded,
+    onlineExhibitionDeleted,
+  ]);
 
   useEffect(() => {
     fetch(`${host}/api/v1/exhibitions/users/1/online/`, {
@@ -201,7 +209,14 @@ function Profile(props) {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, [host, token, newOnlineExhibitionUploaded, onlineExhibitionDeleted]);
+  }, [
+    host,
+    token,
+    newArtItemUploaded,
+    artItemDeleted,
+    newOnlineExhibitionUploaded,
+    onlineExhibitionDeleted,
+  ]);
 
   useEffect(() => {
     // dont forget the put the slash at the end
@@ -285,6 +300,11 @@ function Profile(props) {
     scrollToTop();
   }
 
+  function goToOnlineExhibition(id) {
+    navigate(`/exhibitions/online/${id}`);
+    scrollToTop();
+  }
+
   function openDeletePopUp(id) {
     setDeleteButton(false);
     setIsDeletePopUpOpen(true);
@@ -328,8 +348,6 @@ function Profile(props) {
       }
     )
       .then((response) => {
-        console.log(response);
-
         setIsDeletePopUpOpen(false);
         setOnlineExhibitionDeleted(!onlineExhibitionDeleted);
         scrollToTop();
@@ -546,7 +564,7 @@ function Profile(props) {
                         <div
                           role="link"
                           className="gallery-image-link"
-                          onClick={() => goToArtItem(val.id)}
+                          onClick={() => goToOnlineExhibition(val.id)}
                           style={{
                             pointerEvents: deleteButton ? "none" : "auto",
                             cursor: deleteButton ? "auto" : "pointer",
