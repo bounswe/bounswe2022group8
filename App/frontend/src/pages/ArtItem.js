@@ -8,7 +8,6 @@ import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
-import Select from "react-select";
 
 import "./styles/ArtItem.css";
 
@@ -73,11 +72,10 @@ function ArtItem(props) {
     (state, newState) => ({ ...state, ...newState }),
     {
       amount: null,
-      deadline: "",
+      deadline: null,
     }
   );
-  const biddingStatus = { NS: "Not For Sale", FS: "For Sale", SO: "SOLD" };
-  const bidresponses = { AC: "Accepted", NS: "No Response", RE: "Rejected" };
+  const bidresponses = { AC: "Accepted", NR: "No Response", RE: "Rejected" };
   const [bids, setBids] = useState([]);
   const [bidPhotos, setBidPhotos] = useState([]);
   const [saleStatus, setSaleStatus] = useState(null);
@@ -85,12 +83,15 @@ function ArtItem(props) {
   const [boughtBy, setBoughtBy] = useState(null);
   const [isPutOnSaleButtonClicked, setIsPutOnSaleButtonClicked] =
     useState(false);
-  const [isRemoveFromSaleButtonClicked, setIsRemoveFromSaleButtonClicked] =
-    useState(false);
+  //const [isRemoveFromSaleButtonClicked, setIsRemoveFromSaleButtonClicked] =
+  useState(false);
   const [minPriceInput, setMinPriceInput] = useState(null);
-  const [putOnSaleMessage, setPutOnSaleMessage] = useState(null);
   const [rejectButtonClicked, setRejectButtonClicked] = useState(false);
-  const [acceptButtonClicked, setAcceptButtonClicked] = useState(false);
+  //const [acceptButtonClicked, setAcceptButtonClicked] = useState(false);
+  const [buyerPhoto, setBuyerPhoto] = useState("");
+  const [showResponseMessage, setShowResponseMessage] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(null);
+  const [sendOfferClicked, setSendOfferClicked] = useState(false);
 
   // COMMENT BODY TO BE POSTED
   const [newComment, setNewComment] = useState("");
@@ -156,6 +157,15 @@ function ArtItem(props) {
         };
 
         setArtitemOwnerPhoto(s3.getSignedUrl("getObject", params_owner_pp));
+
+        if (response.bought_by !== null) {
+          var params_buyer_pp = {
+            Bucket: process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME,
+            Key: response.bought_by.profile_path,
+          };
+
+          setBuyerPhoto(s3.getSignedUrl("getObject", params_buyer_pp));
+        }
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -591,7 +601,6 @@ function ArtItem(props) {
     setNewOffer({ [name]: newValue });
   };
   function handleSendOffer() {
-    console.log("newOffer", newOffer);
     //POST api call here
     fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
       method: "POST",
@@ -609,10 +618,14 @@ function ArtItem(props) {
         console.log("response", response);
         setIsMakeOfferClicked(false);
         setNewOffer({ amount: null, deadline: "" });
+        setSendOfferClicked(true);
+        if (response["detail"]) {
+          setResponseMessage(response["detail"]);
+        } else {
+          setResponseMessage("Your offer was sent successfully.");
+        }
       })
       .catch((error) => console.error("Error:", error));
-    ///not successful
-    //show error message about input format to user
   }
   const handleMinPriceInput = (event) => {
     const name = event.target.name;
@@ -638,13 +651,14 @@ function ArtItem(props) {
         setSaleStatus("FS");
         setMinPriceOfArtitem(minPriceInput["minimumprice"]);
         setIsPutOnSaleButtonClicked(false);
-        setPutOnSaleMessage(response["detail"]);
+        setResponseMessage(response["detail"]);
+        setShowResponseMessage(true);
       })
       .catch((error) => console.error("Error:", error));
   }
 
   function handleRemoveFromSale() {
-    setIsRemoveFromSaleButtonClicked(true);
+    //setIsRemoveFromSaleButtonClicked(true);
     fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
       method: "PUT",
       body: JSON.stringify({
@@ -659,14 +673,15 @@ function ArtItem(props) {
       .then((response) => {
         console.log("response", response);
         setSaleStatus("NS");
-        setIsRemoveFromSaleButtonClicked(true);
         setIsPutOnSaleButtonClicked(false);
+        setResponseMessage(response["detail"]);
+        setShowResponseMessage(true);
       })
       .catch((error) => console.error("Error:", error));
   }
 
-  const handleRejectOffer = (bidId) => {
-    fetch(`${host}/api/v1/artitems/bids/${bidId}`, {
+  const handleRejectOffer = (bidId, index) => {
+    fetch(`${host}/api/v1/artitems/bids/${bidId}/`, {
       method: "PUT",
       body: JSON.stringify({
         response: "RE",
@@ -680,12 +695,12 @@ function ArtItem(props) {
       .then((response) => {
         console.log("response", response);
         setRejectButtonClicked(!rejectButtonClicked);
-        //renewPage();
+        bids[index].accepted = "RE";
       })
       .catch((error) => console.error("Error:", error));
   };
-  function handleAcceptOffer(bidId) {
-    fetch(`${host}/api/v1/artitems/bids/${bidId}`, {
+  function handleAcceptOffer(bidId, index) {
+    fetch(`${host}/api/v1/artitems/bids/${bidId}/`, {
       method: "PUT",
       body: JSON.stringify({
         response: "AC",
@@ -698,15 +713,11 @@ function ArtItem(props) {
       .then((response) => response.json())
       .then((response) => {
         console.log("response", response);
-        setAcceptButtonClicked(true);
+        //setAcceptButtonClicked(true);
         setSaleStatus("SO");
-        //renewPage();
+        bids[index].accepted = "AC";
       })
       .catch((error) => console.error("Error:", error));
-  }
-
-  function renewPage() {
-    navigate(`/artitems/${artitem_id}`);
   }
 
   return (
@@ -802,6 +813,9 @@ function ArtItem(props) {
                 </div>
               </div>
             ) : null}
+            {showResponseMessage || sendOfferClicked ? (
+              <div className="message-container">{responseMessage}</div>
+            ) : null}
 
             {token && userid === artitemOwnerID && saleStatus === "FS" ? (
               <button
@@ -891,10 +905,12 @@ function ArtItem(props) {
 
                   {bids.length === 0 ? (
                     <tbody>
-                      <td></td>
-                      <td style={{ textAlign: "right" }}>No offers yet</td>
-                      <td></td>
-                      <td></td>
+                      <tr>
+                        <td />
+                        <td style={{ textAlign: "right" }}>No offers yet</td>
+                        <td />
+                        <td />
+                      </tr>
                     </tbody>
                   ) : (
                     <tbody>
@@ -919,20 +935,22 @@ function ArtItem(props) {
                             </td>
                             <td className="text-center">
                               {saleStatus === "SO" ? (
-                                <td className="text-center">
-                                  {bidresponses[val.accepted]}
-                                </td>
+                                bidresponses[val.accepted]
                               ) : val.accepted === "NR" ? (
                                 <div>
                                   <button
                                     className="accept-offer-button"
-                                    onClick={() => handleAcceptOffer(val.id)}
+                                    onClick={() =>
+                                      handleAcceptOffer(val.id, index)
+                                    }
                                   >
                                     Accept
                                   </button>
                                   <button
                                     className="reject-offer-button"
-                                    onClick={() => handleRejectOffer(val.id)}
+                                    onClick={() =>
+                                      handleRejectOffer(val.id, index)
+                                    }
                                   >
                                     Reject
                                   </button>
@@ -951,7 +969,7 @@ function ArtItem(props) {
                 </table>
               </div>
             ) : null}
-            {token && userid !== artitemOwnerID && saleStatus === "S" ? (
+            {token && userid !== artitemOwnerID && saleStatus === "SO" ? (
               <div className="table">
                 <table className="bidder-list">
                   <thead>
@@ -966,9 +984,10 @@ function ArtItem(props) {
                   </thead>
                   <tbody>
                     <td>
-                      <img id="bidder-profile-photo" src="" alt="" />
-                      <span class="user-name">{boughtBy}</span>
+                      <img id="buyer-profile-photo" src={buyerPhoto} alt="" />
+                      <span class="user-name">{boughtBy.username}</span>
                     </td>
+
                     <td className="text-center">SOLD</td>
                   </tbody>
                 </table>
