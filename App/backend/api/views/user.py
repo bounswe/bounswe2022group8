@@ -23,6 +23,7 @@ from drf_yasg import openapi
             description="Successfully retrieved the users.",
             examples={
                 "application/json": [{
+                    "id": 1,
                     "username": "pothepanda",
                     "email": "po@jade.edu",
                     "location": "China",

@@ -18,6 +18,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 import hashlib
 
+from ..signals import user_created_signal
+
 
 class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -62,6 +64,9 @@ class RegisterView(generics.GenericAPIView):
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+
+
+        user_created_signal.send(user, request=request)
 
         user_data = serializer.data
         return Response({"user": user_data, "token": AuthToken.objects.create(user)[1]}, status=status.HTTP_201_CREATED)

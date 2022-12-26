@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              for (ArtItem item in artItems ) (Post(artitem: item))
+              for (ArtItem item in artItems ) (Post(artitem: item)),
             ],
           ),
     ) ;},),

@@ -2,7 +2,7 @@ from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
 from ..models.models import Comment
-from ..models.artitem import Tag, ArtItem
+from ..models.artitem import Tag, ArtItem, Bid, NewBids
 from ..models.user import User
 
 
@@ -26,22 +26,25 @@ class TagSerializer(serializers.ModelSerializer):
 
 class ArtItemSerializer(serializers.ModelSerializer):
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
 
     class Meta:
         model = ArtItem
-        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'likes', 'number_of_views', 'created_at' ]
+        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'likes', 'number_of_views', 'created_at', 'sale_status', 'minimum_price', 'bought_by', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep["tags"] = TagSerializer(instance.tags.all(), many=True).data 
         rep["owner"] = SimpleUserSerializer(instance.owner).data
+        rep['bought_by'] = CommentUserSerializer(instance.bought_by).data if rep['bought_by'] else None
         return rep
 
 class SimpleArtItemSerializer(serializers.ModelSerializer):
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
 
     class Meta:
         model = ArtItem
-        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'created_at']
+        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'created_at', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -64,6 +67,35 @@ class SimpleUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'surname',  'profile_path']
 
+class BidArtItemSerializer(serializers.ModelSerializer):
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
+
+    class Meta:
+        model = ArtItem
+        fields = ['id', 'title', 'category', 'artitem_path', 'isExhibition']
+
+
+class BidSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bid
+        fields = ['id', 'artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep["buyer"] = CommentUserSerializer(instance.buyer).data 
+        rep["artitem"] = BidArtItemSerializer(instance.artitem).data 
+        return rep
+
+class NewBidsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewBids
+        fields = ['new_bids']
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance) 
+        rep["new_bids"] = BidArtItemSerializer(instance.new_bids, many=True).data 
+        return rep
+        
 class ArtItemByTagQuerySerializer(serializers.Serializer):
     tags = serializers.CharField(default="1,2,3")
   

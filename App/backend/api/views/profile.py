@@ -16,10 +16,11 @@ from ..models.user import Follow
 import datetime
 
 from ..models.models import Comment
-from ..models.artitem import ArtItem
+from ..models.artitem import ArtItem, NewBids
 from history.models import History
 
 from history.signals import object_viewed_signal
+from ..serializers.serializers import NewBidsSerializer
 
 levelThreshold = 10
 
@@ -76,7 +77,8 @@ def profile_api(request, id):
                     data["isFollowed"] = False
 
                 instance = user
-                object_viewed_signal.send(User, instance=instance, request=request)
+                if request.user.is_authenticated:
+                    object_viewed_signal.send(User, instance=instance, request=request)
             
             return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
@@ -105,7 +107,22 @@ def profile_api(request, id):
                     "profile_path": "avatar/default.png",
                     "is_level2": False,
                     "followers": 3,
-                    "followings": 2
+                    "followings": 2,
+                    "new_bid_flag": "true",
+                    "new_bids": [
+                        {
+                            "id": 25,
+                            "title": "blah",
+                            "category": "PF",
+                            "artitem_path": "artitem/defaultart.jpg"
+                        },
+                        {
+                            "id": 24,
+                            "title": "hope",
+                            "category": "PD",
+                            "artitem_path": "artitem/defaultart.jpg"
+                        }
+                    ]
                 }
             }
         ),
@@ -177,8 +194,15 @@ def profile_me_api(request):
         user = request.user
         user.calculateLevel()
         serializer = UserProfileSerializer(user)
+        mydata = serializer.data
+        user.new_bid_flag = False
+        user.save()
+        newbids = NewBids.objects.get(user=user)
+        mydata.update(NewBidsSerializer(newbids).data) 
+        newbids.new_bids.clear()
+        newbids.save()
  
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(mydata, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
 
         # BASE64 DECODING
