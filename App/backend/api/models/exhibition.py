@@ -13,6 +13,7 @@ class ExhibitionPoster(models.Model):
     artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
     artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.TextField()
 
 class AbstractExhibition(models.Model):
     title = models.CharField(max_length=200)

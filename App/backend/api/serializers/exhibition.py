@@ -17,16 +17,17 @@ class OfflineExhibitionSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        rep["poster"] = SimpleArtItemSerializer(instance.poster).data
+        rep["poster"] = SimpleExhibitionPosterSerializer(instance.poster).data
         rep["collaborators"] = SimpleUserSerializer(instance.collaborators, many=True).data
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
 class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
     class Meta:
         model = ArtItem
-        fields = ['id', 'title', 'tags', 'description', 'category', 'artitem_path',  'likes', 'created_at']
+        fields = ['id', 'title', 'tags', 'description', 'category', 'artitem_path',  'likes', 'created_at', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -34,10 +35,11 @@ class SimpleExhibitionArtItemSerializer(serializers.ModelSerializer):
         return rep
 
 class ExhibitionArtItemSerializer(serializers.ModelSerializer):
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
     class Meta:
         model = ArtItem
-        fields = ['id',  'owner', 'title', 'tags', 'description', 'category', 'virtualExhibition', 'artitem_path', 'artitem_image', 'likes', 'created_at']
+        fields = ['id',  'owner', 'title', 'tags', 'description', 'category', 'virtualExhibition', 'artitem_path', 'artitem_image', 'likes', 'created_at', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -47,7 +49,6 @@ class ExhibitionArtItemSerializer(serializers.ModelSerializer):
 
 
 class SimpleExhibitionPosterSerializer(serializers.ModelSerializer):
- 
     class Meta:
         model = ExhibitionPoster
         fields = ['id', 'artitem_path', 'created_at']

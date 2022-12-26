@@ -74,7 +74,10 @@ class ArtItem(models.Model):
         print(self.popularity)
         super().save(*args, **kwargs)
 
-
+    @property
+    def isExhibitionArtItem(self):
+        return (self.virtualExhibition is not None)
+        
     class Meta:
         ordering = ["-popularity"]  # order according to popularity
     
