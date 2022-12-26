@@ -35,7 +35,8 @@ from dateutil import parser
                                 "id": 21,
                                 "title": "a3",
                                 "category": "OT",
-                                "artitem_path": "artitem/defaultart.jpg"
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "isExhibition": False
                             },
                             "buyer": {
                                 "id": 3,
@@ -53,7 +54,8 @@ from dateutil import parser
                                 "id": 21,
                                 "title": "a3",
                                 "category": "OT",
-                                "artitem_path": "artitem/defaultart.jpg"
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "isExhibition": False
                             },
                             "buyer": {
                                 "id": 2,
@@ -111,7 +113,8 @@ from dateutil import parser
                         "id": 23,
                         "title": "inspo",
                         "category": "PH",
-                        "artitem_path": "artitem/defaultart.jpg"
+                        "artitem_path": "artitem/defaultart.jpg",
+                        "isExhibition": False
                     },
                     "buyer": {
                         "id": 4,
@@ -313,7 +316,8 @@ def BidArtItemView(request, artitemid):
                                 "id": 21,
                                 "title": "a3",
                                 "category": "OT",
-                                "artitem_path": "artitem/defaultart.jpg"
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "isExhibition": False
                             },
                             "buyer": {
                                 "id": 3,
@@ -331,7 +335,8 @@ def BidArtItemView(request, artitemid):
                                 "id": 21,
                                 "title": "a3",
                                 "category": "OT",
-                                "artitem_path": "artitem/defaultart.jpg"
+                                "artitem_path": "artitem/defaultart.jpg",
+                                "isExhibition": False
                             },
                             "buyer": {
                                 "id": 2,

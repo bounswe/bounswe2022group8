@@ -5,6 +5,7 @@ from knox.models import AuthToken
 
 from ..models.user import User, UserInterest
 from ..models.user import Follow
+from ..models.exhibition import ExhibitionPoster
 from ..models.artitem import ArtItem, LikeArtItem
 from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
 from ..serializers.auth import RegisterSerializer, LoginSerializer
@@ -69,6 +70,7 @@ from django.core.files.base import ContentFile
                         "sale_status": "NS",
                         "minimum_price": 200,
                         "bought_by": None,
+                        "isExhibition": False
                     }
                 ]
             }
@@ -130,6 +132,7 @@ def get_artitems(request):
                         "sale_status": "NS",
                         "minimum_price": 200,
                         "bought_by": None,
+                        "isExhibition": False
                     }
             }
         ),
@@ -166,7 +169,11 @@ def post_artitem(request):
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
                 # iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=
-                id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
+            
+                id_artitem = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id
+                id_poster = 0 if ExhibitionPoster.objects.count() == 0 else ExhibitionPoster.objects.latest('id').id
+                id_ = id_artitem + id_poster + 1
+    
                 filename = 'artitem-{pk}.png'.format(
                     pk=id_)
                 request.data['artitem_image'] = ContentFile(decoded, filename)
@@ -272,7 +279,8 @@ def delete_artitem(request, id):
                         "sale_status": "FS",
                         "minimum_price": 50,
                         "bought_by": None,
-                        "isLiked": "False"
+                        "isLiked": "False",
+                        "isExhibition": False
 
                     }
                 ]
@@ -341,6 +349,7 @@ def artitems_by_id(request, id):
                         "sale_status": "NS",
                         "minimum_price": 200,
                         "bought_by": None,
+                        "isExhibition": False
                     }
                 ]
             }
@@ -397,6 +406,7 @@ def artitems_by_userid(request, id):
                         "sale_status": "NS",
                         "minimum_price": 200,
                         "bought_by": None,
+                        "isExhibition": False
                     }
                 ]
             }
@@ -420,7 +430,7 @@ def artitems_by_username(request, username):
         return Response({"Not Found": "Any user with the given username doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
     else:
         # we know that length of user must be 1 since username is a unique field
-        artitems = ArtItem.objects.filter(owner=user[0].id)
+        artitems = ArtItem.objects.filter(owner=user[0].id).exclude(virtualExhibition__isnull=False) # exluce exhibition art items
         serializer = ArtItemSerializer(artitems, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -455,6 +465,7 @@ def artitems_by_username(request, username):
                         "sale_status": "NS",
                         "minimum_price": 200,
                         "bought_by": None,
+                        "isExhibition": False
                     }
                 ]
             }
@@ -515,7 +526,8 @@ def artitems_of_followings(request):
                         "number_of_views": 5,
                         "sale_status": "NS",
                         "minimum_price": 200,
-                        "bought_by": None
+                        "bought_by": None,
+                        "isExhibition": False
                     }
                 ]
             }
