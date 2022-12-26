@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'knox',
     'drf_yasg',
     'storages',
+    'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

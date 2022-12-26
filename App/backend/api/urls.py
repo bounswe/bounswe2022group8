@@ -13,7 +13,7 @@ from .views.artitem import get_artitems, artitems_by_userid, artitems_by_usernam
 from .views.follow import follow_user, unfollow_user, get_my_followers, get_my_followings, get_followers, get_followings
 from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
-from .views.search import LexSearchView, LexSearchUserView
+from .views.search import LexSearchView, LexSearchUserView, search_artitems_fulltext, search_users_fulltext
 from .views.user import users_api
 from .views.exhibition import get_exhibitions, get_my_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
@@ -106,7 +106,9 @@ urlpatterns = [
     path('artitems/bids/<int:id>/', BidView, name="BidView"),
     path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),
     path('search/lexical/', LexSearchView.as_view(), name='LexicalSearch'),
-    path('search/lexical/users/', LexSearchUserView.as_view(), name='LexicalSearchUser')
+    path('search/lexical/users/', LexSearchUserView.as_view(), name='LexicalSearchUser'),
+    path('search/fulltext/', search_artitems_fulltext, name='fulltext_search_art_items'),
+    path('search/fulltext/users/', search_users_fulltext, name='fulltext_search_users')
 ]
 
 # added to give us the option to choose between default Response template and regular json
