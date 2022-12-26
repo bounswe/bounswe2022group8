@@ -1,3 +1,4 @@
+import 'package:artopia/artitem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artopia/search.dart';
@@ -7,6 +8,7 @@ import 'package:artopia/settings_page.dart';
 import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
+import 'package:artopia/artitem_page.dart';
 import 'package:artopia/profile_page.dart';
 import 'package:artopia/profile.dart';
 import 'package:artopia/widgets/self_profile.dart';
@@ -81,8 +83,8 @@ class _SearchPageState extends State<SearchPage> {
                   final finalResult = await showSearch(
                     context: context,
                     delegate: Search(
-                      allCaliforniaPlaces: allCaliforniaLocations,
-                      californiaPlaceSuggestion: popularCaliforniaLocations,
+                      listToSearch: listOfUsers,
+                      listToSuggest: listOfSuggestions,
                     ),
                   );
                   setState(
@@ -115,13 +117,16 @@ class _SearchPageState extends State<SearchPage> {
                   final finalResult = await showSearch(
                     context: context,
                     delegate: Search(
-                      allCaliforniaPlaces: allCaliforniaLocations,
-                      californiaPlaceSuggestion: popularCaliforniaLocations,
+                        listToSearch: listOfArtItems,
+                      listToSuggest: listOfSuggestions,
                     ),
                   );
                   setState(
                     () {
                       selectedArtItem = finalResult!;
+                      Route route =
+                      MaterialPageRoute(builder: (context) => HomePage()); //ArtItemPage());
+                      Navigator.pushReplacement(context, route);
                     },
                   );
                 },
@@ -203,7 +208,7 @@ class _SearchPageState extends State<SearchPage> {
   otherProfile(BuildContext context, me) {}
 }
 
-final List<String> allCaliforniaLocations = [
+final List<String> listOfUsers = [
   "Alameda",
   "Albany",
   "Alhambra",
@@ -260,7 +265,65 @@ final List<String> allCaliforniaLocations = [
   "Calimesa",
   "Calipatria",
 ];
-final List<String> popularCaliforniaLocations = [
+final List<String> listOfArtItems = [
+  "Alameda",
+  "Albany",
+  "Alhambra",
+  "Aliso Viejo",
+  "Alturas",
+  "Amador City",
+  "American Canyon",
+  "Anaheim",
+  "Anderson",
+  "Angels Camp",
+  "Antioch",
+  "Apple Valley",
+  "Arcadia",
+  "Arcata",
+  "Arroyo Grande",
+  "Artesia",
+  "Arvin",
+  "Atascadero",
+  "Atwater",
+  "Auburn",
+  "Avalon",
+  "Avenal",
+  "Azusa",
+  "Bakersfield",
+  "Baldwin Park",
+  "Banning",
+  "Barstow",
+  "Beaumont",
+  "Bell",
+  "Bell Gardens",
+  "Bellflower",
+  "Belmont",
+  "Belvedere",
+  "Benicia",
+  "Berkeley",
+  "Beverly Hills",
+  "Big Bear Lake",
+  "Biggs",
+  "Bishop",
+  "Bloomington",
+  "Blythe",
+  "Bodega Bay",
+  "Brawley",
+  "Brea",
+  "Brentwood",
+  "Brisbane",
+  "Buellton",
+  "Buena Park",
+  "Burbank",
+  "Burlingame",
+  "Buttonwillow",
+  "Byron",
+  "Calexico",
+  "Calimesa",
+  "Calipatria",
+];
+final List<String> listOfSuggestions = [
+  /*
   "Alameda",
   "Albany",
   "Antioch",
@@ -284,4 +347,5 @@ final List<String> popularCaliforniaLocations = [
   "Burbank",
   "Calimesa",
   "Calipatria",
+*/
 ];

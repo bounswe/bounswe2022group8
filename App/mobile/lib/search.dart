@@ -2,9 +2,9 @@ import 'package:artopia/search_page.dart';
 import 'package:flutter/material.dart';
 
 class Search extends SearchDelegate<String>{
-  final List<String> allCaliforniaPlaces;
-  final List<String> californiaPlaceSuggestion;
-  Search({required this.allCaliforniaPlaces, required this.californiaPlaceSuggestion});
+  final List<String> listToSearch;
+  final List<String> listToSuggest;
+  Search({required this.listToSearch, required this.listToSuggest});
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -28,17 +28,17 @@ class Search extends SearchDelegate<String>{
   }
   @override
   Widget buildResults(BuildContext context) {
-    final List<String> allLocations = allCaliforniaPlaces.where(
-            (californiaPlace) => californiaPlace.toLowerCase().contains(
+    final List<String> allUsers = listToSearch.where(
+            (anUser) => anUser.toLowerCase().contains(
                 query.toLowerCase(),
             ),
     ).toList();
     return ListView.builder(
-      itemCount: allLocations.length,
+      itemCount: allUsers.length,
       itemBuilder: (context, index) => ListTile(
-          title: Text(allLocations[index]),
+          title: Text(allUsers[index]),
         onTap: () {
-          query = allLocations[index];
+          query = allUsers[index];
           close(context, query);
         },
         ),
@@ -48,8 +48,8 @@ class Search extends SearchDelegate<String>{
   @override
 
   Widget buildSuggestions(BuildContext context) {
-    final List<String> locationSuggestions = californiaPlaceSuggestion.where(
-          (placeSuggestions) => placeSuggestions.toLowerCase().contains(
+    final List<String> suggestions = listToSuggest.where(
+          (aSuggestion) => aSuggestion.toLowerCase().contains(
         query.toLowerCase(),
       ),
     ).toList();
