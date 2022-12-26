@@ -201,8 +201,6 @@ def profile_me_api(request):
         mydata.update(NewBidsSerializer(newbids).data) 
         newbids.new_bids.clear()
         newbids.save()
-
-        profilecount = profilecount + 1
  
         return Response(mydata, status=status.HTTP_200_OK)
     elif (request.method == "PUT"):
