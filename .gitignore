@@ -2,7 +2,8 @@ App/mobile/.dart_tool/
 App/mobile/macos/
 App/mobile/.flutter-plugins
 App/mobile/.flutter-plugins-dependencies
-
+App/mobile/android
+App/mobile/build
 # ignore environment 
 env/
 
