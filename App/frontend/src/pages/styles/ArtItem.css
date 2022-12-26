@@ -285,6 +285,7 @@
 /*BIDDING*/
 
 .artitem-post-container .put-on-sale-button {
+  display: block;
   background-color: #ffc9ff;
   color: #0e0a10;
   border-radius: 0.3rem;
@@ -328,7 +329,7 @@
   margin-right: 0.6rem;
   margin-bottom: 1rem;
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
-  width: 100%;
+  width: 99%;
   text-align: center;
 }
 
@@ -348,11 +349,11 @@
 }
 
 .artitem-post-container .make-offer-button {
+  display: block;
   background-color: #ffc9ff;
   color: #18121c;
   border-radius: 0.3rem;
   font-size: 15px;
-  margin-left: auto;
   padding: 0.3rem;
   border-color: #ffc9ff;
 }
@@ -448,8 +449,6 @@
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
-  margin-left: 340px;
-  margin-right: 10px;
   margin-bottom: 5px;
   margin-top: 8px;
 }
@@ -457,7 +456,7 @@
 /* USER LIST TABLE */
 
 .bidder-list {
-  width: 100%;
+  width: 99%;
 }
 .bidder-list tbody td > img {
   position: relative;
@@ -565,4 +564,3 @@
 .r6o-widget.comment.editable:not(:first-child) {
   display: none;
 }
-

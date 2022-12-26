@@ -26,6 +26,10 @@ function ArtItem(props) {
     });
   }
 
+  function scrollToBottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
   var host = HOST;
   var annotationhost = ANNOHOST;
   const { token } = useAuth();
@@ -508,9 +512,9 @@ function ArtItem(props) {
             console.log((error) => console.error("Error:", error));
           }
         });
-        
-        r.on("cancelSelected",(selected)=>{
-          r.readOnly=false;
+
+        r.on("cancelSelected", (selected) => {
+          r.readOnly = false;
         });
         r.loadAnnotations(
           `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
@@ -604,7 +608,6 @@ function ArtItem(props) {
     scrollToTop();
   }
 
-
   //BIDDING
   useEffect(() => {
     // GET bids on an art item
@@ -639,12 +642,20 @@ function ArtItem(props) {
   }, [host, artitem_id, token, userid]);
 
   function handleMakeOffer() {
-    setIsMakeOfferClicked(true);
+    setIsMakeOfferClicked(!isMakeOfferClicked);
+    scrollToBottom();
   }
+
   function handleCancelMakingOffer() {
     setIsMakeOfferClicked(false);
     setNewOffer({ amount: null, deadline: "" });
   }
+
+  function handlePutOnSale() {
+    setIsPutOnSaleButtonClicked(!isPutOnSaleButtonClicked);
+    scrollToBottom();
+  }
+
   const handleOfferInput = (event) => {
     const name = event.target.name;
     const newValue = event.target.value;
@@ -684,27 +695,29 @@ function ArtItem(props) {
   };
   function handleSendMinPrice() {
     //PUT api call to change sale status and min price "FS" minPriceInput
-    fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
-      method: "PUT",
-      body: JSON.stringify({
-        sale_status: "FS",
-        minimum_price: minPriceInput["minimumprice"],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        //console.log("response", response);
-        setSaleStatus("FS");
-        setMinPriceOfArtitem(minPriceInput["minimumprice"]);
-        setIsPutOnSaleButtonClicked(false);
-        setResponseMessage(response["detail"]);
-        setShowResponseMessage(true);
+    if (isNaN(minPriceInput)) {
+      fetch(`${host}/api/v1/artitems/${artitem_id}/bids/`, {
+        method: "PUT",
+        body: JSON.stringify({
+          sale_status: "FS",
+          minimum_price: minPriceInput["minimumprice"],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json())
+        .then((response) => {
+          //console.log("response", response);
+          setSaleStatus("FS");
+          setMinPriceOfArtitem(minPriceInput["minimumprice"]);
+          setIsPutOnSaleButtonClicked(false);
+          setResponseMessage(response["detail"]);
+          setShowResponseMessage(true);
+        })
+        .catch((error) => console.error("Error:", error));
+    }
   }
 
   function handleRemoveFromSale() {
@@ -768,10 +781,10 @@ function ArtItem(props) {
         bids[index].accepted = "AC";
       })
       .catch((error) => console.error("Error:", error));
+  }
 
   function goToSearchResults(id) {
     navigate(`/artitems/tag/${id}`);
-
   }
 
   return (
@@ -823,26 +836,10 @@ function ArtItem(props) {
               </button>
             ) : null}
 
-            <div
-              className={
-                token && clickedAnnotationText
-                  ? "display-image-annotation-text-container"
-                  : ""
-              }
-            >
-              {token ? clickedAnnotationOwner : null}
-              {token && clickedAnnotationText && clickedAnnotationOwner
-                ? " : "
-                : null}
-              {token ? clickedAnnotationText : null}
-            </div>
-
             {token && userid === artitemOwnerID && saleStatus === "NS" ? (
               <button
                 className="put-on-sale-button"
-                onClick={() =>
-                  setIsPutOnSaleButtonClicked(!isPutOnSaleButtonClicked)
-                }
+                onClick={() => handlePutOnSale()}
               >
                 Put On Sale
               </button>
@@ -1040,9 +1037,20 @@ function ArtItem(props) {
                     </tr>
                   </thead>
                   <tbody>
-                    <td>
-                      <img id="buyer-profile-photo" src={buyerPhoto} alt="" />
-                      <span class="user-name">{boughtBy.username}</span>
+                    <td className="text-center">
+                      <div>
+                        <img id="buyer-profile-photo" src={buyerPhoto} alt="" />
+                        <span
+                          class="user-name"
+                          style={{
+                            display: "inline",
+                            marginLeft: "1rem",
+                            paddingLeft: "0rem",
+                          }}
+                        >
+                          {boughtBy.username}
+                        </span>
+                      </div>
                     </td>
 
                     <td className="text-center">SOLD</td>
@@ -1050,7 +1058,6 @@ function ArtItem(props) {
                 </table>
               </div>
             ) : null}
-
           </div>
 
           <div id="info-container">
