@@ -91,7 +91,7 @@ from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibit
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="Authentication required.",
+            description="Invalid token.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
@@ -275,7 +275,7 @@ def RecommendArtItemView(request):
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="Authentication required.",
+            description="Invalid token.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
@@ -342,7 +342,7 @@ def RecommendExhibitionView(request):
 
 @swagger_auto_schema(
     method='GET',
-    operation_description="This endpoint with GET request does one of two things depending on whether the user is authenticated or not. If user is logged in, it returns a list of 16 users that are popular, have similar interest to the user and that the user is not following. If the user is anonymous it just returns a list of 25 users that are popular. This is ofcourse the case if such items(users) exist in the database. Authentication is required. If no users with similar interest found, just popular users are returned.",
+    operation_description="This endpoint with GET request does one of two things depending on whether the user is authenticated or not. If user is logged in, it returns a list of 16 users that are popular, have similar interest to the user and that the user is not following. If the user is anonymous it just returns a list of 25 users that are popular. This is ofcourse the case if such items(users) exist in the database. If no users with similar interest found, just popular users are returned.",
     operation_summary="Get recommended users for the user.",
     tags=['recommendation'],
     responses={
@@ -367,7 +367,7 @@ def RecommendExhibitionView(request):
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
-            description="Authentication required.",
+            description="Invalid token.",
             examples={
                 "application/json": {
                     "detail": "Invalid token."
