@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
 import 'TextAnnotation.dart';
-
+import '../variables.dart';
 class ArtItemPageStructue extends StatefulWidget {
   final ArtItem artitem ;
   const ArtItemPageStructue({Key? key , required  this.artitem}) : super(key: key);
@@ -17,10 +17,10 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
   final colorPalette = ColorPalette();
   bool annotationSelected = false;
   String annotationButtonString = "Show Annotations";
-
   @override
   Widget build(BuildContext context) {
-
+   annotated_item_url = widget.artitem.artitem_path ;
+   annotated_item_id = widget.artitem.id ;
     void changeAnnotationSelected() {
       setState(() {
         annotationSelected = !annotationSelected;

@@ -2,7 +2,8 @@ App/mobile/.dart_tool/
 App/mobile/macos/
 App/mobile/.flutter-plugins
 App/mobile/.flutter-plugins-dependencies
-
+App/mobile/android
+App/mobile/build
 # ignore environment 
 env/
 
@@ -206,9 +207,8 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/django
 .flutter-plugins
 .flutter-plugins-dependencies
-App/mobile/build/app/intermediates/flutter/debug/.last_build_id
-App/mobile/build/app/intermediates/flutter/debug/flutter_build.d
-App/mobile/build/app/intermediates/flutter/debug/libs.jar
-App/frontend
+App/mobile/build/app/intermediates/*
+App/mobile/build/app/outputs*
+App/mobile/android*
 
 *.workspace.xml
