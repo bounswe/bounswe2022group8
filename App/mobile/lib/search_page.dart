@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:artopia/home_page.dart';
 import 'package:artopia/landing_page.dart';
 import 'package:artopia/profile_page.dart';
+import 'package:artopia/profile.dart';
+import 'package:artopia/widgets/self_profile.dart';
 import 'dart:core';
 
 class SearchPage extends StatefulWidget {
@@ -16,9 +18,11 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  Future<Profile> me = getMyProfile();
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
-  String selectedPlace = "";
+  String selectedUser = "";
+  String selectedArtItem = "";
 
   @override
   Widget build(BuildContext context) {
@@ -58,40 +62,88 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Column(
         children: <Widget>[
-          OutlinedButton.icon(
-            label: textUtils.buildText(
-                "Search", 18, Colors.white70, FontWeight.w500),
-            icon: Icon(Icons.search),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: colorPalette.darkPurple,
-              side: BorderSide(
-                color: colorPalette.darkPurple,
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            SizedBox(
+              //User Search
+              width: MediaQuery.of(context).size.width / 2.1,
+              child: OutlinedButton.icon(
+                label: textUtils.buildText(
+                    "User Search", 17, Colors.white70, FontWeight.w500),
+                icon: Icon(Icons.search, size: 17),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: colorPalette.darkPurple,
+                  side: BorderSide(
+                    color: colorPalette.darkPurple,
+                  ),
+                ),
+                onPressed: () async {
+                  final finalResult = await showSearch(
+                    context: context,
+                    delegate: Search(
+                      allCaliforniaPlaces: allCaliforniaLocations,
+                      californiaPlaceSuggestion: popularCaliforniaLocations,
+                    ),
+                  );
+                  setState(
+                    () {
+                      selectedUser = finalResult!;
+                      Route route =
+                      MaterialPageRoute(builder: (context) => ProfilePage());
+                      Navigator.pushReplacement(context, route);
+                    },
+                  );
+                },
               ),
             ),
-            onPressed: () async {
-              final finalResult = await showSearch(
-                context: context,
-                delegate: Search(
-                  allCaliforniaPlaces: allCaliforniaLocations,
-                  californiaPlaceSuggestion: popularCaliforniaLocations,
+            SizedBox(width: 10),
+            SizedBox(
+              //Art Item Search
+              width: MediaQuery.of(context).size.width / 2.1,
+              child: OutlinedButton.icon(
+                label: textUtils.buildText(
+                    "Art Item Search", 17, Colors.white70, FontWeight.w500),
+                icon: Icon(Icons.search, size: 17),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: colorPalette.darkPurple,
+                  side: BorderSide(
+                    color: colorPalette.darkPurple,
+                  ),
                 ),
-              );
-              setState(
-                () {
-                  selectedPlace = finalResult!;
+                onPressed: () async {
+                  final finalResult = await showSearch(
+                    context: context,
+                    delegate: Search(
+                      allCaliforniaPlaces: allCaliforniaLocations,
+                      californiaPlaceSuggestion: popularCaliforniaLocations,
+                    ),
+                  );
+                  setState(
+                    () {
+                      selectedArtItem = finalResult!;
+                    },
+                  );
                 },
-              );
-            },
-          ),
-          selectedPlace == ""
+              ),
+            ),
+          ]),
+          selectedUser == ""
               ? SizedBox.shrink()
-              : Container(
+              :
+              //SizedBox.shrink(),
+          Container(),
+
+
+          /*
+          Container(
                   padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                   color: colorPalette.darkPurple,
                   child: textUtils.buildText(
-                      selectedPlace, 18, Colors.white70, FontWeight.w500),
-                ),
+                      selectedUser, 18, Colors.white70, FontWeight.w500),
+          ),
+          */
+          /*
           Expanded(
             child: ListView.builder(
               itemCount: allCaliforniaLocations.length,
@@ -102,6 +154,7 @@ class _SearchPageState extends State<SearchPage> {
               },
             ),
           ),
+          */
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -111,23 +164,20 @@ class _SearchPageState extends State<SearchPage> {
         unselectedItemColor: colorPalette.darkPurple,
         onTap: (value) {
           if (value == 0) {
-            Route route =
-            MaterialPageRoute(builder: (context) => HomePage());
+            Route route = MaterialPageRoute(builder: (context) => HomePage());
             Navigator.pushReplacement(context, route);
           } else if (value == 1) {
             Route route =
-            MaterialPageRoute(builder: (context) => ProfilePage());
+                MaterialPageRoute(builder: (context) => ProfilePage());
             Navigator.pushReplacement(context, route);
-          }
-          else if (value == 3) {
+          } else if (value == 3) {
             Route route =
-            MaterialPageRoute(builder: (context) => LandingPage());
+                MaterialPageRoute(builder: (context) => LandingPage());
             Navigator.pushReplacement(context, route);
           }
         },
         items: const [
           BottomNavigationBarItem(
-
             icon: Icon(Icons.home),
             label: 'Home',
           ),
@@ -147,6 +197,8 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+
+  otherProfile(BuildContext context, me) {}
 }
 
 final List<String> allCaliforniaLocations = [

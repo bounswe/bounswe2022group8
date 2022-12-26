@@ -1,5 +1,6 @@
 import 'package:artopia/search_page.dart';
 import 'package:artopia/search.dart';
+import 'package:artopia/widgets/self_profile.dart';
 import 'package:artopia/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
