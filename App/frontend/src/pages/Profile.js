@@ -49,6 +49,7 @@ function Profile(props) {
   const [deleteButton, setDeleteButton] = useState(false);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
   const [artItemToBeDeletedID, setArtItemToBeDeletedID] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -142,6 +143,31 @@ function Profile(props) {
         .catch((error) => console.error("Error:", error));
     }
   }, [host, token, profileInfo.username, newImageUploaded, artItemDeleted]);
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/tags/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        var tagOptions = [];
+
+        for (let i = 0; i < response.length; i++) {
+          tagOptions.push({
+            value: response[i].id,
+            label: response[i].tagname,
+          });
+        }
+
+        setTags(tagOptions);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token]);
 
   // true -> art item --- false -> exhibition
   const [navTab, setNavTab] = useState(true);
@@ -292,6 +318,7 @@ function Profile(props) {
             newImageUploaded={newImageUploaded}
             setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
             closeUploadCard={() => setUpload(false)}
+            tags={tags}
           />
           {navTab ? (
             // what if gallery is empty ?

@@ -69,7 +69,7 @@ function UploadCard(props) {
           title: title,
           description: description,
           category: category ? category.value : "OT",
-          tags: tags,
+          tags: tags.map(({ value }) => value),
           artitem_image: base64Image,
         }),
         headers: {
@@ -111,12 +111,11 @@ function UploadCard(props) {
   }
 
   function handleCategory(selectedOption) {
-    setCategory({ value: selectedOption.value, label: selectedOption.label });
+    setCategory(selectedOption);
   }
 
-  function handleTags(e) {
-    const value = e.target.value;
-    setTags([]);
+  function handleTags(selectedOptions) {
+    setTags(selectedOptions);
   }
 
   return (
@@ -282,19 +281,39 @@ function UploadCard(props) {
             <label className="access-label" style={{ color: "#ffc9ff" }}>
               Tags
             </label>
-            <input
-              type="text"
-              className="form-control mt-1"
+            <Select
+              className="mt-1"
               placeholder="Add tags"
-              name="tags"
-              id="tags"
-              style={{ fontSize: "14px" }}
+              options={props.tags}
+              maxMenuHeight={170}
+              isMulti
+              menuPlacement="top"
+              styles={{
+                control: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  borderRadius: "6px",
+                  borderColor: "#18121c",
+                  boxShadow: "none",
+                  outline: "none",
+                }),
+                menu: (baseStyles) => ({
+                  ...baseStyles,
+                  fontSize: "14px",
+                  color: "#000000",
+                }),
+                option: (baseStyles) => ({
+                  ...baseStyles,
+                  paddingTop: "3px",
+                  paddingBottom: "3px",
+                }),
+              }}
               value={tags}
               onChange={handleTags}
             />
           </div>
 
-          <div className="d-grid gap-2 mt-4 mb-4">
+          <div className="d-grid gap-2 mt-4">
             <button
               type="submit"
               className="btn upload-post-btn"

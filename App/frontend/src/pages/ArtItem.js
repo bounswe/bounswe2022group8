@@ -60,6 +60,7 @@ function ArtItem(props) {
   const [artitemTitle, setArtitemTitle] = useState("");
   const [artitemDescription, setArtitemDescription] = useState("");
   const [artitemCategory, setArtitemCategory] = useState("");
+  const [artitemTags, setArtitemTags] = useState([]);
   const [artitemOwnerUsername, setArtitemOwnerUsername] = useState("");
   const [artitemOwnerID, setArtitemOwnerID] = useState(null);
   const [artitemComments, setArtitemComments] = useState([]);
@@ -113,6 +114,7 @@ function ArtItem(props) {
         setArtitemTitle(response.title);
         setArtitemDescription(response.description);
         setArtitemCategory(response.category);
+        setArtitemTags(response.tags);
         setArtitemOwnerUsername(response.owner.username);
         setArtitemOwnerID(response.owner.id);
         setIsLiked(response.isLiked);
@@ -566,6 +568,10 @@ function ArtItem(props) {
     scrollToTop();
   }
 
+  function goToSearchResults(id) {
+    navigate(`/artitems/tag/${id}`);
+  }
+
   return (
     <Layout
       guestClick={guestClick}
@@ -589,12 +595,15 @@ function ArtItem(props) {
             )}
 
             <div className="tag-container">
-              <Tag tagname="nature"></Tag>
-              <Tag tagname="human"></Tag>
-              <Tag tagname="architecture"></Tag>
-              <Tag tagname="black"></Tag>
-              <Tag tagname="pink"></Tag>
-              <Tag tagname="night"></Tag>
+              {artitemTags.map((val) => {
+                return (
+                  <Tag
+                    key={val.id}
+                    tagname={val.tagname}
+                    onClick={() => goToSearchResults(val.id)}
+                  />
+                );
+              })}
             </div>
 
             {token ? (
@@ -718,12 +727,6 @@ function ArtItem(props) {
           </div>
         </div>
       </div>
-
-      {/*<div className="artitem-post-properties">
-        <div className="tag-container">
-          <div className="tag"></div>
-        </div>
-      </div>*/}
     </Layout>
   );
 }
