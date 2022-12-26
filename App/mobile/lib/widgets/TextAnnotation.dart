@@ -1,8 +1,11 @@
 import 'package:artopia/utils/textUtils.dart';
+import 'package:artopia/variables.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:text_selection_controls/text_selection_controls.dart';
+import '../annotations.dart';
+import '../variables.dart';
 import '../utils/colorPalette.dart';
 
 class Annotation {
@@ -10,7 +13,6 @@ class Annotation {
   String annotationMessage;
   int annotationX;  //start position of the annotation
   int annotationY;  //end position of the annotation
-
   Annotation(this.userName, this.annotationMessage, this.annotationX,
       this.annotationY);
 
@@ -36,7 +38,6 @@ class AnnotableTextField extends StatefulWidget {
 
 class _AnnotableTextFieldState extends State<AnnotableTextField> {
   final ColorPalette colorPalette = ColorPalette();
-
   //holds annotations of every character
   final List<List<Annotation>> charAnnotations = List.generate(
       descriptionText.length, (index) => List.empty(growable: true));
@@ -52,16 +53,18 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
     AFTER GETTING ANNOTATIONS FROM API, THIS METHOD SHOULD BE CALLED TO FILL THE charAnnotations LIST AND isAnnotatedChar LIST
      */
   void addAnnotation(String annotationMessage, int start, int end) {
-    setState(() {
+    setState(()  {
       for (int i = start; i < end; i++) {
-        charAnnotations[i].add(Annotation("user", annotationMessage, start, end));
+        charAnnotations[i].add(Annotation(registered_username, annotationMessage, start, end));
         isAnnotatedChar[i] = true;
       }
+      //print(message);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     TextUtils textUtils = TextUtils();
 
     List<TextSpan> chars = [];
@@ -87,9 +90,11 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
           ),
           TextButton(
             child: const Text("Submit"),
-            onPressed: () {
+            onPressed: ()  {
               addAnnotation(controller.text, annotationX, annotationY);
-              Navigator.of(context).pop();
+              getAllAnnotations().then((value) {});
+              postAnnotation( annotationX, annotationY,  controller.text, descriptionText).then((value) { Navigator.of(context).pop();
+            });
               //TODO: Add annotation to the database
             },
           ),

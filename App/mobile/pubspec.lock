@@ -21,7 +21,7 @@ packages:
       name: aws_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.3"
+    version: "0.3.5"
   aws_signature_v4:
     dependency: "direct main"
     description:
@@ -317,6 +317,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   nested:
     dependency: transitive
     description:
@@ -483,6 +490,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  text_selection_controls:
+    dependency: "direct main"
+    description:
+      name: text_selection_controls
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   typed_data:
     dependency: transitive
     description:
