@@ -9,11 +9,16 @@ from django.utils import timezone
 from django.db.models import F, Q
 
 
+class ExhibitionPoster(models.Model):
+    artitem_image = models.ImageField( default='artitem/defaultart.jpg', upload_to='artitem/')
+    artitem_path = models.TextField(default= 'artitem/defaultart.jpg')
+    created_at = models.DateTimeField(auto_now_add=True)
+
 class AbstractExhibition(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    poster = models.OneToOneField(ArtItem, on_delete=models.CASCADE)  # a poster must be unique to an exhibition and each exhibition must have one
+    poster = models.OneToOneField(ExhibitionPoster, on_delete=models.CASCADE)  # a poster must be unique to an exhibition and each exhibition must have one
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     start_date = models.DateTimeField()

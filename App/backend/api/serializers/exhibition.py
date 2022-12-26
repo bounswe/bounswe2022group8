@@ -5,7 +5,7 @@ from ..models.models import Comment
 from ..models.artitem import Tag, ArtItem
 from ..models.user import User
 from .serializers import TagSerializer, SimpleUserSerializer, ArtItemSerializer, SimpleArtItemSerializer
-from ..models.exhibition import OfflineExhibition, VirtualExhibition
+from ..models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionPoster
 
 class OfflineExhibitionSerializer(serializers.ModelSerializer):
     status = serializers.ReadOnlyField(source='get_status')
@@ -45,6 +45,13 @@ class ExhibitionArtItemSerializer(serializers.ModelSerializer):
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         return rep
 
+
+class SimpleExhibitionPosterSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = ExhibitionPoster
+        fields = ['id', 'artitem_path', 'created_at']
+
 class VirtualExhibitionSerializer(serializers.ModelSerializer):
     status = serializers.ReadOnlyField(source='get_status')
     artitems_upload = serializers.ReadOnlyField(source='get_uploaded_artitems')
@@ -54,7 +61,7 @@ class VirtualExhibitionSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        rep["poster"] = SimpleArtItemSerializer(instance.poster).data
+        rep["poster"] = SimpleExhibitionPosterSerializer(instance.poster).data
         rep["collaborators"] = SimpleUserSerializer(instance.collaborators, many=True).data
         rep["owner"] = SimpleUserSerializer(instance.owner).data
         rep["artitems_gallery"] = SimpleArtItemSerializer(instance.artitems_gallery, many=True).data
