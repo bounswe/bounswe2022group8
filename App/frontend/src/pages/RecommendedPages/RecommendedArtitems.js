@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { HOST } from "../../constants/host";
 import Layout from "../../layout/Layout";
 import * as dotenv from "dotenv";
+import { useAuth } from "../../auth/authentication";
 
 import "../styles/Recommendation.css";
 
@@ -16,7 +17,7 @@ function RecommendedArtitems(props) {
   }
 
   const navigate = useNavigate();
-
+  const { token } = useAuth();
   var host = HOST;
 
   const [artItemInfos, setArtItemInfos] = useState([]);
@@ -33,24 +34,25 @@ function RecommendedArtitems(props) {
 
   useEffect(() => {
     // dont forget the put the slash at the end
-    fetch(`${host}/api/v1/artitems/`, {
+    fetch(`${host}/api/v1/recommendations/artitems/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+         Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
       .then((response) => {
-        //console.log(response);
-        setArtItemInfos(response);
+        console.log(response.artitems);
+        setArtItemInfos(response.artitems);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
         var art_item_paths = [];
 
-        for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.artitems.length; i++) {
           var params = {
             Bucket: bucket,
-            Key: response[i].artitem_path,
+            Key: response.artitems[i].artitem_path,
           };
 
           var artitem_url = s3.getSignedUrl("getObject", params);

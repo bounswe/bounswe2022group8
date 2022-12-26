@@ -115,7 +115,7 @@ def RecommendArtItemView(request):
 
             artitems = []
 
-            firstcategory = ArtItem.objects.filter(category = category1)
+            firstcategory = ArtItem.objects.filter(category = category1).exclude(virtualExhibition__isnull = False)
             for item in firstcategory:
                 histories = History.objects.filter(user=user, is_art=True, art_id=item.id)
                 if(len(histories) == 0):
@@ -123,7 +123,7 @@ def RecommendArtItemView(request):
                 if(len(artitems)>=5):
                     break
             #print(artitems)
-            secondcategory = ArtItem.objects.filter(category = category2)
+            secondcategory = ArtItem.objects.filter(category = category2).exclude(virtualExhibition__isnull = False)
             for item in secondcategory:
                 histories = History.objects.filter(user=user, is_art=True, art_id=item.id)
                 if(len(histories) == 0):
@@ -131,7 +131,7 @@ def RecommendArtItemView(request):
                 if(len(artitems)>=5):
                     break
             #print(artitems)
-            thirdcategory = ArtItem.objects.filter(category = category3)
+            thirdcategory = ArtItem.objects.filter(category = category3).exclude(virtualExhibition__isnull = False)
             for item in thirdcategory:
                 histories = History.objects.filter(user=user, is_art=True, art_id=item.id)
                 if(len(histories) == 0):
@@ -141,7 +141,7 @@ def RecommendArtItemView(request):
             #print(artitems)
             if(len(artitems)<15):   
                 #Django querysets are lazy. That means a query will hit the database only when you specifically ask for the result.         
-                items = ArtItem.objects.all()
+                items = ArtItem.objects.all().exclude(virtualExhibition__isnull = False)
                 for item in items:
                     histories = History.objects.filter(user=user, is_art=True, art_id=item.id)
                     if(len(histories)==0):

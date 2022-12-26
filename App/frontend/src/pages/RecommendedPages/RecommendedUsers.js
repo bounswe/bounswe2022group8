@@ -35,24 +35,25 @@ function RecommendedUsers(props) {
 
   useEffect(() => {
     // dont forget the put the slash at the end
-    fetch(`${host}/api/v1/users/profile/users/`, {
+    fetch(`${host}/api/v1/recommendations/users/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
       .then((response) => {
         //console.log(response);
-        setAllUsers(response);
+        setAllUsers(response.users);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
         var profile_photos = [];
 
-        for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.users.length; i++) {
           var params = {
             Bucket: bucket,
-            Key: response[i].profile_path,
+            Key: response.users[i].profile_path,
           };
 
           var profile_path = s3.getSignedUrl("getObject", params);
