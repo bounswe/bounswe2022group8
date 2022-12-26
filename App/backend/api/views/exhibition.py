@@ -4,9 +4,9 @@ from knox.models import AuthToken
 
 from ..models.user import User
 from ..models.artitem import ArtItem
-from ..models.exhibition import OfflineExhibition, VirtualExhibition
+from ..models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionPoster
 from ..serializers.serializers import ArtItemSerializer
-from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibitionSerializer, SimpleExhibitionArtItemSerializer, ExhibitionArtItemSerializer
+from ..serializers.exhibition import OfflineExhibitionSerializer, SimpleExhibitionPosterSerializer, VirtualExhibitionSerializer, SimpleExhibitionArtItemSerializer, ExhibitionArtItemSerializer
 from rest_framework import permissions
 from drf_yasg.utils import swagger_auto_schema
 from knox.auth import TokenAuthentication
@@ -55,13 +55,8 @@ from history.signals import object_viewed_signal
                         "description": "Art exhibition at street 123.",
                         "poster": {
                             "id": 1,
-                            "owner": 1,
-                            "title": "My Offline Exhibition",
-                            "description": "Art exhibition at street 123.",
-                            "category": "PT",
-                            "tags": [],
                             "artitem_path": "artitem/artitem-1.png",
-                            "created_at": "08-12-2022 23:31:44"
+                            "created_at": "26-12-2022 09:45:52"
                         },
                         "collaborators": [],
                         "start_date": "08-12-2022 16:00:00",
@@ -89,14 +84,9 @@ from history.signals import object_viewed_signal
                         "title": "My Offline Exhibition",
                         "description": "Art exhibition at street 123.",
                         "poster": {
-                            "id": 4,
-                            "owner": 1,
-                            "title": "My Offline Exhibition",
-                            "description": "Art exhibition at street 123.",
-                            "category": "PT",
-                            "tags": [],
-                            "artitem_path": "artitem/artitem-4.png",
-                            "created_at": "08-12-2022 23:32:34"
+                            "id": 1,
+                            "artitem_path": "artitem/artitem-1.png",
+                            "created_at": "26-12-2022 09:45:52"
                         },
                         "collaborators": [],
                         "artitems_gallery": [
@@ -108,7 +98,8 @@ from history.signals import object_viewed_signal
                                 "category": "OT",
                                 "tags": [],
                                 "artitem_path": "artitem/artitem-3.png",
-                                "created_at": "08-12-2022 23:32:18"
+                                "created_at": "08-12-2022 23:32:18",
+                                "isExhibition": True
                             }
                         ],
                         "start_date": "08-12-2022 16:00:00",
@@ -158,14 +149,9 @@ def get_exhibitions(request):
                 "title": "My Offline Exhibition",
                 "description": "Art exhibition at street 123.",
                 "poster": {
-                    "id": 4,
-                    "owner": 1,
-                    "title": "My Offline Exhibition",
-                    "description": "Art exhibition at street 123.",
-                    "category": "OT",
-                    "tags": [],
-                    "artitem_path": "artitem/artitem-4.png",
-                    "created_at": "08-12-2022 23:32:34"
+                    "id": 1,
+                    "artitem_path": "artitem/artitem-1.png",
+                    "created_at": "26-12-2022 09:45:52"
                 },
                 "collaborators": [],
                 "artitems_gallery": [
@@ -177,7 +163,8 @@ def get_exhibitions(request):
                         "category": "OT",
                         "tags": [],
                         "artitem_path": "artitem/artitem-3.png",
-                        "created_at": "08-12-2022 23:32:18"
+                        "created_at": "08-12-2022 23:32:18",
+                        "isExhibition": True
                     }
                 ],
                 "start_date": "08-12-2022 16:00:00",
@@ -258,15 +245,10 @@ def get_exhibitions(request):
                     },
                     "title": "My Offline Exhibition",
                     "description": "Art exhibition at street 123.",
-                    "poster": {
-                        "id": 61,
-                        "owner": 1,
-                        "title": "Joel Miller",
-                        "description": "Art exhibition at street 123.",
-                        "category": "PT",
-                        "tags": [],
-                        "artitem_path": "artitem/artitem-61.png",
-                        "created_at": "08-12-2022 23:18:13"
+                   "poster": {
+                        "id": 1,
+                        "artitem_path": "artitem/artitem-1.png",
+                        "created_at": "26-12-2022 09:45:52"
                     },
                     "collaborators": [],
                     "artitems_gallery": [
@@ -278,7 +260,8 @@ def get_exhibitions(request):
                             "category": "PT",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
-                            "created_at": "08-12-2022 23:15:21"
+                            "created_at": "08-12-2022 23:15:21",
+                            "isExhibition": True
                         }
                     ],
                     "start_date": "08-12-2022 16:00:00",
@@ -295,7 +278,8 @@ def get_exhibitions(request):
                             "category": "OT",
                             "artitem_path": "artitem/artitem-3.png",
                             "likes": 0,
-                            "created_at": "24-12-2022 14:02:33"
+                            "created_at": "24-12-2022 14:02:33",
+                            "isExhibition": True
                         }
                     ]
                 }
@@ -386,9 +370,10 @@ def get_online_exhibitions_by_id(request, id):
             artitem_image_storage = ArtItemStorage()
             try:
                 objects = []
+                cnt = 0
                 for artitem_data in data["add_via_upload"]:
                     try:
-                        inddata = fetch_image(artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                        inddata, cnt = fetch_image(cnt, artitem_data.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                         inddata["title"] = artitem_data["title"]
                         if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
                         inddata["category"] = artitem_data["category"]
@@ -467,13 +452,8 @@ def get_online_exhibitions_by_id(request, id):
                     "description": "Art exhibition at street 123.",
                     "poster": {
                         "id": 1,
-                        "owner": 1,
-                        "title": "My Offline Exhibition",
-                        "description": "Art exhibition at street 123.",
-                        "category": "PT",
-                        "tags": [],
                         "artitem_path": "artitem/artitem-1.png",
-                        "created_at": "08-12-2022 23:31:44"
+                        "created_at": "26-12-2022 09:45:52"
                     },
                     "collaborators": [],
                     "start_date": "08-12-2022 16:00:00",
@@ -588,13 +568,8 @@ def get_offline_exhibitions_by_id(request, id):
                             "description": "Art exhibition at street 123.",
                             "poster": {
                                 "id": 1,
-                                "owner": 1,
-                                "title": "My Offline Exhibition",
-                                "description": "Art exhibition at street 123.",
-                                "category": "PT",
-                                "tags": [],
                                 "artitem_path": "artitem/artitem-1.png",
-                                "created_at": "08-12-2022 23:31:44"
+                                "created_at": "26-12-2022 09:45:52"
                             },
                             "collaborators": [],
                             "start_date": "08-12-2022 16:00:00",
@@ -659,14 +634,9 @@ def get_offline_exhibitions_by_userid(request, userid):
                             "title": "My Offline Exhibition",
                             "description": "Art exhibition at street 123.",
                             "poster": {
-                                "id": 4,
-                                "owner": 1,
-                                "title": "My Offline Exhibition",
-                                "description": "Art exhibition at street 123.",
-                                "category": "PT",
-                                "tags": [],
-                                "artitem_path": "artitem/artitem-4.png",
-                                "created_at": "08-12-2022 23:32:34"
+                                "id": 1,
+                                "artitem_path": "artitem/artitem-1.png",
+                                "created_at": "26-12-2022 09:45:52"
                             },
                             "collaborators": [],
                             "artitems_gallery": [
@@ -678,7 +648,8 @@ def get_offline_exhibitions_by_userid(request, userid):
                                     "category": "OT",
                                     "tags": [],
                                     "artitem_path": "artitem/artitem-3.png",
-                                    "created_at": "08-12-2022 23:32:18"
+                                    "created_at": "08-12-2022 23:32:18",
+                                    "isExhibition": True
                                 }
                             ],
                             "start_date": "08-12-2022 16:00:00",
@@ -753,15 +724,10 @@ def get_online_exhibitions_by_userid(request, userid):
                     "title": "My Offline Exhibition",
                     "description": "Art exhibition at street 123.",
                     "poster": {
-                        "id": 2,
-                        "owner": 1,
-                        "title": "My Offline Exhibition",
-                        "description": "Art exhibition at street 123.",
-                        "category": "PT",
-                        "tags": [],
-                        "artitem_path": "artitem/artitem-2.png",
-                        "created_at": "08-12-2022 19:42:06"
-                    },
+                            "id": 1,
+                            "artitem_path": "artitem/artitem-1.png",
+                            "created_at": "26-12-2022 09:45:52"
+                        },
                     "collaborators": [],
                     "start_date": "08-12-2020 16:00:00",
                     "end_date": "10-12-2020 16:00:00",
@@ -798,24 +764,21 @@ def get_online_exhibitions_by_userid(request, userid):
 @authentication_classes([TokenAuthentication])
 def create_offline_exhibition(request):
     if (request.method == "POST"):
+        cnt = 0
         if('poster' not in request.data):
             return Response({"poster": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
         artitem_image_storage = ArtItemStorage()
-        # Our poster will be an art item, let's create a dictionary that will hold the information of art item
         artitemdata = {}
-        artitemdata['title'] = request.data['title']
-        artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['category'] = 'PT'
 
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
+            artitemdata, cnt = fetch_image(cnt, artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
         ## serialize the poster first:
-        poster_serializer = ArtItemSerializer(data=artitemdata)
+        poster_serializer = SimpleExhibitionPosterSerializer(data=artitemdata)
         poster = None
         artitem_storage_tuple = None
         if poster_serializer.is_valid():
@@ -878,14 +841,9 @@ def create_offline_exhibition(request):
                     "title": "My Offline Exhibition",
                     "description": "Art exhibition at street 123.",
                     "poster": {
-                        "id": 61,
-                        "owner": 1,
-                        "title": "Joel Miller",
-                        "description": "Art exhibition at street 123.",
-                        "category": "PT",
-                        "tags": [],
-                        "artitem_path": "artitem/artitem-61.png",
-                        "created_at": "08-12-2022 23:18:13"
+                        "id": 1,
+                        "artitem_path": "artitem/artitem-1.png",
+                        "created_at": "26-12-2022 09:45:52"
                     },
                     "collaborators": [],
                     "artitems_gallery": [
@@ -897,7 +855,8 @@ def create_offline_exhibition(request):
                             "category": "sketch",
                             "tags": [],
                             "artitem_path": "artitem/artitem-57.png",
-                            "created_at": "08-12-2022 23:15:21"
+                            "created_at": "08-12-2022 23:15:21",
+                            "isExhibition": True
                         }
                     ],
                     "start_date": "08-12-2020 16:00:00",
@@ -914,7 +873,8 @@ def create_offline_exhibition(request):
                             "category": "OT",
                             "artitem_path": "artitem/artitem-3.png",
                             "likes": 0,
-                            "created_at": "24-12-2022 14:02:33"
+                            "created_at": "24-12-2022 14:02:33",
+                            "isExhibition": True
                         }
                     ]
                 }
@@ -942,24 +902,20 @@ def create_offline_exhibition(request):
 @authentication_classes([TokenAuthentication])
 def create_online_exhibition(request):
     if (request.method == "POST"):
+        cnt = 0
         if('poster' not in request.data):
             return Response({"poster": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
         artitem_image_storage = ArtItemStorage()
-        # Our poster will be an art item, let's create a dictionary that will hold the information of art item
         artitemdata = {}
-        artitemdata['title'] = request.data['title']
-        artitemdata['description'] = request.data['description']
         artitemdata['owner'] = request.user.id
-        artitemdata['category'] = 'PT'
-
         #### Create a ContentFile using the poster provided by the user
         try:
-            artitemdata = fetch_image(artitemdata, artitem_image_storage, request.data["poster"], request.user)
+            artitemdata, cnt = fetch_image(cnt, artitemdata, artitem_image_storage, request.data["poster"], request.user)
         except:
             return Response({"Invalid Input": "Given poster image is not compatible with base64 format."}, status=status.HTTP_400_BAD_REQUEST)
 
         ## serialize the poster first:
-        poster_serializer = ArtItemSerializer(data=artitemdata)
+        poster_serializer = SimpleExhibitionPosterSerializer(data=artitemdata)
         poster = None
         artitem_storage_tuple = None
         if poster_serializer.is_valid():
@@ -977,10 +933,11 @@ def create_online_exhibition(request):
         artitemdata = {}
         artitemdata['owner'] = request.user.id
         objects = []
+        cnt = 0
         if("artitems_upload" in request.data):
             for artitem_data in request.data["artitems_upload"]:
                 try:
-                    data = fetch_image(artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
+                    data, cnt = fetch_image(cnt, artitemdata.copy(), artitem_image_storage, artitem_data["artitem_image"], request.user)
                     data["title"] = artitem_data["title"]
                     if("tags" in artitem_data): data["tags"] = artitem_data["tags"]
                     data["category"] = artitem_data["category"]
@@ -1005,7 +962,6 @@ def create_online_exhibition(request):
         # If it's valid, save the image object but do not upload it to S3 yet. Store the IDs of the saved image objects.
         # If any one of the serializers turn out to be invalid, delete all the images you created and return 400.
         # If not, upload each image to S3 afterwards.
-
         if serializer.is_valid():
             try:
                 virtualexhibition = serializer.save()
@@ -1044,20 +1000,164 @@ def create_online_exhibition(request):
 
 
 ### HELPER FUNCTIONS ####
-def fetch_image(artitemdata, artitem_image_storage, base64s, user):
+def fetch_image(cnt, artitemdata, artitem_image_storage, base64s, user):
     image_data = base64s.split("base64,")[1]
     decoded = base64.b64decode(image_data)
 
-    id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
+
+    id_artitem = 0 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id
+    id_poster = 0 if ExhibitionPoster.objects.count() == 0 else ExhibitionPoster.objects.latest('id').id
+    id_ = id_artitem + id_poster + 1 + cnt
+
+    cnt += 1
     filename = 'artitem-{pk}.png'.format(pk=id_)
     artitemdata['artitem_image'] = ContentFile(decoded, filename)
     artitemdata['artitem_path'] = artitem_image_storage.location + \
         "/" + filename
     artitemdata["owner"] = user.id
-    return artitemdata
+    return artitemdata, cnt
 
 def validate_ids(artitems, userid):
     owned_artitems = ArtItem.objects.filter(owner=userid)
     owned_artitem_ids = [i.id for i in owned_artitems]
     return all([True if artitemid in owned_artitem_ids else False for artitemid in artitems])  # all given art items should belong to the current user
+
+@ swagger_auto_schema(
+    method='get',
+    operation_description="Exhibitions API. Returns all the exhibitions of the currently logged-in user. Requires authentication.",
+    operation_summary="Get all the exhibitions of the user.",
+    tags=['exhibitions'],
+    responses={
+        status.HTTP_200_OK: openapi.Response(
+            description="Successfully retrieved all the exhibitions of the user.",
+            examples={
+                "application/json": {
+                "Offline Exhibitions":  {
+                    "owner":
+                    [
+                    {
+                        "id": 1,
+                        "owner": {
+                            "id": 1,
+                            "username": "denemes",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "My Offline Exhibition",
+                        "description": "Art exhibition at street 123.",
+                        "poster": {
+                            "id": 1,
+                            "owner": 1,
+                            "title": "My Offline Exhibition",
+                            "description": "Art exhibition at street 123.",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/artitem-1.png",
+                            "created_at": "08-12-2022 23:31:44"
+                        },
+                        "collaborators": [],
+                        "start_date": "08-12-2022 16:00:00",
+                        "end_date": "10-12-2020 16:00:00",
+                        "created_at": "08-12-2022 23:31:44",
+                        "updated_at": "08-12-2022 23:31:44",
+                        "city": "İstanbul",
+                        "country": "Türkiye",
+                        "address": "Beyoglu",
+                        "latitude": 41.40338,
+                        "longitude": 28.97835,
+                        "status": "Ongoing"
+                    }
+                    ],
+                    "collaborator": []
+                },
+                "Virtual Exhibitions": {
+                    "owner":
+                     [
+                    {
+                        "id": 1,
+                        "owner": {
+                            "id": 1,
+                            "username": "denemes",
+                            "name": "",
+                            "surname": "",
+                            "profile_path": "avatar/default.png"
+                        },
+                        "title": "My Offline Exhibition",
+                        "description": "Art exhibition at street 123.",
+                        "poster": {
+                            "id": 4,
+                            "owner": 1,
+                            "title": "My Offline Exhibition",
+                            "description": "Art exhibition at street 123.",
+                            "category": "PT",
+                            "tags": [],
+                            "artitem_path": "artitem/artitem-4.png",
+                            "created_at": "08-12-2022 23:32:34"
+                        },
+                        "collaborators": [],
+                        "artitems_gallery": [
+                            {
+                                "id": 3,
+                                "owner": 1,
+                                "title": "Portrait of Joel Miller",
+                                "description": "Joel Miller from TLOU universe.",
+                                "category": "OT",
+                                "tags": [],
+                                "artitem_path": "artitem/artitem-3.png",
+                                "created_at": "08-12-2022 23:32:18"
+                            }
+                        ],
+                        "start_date": "08-12-2022 16:00:00",
+                        "end_date": "10-12-2020 16:00:00",
+                        "created_at": "08-12-2022 23:32:34",
+                        "updated_at": "08-12-2022 23:32:34",
+                        "status": "Ongoing"
+                    }
+                ],
+                "collaborator": []
+                }
+            }
+            }
+        )
+    }
+)
+@api_view(["GET"])
+@permission_classes([permissions.AllowAny])
+@authentication_classes([TokenAuthentication])
+def get_my_exhibitions(request):
+    if (request.method == "GET"):
+        current_userid = request.user.id
+
+        query = Q(owner=current_userid)           # user is the owner
+        virtualExhibitions = VirtualExhibition.objects.filter(query) # get virtual exhibitions in which the user is the owner
+        serializer = VirtualExhibitionSerializer(virtualExhibitions, many=True)
+        virtual_owner = serializer.data
+
+        query = (Q(collaborators=current_userid))  # user is a collaborator 
+        virtualExhibitions = VirtualExhibition.objects.filter(query)
+        serializer = VirtualExhibitionSerializer(virtualExhibitions, many=True)
+        virtual_collaborator = serializer.data
+
+        query = Q(owner=current_userid)      # user is the owner 
+        offlineExhibitions = OfflineExhibition.objects.filter(query)
+        serializer = OfflineExhibitionSerializer(offlineExhibitions, many=True)
+        offline_owner = serializer.data
+
+        query = (Q(collaborators=current_userid))  # user is a collaborator 
+        offlineExhibitions = OfflineExhibition.objects.filter(query)
+        serializer = OfflineExhibitionSerializer(offlineExhibitions, many=True)
+        offline_collaborator = serializer.data
         
+        data = {
+            "Offline Exhibitions": {
+                "owner": offline_owner,
+                "collaborator": offline_collaborator
+            },
+            "Virtual Exhibitions": {
+                "owner": virtual_owner,
+                "collaborator": virtual_collaborator
+            }
+        }
+
+        return Response(data, status=status.HTTP_200_OK)

@@ -1,8 +1,8 @@
 import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
+import 'TextAnnotation.dart';
 
 class ArtItemPageStructue extends StatefulWidget {
   final ArtItem artitem ;
@@ -15,9 +15,22 @@ class ArtItemPageStructue extends StatefulWidget {
 class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
   final textUtils = TextUtils();
   final colorPalette = ColorPalette();
+  bool annotationSelected = false;
+  String annotationButtonString = "Show Annotations";
 
   @override
   Widget build(BuildContext context) {
+
+    void changeAnnotationSelected() {
+      setState(() {
+        annotationSelected = !annotationSelected;
+        if (annotationSelected) {
+          annotationButtonString = "Hide Annotations";
+        } else {
+          annotationButtonString = "Show Annotations";
+        }
+      });
+    }
 
 
     return Container(
@@ -42,7 +55,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              textUtils.buildText(widget.artitem.title, 32, colorPalette.blackShadows,
+              textUtils.buildText(widget.artitem.title, 28, colorPalette.blackShadows,
                   FontWeight.w600),
             ],
           ),
@@ -83,24 +96,24 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  textUtils.buildText(widget.artitem.likes.toString() + " likes", 13, colorPalette.blackShadows,
+                  textUtils.buildText("${widget.artitem.likes} likes", 13, colorPalette.blackShadows,
                       FontWeight.w600),
                   const SizedBox(
                     width: 15,
+                  ),
+                  TextButton(onPressed:()=>{
+                    changeAnnotationSelected(),
+                  }, child:
+                  textUtils.buildText(annotationButtonString, 13, colorPalette.blackShadows,
+                      FontWeight.w600),
                   ),
                 ],
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-            child: Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-              child: textUtils.buildText(widget.artitem.description, 20, colorPalette.blackShadows,
-                  FontWeight.w600),
-            ),
+            padding: const EdgeInsets.only(left: 15, top: 15, right: 15,bottom: 15),
+            child: AnnotableTextField(widget.artitem.description, annotationSelected),
           ),
         ],
       ),

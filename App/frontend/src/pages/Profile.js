@@ -6,7 +6,8 @@ import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import { CiLocationOn } from "react-icons/ci";
 import * as dotenv from "dotenv";
-import UploadCard from "../components/UploadCard";
+import UploadArtitemCard from "../components/UploadArtitemCard";
+import UploadOnlineExhibitionCard from "../components/UploadOnlineExhibitionCard";
 import FirstUploadCard from "../components/FirstUploadCard";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import DeleteArtItemPopUp from "../components/DeleteArtItemPopUp";
@@ -38,17 +39,29 @@ function Profile(props) {
   });
 
   const [userGallery, setUserGallery] = useState([]);
+  const [onlineExhibitions, setOnlineExhibitions] = useState([]);
 
   // just to decide after two unnecessary renders whether the gallery is empty or not
   const [emptyGallery, setEmptyGallery] = useState(null);
+  const [emptyOnlineExhibitions, setEmptyOnlineExhibitions] = useState(null);
 
   // JUST TO CAUSE A STATE CHANGE AFTER AN ART ITEM POSTED
-  const [newImageUploaded, setNewImageUploaded] = useState(true);
+  const [newArtItemUploaded, setNewArtItemUploaded] = useState(true);
   const [artItemDeleted, setArtItemDeleted] = useState(false);
+
+  // <--- COME BACK HERE --->
+  const [newOnlineExhibitionUploaded, setNewOnlineExhibitionUploaded] =
+    useState(true);
+  const [onlineExhibitionDeleted, setOnlineExhibitionDeleted] = useState(false);
 
   const [deleteButton, setDeleteButton] = useState(false);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false);
   const [artItemToBeDeletedID, setArtItemToBeDeletedID] = useState(null);
+  const [onlineExhibitionToBeDeletedID, setOnlineExhibitionToBeDeletedID] =
+    useState(null);
+
+  const [tags, setTags] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -119,7 +132,7 @@ function Profile(props) {
 
             var artitem_url = s3.getSignedUrl("getObject", params);
 
-            gallery.push({
+            /*gallery.push({
               id: response[i].id,
               owner: response[i].owner,
               title: response[i].title,
@@ -128,6 +141,12 @@ function Profile(props) {
               tags: response[i].tags,
               artitem_path: artitem_url,
               created_at: response[i].created_at,
+            });*/
+
+            gallery.push({
+              id: response[i].id,
+              description: response[i].description,
+              artitem_path: artitem_url,
             });
           }
 
@@ -141,21 +160,133 @@ function Profile(props) {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [host, token, profileInfo.username, newImageUploaded, artItemDeleted]);
+  }, [
+    host,
+    token,
+    profileInfo.username,
+    newArtItemUploaded,
+    artItemDeleted,
+    newOnlineExhibitionUploaded,
+    onlineExhibitionDeleted,
+  ]);
 
-  // true -> art item --- false -> exhibition
-  const [navTab, setNavTab] = useState(true);
+  useEffect(() => {
+    // BURA DEGISECEK
+    fetch(`${host}/api/v1/exhibitions/users/2/online/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response.length);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var online_exhibitions = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].poster.artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          online_exhibitions.push({
+            id: response[i].id,
+            description: response[i].description,
+            artitem_path: artitem_url,
+          });
+        }
+
+        setOnlineExhibitions(online_exhibitions);
+
+        if (online_exhibitions.length === 0) {
+          setEmptyOnlineExhibitions(true);
+        } else {
+          setEmptyOnlineExhibitions(false);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [
+    host,
+    token,
+    newArtItemUploaded,
+    artItemDeleted,
+    newOnlineExhibitionUploaded,
+    onlineExhibitionDeleted,
+  ]);
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/tags/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        var tagOptions = [];
+
+        for (let i = 0; i < response.length; i++) {
+          tagOptions.push({
+            value: response[i].id,
+            label: response[i].tagname,
+          });
+        }
+
+        setTags(tagOptions);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token]);
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/users/me/followers/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        var followers = [];
+
+        for (let i = 0; i < response.length; i++) {
+          followers.push({
+            value: response[i].id,
+            label: response[i].username,
+          });
+        }
+
+        setUsers(followers);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token, profileInfo.followers]);
+
+  // 0 --> art items, 1 --> online exhibitons, 2 --> offline/physical exhibitons
+  const [navTab, setNavTab] = useState(0);
   const [upload, setUpload] = useState(false);
   const [postError, setPostError] = useState(false); // essentially for the upload card
   const [uploadInfoError, setUploadInfoError] = useState(false); // essentially for the upload card
 
   function handleArtItems() {
-    setNavTab(true);
+    setNavTab(0);
     setUpload(false);
   }
 
-  function handleExhibitions() {
-    setNavTab(false);
+  function handleOnlineExhibitions() {
+    setNavTab(1);
+    setUpload(false);
+  }
+
+  function handleOfflineExhibitions() {
+    setNavTab(2);
     setUpload(false);
   }
 
@@ -170,10 +301,24 @@ function Profile(props) {
     scrollToTop();
   }
 
+  function goToOnlineExhibition(id) {
+    navigate(`/exhibitions/online/${id}`);
+    scrollToTop();
+  }
+
   function openDeletePopUp(id) {
     setDeleteButton(false);
     setIsDeletePopUpOpen(true);
-    setArtItemToBeDeletedID(id);
+    if (navTab === 0) setArtItemToBeDeletedID(id);
+    else if (navTab === 1) setOnlineExhibitionToBeDeletedID(id);
+  }
+
+  function handleDelete() {
+    if (navTab === 0) {
+      handleDeleteArtItem();
+    } else if (navTab === 1) {
+      handleDeleteOnlineExhibition();
+    }
   }
 
   function handleDeleteArtItem() {
@@ -192,8 +337,24 @@ function Profile(props) {
       .catch((error) => console.error("Error:", error));
   }
 
-  // renders unnecessarily twice --> PROBLEM
-  // console.log(userGallery.length);
+  function handleDeleteOnlineExhibition() {
+    fetch(
+      `${host}/api/v1/exhibitions/online/${onlineExhibitionToBeDeletedID}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        setIsDeletePopUpOpen(false);
+        setOnlineExhibitionDeleted(!onlineExhibitionDeleted);
+        scrollToTop();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
 
   return (
     <Layout>
@@ -201,7 +362,8 @@ function Profile(props) {
         <>
           <DeleteArtItemPopUp
             onClickCancel={() => setIsDeletePopUpOpen(false)}
-            onClickDelete={(id) => handleDeleteArtItem(id)}
+            onClickDelete={() => handleDelete()}
+            navTab={navTab}
           />
           <Backdrop onClick={() => setIsDeletePopUpOpen(false)} />
         </>
@@ -259,7 +421,7 @@ function Profile(props) {
         <div className="tab-container">
           <button
             className={`btn btn-navtab + ${
-              navTab ? "btn-navtab-underline" : ""
+              navTab === 0 ? "btn-navtab-underline" : ""
             }`}
             onClick={() => handleArtItems()}
           >
@@ -267,11 +429,19 @@ function Profile(props) {
           </button>
           <button
             className={`btn btn-navtab + ${
-              !navTab ? "btn-navtab-underline" : ""
+              navTab === 1 ? "btn-navtab-underline" : ""
             }`}
-            onClick={() => handleExhibitions()}
+            onClick={() => handleOnlineExhibitions()}
           >
-            Exhibitions
+            Online Exhibitions
+          </button>
+          <button
+            className={`btn btn-navtab + ${
+              navTab === 2 ? "btn-navtab-underline" : ""
+            }`}
+            onClick={() => handleOfflineExhibitions()}
+          >
+            Physical Exhibitions
           </button>
           <button className="btn btn-upload" onClick={() => handleUpload()}>
             Upload
@@ -281,27 +451,32 @@ function Profile(props) {
         <hr className="tab-line"></hr>
 
         <main>
-          <UploadCard
-            height={upload ? "535px" : "0px"}
-            border={upload ? "2px dashed #bcb1c1" : "2px dashed transparent"}
-            marginBottom={upload ? "1rem" : "0rem"}
-            postError={postError}
-            setPostError={(error) => setPostError(error)}
-            uploadInfoError={uploadInfoError}
-            setUploadInfoError={(error) => setUploadInfoError(error)}
-            newImageUploaded={newImageUploaded}
-            setNewImageUploaded={() => setNewImageUploaded(!newImageUploaded)}
-            closeUploadCard={() => setUpload(false)}
-          />
-          {navTab ? (
-            // what if gallery is empty ?
+          {navTab === 0 && (
             <>
+              <UploadArtitemCard
+                height={upload ? "535px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                newArtItemUploaded={newArtItemUploaded}
+                setNewArtItemUploaded={() =>
+                  setNewArtItemUploaded(!newArtItemUploaded)
+                }
+                closeUploadArtitemCard={() => setUpload(false)}
+                tags={tags}
+              />
               {emptyGallery === true && !upload && (
                 <div className="gallery-item">
-                  <FirstUploadCard onClick={() => handleUpload()} />
+                  <FirstUploadCard onClick={() => handleUpload()}>
+                    Upload your first art item
+                  </FirstUploadCard>
                 </div>
               )}
-
               <div className="gallery">
                 {userGallery.map((val, key) => {
                   return (
@@ -345,30 +520,99 @@ function Profile(props) {
                 })}
               </div>
             </>
-          ) : (
-            <div className="gallery">
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
+          )}
+          {navTab === 1 && (
+            <>
+              <UploadOnlineExhibitionCard
+                height={upload ? "620px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                newOnlineExhibitionUploaded={newOnlineExhibitionUploaded}
+                setNewOnlineExhibitionUploaded={() =>
+                  setNewOnlineExhibitionUploaded(!newOnlineExhibitionUploaded)
+                }
+                closeUploadOnlineExhibitionCard={() => setUpload(false)}
+                userGallery={userGallery}
+                users={users}
+              />
+              {emptyOnlineExhibitions === true && !upload && (
+                <div className="gallery-item">
+                  <FirstUploadCard onClick={() => handleUpload()}>
+                    Organise an online exhibition
+                  </FirstUploadCard>
+                </div>
+              )}
+              <div className="gallery">
+                {onlineExhibitions.map((val, key) => {
+                  return (
+                    <div
+                      key={val.id}
+                      className="gallery-item"
+                      onMouseLeave={() => setDeleteButton(false)}
+                    >
+                      <img
+                        src={val.artitem_path}
+                        className="gallery-image"
+                        alt={val.description}
+                      />
+                      <div className="gallery-image-options-container">
+                        <div
+                          role="link"
+                          className="gallery-image-link"
+                          onClick={() => goToOnlineExhibition(val.id)}
+                          style={{
+                            pointerEvents: deleteButton ? "none" : "auto",
+                            cursor: deleteButton ? "auto" : "pointer",
+                          }}
+                        ></div>
+                        <BsThreeDotsVertical
+                          role="select"
+                          className="gallery-image-options"
+                          onClick={() => setDeleteButton(!deleteButton)}
+                        />
+                        {deleteButton && (
+                          <div
+                            role="button"
+                            className="delete-card"
+                            onClick={() => openDeletePopUp(val.id, navTab)}
+                          >
+                            Delete
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-            </div>
+            </>
+          )}
+          {navTab === 2 && (
+            <>
+              <UploadArtitemCard
+                height={upload ? "535px" : "0px"}
+                border={
+                  upload ? "2px dashed #bcb1c1" : "2px dashed transparent"
+                }
+                marginBottom={upload ? "1rem" : "0rem"}
+                postError={postError}
+                setPostError={(error) => setPostError(error)}
+                uploadInfoError={uploadInfoError}
+                setUploadInfoError={(error) => setUploadInfoError(error)}
+                /*newImageUploaded={newImageUploaded}
+                setNewImageUploaded={() =>
+                  setNewImageUploaded(!newImageUploaded)
+                }*/
+                closeUploadArtitemCard={() => setUpload(false)}
+                tags={tags}
+              />
+              <div style={{ color: "white" }}>PHYSICAL EXHIBITIONS HERE</div>
+            </>
           )}
         </main>
       </div>

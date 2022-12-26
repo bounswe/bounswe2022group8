@@ -24,6 +24,10 @@ class Utils:
                 "id": bodyid,
                 "value": bodyvalue,
                 "type": bodytype,
+                "creator": {
+                  "id": 1,
+                  "name": "joseph.blocker"
+                }
             }
         ],
         "type": "Annotation",
@@ -64,7 +68,11 @@ class Utils:
         "body": [{
           "id": bodyid,
           "type": bodytype,
-          "value": bodyvalue
+          "value": bodyvalue,
+          "creator": {
+            "id": 1,
+            "name": "joseph.blocker"
+        }
         }],
         "target": {
           "source": source,

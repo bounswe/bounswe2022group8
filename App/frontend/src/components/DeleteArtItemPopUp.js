@@ -4,7 +4,11 @@ function DeleteArtItemPopUp(props) {
   return (
     <div className="delete-artitem-pop-up-container">
       <header className="delete-artitem-pop-up-header">
-        Are you sure you want to delete your Art Item?
+        {props.navTab === 0 ? (
+          <>Are you sure you want to delete your Art Item?</>
+        ) : (
+          <>Are you sure you want to delete your exhibition?</>
+        )}
       </header>
       <div className="delete-artitem-pop-up-buttons">
         <button

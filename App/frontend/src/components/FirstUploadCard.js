@@ -20,9 +20,7 @@ function FirstUploadCard(props) {
           />
         </svg>
 
-        <div className="first-upload-card-header">
-          Upload your first art item
-        </div>
+        <div className="first-upload-card-header">{props.children}</div>
       </div>
     </div>
   );

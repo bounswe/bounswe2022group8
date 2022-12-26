@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/Users/murat/.gradle/caches/transforms-3/8a5514d4341f323606d890e29d4268b9/transformed/lifecycle-runtime-2.3.1/res/values/values.xml",
+                    "source": "/Users/mustafa/.gradle/caches/transforms-3/8a5514d4341f323606d890e29d4268b9/transformed/lifecycle-runtime-2.3.1/res/values/values.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/murat/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values/values.xml",
+                    "source": "/Users/mustafa/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,89,90,94,95,96,97,103,113,146,167,200",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -40,26 +40,7 @@
                     }
                 },
                 {
-                    "source": "/Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,7,8,9,10,11,19,23,34,51",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,234,294,346,391,451,869,1066,1790,2904",
-                        "endLines": "6,7,8,9,10,18,22,33,50,58",
-                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
-                        "endOffsets": "229,289,341,386,446,864,1061,1785,2899,3292"
-                    },
-                    "to": {
-                        "startLines": "3,8,9,10,72,115,123,236,247,264",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "115,294,354,406,4332,6879,7297,11259,11983,13097",
-                        "endLines": "7,8,9,10,72,122,126,246,263,271",
-                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
-                        "endOffsets": "289,349,401,446,4387,7292,7489,11978,13092,13485"
-                    }
-                },
-                {
-                    "source": "/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/mustafa/GitHub/bounswe2022group8/App/mobile/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -75,6 +56,25 @@
                         "endLines": "98,101",
                         "endColumns": "12,12",
                         "endOffsets": "5808,5977"
+                    }
+                },
+                {
+                    "source": "/Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/res/values/values.xml",
+                    "from": {
+                        "startLines": "2,7,8,9,10,11,19,23,34,51",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,234,294,346,391,451,869,1066,1790,2904",
+                        "endLines": "6,7,8,9,10,18,22,33,50,58",
+                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
+                        "endOffsets": "229,289,341,386,446,864,1061,1785,2899,3292"
+                    },
+                    "to": {
+                        "startLines": "3,8,9,10,72,115,123,236,247,264",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "115,294,354,406,4332,6879,7297,11259,11983,13097",
+                        "endLines": "7,8,9,10,72,122,126,246,263,271",
+                        "endColumns": "11,59,51,44,59,24,24,24,24,24",
+                        "endOffsets": "289,349,401,446,4387,7292,7489,11978,13092,13485"
                     }
                 }
             ]

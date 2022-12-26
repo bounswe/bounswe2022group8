@@ -13,13 +13,13 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/android/app/src/debug/AndroidManifest.xml:7:5-66
-15-->/Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/android/app/src/debug/AndroidManifest.xml:7:22-64
+15-->/Users/mustafa/GitHub/bounswe2022group8/App/mobile/android/app/src/debug/AndroidManifest.xml:7:5-66
+15-->/Users/mustafa/GitHub/bounswe2022group8/App/mobile/android/app/src/debug/AndroidManifest.xml:7:22-64
 16
 17    <application
 18        android:name="android.app.Application"
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.8.0] /Users/murat/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+19-->[androidx.core:core:1.8.0] /Users/mustafa/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
 22        android:label="artopia" >
@@ -57,44 +57,44 @@
 54            android:value="2" />
 55
 56        <provider
-56-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+56-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 57            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-57-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+57-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
 58            android:authorities="com.example.artopia.flutter.image_provider"
-58-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+58-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 59            android:exported="false"
-59-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+59-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 60            android:grantUriPermissions="true" >
-60-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+60-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 61            <meta-data
-61-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+61-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
 62                android:name="android.support.FILE_PROVIDER_PATHS"
-62-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+62-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
 63                android:resource="@xml/flutter_image_picker_file_paths" />
-63-->[:image_picker_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+63-->[:image_picker_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 64        </provider>
 65
 66        <activity
-66-->[:url_launcher_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+66-->[:url_launcher_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
 67            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-67-->[:url_launcher_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+67-->[:url_launcher_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
 68            android:exported="false"
-68-->[:url_launcher_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+68-->[:url_launcher_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
 69            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-69-->[:url_launcher_android] /Users/murat/eclipse-workspace/Milestone2/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+69-->[:url_launcher_android] /Users/mustafa/GitHub/bounswe2022group8/App/mobile/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
 70
 71        <uses-library
-71-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+71-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 72            android:name="androidx.window.extensions"
-72-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+72-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
 73            android:required="false" />
-73-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+73-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
 74        <uses-library
-74-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+74-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
 75            android:name="androidx.window.sidecar"
-75-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+75-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
 76            android:required="false" />
-76-->[androidx.window:window:1.0.0-beta04] /Users/murat/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+76-->[androidx.window:window:1.0.0-beta04] /Users/mustafa/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 77    </application>
 78
 79</manifest>
