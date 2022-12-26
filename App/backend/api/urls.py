@@ -15,8 +15,9 @@ from .views.comments import CommentView, CommentsView
 from .views.tags import TagView, TagsView
 from .views.search import LexSearchView, LexSearchUserView
 from .views.user import users_api
-from .views.exhibition import get_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid
+from .views.exhibition import get_exhibitions, get_my_exhibitions, create_offline_exhibition, create_online_exhibition, get_online_exhibitions_by_id, get_offline_exhibitions_by_id, get_offline_exhibitions_by_userid, get_online_exhibitions_by_userid
 from .views.like import like_artitem, unlike_artitem, get_liked_artitems_of_user, get_users_who_liked_artitem, like_comment, unlike_comment, get_users_who_liked_comment
+from .views.recommendation import RecommendArtItemView, RecommendExhibitionView, RecommendUserView
 from .views.bidding import BidArtItemView, BidView
 
 from knox import views as knox_views
@@ -96,6 +97,11 @@ urlpatterns = [
     path('exhibitions/offline/<int:id>', get_offline_exhibitions_by_id, name="get_offline_exhibitions_by_id"),
     path('exhibitions/users/<int:userid>/offline/', get_offline_exhibitions_by_userid, name="get_offline_exhibitions_by_userid"),
     path('exhibitions/users/<int:userid>/online/', get_online_exhibitions_by_userid, name="get_online_exhibitions_by_userid"),
+    path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),
+    path('exhibitions/me/', get_my_exhibitions, name="get my exhibitions"),
+    path('recommendations/artitems/', RecommendArtItemView, name="RecommendArtItem"),
+    path('recommendations/exhibitions/', RecommendExhibitionView, name="RecommendExhibition"),
+    path('recommendations/users/', RecommendUserView, name="RecommendUser"),
     path('artitems/<int:artitemid>/bids/', BidArtItemView, name="BidArtItemView"),
     path('artitems/bids/<int:id>/', BidView, name="BidView"),
     path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),

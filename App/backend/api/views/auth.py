@@ -65,6 +65,7 @@ class RegisterView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
+
         user_created_signal.send(user, request=request)
 
         user_data = serializer.data

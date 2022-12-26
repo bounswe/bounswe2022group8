@@ -26,10 +26,11 @@ class TagSerializer(serializers.ModelSerializer):
 
 class ArtItemSerializer(serializers.ModelSerializer):
     likes = serializers.ReadOnlyField(source='get_numberof_likes')
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
 
     class Meta:
         model = ArtItem
-        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'likes', 'number_of_views', 'created_at', 'sale_status', 'minimum_price', 'bought_by' ]
+        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'likes', 'number_of_views', 'created_at', 'sale_status', 'minimum_price', 'bought_by', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -39,10 +40,11 @@ class ArtItemSerializer(serializers.ModelSerializer):
         return rep
 
 class SimpleArtItemSerializer(serializers.ModelSerializer):
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
 
     class Meta:
         model = ArtItem
-        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'created_at']
+        fields = ['id', 'owner', 'title', 'description', 'category', 'tags', 'artitem_path', 'created_at', 'isExhibition']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -66,10 +68,11 @@ class SimpleUserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'name', 'surname',  'profile_path']
 
 class BidArtItemSerializer(serializers.ModelSerializer):
+    isExhibition = serializers.ReadOnlyField(source='isExhibitionArtItem')
 
     class Meta:
         model = ArtItem
-        fields = ['id', 'title', 'category', 'artitem_path']
+        fields = ['id', 'title', 'category', 'artitem_path', 'isExhibition']
 
 
 class BidSerializer(serializers.ModelSerializer):
