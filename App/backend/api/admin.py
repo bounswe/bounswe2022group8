@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models.models import Comment
 from .models.artitem import Tag, ArtItem, Bid, NewBids
 from .models.user import User
-from .models.exhibition import OfflineExhibition, VirtualExhibition
+from .models.exhibition import OfflineExhibition, VirtualExhibition, ExhibitionPoster
 
 class UserAdmin(admin.ModelAdmin):
    # exclude = ('otp',)
@@ -26,6 +26,8 @@ class VirtualExhibitionAdmin(admin.ModelAdmin):
 class BidAdmin(admin.ModelAdmin):
     list_display = ['id', 'artitem', 'buyer', 'amount', 'created_at', 'deadline', 'accepted']
 
+class ExhibitionPosterAdmin(admin.ModelAdmin):
+    list_display = ['id', 'artitem_image', 'artitem_path', 'created_at']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)
@@ -35,3 +37,4 @@ admin.site.register(OfflineExhibition, OfflineExhibitionAdmin)
 admin.site.register(VirtualExhibition, VirtualExhibitionAdmin)
 admin.site.register(Bid, BidAdmin)
 admin.site.register(NewBids)
+admin.site.register(ExhibitionPoster)
