@@ -206,9 +206,9 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/django
 .flutter-plugins
 .flutter-plugins-dependencies
-App/mobile/build/app/intermediates/flutter/debug/.last_build_id
-App/mobile/build/app/intermediates/flutter/debug/flutter_build.d
-App/mobile/build/app/intermediates/flutter/debug/libs.jar
+App/mobile/build/app/intermediates/*
+App/mobile/build/app/outputs*
+App/mobile/android*
 App/frontend
 
 *.workspace.xml
