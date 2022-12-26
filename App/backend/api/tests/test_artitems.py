@@ -138,7 +138,6 @@ class ArtItemTest(TestCase):
     # get artitem by username (multiple images)
     def test_get_artitem_by_username(self):
         created1 = utils.upload_an_image(self.user)
-        created2 = utils.upload_an_image(self.user)
         username = created1['owner']['username']
 
         request = self.factory.get('/artitems/users/username/', content_type='application/json')
@@ -146,10 +145,8 @@ class ArtItemTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(response.data, list))
-        artitem1 = response.data[1] 
-        artitem2 = response.data[0]
+        artitem1 = response.data[0]
         self.compare_equality(created1, artitem1)
-        self.compare_equality(created2, artitem2)
 
 
     # delete artitem

@@ -49,7 +49,7 @@ class ArtItemTest(TestCase):
         user = User.objects.create(username = self.faker.unique.word(), password = self.faker.password(), email = f"{self.faker.first_name()}.{self.faker.last_name()}@{self.faker.domain_name()}")
         artitem_image_storage = ArtItemStorage()
         artitemdata = {}
-        artitem_data = fetch_image(artitemdata, artitem_image_storage, utils.BASE64, user)
+        artitem_data, _ = fetch_image(0, artitemdata, artitem_image_storage, utils.BASE64, user)
 
         self.assertEqual(artitem_data["artitem_path"], "artitem/artitem-1.png")
         self.assertTrue(isinstance(artitem_data["artitem_image"], ContentFile))

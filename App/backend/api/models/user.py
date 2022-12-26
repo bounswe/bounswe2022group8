@@ -32,7 +32,9 @@ class User(AbstractUser):
     updated_at =models.DateTimeField(auto_now=True)
     profile_image = models.ImageField( default='avatar/default.png', upload_to='avatar/')  # amazon
     profile_path = models.TextField(default='avatar/default.png')                          # avatar/profile.png
+
     popularity = models.FloatField(default=0)
+
     new_bid_flag = models.BooleanField(default=False)
     
     #OTP (one time password for password reset)
@@ -77,7 +79,7 @@ class User(AbstractUser):
         artitems = ArtItem.objects.filter(owner=self).count()
         visits = History.objects.filter(user=self).count()
         result = 0.8*artitems + 0.1*comments + 0.02*visits
-        print(result)
+        #print(result)
         if(result>levelThreshold and not self.is_level2):
             self.is_level2 = True
         return self.is_level2

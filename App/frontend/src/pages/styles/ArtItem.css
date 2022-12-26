@@ -46,11 +46,14 @@
 }
 
 .artitem-post-container .anno-show-hide-button {
-  display: block;
   background-color: #ffc9ff;
   color: #18121c;
   border-radius: 0.3rem;
   font-size: 15px;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding: 0.3rem;
 }
 
 .artitem-post-container #info-container {
@@ -239,7 +242,8 @@
 
 /* width */
 .artitem-post-container #comments::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  height: 10px;
 }
 
 /* Track */
@@ -259,7 +263,8 @@
 
 /* width */
 .artitem-post-container #image-container::-webkit-scrollbar {
-  width: 1px;
+  width: 5px;
+  height: 10px;
 }
 
 /* Track */
@@ -277,11 +282,29 @@
   background: #555;
 }
 
-.artitem-post-container
-  #image-container
-  .display-image-annotation-text-container {
+/*BIDDING*/
+
+.artitem-post-container .put-on-sale-button {
   display: block;
-  background-color: #ffdeff;
+  background-color: #ffc9ff;
+  color: #0e0a10;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-right: auto;
+  padding: 0.2rem;
+  border-color: #ffc9ff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.artitem-post-container .put-on-sale-button:hover,
+.artitem-post-container .put-on-sale-button:active {
+  color: #ffc9ff !important;
+  background-color: #0e0a10 !important;
+}
+
+.artitem-post-container #image-container .put-on-sale-form-container {
+  display: block;
+  background-color: #fad3fa;
   color: #18121c;
   border-radius: 4px;
   font-size: 15px;
@@ -289,8 +312,253 @@
   border: 1px solid #bcb1c1;
   margin-top: 0.6rem;
   margin-right: 0.6rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  width: 30%;
+}
+
+.artitem-post-container #image-container .message-container {
+  display: block;
+  background-color: #fad3fa;
+  color: #18121c;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #bcb1c1;
+  margin-top: 0.6rem;
+  margin-right: 0.6rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  width: 99%;
+  text-align: center;
+}
+
+.artitem-post-container .change-sale-status-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.3rem;
+  border-color: #ffc9ff;
+}
+.artitem-post-container .change-sale-status-button:hover,
+.artitem-post-container .change-sale-status-button:active {
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
+}
+
+.artitem-post-container .make-offer-button {
+  display: block;
+  background-color: #ffc9ff;
+  color: #18121c;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  padding: 0.3rem;
+  border-color: #ffc9ff;
+}
+.artitem-post-container .make-offer-button:hover,
+.artitem-post-container .make-offer-button:active {
+  color: white !important;
+  background-color: #0e0a10 !important;
+}
+
+.artitem-post-container #image-container .make-offer-form-container {
+  display: block;
+  background-color: #fad3fa;
+  color: #18121c;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #bcb1c1;
+  margin-top: 0.6rem;
+  margin-right: auto;
   margin-bottom: 0.6rem;
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
+  width: 75%;
+}
+
+.artitem-post-container .cancel-make-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.3rem;
+  border-color: #ffc9ff;
+}
+.artitem-post-container .send-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.3rem;
+  border-color: #ffc9ff;
+}
+
+.artitem-post-container .accept-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.1rem;
+  border-color: #ffc9ff;
+  margin-bottom: 5px;
+  width: 70px;
+}
+.artitem-post-container .accept-offer-button:hover,
+.artitem-post-container .accept-offer-button:active {
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
+}
+
+.artitem-post-container .reject-offer-button {
+  background-color: #0e0a10;
+  color: #ffc9ff;
+  border-radius: 0.3rem;
+  font-size: 15px;
+  margin-left: auto;
+  padding: 0.1rem;
+  border-color: #ffc9ff;
+  width: 70px;
+}
+.artitem-post-container .reject-offer-button:hover,
+.artitem-post-container .reject-offer-button:active {
+  color: #0e0a10 !important;
+  background-color: #ffc9ff !important;
+}
+
+.artitem-post-container #bidder-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: 40px;
+  margin-right: 4px;
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+.artitem-post-container #buyer-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+/* USER LIST TABLE */
+
+.bidder-list {
+  width: 99%;
+}
+.bidder-list tbody td > img {
+  position: relative;
+  max-width: 50px;
+  float: left;
+  margin-right: 15px;
+}
+.bidder-list tbody td .user-name {
+  display: block;
+  font-size: 1.25em;
+  padding-top: 4px;
+  margin-top: 10px;
+  margin-left: 60px;
+  font-size: 15px;
+  padding-left: 30px;
+}
+
+/* TABLES */
+.table {
+  border-collapse: separate;
+  border-color: #ffc9ff;
+  color: white;
+  margin-top: 10px;
+}
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: transparent;
+}
+.table thead > tr > th {
+  border-bottom: 1px solid #c2c2c2;
+  padding-bottom: 0;
+  border-top: 1px solid #c2c2c2;
+}
+.table tbody > tr > td {
+  font-size: 0.875em;
+  background-color: transparent;
+  border-top: 10px solid #18121c;
+  vertical-align: middle;
+  padding: 12px 8px;
+  width: 30%;
+}
+.table tbody > tr > td:first-child,
+.table thead > tr > th:first-child {
+  padding-left: 20px;
+}
+.table thead > tr > th span {
+  border-bottom: 2px solid #c2c2c2;
+  display: inline-block;
+  padding: 0 5px;
+  padding-bottom: 5px;
+  font-weight: normal;
+}
+.table thead > tr > th > a span {
+  color: #344644;
+}
+.table thead > tr > th > a span:after {
+  content: "\f0dc";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  margin-left: 5px;
+  font-size: 0.75em;
+}
+.table thead > tr > th > a.asc span:after {
+  content: "\f0dd";
+}
+.table thead > tr > th > a.desc span:after {
+  content: "\f0de";
+}
+.table thead > tr > th > a:hover span {
+  text-decoration: none;
+  color: #2bb6a3;
+  border-color: #2bb6a3;
+}
+.table.table-hover tbody > tr > td {
+  -webkit-transition: background-color 0.15s ease-in-out 0s;
+  transition: background-color 0.15s ease-in-out 0s;
+}
+
+.table tbody tr {
+  background-color: transparent;
+  font-size: 16px;
+}
+.table tbody tr td .call-type {
+  display: block;
+  font-size: 0.75em;
+  text-align: center;
+}
+.table tbody tr td .first-line {
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 1.125em;
+}
+.table tbody tr td .first-line span {
+  font-size: 0.875em;
+  color: #969696;
+  font-weight: 300;
+}
+.table tbody tr td .second-line {
+  font-size: 0.875em;
+  line-height: 1.2;
 }
 
 .r6o-widget.comment.editable:not(:first-child) {

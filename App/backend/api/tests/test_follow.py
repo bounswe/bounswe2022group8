@@ -58,9 +58,9 @@ class FollowTest(TestCase):
         Follow.objects.create(from_user=from_user, to_user=to_user)
 
         followings = [follow.to_user for follow in Follow.objects.filter(from_user=from_user)]
-        artitems = ArtItem.objects.filter(owner__in=followings)
+        artitems = ArtItem.objects.filter(owner__in=followings).order_by('created_at')
 
-        self.assertEqual(list(artitems), [artitem2, artitem1])
+        self.assertEqual(list(artitems), [artitem1, artitem2])
 
     # POST test
     def test_follow(self):

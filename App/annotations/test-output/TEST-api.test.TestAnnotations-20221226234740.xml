@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="api.test.TestAnnotations-20221226234740" tests="17" file="api/test.py" time="1.916" timestamp="2022-12-26T23:47:42" failures="0" errors="0" skipped="0">
+	<testcase classname="api.test.TestAnnotations" name="test_body_serializer" time="0.102" timestamp="2022-12-26T23:47:41" file="api\test.py" line="50">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_create_image_annotation" time="0.130" timestamp="2022-12-26T23:47:41" file="api\test.py" line="90">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_create_text_annotation" time="0.111" timestamp="2022-12-26T23:47:41" file="api\test.py" line="155">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_edit_annotation" time="0.132" timestamp="2022-12-26T23:47:41" file="api\test.py" line="235">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_fragment_selector_serializer" time="0.075" timestamp="2022-12-26T23:47:41" file="api\test.py" line="68">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_image_annotations1" time="0.120" timestamp="2022-12-26T23:47:41" file="api\test.py" line="275">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_image_annotations2" time="0.118" timestamp="2022-12-26T23:47:41" file="api\test.py" line="286">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_image_annotations3" time="0.120" timestamp="2022-12-26T23:47:41" file="api\test.py" line="296">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_image_annotations4" time="0.117" timestamp="2022-12-26T23:47:42" file="api\test.py" line="306">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_image_annotations5" time="0.120" timestamp="2022-12-26T23:47:42" file="api\test.py" line="316">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_text_annotations1" time="0.121" timestamp="2022-12-26T23:47:42" file="api\test.py" line="327">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_text_annotations2" time="0.128" timestamp="2022-12-26T23:47:42" file="api\test.py" line="338">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_text_annotations3" time="0.120" timestamp="2022-12-26T23:47:42" file="api\test.py" line="348">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_text_annotations4" time="0.121" timestamp="2022-12-26T23:47:42" file="api\test.py" line="358">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_get_text_annotations5" time="0.122" timestamp="2022-12-26T23:47:42" file="api\test.py" line="368">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_helpers" time="0.079" timestamp="2022-12-26T23:47:42" file="api\test.py" line="77">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+	<testcase classname="api.test.TestAnnotations" name="test_image_annotation_target_serializer" time="0.080" timestamp="2022-12-26T23:47:42" file="api\test.py" line="35">
+		<system-out><![CDATA[TestAnnotation:setUp_:begin
+TestAnnotation:setUp_:end
+TestAnnotation:tearDown_:begin
+TestAnnotation:tearDown_:end
+]]></system-out>
+	</testcase>
+</testsuite>

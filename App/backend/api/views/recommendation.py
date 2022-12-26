@@ -104,11 +104,14 @@ from ..serializers.exhibition import OfflineExhibitionSerializer, VirtualExhibit
 def RecommendArtItemView(request):
     if request.user.is_authenticated:
         user = request.user
+        # print("authenticated")
+        # print(request.user.username)
         if (request.method == "GET"):
             userinterest = UserInterest.objects.get(user=user)
             category1 = userinterest.first
             category2 = userinterest.second
             category3 = userinterest.third
+            # print(category1, category2, category3)
 
             artitems = []
 
@@ -152,6 +155,7 @@ def RecommendArtItemView(request):
             message = {'artitems': serializer.data}
             return Response(message, status=status.HTTP_200_OK)        
     else:
+        # print("not authenticated")
         if (request.method == "GET"):
             artitems = []
 

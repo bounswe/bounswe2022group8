@@ -25,7 +25,7 @@
   display: grid;
   grid-template-columns: 7fr 4fr;
   height: 100%;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .upload-interface-container {
@@ -36,11 +36,10 @@
 .upload-interface-header {
   font-size: 40px;
   margin-top: 5rem;
-  margin-bottom: 3rem;
 }
 
 .upload-interface-btn {
-  margin-left: auto;
+  margin-top: 3rem;
   margin-bottom: 0.5rem;
   color: #fafafa;
   font-size: 16px;
@@ -53,6 +52,12 @@
 .upload-interface-btn:active {
   color: #18121c !important;
   background-color: #ffc9ff !important;
+}
+
+.upload-interface-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 input[type="file"] {
@@ -71,8 +76,8 @@ input[type="file"] {
   object-fit: contain;
   box-shadow: 0px 0px 5px #ffc9ff !important;
   /* hardcoded for now */
-  /* container height - padding top - padding bottom */
-  max-height: calc(535px - 4rem);
+  /* container height - 2*border - padding top - padding bottom */
+  max-height: calc(531px - 4rem);
   max-width: 100%;
 }
 
@@ -90,6 +95,43 @@ input[type="file"] {
   width: 100%;
   height: 100%;
   background-color: rgba(200, 200, 200, 0.1);
+}
+
+.upload-exhibition-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+.upload-exhibition-wrap {
+  position: relative;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.upload-exhibition-wrap:hover .upload-post-cancel-container,
+.upload-exhibition-wrap:focus .upload-post-cancel-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 200, 200, 0.1);
+}
+
+.upload-exhibition-preview {
+  object-fit: contain;
+  box-shadow: 0px 0px 5px #ffc9ff !important;
+  height: 150px;
+}
+
+.upload-poster-preview {
+  object-fit: contain;
+  box-shadow: 0px 0px 5px #ffc9ff !important;
+  /* hardcoded for now */
+  /* container height - 2*border - padding top - padding bottom */
+  max-height: calc(616px - 4rem);
+  max-width: 100%;
 }
 
 .upload-post-cancel-container {
@@ -161,4 +203,25 @@ input[type="file"] {
   margin-bottom: -0.75rem;
   font-size: 14px;
   font-weight: 300;
+}
+
+/* width */
+.upload-grid::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+/* Track */
+.upload-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.upload-grid::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.upload-grid::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

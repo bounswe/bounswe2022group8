@@ -55,7 +55,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              textUtils.buildText(widget.artitem.title, 32, colorPalette.blackShadows,
+              textUtils.buildText(widget.artitem.title, 28, colorPalette.blackShadows,
                   FontWeight.w600),
             ],
           ),

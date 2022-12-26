@@ -1,0 +1,166 @@
+.exhibition-post-container {
+  display: grid;
+  margin-top: 120px;
+  margin-left: 35px;
+  margin-right: 35px;
+  height: calc(100vh - 130px);
+  /*padding: 10px;
+    overflow: hidden;
+    background-color: red;*/
+  margin-bottom: 0px;
+}
+
+.exhibition-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  background-color: #0e0a10;
+}
+
+.exhibition-container {
+  flex: 1 1 200px;
+  overflow: auto;
+}
+
+.exhibition-arrow-container {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin-top: 34vh;
+  width: 100px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.exhibition-arrow-container:hover,
+.exhibition-arrow-container:active {
+  color: #ffc9ff;
+}
+
+.artitem-focused {
+  object-fit: contain;
+  width: 100%;
+  height: 82%;
+  margin-bottom: 0.8rem;
+}
+
+.exhibition-linear-container {
+  display: flex;
+  color: white;
+  overflow-x: scroll;
+  /*overflow-y: hidden;*/
+  height: calc(17% - 1rem);
+}
+
+.exhibition-linear-image-wrap:hover .exhibition-linear-image-cover,
+.exhibition-linear-image-wrap:focus .exhibition-linear-image-cover {
+  display: none;
+}
+
+.exhibition-linear-image-wrap {
+  display: flex;
+  position: relative;
+  margin-right: 0.6rem;
+}
+
+.exhibition-linear-image {
+  object-fit: contain;
+  cursor: pointer;
+  height: 12vh;
+}
+
+.exhibition-linear-image-cover {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.exhibition-info-container {
+  color: #ffffff;
+  background-color: #0e0a10;
+  flex: 1 4 300px;
+  max-width: 20vw;
+  min-width: 280px;
+  border-left: 1px solid #bcb1c1;
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  /*overflow-y: scroll;*/
+}
+
+.exhibition-collaborators {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.exhibition-owner {
+  width: 3.5rem;
+}
+
+.exhibition-owner-profile-photo {
+  object-fit: cover;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+
+.exhibition-title {
+  font-size: 18px;
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+}
+
+.exhibition-description {
+  font-size: 14px;
+  margin-bottom: 2rem;
+}
+
+.exhibition-date {
+  font-size: 14px;
+}
+
+.exhibition-status {
+  font-size: 14px;
+  margin-bottom: 1.1rem;
+}
+
+.exhibition-visit-link {
+  font-size: 14px;
+  color: #bcb1c1;
+}
+
+.exhibition-visit-link:hover,
+.exhibition-visit-link:active {
+  color: #bcb1c1;
+}
+
+/* width */
+.exhibition-linear-container::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+.exhibition-linear-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.exhibition-linear-container::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.exhibition-linear-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
