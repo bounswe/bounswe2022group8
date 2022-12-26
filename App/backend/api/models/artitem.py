@@ -70,7 +70,7 @@ class ArtItem(models.Model):
 
     def updatePopularity(self, *args, **kwargs):
         self.popularity = 0.1*((self.created_at.year - 2020)*365 + self.created_at.month*30 + self.created_at.day) + 2*self.get_numberof_likes + 0.5*self.number_of_views
-        print(self.popularity)
+        #print(self.popularity)
         super().save(*args, **kwargs)
 
 
