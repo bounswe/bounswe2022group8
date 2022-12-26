@@ -12,7 +12,7 @@ import 'package:artopia/utils/textUtils.dart';
 
 
 
-Widget profileHeaderWidget(BuildContext context, Profile me) {
+Widget selfProfile(BuildContext context, Profile me) {
   final ColorPalette colorPalette = ColorPalette();
   final textUtils = TextUtils();
 
@@ -55,14 +55,14 @@ Widget profileHeaderWidget(BuildContext context, Profile me) {
                             width: 130,
                             height: 130,
                             child: CircleAvatar(
-       
+
                               foregroundImage: Image.network(
-                                      me.imageUrl)
+                                  me.imageUrl)
 
                                   .image,
                               radius: 10,
 
-                                ),
+                            ),
                           ),
                         ),
                       ),

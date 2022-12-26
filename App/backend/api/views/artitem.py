@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from knox.models import AuthToken
 
-from ..models.user import User
+from ..models.user import User, UserInterest
 from ..models.user import Follow
 from ..models.artitem import ArtItem, LikeArtItem
 from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
@@ -31,8 +31,8 @@ from history.signals import object_viewed_signal
 #
 #  http://${host}:8000/api/v1/artitems                            / GET    / Return all of the art items in the system in JSON format
 #  http://${host}:8000/api/v1/artitems/<id>                       / GET    / Return an art item with the given id
-#  http://${host}:8000/api/v1/artitems/me/<id>                           / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
-#  http://${host}:8000/api/v1/artitems/me/                            / POST   / create an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/<id>                    / DELETE / Delete an art item                   [REQUIRES AUTHENTICATION]
+#  http://${host}:8000/api/v1/artitems/me/                        / POST   / create an art item                   [REQUIRES AUTHENTICATION]
 #  http://${host}:8000/api/v1/artitems/users/<id>                 / GET    / get all of the art items of the specific user (by id)
 #  http://${host}:8000/api/v1/artitems/users/username/<username>  / GET    / get all of the art items of the specific user (by username)
 #
@@ -110,7 +110,7 @@ def get_artitems(request):
         status.HTTP_201_CREATED: openapi.Response(
             description="Successfully created an art item.",
             examples={
-                "application/json": [
+                "application/json": 
                     {
                         "id": 2,
                         "title": "Docker",
@@ -131,7 +131,6 @@ def get_artitems(request):
                         "minimum_price": 200,
                         "bought_by": None,
                     }
-                ]
             }
         ),
         status.HTTP_401_UNAUTHORIZED: openapi.Response(
@@ -143,7 +142,7 @@ def get_artitems(request):
         status.HTTP_400_BAD_REQUEST: openapi.Response(
             description="Bad Request is raised when the given data is not enough to be serialized as an art item object.",
             examples={
-                "application/json": {"type": ["This field is required."]}
+                "application/json": {"category": ["This field is required."]}
             }
         ),
     }
@@ -166,6 +165,7 @@ def post_artitem(request):
             try:
                 image_data = request.data['artitem_image'].split("base64,")[1]
                 decoded = base64.b64decode(image_data)
+                # iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=
                 id_ = 1 if ArtItem.objects.count() == 0 else ArtItem.objects.latest('id').id + 1
                 filename = 'artitem-{pk}.png'.format(
                     pk=id_)
@@ -185,6 +185,9 @@ def post_artitem(request):
                     filename,  request.data['artitem_image'])
 
             serializer.save()
+            request.user.updatePopularity()
+            userinterest = UserInterest.objects.get(user = request.user)
+            userinterest.updateInterest(request.data["category"], 2)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -303,7 +306,8 @@ def artitems_by_id(request, id):
                     data["isLiked"] = False
                 #print("not anonymous")
                 instance = artitem
-                object_viewed_signal.send(instance.__class__, instance=instance, request=request)
+                if request.user.is_authenticated:
+                    object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)

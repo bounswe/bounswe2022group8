@@ -77,7 +77,8 @@ def profile_api(request, id):
                     data["isFollowed"] = False
 
                 instance = user
-                object_viewed_signal.send(User, instance=instance, request=request)
+                if request.user.is_authenticated:
+                    object_viewed_signal.send(User, instance=instance, request=request)
             
             return Response(data, status=status.HTTP_200_OK)
         except User.DoesNotExist:

@@ -20,6 +20,8 @@ from django.db import IntegrityError
 from django.db.models import Q
 from drf_yasg import openapi
 
+from history.signals import object_viewed_signal
+
 #  http://${host}:8000/api/v1/exhibitions/                        / GET    / Return all of the exhibitions in the system
 #  http://${host}:8000/api/v1/exhibitions/online/<id>             / GET    / Return an online exhibition with the given id
 #  http://${host}:8000/api/v1/exhibitions/offline/<id>            / GET    / Return an offline exhibition with the given id
@@ -284,12 +286,16 @@ def get_exhibitions(request):
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
                     "status": "Ongoing",
-                    "uploaded_images": [
+                    "artitems_upload": [
                         {
-                            "id": 62,
-                            "virtualExhibition": 27,
-                            "artitem_path": "artitem/artitem-62.png",
-                            "created_at": "08-12-2022 23:18:16"
+                            "id": 3,
+                            "title": "Portrait of Joel Miller",
+                            "tags": [],
+                            "description": "Joel Miller from TLOU universe.",
+                            "category": "OT",
+                            "artitem_path": "artitem/artitem-3.png",
+                            "likes": 0,
+                            "created_at": "24-12-2022 14:02:33"
                         }
                     ]
                 }
@@ -323,6 +329,8 @@ def get_online_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = VirtualExhibition.objects.get(pk=id)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = VirtualExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except VirtualExhibition.DoesNotExist:
@@ -349,7 +357,7 @@ def get_online_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any virtual exhibition with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
     elif (request.method == "PUT"):
         userid = request.user.id
         try:
@@ -528,6 +536,8 @@ def get_offline_exhibitions_by_id(request, id):
     if request.method == "GET":
         try:
             virtualExhibition = OfflineExhibition.objects.get(pk=id)
+            if request.user.is_authenticated:
+                object_viewed_signal.send(virtualExhibition.__class__, instance=virtualExhibition, request=request)
             serializer = OfflineExhibitionSerializer(virtualExhibition)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except OfflineExhibition.DoesNotExist:
@@ -550,7 +560,7 @@ def get_offline_exhibitions_by_id(request, id):
                 return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 
 
 
@@ -717,7 +727,7 @@ def get_online_exhibitions_by_userid(request, userid):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
-            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2022-12-08T13:00:00.000Z"),
+            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2020-12-08T13:00:00.000Z"),
             "end_date": openapi.Schema(type=openapi.TYPE_STRING, description='end date of the exhibition', default="2020-12-10T13:00:00.000Z"),
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
@@ -753,7 +763,7 @@ def get_online_exhibitions_by_userid(request, userid):
                         "created_at": "08-12-2022 19:42:06"
                     },
                     "collaborators": [],
-                    "start_date": "08-12-2022 16:00:00",
+                    "start_date": "08-12-2020 16:00:00",
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 19:42:06",
                     "updated_at": "08-12-2022 19:42:06",
@@ -824,6 +834,7 @@ def create_offline_exhibition(request):
             try:
                 serializer.save()
                 artitem_image_storage.save(artitem_storage_tuple[0], artitem_storage_tuple[1])
+                request.user.updatePopularity()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
                 poster.delete()
@@ -844,7 +855,7 @@ def create_offline_exhibition(request):
         properties={
             "title": openapi.Schema(type=openapi.TYPE_STRING, description='title of the exhibition', default="Art Online"),
             "description": openapi.Schema(type=openapi.TYPE_STRING, description='description of the exhibition', default="A collection of beautiful paintings."),
-            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2022-12-08T13:00:00.000Z"),
+            "start_date": openapi.Schema(type=openapi.TYPE_STRING, description='start date of the exhibition', default="2020-12-08T13:00:00.000Z"),
             "end_date": openapi.Schema(type=openapi.TYPE_STRING, description='end date of the exhibition', default="2020-12-10T13:00:00.000Z"),
             "collaborators": openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Items(type=openapi.TYPE_INTEGER), description='IDs of the collaborators', default=[2]),
             "poster": openapi.Schema(type=openapi.TYPE_STRING, description='base64 encoded version of the poster', default="base64 string"),
@@ -889,17 +900,21 @@ def create_offline_exhibition(request):
                             "created_at": "08-12-2022 23:15:21"
                         }
                     ],
-                    "start_date": "08-12-2022 16:00:00",
+                    "start_date": "08-12-2020 16:00:00",
                     "end_date": "10-12-2020 16:00:00",
                     "created_at": "08-12-2022 23:18:13",
                     "updated_at": "08-12-2022 23:18:13",
                     "status": "Ongoing",
-                    "uploaded_images": [
+                    "artitems_upload": [
                         {
-                            "id": 62,
-                            "virtualExhibition": 27,
-                            "artitem_path": "artitem/artitem-62.png",
-                            "created_at": "08-12-2022 23:18:16"
+                            "id": 3,
+                            "title": "Portrait of Joel Miller",
+                            "tags": [],
+                            "description": "Joel Miller from TLOU universe.",
+                            "category": "OT",
+                            "artitem_path": "artitem/artitem-3.png",
+                            "likes": 0,
+                            "created_at": "24-12-2022 14:02:33"
                         }
                     ]
                 }
@@ -994,6 +1009,7 @@ def create_online_exhibition(request):
         if serializer.is_valid():
             try:
                 virtualexhibition = serializer.save()
+                request.user.updatePopularity()
             except IntegrityError:
                 poster.delete()
                 return Response({"Invalid request": "Start date must be earlier than the end date."}, status=status.HTTP_400_BAD_REQUEST)

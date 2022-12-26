@@ -2,7 +2,7 @@ from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from .user import User
+from .user import User, UserInterest
 
 from django.template.defaultfilters import date
 from django.utils.translation import gettext_lazy as _
@@ -59,6 +59,7 @@ class ArtItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     virtualExhibition = models.ForeignKey('api.VirtualExhibition', on_delete=models.CASCADE, blank=True, null=True) 
     number_of_views = models.IntegerField(default=0)
+    popularity = models.FloatField(default=0)
     sale_status = models.CharField(max_length=2, choices=SaleStatus.choices, default=SaleStatus.NOTFORSALE)
     minimum_price = models.PositiveIntegerField(default=0)
     bought_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="bought_art")
@@ -67,8 +68,14 @@ class ArtItem(models.Model):
         self.number_of_views += 1
         super().save(*args, **kwargs)
 
+    def updatePopularity(self, *args, **kwargs):
+        self.popularity = 0.1*((self.created_at.year - 2020)*365 + self.created_at.month*30 + self.created_at.day) + 2*self.get_numberof_likes + 0.5*self.number_of_views
+        print(self.popularity)
+        super().save(*args, **kwargs)
+
+
     class Meta:
-        ordering = ["-created_at"]  # order according to the timestamps
+        ordering = ["-popularity"]  # order according to popularity
     
     def __str__(self):
         return "Art item: " + self.title
@@ -135,5 +142,7 @@ def user_created_receiver(sender, request, *args, **kwargs):
     new_newbids         = NewBids.objects.create(
         user            =  sender
     )
+    userInterest = UserInterest.objects.create(user=sender)
 
 user_created_signal.connect(user_created_receiver)
+

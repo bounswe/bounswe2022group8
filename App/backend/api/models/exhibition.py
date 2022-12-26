@@ -18,6 +18,21 @@ class AbstractExhibition(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    number_of_views = models.IntegerField(default=0)
+    popularity = models.FloatField(default=0)
+
+    def increaseViews(self, *args, **kwargs):
+        self.number_of_views += 1
+        super().save(*args, **kwargs)
+
+    def updatePopularity(self, *args, **kwargs):
+        self.popularity = 0.05*((self.created_at.year - 2020)*365 + self.created_at.month*30 + self.created_at.day) + self.number_of_views
+        print(self.popularity)
+        super().save(*args, **kwargs)
+
+
+    class Meta:
+        ordering = ["-popularity"]  # order according to popularity
 
     class Meta:
         ordering = ["-created_at"]  # order according to the timestamp

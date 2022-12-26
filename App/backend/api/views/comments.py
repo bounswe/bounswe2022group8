@@ -128,6 +128,14 @@ from django.contrib.auth.models import AnonymousUser
                 },
             }
         ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
     }
 )
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -189,7 +197,7 @@ def CommentView(request, artitemid, id):
                 return Response(message, status=status.HTTP_400_BAD_REQUEST)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
 # do we want nonregistered users to see comments???
 # Condition to keep parent ArtItem the same
 
@@ -305,6 +313,14 @@ def CommentView(request, artitemid, id):
                 },
             }
         ),
+        status.HTTP_401_UNAUTHORIZED: openapi.Response(
+            description="Invalid token.",
+            examples={
+                "application/json": {
+                    "detail": "Invalid token."
+                }
+            }
+        ),
     }
 )
 @api_view(['POST', 'GET'])
@@ -323,7 +339,7 @@ def CommentsView(request, artitemid):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             message = {'detail': 'Invalid token.'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+            return Response(message, status=status.HTTP_401_UNAUTHORIZED)
     if (request.method == "GET"):
         try:
             artitem = ArtItem.objects.get(id=artitemid)

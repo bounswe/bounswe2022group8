@@ -293,23 +293,6 @@
   padding: 0.4rem 0.9rem 0.45rem 0.9rem;
 }
 
-.artitem-post-container #info-container .r6o-editor {
-  transform: translate(350px, 0px) !important;
+.r6o-widget.comment.editable:not(:first-child) {
+  display: none;
 }
-
-.artitem-post-container #info-container .r6o-editor .r6o-arrow {
-  padding-right: 380px;
-}
-
-/*.artitem-post-container .btn-show-text-annotations {
-  margin-bottom: 2px;
-  margin-top: 5px;
-  border-color: transparent;
-  padding-left: 0;
-  display: block;
-  color:#ffc9ff;
-  background-color: #ffc9ff;
-  color: #18121c;
-  border-radius: 0.3rem;
-  font-size: 15px;
-}*/
