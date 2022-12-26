@@ -210,4 +210,5 @@ App/mobile/build/app/intermediates/flutter/debug/.last_build_id
 App/mobile/build/app/intermediates/flutter/debug/flutter_build.d
 App/mobile/build/app/intermediates/flutter/debug/libs.jar
 App/frontend
+
 *.workspace.xml

@@ -21,10 +21,19 @@ class _ArtItemPageState extends State<ArtItemPage> {
   final textUtils = TextUtils();
   final ColorPalette colorPalette = ColorPalette();
 
+  bool liked = false;
+
+  void changeLikeState(){
+    setState(() {
+      liked = !liked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     IconButton likeButton = IconButton(
-      icon: Icon(Icons.favorite, color: colorPalette.blackShadows, size: 30),
+      icon: liked ?  Icon(Icons.favorite, color: colorPalette.blackShadows, size: 30) : Icon(Icons.favorite_border_outlined, color: colorPalette.blackShadows, size: 30),
       tooltip: 'Like',
       splashColor: Colors.white,
       onPressed: () => {likeButtonPressed()},
@@ -91,11 +100,10 @@ class _ArtItemPageState extends State<ArtItemPage> {
     );
   }
   likeButtonPressed() {
-    print("like button pressed");
+    changeLikeState();
   }
 
   commentButtonPressed() {
-    print("comment button pressed");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>  CommentPage(artitem: widget.artitem)),
@@ -103,7 +111,6 @@ class _ArtItemPageState extends State<ArtItemPage> {
   }
 
   purchaseButtonPressed() {
-    print("purchase button pressed");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>  ArtItemPage(artitem: widget.artitem)),

@@ -7,7 +7,6 @@ import 'profile_page.dart';
 import 'change_password.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'profile.dart' ;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
