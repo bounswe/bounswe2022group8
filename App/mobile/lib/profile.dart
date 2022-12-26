@@ -28,7 +28,7 @@ class Profile extends StatefulWidget {
   final String name;
   final String bio;
   final String location;
-  final int followers;
+  int followers;
   final int following;
   final int id;
   @override

@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from knox.models import AuthToken
 
-from ..models.user import User
+from ..models.user import User, UserInterest
 from ..models.user import Follow
 from ..models.artitem import ArtItem, LikeArtItem
 from ..serializers.serializers import ArtItemSerializer, ArtItemByTagQuerySerializer
@@ -185,6 +185,9 @@ def post_artitem(request):
                     filename,  request.data['artitem_image'])
 
             serializer.save()
+            request.user.updatePopularity()
+            userinterest = UserInterest.objects.get(user = request.user)
+            userinterest.updateInterest(request.data["category"], 2)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -303,7 +306,8 @@ def artitems_by_id(request, id):
                     data["isLiked"] = False
                 #print("not anonymous")
                 instance = artitem
-                object_viewed_signal.send(instance.__class__, instance=instance, request=request)
+                if request.user.is_authenticated:
+                    object_viewed_signal.send(instance.__class__, instance=instance, request=request)
             return Response(data, status=status.HTTP_200_OK)
         except ArtItem.DoesNotExist:
             return Response({"Not Found": "Any art item with the given ID doesn't exist."}, status=status.HTTP_404_NOT_FOUND)
