@@ -24,6 +24,8 @@ function Recommendation(props) {
 
   const [artItemInfos, setArtItemInfos] = useState([]);
   const [artItemPaths, setArtItemPaths] = useState([]);
+  const [exhibitionPaths, setExhibitionPaths] = useState([]);
+  const [exhibitionInfos, setExhibitionInfos] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [allUsersPhotos, setAllUsersPhotos] = useState([]);
   const [myID, setMyID] = useState(null);
@@ -39,24 +41,25 @@ function Recommendation(props) {
 
   useEffect(() => {
     // dont forget the put the slash at the end
-    fetch(`${host}/api/v1/artitems/`, {
+    fetch(`${host}/api/v1/recommendations/artitems/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
       .then((response) => {
         //console.log(response);
-        setArtItemInfos(response);
+        setArtItemInfos(response.artitems);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
         var art_item_paths = [];
 
-        for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.artitems.length; i++) {
           var params = {
             Bucket: bucket,
-            Key: response[i].artitem_path,
+            Key: response.artitems[i].artitem_path,
           };
 
           var artitem_url = s3.getSignedUrl("getObject", params);
@@ -65,6 +68,39 @@ function Recommendation(props) {
         }
 
         setArtItemPaths(art_item_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
+  useEffect(() => {
+    // dont forget the put the slash at the end
+    fetch(`${host}/api/v1/recommendations/exhibitions/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        //console.log(response);
+        setExhibitionInfos(response.exhibitions);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var exhibition_paths = [];
+
+        for (let i = 0; i < response.exhibitions.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response.exhibitions[i].artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          exhibition_paths.push(artitem_url);
+        }
+
+        setExhibitionPaths(exhibition_paths);
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -92,6 +128,11 @@ function Recommendation(props) {
     scrollToTop();
   }
 
+  function goToExhibition(id) {
+    navigate(`/exhibitions/online/${id}`);
+    scrollToTop();
+  }
+
   function goToProfile(id) {
     if (myID === id) {
       navigate(`/my-profile`);
@@ -104,24 +145,25 @@ function Recommendation(props) {
 
   useEffect(() => {
     // dont forget the put the slash at the end
-    fetch(`${host}/api/v1/users/profile/users/`, {
+    fetch(`${host}/api/v1/recommendations/users/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => response.json())
       .then((response) => {
         //console.log(response);
-        setAllUsers(response);
+        setAllUsers(response.users);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
         var profile_photos = [];
 
-        for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.users.length; i++) {
           var params = {
             Bucket: bucket,
-            Key: response[i].profile_path,
+            Key: response.users[i].profile_path,
           };
 
           var profile_path = s3.getSignedUrl("getObject", params);
@@ -178,20 +220,41 @@ function Recommendation(props) {
             </Link>
           </div>
 
-          <div class="list">
-            {SampleExhibitions.map((val, key) => {
-              return (
-                <div key={key} className="recommendation-card">
-                  <img className="art-related" src={val.src} alt="" />
-                  <div class="artitem-context">
-                    <h4>{val.name}</h4>
-                    {/*<p>{val.owner}</p>
-                    <p>{val.date}</p>*/}
+          {exhibitionInfos.length!==0 ? (
+            <div class="list">
+              {exhibitionInfos.slice(0, 5).map((val, index) => {
+                return (
+                  <div
+                    key={val.id}
+                    className="recommendation-card"
+                    onClick={() => goToExhibition(val.id)}
+                  >
+                    <img
+                      className="art-related"
+                      src={exhibitionPaths[index]}
+                      alt={val.description}
+                    />
+                    <div class="artitem-context">
+                      <h4>{val.title}</h4>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div class="list">
+              {SampleExhibitions.map((val, key) => {
+                return (
+                  <div key={key} className="recommendation-card">
+                    <img className="art-related" src={val.src} alt="" />
+                    <div class="artitem-context">
+                      <h4>{val.name}</h4>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div class="recommendation-grid">
