@@ -1,20 +1,31 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:text_selection_controls/text_selection_controls.dart';
 import '../utils/colorPalette.dart';
 
 class Annotation {
+  String userName;
   String annotationMessage;
   int annotationX;
   int annotationY;
 
-  Annotation(this.annotationMessage, this.annotationX, this.annotationY);
+  Annotation(this.userName, this.annotationMessage, this.annotationX,
+      this.annotationY);
 }
 
+late String descriptionText;
+bool annotationSelected = false;
+
 class AnnotableTextField extends StatefulWidget {
-  final String descriptionText;
-  const AnnotableTextField({Key? key, required this.descriptionText})
-      : super(key: key);
+  AnnotableTextField(
+    String text,
+    bool selection, {
+    Key? key,
+  }) : super(key: key) {
+    descriptionText = text;
+    annotationSelected = selection;
+  }
 
   @override
   State<AnnotableTextField> createState() => _AnnotableTextFieldState();
@@ -23,18 +34,77 @@ class AnnotableTextField extends StatefulWidget {
 class _AnnotableTextFieldState extends State<AnnotableTextField> {
   final ColorPalette colorPalette = ColorPalette();
 
+  //holds annotations of every character
+  final List<List<Annotation>> charAnnotations = List.generate(descriptionText.length, (index) => List.empty(growable: true));
+
+  //selected texts. 0 means not selected, 1 means selected and 2 means there exists more than one annotation
+  final List<bool> isAnnotatedChar = List.filled(descriptionText.length, false);
+
+
   @override
   Widget build(BuildContext context) {
     List<TextSpan> chars = [];
 
-    for (int i = 0; i < widget.descriptionText.length; i++) {
+
+    /*
+    THIS METHOD IS ONLY FOR TESTING PURPOSES
+    ANNOTATIONS ARE NOT SAVED IN THE MOBILE SYSTEM
+    THERE SHOULD BE API CALL TO GET ANNOTATIONS
+    THERE SHOULD BE API CALL TO SAVE ANNOTATIONS
+    AFTER GETTING ANNOTATIONS FROM API, THIS METHOD SHOULD BE CALLED TO FILL THE charAnnotations LIST AND isAnnotatedChar LIST
+     */
+    void addAnnotation(String annotationMessage,int start, int end) {
+      String selectedText = descriptionText.substring(start, end);
+      setState(() {
+        for (int i = start; i < end; i++) {
+          charAnnotations[i].add(Annotation("user", annotationMessage, i, i));
+          isAnnotatedChar[i] = true;
+        }
+      });
+      }
+
+    GestureRecognizer? returnRecognizer(int i) {
+      return TapGestureRecognizer()..onTap = () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Annotation"),
+              content: Text(charAnnotations[i][0].annotationMessage),
+              actions: [
+                TextButton(
+                  child: Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      };
+    }
+
+    for (int i = 0; i < descriptionText.length; i++) {
       chars.add(TextSpan(
-        text: widget.descriptionText[i],
+        text: descriptionText[i],
+        style: GoogleFonts.inter(
+          textStyle: GoogleFonts.inter(
+            fontSize: 20,
+            color: colorPalette.blackShadows,
+            fontWeight: FontWeight.w600,
+            backgroundColor: (isAnnotatedChar[i] && annotationSelected)
+                ? Colors.yellow
+                : Colors.transparent,
+          ),
+        ),
+        recognizer: (isAnnotatedChar[i] && annotationSelected) ? returnRecognizer(i) : null,
       ));
     }
 
+
     AlertDialog AnnotationDialog(String substring, int annotationX, int annotationY, BuildContext context) {
-      final TextEditingController _controller = TextEditingController();
+      final TextEditingController controller = TextEditingController();
       return AlertDialog(
         title: const Text("Annotation"),
         content: TextField(
@@ -42,7 +112,7 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
             border: OutlineInputBorder(),
             labelText: 'Annotation',
           ),
-          controller: _controller,
+          controller: controller,
         ),
         actions: <Widget>[
           TextButton(
@@ -54,8 +124,7 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
           TextButton(
             child: const Text("Submit"),
             onPressed: () {
-              print(substring);
-              print(_controller.text);
+              addAnnotation(controller.text, annotationX, annotationY);
               Navigator.of(context).pop();
               //TODO: Add annotation to the database
             },
@@ -63,6 +132,16 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
         ],
       );
     }
+
+    setState(() {
+      for(int i = 0; i < charAnnotations.length; i++){
+        if(charAnnotations[i].isNotEmpty){
+          isAnnotatedChar[i] = true;
+        }
+      }
+    });
+
+
 
     return SelectableText.rich(
       TextSpan(
@@ -77,14 +156,14 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
       selectionControls: FlutterSelectionControls(toolBarItems: [
         ToolBarItem(
             item: const Text(
-              'Select All',
-            ),
-            itemControl: ToolBarItemControl.selectAll),
-        ToolBarItem(
-            item: const Text(
               'Copy',
             ),
             itemControl: ToolBarItemControl.copy),
+        annotationSelected ? ToolBarItem(
+            item: const Text(
+              'Select All',
+            ),
+            itemControl: ToolBarItemControl.selectAll) :
         ToolBarItem(
           item: const Text(
             'Annotate',
@@ -93,11 +172,11 @@ class _AnnotableTextFieldState extends State<AnnotableTextField> {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AnnotationDialog(substring, annotationX, annotationY,
-                      context);
+                  return AnnotationDialog(
+                      substring, annotationX, annotationY, context);
                 });
           },
-        ),
+        )
       ]),
     );
   }

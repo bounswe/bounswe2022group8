@@ -1,6 +1,5 @@
 import 'package:artopia/artitem.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
 import 'TextAnnotation.dart';
@@ -97,7 +96,7 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  textUtils.buildText(widget.artitem.likes.toString() + " likes", 13, colorPalette.blackShadows,
+                  textUtils.buildText("${widget.artitem.likes} likes", 13, colorPalette.blackShadows,
                       FontWeight.w600),
                   const SizedBox(
                     width: 15,
@@ -113,14 +112,8 @@ class _ArtItemPageStructueState extends State<ArtItemPageStructue> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-            child: Container(
-              color: Colors.black,
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-              child: annotationSelected ? AnnotableTextField(descriptionText: widget.artitem.description) :  textUtils.buildText(widget.artitem.description, 20, colorPalette.blackShadows,
-                  FontWeight.w600),
-            ),
+            padding: const EdgeInsets.only(left: 15, top: 15, right: 15,bottom: 15),
+            child: AnnotableTextField(widget.artitem.description, annotationSelected),
           ),
         ],
       ),
