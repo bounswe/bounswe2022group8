@@ -60,7 +60,7 @@ function SearchResults(props) {
         setArtItemPaths(art_item_paths);
       })
       .catch((error) => console.error("Error:", error));
-  }, [host]);
+  }, [host, tag_id]);
 
   useEffect(() => {
     fetch(`${host}/api/v1/tags/${tag_id}`, {
@@ -74,7 +74,7 @@ function SearchResults(props) {
         setTagName(response.tagname);
       })
       .catch((error) => console.error("Error:", error));
-  }, [host]);
+  }, [host, tag_id]);
 
   function goToArtItem(id) {
     navigate(`/artitems/${id}`);

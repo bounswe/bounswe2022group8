@@ -171,8 +171,7 @@ function Profile(props) {
   ]);
 
   useEffect(() => {
-    // BURA DEGISECEK
-    fetch(`${host}/api/v1/exhibitions/users/2/online/`, {
+    fetch(`${host}/api/v1/exhibitions/me/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -181,7 +180,8 @@ function Profile(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        // console.log(response.length);
+        console.log(response["Virtual Exhibitions"]);
+        response = response["Virtual Exhibitions"].owner;
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
         var online_exhibitions = [];

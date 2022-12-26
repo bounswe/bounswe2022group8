@@ -46,3 +46,12 @@
   margin-bottom: 0px;
   margin-right: 15px; /* padding-top-form (10) + margin-top-btn(5)*/
 }
+
+.access-link {
+  color: #3483be;
+}
+
+.access-link:hover,
+.access-link:active {
+  color: #3483be;
+}
