@@ -128,11 +128,13 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ]),
+          /*
           selectedUser == ""
               ? SizedBox.shrink()
               :
               //SizedBox.shrink(),
           Container(),
+          */
 
 
           /*
