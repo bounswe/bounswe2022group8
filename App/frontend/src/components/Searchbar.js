@@ -1,9 +1,18 @@
+import { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./styles/Searchbar.css";
 
 function Searchbar() {
+  const [input, setInput] = useState("");
+
+  function handleInput(e) {
+    setInput(e.target.value);
+  }
+
+  console.log(input);
+
   return (
     <InputGroup>
       <InputGroup.Text id="search-icon" className="search-icon">
@@ -11,9 +20,11 @@ function Searchbar() {
       </InputGroup.Text>
       <Form.Control
         type="search"
-        placeholder="Search for images, exhibitions, artists..."
+        placeholder="Search for art items, exhibitions, artists..."
         className="search-bar"
         aria-label="Search"
+        value={input}
+        onChange={(e) => handleInput(e)}
       />
     </InputGroup>
   );

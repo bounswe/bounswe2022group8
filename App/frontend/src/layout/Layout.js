@@ -119,23 +119,6 @@ function Layout(props) {
     return () => window.removeEventListener("scroll", changeNavbarColor);
   }, []);
 
-  /*// keeps track of the current position of the scrollbar
-  function updatePosition() {
-    setCurrentScrollY(window.scrollY);
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", updatePosition);
-    return () => window.removeEventListener("scroll", updatePosition);
-  }, []);
-
-  // prevents scrollbar to reset each time a component re-renders
-  useEffect(() => {
-    window.scrollTo(0, currentScrollY);
-  }, [currentScrollY]);*/
-
-  // keeps track of the current windows width
-
   function updateWidth() {
     setWindowWidth(window.innerWidth);
   }
@@ -144,8 +127,6 @@ function Layout(props) {
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
-
-  // console.log(windowWidth);
 
   return (
     <div>
