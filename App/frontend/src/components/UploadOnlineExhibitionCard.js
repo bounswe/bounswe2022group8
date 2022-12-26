@@ -42,11 +42,12 @@ function UploadOnlineExhibitionCard(props) {
       props.setPostError(false);
 
       var artitems_upload = [];
-      var base64_upload = [];
       for (let i = 0; i < e.target.files.length; i++) {
         artitems_upload.push(URL.createObjectURL(e.target.files[i]));
-        base64_upload.push(await toBase64(e.target.files[i]));
       }
+
+      const base64_upload = await tobase64Handler(e.target.files);
+      // console.log(base64_upload);
 
       setPreviewImages([...previewImages, ...artitems_upload]);
       setBase64Images([...base64Images, ...base64_upload]);
@@ -139,6 +140,15 @@ function UploadOnlineExhibitionCard(props) {
     } else if (title === "" || description === "" || posterPreview === "") {
       props.setUploadInfoError(true);
     } else {
+      const temp = base64Images.map((base64) => ({
+        title: title,
+        description: `This art item is part of the ${title} exhibition and was uploaded exclusively for this exhibition`,
+        tags: [],
+        category: "OT",
+        artitem_image: base64,
+      }));
+
+      console.log(temp);
       setIsLoading(true);
       fetch(`${host}/api/v1/exhibitions/me/online/`, {
         method: "POST",
@@ -151,7 +161,7 @@ function UploadOnlineExhibitionCard(props) {
           artitems_gallery: artItemsGallery,
           artitems_upload: base64Images.map((base64) => ({
             title: title,
-            description: "bu eser sadece exhibitiona özel",
+            description: `This art item is part of the ${title} exhibition and was uploaded exclusively for this exhibition`,
             tags: [],
             category: "OT",
             artitem_image: base64,
@@ -167,8 +177,6 @@ function UploadOnlineExhibitionCard(props) {
           setIsLoading(false);
           props.setNewOnlineExhibitionUploaded();
           props.closeUploadOnlineExhibitionCard();
-
-          console.log(response);
 
           setTitle("");
           setDescription("");
@@ -190,6 +198,17 @@ function UploadOnlineExhibitionCard(props) {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
+
+  async function tobase64Handler(files) {
+    const filePathsPromises = [];
+
+    Array.from(files).forEach((file) => {
+      filePathsPromises.push(toBase64(file));
+    });
+
+    const filePaths = await Promise.all(filePathsPromises);
+    return filePaths;
+  }
 
   function handleTitle(e) {
     const value = e.target.value;

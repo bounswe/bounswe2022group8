@@ -35,6 +35,7 @@ function ProfileOther(props) {
   });
 
   const [userGallery, setUserGallery] = useState([]);
+  const [onlineExhibitions, setOnlineExhibitions] = useState([]);
 
   // JUST TO CAUSE A STATE CHANGE AFTER A FOLLOW ACTION
   const [updateFollow, setUpdateFollow] = useState(true);
@@ -136,19 +137,63 @@ function ProfileOther(props) {
     }
   }, [host, token, profileInfo.username]);
 
+  useEffect(() => {
+    fetch(`${host}/api/v1/exhibitions/users/${user_id}/online/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response.length);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var online_exhibitions = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].poster.artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          online_exhibitions.push({
+            id: response[i].id,
+            description: response[i].description,
+            artitem_path: artitem_url,
+          });
+        }
+
+        setOnlineExhibitions(online_exhibitions);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, token]);
+
   // true -> art item --- false -> exhibition
-  const [navTab, setNavTab] = useState(true);
+  const [navTab, setNavTab] = useState(0);
 
   function handleArtItems() {
-    setNavTab(true);
+    setNavTab(0);
   }
 
-  function handleExhibitions() {
-    setNavTab(false);
+  function handleOnlineExhibitions() {
+    setNavTab(1);
+  }
+
+  function handleOfflineExhibitions() {
+    setNavTab(2);
   }
 
   function goToArtItem(id) {
     navigate(`/artitems/${id}`);
+    scrollToTop();
+  }
+
+  function goToOnlineExhibition(id) {
+    navigate(`/exhibitions/online/${id}`);
     scrollToTop();
   }
 
@@ -266,7 +311,7 @@ function ProfileOther(props) {
         <div className="tab-container">
           <button
             className={`btn btn-navtab + ${
-              navTab ? "btn-navtab-underline" : ""
+              navTab === 0 ? "btn-navtab-underline" : ""
             }`}
             onClick={() => handleArtItems()}
           >
@@ -274,18 +319,26 @@ function ProfileOther(props) {
           </button>
           <button
             className={`btn btn-navtab + ${
-              !navTab ? "btn-navtab-underline" : ""
+              navTab === 1 ? "btn-navtab-underline" : ""
             }`}
-            onClick={() => handleExhibitions()}
+            onClick={() => handleOnlineExhibitions()}
           >
-            Exhibitions
+            Online Exhibitions
+          </button>
+          <button
+            className={`btn btn-navtab + ${
+              navTab === 2 ? "btn-navtab-underline" : ""
+            }`}
+            onClick={() => handleOfflineExhibitions()}
+          >
+            Physical Exhibitions
           </button>
         </div>
 
         <hr className="tab-line"></hr>
 
         <main>
-          {navTab ? (
+          {navTab === 0 && (
             // what if gallery is empty ?  --> do nothing for the other profile
             <div className="gallery">
               {userGallery.map((val, key) => {
@@ -306,29 +359,27 @@ function ProfileOther(props) {
                 );
               })}
             </div>
-          ) : (
+          )}
+          {navTab === 1 && (
             <div className="gallery">
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/c9/e3/a0/c9e3a04419c70017ce6bfd2bd7c88a67.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
-              <div className="gallery-item" tabIndex="0">
-                <img
-                  src="https://i.pinimg.com/564x/26/ca/72/26ca72d8a74429381c310677c0bfc576.jpg"
-                  className="gallery-image"
-                  alt=""
-                />
-              </div>
+              {onlineExhibitions.map((val, key) => {
+                return (
+                  <div key={val.id} className="gallery-item">
+                    <img
+                      src={val.artitem_path}
+                      className="gallery-image"
+                      alt={val.description}
+                    />
+                    <div className="gallery-image-options-container">
+                      <div
+                        role="link"
+                        className="gallery-image-link"
+                        onClick={() => goToOnlineExhibition(val.id)}
+                      ></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </main>

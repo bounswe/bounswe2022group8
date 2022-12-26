@@ -171,7 +171,8 @@ function Profile(props) {
   ]);
 
   useEffect(() => {
-    fetch(`${host}/api/v1/exhibitions/users/1/online/`, {
+    // BURA DEGISECEK
+    fetch(`${host}/api/v1/exhibitions/users/2/online/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

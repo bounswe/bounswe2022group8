@@ -24,8 +24,12 @@ function Exhibition(props) {
   const { online_id } = useParams();
   const navigate = useNavigate();
 
-  const [artItemSrcs, setArtItemSrcs] = useState([]);
-  const [artItemIDs, setArtItemIDs] = useState([]);
+  const [exhbitionSrcs, setExhibitionSrcs] = useState([]);
+  const [exhibitionIDs, setExhibitionIDs] = useState([]);
+  const [artItemGallerySrcs, setArtItemGallerySrcs] = useState([]);
+  const [artItemGalleryIDs, setArtItemGalleryIDs] = useState([]);
+  const [artItemUploadSrcs, setArtItemUploadSrcs] = useState([]);
+  const [artItemUploadIDs, setArtItemUploadIDs] = useState([]);
   const [ownerID, setOwnerID] = useState(null);
   const [ownerPhoto, setOwnerPhoto] = useState("");
   const [collaboratorSrcs, setCollaboratorSrcs] = useState([]);
@@ -45,20 +49,20 @@ function Exhibition(props) {
   function handleFocus(src, index) {
     setFocusIdx(index);
     setFocusSrc(src);
-    setFocusID(artItemIDs[index]);
+    setFocusID(exhibitionIDs[index]);
   }
 
   function handleNext() {
-    if (focusIdx !== artItemSrcs.length - 1) {
+    if (focusIdx !== exhbitionSrcs.length - 1) {
       setFocusIdx(focusIdx + 1);
-      setFocusSrc(artItemSrcs[focusIdx + 1]);
+      setFocusSrc(exhbitionSrcs[focusIdx + 1]);
     }
   }
 
   function handlePrevious() {
     if (focusIdx !== 0) {
       setFocusIdx(focusIdx - 1);
-      setFocusSrc(artItemSrcs[focusIdx - 1]);
+      setFocusSrc(exhbitionSrcs[focusIdx - 1]);
     }
   }
 
@@ -80,20 +84,26 @@ function Exhibition(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        // console.log(response);
+        var artitem_gallery_ids = response.artitems_gallery.map(({ id }) => id);
+        console.log(response.artitems_upload);
+        var artitem_upload_ids = response.artitems_upload.map(({ id }) => id);
+        var exhibition_ids = artitem_gallery_ids.concat(artitem_upload_ids);
 
         setExhibitionTitle(response.title);
         setExhibitionDescription(response.description);
         setOwnerID(response.owner.id);
         setCollaboratorIDs(response.collaborators.map(({ id }) => id));
-        setArtItemIDs(response.artitems_gallery.map(({ id }) => id));
+        setArtItemGalleryIDs(artitem_gallery_ids);
+        setArtItemUploadIDs(artitem_upload_ids);
+        setExhibitionIDs(exhibition_ids);
         setStartDate(response.start_date);
         setEndDate(response.end_date);
         setStatus(response.status);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
 
-        var artitem_srcs = [];
+        var artitem_gallery_srcs = [];
+        var artitem_upload_srcs = [];
         var collaborator_srcs = [];
 
         for (let i = 0; i < response.artitems_gallery.length; i++) {
@@ -103,7 +113,17 @@ function Exhibition(props) {
           };
 
           var artitem_url = s3.getSignedUrl("getObject", params);
-          artitem_srcs.push(artitem_url);
+          artitem_gallery_srcs.push(artitem_url);
+        }
+
+        for (let i = 0; i < response.artitems_upload.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response.artitems_upload[i].artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+          artitem_upload_srcs.push(artitem_url);
         }
 
         for (let i = 0; i < response.collaborators.length; i++) {
@@ -123,13 +143,27 @@ function Exhibition(props) {
 
         var owner_src = s3.getSignedUrl("getObject", params);
 
-        setArtItemSrcs(artitem_srcs);
+        setArtItemGallerySrcs(artitem_gallery_srcs);
+        setArtItemUploadSrcs(artitem_upload_srcs);
         setCollaboratorSrcs(collaborator_srcs);
         setOwnerPhoto(owner_src);
 
+        var exhibition_srcs = artitem_gallery_srcs.concat(artitem_upload_srcs);
+
+        //console.log(response.artitems_gallery);
+        //console.log(response.artitems_upload);
+
         setFocusIdx(0);
-        setFocusSrc(artitem_srcs[0]);
-        setFocusID(response.artitems_gallery[0].id);
+        setFocusSrc(exhibition_srcs[0]);
+        setFocusID(
+          response.artitems_gallery.length > 0
+            ? response.artitems_gallery[0].id
+            : response.artitems_upload.length > 0
+            ? response.artitems_upload[0].id
+            : null
+        );
+
+        setExhibitionSrcs(exhibition_srcs);
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -175,7 +209,7 @@ function Exhibition(props) {
           <div className="exhibition-container">
             <img className="artitem-focused" src={focusSrc} alt={""} />
             <div className="exhibition-linear-container">
-              {artItemSrcs.map((source, index) => {
+              {exhbitionSrcs.map((source, index) => {
                 return (
                   <div
                     key={index}
