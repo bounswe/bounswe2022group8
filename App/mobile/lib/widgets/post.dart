@@ -4,22 +4,15 @@ import 'package:flutter/material.dart';
 import '../utils/colorPalette.dart';
 import '../utils/textUtils.dart';
 import '../comment_page.dart';
-
 import 'artitem_page_structure.dart';
-
-//  baglama isi yaparken kullanilacak.
-// import 'artitem.dart';
 
 class Post extends StatefulWidget {
 
   final ArtItem artitem ;
-  //baglama isi icin bu satiri da commentli birakiyorum
-  // final ArtItem artItem;
   final owner = "Author";
-  const Post({Key? key,required this.artitem}) : super(key: key);
 
-  //baglama isini kolaylastirmak icin bu satiri burada birakmak mantikli.
-  // PostsList({Key?key, required this.artItem}) : super(key: key);
+
+  const Post({Key? key,required this.artitem}) : super(key: key);
 
   @override
   State<Post> createState() => _PostState();
@@ -31,10 +24,18 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   final textUtils = TextUtils();
   final colorPalette = ColorPalette();
+  bool liked = false;
+
+  void changeLikeState(){
+    setState(() {
+      liked = !liked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     IconButton likeButton = IconButton(
-      icon: Icon(Icons.favorite, color: colorPalette.blackShadows, size: 30),
+      icon: liked ?  Icon(Icons.favorite, color: colorPalette.blackShadows, size: 30) : Icon(Icons.favorite_border_outlined, color: colorPalette.blackShadows, size: 30),
       tooltip: 'Like',
       splashColor: Colors.white,
       onPressed: () => {likeButtonPressed()},
@@ -127,7 +128,7 @@ class _PostState extends State<Post> {
   }
 
   likeButtonPressed() {
-    print("like button pressed");
+    changeLikeState();
   }
 
   commentButtonPressed() {
