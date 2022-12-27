@@ -11,6 +11,9 @@
 8. [Standards](#8-standards)
 9. [Individual Reports](#9-individual-reports)
 
+
+**Important:** Final deployment tagged version link: https://github.com/bounswe/bounswe2022group8/releases/tag/customer-presentation-3
+
 ## 1. Executive Summary
 ### *Description*
 
@@ -123,8 +126,7 @@
 * By using Swagger, you can test any API you want either with the example input we provided or some other input that complies with the specification.
 * You can use the button below to test any functionality you want. All inputs are already prepared for you - you just have to sign-in or register to the application and use the generated token for authentication-required APIs. <br>
 * You can find our collection as a [json file](https://raw.githubusercontent.com/bounswe/bounswe2022group8/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/CmpE451%20API.postman_collection.json) within this directory.
-* Public Workspace: https://documenter.getpostman.com/view/16425196/2s8Z6x1sYP#02d71c3b-ce09-4b8a-a281-189d1c91441a 
-* [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f352c8e9d0e1c7647570?action=collection%2Fimport)
+* Public Workspace: https://documenter.getpostman.com/view/16425196/2s8Z6x1sYP#02d71c3b-ce09-4b8a-a281-189d1c91441a (You can use the `Run in Postman` button at the top-right corner.)
 * Let me provide the Postman Collection [here](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_3/CmpE451%20API%20-%20Production.postman_collection.json). `{{host}}` stands for `34.125.134.88`.
 
 ---
