@@ -1,26 +1,22 @@
 export const SidebarData = [
-    {
-        title: "Home",
-        link: "/"
-    },
-    {
-        title: "Gallery",
-        link: "/"
-    },
-    {
-        title: "Exhibitions",
-        link: "/"
-    },
-    {
-        title: "Popular Artists",
-        link: "/"
-    },
-    {
-        title: "Discover",
-        link: "/discover"
-    },
-    {
-        title: "Add Favourites",
-        link: "/"
-    }
-]
+  {
+    title: "Home",
+    link: "/",
+  },
+  {
+    title: "Discover",
+    link: "/discover",
+  },
+  {
+    title: "Art Items",
+    link: "/discover-artitems",
+  },
+  {
+    title: "Exhibitions",
+    link: "/discover-exhibitions",
+  },
+  {
+    title: "Artists",
+    link: "/discover-users",
+  },
+];

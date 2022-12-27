@@ -77,7 +77,7 @@ function Signup(props) {
       <div className="access-content">
         <h3 className="access-title">Sign Up</h3>
         <div className="text-center">
-          Already registered? <Link onClick={props.onClickLogIn}>Log in</Link>
+          Already registered? <Link onClick={props.onClickLogIn} className="access-link">Log in</Link>
         </div>
         <div className="form-group mt-3">
           <label className="access-label">Username</label>

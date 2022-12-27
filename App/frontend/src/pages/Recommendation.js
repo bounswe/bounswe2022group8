@@ -87,20 +87,20 @@ function Recommendation(props) {
         setExhibitionInfos(response.exhibitions);
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
-        var exhibition_paths = [];
+        var exhibition_posters = [];
 
         for (let i = 0; i < response.exhibitions.length; i++) {
           var params = {
             Bucket: bucket,
-            Key: response.exhibitions[i].artitem_path,
+            Key: response.exhibitions[i].poster.artitem_path,
           };
 
           var artitem_url = s3.getSignedUrl("getObject", params);
 
-          exhibition_paths.push(artitem_url);
+          exhibition_posters.push(artitem_url);
         }
 
-        setExhibitionPaths(exhibition_paths);
+        setExhibitionPaths(exhibition_posters);
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
@@ -220,7 +220,7 @@ function Recommendation(props) {
             </Link>
           </div>
 
-          {exhibitionInfos.length!==0 ? (
+          {exhibitionInfos.length !== 0 ? (
             <div class="list">
               {exhibitionInfos.slice(0, 5).map((val, index) => {
                 return (

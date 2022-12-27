@@ -811,7 +811,7 @@ function ArtItem(props) {
       .catch((error) => console.error("Error:", error));
   }
 
-  function goToSearchResults(id) {
+  function goToSearchResultsTag(id) {
     navigate(`/artitems/tag/${id}`);
   }
 
@@ -843,7 +843,7 @@ function ArtItem(props) {
                   <Tag
                     key={val.id}
                     tagname={val.tagname}
-                    onClick={() => goToSearchResults(val.id)}
+                    onClick={() => goToSearchResultsTag(val.id)}
                   />
                 );
               })}
