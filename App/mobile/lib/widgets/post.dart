@@ -127,7 +127,8 @@ class _PostState extends State<Post> {
     );
   }
 
-  likeButtonPressed() {
+  likeButtonPressed() async {
+    await likeArtItem(widget.artitem.id);
     changeLikeState();
   }
 

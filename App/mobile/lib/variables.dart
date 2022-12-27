@@ -16,6 +16,7 @@ const String OTP_ENDPOINT ="http://$HOST/api/v1/auth/request-reset/";
 const String PASSWORD_RESET_ENDPOINT ="http://$HOST/api/v1/auth/password-reset/";
 const String GET_TEXT_ANNOTATIONS ="http://$ANNOTATOINHOST/api/v1/annotations/text/artitems/";
 const String POST_ANNOTATIONS ="http://$ANNOTATOINHOST/api/v1/annotations/";
+const String SEARCH_ART_ITEM_ENDPOINT ="http://$HOST/api/v1/search/lexical/";
 
 String token = "";
 String registered_username = "";

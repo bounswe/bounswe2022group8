@@ -78,7 +78,7 @@ List <dynamic> items = jsonDecode(response.body);
     String profileUrl = await getImage(owner.profile_path) ;
 
     String itemURL = await getImage(body['artitem_path']) ;
-    print(owner.name);
+    print(itemURL);
 
     //Profile profile = await getOtherProfile(owner.id);
     ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username,  tags: body["tags"], artitem_path: itemURL,profile_path: profileUrl, likes : body["likes"]) ;
@@ -150,7 +150,7 @@ Future<String> uploadArtItem(title, description, String tags, XFile? image) asyn
       'title': title,
       'description' : description,
       'type' : "Sketch",
-      'tags' : tagArray,
+      'tags' : [],
       "artitem_image": base64Image,
     })
   );
@@ -173,6 +173,78 @@ Future<String> uploadArtItem(title, description, String tags, XFile? image) asyn
    
 }
 
+Future<String> likeArtItem(int id) async {
+    String strid = id.toString();
+    String LIKE_ART_ITEM_ENDPOINT = "http://$HOST/api/v1/users/artitems/$strid/unlike/"  ;
+    final response = await http.delete(
+      Uri.parse(LIKE_ART_ITEM_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      );
+  print(response.statusCode) ;
+  print(response.body) ;
 
 
+  if (response.statusCode == 204) {
 
+    return  "unliked";
+  }
+  else {
+    LIKE_ART_ITEM_ENDPOINT = "http://$HOST/api/v1/users/artitems/$strid/like/"  ;
+    final response = await http.post(
+      Uri.parse(LIKE_ART_ITEM_ENDPOINT),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      } ,
+      );
+        print(response.statusCode) ;
+  print(response.body) ;
+  }
+  return  "liked" ;
+
+
+ 
+}
+
+
+Future <List<ArtItem>> searchArtItems(String search) async {
+  final response = await http.get(
+      Uri.parse(SEARCH_ART_ITEM_ENDPOINT+"?search=$search"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token'
+
+      }
+  
+  );
+  
+  //print(response.statusCode) ;
+  print(response.body) ;
+
+List <dynamic> items = jsonDecode(response.body);
+  List <ArtItem> userArtItems = [] ;
+  if (response.statusCode == 200) {
+    for (var body in items) {
+    ArtItemUserClass owner = ArtItemUserClass.fromJson(body['owner']);
+    String profileUrl = await getImage(owner.profile_path) ;
+
+    String itemURL = await getImage(body['artitem_path']) ;
+    print(itemURL);
+
+    //Profile profile = await getOtherProfile(owner.id);
+    ArtItem x = ArtItem(id: body["id"], title: body["title"], description: body["description"], username: owner.username,  tags: body["tags"], artitem_path: itemURL,profile_path: profileUrl, likes : body["likes"]) ;
+    //print(x.description);
+    //print(x.id);
+    print(x.title);
+    print("Finished") ;
+    userArtItems.add(x);
+  }
+  }
+  print(userArtItems);
+  return userArtItems ;
+}

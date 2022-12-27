@@ -1,6 +1,9 @@
 import 'package:artopia/search_page.dart';
 import 'package:flutter/material.dart';
 
+import 'artitem.dart';
+import 'widgets/post.dart';
+
 class Search extends SearchDelegate<String>{
   final List<String> listToSearch;
   final List<String> listToSuggest;
@@ -11,6 +14,7 @@ class Search extends SearchDelegate<String>{
       IconButton(
         icon: Icon(Icons.clear),
         onPressed: () {
+          print("user");
           query = "";
         },
       ),
@@ -21,6 +25,8 @@ class Search extends SearchDelegate<String>{
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
+        print("art item");
+
         //query = "";
         close(context, query);
       },
@@ -28,21 +34,28 @@ class Search extends SearchDelegate<String>{
   }
   @override
   Widget buildResults(BuildContext context) {
+    return FutureBuilder<List<ArtItem>>(
+          future: searchArtItems(query),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArtItem>> snapshot) {
+            if (snapshot.hasData == false)
+              return SizedBox.shrink();
+            List<ArtItem> artItems = snapshot.requireData;
+
+            return  SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              for (ArtItem item in artItems ) (Post(artitem: item)),
+            ],
+          ),
+    ) ;},);
     final List<String> allUsers = listToSearch.where(
             (anUser) => anUser.toLowerCase().contains(
                 query.toLowerCase(),
             ),
     ).toList();
-    return ListView.builder(
-      itemCount: allUsers.length,
-      itemBuilder: (context, index) => ListTile(
-          title: Text(allUsers[index]),
-        onTap: () {
-          query = allUsers[index];
-          close(context, query);
-        },
-        ),
-    );
+ 
 
   }
   @override
