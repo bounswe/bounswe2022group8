@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
 import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
@@ -16,12 +17,16 @@ function SearchResults(props) {
   }
 
   var host = HOST;
-  const { tag_id } = useParams();
+  const { token } = useAuth();
+  const { input } = useParams();
   const navigate = useNavigate();
 
   const [artItemInfos, setArtItemInfos] = useState([]);
   const [artItemPaths, setArtItemPaths] = useState([]);
-  const [tagName, setTagName] = useState([]);
+  const [userInfos, setUserInfos] = useState([]);
+  const [userPaths, setUserPaths] = useState([]);
+  const [noResult, setNoResult] = useState(false);
+  const [myID, setMyID] = useState(null);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -32,31 +37,168 @@ function SearchResults(props) {
 
   const s3 = new AWS.S3();
 
+  useEffect(() => {
+    fetch(`${host}/api/v1/search/lexical/?search=${input}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setArtItemInfos(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var art_item_paths = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          art_item_paths.push(artitem_url);
+        }
+
+        setArtItemPaths(art_item_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, input]);
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/search/lexical/users/?search=${input}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setUserInfos(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var user_paths = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].profile_path,
+          };
+
+          var user_url = s3.getSignedUrl("getObject", params);
+
+          user_paths.push(user_url);
+        }
+
+        setUserPaths(user_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, input]);
+
+  useEffect(() => {
+    var config = {};
+
+    if (token) {
+      config = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      };
+    } else {
+      config = { "Content-Type": "application/json" };
+    }
+
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: config,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setMyID(response.id);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host]);
+
+  useEffect(() => {
+    if (artItemInfos.length === 0 && userInfos.length === 0) {
+      setNoResult(true);
+    } else {
+      setNoResult(false);
+    }
+  }, [artItemInfos, userInfos]);
+
+  function goToArtItem(id) {
+    navigate(`/artitems/${id}`);
+    scrollToTop();
+  }
+
+  function goToExhibition(id) {
+    navigate(`/exhibitions/online/${id}`);
+    scrollToTop();
+  }
+
+  function goToProfile(id) {
+    if (myID === id) {
+      navigate(`/my-profile`);
+    } else {
+      navigate(`/users/${id}`);
+    }
+
+    scrollToTop();
+  }
+
   return (
     <Layout>
       <div class="recommendation-container">
         <div class="recommendation-grid">
-          <h1 className="page-header">Search results for {tagName} tag</h1>
+          <h1 className="page-header">Search results for {input}</h1>
           <div className="art-gallery">
-            {artItemInfos.map((val, index) => {
-              return (
-                <div
-                  key={val.id}
-                  className="recommendation-card"
-                  onClick={() => goToArtItem(val.id)}
-                >
-                  <img
-                    className="art-related"
-                    src={artItemPaths[index]}
-                    alt={val.description}
-                  />
-                  <div class="artitem-context">
-                    <h4>{val.title}</h4>
-                    <p>{val.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+            {noResult ? (
+              <div className="no-results-found">No results found</div>
+            ) : (
+              <>
+                {artItemInfos.map((val, index) => {
+                  return (
+                    <div
+                      key={val.id}
+                      className="recommendation-card"
+                      onClick={() => goToArtItem(val.id)}
+                    >
+                      <img
+                        className="art-related"
+                        src={artItemPaths[index]}
+                        alt={val.description}
+                      />
+                      <div class="artitem-context">
+                        <h4>{val.title}</h4>
+                        <p>{val.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+                {userInfos.map((val, index) => {
+                  return (
+                    <div
+                      key={val.id}
+                      className="recommendation-card"
+                      onClick={() => goToProfile(val.id)}
+                    >
+                      <img
+                        className="profile-photo"
+                        src={userPaths[index]}
+                        alt=""
+                      />
+                      <div class="profile-context">
+                        <h4>{val.username}</h4>
+                        {/*<p>{val.name}</p>
+                    <p>{val.location}</p>*/}
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>

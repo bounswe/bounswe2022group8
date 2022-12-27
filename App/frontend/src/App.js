@@ -18,6 +18,7 @@ import RecommendedExhibitions from "./pages/RecommendedPages/RecommendedExhibiti
 import RecommendedUsers from "./pages/RecommendedPages/RecommendedUsers";
 import ArtItem from "./pages/ArtItem";
 import Settings from "./pages/Settings";
+import SearchResults from "./pages/SearchResults";
 import SearchResultsTag from "./pages/SearchResultsTag";
 import Exhibition from "./pages/Exhibition";
 
@@ -85,6 +86,7 @@ function App() {
           element={<Exhibition />}
         ></Route>
 
+        <Route path="/search/:input" element={<SearchResults />} />
         <Route path="/artitems/tag/:tag_id" element={<SearchResultsTag />} />
       </Routes>
     </AuthProvider>

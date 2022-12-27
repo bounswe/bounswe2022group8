@@ -113,9 +113,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .recommendation-grid .recommendation-card p {
   color: #989898;
   font-size: 12px;
   line-height: 20px;
   font-weight: 600;
+}
+
+.recommendation-grid .no-results-found {
+  color: #989898;
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: -1rem;
 }
