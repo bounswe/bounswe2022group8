@@ -88,8 +88,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        //selfProfile(context,me),
-                        otherProfile(context, me),
+                        selfProfile(context,me),
+                        //otherProfile(context, me),
                       ],
                     ),
                   ),
@@ -144,7 +144,6 @@ class _ProfilePageState extends State<ProfilePage> {
               MaterialPageRoute(builder: (context) => HomePage()),
             );
           } else if (value == 2) {//search
-            token = "";
             Route route =
                 MaterialPageRoute(builder: (context) => SearchPage());
             Navigator.pushReplacement(context, route);

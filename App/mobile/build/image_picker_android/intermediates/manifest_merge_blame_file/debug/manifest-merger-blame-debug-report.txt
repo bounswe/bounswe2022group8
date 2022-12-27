@@ -4,28 +4,28 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="16"
-6-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml
+6-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="16" />
-7-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml
+7-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml
 8
 9    <application>
-9-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:4:5-14:19
+9-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:4:5-14:19
 10        <provider
-10-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:5:9-13:20
+10-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:5:9-13:20
 11            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-11-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:6:13-82
+11-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:6:13-82
 12            android:authorities="${applicationId}.flutter.image_provider"
-12-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:7:13-74
+12-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:7:13-74
 13            android:exported="false"
-13-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:8:13-37
+13-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:8:13-37
 14            android:grantUriPermissions="true" >
-14-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:9:13-47
+14-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:9:13-47
 15            <meta-data
-15-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:10:13-12:75
+15-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:10:13-12:75
 16                android:name="android.support.FILE_PROVIDER_PATHS"
-16-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:11:17-67
+16-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:11:17-67
 17                android:resource="@xml/flutter_image_picker_file_paths" />
-17-->/Users/mustafa/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:12:17-72
+17-->/Users/murat/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_android-0.8.5+3/android/src/main/AndroidManifest.xml:12:17-72
 18        </provider>
 19    </application>
 20
