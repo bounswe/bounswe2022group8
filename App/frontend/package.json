@@ -10,6 +10,7 @@
     "aws-sdk": "^2.1256.0",
     "bootstrap": "^5.2.2",
     "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",

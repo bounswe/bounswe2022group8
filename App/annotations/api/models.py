@@ -96,7 +96,7 @@ class Creator(models.Model):
 """
 class Body(models.Model):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, to_field='type')  # create a type object with "annotation" type
-    value = models.TextField()
+    value = models.TextField(null=True, blank=True)
     format = models.TextField(default=FORMAT)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
