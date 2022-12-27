@@ -1,4 +1,4 @@
-# Group 8 - Milestone 2 - Group Review
+# Group 8 - Milestone 3 - Group Review
 
 ### Table of Contents
 1. [Executive Summary](#1-executive-summary)
@@ -129,7 +129,7 @@
 
 ---
 To give you an example, let me provide some consecutive API calls in a scenario.
-* Firstly, you should be registering to the application using `http://{{host}}:8000/api/v1/auth/register/` endpoint. You can call it with the following body:
+1) Firstly, you should be registering to the application using `http://{{host}}:8000/api/v1/auth/register/` endpoint. You can call it with the following body:
 ```json
 {
   "email": "plantinga@cornell.edu.tr",
@@ -138,7 +138,17 @@ To give you an example, let me provide some consecutive API calls in a scenario.
   "password_confirm": "revisionistwestern3"
 }
 ```
-* Then you should proceed with creating an art item. Input body is already provided for you. You should just change the token from the headers. Copy paste the generated token from the call above, and update the value of `Authorization` header. Then call the `http://{{host}}:8000/api/v1/artitems/me/upload/` API with the following input:
+It will return an output in the following format:
+```json
+{
+    "user": {
+        "email": "plantinga@cornell.edu.tr",
+        "username": "alvin.plantinga"
+    },
+    "token": "b03191f004b98d4207b178ecd25ff645f464e9d37d9730dc47c8a175f8216b45"
+}
+```
+2. Then you should proceed with creating an art item. Input body is already provided for you. You should just change the token from the headers. Copy paste the generated token from the call above, and update the value of `Authorization` header. Then call the `http://{{host}}:8000/api/v1/artitems/me/upload/` API with the following input:
 ```json
 {
     "title" : "A work of art",
@@ -146,8 +156,32 @@ To give you an example, let me provide some consecutive API calls in a scenario.
     "category": "SK",
     "artitem_image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="}
 ```
+Output will be something like this:
+```json
+{
+    "id": 9,
+    "owner": {
+        "id": 6,
+        "username": "alvin.plantinga",
+        "name": "",
+        "surname": "",
+        "profile_path": "avatar/default.png"
+    },
+    "title": "A work of art",
+    "description": "An example of fine art, such as a painting or drawing.",
+    "category": "SK",
+    "tags": [],
+    "artitem_path": "artitem/artitem-9.png",
+    "likes": 0,
+    "number_of_views": 0,
+    "created_at": "27-12-2022 03:26:52",
+    "sale_status": "NS",
+    "minimum_price": 0,
+    "bought_by": null
+}
+```
 To avoid verbosity, the base64 string given above represents an extremely small image. But you can upload real images using the input bodies already provided for you in the collection.
-* Finally, try to create an online exhibition using `http://{{host}}:8000/api/v1/exhibitions/me/online/`. 
+3. Try to create an online exhibition using `http://{{host}}:8000/api/v1/exhibitions/me/online/`. 
 ```json
 {       
     "title" : "Exploring Global Climate Change Through Photography",
@@ -165,7 +199,7 @@ To avoid verbosity, the base64 string given above represents an extremely small 
         "artitem_image": 
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="},
     {
-        "title" : "Shipwereck",
+        "title" : "Shipwreck",
         "description" :"Realistic depictions of coastal scenes and seascapes.",
         "tags": [],
         "category": "OT",
@@ -173,11 +207,71 @@ To avoid verbosity, the base64 string given above represents an extremely small 
     "poster": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
 }
 ```
-* You can put your art item on sale starting from a minimum price of 200 dollars, using the API `http://{{host}}:8000/api/v1/artitems/<int:artitemid>/bids/` with the following body:
+Output of this call will be something like this:
+```json
+{
+    "id": 1,
+    "owner": {
+        "id": 1,
+        "username": "alvin.plantinga",
+        "name": "",
+        "surname": "",
+        "profile_path": "avatar/default.png"
+    },
+    "title": "Exploring Global Climate Change Through Photography",
+    "description": "Art exhibition at 5th Avenue.",
+    "poster": {
+        "id": 2,
+        "owner": 1,
+        "title": "Exploring Global Climate Change Through Photography",
+        "description": "Art exhibition at 5th Avenue.",
+        "category": "PT",
+        "tags": [],
+        "artitem_path": "artitem/artitem-10.png",
+        "created_at": "27-12-2022 03:28:22"
+    },
+    "collaborators": [],
+    "artitems_gallery": [],
+    "start_date": "08-12-2022 16:00:00",
+    "end_date": "19-12-2022 16:00:00",
+    "created_at": "27-12-2022 03:28:22",
+    "updated_at": "27-12-2022 03:28:22",
+    "status": "Finished",
+    "artitems_upload": [
+        {
+            "id": 3,
+            "title": "Shipwreck",
+            "tags": [],
+            "description": "Realistic depictions of coastal scenes and seascapes.",
+            "category": "OT",
+            "artitem_path": "artitem/artitem-11.png",
+            "likes": 0,
+            "created_at": "27-12-2022 03:28:23"
+        },
+        {
+            "id": 4,
+            "title": "Portrait of Joel Miller, a ruthless and cynical smuggler eventually tasked with smuggling and protecting Ellie Williams.",
+            "tags": [],
+            "description": "Joel Miller from TLOU universe.",
+            "category": "OT",
+            "artitem_path": "artitem/artitem-11.png",
+            "likes": 0,
+            "created_at": "27-12-2022 03:28:23"
+        }
+    ]
+}
+```
+4. You can put your art item on sale starting from a minimum price of 200 dollars, using the API `http://{{host}}:8000/api/v1/artitems/<int:artitemid>/bids/` with the following body:
 ```json
 {
   "sale_status": "FS",
   "minimum_price": 200
+}
+```
+Output will be as follows:
+```json
+{
+"detail": "The art item is successfully put on sale."
 }
 ```
 * You can do much more with all those APIs provided in the collection. Keep on exploring!
