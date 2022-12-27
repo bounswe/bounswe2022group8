@@ -28,114 +28,67 @@ function HomeGalleryCard(props) {
         <div className="gallery-header">Featured Art Items</div>
         <div className="gallery-row">
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(1)*/
-              }
-            }
+            onClick={() => goToArtItem(5)}
             source={lost}
             name="Lost Highway"
           />
+
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(6)}
             source={buddhists}
             name="Four Noble Truths"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(7)}
             source={haybales}
             name="Agriculture in the Netherlands"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(8)}
             source={wheat}
             name="Fauvism"
           />
         </div>
         <div className="gallery-row">
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(9)}
             source={greenFace}
             name="To Pimp a Butterfly"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(10)}
             source={greenFood}
             name="Green Life"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(11)}
             source={greenCadillac}
             name="1957 Cadillac Eldorado Biarritz "
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(12)}
             source={angel}
             name="Forgotten Statues"
           />
         </div>
         <div className="gallery-row">
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(13)}
             source={cyber}
             name="One Night in Shangai"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(14)}
             source={bluebuilding}
             name="Architecture in Movies"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(15)}
             source={rome}
             name="Rome: A History of the Eternal City"
           />
           <HomeImageCard
-            onClick={
-              {
-                /*() => goToArtItem(13)*/
-              }
-            }
+            onClick={() => goToArtItem(16)}
             source={beach}
             name="West Coast"
           />
