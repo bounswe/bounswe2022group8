@@ -236,7 +236,7 @@ function SearchResults(props) {
                   return (
                     <div
                       key={val.id}
-                      className="recommendation-card-user"
+                      className="recommendation-card"
                       onClick={() => goToProfile(val.id)}
                     >
                       <img
@@ -245,7 +245,7 @@ function SearchResults(props) {
                         alt=""
                       />
                       <div class="profile-context">
-                        <h4 style={{ color: "#000000" }}>{val.username}</h4>
+                        <h4>{val.username}</h4>
                         {/*<p>{val.name}</p>
                     <p>{val.location}</p>*/}
                       </div>
