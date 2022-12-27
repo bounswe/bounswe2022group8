@@ -23,6 +23,8 @@ function SearchResults(props) {
 
   const [artItemInfos, setArtItemInfos] = useState([]);
   const [artItemPaths, setArtItemPaths] = useState([]);
+  const [exhibitionInfos, setExhibitionInfos] = useState([]);
+  const [exhibitionPaths, setExhibitionPaths] = useState([]);
   const [userInfos, setUserInfos] = useState([]);
   const [userPaths, setUserPaths] = useState([]);
   const [noResult, setNoResult] = useState(false);
@@ -63,6 +65,36 @@ function SearchResults(props) {
         }
 
         setArtItemPaths(art_item_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, input]);
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/search/lexical/exhibitions/online/?search=${input}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setExhibitionInfos(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var poster_paths = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].poster.artitem_path,
+          };
+
+          var poster_url = s3.getSignedUrl("getObject", params);
+
+          poster_paths.push(poster_url);
+        }
+
+        setExhibitionPaths(poster_paths);
       })
       .catch((error) => console.error("Error:", error));
   }, [host, input]);
@@ -121,12 +153,16 @@ function SearchResults(props) {
   }, [host]);
 
   useEffect(() => {
-    if (artItemInfos.length === 0 && userInfos.length === 0) {
+    if (
+      artItemInfos.length === 0 &&
+      exhibitionInfos.length === 0 &&
+      userInfos.length === 0
+    ) {
       setNoResult(true);
     } else {
       setNoResult(false);
     }
-  }, [artItemInfos, userInfos]);
+  }, [artItemInfos, exhibitionInfos, userInfos]);
 
   function goToArtItem(id) {
     navigate(`/artitems/${id}`);
@@ -177,11 +213,30 @@ function SearchResults(props) {
                     </div>
                   );
                 })}
+                {exhibitionInfos.map((val, index) => {
+                  return (
+                    <div
+                      key={val.id}
+                      className="recommendation-card-exhibition"
+                      onClick={() => goToExhibition(val.id)}
+                    >
+                      <img
+                        className="art-related"
+                        src={exhibitionPaths[index]}
+                        alt={val.description}
+                      />
+                      <div class="artitem-context">
+                        <h4 style={{ color: "#f6f6f6" }}>{val.title}</h4>
+                        <p style={{ color: "#222222" }}>{val.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
                 {userInfos.map((val, index) => {
                   return (
                     <div
                       key={val.id}
-                      className="recommendation-card"
+                      className="recommendation-card-user"
                       onClick={() => goToProfile(val.id)}
                     >
                       <img
@@ -190,7 +245,7 @@ function SearchResults(props) {
                         alt=""
                       />
                       <div class="profile-context">
-                        <h4>{val.username}</h4>
+                        <h4 style={{ color: "#000000" }}>{val.username}</h4>
                         {/*<p>{val.name}</p>
                     <p>{val.location}</p>*/}
                       </div>
