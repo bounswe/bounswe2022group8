@@ -1,1 +1,1 @@
-Since we used AWS Acces key and Secret key when we build our mobile project, we can share the [deployed app](https://drive.google.com/file/d/1XlLH6hBAzdBmDwWg4bOisOh7fzPPcBPu/view?usp=sharing) rather than the building steps.
+Since we used AWS Acces key and Secret key when we build our mobile project, we can share the [deployed app](https://drive.google.com/drive/folders/1NaEdDko7TS6xYg-C_MleVoO33yP-qhrz) rather than the building steps.
