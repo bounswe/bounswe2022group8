@@ -155,7 +155,7 @@ function SearchResults(props) {
           <h1 className="page-header">Search results for {input}</h1>
           <div className="art-gallery">
             {noResult ? (
-              <div className="no-results-found">No results found</div>
+              <div className="no-results-found">No results found...</div>
             ) : (
               <>
                 {artItemInfos.map((val, index) => {
