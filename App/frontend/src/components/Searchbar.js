@@ -11,8 +11,6 @@ function Searchbar() {
     setInput(e.target.value);
   }
 
-  console.log(input);
-
   return (
     <InputGroup>
       <InputGroup.Text id="search-icon" className="search-icon">

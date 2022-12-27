@@ -180,7 +180,6 @@ function Profile(props) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response["Virtual Exhibitions"]);
         response = response["Virtual Exhibitions"].owner;
 
         var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;

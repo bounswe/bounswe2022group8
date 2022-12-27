@@ -140,15 +140,6 @@ function UploadOnlineExhibitionCard(props) {
     } else if (title === "" || description === "" || posterPreview === "") {
       props.setUploadInfoError(true);
     } else {
-      const temp = base64Images.map((base64) => ({
-        title: title,
-        description: `This art item is part of the ${title} exhibition and was uploaded exclusively for this exhibition`,
-        tags: [],
-        category: "OT",
-        artitem_image: base64,
-      }));
-
-      console.log(temp);
       setIsLoading(true);
       fetch(`${host}/api/v1/exhibitions/me/online/`, {
         method: "POST",

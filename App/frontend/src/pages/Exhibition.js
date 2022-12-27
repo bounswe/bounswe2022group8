@@ -85,7 +85,6 @@ function Exhibition(props) {
       .then((response) => response.json())
       .then((response) => {
         var artitem_gallery_ids = response.artitems_gallery.map(({ id }) => id);
-        console.log(response.artitems_upload);
         var artitem_upload_ids = response.artitems_upload.map(({ id }) => id);
         var exhibition_ids = artitem_gallery_ids.concat(artitem_upload_ids);
 
