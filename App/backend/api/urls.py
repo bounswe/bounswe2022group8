@@ -111,7 +111,7 @@ urlpatterns = [
     path('artitems/tags/', artitems_by_tags, name="get_artitems_by_tags"),
     path('search/lexical/', LexSearchView.as_view(), name='LexicalSearch'),
     path('search/lexical/users/', LexSearchUserView.as_view(), name='LexicalSearchUser'),
-    path('search/lexical/exhibitions/offline', search_offline_exhibitions_lexical.as_view(), name="search_offline_exhibitions"),
+    path('search/lexical/exhibitions/offline/', search_offline_exhibitions_lexical.as_view(), name="search_offline_exhibitions"),
     path('search/lexical/exhibitions/online/', search_virtual_exhibitions_lexical.as_view(), name="search_virtual_exhibitions")
 ]
 
