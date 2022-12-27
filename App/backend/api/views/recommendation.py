@@ -150,7 +150,10 @@ def RecommendArtItemView(request):
                             artitems.append(item)
                     if(len(artitems)>=15):
                         break
-
+            artitemIDs = set()
+            for artitem in artitems:
+                artitemIDs.add(artitem.id)
+            artitems = [ArtItem.objects.get(pk=id) for id in artitemIDs]
             #print(artitems)
             serializer = ArtItemSerializer(artitems, many=True)
             message = {'artitems': serializer.data}
