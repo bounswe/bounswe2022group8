@@ -610,7 +610,7 @@ function Profile(props) {
                 closeUploadArtitemCard={() => setUpload(false)}
                 tags={tags}
               />
-              <div style={{ color: "white" }}>PHYSICAL EXHIBITIONS HERE</div>
+              {/*<div style={{ color: "white" }}>PHYSICAL EXHIBITIONS HERE</div>*/}
             </>
           )}
         </main>
