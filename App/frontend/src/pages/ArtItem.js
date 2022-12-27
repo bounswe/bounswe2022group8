@@ -8,6 +8,7 @@ import Layout from "../layout/Layout";
 import * as dotenv from "dotenv";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoIosHeart } from "react-icons/io";
+import moment from "moment";
 
 import "./styles/ArtItem.css";
 
@@ -43,7 +44,7 @@ function ArtItem(props) {
   const [anno, setAnno] = useState();
 
   const [isHideAnnoButtonClicked, setIsHideAnnoButtonClicked] = useState(false);
-
+  const [currentUsername, setCurrentUsername] = useState("");
   //const [clickedAnnotationText, setClickedAnnotationText] = useState(null);
   //const [clickedAnnotationOwner, setClickedAnnotationOwner] = useState(null);
   /*Image Annotation*/
@@ -321,6 +322,7 @@ function ArtItem(props) {
         .then((response) => {
           //console.log(response);
           setUserid(response.id);
+          setCurrentUsername(response.username);
         })
         .catch((error) => console.error("Error:", error));
     }
@@ -335,23 +337,14 @@ function ArtItem(props) {
         annotorious = new Annotorious({
           image: imageElement.current,
           widgets: ["COMMENT"],
+          allowEmpty: true,
         });
 
-        fetch(`${host}/api/v1/users/profile/${userid}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-        })
-          .then((response2) => response2.json())
-          .then((response2) => {
-            annotorious.setAuthInfo({
-              id: userid,
-              displayName: response2.username,
-            });
-          })
-          .catch((error) => console.error("Error:", error));
+        annotorious.setAuthInfo({
+          id: userid,
+          displayName: currentUsername,
+        });
+
         //console.log(imageElement);
 
         // Load annotations in W3C Web Annotation format
@@ -411,6 +404,19 @@ function ArtItem(props) {
         //...annotation backend connection...
         // Event handlers
         annotorious.on("createAnnotation", (annotation) => {
+          console.log("f", annotation);
+          if (annotation.body.length === 0) {
+            var now = moment().format();
+            annotation.body = [
+              {
+                value: "",
+                purpose: "commenting",
+                type: "TextualBody",
+                creator: { id: userid, name: currentUsername },
+                created: now,
+              },
+            ];
+          }
           annotorious.readOnly = false;
           annotation["creator"] = `${userid}`;
           annotation["target"]["source"] =
@@ -481,27 +487,44 @@ function ArtItem(props) {
         const r = new Recogito({
           content: textElement.current,
           widgets: ["COMMENT"],
+          allowEmpty: true,
         });
 
-        fetch(`${host}/api/v1/users/profile/${userid}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-        })
-          .then((response2) => response2.json())
-          .then((response2) => {
-            r.setAuthInfo({
-              id: userid,
-              displayName: response2.username,
-            });
+        r.setAuthInfo({
+          id: userid,
+          displayName: currentUsername,
+        });
+
+        r.loadAnnotations(
+          `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
+        )
+          .then((response) => {
+            console.log(response);
           })
           .catch((error) => console.error("Error:", error));
 
         r.on("selectAnnotation", (selected) => {
           console.log("selected", selected);
           //console.log("id",selected["body"][0]["creator"]["id"]);
+          if (selected.body.length === 0) {
+            var now = moment().format();
+            selected.body = [
+              {
+                value: "",
+                purpose: "commenting",
+                type: "TextualBody",
+                creator: { id: userid, name: currentUsername },
+                created: now,
+              },
+            ];
+            r.loadAnnotations(
+              `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
+            )
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => console.error("Error:", error));
+          }
           try {
             if (parseInt(selected["body"][0]["creator"]["id"]) === userid) {
               r.readOnly = false;
@@ -516,17 +539,22 @@ function ArtItem(props) {
         r.on("cancelSelected", (selected) => {
           r.readOnly = false;
         });
-        r.loadAnnotations(
-          `${annotationhost}/api/v1/annotations/text/artitems/${artitem_id}`
-        )
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => console.error("Error:", error));
 
         // Event handlers
         r.on("createAnnotation", (annotation) => {
-          console.log(annotation);
+          //console.log(annotation);
+          if (annotation.body.length === 0) {
+            var now = moment().format();
+            annotation.body = [
+              {
+                value: "",
+                purpose: "commenting",
+                type: "TextualBody",
+                creator: { id: userid, name: currentUsername },
+                created: now,
+              },
+            ];
+          }
           annotation["creator"] = userid;
           annotation["target"]["source"] = artitemSrc.split(/[?]/)[0];
           //fetch with method 'POST'
