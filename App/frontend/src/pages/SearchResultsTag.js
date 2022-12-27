@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 
 import "./styles/Recommendation.css";
 
-function SearchResults(props) {
+function SearchResultsTag(props) {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -31,6 +31,55 @@ function SearchResults(props) {
   });
 
   const s3 = new AWS.S3();
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/artitems/tags/?tags=${tag_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setArtItemInfos(response);
+
+        var bucket = process.env.REACT_APP_AWS_STORAGE_BUCKET_NAME;
+        var art_item_paths = [];
+
+        for (let i = 0; i < response.length; i++) {
+          var params = {
+            Bucket: bucket,
+            Key: response[i].artitem_path,
+          };
+
+          var artitem_url = s3.getSignedUrl("getObject", params);
+
+          art_item_paths.push(artitem_url);
+        }
+
+        setArtItemPaths(art_item_paths);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, tag_id]);
+
+  useEffect(() => {
+    fetch(`${host}/api/v1/tags/${tag_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setTagName(response.tagname);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, [host, tag_id]);
+
+  function goToArtItem(id) {
+    navigate(`/artitems/${id}`);
+    scrollToTop();
+  }
 
   return (
     <Layout>
@@ -64,4 +113,4 @@ function SearchResults(props) {
   );
 }
 
-export default SearchResults;
+export default SearchResultsTag;

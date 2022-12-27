@@ -135,6 +135,7 @@ function Layout(props) {
           mainbarOpen={mainbarOpen}
           sidebarOpen={sidebarOpen}
           onClickMenu={() => handleSidebar()}
+          //setSearchInput={}
         />
       ) : (
         <Mainbar
@@ -143,6 +144,7 @@ function Layout(props) {
           onClickLogIn={() => handleLogIn()}
           onClickSignUp={() => handleSignUp()}
           onClickMenu={() => handleSidebar()}
+          //setSearchInput={}
         />
       )}
 

@@ -115,6 +115,7 @@ def RecommendArtItemView(request):
 
             artitems = []
 
+            # exclude(virtualExhibition__isnull = False)
             firstcategory = ArtItem.objects.filter(category = category1).exclude(virtualExhibition__isnull = False)
             for item in firstcategory:
                 histories = History.objects.filter(user=user, is_art=True, art_id=item.id)

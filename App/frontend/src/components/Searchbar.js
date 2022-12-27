@@ -4,11 +4,11 @@ import Form from "react-bootstrap/Form";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./styles/Searchbar.css";
 
-function Searchbar() {
-  const [input, setInput] = useState("");
+function Searchbar(props) {
+  const [searchInput, setSearchInput] = useState("");
 
-  function handleInput(e) {
-    setInput(e.target.value);
+  function handleSearchInput(e) {
+    setSearchInput(e.target.value);
   }
 
   return (
@@ -21,8 +21,8 @@ function Searchbar() {
         placeholder="Search for art items, exhibitions, artists..."
         className="search-bar"
         aria-label="Search"
-        value={input}
-        onChange={(e) => handleInput(e)}
+        value={searchInput}
+        onChange={(e) => handleSearchInput(e)}
       />
     </InputGroup>
   );
