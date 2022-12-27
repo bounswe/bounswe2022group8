@@ -28,7 +28,11 @@ function HomeGalleryCard(props) {
         <div className="gallery-header">Featured Art Items</div>
         <div className="gallery-row">
           <HomeImageCard
-            onClick={() => goToArtItem(1)}
+            onClick={
+              {
+                /*() => goToArtItem(1)*/
+              }
+            }
             source={lost}
             name="Lost Highway"
           />
