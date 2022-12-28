@@ -39,3 +39,9 @@
   border-bottom-right-radius: 0px;
   margin-right: -0.8rem;
 }
+
+.search-icon:hover,
+.search-icon:active {
+  opacity: 0.8;
+  cursor: pointer;
+}

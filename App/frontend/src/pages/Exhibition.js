@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/authentication";
 import { HOST } from "../constants/host";
@@ -23,6 +23,10 @@ function Exhibition(props) {
   const { token } = useAuth();
   const { online_id } = useParams();
   const navigate = useNavigate();
+
+  const [leftRefs, setLeftRefs] = useState([]);
+  const [rightRefs, setRightRefs] = useState([]);
+  const [action, setAction] = useState("left");
 
   const [exhbitionSrcs, setExhibitionSrcs] = useState([]);
   const [exhibitionIDs, setExhibitionIDs] = useState([]);
@@ -56,6 +60,7 @@ function Exhibition(props) {
     if (focusIdx !== exhbitionSrcs.length - 1) {
       setFocusIdx(focusIdx + 1);
       setFocusSrc(exhbitionSrcs[focusIdx + 1]);
+      setAction("right");
     }
   }
 
@@ -63,8 +68,37 @@ function Exhibition(props) {
     if (focusIdx !== 0) {
       setFocusIdx(focusIdx - 1);
       setFocusSrc(exhbitionSrcs[focusIdx - 1]);
+      setAction("left");
     }
   }
+
+  useEffect(() => {
+    const keyDownHandler = (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        handlePrevious();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        handleNext();
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [focusSrc]);
+
+  useEffect(() => {
+    if (rightRefs.length !== 0) {
+      if (action === "left") {
+        leftRefs[focusIdx].current?.scrollIntoView({ behavior: "smooth" });
+      } else if (action === "right") {
+        rightRefs[focusIdx].current?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [focusSrc]);
 
   const AWS = require("aws-sdk");
   dotenv.config();
@@ -163,18 +197,38 @@ function Exhibition(props) {
         );
 
         setExhibitionSrcs(exhibition_srcs);
+
+        setLeftRefs(
+          Array(exhibition_srcs.length)
+            .fill()
+            .map((_, i) => leftRefs[i] || createRef())
+        );
+
+        setRightRefs(
+          Array(exhibition_srcs.length)
+            .fill()
+            .map((_, i) => rightRefs[i] || createRef())
+        );
       })
       .catch((error) => console.error("Error:", error));
   }, [host]);
 
   // GET CURRENTLY LOGGED IN USERS' ID
   useEffect(() => {
-    fetch(`${host}/api/v1/users/profile/me/`, {
-      method: "GET",
-      headers: {
+    var config = {};
+
+    if (token) {
+      config = {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
-      },
+      };
+    } else {
+      config = { "Content-Type": "application/json" };
+    }
+
+    fetch(`${host}/api/v1/users/profile/me/`, {
+      method: "GET",
+      headers: config,
     })
       .then((response) => response.json())
       .then((response) => {
@@ -210,21 +264,27 @@ function Exhibition(props) {
             <div className="exhibition-linear-container">
               {exhbitionSrcs.map((source, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="exhibition-linear-image-wrap"
-                    onClick={() => handleFocus(source, index)}
-                    style={{
-                      border: index === focusIdx ? "2px solid white" : "none",
-                    }}
-                  >
-                    <img
-                      className="exhibition-linear-image"
-                      src={source}
-                      alt=""
-                    />
-                    <div className="exhibition-linear-image-cover"></div>
-                  </div>
+                  <>
+                    {leftRefs.length !== 0 && <div ref={leftRefs[index]}></div>}
+                    <div
+                      key={index}
+                      className="exhibition-linear-image-wrap"
+                      onClick={() => handleFocus(source, index)}
+                      style={{
+                        border: index === focusIdx ? "2px solid white" : "none",
+                      }}
+                    >
+                      <img
+                        className="exhibition-linear-image"
+                        src={source}
+                        alt=""
+                      />
+                      <div className="exhibition-linear-image-cover"></div>
+                    </div>
+                    {rightRefs.length !== 0 && (
+                      <div ref={rightRefs[index]}></div>
+                    )}
+                  </>
                 );
               })}
             </div>

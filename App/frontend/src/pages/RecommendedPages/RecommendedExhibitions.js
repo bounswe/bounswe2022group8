@@ -5,8 +5,6 @@ import { HOST } from "../../constants/host";
 import * as dotenv from "dotenv";
 import { useAuth } from "../../auth/authentication";
 
-import { SampleExhibitions } from "../data/SampleExhibitions";
-
 import "../styles/Recommendation.css";
 
 function RecommendedExhibitions(props) {
@@ -77,42 +75,26 @@ function RecommendedExhibitions(props) {
       <div class="recommendation-container">
         <div class="recommendation-grid">
           <h1 className="page-header">Discover Exhibitions</h1>
-
-          {exhibitionInfos.length !== 0 ? (
-            <div className="art-gallery">
-              {exhibitionInfos.slice(0, 5).map((val, index) => {
-                return (
-                  <div
-                    key={val.id}
-                    className="recommendation-card"
-                    onClick={() => goToExhibition(val.id)}
-                  >
-                    <img
-                      className="art-related"
-                      src={exhibitionPaths[index]}
-                      alt={val.description}
-                    />
-                    <div class="artitem-context">
-                      <h4>{val.title}</h4>
-                    </div>
+          <div className="art-gallery">
+            {exhibitionInfos.map((val, index) => {
+              return (
+                <div
+                  key={val.id}
+                  className="recommendation-card"
+                  onClick={() => goToExhibition(val.id)}
+                >
+                  <img
+                    className="art-related"
+                    src={exhibitionPaths[index]}
+                    alt={val.description}
+                  />
+                  <div class="artitem-context">
+                    <h4>{val.title}</h4>
                   </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="art-gallery">
-              {SampleExhibitions.map((val, key) => {
-                return (
-                  <div key={key} className="recommendation-card">
-                    <img className="art-related" src={val.src} alt="" />
-                    <div class="artitem-context">
-                      <h4>{val.name}</h4>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Layout>

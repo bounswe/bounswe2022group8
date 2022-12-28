@@ -21,6 +21,10 @@ function SearchResults(props) {
   const { input } = useParams();
   const navigate = useNavigate();
 
+  const [artitemsRendered, setArtitemsRendered] = useState(false);
+  const [exhibitionsRendered, setExhibitionsRendered] = useState(false);
+  const [usersRendered, setUsersRendered] = useState(false);
+
   const [artItemInfos, setArtItemInfos] = useState([]);
   const [artItemPaths, setArtItemPaths] = useState([]);
   const [exhibitionInfos, setExhibitionInfos] = useState([]);
@@ -67,6 +71,8 @@ function SearchResults(props) {
         setArtItemPaths(art_item_paths);
       })
       .catch((error) => console.error("Error:", error));
+
+    setArtitemsRendered(true);
   }, [host, input]);
 
   useEffect(() => {
@@ -97,6 +103,8 @@ function SearchResults(props) {
         setExhibitionPaths(poster_paths);
       })
       .catch((error) => console.error("Error:", error));
+
+    setExhibitionsRendered(true);
   }, [host, input]);
 
   useEffect(() => {
@@ -127,6 +135,8 @@ function SearchResults(props) {
         setUserPaths(user_paths);
       })
       .catch((error) => console.error("Error:", error));
+
+    setUsersRendered(true);
   }, [host, input]);
 
   useEffect(() => {
@@ -153,14 +163,16 @@ function SearchResults(props) {
   }, [host]);
 
   useEffect(() => {
-    if (
-      artItemInfos.length === 0 &&
-      exhibitionInfos.length === 0 &&
-      userInfos.length === 0
-    ) {
-      setNoResult(true);
-    } else {
-      setNoResult(false);
+    if (artitemsRendered && exhibitionsRendered && usersRendered) {
+      if (
+        artItemInfos.length === 0 &&
+        exhibitionInfos.length === 0 &&
+        userInfos.length === 0
+      ) {
+        setNoResult(true);
+      } else {
+        setNoResult(false);
+      }
     }
   }, [artItemInfos, exhibitionInfos, userInfos]);
 

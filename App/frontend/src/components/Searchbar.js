@@ -6,6 +6,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 import "./styles/Searchbar.css";
 
 function Searchbar() {
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }
+
   const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState("");
@@ -14,25 +22,39 @@ function Searchbar() {
     setSearchInput(e.target.value);
   }
 
+  function handleSearchIconClick() {
+    if (searchInput !== "") {
+      navigate(`/search/${searchInput}`);
+      scrollToTop();
+    }
+  }
+
   useEffect(() => {
-    const keyDownHandler = (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
+    if (searchInput !== "") {
+      const keyDownHandler = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
 
-        navigate(`/search/${searchInput}`);
-      }
-    };
+          navigate(`/search/${searchInput}`);
+          scrollToTop();
+        }
+      };
 
-    document.addEventListener("keydown", keyDownHandler);
+      document.addEventListener("keydown", keyDownHandler);
 
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
+      return () => {
+        document.removeEventListener("keydown", keyDownHandler);
+      };
+    }
   }, [searchInput]);
 
   return (
     <InputGroup>
-      <InputGroup.Text id="search-icon" className="search-icon">
+      <InputGroup.Text
+        id="search-icon"
+        className="search-icon"
+        onClick={handleSearchIconClick}
+      >
         <AiOutlineSearch />
       </InputGroup.Text>
       <Form.Control

@@ -7,7 +7,6 @@ import Layout from "../layout/Layout";
 
 import "./styles/Recommendation.css";
 import * as dotenv from "dotenv";
-import { SampleExhibitions } from "./data/SampleExhibitions";
 
 function Recommendation(props) {
   function scrollToTop() {
@@ -220,41 +219,26 @@ function Recommendation(props) {
             </Link>
           </div>
 
-          {exhibitionInfos.length !== 0 ? (
-            <div class="list">
-              {exhibitionInfos.slice(0, 5).map((val, index) => {
-                return (
-                  <div
-                    key={val.id}
-                    className="recommendation-card"
-                    onClick={() => goToExhibition(val.id)}
-                  >
-                    <img
-                      className="art-related"
-                      src={exhibitionPaths[index]}
-                      alt={val.description}
-                    />
-                    <div class="artitem-context">
-                      <h4>{val.title}</h4>
-                    </div>
+          <div class="list">
+            {exhibitionInfos.slice(0, 5).map((val, index) => {
+              return (
+                <div
+                  key={val.id}
+                  className="recommendation-card"
+                  onClick={() => goToExhibition(val.id)}
+                >
+                  <img
+                    className="art-related"
+                    src={exhibitionPaths[index]}
+                    alt={val.description}
+                  />
+                  <div class="artitem-context">
+                    <h4>{val.title}</h4>
                   </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div class="list">
-              {SampleExhibitions.map((val, key) => {
-                return (
-                  <div key={key} className="recommendation-card">
-                    <img className="art-related" src={val.src} alt="" />
-                    <div class="artitem-context">
-                      <h4>{val.name}</h4>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div class="recommendation-grid">
