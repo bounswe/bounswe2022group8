@@ -14,7 +14,7 @@
 
 **Important:** 
 * Final deployment tagged version link: https://github.com/bounswe/bounswe2022group8/releases/tag/customer-presentation-3
-* [Project Plan]((https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan))
+* [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
 * [Requirements](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)
 * [Use Case Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram)
 * [Sequence Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)
@@ -312,7 +312,7 @@ Output will be as follows:
 * Annotation service is completely up and ready for the usage of frontend/mobile, serving on http://34.125.134.88:7000/. 
 * Swagger documentation with detailed input/output examples can be examined on http://34.125.134.88:7000/api/v1/swagger/schema/.
 * Unittests covering the functionalities provided by Annotation APIs can be found [here](https://github.com/bounswe/bounswe2022group8/blob/master/App/annotations/api/test.py). 
-* the work we have completed towards the application of the W3C
+* The work we have completed towards the application of the W3C
 standards with respect to Annotations can be found in the next section.
 
 ## 8. Standards
