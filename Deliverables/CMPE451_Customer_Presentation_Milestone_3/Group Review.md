@@ -421,7 +421,8 @@ Output will be as follows:
 
 <details>
     <summary>Mobile</summary>
-</detail>
+</details>
+
 
 ## 7. Annotations
 ### Frontend
