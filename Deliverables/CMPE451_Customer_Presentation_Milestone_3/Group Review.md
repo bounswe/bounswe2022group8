@@ -336,53 +336,73 @@ Output will be as follows:
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Profile.js)
 * UI:
+    ![profile1](https://user-images.githubusercontent.com/98259272/210138542-a4dba10e-7fe3-4dfd-8cae-843b12dc7dcf.png)
+    ![profile2](https://user-images.githubusercontent.com/98259272/210138544-6d9a8ee2-7547-47b5-be06-63a73167d702.png)
+    ![profile3](https://user-images.githubusercontent.com/98259272/210138545-78989429-4b97-4d5f-b189-19599f8c8259.png)
+  
+#### Upload Card
     
+* [Code-upload-artitem](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/UploadArtitemCard.js)
+* UI:
+    ![upload1](https://user-images.githubusercontent.com/98259272/210138548-6b7404e5-eae1-47a7-a701-3fbe4251f37b.png)
+    
+* [Code-upload-exhibition1](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/UploadOnlineExhibitionCard.js)
+* [Code-upload-exhibition2](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/ArtItemSelection.js)
+* UI:
+    ![upload2](https://user-images.githubusercontent.com/98259272/210138551-04283d01-23af-4c3e-a81a-aa77aa4ac0c6.png)
+    ![upload2 1](https://user-images.githubusercontent.com/98259272/210138549-6ef01423-6eed-48b5-8b3a-5ead9bcf8f18.png)
+    ![upload2 2](https://user-images.githubusercontent.com/98259272/210138550-a97b9e06-504d-4d60-85ab-c2014d7dc8cf.png)
+ 
 #### Other Users Profile Page
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/ProfileOther.js)
 * UI:
- 
+    ![otherusersprofile](https://user-images.githubusercontent.com/98259272/210138540-f6cd9e9a-f491-48be-9996-15a868e6590a.png)
+
 #### Art Item Page
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/ArtItem.js)
 * UI:
-   
+    ![artitem1](https://user-images.githubusercontent.com/98259272/210138527-e1fc6ee6-23ec-4932-8b12-9c34187ea80d.png)
+    ![artitem2](https://user-images.githubusercontent.com/98259272/210138528-8b719066-ae7f-40cc-a39a-d099f5d42d6b.png)
    
 #### Exhibition
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Exhibition.js)
 * UI:
-       
+    ![exhibition](https://user-images.githubusercontent.com/98259272/210138538-1bd16514-59bb-4f0c-aad9-d78cd74ab00a.png)   
     
 #### Sidebar
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/layout/Sidebar.js)
 * UI:
-  
+    ![sidebar](https://user-images.githubusercontent.com/98259272/210138547-49549a87-143c-4f9a-bc6d-00c30f561f87.png)
   
 #### Discover Page
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Recommendation.js)
 * UI:
-   
-    
+   ![discover1](https://user-images.githubusercontent.com/98259272/210138529-5a493d50-c19b-47d3-9ee7-a01b0c2a4eae.png)
+    ![discover2](https://user-images.githubusercontent.com/98259272/210138530-58ee5e31-be01-495d-8708-b51944a1af98.png)
+    ![discover3](https://user-images.githubusercontent.com/98259272/210138531-265ca202-6f2b-4fd8-8002-c3139092ddcc.png)
+  
 #### Discover Art Items Page
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedArtitems.js)
 * UI:
-  
+    ![discoverartitem](https://user-images.githubusercontent.com/98259272/210138532-5f2355fd-fde6-4209-8523-38cabcca5050.png)
     
 #### Discover Exhibitions Page
     
-* [Code]()
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedExhibitions.js)
 * UI:
-   
+   ![discoverexhibitions](https://user-images.githubusercontent.com/98259272/210138534-efc91a73-5815-45d2-ae5a-f0173f4cf7df.png)
 
 #### Discover Users Page
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedUsers.js)
 * UI:
-       
+    ![discoverusers](https://user-images.githubusercontent.com/98259272/210138535-56efb0c7-2e09-45c8-9f25-f2bec5a8dde5.png)   
     
 #### Settings Page
     
@@ -395,6 +415,7 @@ Output will be as follows:
     
 * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/SearchResults.js)
 * UI:
+    ![searchresults](https://user-images.githubusercontent.com/98259272/210138546-a134c03d-0371-46f2-bf9c-57816e35ae39.png)
     
 </details>   
 
