@@ -304,6 +304,103 @@ Output will be as follows:
 
 ## 6. User Interface and User Experience
 
+<details>
+    <summary>Web</summary>
+    
+#### Home Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Home.js)
+* UI: 
+    ![home1](https://user-images.githubusercontent.com/98259272/206314671-eb4af8f4-8797-4566-bda5-080aaa9887b0.png)
+    ![home2](https://user-images.githubusercontent.com/98259272/206314697-bda8a10b-5ae5-4067-9288-fba2c832e600.png)
+    ![home3](https://user-images.githubusercontent.com/98259272/206314712-4f061c77-5682-43dc-a6df-b2e7f52e8bc3.png)
+#### Login Pop-up
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/LoginModal.js) 
+* UI:
+    ![login](https://user-images.githubusercontent.com/98259272/206314720-4d8d4686-a2ed-4e5f-bedc-91f47cd60b48.png)
+
+#### Sign up Pop-up
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/SignupModal.js)
+* UI:
+    ![sign up](https://user-images.githubusercontent.com/98259272/206314739-5d915561-841c-4fc1-aa34-1ae606aba007.png)
+    
+#### Reset Password Pop-up
+    
+ * [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/components/ResetPasswordModal.js)
+ * UI:
+    ![forgotpassword](https://user-images.githubusercontent.com/98259272/206521742-d41bf4a8-331b-4567-ae2a-d8400b53404a.png)
+
+#### Profile Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Profile.js)
+* UI:
+    
+#### Other Users Profile Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/ProfileOther.js)
+* UI:
+ 
+#### Art Item Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/ArtItem.js)
+* UI:
+   
+   
+#### Exhibition
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Exhibition.js)
+* UI:
+       
+    
+#### Sidebar
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/layout/Sidebar.js)
+* UI:
+  
+  
+#### Discover Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Recommendation.js)
+* UI:
+   
+    
+#### Discover Art Items Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedArtitems.js)
+* UI:
+  
+    
+#### Discover Exhibitions Page
+    
+* [Code]()
+* UI:
+   
+
+#### Discover Users Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/RecommendedPages/RecommendedUsers.js)
+* UI:
+       
+    
+#### Settings Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/Settings.js) 
+* UI:
+    ![settings1](https://user-images.githubusercontent.com/98259272/206314803-0b12152a-c167-4cc4-8b89-373c2ef5c228.png)
+    ![settings2](https://user-images.githubusercontent.com/98259272/206314814-b4355a4a-b507-4bf0-b828-a7f4b9c68880.png)
+
+#### Search Results Page
+    
+* [Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/frontend/src/pages/SearchResults.js)
+* UI:
+    
+</details>   
+
+<details>
+    <summary>Mobile</summary>
+</detail>
 
 ## 7. Annotations
 ### Frontend
