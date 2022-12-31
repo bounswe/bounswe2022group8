@@ -426,6 +426,9 @@ Output will be as follows:
 
 ## 7. Annotations
 ### Frontend
+* @recogito/recogito-js react library is used to handle text annotations on title and description of artitems on artitem page. 
+* @recogito/annotorious react library is used image annotations on image on artitem page.
+* Both libraries conforms to the web annotation standards and compatible with React.js. Also, both provides opportunity to add more fields to data modal in order to meet the needs of the backend. By the functions and user editor both libraries provide, annotation user interface was handled faster and features to display information about annotations such as creator username and created time were provided to users and handled at coding side in a better way.
 ### Mobile
 ### Backend
 * Annotation service is completely up and ready for the usage of frontend/mobile, serving on http://34.125.134.88:7000/. 
