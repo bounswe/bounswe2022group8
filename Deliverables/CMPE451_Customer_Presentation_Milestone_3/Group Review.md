@@ -603,7 +603,60 @@ Here you can find an exemplary target from our application:
 <details>
     <summary> Sinem Koçoğlu </summary>
     
+I am Sinem Koçoğlu and I am member of group 8 frontend team.
 
+### Responsibilities
+* Implementation of annotations on frontend and fixing related bugs.
+* Implementation of bidding system on frontend.
+* Providing backend connection for recommendation pages.
+* PR Review:
+    * feature/FE-12
+    * feature/FE-18
+    * feature/FE-24
+    * feature/FE-25
+    * feature/FE-28
+    * feature/FE-29
+* Adding user interfaces for web to the Final Milestone document.
+* Updating scenario2-Artists with respect to the final version of the app.
+* Reviewed requirements related to annotation and bidding.
+
+### Main Contributions
+I have implemented anything related to annotation on frontend and fixed related bugs by communicating with Karahan Sarıtaş, member of backend team. Then, I worked on implementation of bidding system on frontend. After completion of it, I took the the responsibility of providing backend connection of recommendation pages. For Milestone, I reviewed requirements related to annotation and bidding system, added user interfaces for the web and updated 2nd user scenario-Artist.
+    
+**Code Related Issues**
+* [FE-19](https://github.com/bounswe/bounswe2022group8/issues/308)
+* [FE-27](https://github.com/bounswe/bounswe2022group8/issues/377)
+* [FE-31](https://github.com/bounswe/bounswe2022group8/issues/393)
+
+**Management Related Issues**
+
+**Pull Requests**
+* [feature/FE-19](https://github.com/bounswe/bounswe2022group8/pull/376)
+* [bugfix/FE-19](https://github.com/bounswe/bounswe2022group8/pull/389)
+* [hotfix/FE-33](https://github.com/bounswe/bounswe2022group8/pull/417)
+* [feature/FE-27](https://github.com/bounswe/bounswe2022group8/pull/392)
+* [feature/FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)
+
+**Unit Tests**
+
+You can find frotend unittests [here](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
+
+My unittests:
+    
+* SignupModal.test.js
+* SettingsProfilePopUp.test.js
+* SettingsPasswordPopUp.test.js
+
+
+**Additional**
+    
+PR reviews:
+* [FE-29](https://github.com/bounswe/bounswe2022group8/pull/396)
+* [FE-28](https://github.com/bounswe/bounswe2022group8/pull/394)
+* [FE-25](https://github.com/bounswe/bounswe2022group8/pull/375)
+* [FE-24](https://github.com/bounswe/bounswe2022group8/pull/374)
+* [FE-18](https://github.com/bounswe/bounswe2022group8/pull/360)
+* [FE-12](https://github.com/bounswe/bounswe2022group8/pull/355)
 
 
 </details>
