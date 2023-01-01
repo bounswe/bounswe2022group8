@@ -75,6 +75,16 @@
 
 <details>
     <summary> Sinem Koçoğlu </summary>
+    
+|  Task Type   | Task Description   |Related Link(s) |
+|  :----:        |  :----:   |  :----: |
+|  Implementation | Implementation of annotations on frontend and fixing related bugs  | [#308](https://github.com/bounswe/bounswe2022group8/issues/308), [PR](https://github.com/bounswe/bounswe2022group8/pull/376), [PR](https://github.com/bounswe/bounswe2022group8/pull/389) [PR](https://github.com/bounswe/bounswe2022group8/pull/417) |
+| Implementation | Implementation of bidding system on frontend | [#377](https://github.com/bounswe/bounswe2022group8/issues/377), [PR](https://github.com/bounswe/bounswe2022group8/pull/392)   |
+| Implementation | Providing backend connection for recommendation pages | [#393](https://github.com/bounswe/bounswe2022group8/issues/393), [PR](https://github.com/bounswe/bounswe2022group8/pull/408) | 
+| Documentation | Updating scenario2-Artists with respect to the final version of the app | [wiki](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2) |
+| Documentation/Review | Reviewed annotation and bidding related requirements |  [#414](https://github.com/bounswe/bounswe2022group8/issues/414) |  
+| Code Review | Reviewed PRs belonging to frontend. | [FE-29](https://github.com/bounswe/bounswe2022group8/pull/396), [FE-28](https://github.com/bounswe/bounswe2022group8/pull/394), [FE-25](https://github.com/bounswe/bounswe2022group8/pull/375), [FE-24](https://github.com/bounswe/bounswe2022group8/pull/374), [FE-18](https://github.com/bounswe/bounswe2022group8/pull/360), [FE-12](https://github.com/bounswe/bounswe2022group8/pull/355)|  
+
  
 </details>
 
