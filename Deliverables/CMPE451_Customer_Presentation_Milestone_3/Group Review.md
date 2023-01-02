@@ -969,7 +969,7 @@ I tried to add both image and text annotation on mobile application. But I was u
 
 <details>
     <summary> Metehan Dündar </summary>
-I am [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar), a member of group 8. I work on the mobile team.
+I am Metehan Dündar, a member of group 8. I work on the mobile team.
 
 ## Milestone 1
 ### Milestone 1 Responsibilities
