@@ -16,3 +16,4 @@ also provide instructions for use with an emulator.
   * Collaborator
 * [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
 * Unit tests
+   * [Frontend Tests](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
