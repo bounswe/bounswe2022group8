@@ -808,6 +808,80 @@ PR reviews:
 
 <details>
     <summary> Elif Bayraktar </summary>
+    
+### Responsibilities
+* Figuring out and implementing how to track user activity. Creating a separate app for user history.
+* Updating type/category structure of Art Items.
+* Implementing User Level system including API and automatic update.
+* Implementation of Bidding System. Both infrastructure models and APIs.
+* Implementation of Recommendation System. 
+  * Implementation of popularity separately for artitem, user and exhibitions, taking into account different parameters including aging with time.
+  * Implementation of user interests model, necessary signals, connections for updating.
+  * Implementation of recommendation APIs, including logged in and anonymous cases.
+* Implementation of unittests.
+* Creating a release draft and reviewing requirements for release.
+* Revising all requirements marking their status.
+* Update and addition of new requirements.
+* Updating the use case diagram.
+* Writing part of executive summary.
+* Reviewing PRs, and keeping up with overall project status at all times.
+
+### Main Contributions
+I listed above my main contributions. I tried to fulfill my responsibilities in time. I kept in touch with teammates, and tried to help run development process as smoothly as possible. Documented my work in detail.
+    
+**Code Related Issues**
+* [BE-32 : User History](https://github.com/bounswe/bounswe2022group8/issues/353)
+* [BE-35: Art Item Category](https://github.com/bounswe/bounswe2022group8/issues/357)
+* [BE-36: User Level](https://github.com/bounswe/bounswe2022group8/issues/361)
+* [BE-38: Bidding System](https://github.com/bounswe/bounswe2022group8/issues/369)
+* [BE-40: Recommendation System](https://github.com/bounswe/bounswe2022group8/issues/372)
+* [BE-43: BE Tests+](https://github.com/bounswe/bounswe2022group8/issues/403)
+
+
+**Management Related Issues**
+* [MIL-22: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/414)
+* [MIL-29: Status of the requirements](https://github.com/bounswe/bounswe2022group8/issues/425)
+* [MIL-32: Use Case Diagram Update](https://github.com/bounswe/bounswe2022group8/issues/428)
+* [MIL-39: Executive/ what could have been done differently](https://github.com/bounswe/bounswe2022group8/issues/440)
+
+**Pull Requests**
+* [feature/BE-32 : User History](https://github.com/bounswe/bounswe2022group8/pull/354)
+* [feature/BE-35: Art Item Category](https://github.com/bounswe/bounswe2022group8/pull/358)
+* [feature/BE-36: User Level](https://github.com/bounswe/bounswe2022group8/pull/364)
+* [feature/BE-38: Bidding System](https://github.com/bounswe/bounswe2022group8/pull/371)
+* [feature/BE-40: Recommendation System](https://github.com/bounswe/bounswe2022group8/pull/386)
+* [feature/BE-43: Backend Unittests [2]](https://github.com/bounswe/bounswe2022group8/pull/404)
+* [hotfix/BE-38: new_bids reset](https://github.com/bounswe/bounswe2022group8/pull/397)
+
+
+**Unit Tests**
+* `test_open_item_for_sale`
+* `test_bid_on_art_item`
+* `test_bid_on_art_item_fail`
+* `test_get_all_bids_on_art_item`
+* `test_get_bids_on_art_item_fail`
+* `test_reply_to_bid`
+* `test_get_bid`
+* `test_recommendation_artitem`
+* `test_recommendation_artitem_viewed`
+* `test_recommendation_artitem_anonymous`
+* `test_recommendation_exhibition_anonymous`
+* `test_recommendation_user`
+* `test_recommendation_user_following`
+* `test_comment_creation`
+* `test_comment_deletion_cascaded`
+* I also added documentation ofr test in the files.
+
+
+
+**Additional**
+
+PR Reviews:
+* [feature/BE-30: Exhibitions](https://github.com/bounswe/bounswe2022group8/pull/344) 
+* [feature/BE-39: Backend Unittests [1]](https://github.com/bounswe/bounswe2022group8/pull/382)
+* [feature/MIL-20: API Endpoints](https://github.com/bounswe/bounswe2022group8/pull/412)
+
+
  
     
 
