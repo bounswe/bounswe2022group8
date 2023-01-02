@@ -1213,10 +1213,49 @@ the help of Karahan and I evaluated the tools we have used in backend for the mi
 
     
 ## Milestone 2
-    
 
 ### Mil-2 Responsibilities
 
+* Implementing the Tag related API endpoints.
+* Testing the API endpoints I have written and documenting them using Swagger.
+* Reviewing and testing my backendteam-members' PRs.
+* Researching user flags in Django to implement tag creation and deletion APIs.
+* Presenting the artist use case scenario during the second customer review.
+* Helping the new backend team member get onboard.
+
+### Main Contribution
+    
+My main contributions include coding API endpoints as well as supporting the team in management related issues. I tried to review my teammates's work quickly as possible to help the team progress and did my best to implement API endpoints.
+
+**Code Related Issues**
+
+* [BE-23: [API] Tag Managing](https://github.com/bounswe/bounswe2022group8/issues/277)
+* [BE-25: Research on Moderator Flags](https://github.com/bounswe/bounswe2022group8/issues/278)
+* [BE-26: [API] Semantic and Lexical Search](https://github.com/bounswe/bounswe2022group8/issues/279)
+    
+**Management Related Issues**
+
+* [MIL-10: Milestone 2 Requirements](https://github.com/bounswe/bounswe2022group8/issues/299)
+* [Meeting Notes: Week 9 BE Meeting 4](https://github.com/bounswe/bounswe2022group8/issues/297)
+* [Week 9 - Meeting #6(29.11.2022)](https://github.com/bounswe/bounswe2022group8/issues/296)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
+* [BE-31: Meeting Notes: Week 7 Backend-Meeting #3](https://github.com/bounswe/bounswe2022group8/issues/264)
+    
+**Pull Requests**
+* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
+
+**Unit Tests**
+    
+Unfortunately I didn't write any unit tests.
+
+**Additional Information**
+    
+PR reviews
+
+* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294#issuecomment-1331032342)
+* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/291#issuecomment-1331030915)
+* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249#issuecomment-1318197777)
+* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247#issuecomment-1318189615)
 
 
 </details>
@@ -1454,59 +1493,7 @@ Cancelled PR: [feature/BE-26: Full Text Search](https://github.com/bounswe/bouns
 
 <details>
     <summary> Doğukan Türksoy </summary>
-## Milestone 2
-
-I am Doğukan Türksoy, a member of group 8. I am at mobile part of our project.
-
-### Responsibilities
-I am responsible for mobile part and deployment. 
-
-### Main Contributions
-For this milestone I mainly worked on backend-mobile connections of out project. I connected profile page, update profile page, upload art item page, reset password , home page, art item page and comment pages. Moreover, worked on the connection of AWS S3 bucket to the mobile for fetching images. I also deployed the frontend, backend and mobile. <br/>
-
-***Code Related Issues***
-* [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)
-* [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)
-* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
-
-***Management Related Issues***
-* [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)
-* [MIL-18: User Interface / User Experience](https://github.com/bounswe/bounswe2022group8/issues/349)
-
-***Pull Requests***
-* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
-* [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
-
-## Milestone 3
-### MIL 3 - Responsibilities
-* Implementation of like functionality of mobile.
-* Implementation of text annotation backend connections of mobile.
-* Implementation of search functionality backend connections of mobile.
-* Improvement on the styling when necessary.
-* PR and issue reviews on the mobile.
-* Backend PR reviews when necessary.
-* Helping backend and frontend teams when necessary.
-* System manuals for frontend and mobile
-* All deployments (frontend, backend, annotations, mobile)
-
-### MIL 3 - Main contributions
-For the final milestone, I took responsibility for the backend connections for Mobile team. I managed backend connections and page transitions. I also deployed the app on cloud and created .apk file.
-
-**Code Related Issues**
-* [MOB-21](https://github.com/bounswe/bounswe2022group8/issues/379) 
-* [MOB-29](https://github.com/bounswe/bounswe2022group8/issues/437)
-
-
-**Management Related Issues**
-* [MIL-33](https://github.com/bounswe/bounswe2022group8/issues/430)
-* [MIL-34](https://github.com/bounswe/bounswe2022group8/issues/431)
-* [MIL-35](https://github.com/bounswe/bounswe2022group8/issues/432)
-
-
-**Pull Requests**
-* [feature/MOB-21](https://github.com/bounswe/bounswe2022group8/pull/380)
-* [feature/MOB-28](https://github.com/bounswe/bounswe2022group8/pull/411)
-* [feature/MOB-29](https://github.com/bounswe/bounswe2022group8/pull/416)    
+    
 
    </details>
 
