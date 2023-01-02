@@ -107,7 +107,14 @@ Features implemented in the remaining time were:
 
 <details>
     <summary> Metehan Dündar </summary>
-
+    
+|  Task Type   | Task Description |  Time Spent    |Related Link(s) |
+|  :----:      |  :----:          |  :----:        |  :----:        |
+|  Planning  |  Week12 General Meeting After Presentation     |  60 minutes  |   |
+|  Planning  |  Attended all weeks' lab session for planning the course of the project.     |  300 minutes  |   |
+|  Research  |  Researched about dart language to implement raw, column, widget etc. |  60 minutes  |   | 
+|  Implementation  |  Implemented the following & follower users' page |  300 minutes  | [feature/MOB-21](https://github.com/bounswe/bounswe2022group8/tree/feature/MOB-21)   |
+|  Presentation  |  Preparing for presentation of the mobile team and its application at final customer meeting |  60 minutes  |   | 
 
 </details>
 
