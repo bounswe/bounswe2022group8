@@ -178,7 +178,7 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 |[Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)| Completed | - |
 |Individual Contribution Reports | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_3/Group%20Review.md#9-individual-reports)|
 |[Web App](http://34.125.134.88/#) | Completed | - |
-|Mobile App - APK | Completed | [Latest version]([https://drive.google.com/drive/folders/1pxyOYx00xKzcZZpRGAp4a4VH943BzH--?usp=share_link](https://drive.google.com/drive/folders/1NaEdDko7TS6xYg-C_MleVoO33yP-qhrz))|
+|Mobile App - APK | Completed | [Latest version](https://drive.google.com/drive/folders/1NaEdDko7TS6xYg-C_MleVoO33yP-qhrz)|
 |Group Review | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_3/Group%20Review.md)|
 
 
