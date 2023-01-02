@@ -115,7 +115,7 @@ For the third milestone stage we connected our exhibition page, we have fully im
 | Implementation | Implementation of tag selection/multi selection dropdown, tag by search page interface and the necessary tag related connections to backend  | [#378](https://github.com/bounswe/bounswe2022group8/issues/378), [PR](https://github.com/bounswe/bounswe2022group8/pull/394) |
 | Implementation | Implementation of online exhibition upload interface, online exhibition page and the necessary backend connections and redirections   | [#383](https://github.com/bounswe/bounswe2022group8/issues/383), [PR](https://github.com/bounswe/bounswe2022group8/pull/396)  |
 | Implementation | Implementation of search result page and searchbar backend connections | [#406](https://github.com/bounswe/bounswe2022group8/issues/406), [PR](https://github.com/bounswe/bounswe2022group8/pull/415) |
-| Code Review    | Reviewed some frontend and backend PRs  | [BE-37](https://github.com/bounswe/bounswe2022group8/pull/368), [FE-19](https://github.com/bounswe/bounswe2022group8/pull/376), [BE-30.1](https://github.com/bounswe/bounswe2022group8/pull/390), [FE-27](https://github.com/bounswe/bounswe2022group8/pull/392), [BE-30.2](https://github.com/bounswe/bounswe2022group8/pull/392), [FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)   |
+| Code Review    | Reviewed some frontend and backend PRs  | [BE-37](https://github.com/bounswe/bounswe2022group8/pull/368), [FE-19](https://github.com/bounswe/bounswe2022group8/pull/376), [BE-30.1](https://github.com/bounswe/bounswe2022group8/pull/390), [FE-27](https://github.com/bounswe/bounswe2022group8/pull/392), [BE-30.2](https://github.com/bounswe/bounswe2022group8/pull/395), [FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)   |
 
 
 </details>   
@@ -834,6 +834,45 @@ PR reviews:
 * Updating the project plan
     
 ### MIL 3 - Main contributions
+For the final milestone, I took responsibility for the front-end of the features that we had targeted for the previous milestone but couldn't deliver. On top of that, I took responsibility for everything related to exhibition and search on the front-end. In short, for this milestone, I was directly involved in the implementation and design of the following features: other's profile page, like, follow/unfollow, reset/forgot password, tags, dropdowns, deletion of artitems/exhibitions, online exhibiton and search. Apart from these, I have been in constant contact with the backend during the whole project and whenever Sinem, the other member of the frontend team, needed help, I tried to help as much as I could. Lastly, I was responsible for monitoring and updating the project plan. 
+    
+**Code Related Issues**
+* [FE-10](https://github.com/bounswe/bounswe2022group8/issues/241) 
+* [FE-12](https://github.com/bounswe/bounswe2022group8/issues/260)
+* [FE-24](https://github.com/bounswe/bounswe2022group8/issues/362) 
+* [FE-25](https://github.com/bounswe/bounswe2022group8/issues/363)
+* [FE-26](https://github.com/bounswe/bounswe2022group8/issues/373) 
+* [FE-28](https://github.com/bounswe/bounswe2022group8/issues/378)  
+* [FE-29](https://github.com/bounswe/bounswe2022group8/issues/383) 
+* [FE-32](https://github.com/bounswe/bounswe2022group8/issues/406)   
+    
+**Management Related Issues**
+    
+**Pull Requests**
+* [feature/FE-12](https://github.com/bounswe/bounswe2022group8/pull/355)
+* [feature/FE-18](https://github.com/bounswe/bounswe2022group8/pull/360)
+* [feature/FE-24](https://github.com/bounswe/bounswe2022group8/pull/374)
+* [feature/FE-25](https://github.com/bounswe/bounswe2022group8/pull/375)
+* [feature/FE-28](https://github.com/bounswe/bounswe2022group8/pull/394)
+* [feature/FE-29](https://github.com/bounswe/bounswe2022group8/pull/396)
+* [feature/FE-32](https://github.com/bounswe/bounswe2022group8/pull/415)
+
+**Unit Tests**
+    
+
+**Additional**
+  
+PR reviews:
+* [BE-37](https://github.com/bounswe/bounswe2022group8/pull/368)
+* [FE-19](https://github.com/bounswe/bounswe2022group8/pull/376)
+* [BE-30.1](https://github.com/bounswe/bounswe2022group8/pull/390)
+* [FE-27](https://github.com/bounswe/bounswe2022group8/pull/392)
+* [BE-30.2](https://github.com/bounswe/bounswe2022group8/pull/395)
+* [FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)
+    
+    
+    
+
 
 </details>
 
