@@ -696,6 +696,78 @@ Here you can find an exemplary target from our application:
 
 <details>
     <summary> Mustafa Cihan </summary>
+    I am Mustafa Cihan, a team member of the Group 8. I specificly work on the Mobile development part of our project. 
+
+## Milestone 1
+### Milestone 1 Responsibilities
+I am responsible for mobile application. For this milestone I mostly worked on frontend of mobile application. I designed landing page, login page, signup page and home page. Also I implemented pages that I designed. I set up inital mobile application that my team built desired functionalities. I am responsible for general mobile application development frame. 
+
+### Milestone 1 Main Contributions
+I designed and implemented landing page, login page, signup page and home page. I set up inital mobile application that my team built desired functionalities. I mainly worked on mobile app so I gave most of my effort to develop mobile application. 
+
+**Code Related Issues**
+* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198)
+* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213)
+* [MOB-5: Adding error notifications on login and sign-up]()
+* [MOB-3: Connecting Mobile App with Backend](https://github.com/bounswe/bounswe2022group8/issues/208) made [commit](https://github.com/bounswe/bounswe2022group8/commit/ab54c1f7421d943cb31c427005342a2c24466440)  to this issue.
+
+**Management Related Issues**
+* [GEN-27: Meeting Notes: Week#4 Meeting#4](https://github.com/bounswe/bounswe2022group8/issues/207)
+* [MOB-2: Meeting Notes: Week#3 Mobile Meeting#1](https://github.com/bounswe/bounswe2022group8/issues/205)
+* [GEN-25:Revise the Copyright Infringement Requirement](https://github.com/bounswe/bounswe2022group8/issues/178)
+* [GEN-21: Create a Wikipage for Conventions](https://github.com/bounswe/bounswe2022group8/issues/173)
+* [GEN-3: Week #1 Meeting #1 Notes](https://github.com/bounswe/bounswe2022group8/issues/155)
+
+**Pull Requests**
+* [feature/MOB-1](https://github.com/bounswe/bounswe2022group8/pull/204)
+* [feature/MOB-4](https://github.com/bounswe/bounswe2022group8/pull/216)
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219)
+* Reviewed [Feature/MOB-3](https://github.com/bounswe/bounswe2022group8/pull/221)
+
+## Milestone 2
+### Milestone 2 Responsibilities
+In this milestone I am responsible for redesigning and implementing art item page, homepage and comment page. I am also responsible for implementing like and unlike functionality. In comment page user can add comments and view comments. In art item page user can see art item definition likes and comments. 
+
+### Milestone 2 Main Contributions
+I redesigned most of the pages in a way that customers wanted. Mainly I worked on art item page, homepage and comment page. I designed these pages and implemented them. In art item page user can see art item definition likes and comments. I choose to not include these fields to homepage so users can easliy focus on the art item. So in art item page user can see definition of art item. By clicking comment button on art item user can go to comment sections and view comments and/or add comments. Also user can like or unlike art items.
+
+**Code Related Issues**
+* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
+* [MOB-15: Static Comment Page](https://github.com/bounswe/bounswe2022group8/issues/315)
+* [MOB-14: Revising Homepage](https://github.com/bounswe/bounswe2022group8/issues/289)
+* [MOB-13: Revise Signup and Login page](https://github.com/bounswe/bounswe2022group8/issues/287)
+* [MOB-8: Creating Art Item Pages](https://github.com/bounswe/bounswe2022group8/issues/282)
+* [MOB-6: Revising Landing Page](https://github.com/bounswe/bounswe2022group8/issues/238)
+  
+**Management Related Issues**
+* Unfortunatelly, I don't have any management related issues.
+
+**Pull Requests**
+* [feature/MOB-6](https://github.com/bounswe/bounswe2022group8/pull/239)
+* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314)
+* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
+
+## Milestone 3
+### Milestone 3 Responsibilities
+In this milestone I am mainly responsible for annotations on mobile applications. Some other responsibilities are fixing bugs and making design changes in required pages.
+
+### Milestone 3 Main Contributions
+I tried to add both image and text annotation on mobile application. But I was unable to add image annotation. I made deep research about how can i make annotations. I tried to find annotation library in flutter project but unfortunatelly I couldn't find any. So i designed and implemented text annotation based on the researches that i made. I also fixed some bugs and made design changes in required pages.
+
+**Code Related Issues**
+* [MOB-24: Like Functionality](https://github.com/bounswe/bounswe2022group8/issues/399)
+* [MOB-22: Text Annotations](https://github.com/bounswe/bounswe2022group8/issues/398)
+
+**Management Related Issues**
+* [MIL-30: Status of The Annotations in Mobile Application](https://github.com/bounswe/bounswe2022group8/issues/426)
+* [MIL-38: Adding Mobile UI to Document](https://github.com/bounswe/bounswe2022group8/issues/436)
+
+**Pull Requests**
+* [feature/MOB-24](https://github.com/bounswe/bounswe2022group8/pull/401)
+* [feature/MOB-22](https://github.com/bounswe/bounswe2022group8/pull/400)
+* [Feature/MOB-21: Bug fixes after Milestone 2](https://github.com/bounswe/bounswe2022group8/pull/380)
+
+
 
 </details>
 
