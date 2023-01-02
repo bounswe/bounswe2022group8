@@ -820,6 +820,20 @@ PR reviews:
     
     
 ## Milestone 3
+### MIL 3 - Responsibilities
+* Implementation of other user's profile page.
+* Implementation of like functionality on frontend.
+* Implementation of follow/unfollow functionalities on frontend.
+* Implementation of forgot/reset password interfaces and backend connections.
+* Implementation of tag related interfaces and backend connections.
+* Implementation of exhibiton related interfaces and backend connections.
+* Implementation of search related interfaces and backend connections.
+* Improvement on the styling when necessary.
+* PR and issue reviews on the frontend.
+* Backend PR reviews when necessary.
+* Updating the project plan
+    
+### MIL 3 - Main contributions
 
 </details>
 
