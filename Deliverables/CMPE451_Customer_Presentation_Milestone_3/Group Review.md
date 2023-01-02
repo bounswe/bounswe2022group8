@@ -706,9 +706,38 @@ I implemented a profile page that allows users to dislay their uploaded art item
 <details>
     <summary> Furkan Keskin </summary>
     
-    I'm Furkan Keskin and I'm a member of the group 8 frontend team.
+I'm Furkan Keskin and I'm a member of the group 8 frontend team.
 
 ## Milestone 1    
+### MIL 1 - Responsibilities
+* Research on frontend tools.
+* Determining the color palette.
+* Creation of the layout.
+* Design and implementation of initial home page structure.
+* Design and implementation of navigation bar, search bar and side bar.
+* Implementation of login, signup pop-ups and backdrop.
+* Design and implementation of image and gallery cards.
+* Design and implementation of the footer.
+* Preparing a welcome card.
+* Preparing a sample gallery.
+* Finding and styling logos compatible with our theme for the necessary parts.
+    
+### MIL 1 - Main Contributions
+After researching the frontend tools with Sinem for a long time and deciding what to use, I reviewed a lot of art related websites to give ideas for design and functionality. I then created a draft color palette and layout (continuously updated throughout the development period). Afterwards, I did the entire design and styling of the home page including navigation bar, search bar, side bar, pop-ups, backdrop, cards, footer and necessary transitions of the components. During this process I also created a welcome card and a gallery of exhibitions to make our site look more aesthetically pleasing. Also, I put a lot of effort to make our site look good not only on big screens but also on small screens and implemented some styling differences for small screens. Finally, I designed and implemented the necessary components for authentication and created error messages for incorrect entries in sign up / log in forms.
+    
+
+**Code Related Issues**
+* [FE-2](https://github.com/bounswe/bounswe2022group8/issues/185): Research on Frontend Tools 
+* [FE-6](https://github.com/bounswe/bounswe2022group8/issues/231): Form errors and Log out
+    
+**Management Related Issues**
+* [GEN-30](https://github.com/bounswe/bounswe2022group8/issues/230): Update the project plan
+* [FE-1](https://github.com/bounswe/bounswe2022group8/issues/184): Meeting Notes: Week#3 Frontend Meeting#1
+    
+ **Pull Requests**
+* [Feature/FE-3](https://github.com/bounswe/bounswe2022group8/pull/220)
+* [Feature/FE-6](https://github.com/bounswe/bounswe2022group8/pull/223)
+* Reviewed [Feature/FE-5](https://github.com/bounswe/bounswe2022group8/pull/218)
     
 ## Milestone 2
 ### MIL 2 - Responsibilities
