@@ -17,3 +17,5 @@ also provide instructions for use with an emulator.
 * [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
 * Unit tests
    * [Frontend Tests](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
+   * [Backend - Application Tests](https://github.com/bounswe/bounswe2022group8/tree/master/App/backend/api/tests)
+   * [Backend - Annotation Tests](https://github.com/bounswe/bounswe2022group8/blob/master/App/annotations/api/test.py)
