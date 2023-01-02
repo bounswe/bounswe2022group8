@@ -102,6 +102,20 @@ For the third milestone stage we connected our exhibition page, we have fully im
 <details>
     <summary> Furkan Keskin </summary>
  
+|  Task Type   | Task Description   |Related Link(s) |
+|  :----:        |  :----:   |  :----: |
+| Implementation | Implementation of others' profile page | [#241](https://github.com/bounswe/bounswe2022group8/issues/241), [PR](https://github.com/bounswe/bounswe2022group8/pull/360) |
+| Implementation | Implementation of Follow/Unfollow related interfaces and backend connections | [PR](https://github.com/bounswe/bounswe2022group8/pull/360)|
+| Implementation | Implementation of Like functionality on frontend  | [#362](https://github.com/bounswe/bounswe2022group8/issues/362), [PR](https://github.com/bounswe/bounswe2022group8/pull/374)   |
+| Implementation| Implementation of Forgot/Reset password on frontend | [#260](https://github.com/bounswe/bounswe2022group8/issues/260), [PR](https://github.com/bounswe/bounswe2022group8/pull/355) |
+| Implementation | Improvement on the guest users' user experience  | [PR](https://github.com/bounswe/bounswe2022group8/pull/360)  |
+| Implementation | Significant improvements on the recommendation pages  | [PR](https://github.com/bounswe/bounswe2022group8/pull/360)   |
+| Implementation | Implemented category interface/dropdown selection on frontend  | [#363](https://github.com/bounswe/bounswe2022group8/issues/363), [PR](https://github.com/bounswe/bounswe2022group8/pull/375)  |
+| Implementation | Implementation of delete artitem/exhibition interfaces and backend connections  | [#373](https://github.com/bounswe/bounswe2022group8/issues/373), [PR](https://github.com/bounswe/bounswe2022group8/pull/375)  |
+| Implementation | Implementation of tag selection/multi selection dropdown, tag by search page interface and the necessary tag related connections to backend  | [#378](https://github.com/bounswe/bounswe2022group8/issues/378), [PR](https://github.com/bounswe/bounswe2022group8/pull/394) |
+| Implementation | Implementation of online exhibition upload interface, online exhibition page and the necessary backend connections and redirections   | [#383](https://github.com/bounswe/bounswe2022group8/issues/383), [PR](https://github.com/bounswe/bounswe2022group8/pull/396)  |
+| Implementation | Implementation of search result page and searchbar backend connections | [#406](https://github.com/bounswe/bounswe2022group8/issues/406), [PR](https://github.com/bounswe/bounswe2022group8/pull/415) |
+| Code Review    | Reviewed some frontend and backend PRs  | [BE-37](https://github.com/bounswe/bounswe2022group8/pull/368), [FE-19](https://github.com/bounswe/bounswe2022group8/pull/376), [BE-30.1](https://github.com/bounswe/bounswe2022group8/pull/390), [FE-27](https://github.com/bounswe/bounswe2022group8/pull/392), [BE-30.2](https://github.com/bounswe/bounswe2022group8/pull/392), [FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)   |
 
 
 </details>   
