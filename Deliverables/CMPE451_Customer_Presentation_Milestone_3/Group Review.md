@@ -809,7 +809,116 @@ PR reviews:
 <details>
     <summary> Elif Bayraktar </summary>
     
-### Responsibilities
+I am Elif Bayraktar, a member of Group 8, backend team. 
+
+## Milestone 1
+
+### MIL 1 -Responsibilities
+   1. Reviewing/updating requirements (Bidding system, Notifications, Level and Verification Systems)
+   2. Updating Use Case diagram.
+   3. Researching different authentication and authorization mechanisms to set up our project the right way.
+   4. Implementing the itinital models for the project.
+   5. Implementing serializers and creating the admin site.
+   6. Implementation of alternative registration API, using django authentication.
+   7. Researching and implementing CICD workflow.
+
+<details>
+    <summary> MIL 1- Summary of work </summary>
+
+| Hours spent | Task Type             | Task Description |
+|  :----:       |  :----:   |  :----: |
+|  Week 1       |  :----:   |  :----: |
+|  2 hours  |  planning   |  Attended [weekly meeting/lab](https://github.com/bounswe/bounswe2022group8/wiki/Week-1-Meeting-Notes-1). |
+|  15 minutes       |  documentation   |  Caught up with the repo updated necessary things.  |
+|  Week 2       |  :----:   |  :----: |
+|  1 hour 45 minutes  |  planning   |  Attended [weekly meeting/lab](https://github.com/bounswe/bounswe2022group8/wiki/Week-2-Meeting-%232). |
+|  2 hours  |  planning   |  Attended [weekly meeting](https://github.com/bounswe/bounswe2022group8/wiki/Week-2--Meeting-Notes-3). |
+|  2 hours       |  revision/documentation   |  Revised the requirements, critically revised Bidding system, Notifications, Level and Verification systems. Here are related issues [GEN-10](https://github.com/bounswe/bounswe2022group8/issues/162), [GEN-11](https://github.com/bounswe/bounswe2022group8/issues/163), [GEN-14](https://github.com/bounswe/bounswe2022group8/issues/166), [GEN-15](https://github.com/bounswe/bounswe2022group8/issues/167) |
+|  30 minutes  |  coding/upkeep   |  Updated issue template to include new member [GEN-12](https://github.com/bounswe/bounswe2022group8/issues/164). |
+|  15 minutes  |  documentation/wiki  |  Updated [questions and answers](https://github.com/bounswe/bounswe2022group8/wiki/Agenda-&-Questions-&-Answers) page [GEN-13](https://github.com/bounswe/bounswe2022group8/issues/165). |
+|  Week 3       |  :----:   |  :----: |
+|  1 hour 45 minutes  |  planning   |  Attended [weekly meeting/lab](https://github.com/bounswe/bounswe2022group8/wiki/Week-3-Backend-Meeting-Notes-1). |
+|  30 minutes       |  documentation   |  Updated Bidding System requirements in accordance with last group meeting's decisions.[GEN-14](https://github.com/bounswe/bounswe2022group8/issues/166)  |
+|  30 minutes       |  code review   |  Reviewed the initial for pull request. [Pull request](https://github.com/bounswe/bounswe2022group8/pull/180)  |
+|  5 hours  |  Research/Implementation   |  Researched authentication and authorization to set up the initial structure of the project the correct way. Implemented initial models. [BE-4](https://github.com/bounswe/bounswe2022group8/issues/187), [Pull request](https://github.com/bounswe/bounswe2022group8/pull/190) |
+|  30 minutes  |  planning   |  Attended backend catch-up meeting. |
+|  2 hours  |  coding/documentation   |  Wrote the [issue](https://github.com/bounswe/bounswe2022group8/issues/187) for initial models. Implemented serializers, decorator and created/configured admin site. [commit](https://github.com/bounswe/bounswe2022group8/pull/190/commits/c14653b56797783697286c367fc99f694e11f8ff) |
+|  40 minutes |  coding   |  Implemented initial homepage with templates. [commit](https://github.com/bounswe/bounswe2022group8/pull/190/commits/12d8b04e1501b8eeac734901b24529ff90b81f5e) |
+|  30 minutes  |  coding  |  Merging the branch, some updates. [comment](https://github.com/bounswe/bounswe2022group8/pull/190#issuecomment-1288081724) |
+|  45 minutes  |  research/review  |  Extra research about alternative methods of authentication, checking new commits to the repo. |
+|  45 minutes  |  research  |  Researching CI/CD. [BE-11](https://github.com/bounswe/bounswe2022group8/issues/209) |
+|  Week 4       |  :----:   |  :----: |
+|  2 hours  |  planning   |  Attended [weekly meeting/lab](https://github.com/bounswe/bounswe2022group8/wiki/Week-4--Meeting-Notes-4). |
+|  45 minutes       |  documentation   |  Created [wiki page](https://github.com/bounswe/bounswe2022group8/wiki/Django-Practices) for best django practices, and research links. [GEN-26](https://github.com/bounswe/bounswe2022group8/issues/197)  |
+|  3 hours  |  implementation   |  Implemented alternative register (and part of logout) API's that use django authentication rather than Knox. |
+|  5 hours  |  devops   |  Setting up Docker. |
+|  2.5 hours  |  learning/implementation/devops   |  Learned how to use GitHub Actions. Implemented a workflow including testing and dockerization. Need to make some updates for testing. [BE-11](https://github.com/bounswe/bounswe2022group8/issues/209) [Pull Request](https://github.com/bounswe/bounswe2022group8/pull/215) |
+|  1.5+ hours  |  reviewing   | Keeping up with repo, reviewing/updating mockups. [GEN-19](https://github.com/bounswe/bounswe2022group8/issues/171) |
+|  -  |  planning   |  Naming the app [GEN-28](https://github.com/bounswe/bounswe2022group8/issues/212) |
+|  1.25 hours  |  documentation   |  Updating timesheets. |
+|  2 hours  |  planning   |  Preparing for Milestone presentation. |
+|  1.1 hours  |  documentation   |  Preparing Personal Contribution report for milestone deliverables. |
+|  Week 5       |  :----:   |  :----: |
+|  1 hour  |  documentation   |  Organized and added [BE Meeting#2 notes](https://github.com/bounswe/bounswe2022group8/wiki/Week-5--BE-Meeting-%232-(02.11.2022)) to wiki. [Issue link](https://github.com/bounswe/bounswe2022group8/issues/240) |
+|         |  documentation   |  Adding work summary and work performed to Group Review Report, updating timesheet.  |
+
+</details>
+
+
+## Milestone 2
+
+### MIL 2 -Responsibilities
+* Creating APIs for password reset (both for with or without login)(x3 APIs in total).
+* Configuring app settings and an email server for sending automated otp emails through the app for password reset.
+* Updating the comment model to accommodate replies and the hierarchy (using django-mptt).
+* Creating APIs for CRUD comment operations and get all comments of art item(x5 APIs in total).
+* Creating Swagger documentation for all of these APIs.
+* Researching about GitHub Packages, Personal Access Tokens and how to use them in workflows.
+* Creating GitHub Workflow for building and pushing docker images.
+* Writing the executive summary for the milestone2 report.
+* PR Review: Swagger Integration feature/BE-14
+* PR Review: hotfix/BE-14
+* PR Review: Feature/BE-23 Tag APIs    
+* PR Review: feature/BE-27 Account deletion API
+
+
+
+### MIL 2 -Main Contributions
+I already listed my main responsibilities and contributions above. Other than those, I tried to write detailed explanations about usage of the tools I integrated (such as github packages) and provided detailed explanations for my PRs. I tried to help teammates with testing their code when available.
+    
+**Code Related Issues**
+* [BE-19: Implementation of Reset Password API (Forgot password & logged in)](https://github.com/bounswe/bounswe2022group8/issues/254)
+* [BE-20: Comment System](https://github.com/bounswe/bounswe2022group8/issues/261)
+* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
+    
+**Management Related Issues**
+* [MIL-8: Milestone 2 Group Review/Executive Summary](https://github.com/bounswe/bounswe2022group8/issues/295)
+* [BE-11: CI/CD Research and Implementation](https://github.com/bounswe/bounswe2022group8/issues/209)
+
+
+**Pull Requests**
+* [PR:Feature/be 19 ](https://github.com/bounswe/bounswe2022group8/pull/259)
+* [PR:Feature/be 20](https://github.com/bounswe/bounswe2022group8/pull/262)
+* [PR:Feature/BE11](https://github.com/bounswe/bounswe2022group8/pull/215)
+    
+
+**Unit Tests**
+
+* `test_comment_creation`
+* `test_comment_deletion_cascaded` 
+
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245)
+* [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
+* [PR:feature/BE-27 Account deletion API](https://github.com/bounswe/bounswe2022group8/pull/319)
+* [Feature/BE-23 Tag APIs](https://github.com/bounswe/bounswe2022group8/pull/292)
+
+
+## Milestone 3
+
+### MIL 3 - Responsibilities
 * Figuring out and implementing how to track user activity. Creating a separate app for user history.
 * Updating type/category structure of Art Items.
 * Implementing User Level system including API and automatic update.
@@ -826,7 +935,7 @@ PR reviews:
 * Writing part of executive summary.
 * Reviewing PRs, and keeping up with overall project status at all times.
 
-### Main Contributions
+### MIL 3 - Main Contributions
 I listed above my main contributions. I tried to fulfill my responsibilities in time. I kept in touch with teammates, and tried to help run development process as smoothly as possible. Documented my work in detail.
     
 **Code Related Issues**
@@ -870,7 +979,7 @@ I listed above my main contributions. I tried to fulfill my responsibilities in 
 * `test_recommendation_user_following`
 * `test_comment_creation`
 * `test_comment_deletion_cascaded`
-* I also added documentation ofr test in the files.
+* I also added documentation of tests in the files.
 
 
 
@@ -880,9 +989,6 @@ PR Reviews:
 * [feature/BE-30: Exhibitions](https://github.com/bounswe/bounswe2022group8/pull/344) 
 * [feature/BE-39: Backend Unittests [1]](https://github.com/bounswe/bounswe2022group8/pull/382)
 * [feature/MIL-20: API Endpoints](https://github.com/bounswe/bounswe2022group8/pull/412)
-
-
- 
     
 
 </details>
