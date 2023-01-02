@@ -65,20 +65,15 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
     <summary> Mustafa Emre Erengül </summary>
    
 |  Task Type   | Task Description |  Time Spent    |Related Link(s) |
- |  :----:        |  :----:   |  :----: |  :----: |
- |  Planning  |  Attended Week5 Group Meeting.    |  1 hour  |  [Week5- Group Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Meeting-Notes-5) |
- |  Planning  |  Attended Week5 Mobile Meeting.     |  1 hour  |  [Week5- MOB Meeting #2](https://github.com/bounswe/bounswe2022group8/wiki/Week-5-Mobile-Meeting-Notes-2) |
- |  Planning  |  Review the plan for the second milestone during the lab time.     |  1 hour  |   |
- |  Planning  |  Attended Week7 Mobile Meeting.     |  1 hour  |  [Week7- MOB Meeting #3](https://github.com/bounswe/bounswe2022group8/wiki/Week-7--MOB-Meeting-%233-(16.11.2022)) |
-| Research | Research about how to implement the page navigations. | 60 minutes | 
-| Implementation | Profile page with the header widget is created. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-| Implementation | Tabs are added and profile page is completed. | 180 minutes | [feature/MOB-7(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/280)  |
-|  Planning  |  Attended Week8 Mobile Meeting.     |  2 hours  |  [Week8- MOB Meeting #4](https://github.com/bounswe/bounswe2022group8/wiki/Week-8-MOB-Meeting-%234-(26.11.2022)) |
-| Implementation | Art item upload page is implemented. | 240 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-|  Planning  |  Attended Week9 Group Meeting.    |  1 hour  |  [Week9- Group Meeting #9](https://github.com/bounswe/bounswe2022group8/wiki/Week-9-Meeting-%236-(29.11.2022)) |
-| Implementation | Profile settings  page is implemented. | 180 minutes | [feature/MOB-8(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/288)  |
-| Implementation | Profile photo change page is implemented. | 150 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
-| Implementation | Change password page is implemented. | 180 minutes | [feature/MOB-9(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/327)  |
+|  :----:        |  :----:   |  :----: |  :----: |
+|  Planning  |  Review the plan for the final milestone during the lab time.     |  90 minutes  |   |
+|  Planning  |  Attended Week10 Group Meeting.    |  130 minutes  |  [Week10- Group Meeting #7](https://github.com/bounswe/bounswe2022group8/wiki/Week-10-Meeting-%237-(07.12.2022)) |
+| Implementation | Visiting Other User's Profile is implemented. | 180 minutes | [feature/MOB-22(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/391)  |
+| Implementation | Following and Unfollowing functionality is implemented. | 240 minutes | [feature/MOB-22(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/391)  |
+| Implementation | Search page with art item search and user search is created. | 180 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402)  |
+| Research | Research about how to implement the search functionality. | 60 minutes |
+| Implementation | Searching functionality is activated. | 240 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402  |
+| Implementation | Following/Followers page is made. | 150 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402)  |
 
 </details>
 
