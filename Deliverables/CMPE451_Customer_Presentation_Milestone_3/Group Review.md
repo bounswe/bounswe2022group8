@@ -192,6 +192,15 @@ Deployment | Annotation Deployment | [MIL-33: Deployment](https://github.com/bou
 
 <details>
     <summary> Mustafa Cihan </summary>
+    
+|  Task Type   | Task Description   | Related Link(s) |
+|  :----:        |  :----:   |   :----: |
+|  Research |  Annotations for mobile  |  [MOB-22](https://github.com/bounswe/bounswe2022group8/issues/398)|    
+|  Design |  Designing text annotation system for mobile  |  [MOB-22](https://github.com/bounswe/bounswe2022group8/issues/398)|    
+|  Implementation |  Text annotations for mobile  |  [MOB-22](https://github.com/bounswe/bounswe2022group8/issues/398)  |
+|  Implementation |  Like Functionality  |  [MOB-23](https://github.com/bounswe/bounswe2022group8/issues/399)|
+|  Doucmentation |   Status of The Annotations in Mobile Application | [MIL-30](https://github.com/bounswe/bounswe2022group8/issues/426) |
+|  Documentation |  Adding Mobile UI to Document |  [MIL-38](https://github.com/bounswe/bounswe2022group8/issues/436) |
   
     
 </details>
