@@ -53,12 +53,6 @@ The prioritizing of the implementation of the remaining functionalities helped u
 3. Recommendation system that tracks the user activity
 4. Bidding system for the art items
 
-### **What could have been done differently**
-
-&nbsp; &nbsp;&nbsp; Although we were very excited to see many of the features come to life, unfortunately some of the things we were planning on, didn’t make the cut. This was partly due to us and some planning errors and partly due to factors out of our control.  Looking back at our timeline, one crucial thing would be starting our implementations earlier and with more pace. Meaning, we should have implemented a bigger chunk of our functionalities before milestone 1, not just the main data structures and login/logout.   
-&nbsp; &nbsp; &nbsp;  In addition to that, recognizing process tracking (if everyone is where they are supposed to be in terms of implementation) and communication between subgroups, as major tasks of their own from the beginning, would have been helpful. When not planned for, these things either lead to unfair burden on some people or cause stalls in the development process. Although it sucks to admit it, everyone participating in everything mentality can only get us so far, and at some point it is more efficient to allocate management and tracking tasks to some people.  
-&nbsp; &nbsp; &nbsp;  Another thing would be, either having more people on the team learn how to use certain software development tools as a backup, or choosing more common and primitive tools and technologies (familiar to more people on the team) to work with. So that, it is easier to jump in and help if a subgroup is struggling with time. But then, we wouldn’t have this amazing looking interface, so not really. Considering the number of features and our experiences in development (with the learning curves), it was pretty obvious early on that we would struggle with time. Imagining this was a real life scenario, in order for all of the features to come to life, only viable solution I can think of is asking the customer either for more people on the team ready to work or an extension. After all, like couture, some things shouldn’t be rushed.
-
 
 ## 2. Summary of Work
 
@@ -117,6 +111,13 @@ The prioritizing of the implementation of the remaining functionalities helped u
 <details>
     <summary> Sena Mumcu </summary>
  
+|  Task Type   | Task Description   |Related Link(s) |
+|  :----:        |  :----:   |  :----: |
+|  Planning        |  Attended Week11 BE Meeting   |  [Meeting Notes](https://github.com/bounswe/bounswe2022group8/wiki/Week-11-BE-Meeting-%235-(13.12.2022)) |
+|  Implementation      |  Implementation of search related APIs   |  See [PR](https://github.com/bounswe/bounswe2022group8/pull/292) |
+| Milestone 3       |  Wrote the changes we made in our planning and development process since milestone 2   |  see [issue](https://github.com/bounswe/bounswe2022group8/issues/427) |
+|  Milestone 3        |  Prepared the system manual for the backend team   |  see [issue](https://github.com/bounswe/bounswe2022group8/issues/429) |
+    
 </details>
 
 <details>
