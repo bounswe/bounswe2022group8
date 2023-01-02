@@ -836,10 +836,10 @@ I implemented a profile page that allows users to display their uploaded art ite
     
 ## Milestone 3
 ### Milestone 3 Responsibilities
-In the mobile application part of our project, we had some implementations that we would like to add before the FinalMilestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating the search page and searching functionality, following/unfollowing a user, visiting other users profile page and following/followers page.
+In the mobile application part of our project, we had some implementations that we would like to add before the Final Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating the search page and searching functionality, following/unfollowing a user, visiting other users profile page and following/followers page.
     
 ### Milestone 3 Main Contributions
-I implemented a search page that allows users to search both other users or other user’s art items. One can now search with keywords to find their favorite art items. I also implement visiting other people’s profile feature so that one can see other user’s all art contributions. Moreover inside this page a user can follow/unfollow another user by simply clicking a follow button. Lastly I created following/followers page which allows users to who is following or being followed by a profile.  <br/>
+I implemented a search page that allows users to search both for other users or other user’s art items. One can now search with keywords to find their favorite art items. I also implement visiting other people’s profile feature so that one can see other user’s all art contributions. Moreover inside this page a user can follow/unfollow another user by simply clicking a follow/unfollow button. Lastly I created following/followers page which allows users to who is following or being followed by a profile.  <br/>
 
 **Milestone 3 Code Related Issues**
 * [MOB-25: Follower & Following Pages](https://github.com/bounswe/bounswe2022group8/issues/410) (contributed)
