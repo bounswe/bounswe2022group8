@@ -836,30 +836,28 @@ I implemented a profile page that allows users to display their uploaded art ite
     
 ## Milestone 3
 ### Milestone 3 Responsibilities
-In the mobile application part of our project, we had some implementations that we would like to add before the Second Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating a profile page, settings (editing profile) page, change password page, updating profile photo page and a page that allows users to add a new art item to their profile.
+In the mobile application part of our project, we had some implementations that we would like to add before the FinalMilestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating the search page and searching functionality, following/unfollowing a user, visiting other users profile page and following/followers page.
     
 ### Milestone 3 Main Contributions
-I implemented a profile page that allows users to dislay their uploaded art items and the exhibitions that they are attending. One can see user's username, name, surname, bio, location and profile photo by looking at this page. I also implement a settings page to enable users to make changes over this fields. Moreover a user can change his/her password and profile photo. Lastly I created an upload art item page which allows users to add new art items to their profile.  <br/>
+I implemented a search page that allows users to search both other users or other user’s art items. One can now search with keywords to find their favorite art items. I also implement visiting other people’s profile feature so that one can see other user’s all art contributions. Moreover inside this page a user can follow/unfollow another user by simply clicking a follow button. Lastly I created following/followers page which allows users to who is following or being followed by a profile.  <br/>
 
 **Milestone 3 Code Related Issues**
-* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
-* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
-* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
-* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
-* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
+* [MOB-25: Follower & Following Pages](https://github.com/bounswe/bounswe2022group8/issues/410) (contributed)
+* [MOB-26: Visiting Another User's Profile](https://github.com/bounswe/bounswe2022group8/issues/435) (implemented)
+* [MOB-27: Following and Unfollowing Functionality](https://github.com/bounswe/bounswe2022group8/issues/438) (implemented)
+* [MOB-28: Search Page and Searching Functionality](https://github.com/bounswe/bounswe2022group8/issues/439) (implemented)
     
 **Milestone 3 Management Related Issues**
-* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
-* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
+* [GEN-6: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/158) (completed)
+* [MIL-36: Reflections to the Final Milestone Demo](https://github.com/bounswe/bounswe2022group8/issues/433) (completed)
+* [MIL-37: Art Follower User Scenario](https://github.com/bounswe/bounswe2022group8/issues/434) (completed)
     
 **Milestone 3 Pull Requests**
-* [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
-* [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
-* [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
+* [feature/MOB-22 : Visiting Other Profiles & Follow and Unfollow Buttons](https://github.com/bounswe/bounswe2022group8/pull/391)
+* [feature/MOB-25 : Searching Users and Art Items](https://github.com/bounswe/bounswe2022group8/pull/402)
 
 ***Milestone 3 Additional***
-* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314) (reviewed)
-* [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
+* [feature/MOB-24](https://github.com/bounswe/bounswe2022group8/pull/401) (reviewed)
     
 </details>
 
