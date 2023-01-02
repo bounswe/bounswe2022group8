@@ -165,8 +165,8 @@ For the third milestone stage we connected our exhibition page, we have fully im
 
 ## 4. Progress According to Requirements
 
-* The requirements page of the application [here](https://github.com/bounswe/bounswe2022group8/wiki/Requirements).
-* Requirements satisfied so far: [Realized Requirements](https://github.com/bounswe/bounswe2022group8/wiki/Realized-Requirements)
+* The requirements page of the application [here](https://github.com/bounswe/bounswe2022group8/wiki/Requirements). Here status of the requirements are marked as (Completed), (In progress) or (Not started).
+* Requirements satisfied so far: [Realized Requirements](https://github.com/bounswe/bounswe2022group8/wiki/Realized-Requirements). Here you can find the latest version of the Software Requirements Specification, with updates and changes.
 
 ## 5. API Endpoints
 **@author: Karahan Sarıtaş**
