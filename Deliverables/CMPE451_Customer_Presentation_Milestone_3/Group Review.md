@@ -36,7 +36,7 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 
 **Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
 
-### *Changed in Development Process**
+### **Changes in Development Process**
 
 In the second Milestone, we couldn't showcase many of the backend functionalities we have implemented because 
 we had problems with the planning of the Front, Mobile, and Backend synchronization. After Milestone 2, we had a little missing functionalities
