@@ -147,6 +147,19 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
     <summary> Doğukan Türksoy </summary>
  
 
+Task Type | Task Description | Related Link(s)
+-- | -- | --
+Implementation | Implementation of bugs after Milestone2 | [MOB-21](https://github.com/bounswe/bounswe2022group8/issues/379)
+Implementation | Implementation of backend connection of annotations | [MOB-28](https://github.com/bounswe/bounswe2022group8/pull/411)
+Implementation | Search page backend connection implemented | [MOB-29](https://github.com/bounswe/bounswe2022group8/pull/416)
+Documentation | Creating System Manual for Frontend and Android | wiki
+Code Review | Reviewed PRs belonging to mobile. | [BE-30](https://github.com/bounswe/bounswe2022group8/pull/333) [MOB-22](https://github.com/bounswe/bounswe2022group8/issues/398), [MOB-25](https://github.com/bounswe/bounswe2022group8/pull/402)
+Deployment | Frontend Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
+Deployment | Backend Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
+Deployment | Android Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
+Deployment | Annotation Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
+
+
 </details>
 
 
@@ -158,7 +171,6 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 </details>
 
 
-## 3. Status of Deliverables
 
 ## 3. Status of Deliverables
 |Deliverable|Status|Changes| 
