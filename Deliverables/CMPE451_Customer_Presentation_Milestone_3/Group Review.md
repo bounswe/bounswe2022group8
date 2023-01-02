@@ -616,6 +616,32 @@ Here you can find an exemplary target from our application:
 <details>
     <summary> Mustafa Emre Erengül </summary>
 
+I am Mustafa Emre Erengül, a team member of the Group 8. I specificly work on the Mobile development part of our project.
+
+## Milestone 1
+### Milestone 1 Responsibilities
+Setting the environment for the mobile development and learning basic Flutter/Dart to implement the initial pages. Creating the basic version of the mobile app which can run the functionalities that Backend team provided. Debugging the error-messages and dependency problems. Preparing a simple & stable version of the mobile app for the Milestone 1 Customer presentation.
+    
+### Milestone 1 Main Contributions
+Help to launch the initial version of the mobile app. Contribute to creation of the 3 main pages (Sign-up, login and home pages) that are required for the Milestone 1. Also designing issues and the colour palette for the app background.<br/>
+
+**Milestone 1 Code Related Issues**
+* [MOB-1: Design and Code Flutter Files for Login and Sign-Up](https://github.com/bounswe/bounswe2022group8/issues/198) (reviewed & closed)
+* [MOB-4: Creating a Homepage](https://github.com/bounswe/bounswe2022group8/issues/213) (reviewed & closed)
+    
+**Milestone 1 Management Related Issues**
+* [GEN-4: Updating Wiki pages related to the last semester](https://github.com/bounswe/bounswe2022group8/issues/156) (opened)
+* [GEN-5: Adding CmpE451 section to the personal Timesheet pages](https://github.com/bounswe/bounswe2022group8/issues/157) (opened)
+* [GEN-7: Update the Communication Plan](https://github.com/bounswe/bounswe2022group8/issues/159) (contributed)
+* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162) (contributed)
+* [GEN-22: Revise Search](https://github.com/bounswe/bounswe2022group8/issues/174) (completed)
+* [GEN-23: Revise Location](https://github.com/bounswe/bounswe2022group8/issues/175) (completed)
+* [MIL-5: Milestone 1 Group Review](https://github.com/bounswe/bounswe2022group8/issues/226) (opened)
+    
+**Milestone 1 Pull Requests**
+* [feature/MOB-5](https://github.com/bounswe/bounswe2022group8/pull/219) (reviewed)
+
+## Milestone 2
     
 </details>
 
