@@ -3,7 +3,7 @@
 ### Table of Contents
 1. [Executive Summary](#1-executive-summary)
 2. [A Summary of work performed by each team member](#2-summary-of-work)
-3. [Status of deliverables of Milestone 1](#3-status-of-deliverables)
+3. [Status of deliverables of Milestone 3](#3-status-of-deliverables)
 4. [Progress according to requirements](#4-progress-according-to-requirements)
 5. [API Endpoints](#5-api-endpoints)
 6. [User Interface / User Experience](#6-user-interface-and-user-experience)
@@ -163,6 +163,21 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 
 ## 3. Status of Deliverables
 
+## 3. Status of Deliverables
+|Deliverable|Status|Changes| 
+|-----|:--------:|:------:| 
+|Software Requirements Specification | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Requirements)|
+|Software Design (UML):Use-Case Diagram | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Use-case-diagram)|
+|Software Design (UML):Class Diagram | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)|
+|Software Design (UML):Sequence Diagram | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)|
+|[Scenario: Art Follower User](https://github.com/bounswe/bounswe2022group8/wiki/Scenario:-Art-Follower-User) | Completed | - |
+|[Scenario: Verified User/Artist Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2) | Completed | - |
+|[Scenario: Collaboration Scenario](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-3) | Completed | - |
+|[Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)| Completed | - |
+|Individual Contribution Reports | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_3/Group%20Review.md#9-individual-reports)|
+|[Web App](http://34.125.134.88/#) | Completed | - |
+|Mobile App - APK | Completed | [Latest version]([https://drive.google.com/drive/folders/1pxyOYx00xKzcZZpRGAp4a4VH943BzH--?usp=share_link](https://drive.google.com/drive/folders/1NaEdDko7TS6xYg-C_MleVoO33yP-qhrz))|
+|Group Review | Completed | [Latest version](https://github.com/bounswe/bounswe2022group8/blob/feature/MIL/Deliverables/CMPE451_Customer_Presentation_Milestone_3/Group%20Review.md)|
 
 
 ## 4. Progress According to Requirements
