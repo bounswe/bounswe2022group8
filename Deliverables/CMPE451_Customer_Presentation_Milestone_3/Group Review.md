@@ -525,7 +525,6 @@ Output will be as follows:
 
 ##### [Forgot Password Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/forgot_password.dart)
 <img width="491" alt="Ekran Resmi 2023-01-02 22 46 01" src="https://user-images.githubusercontent.com/49492904/210273058-47af8f6e-8fe8-4c6d-9792-01b2774b4d41.png">
-![WhatsApp Image 2023-01-02 at 22 58 27](https://user-images.githubusercontent.com/49492904/210274417-5d038cba-9edd-4536-949d-b8a4bcc61b58.jpeg)
 
 ##### [Login Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/login_page.dart)
 <img width="492" alt="Ekran Resmi 2023-01-02 22 46 28" src="https://user-images.githubusercontent.com/49492904/210273088-970cb60e-4f72-4281-a8cc-d43c27204cf9.png">
