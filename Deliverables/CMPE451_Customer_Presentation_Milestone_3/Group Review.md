@@ -616,6 +616,89 @@ Here you can find an exemplary target from our application:
     
 I am Sinem Koçoğlu and I am member of group 8 frontend team.
 
+## Milestone 1
+    
+### Mil-1 Responsibilities
+* Creation of first design of login and signup pages.
+* Research on frontend tools.
+* Providing authentication for login and signup.
+* Providing connection to backend.
+* Dockerization of frontend.
+
+### Mil-1 Main Contributions
+I have created the first view for login and signup pages while creating the frontend project. I shared my knowledge about frontend tools with my teammate. Then, I studied and worked on authentication and tokenizaton for login and sign up. I configured backend and database on local in order to test if authentication and tokenization works well. I did research on dockerization of frontend projects and dockerize it.
+
+**Code Related Issues**
+* [FE-2](https://github.com/bounswe/bounswe2022group8/issues/185): Research on Frontend Tools 
+* [FE-3](https://github.com/bounswe/bounswe2022group8/issues/186): Design and code CSS Files for Login and Sign Up 
+* [FE-4](https://github.com/bounswe/bounswe2022group8/issues/203): Connection Between Backend and Frontend
+* [FE-5](https://github.com/bounswe/bounswe2022group8/issues/217): Dockerize frontend
+
+**Management Related Issues**
+* [GEN-16](https://github.com/bounswe/bounswe2022group8/issues/168): Revise Profile Management 
+* [GEN-17](https://github.com/bounswe/bounswe2022group8/issues/169): Revise Exhibition
+* [GEN-25](https://github.com/bounswe/bounswe2022group8/issues/177): Meeting Notes: Week#2 Meeting#3
+
+**Pull Requests**
+* [Feature/FE-5](https://github.com/bounswe/bounswe2022group8/pull/218)
+* Reviewed [Feature/FE-3](https://github.com/bounswe/bounswe2022group8/pull/220)
+* 
+**Additional Information**
+* First, I have created project in [CodeSandBox](https://codesandbox.io/s/artcommunityplatform-ilgl9c?file=/src/Login.js) to experience css tools.Then, Furkan Keskin took the responsibility of creating design by using css. That's way, he uploaded the project to git.
+* I did not create a pr to merge authentication file to the branch 'feature/FE-3' because I have already downloaded updated backend folder to my branch to test if everything worked well. Not to destruct folder structure, Furkan Keskin copied the only authentication file manually to his branch.
+
+## Milestone 2
+
+
+### Mil-2 Responsibilities
+* Creation of the first design of profile page.
+* Study different settings pages to discuss in lab session with Furkan Keskin.
+* Improvement on profile page and first design of art item page.
+* Creation and design of recommendation pages.
+* Logo integration and typo correction on frontend.
+* PR Review: hotfix/FE-20
+* PR Review: feature/FE-23
+* Adding user interfaces for web to the Milestone II document.
+* Taking notes during Week#10 Meeting#7
+* Providing follow functionality on frontend. (not completed due to health issues)
+* Providing hover over text annotation on frontend. (not completed due to health issues)
+
+### Mil-2 Main Contributions
+I have created the first design of profile page. Then, worked on design of settings page but I couldn't create a good design. That's why, Furkan Keskin took the responsibility of it and I created the first view of art item page that was improved by Furkan Keskin later. Then, I took the responsibility of creation of recommendation pages of frontend. I made changes according to the feedback we got in Milestone I presentation. I couldn't complete my tasks due to some health issues. They will be provided until final milestone.
+    
+**Code Related Issues**
+* [FE-10](https://github.com/bounswe/bounswe2022group8/issues/241)
+* [FE-15](https://github.com/bounswe/bounswe2022group8/issues/267)
+* [FE-16](https://github.com/bounswe/bounswe2022group8/issues/305)
+* [FE-17](https://github.com/bounswe/bounswe2022group8/issues/307)
+
+**Management Related Issues**
+* [GEN-36](https://github.com/bounswe/bounswe2022group8/issues/336)
+
+
+**Pull Requests**
+* [feature/FE-16](https://github.com/bounswe/bounswe2022group8/pull/309)
+* [feature/FE-15](https://github.com/bounswe/bounswe2022group8/pull/304)
+
+
+**Unit Tests**
+
+You can find frotend unittests [here](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
+
+My unittests:
+    
+* SignupModal.test.js
+* SettingsProfilePopUp.test.js
+* SettingsPasswordPopUp.test.js
+
+
+**Additional**
+    
+PR reviews:
+* [hotfix/FE-20](https://github.com/bounswe/bounswe2022group8/pull/337)
+* [feature/FE-23](https://github.com/bounswe/bounswe2022group8/pull/339)
+
+## Milestone 3
 ### Responsibilities
 * Implementation of annotations on frontend and fixing related bugs.
 * Implementation of bidding system on frontend.
@@ -649,15 +732,7 @@ I have implemented anything related to annotation on frontend and fixed related 
 * [feature/FE-31](https://github.com/bounswe/bounswe2022group8/pull/408)
 
 **Unit Tests**
-
-You can find frotend unittests [here](https://github.com/bounswe/bounswe2022group8/tree/master/App/frontend/src/components/__test__)
-
-My unittests:
     
-* SignupModal.test.js
-* SettingsProfilePopUp.test.js
-* SettingsPasswordPopUp.test.js
-
 
 **Additional**
     
