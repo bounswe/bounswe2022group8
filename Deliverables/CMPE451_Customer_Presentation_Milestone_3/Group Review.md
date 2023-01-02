@@ -28,6 +28,8 @@ For the third milestone stage we connected our exhibition page, we have fully im
 
 ### *Future Plans*
 
+### Reflections Related to the Final Milestone Demo
+The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome of almost 10 months of work. As a result of tremendous amount of effort and sleepless nights we finalized our product. It was a stable and error-free version of our project. Even though we had to re-plan our roadmap not to miss the deadlines, still we implemented most of the essential features of our given task. On the Final Milestone Demo day, we tried to show our implementations over personas and mock-ups as much as possible, however in terms of consistency we haven't stick to the same personas and scenarios throughout the three milestones. This might somewhat confused the customers and lost their influence. On the other hand our strong side was our design choices. As an instant customer feedback, our design (color palette, text style, contrast, coherence, etc.) was always appreciated by audience and customers. Simple and elegant choices of design attracted customer attention and boosted the positive feedbacks to the project.
 
 
 **Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
