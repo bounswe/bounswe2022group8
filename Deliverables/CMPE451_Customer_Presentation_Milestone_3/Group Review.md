@@ -72,7 +72,7 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 | Implementation | Following and Unfollowing functionality is implemented. | 240 minutes | [feature/MOB-22(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/391)  |
 | Implementation | Search page with art item search and user search is created. | 180 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402)  |
 | Research | Research about how to implement the search functionality. | 60 minutes |
-| Implementation | Searching functionality is activated. | 240 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402  |
+| Implementation | Searching functionality is activated. | 240 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402)  |
 | Implementation | Following/Followers page is made. | 150 minutes | [feature/MOB-25(Pull Request)](https://github.com/bounswe/bounswe2022group8/pull/402)  |
 
 </details>
