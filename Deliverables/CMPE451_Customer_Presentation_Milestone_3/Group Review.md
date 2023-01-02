@@ -29,11 +29,6 @@ After the second milestone we had 2 weeks to develop and improve our application
 For the third milestone stage we connected our exhibition page, we have fully implemented the annotation functionality. Users can annotate both images and texts. The lexical search functionality has been implemented and connected with the frontend. We have implemented our recommendation algorithm which is based on the popularity of the art items and exhibition. This recommendation algorithm tracks the user interests as well. This functionality is also connected with the discovery page, as well. Like and unlike images and comments api endpoints has been fully implemented and connected with the both frontends. We have also implemented the bidding system for our artists and art collectors. We supply a platform where artists and art followers meet. Artists can sell their art items without a gallery commission. Following and unfollowing other users functionality has been fully implemented and connected with the both frontends. 
 
 ### *Future Plans*
-
-### Reflections Related to the Final Milestone Demo
-The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome of almost 10 months of work. As a result of tremendous amount of effort and sleepless nights we finalized our product. It was a stable and error-free version of our project. Even though we had to re-plan our roadmap not to miss the deadlines, still we implemented most of the essential features of our given task. On the Final Milestone Demo day, we tried to show our implementations over personas and mock-ups as much as possible, however in terms of consistency we haven't stick to the same personas and scenarios throughout the three milestones. This might somewhat confused the customers and lost their influence. On the other hand our strong side was our design choices. As an instant customer feedback, our design (color palette, text style, contrast, coherence, etc.) was always appreciated by audience and customers. Simple and elegant choices of design attracted customer attention and boosted the positive feedbacks to the project.
-
-
 **Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
 
 ### **Changes in Development Process**
@@ -53,6 +48,8 @@ The prioritizing of the implementation of the remaining functionalities helped u
 3. Recommendation system that tracks the user activity
 4. Bidding system for the art items
 
+### Reflections Related to the Final Milestone Demo
+The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome of almost 10 months of work. As a result of tremendous amount of effort and sleepless nights we finalized our product. It was a stable and error-free version of our project. Even though we had to re-plan our roadmap not to miss the deadlines, still we implemented most of the essential features of our given task. On the Final Milestone Demo day, we tried to show our implementations over personas and mock-ups as much as possible, however in terms of consistency we haven't stick to the same personas and scenarios throughout the three milestones. This might somewhat confused the customers and lost their influence. On the other hand our strong side was our design choices. As an instant customer feedback, our design (color palette, text style, contrast, coherence, etc.) was always appreciated by audience and customers. Simple and elegant choices of design attracted customer attention and boosted the positive feedbacks to the project.
 
 ## 2. Summary of Work
 
