@@ -10,7 +10,7 @@ also provide instructions for use with an emulator.
   * [Sequence Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Sequence-Diagrams)
   * [Class Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)
 * User scenarios and mockups
-  * Art Follower
+  * [Art Follower](https://github.com/bounswe/bounswe2022group8/wiki/Scenario:-Art-Follower-User-(Cmpe-451))
   * [Artist](https://github.com/bounswe/bounswe2022group8/wiki/Scenario-2)
   * Collaborator
 * [Project Plan](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan)
