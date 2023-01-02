@@ -29,6 +29,11 @@ After the second milestone we had 2 weeks to develop and improve our application
 For the third milestone stage we connected our exhibition page, we have fully implemented the annotation functionality. Users can annotate both images and texts. The lexical search functionality has been implemented and connected with the frontend. We have implemented our recommendation algorithm which is based on the popularity of the art items and exhibition. This recommendation algorithm tracks the user interests as well. This functionality is also connected with the discovery page, as well. Like and unlike images and comments api endpoints has been fully implemented and connected with the both frontends. We have also implemented the bidding system for our artists and art collectors. We supply a platform where artists and art followers meet. Artists can sell their art items without a gallery commission. Following and unfollowing other users functionality has been fully implemented and connected with the both frontends. 
 
 ### *Future Plans*
+
+### Reflections Related to the Final Milestone Demo
+The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome of almost 10 months of work. As a result of tremendous amount of effort and sleepless nights we finalized our product. It was a stable and error-free version of our project. Even though we had to re-plan our roadmap not to miss the deadlines, still we implemented most of the essential features of our given task. On the Final Milestone Demo day, we tried to show our implementations over personas and mock-ups as much as possible, however in terms of consistency we haven't stick to the same personas and scenarios throughout the three milestones. This might somewhat confused the customers and lost their influence. On the other hand our strong side was our design choices. As an instant customer feedback, our design (color palette, text style, contrast, coherence, etc.) was always appreciated by audience and customers. Simple and elegant choices of design attracted customer attention and boosted the positive feedbacks to the project.
+
+
 **Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
 
 ### **Changes in Development Process**
@@ -48,8 +53,6 @@ The prioritizing of the implementation of the remaining functionalities helped u
 3. Recommendation system that tracks the user activity
 4. Bidding system for the art items
 
-### Reflections Related to the Final Milestone Demo
-The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome of almost 10 months of work. As a result of tremendous amount of effort and sleepless nights we finalized our product. It was a stable and error-free version of our project. Even though we had to re-plan our roadmap not to miss the deadlines, still we implemented most of the essential features of our given task. On the Final Milestone Demo day, we tried to show our implementations over personas and mock-ups as much as possible, however in terms of consistency we haven't stick to the same personas and scenarios throughout the three milestones. This might somewhat confused the customers and lost their influence. On the other hand our strong side was our design choices. As an instant customer feedback, our design (color palette, text style, contrast, coherence, etc.) was always appreciated by audience and customers. Simple and elegant choices of design attracted customer attention and boosted the positive feedbacks to the project.
 
 ## 2. Summary of Work
 
@@ -833,28 +836,30 @@ I implemented a profile page that allows users to display their uploaded art ite
     
 ## Milestone 3
 ### Milestone 3 Responsibilities
-In the mobile application part of our project, we had some implementations that we would like to add before the Final Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating the search page and searching functionality, following/unfollowing a user, visiting other users profile page and following/followers page.
+In the mobile application part of our project, we had some implementations that we would like to add before the Second Milestone. So we shared the implementations among our mobile team. As a team member I was responsible for implementations of creating a profile page, settings (editing profile) page, change password page, updating profile photo page and a page that allows users to add a new art item to their profile.
     
 ### Milestone 3 Main Contributions
-I implemented a search page that allows users to search both for other users or other user’s art items. One can now search with keywords to find their favorite art items. I also implement visiting other people’s profile feature so that one can see other user’s all art contributions. Moreover inside this page a user can follow/unfollow another user by simply clicking a follow/unfollow button. Lastly I created following/followers page which allows users to who is following or being followed by a profile.  <br/>
+I implemented a profile page that allows users to dislay their uploaded art items and the exhibitions that they are attending. One can see user's username, name, surname, bio, location and profile photo by looking at this page. I also implement a settings page to enable users to make changes over this fields. Moreover a user can change his/her password and profile photo. Lastly I created an upload art item page which allows users to add new art items to their profile.  <br/>
 
 **Milestone 3 Code Related Issues**
-* [MOB-25: Follower & Following Pages](https://github.com/bounswe/bounswe2022group8/issues/410) (contributed)
-* [MOB-26: Visiting Another User's Profile](https://github.com/bounswe/bounswe2022group8/issues/435) (implemented)
-* [MOB-27: Following and Unfollowing Functionality](https://github.com/bounswe/bounswe2022group8/issues/438) (implemented)
-* [MOB-28: Search Page and Searching Functionality](https://github.com/bounswe/bounswe2022group8/issues/439) (implemented)
+* [MOB-7: Creating a profile page](https://github.com/bounswe/bounswe2022group8/issues/281) (implemented)
+* [MOB-9: Redesign of the main navigation bar](https://github.com/bounswe/bounswe2022group8/issues/283) (implemented)
+* [MOB-10: Changing password and the profile photo](https://github.com/bounswe/bounswe2022group8/issues/284) (implemented)
+* [MOB-11: Uploading a new art item to the profile](https://github.com/bounswe/bounswe2022group8/issues/285) (implemented)
+* [MOB-12: Renewing the mobile app icon and the name](https://github.com/bounswe/bounswe2022group8/issues/286) (implemented)
     
 **Milestone 3 Management Related Issues**
-* [GEN-6: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/158) (completed)
-* [MIL-36: Reflections to the Final Milestone Demo](https://github.com/bounswe/bounswe2022group8/issues/433) (completed)
-* [MIL-37: Art Follower User Scenario](https://github.com/bounswe/bounswe2022group8/issues/434) (completed)
+* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268) (contributed)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290) (completed)
     
 **Milestone 3 Pull Requests**
-* [feature/MOB-22 : Visiting Other Profiles & Follow and Unfollow Buttons](https://github.com/bounswe/bounswe2022group8/pull/391)
-* [feature/MOB-25 : Searching Users and Art Items](https://github.com/bounswe/bounswe2022group8/pull/402)
+* [feature/MOB-7 : Profile Page Implementation](https://github.com/bounswe/bounswe2022group8/pull/280)
+* [feature/MOB-8 : Editing Profile and Uploading Art Item](https://github.com/bounswe/bounswe2022group8/pull/323)
+* [feature/MOB-9 : Change Password & Profile Photo](https://github.com/bounswe/bounswe2022group8/pull/327)
 
 ***Milestone 3 Additional***
-* [feature/MOB-24](https://github.com/bounswe/bounswe2022group8/pull/401) (reviewed)
+* [Feature/MOB-13](https://github.com/bounswe/bounswe2022group8/pull/314) (reviewed)
+* [Feature/mob 18](https://github.com/bounswe/bounswe2022group8/pull/325) (reviewed)
     
 </details>
 
@@ -1171,8 +1176,49 @@ PR reviews:
 <details>
     <summary> Sena Mumcu </summary>
 
+I am Sena Mumcu and I am a  member of group 8 backend team.
+
+## Milestone 1
+    
+### Mil-1 Responsibilities
+* Creating the initial integration of PostgreSQL and out Django application.
+* Implementing login API.
+* Implementing logout API.
+* Taking notes during Milestone 1 presentation.
+* Evaluating backend tools and processes for Milestone Group Review.
+
+### Mil-1 Main Contributions
+
+I have created the initial integration of our Django application and PostgreSQL. I shared my knowledge about the possible
+alternatives of PostgreSQL and we decided to move on with it. I worked in the implementation of the login and logout API with 
+the help of Karahan and I evaluated the tools we have used in backend for the milestone group review.
+
+**Code Related Issues**
+* [BE-10](https://github.com/bounswe/bounswe2022group8/issues/199)
+* [BE-9](https://github.com/bounswe/bounswe2022group8/issues/195)
+* [BE-3](https://github.com/bounswe/bounswe2022group8/issues/182)
+
+
+**Management-Related Issues**
+* [GEN-29](https://github.com/bounswe/bounswe2022group8/issues/242)
 
     
+**Pull Requests**
+* [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200)
+* [feature/BE-3](https://github.com/bounswe/bounswe2022group8/pull/183)
+    
+**Additional Information**
+
+* Attended group meetings and reviewed my teammates' work.
+
+    
+## Milestone 2
+    
+
+### Mil-2 Responsibilities
+
+
+
 </details>
 
 <details>
@@ -1409,61 +1455,6 @@ Cancelled PR: [feature/BE-26: Full Text Search](https://github.com/bounswe/bouns
 <details>
     <summary> Doğukan Türksoy </summary>
     
-## Milestone 2
- 
-I am Doğukan Türksoy, a member of group 8. I am at mobile part of our project.
-
-### Responsibilities
-I am responsible for mobile part and deployment. 
-
-### Main Contributions
-For this milestone I mainly worked on backend-mobile connections of out project. I connected profile page, update profile page, upload art item page, reset password , home page, art item page and comment pages. Moreover, worked on the connection of AWS S3 bucket to the mobile for fetching images. I also deployed the frontend, backend and mobile. <br/>
-    
-***Code Related Issues***
-* [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)
-* [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)
-* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
-    
-***Management Related Issues***
-* [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)
-* [MIL-18: User Interface / User Experience](https://github.com/bounswe/bounswe2022group8/issues/349)
-    
-***Pull Requests***
-* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
-* [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
-   </details>
-    
-## Milestone 3
-### MIL 3 - Responsibilities
-* Implementation of like functionality of mobile.
-* Implementation of text annotation backend connections of mobile.
-* Implementation of search functionality backend connections of mobile.
-* Improvement on the styling when necessary.
-* PR and issue reviews on the mobile.
-* Backend PR reviews when necessary.
-* Helping backend and frontend teams when necessary.
-* System manuals for frontend and mobile
-* All deployments (frontend, backend, annotations, mobile)
-    
-### MIL 3 - Main contributions
-For the final milestone, I took responsibility for the backend connections for Mobile team. I managed backend connections and page transitions. I also deployed the app on cloud and created .apk file.
-
-**Code Related Issues**
-* [MOB-21](https://github.com/bounswe/bounswe2022group8/issues/379) 
-* [MOB-29](https://github.com/bounswe/bounswe2022group8/issues/437)
-
-    
-**Management Related Issues**
-* [MIL-33](https://github.com/bounswe/bounswe2022group8/issues/430)
-* [MIL-34](https://github.com/bounswe/bounswe2022group8/issues/431)
-* [MIL-35](https://github.com/bounswe/bounswe2022group8/issues/432)
-
-    
-**Pull Requests**
-* [feature/MOB-21](https://github.com/bounswe/bounswe2022group8/pull/380)
-* [feature/MOB-28](https://github.com/bounswe/bounswe2022group8/pull/411)
-* [feature/MOB-29](https://github.com/bounswe/bounswe2022group8/pull/416)
-
 
    </details>
 
