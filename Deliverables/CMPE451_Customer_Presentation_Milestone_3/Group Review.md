@@ -1257,7 +1257,31 @@ PR reviews
 * [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249#issuecomment-1318197777)
 * [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247#issuecomment-1318189615)
 
+## Milestone 3
 
+# Mil-3 Responsibilities
+
+* Implementing search functionality
+* Writing the system manual for the backend of the application
+* Writing the 'Changes in Development Process' part of the executive summary
+* Creating mock data for the last milestone presentation
+
+# Main Contribution
+
+My main contribution in the last milestone was implementing search functionality. The search bar searchs users and art items 
+using lexical search. 
+
+**Code Related Issues**
+* [BE-26:[API] Semantic and Lexical Search](https://github.com/bounswe/bounswe2022group8/issues/279)
+
+**Management-Related Issues**
+* [MIL-32](https://github.com/bounswe/bounswe2022group8/issues/429)
+* [MIL-31](https://github.com/bounswe/bounswe2022group8/issues/427)
+
+**Pull Requests**
+* [feature/BE-23](https://github.com/bounswe/bounswe2022group8/pull/292)
+
+    
 </details>
 
 <details>
