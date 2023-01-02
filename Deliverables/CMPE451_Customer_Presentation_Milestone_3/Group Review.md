@@ -513,49 +513,49 @@ Output will be as follows:
 
 <details>
     <summary>Mobile</summary>
-        
-![WhatsApp Image 2022-12-08 at 17 02 24 (1)](https://user-images.githubusercontent.com/63647591/206468755-0e058571-7d0e-429f-89ed-99805534b118.jpeg)
+       
+#### Landing Page
 
-* [Art Item Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/artitem_page.dart)
+##### [Landing Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/landing_page.dart)
 
-![WhatsApp Image 2022-12-08 at 17 02 24](https://user-images.githubusercontent.com/63647591/206468808-e494c652-2304-49cb-b135-35c53e8e6a88.jpeg)
+<img width="497" alt="Ekran Resmi 2023-01-02 22 42 25" src="https://user-images.githubusercontent.com/49492904/210272822-a4aacf1c-2a3a-4888-a855-d4af158fa131.png">
 
-* [Home Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/home_page.dart)
+##### [Signup Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/signup_page.dart)
+<img width="495" alt="Ekran Resmi 2023-01-02 22 44 44" src="https://user-images.githubusercontent.com/49492904/210272963-90f55fc9-1ef7-4746-aa70-cbabc0c4019e.png">
 
-![WhatsApp Image 2022-12-08 at 17 02 22 (3)](https://user-images.githubusercontent.com/63647591/206469044-d4fe0297-d7ac-44d5-9a83-1e8d6a378f13.jpeg)
+##### [Forgot Password Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/forgot_password.dart)
+<img width="491" alt="Ekran Resmi 2023-01-02 22 46 01" src="https://user-images.githubusercontent.com/49492904/210273058-47af8f6e-8fe8-4c6d-9792-01b2774b4d41.png">
+![WhatsApp Image 2023-01-02 at 22 58 27](https://user-images.githubusercontent.com/49492904/210274417-5d038cba-9edd-4536-949d-b8a4bcc61b58.jpeg)
 
-* [Comment Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/comment_page.dart)
+##### [Login Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/login_page.dart)
+<img width="492" alt="Ekran Resmi 2023-01-02 22 46 28" src="https://user-images.githubusercontent.com/49492904/210273088-970cb60e-4f72-4281-a8cc-d43c27204cf9.png">
 
-![WhatsApp Image 2022-12-08 at 17 02 23 (1)](https://user-images.githubusercontent.com/63647591/206468920-495ab94f-48e9-4804-9b32-205a62c259ac.jpeg)
+##### [Home Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/home_page.dart)
+![WhatsApp Image 2023-01-02 at 22 57 28](https://user-images.githubusercontent.com/49492904/210273851-41e79dd1-fc78-4efb-9ccf-8ce7aa20c6db.jpeg)
 
-* [Landing Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/landing_page.dart)
+##### [Art Item Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/artitem_page.dart)[ Annotation Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/widgets/TextAnnotation.dart)
+![WhatsApp Image 2023-01-02 at 22 57 28-2](https://user-images.githubusercontent.com/49492904/210274014-bd9ef480-0109-410e-89df-1cd1f47cebf1.jpeg)
+![WhatsApp Image 2023-01-02 at 22 57 29](https://user-images.githubusercontent.com/49492904/210274046-1928a328-9f92-40a1-bc9e-4ff8c5c9560e.jpeg)
+![WhatsApp Image 2023-01-02 at 22 57 29-2](https://user-images.githubusercontent.com/49492904/210274067-52ba1e27-7f99-4753-afdf-0232b843fe51.jpeg)
+![WhatsApp Image 2023-01-02 at 22 57 29-3](https://user-images.githubusercontent.com/49492904/210274083-8130978b-157d-46d0-877a-bcfc2e607070.jpeg)
 
-![WhatsApp Image 2022-12-08 at 17 02 21](https://user-images.githubusercontent.com/63647591/206469185-678ae22a-5dbf-40e6-98fe-6f6279fc967f.jpeg)
+##### [Comment Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/comment_page.dart)
+![WhatsApp Image 2023-01-02 at 22 57 28-3](https://user-images.githubusercontent.com/49492904/210274104-4c944f29-7e0d-4a5e-b9fa-3e634d56f7a9.jpeg)
 
-* [Forgot Password Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/forgot_password.dart)
+##### [Profile Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/widgets/self_profile.dart)
+![WhatsApp Image 2023-01-02 at 22 57 29-4](https://user-images.githubusercontent.com/49492904/210274158-e67c9e28-070b-4d5d-ac6c-49d9138a3b2b.jpeg)
 
-![WhatsApp Image 2022-12-08 at 17 02 22](https://user-images.githubusercontent.com/63647591/206469169-97c4a5cf-dc6c-46eb-a093-79f3eb83369b.jpeg)
+##### [Search Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/search_page.dart)
+![WhatsApp Image 2023-01-02 at 22 57 30](https://user-images.githubusercontent.com/49492904/210274238-7bff9876-08c2-4c21-b2ba-c2a0ef2d6513.jpeg)
+![WhatsApp Image 2023-01-02 at 22 57 30-2](https://user-images.githubusercontent.com/49492904/210274248-915fbbab-3298-40a0-b9ed-c6894501c218.jpeg)
+![WhatsApp Image 2023-01-02 at 22 57 30-3](https://user-images.githubusercontent.com/49492904/210274261-f9ac1356-2eec-437a-9ab6-c779bc9d77e8.jpeg)
 
-* [Signup Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/signup_page.dart)
+##### [Upload Art Item Page](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/art_item_upload.dart)
+![WhatsApp Image 2023-01-02 at 22 58 29](https://user-images.githubusercontent.com/49492904/210274361-ef255cfc-83de-49a3-95ff-9abd5b110ccb.jpeg)
 
-![WhatsApp Image 2022-12-08 at 17 02 22 (1)](https://user-images.githubusercontent.com/63647591/206469155-4dd0b650-80de-4a0a-af7e-deea3cd879da.jpeg)
+#### [Change Password Page](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/change_password.dart)
+![WhatsApp Image 2023-01-02 at 22 58 28](https://user-images.githubusercontent.com/49492904/210274393-6858e54f-dffb-4fd0-9f76-901efe4f6ddd.jpeg)
 
-10
-
-![WhatsApp Image 2022-12-08 at 17 02 23](https://user-images.githubusercontent.com/63647591/206470476-c5052cae-bae4-42e4-af34-96adc1dfbaf9.jpeg)
-11
-![WhatsApp Image 2022-12-08 at 17 02 24 (2)](https://user-images.githubusercontent.com/63647591/206470543-919bc932-28e3-484d-88ab-d229083fc049.jpeg)
-
-![WhatsApp Image 2022-12-08 at 17 03 40](https://user-images.githubusercontent.com/63647591/206470594-2e111062-cb08-4dbe-8105-a51ed192b2c9.jpeg)
-
-* [Profile Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/profile_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 24 (3)](https://user-images.githubusercontent.com/63647591/206470617-afc23bbf-8071-4c0d-80a5-4a1971f4c2c6.jpeg)
-
-* [Login Page Code](https://github.com/bounswe/bounswe2022group8/blob/master/App/mobile/lib/login_page.dart)
-
-![WhatsApp Image 2022-12-08 at 17 02 22 (2)](https://user-images.githubusercontent.com/63647591/206471187-d4f020ca-f54c-47ca-85c3-6826817a1754.jpeg)
-    
 </details>
 
 
