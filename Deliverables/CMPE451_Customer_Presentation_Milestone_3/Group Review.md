@@ -733,6 +733,69 @@ Here you can find an exemplary target from our application:
 
 <details>
     <summary> Serdar Akol </summary>
+I am Serdar Akol, a team member of the Group 8. I started work on the Mobile development part of our project then transferred to the 
+    backend team.
+
+## Milestone 1
+### Responsibilities 
+* Researching different mobile application development tools.
+* Setting the environment for the mobile development.
+* Learning basic Flutter/Dart to implement the initial pages.
+* Reviewing and updating the requirements.
+
+### Contributions
+
+|  Task Type   | Task Description   | Related Link(s) |
+ |  :----:        |  :----:    |  :----: |
+ | Requirements Elicitation| Review and revise the requirements _Annotation_ .  |  [#176](https://github.com/bounswe/bounswe2022group8/issues/176)|
+ | Requirements Elicitation|  Review and revise the requirements _User Interaction and Guest Users_ . |   [#172](https://github.com/bounswe/bounswe2022group8/issues/172)|
+ |  Revise | Review and revise the Mockups .  |  [#171](https://github.com/bounswe/bounswe2022group8/issues/171)|
+
+## Milestone 2
+
+* Implementing Like/Unlike feature for comments. 
+* Implementing Account/User deletion API. 
+
+
+### Main Contributions
+My main contributions are also the ones listed above. Since, I have been transferred to backend team after the first milestone report. I have struggled to addopt to the team at first. But thanks to Karahan and all my other backend team, I could catch the team up. <br/>
+
+**Code Related Issues**
+* [Issue BE-27](https://github.com/bounswe/bounswe2022group8/issues/276)
+* [Issue BE-28](https://github.com/bounswe/bounswe2022group8/issues/302)
+  
+**Management Related Issues**
+* Unfortunatelly, I don't have any management related issues.
+
+**Pull Requests**
+* [feature/BE-27](https://github.com/bounswe/bounswe2022group8/pull/319)
+* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315)
+
+**Additional**
+    
+PR reviews:
+* [feature/BE-22](https://github.com/bounswe/bounswe2022group8/pull/274)
+* [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)  
+
+
+## Milestone 3
+
+### Responsibilities 
+* reviewing the PR's of our team
+* Contributing to the milestone report
+
+### Contributions
+* Reviewing the bid related PR [hotfix/BE-38: new_bids reset](https://github.com/bounswe/bounswe2022group8/pull/397)
+* Creating user manuals for both web and mobile applications[MIL-26 User Manual](https://github.com/bounswe/bounswe2022group8/issues/422), [web user manual](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/web_app_user_manual.md) ,[mobile user manual](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/mobile_app_user_manual.md)
+
+* Adding more than 10 art items and creating 2 exhibitions [MIL-28 Creating 10 artitem/online exhibitons](https://github.com/bounswe/bounswe2022group8/issues/424)
+
+* Creating a comprehensive scenario that covers all functionalities [MIL-27 The Comprehensive Scenario](https://github.com/bounswe/bounswe2022group8/issues/423),   [the comprehensive scenario](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/the_comprehensive_scenario.md)
+
+
+* Writing the project status summary [MIL-25 Project Status summary](https://github.com/bounswe/bounswe2022group8/issues/421)
+
+
 
 </details>
 
