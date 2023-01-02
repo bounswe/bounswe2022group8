@@ -71,6 +71,24 @@ Features implemented in the remaining time were:
 <details>
     <summary> Elif Bayraktar </summary>
     
+| Hours spent | Task Type             | Task Description |
+|  :----:       |  :----:   |  :----: |
+|  6 hours   |  coding   |  Added user history as a separate app, created model, and signals, connected. [feature/BE-32 : User History](https://github.com/bounswe/bounswe2022group8/pull/354)  [issue](https://github.com/bounswe/bounswe2022group8/issues/353)|
+|  5 hours   |  review   |  Reviewed [PR BE-30](https://github.com/bounswe/bounswe2022group8/pull/354), made some minor contributions.  |
+|  2 hours   |  coding   |  Updated art item category, predefined choices. [feature/BE-35: Art Item Category](https://github.com/bounswe/bounswe2022group8/pull/358) [issue](https://github.com/bounswe/bounswe2022group8/issues/357) |
+|  1 hour 30 minutes  + |  research   |  Researched for recommendation system.  |
+|  4 hour 30 minutes   |  coding   |  Created level system. [feature/BE-36: User Level](https://github.com/bounswe/bounswe2022group8/pull/364) [issue](https://github.com/bounswe/bounswe2022group8/issues/361) |
+|  2 hours   |  coding   |  Created models for bidding system. [feature/BE-38: Bidding System](https://github.com/bounswe/bounswe2022group8/pull/371) [issue](https://github.com/bounswe/bounswe2022group8/issues/369) |
+|  4 hours   |  coding   |  APIs for the bidding system. [feature/BE-38: Bidding System](https://github.com/bounswe/bounswe2022group8/pull/371) [issue](https://github.com/bounswe/bounswe2022group8/issues/369) |
+|  4 hours   |  coding   |  Created APIs for updating art item sale status, list of newly bidded art items in profile page. [feature/BE-38: Bidding System](https://github.com/bounswe/bounswe2022group8/pull/371) [issue](https://github.com/bounswe/bounswe2022group8/issues/369)  |
+|  12 hours   |  coding   |  Created recommendation system. [feature/BE-40: Recommendation System](https://github.com/bounswe/bounswe2022group8/pull/386) [issue](https://github.com/bounswe/bounswe2022group8/issues/372) |
+|  30 minutes   |  review   |  Reviewed unittest PR. [feature/BE-39: Backend Unittests [1]](https://github.com/bounswe/bounswe2022group8/pull/382)  |
+|  30 minutes   |  coding   |  Bugfix PR. [hotfix/BE-38: new_bids reset](https://github.com/bounswe/bounswe2022group8/pull/397)  |
+|  8 hours   |  testing/coding/learning   |  Created tests for Recommendation and Bidding systems. [feature/BE-43: Backend Unittests [2]](https://github.com/bounswe/bounswe2022group8/pull/404) [issue](https://github.com/bounswe/bounswe2022group8/issues/403)|
+|  8 hours   |  documentation   |  Reviewing updating requirements for release and milestone. Updating use case diagram, part of executive summary, personal reports. [MIL-22: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/414), [MIL-29: Status of the requirements](https://github.com/bounswe/bounswe2022group8/issues/425), [MIL-32: Use Case Diagram Update](https://github.com/bounswe/bounswe2022group8/issues/428), [MIL-39: Executive/ what could have been done differently](https://github.com/bounswe/bounswe2022group8/issues/440) |
+|  ?   |  planning   |  Took part in all of the backend and general meetings.  |
+|  ?   |  learning/planning   |  Attended all of the classes and PSs.  |
+    
 
 
 </details>
