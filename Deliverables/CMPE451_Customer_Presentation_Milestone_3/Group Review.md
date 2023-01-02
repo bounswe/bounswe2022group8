@@ -64,6 +64,18 @@ Features implemented in the remaining time were:
 
 <details>
     <summary> Serdar Akol </summary>
+    
+|  Task Type   | Task Description   |Related Link(s) |
+ |  :----:        |  :----:   |  :----: |
+ |  Planning |  Attended the Week 11 BE Meeting.  |  [Week 11 BE Meeting #5](https://github.com/bounswe/bounswe2022group8/wiki/Week-11-BE-Meeting-%235-(13.12.2022)) |
+ |  Planning |  Attended the Week 11 Meeting.  |  [Week 11 Meeting Notes 16](https://github.com/bounswe/bounswe2022group8/wiki/Week-11-Meeting-Notes-16%F0%9F%97%92%EF%B8%8F) |
+ |  Planning |  Attended the Week 10 Meeting.  |  [Week 10 Meeting #14](https://github.com/bounswe/bounswe2022group8/wiki/Week-10-Meeting-%2314) |
+| PR review | Reviewing the bid related PR| [hotfix/BE-38: new_bids reset](https://github.com/bounswe/bounswe2022group8/pull/397)|
+|  Milestone |  Adding more than 10 art items and creating 2 exhibitions | [MIL-28 Creating 10 artitem/online exhibitons](https://github.com/bounswe/bounswe2022group8/issues/424)  |
+|  Milestone |  Creating a comprehensive scenario that covers all functionalities | [MIL-27 The Comprehensive Scenario](https://github.com/bounswe/bounswe2022group8/issues/423)  [the comprehensive scenario](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/the_comprehensive_scenario.md)|
+|  Milestone |  Creating user manuals for both web and mobile applications | [MIL-26 User Manual](https://github.com/bounswe/bounswe2022group8/issues/422) [web user manual](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/web_app_user_manual.md) [mobile user manual](https://github.com/bounswe/bounswe2022group8/blob/master/Deliverables/CMPE451_Customer_Presentation_Milestone_3/mobile_app_user_manual.md)|
+|  Milestone |  Writing the project status summary | [MIL-25 Project Status summary](https://github.com/bounswe/bounswe2022group8/issues/421) |
+
 
 
 </details>
