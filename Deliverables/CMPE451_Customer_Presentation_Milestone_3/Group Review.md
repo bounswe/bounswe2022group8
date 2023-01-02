@@ -39,19 +39,19 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 ### **Changes in Development Process**
 
 In the second Milestone, we couldn't showcase many of the backend functionalities we have implemented because 
-we had problems with the planning of the Front, Mobile, and Backend synchronization. After Milestone 2, we had a little missing functionalities
+we had problems with the planning of the Front, Mobile, and Backend synchronization. After Milestone 2, we had a missing functionalities
 in the backend, so we decided to push harder for the remaining functionalities' implementations and 
-started helping Frontend and Mobile teams with more strict planning of synchronization. This way we could show all of the implemented functionalities of 
+started helping Frontend and Mobile teams with more strict planning of synchronization. This way we could have show all of the implemented functionalities of 
 the backend in the demo presentation. 
 We had a well-structured pull request template, meeting schedule, issue labeling and documentation so we can say that we didn't need to change anything
 in the management system other than the synchronization of the subgroups. 
 
-The prioritizing of the implementation of the remaining functionalities helped us showcase the following functionalities,
-
+Features implemented in the remaining time were: 
 1. Text and image annotations
 2. Lexical search
 3. Recommendation system that tracks the user activity
 4. Bidding system for the art items
+5. Offline and virtual exhibitions
 
 
 ### **What could have been done differently**
