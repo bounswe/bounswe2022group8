@@ -969,8 +969,66 @@ I tried to add both image and text annotation on mobile application. But I was u
 
 <details>
     <summary> Metehan Dündar </summary>
-    
+I am [Metehan Dündar](https://github.com/bounswe/bounswe2022group8/wiki/Metehan-Dündar), a member of group 8. I work on the mobile team.
 
+## Milestone 1
+### Milestone 1 Responsibilities
+Revisioning of requirements and updating necessary changes. (Search and Location)
+Implementation of logout API.
+    
+### Milestone 1 Main Contributions
+I updated the specifications and participated in the choices we were making on the project's functionalities. I have been there at each of our meetings. I helped my team to present our product to the customers. Due to certain technical issues, I was unable to submit any code for this milestone. I make a commitment to putting in greater effort as we go.
+
+**Milestone 1 Code Related Issues**
+* [BE-3: PostgreSQL Integration to the application](https://github.com/bounswe/bounswe2022group8/issues/182)
+* [BE-4: Setting up initial models](https://github.com/bounswe/bounswe2022group8/pull/190)
+* [BE-10: [API] Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
+    
+**Milestone 1 Management Related Issues**
+* [GEN-5: Adding CmpE451 section to the personal Timesheet pages](https://github.com/bounswe/bounswe2022group8/issues/157)
+* [GEN-19: Revise Mockups](https://github.com/bounswe/bounswe2022group8/issues/171)
+* [GEN-28: Name for application](https://github.com/bounswe/bounswe2022group8/issues/212)
+* [GEN-22: Revise Search](https://github.com/bounswe/bounswe2022group8/issues/174)
+* [GEN-23: Revise Location](https://github.com/bounswe/bounswe2022group8/issues/175)
+
+    
+## Milestone 2
+### Milestone 2 Responsibilities
+* Changing label ordering/systems.
+* Creating several logo designs.
+* Presenting mobile application to customers as an art-dummy user.
+* Implementing the forgot and confirm password pages.
+* Research on Annotation.
+    
+### Milestone 2 Main Contributions
+I already listed my main responsibilities and contributions above. Other than those, since I changed the team, many thanks to Dogukan, I fastly integrated to mobile team, and I contributed their coding works.
+
+**Milestone 2 Code Related Issues**
+* [MOB-21: Forgot & Confirm Password Pages)](https://github.com/bounswe/bounswe2022group8/issues/350)
+    
+**Milestone 2 Management Related Issues**
+* [GEN-32: Logo for Application](https://github.com/bounswe/bounswe2022group8/issues/268)
+* [GEN-33: Label Ordering](https://github.com/bounswe/bounswe2022group8/issues/273)
+* [GEN-35: Application Name and Logo](https://github.com/bounswe/bounswe2022group8/issues/290)
+    
+**Milestone 2 Pull Requests**
+* [feature/MOB-16](https://github.com/bounswe/bounswe2022group8/pull/319)
+    
+## Milestone 3
+### Milestone 3 Responsibilities
+For the mobile part of our project, we wanted to include some additional features after the Second Milestone. We distributed the tasks among the mobile team and I was responsible for implementing the pages for users who follow or are followed by other users.
+    
+### Milestone 3 Main Contributions
+I was working on creating the pages for the profile's following and follower users. Since I haven't practiced coding in the Dart language, I had a lot of difficulty creating these pages as desired.
+
+**Milestone 3 Code Related Issues**
+* [MOB-25: Follower & Following Pages ](https://github.com/bounswe/bounswe2022group8/issues/410)
+    
+**Milestone 3 Management Related Issues**
+* Presentation for Final Customer Milestone
+    
+**Milestone 3 Pull Requests**
+* [feature/MOB-21 : Following & Follower Users' Page](https://github.com/bounswe/bounswe2022group8/tree/feature/MOB-21)
 
 </details>
 
