@@ -36,7 +36,22 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
 
 **Note:** Our current project plan can be found [here](https://github.com/bounswe/bounswe2022group8/wiki/CmpE-451-Project-Plan).
 
+### *Changed in Development Process**
 
+In the second Milestone, we couldn't showcase many of the backend functionalities we have implemented because 
+we had problems with the planning of the Front, Mobile, and Backend synchronization. After Milestone 2, we had a little missing functionalities
+in the backend, so we decided to push harder for the remaining functionalities' implementations and 
+started helping Frontend and Mobile teams with more strict planning of synchronization. This way we could show all of the implemented functionalities of 
+the backend in the demo presentation. 
+We had a well-structured pull request template, meeting schedule, issue labeling and documentation so we can say that we didn't need to change anything
+in the management system other than the synchronization of the subgroups. 
+
+The prioritizing of the implementation of the remaining functionalities helped us showcase the following functionalities,
+
+1. Text and image annotations
+2. Lexical search
+3. Recommendation system that tracks the user activity
+4. Bidding system for the art items
 
 
 ## 2. Summary of Work
@@ -147,19 +162,6 @@ The Final Milestone Demo, we delivered on 27th of December 2022 was an outcome o
     <summary> Doğukan Türksoy </summary>
  
 
-Task Type | Task Description | Related Link(s)
--- | -- | --
-Implementation | Implementation of bugs after Milestone2 | [MOB-21](https://github.com/bounswe/bounswe2022group8/issues/379)
-Implementation | Implementation of backend connection of annotations | [MOB-28](https://github.com/bounswe/bounswe2022group8/pull/411)
-Implementation | Search page backend connection implemented | [MOB-29](https://github.com/bounswe/bounswe2022group8/pull/416)
-Documentation | Creating System Manual for Frontend and Android | wiki
-Code Review | Reviewed PRs belonging to mobile. | [BE-30](https://github.com/bounswe/bounswe2022group8/pull/333) [MOB-22](https://github.com/bounswe/bounswe2022group8/issues/398), [MOB-25](https://github.com/bounswe/bounswe2022group8/pull/402)
-Deployment | Frontend Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
-Deployment | Backend Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
-Deployment | Android Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
-Deployment | Annotation Deployment | [MIL-33: Deployment](https://github.com/bounswe/bounswe2022group8/issues/430)
-
-
 </details>
 
 
@@ -171,6 +173,7 @@ Deployment | Annotation Deployment | [MIL-33: Deployment](https://github.com/bou
 </details>
 
 
+## 3. Status of Deliverables
 
 ## 3. Status of Deliverables
 |Deliverable|Status|Changes| 
