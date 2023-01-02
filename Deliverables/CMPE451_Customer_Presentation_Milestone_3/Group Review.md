@@ -1412,6 +1412,61 @@ Cancelled PR: [feature/BE-26: Full Text Search](https://github.com/bounswe/bouns
 <details>
     <summary> Doğukan Türksoy </summary>
     
+## Milestone 2
+ 
+I am Doğukan Türksoy, a member of group 8. I am at mobile part of our project.
+
+### Responsibilities
+I am responsible for mobile part and deployment. 
+
+### Main Contributions
+For this milestone I mainly worked on backend-mobile connections of out project. I connected profile page, update profile page, upload art item page, reset password , home page, art item page and comment pages. Moreover, worked on the connection of AWS S3 bucket to the mobile for fetching images. I also deployed the frontend, backend and mobile. <br/>
+    
+***Code Related Issues***
+* [MOB-18: Fetching images from AWS S3](https://github.com/bounswe/bounswe2022group8/issues/346)
+* [MOB-20: Backend Connections of uploading image and updating profile](https://github.com/bounswe/bounswe2022group8/issues/345)
+* [MOB-16: Connecting Comment Page](https://github.com/bounswe/bounswe2022group8/issues/316)
+    
+***Management Related Issues***
+* [MIL-17: Deployment](https://github.com/bounswe/bounswe2022group8/issues/347)
+* [MIL-18: User Interface / User Experience](https://github.com/bounswe/bounswe2022group8/issues/349)
+    
+***Pull Requests***
+* [feature/MOB-20](https://github.com/bounswe/bounswe2022group8/pull/331)
+* [Feature/MOB-18](https://github.com/bounswe/bounswe2022group8/pull/314)
+   </details>
+    
+## Milestone 3
+### MIL 3 - Responsibilities
+* Implementation of like functionality of mobile.
+* Implementation of text annotation backend connections of mobile.
+* Implementation of search functionality backend connections of mobile.
+* Improvement on the styling when necessary.
+* PR and issue reviews on the mobile.
+* Backend PR reviews when necessary.
+* Helping backend and frontend teams when necessary.
+* System manuals for frontend and mobile
+* All deployments (frontend, backend, annotations, mobile)
+    
+### MIL 3 - Main contributions
+For the final milestone, I took responsibility for the backend connections for Mobile team. I managed backend connections and page transitions. I also deployed the app on cloud and created .apk file.
+
+**Code Related Issues**
+* [MOB-21](https://github.com/bounswe/bounswe2022group8/issues/379) 
+* [MOB-29](https://github.com/bounswe/bounswe2022group8/issues/437)
+
+    
+**Management Related Issues**
+* [MIL-33](https://github.com/bounswe/bounswe2022group8/issues/430)
+* [MIL-34](https://github.com/bounswe/bounswe2022group8/issues/431)
+* [MIL-35](https://github.com/bounswe/bounswe2022group8/issues/432)
+
+    
+**Pull Requests**
+* [feature/MOB-21](https://github.com/bounswe/bounswe2022group8/pull/380)
+* [feature/MOB-28](https://github.com/bounswe/bounswe2022group8/pull/411)
+* [feature/MOB-29](https://github.com/bounswe/bounswe2022group8/pull/416)
+
 
    </details>
 
