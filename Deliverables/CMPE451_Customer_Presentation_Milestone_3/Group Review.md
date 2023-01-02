@@ -21,18 +21,10 @@
 * [Class Diagram](https://github.com/bounswe/bounswe2022group8/wiki/Class-Diagram)
 
 ## 1. Executive Summary
-### *Description*
+### Project Status Summary
+After the second milestone we had 2 weeks to develop and improve our applications and in those 2 weeks our team did their best. As you might know at the second milestone stage; login, signup functionality, along with homepage, art item page, profile page, profile settings page, comment functionality, password update through settings were implemented on web and mobile applications. Additionally on web, discovery page and static exhibition pages were implemented; on mobile application forgot password functionality was implemented and the mobile app design was updated so that our project got a consistent identity. 
 
-
-### *Changes since Milestone 2 (Current Status)*
-
-
-#### Backend
-
-#### Web frontend
-
-#### Mobile
-
+For the third milestone stage we connected our exhibition page, we have fully implemented the annotation functionality. Users can annotate both images and texts. The lexical search functionality has been implemented and connected with the frontend. We have implemented our recommendation algorithm which is based on the popularity of the art items and exhibition. This recommendation algorithm tracks the user interests as well. This functionality is also connected with the discovery page, as well. Like and unlike images and comments api endpoints has been fully implemented and connected with the both frontends. We have also implemented the bidding system for our artists and art collectors. We supply a platform where artists and art followers meet. Artists can sell their art items without a gallery commission. Following and unfollowing other users functionality has been fully implemented and connected with the both frontends. 
 
 ### *Future Plans*
 
