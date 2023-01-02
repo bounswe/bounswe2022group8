@@ -10,6 +10,8 @@
 7. [Annotations](#7-annotations)
 8. [Standards](#8-standards)
 9. [Individual Reports](#9-individual-reports)
+10. [Final Release Notes](#10-final-release-notes)
+11. [System Manual](#11-system-manual)
 
 
 **Important:** 
@@ -1321,3 +1323,10 @@ Cancelled PR: [feature/BE-26: Full Text Search](https://github.com/bounswe/bouns
     
 
    </details>
+
+## 10. Final Release Notes
+You can find final release notes [here](https://github.com/bounswe/bounswe2022group8/releases/tag/customer-presentation-3)
+
+
+## 11. System Manual
+You can find system manual [here](https://github.com/bounswe/bounswe2022group8/wiki/System-Manual)
