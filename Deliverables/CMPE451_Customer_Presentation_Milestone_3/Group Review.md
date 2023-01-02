@@ -671,9 +671,147 @@ PR reviews:
 <details>
     <summary> Karahan Sarıtaş </summary>
     
-I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I'm working in the backend team, also trying to help frontend whenever it's needed.
+I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karahan-Sar%C4%B1ta%C5%9F), a member of group 8. I'm working in the backend team, also trying to help frontend whenever it's needed. 
 
-### Responsibilities
+## Milestone 1
+   
+### MIL 1 -Responsibilities
+* Revision of requirements and making necessary changes.
+* Creating the initial structure of our Django project. Configuration of settings for both development and production environment.
+* Dockerization of the backend service.
+* Implementation of registration API.
+* Implementation of login API.
+* Implementation of logout API.
+* Research on tokenization and authentication mechanisms.
+* Helping frontend team for the connection.
+* Dockerization of frontend and deployment. 
+
+### MIL 1 - Main Contributions
+I made the initial configurations for the project, adjusted the settings and dockerized it and worked on API endpoints related to registration, login and logout. I made some research on tokenization to prefer a suitable methodology for the project. Meanwhile, I also helped frontend team to integrate their application with ours, use tokens for authentication and actively participated in inter-team communication to make sure that everything works ok.
+    
+**Code Related Issues**
+* [BE-1: Initial Configurations for the App](https://github.com/bounswe/bounswe2022group8/issues/179)
+* [BE-5: Dockerize the Django Application with PostgreSql](https://github.com/bounswe/bounswe2022group8/issues/188)
+* [BE-6: Organization of api folder](https://github.com/bounswe/bounswe2022group8/issues/192)
+* [BE-9: [API] Implementation of Login Endpoint](https://github.com/bounswe/bounswe2022group8/issues/195)
+* [BE-10: [API] Implementation of Logout Endpoint](https://github.com/bounswe/bounswe2022group8/issues/199)
+* [BE-8: [API] Implementation of Register Endpoint](https://github.com/bounswe/bounswe2022group8/issues/194)
+* [BE-12: Integration Between Frontend and Backend](https://github.com/bounswe/bounswe2022group8/issues/211)
+* [MIL-4: Last changes for Deployment before Milestone 1](https://github.com/bounswe/bounswe2022group8/issues/224)
+
+**Management Related Issues**
+* [GEN-8: Week #2 Meeting #2 Notes](https://github.com/bounswe/bounswe2022group8/issues/160)
+* [GEN-10: Review&Revise the Requirements](https://github.com/bounswe/bounswe2022group8/issues/162)  (general issue)
+* [GEN-11: Revise the Notifications](https://github.com/bounswe/bounswe2022group8/issues/163)
+* [GEN-14: Revise the Bidding System](https://github.com/bounswe/bounswe2022group8/issues/166)
+* [GEN-15: Revise Verification and Level System](https://github.com/bounswe/bounswe2022group8/issues/167)
+* [MIL-1: Milestone I Deliverables](https://github.com/bounswe/bounswe2022group8/issues/201)
+* [MIL-2: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/202)
+* [BE-2: Meeting Notes Week #3 Backend Meeting #1](https://github.com/bounswe/bounswe2022group8/issues/181)
+
+
+**Pull Requests**
+* [feature/BE-1](https://github.com/bounswe/bounswe2022group8/pull/180)
+* [feature/BE-5](https://github.com/bounswe/bounswe2022group8/pull/189)
+* [feature/BE-6](https://github.com/bounswe/bounswe2022group8/pull/191)
+* [feature/BE-9](https://github.com/bounswe/bounswe2022group8/pull/200)
+* [bugfix/BE-5](https://github.com/bounswe/bounswe2022group8/pull/206) 
+* [feature/BE-12](https://github.com/bounswe/bounswe2022group8/pull/210)
+
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-4](https://github.com/bounswe/bounswe2022group8/pull/190)
+* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215)  (on-hold for now)
+* [feature/MIL-4](https://github.com/bounswe/bounswe2022group8/pull/225) (worked on this as a pair)<br>
+    
+Throughout the week, I took the whole responsibility of communication between backend and other teams. Tried to be present on Discord whenever someone needs help. 
+ 
+## Milestone 2
+    
+### MIL 2 - Responsibilities
+* Integration of Swagger to the backend for API documentation and testing.
+* AWS S3 Bucket Integration for both development and production.
+* Research on how we can transfer the images from frontend to backend - and store them properly. As a result of my research, I provided a detailed description of the architecture [here](https://github.com/bounswe/bounswe2022group8/issues/246), implemented the backend part of the system.
+* Integration of Profile Page with backend APIs with Furkan from frontend team.
+* Implementation of art item related APIs (x7 APIs in total).
+* Implementation of follow/unfollow related APIs (x6 APIs in total).
+* Implementation of profile related APIs (x4 APIs in total).
+* Communication with frontend for the integration stage.
+* Updating login and signup error messages.
+* PR Review: Reset Password API
+* PR Review: Comment related APIs
+* PR Review: CI/CD Integration
+* PR Review: Like/Unlike API
+* Frontend PR Reviews: API Integrations
+* Configuration of `.env` and `.production.env` files to hide all of our secret information including AWS credentials, database credentials, email information and S3 bucket information, for both development and production sites.
+* Generation of the class diagram fron Django using `graphviz`.
+* Updating the class diagram. Filling up the `API` section of the Milestone II document.
+* Updating existing APIs in accordance with the requests coming from frontend and mobile during the milestone week.
+
+###  MIL 2 - Main Contributions
+Already listed all of my responsibilities and contributions above. Overall, I worked so hard to pushed the team forward, handled some of the challenging tasks in our path and guided people throughout the procedure. Critically reviewed pull requests of other team members.
+    
+**Code Related Issues**
+* [BE-29: [API] Follow&Profile and Comment Enhancement](https://github.com/bounswe/bounswe2022group8/issues/321)
+* [BE-24: Generate Class Diagram from Django](https://github.com/bounswe/bounswe2022group8/issues/293)
+* [BE-22: [API] Implementation of Follow Action APIs](https://github.com/bounswe/bounswe2022group8/issues/272)
+* [BE-21: Add Image Storage Path and Production Settings](https://github.com/bounswe/bounswe2022group8/issues/269)
+* [BE-17: [API] Implementation of Art Item Related APIs - 1](https://github.com/bounswe/bounswe2022group8/issues/250)
+* [BE-16: [API] Implementation of Profile Related APIs - 1](https://github.com/bounswe/bounswe2022group8/issues/248)
+* [BE-15: Configure AWS S3 Bucket for Image Storage](https://github.com/bounswe/bounswe2022group8/issues/246)
+* [BE-14: Add Swagger Integration](https://github.com/bounswe/bounswe2022group8/issues/244)
+
+
+**Management Related Issues**
+* [MIL-8: Milestone 2 Group Review](https://github.com/bounswe/bounswe2022group8/issues/295)
+* [MIL-9: Software Requirements Specification](https://github.com/bounswe/bounswe2022group8/issues/298)
+* [MIL-11:  Milestone 2 Deliverables](https://github.com/bounswe/bounswe2022group8/issues/300)
+* [MIL-12: Update Class Diagram](https://github.com/bounswe/bounswe2022group8/issues/303)
+* [MIL-13: Pre-Release Version 0.2.0](https://github.com/bounswe/bounswe2022group8/issues/335)
+
+
+**Pull Requests**
+* [feature/BE-14](https://github.com/bounswe/bounswe2022group8/pull/245)
+* [feature/BE-15](https://github.com/bounswe/bounswe2022group8/pull/247)
+* [feature/BE-16](https://github.com/bounswe/bounswe2022group8/pull/249)
+* [feature/BE-17](https://github.com/bounswe/bounswe2022group8/pull/251)
+* [feature/BE-18](https://github.com/bounswe/bounswe2022group8/pull/252)
+* [bugfix/BE-17](https://github.com/bounswe/bounswe2022group8/pull/311)
+* [hotfix/BE-14](https://github.com/bounswe/bounswe2022group8/pull/255)
+* [feature/BE-21](https://github.com/bounswe/bounswe2022group8/pull/270)
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271)
+* [feature/BE-22 #1](https://github.com/bounswe/bounswe2022group8/pull/274)
+* [feature/BE-22 #2](https://github.com/bounswe/bounswe2022group8/pull/291)
+* [feature/BE-24](https://github.com/bounswe/bounswe2022group8/pull/294)
+* [feature/BE-29](https://github.com/bounswe/bounswe2022group8/pull/320)
+* [feature/BE-30](https://github.com/bounswe/bounswe2022group8/pull/333)
+* [hotfix/BE-11](https://github.com/bounswe/bounswe2022group8/pull/301)
+
+**Unit Tests**
+* You can find my unittests from the related [folder](https://github.com/bounswe/bounswe2022group8/tree/master/App/backend/api/tests).
+* `test_artitem_creation`
+* `test_artitem_deletion_cascaded`
+* `test_artitem_deletion`
+* `test_follow_creation`
+* `test_follow_deletion_cascaded`
+* `test_follow_artitems`
+* `test_username_syntax`
+    
+**Additional**
+    
+PR reviews:<br>
+* [feature/BE-20](https://github.com/bounswe/bounswe2022group8/pull/262)
+* [feature/BE-19](https://github.com/bounswe/bounswe2022group8/pull/259)
+* [feature/BE-11](https://github.com/bounswe/bounswe2022group8/pull/215) 
+* [feature/FE-10](https://github.com/bounswe/bounswe2022group8/pull/271) (We worked as pair on this)
+* [feature/FE-20](https://github.com/bounswe/bounswe2022group8/pull/322)
+* [feature/FE-22](https://github.com/bounswe/bounswe2022group8/pull/334)
+* [feature/BE-28](https://github.com/bounswe/bounswe2022group8/pull/315) 
+    
+## Milestone 3
+
+### MIL 3 - Responsibilities
 * Maintenance of our Amazon S3 bucket throughout the development.
 * Implementation of exhibition related APIs (both virtual exhibitions and offline exhibitions).
 * Implementation of annotation service: 
@@ -695,8 +833,8 @@ I am [Karahan Sarıtaş](https://github.com/bounswe/bounswe2022group8/wiki/Karah
 * Documentation of our API endpoints and providing examples in the Group Review document.
 * Reviewing all of the pull requests created by backend team, in addition to some pull requests created by frontend.
 
-### Main Contributions
-
+### MIL 3 - Main Contributions
+As listed above, implemented exhibition and annotation related APIs. Dealt with some of the bugs, updated diagrams/documents and reviewed a majority of the pull requests. Increased the number of unittests we have on the backend, helped the deployment of our Annotation service, created a license/tag for the project. I've taken different responsibitilies throughout the last milestone period. I was also responsible for the maintenance of our Amazon S3 bucket and API Collections. 
     
 **Code Related Issues**
 * [BE-30: [API] Implementation of Exhibition Related APIs](https://github.com/bounswe/bounswe2022group8/issues/343)
